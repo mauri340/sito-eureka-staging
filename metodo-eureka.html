@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2X3V7JZPBJ"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-2X3V7JZPBJ');</script>
+<!-- Facebook Pixel -->
+<script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','1113993426083027');fbq('track','PageView');</script>
+<title>Il Metodo Eureka | Apprendimento Rapido</title>
+<meta name="description" content="Sistema completo in 4 pilastri per imparare più velocemente.">
+
+<style>
+:root{
+  --navy:#0D1B2A; --navy2:#1C2B3A; --navy3:#243447;
+  --teal:#00A988; --teal-dk:#007a63; --teal-lt:rgba(0,169,136,.12);
+  --gold:#B8973E; --gold-lt:rgba(184,151,62,.12); --gold-brd:rgba(184,151,62,.35);
+  --white:#ffffff; --off-white:#F8F7F4; --light:#F0EFEB; --light2:#E8E7E2;
+  --text:#1a1a2e; --muted:#5a6a7a; --muted-lt:#8a9aaa;
+  --nav-h:72px;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;background:var(--off-white);color:var(--text);line-height:1.65;overflow-x:hidden;}
+
+/* ── NAV ── */
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--nav-h);
+  background:rgba(255,255,255,.97);border-bottom:1px solid var(--light2);
+  backdrop-filter:blur(12px);display:flex;align-items:center;
+  padding:0 40px;justify-content:space-between;}
+.nav-logo{font-family:'Playfair Display',serif;font-size:19px;font-weight:700;
+  color:var(--navy);text-decoration:none;letter-spacing:.5px;}
+.nav-menu{display:flex;align-items:center;gap:2px;list-style:none;}
+.nav-menu a{display:block;padding:8px 14px;font-size:13px;font-weight:500;
+  color:var(--muted);text-decoration:none;border-radius:8px;
+  transition:color .2s,background .2s;white-space:nowrap;letter-spacing:.2px;}
+.nav-menu a:hover,.nav-menu a.active{color:var(--navy);background:var(--light);}
+.nav-menu a.btn-cta{background:var(--navy);color:#fff;padding:9px 20px;
+  border-radius:8px;margin-left:8px;font-weight:600;}
+.nav-menu a.btn-cta:hover{background:var(--navy2);transform:translateY(-1px);}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;
+  padding:8px;background:none;border:none;}
+.hamburger span{display:block;width:24px;height:2px;background:var(--navy);border-radius:2px;}
+.mobile-menu{display:none;position:fixed;top:var(--nav-h);left:0;right:0;bottom:0;
+  background:#fff;padding:24px;overflow-y:auto;z-index:999;border-top:1px solid var(--light2);}
+.mobile-menu.open{display:block;}
+.mobile-menu a{display:block;padding:14px 16px;font-size:15px;font-weight:500;
+  color:var(--muted);text-decoration:none;border-bottom:1px solid var(--light2);}
+.mobile-menu a:hover{color:var(--navy);}
+
+/* ── LAYOUT ── */
+.container{max-width:1100px;margin:0 auto;padding:0 28px;}
+.section{padding:96px 0;}
+.section-sm{padding:64px 0;}
+.section-label{font-size:11px;font-weight:700;text-transform:uppercase;
+  letter-spacing:2.5px;color:var(--teal);margin-bottom:14px;}
+.section-title{font-family:'Playfair Display',serif;
+  font-size:clamp(1.9rem,3.2vw,2.8rem);font-weight:700;
+  line-height:1.15;color:var(--navy);margin-bottom:18px;}
+.section-title em{font-style:italic;color:var(--gold);}
+.section-sub{font-size:1rem;color:var(--muted);line-height:1.8;max-width:600px;font-weight:400;}
+
+/* ── BADGES ── */
+.tag{display:inline-flex;align-items:center;padding:5px 14px;border-radius:50px;
+  font-size:11px;font-weight:600;letter-spacing:.6px;text-transform:uppercase;}
+.tag-navy{background:rgba(13,27,42,.08);border:1px solid rgba(13,27,42,.2);color:var(--navy);}
+.tag-teal{background:var(--teal-lt);border:1px solid rgba(0,169,136,.25);color:var(--teal-dk);}
+.tag-gold{background:var(--gold-lt);border:1px solid var(--gold-brd);color:#8a6010;}
+
+/* ── BUTTONS ── */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;
+  border-radius:10px;font-size:14px;font-weight:600;font-family:'Inter',sans-serif;
+  text-decoration:none;cursor:pointer;border:none;transition:transform .2s,box-shadow .2s,background .2s;
+  letter-spacing:.2px;}
+.btn-primary{background:var(--navy);color:#fff;box-shadow:0 4px 20px rgba(13,27,42,.25);}
+.btn-primary:hover{background:var(--navy2);transform:translateY(-2px);box-shadow:0 8px 28px rgba(13,27,42,.3);}
+.btn-gold{background:var(--gold);color:#fff;box-shadow:0 4px 20px rgba(184,151,62,.3);}
+.btn-gold:hover{background:#a07c2a;transform:translateY(-2px);}
+.btn-outline{background:transparent;color:var(--navy);border:1.5px solid var(--navy);}
+.btn-outline:hover{background:var(--navy);color:#fff;}
+.btn-teal-outline{background:transparent;color:var(--teal-dk);border:1.5px solid var(--teal);}
+.btn-teal-outline:hover{background:var(--teal);color:#fff;}
+
+/* ── CARDS ── */
+.card{background:#fff;border:1px solid var(--light2);border-radius:16px;
+  padding:32px;transition:box-shadow .25s,transform .25s;}
+.card:hover{box-shadow:0 12px 40px rgba(0,0,0,.09);transform:translateY(-2px);}
+.card-navy{background:var(--navy);border-color:var(--navy2);color:#fff;}
+.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;}
+
+/* ── HERO (navy) ── */
+.hero{min-height:72vh;padding-top:var(--nav-h);
+  background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 100%);
+  display:flex;align-items:center;}
+.hero-inner{display:grid;grid-template-columns:1.1fr 0.9fr;gap:64px;
+  align-items:center;padding:64px 0;}
+.hero-title{font-family:'Playfair Display',serif;
+  font-size:clamp(2.2rem,4vw,3.5rem);font-weight:700;
+  line-height:1.1;margin-bottom:20px;color:#fff;}
+.hero-title em{font-style:italic;color:var(--gold);}
+.hero-body{font-size:1.05rem;color:rgba(255,255,255,.75);
+  line-height:1.8;margin-bottom:32px;max-width:500px;}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:36px;}
+.hero-img-wrap{border-radius:20px;overflow:hidden;aspect-ratio:4/3;
+  border:1px solid rgba(255,255,255,.1);}
+.hero-img-wrap img{width:100%;height:100%;object-fit:cover;opacity:.9;}
+
+/* ── PAGE HERO (lighter, for inner pages) ── */
+.page-hero{padding:calc(var(--nav-h) + 72px) 0 72px;
+  background:linear-gradient(160deg,var(--navy) 0%,#1a3050 100%);}
+.page-hero-title{font-family:'Playfair Display',serif;
+  font-size:clamp(2rem,4vw,3.2rem);font-weight:700;color:#fff;
+  line-height:1.15;margin-bottom:18px;}
+.page-hero-title em{font-style:italic;color:var(--gold);}
+.page-hero-sub{font-size:1.05rem;color:rgba(255,255,255,.72);
+  line-height:1.8;max-width:620px;}
+
+/* ── STATS ── */
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center;}
+.stat-num{font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:700;
+  color:var(--gold);line-height:1;}
+.stat-lbl{font-size:13px;color:var(--muted);margin-top:8px;font-weight:500;}
+
+/* ── TESTIMONIALS ── */
+.testi-card{background:#fff;border:1px solid var(--light2);border-radius:16px;padding:32px;
+  position:relative;}
+.testi-card::before{content:'"';font-family:'Playfair Display',serif;font-size:5rem;
+  color:var(--gold-lt);position:absolute;top:12px;left:20px;line-height:1;}
+.testi-quote{font-size:.98rem;color:var(--muted);line-height:1.8;font-style:italic;
+  margin-bottom:20px;padding-top:20px;}
+.testi-name{font-weight:700;color:var(--navy);font-size:15px;}
+.testi-role{font-size:13px;color:var(--teal-dk);margin-top:2px;font-weight:500;}
+
+/* ── DIVIDER ── */
+.gold-line{width:48px;height:2px;background:var(--gold);border-radius:2px;margin:16px 0;}
+
+/* ── FEATURE ITEM ── */
+.feature-item{border-left:2px solid var(--gold);padding-left:20px;margin-bottom:28px;}
+.feature-item h4{font-weight:600;color:var(--navy);margin-bottom:6px;font-size:15px;}
+.feature-item p{font-size:14px;color:var(--muted);line-height:1.75;}
+
+/* ── BANNER ── */
+.banner-navy{background:var(--navy);border-radius:20px;padding:48px;color:#fff;}
+.banner-gold{background:linear-gradient(135deg,#8a6010,var(--gold));border-radius:20px;padding:48px;color:#fff;}
+.banner-light{background:var(--light);border-radius:20px;padding:48px;border:1px solid var(--light2);}
+
+/* ── SECTION ALT BG ── */
+.bg-white{background:#fff;}
+.bg-off{background:var(--off-white);}
+.bg-light{background:var(--light);}
+.bg-navy{background:var(--navy);}
+
+/* ── FOOTER ── */
+footer{background:var(--navy);color:rgba(255,255,255,.75);padding:56px 0 32px;}
+.footer-inner{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:44px;}
+.footer-logo{font-family:'Playfair Display',serif;font-size:19px;font-weight:700;
+  color:#fff;letter-spacing:.5px;margin-bottom:14px;}
+.footer-brand p{font-size:14px;color:rgba(255,255,255,.6);line-height:1.8;}
+.footer-col h4{font-size:11px;font-weight:700;color:rgba(255,255,255,.4);
+  margin-bottom:18px;text-transform:uppercase;letter-spacing:1.5px;}
+.footer-col a{display:block;font-size:13px;color:rgba(255,255,255,.65);
+  text-decoration:none;margin-bottom:10px;transition:color .2s;font-weight:400;}
+.footer-col a:hover{color:#fff;}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.08);padding-top:26px;
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;}
+.footer-bottom p{font-size:12px;color:rgba(255,255,255,.4);}
+.footer-legal{display:flex;gap:20px;}
+.footer-legal a{font-size:12px;color:rgba(255,255,255,.4);text-decoration:none;}
+.footer-legal a:hover{color:rgba(255,255,255,.8);}
+
+/* ── FORM ── */
+.form-group{margin-bottom:20px;}
+.form-group label{display:block;font-size:13px;font-weight:600;
+  color:var(--navy);margin-bottom:7px;}
+.form-group input,.form-group select,.form-group textarea{
+  width:100%;padding:13px 16px;background:#fff;
+  border:1.5px solid var(--light2);border-radius:10px;
+  color:var(--text);font-family:'Inter',sans-serif;font-size:14px;
+  outline:none;transition:border-color .2s;}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{
+  border-color:var(--navy);}
+.form-group input::placeholder,.form-group textarea::placeholder{color:var(--muted-lt);}
+.form-checkbox{display:flex;align-items:flex-start;gap:10px;
+  font-size:13px;color:var(--muted);}
+.form-checkbox input{width:auto;margin-top:3px;accent-color:var(--navy);}
+.form-checkbox a{color:var(--navy);font-weight:500;}
+.btn-submit{width:100%;padding:17px;font-size:16px;font-weight:700;
+  background:var(--navy);color:#fff;border:none;border-radius:10px;
+  cursor:pointer;font-family:'Inter',sans-serif;
+  transition:background .2s,transform .2s,box-shadow .2s;}
+.btn-submit:hover{background:var(--navy2);transform:translateY(-2px);
+  box-shadow:0 8px 24px rgba(13,27,42,.3);}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .hamburger{display:flex;}
+  .nav-menu{display:none;}
+  .nav{padding:0 20px;}
+  .hero-inner,.grid-2,.grid-3,.grid-4,.stats-grid,.footer-inner{grid-template-columns:1fr;}
+  .hero{min-height:auto;padding:calc(var(--nav-h) + 40px) 0 60px;}
+  .section{padding:64px 0;}
+  .banner-navy,.banner-gold,.banner-light{padding:32px 24px;}
+}
+@media(max-width:600px){
+  .footer-inner{grid-template-columns:1fr 1fr;}
+}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <a href="index.html" class="nav-logo">Metodo Eureka</a>
+  <ul class="nav-menu">
+    <li><a href="metodo-eureka.html" class="active">Il Metodo</a></li>
+    <li><a href="master-eureka.html">Master Eureka</a></li>
+    <li><a href="testimonianze.html">Testimonianze</a></li>
+    <li><a href="risorse-gratuite.html">Risorse Gratuite</a></li>
+    <li><a href="libro.html">Libro</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="demo-zoom/index.html" class="btn-cta">Webinar Gratuito</a></li>
+  </ul>
+  <button class="hamburger" onclick="document.getElementById('mm').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mm">
+  <a href="index.html">Home</a>
+  <a href="metodo-eureka.html">Il Metodo</a>
+  <a href="master-eureka.html">Master Eureka</a>
+  <a href="testimonianze.html">Testimonianze</a>
+  <a href="risorse-gratuite.html">Risorse Gratuite</a>
+  <a href="libro.html">Libro</a>
+  <a href="blog.html">Blog</a>
+  <a href="demo-zoom/index.html" style="color:var(--navy);font-weight:700;">Webinar Gratuito</a>
+</div>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="hero-inner" style="padding:56px 0;">
+      <div>
+        <div style="margin-bottom:18px;"><span class="tag tag-gold">Dal 2001</span></div>
+        <h1 class="page-hero-title">Il <em>Metodo Eureka</em><br>per l'Apprendimento Rapido</h1>
+        <p class="page-hero-sub">Un sistema completo, testato su oltre 40.000 professionisti, per imparare più velocemente, ricordare di più e restare competitivi in un mondo che cambia ogni anno.</p>
+        <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:32px;">
+          <a href="demo-zoom/index.html" class="btn btn-gold">Scopri il Webinar Gratuito</a>
+          <a href="coaching.html" class="btn btn-outline" style="color:#fff;border-color:rgba(255,255,255,.4);">Prenota una Coaching</a>
+        </div>
+      </div>
+      <div>
+        <div class="hero-img-wrap">
+          <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=800&auto=format&fit=crop" alt="Studio professionale">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats bar -->
+<section class="bg-navy" style="padding:36px 0;">
+  <div class="container">
+    <div class="stats-grid stats-section">
+      <div><div class="stat-num" data-count="22" data-suffix="+">0</div><div class="stat-lbl" style="color:rgba(255,255,255,.55);">Anni di attività</div></div>
+      <div><div class="stat-num" data-count="40000" data-suffix="+" data-divisor="1000">0</div><div class="stat-lbl" style="color:rgba(255,255,255,.55);">k Studenti formati</div></div>
+      <div><div class="stat-num" data-count="80" data-suffix="k+">0</div><div class="stat-lbl" style="color:rgba(255,255,255,.55);">Copie libro vendute</div></div>
+      <div><div class="stat-num" data-count="98" data-suffix="%">0</div><div class="stat-lbl" style="color:rgba(255,255,255,.55);">Soddisfazione</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Problem -->
+<section class="section bg-white">
+  <div class="container">
+    <div style="text-align:center;max-width:700px;margin:0 auto 60px;">
+      <div class="section-label">Il Problema</div>
+      <h2 class="section-title">Ogni anno devi imparare <em>cose nuove</em> che prima non esistevano</h2>
+      <p class="section-sub" style="margin:0 auto;">Nuovi strumenti digitali, normative, tecnologie, linguaggi. Il professionista moderno deve aggiornarsi costantemente. Ma con metodi di studio obsoleti, ogni ora è tempo sprecato.</p>
+    </div>
+    <div class="grid-3">
+      <div class="card" style="text-align:center;border-top:3px solid var(--gold);">
+        <div style="font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:700;color:var(--gold);margin-bottom:12px;">3x</div>
+        <div style="font-weight:600;color:var(--navy);margin-bottom:8px;">Velocità di lettura</div>
+        <div style="font-size:14px;color:var(--muted);">La velocità media è 200 parole al minuto. Con il metodo arrivi a 600+.</div>
+      </div>
+      <div class="card" style="text-align:center;border-top:3px solid var(--teal);">
+        <div style="font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:700;color:var(--teal-dk);margin-bottom:12px;">50%</div>
+        <div style="font-weight:600;color:var(--navy);margin-bottom:8px;">Riduzione del tempo</div>
+        <div style="font-size:14px;color:var(--muted);">Raggiungi lo stesso risultato in metà del tempo, con migliore ritenzione.</div>
+      </div>
+      <div class="card" style="text-align:center;border-top:3px solid var(--navy);">
+        <div style="font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:700;color:var(--navy);margin-bottom:12px;">98%</div>
+        <div style="font-weight:600;color:var(--navy);margin-bottom:8px;">Soddisfazione</div>
+        <div style="font-size:14px;color:var(--muted);">Il tasso di soddisfazione dei partecipanti al Metodo Eureka dal 2001.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4 Pillars -->
+<section class="section bg-off">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:60px;">
+      <div class="section-label">Le 4 Tecniche</div>
+      <h2 class="section-title">Un sistema <em>completo</em> in 4 pilastri</h2>
+      <p class="section-sub" style="margin:0 auto;">Non tecniche isolate, ma un sistema integrato dove ogni pilastro potenzia gli altri.</p>
+    </div>
+    <div class="grid-2" style="gap:32px;">
+      <div class="card">
+        <div class="section-label">01</div>
+        <h3 style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--navy);margin-bottom:10px;">Tecniche di Memoria</h3>
+        <div class="gold-line"></div>
+        <p style="color:var(--muted);font-size:14px;line-height:1.8;">L'83% della memoria è visiva. Le tecniche di memoria ti insegnano a creare associazioni visive potenti, catene mnemoniche e ancoraggi emotivi che rendono le informazioni indimenticabili.</p>
+        <div style="margin-top:18px;"><span class="tag tag-gold">Memoria visiva 83%</span></div>
+      </div>
+      <div class="card">
+        <div class="section-label">02</div>
+        <h3 style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--navy);margin-bottom:10px;">Lettura Veloce</h3>
+        <div class="gold-line"></div>
+        <p style="color:var(--muted);font-size:14px;line-height:1.8;">Elimina la subvocalizzazione, amplia il campo visivo e raggiungi 600–900 parole al minuto mantenendo piena comprensione del testo.</p>
+        <div style="margin-top:18px;"><span class="tag tag-teal">600–900 parole/min</span></div>
+      </div>
+      <div class="card">
+        <div class="section-label">03</div>
+        <h3 style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--navy);margin-bottom:10px;">Mappe Mentali</h3>
+        <div class="gold-line"></div>
+        <p style="color:var(--muted);font-size:14px;line-height:1.8;">Dal pensiero lineare al multidimensionale. Ideali per lo studio, la sintesi, la pianificazione e la comunicazione efficace. Un intero libro in una singola mappa.</p>
+        <div style="margin-top:18px;"><span class="tag tag-navy">Pensiero multidimensionale</span></div>
+      </div>
+      <div class="card">
+        <div class="section-label">04</div>
+        <h3 style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--navy);margin-bottom:10px;">Tecniche di Sintesi</h3>
+        <div class="gold-line"></div>
+        <p style="color:var(--muted);font-size:14px;line-height:1.8;">Distingui il segnale dal rumore in qualsiasi documento. Relazioni, normative, manuali tecnici: identifica e trattieni solo le informazioni essenziali.</p>
+        <div style="margin-top:18px;"><span class="tag tag-gold">Segnale dal rumore</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Formula ibrida -->
+<section class="section bg-white">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:56px;">
+      <div class="section-label">La Formula</div>
+      <h2 class="section-title">Formula <em>Ibrida</em> Live + Online</h2>
+      <p class="section-sub" style="margin:0 auto;">Non un corso generico da 500 persone. Un percorso strutturato con attenzione personalizzata.</p>
+    </div>
+    <div class="grid-3">
+      <div class="card" style="text-align:center;">
+        <div style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--navy);margin-bottom:14px;">Live</div>
+        <h3 style="font-weight:600;color:var(--navy);margin-bottom:10px;">Sessioni in Diretta</h3>
+        <p style="font-size:14px;color:var(--muted);">Aule fisiche o Zoom live. Interazione reale, domande, esercizi in tempo reale con il trainer.</p>
+      </div>
+      <div class="card" style="text-align:center;">
+        <div style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--navy);margin-bottom:14px;">Online</div>
+        <h3 style="font-weight:600;color:var(--navy);margin-bottom:10px;">Piattaforma Digitale</h3>
+        <p style="font-size:14px;color:var(--muted);">Materiali, video, esercizi disponibili 24/7. Studi dove vuoi, quando hai tempo.</p>
+      </div>
+      <div class="card" style="text-align:center;background:var(--navy);">
+        <div style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--gold);margin-bottom:14px;">Max 25</div>
+        <h3 style="font-weight:600;color:#fff;margin-bottom:10px;">Gruppi Ridotti</h3>
+        <p style="font-size:14px;color:rgba(255,255,255,.65);">Massimo 25 partecipanti per garantire attenzione individuale a ogni persona.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Psychological edge -->
+<section class="section bg-light">
+  <div class="container">
+    <div class="grid-2" style="gap:72px;align-items:center;">
+      <div>
+        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&auto=format&fit=crop" alt="Professionisti" style="width:100%;border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,.1);">
+      </div>
+      <div>
+        <div class="section-label">Il Vantaggio Competitivo</div>
+        <h2 class="section-title">L'aspetto <em>psicologico</em> che i competitor ignorano</h2>
+        <p style="color:var(--muted);margin-bottom:36px;line-height:1.8;">Molti corsi insegnano tecniche. Il Metodo Eureka lavora anche sulla mente.</p>
+        <div class="feature-item">
+          <h4>Blocchi Mentali</h4>
+          <p>Molte persone hanno vissuto esperienze negative con lo studio. Il metodo identifica e rimuove i blocchi che impediscono l'apprendimento.</p>
+        </div>
+        <div class="feature-item">
+          <h4>Motivazione Strutturata</h4>
+          <p>Obiettivi chiari, abitudini stabili, motivazione nel tempo anche con un'agenda piena.</p>
+        </div>
+        <div class="feature-item">
+          <h4>Fiducia nelle Proprie Capacità</h4>
+          <p>Il 76% dei partecipanti riporta un aumento della fiducia nelle proprie capacità di apprendimento entro le prime 4 settimane.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section" style="background:var(--navy);">
+  <div class="container" style="text-align:center;">
+    <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.6rem);font-weight:700;color:#fff;margin-bottom:18px;">Inizia con il <em style="font-style:italic;color:var(--gold);">Webinar Gratuito</em></h2>
+    <p style="color:rgba(255,255,255,.7);margin:0 auto 36px;max-width:560px;line-height:1.8;">Due ore live su Zoom per scoprire il metodo, fare domande e capire se fa per te. Senza impegno.</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+      <a href="demo-zoom/index.html" class="btn btn-gold">Iscriviti al Webinar Gratuito</a>
+      <a href="coaching.html" class="btn btn-outline" style="color:#fff;border-color:rgba(255,255,255,.35);">Prenota una Coaching 1:1</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">Metodo Eureka</div>
+        <p>Dal 2001 aiutiamo professionisti e manager a imparare più velocemente, ricordare di più e restare competitivi in un mondo che cambia.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Il Metodo</h4>
+        <a href="metodo-eureka.html">Metodo Eureka</a>
+        <a href="master-eureka.html">Master Eureka</a>
+        <a href="libro.html">Il Libro</a>
+      </div>
+      <div class="footer-col">
+        <h4>Risorse</h4>
+        <a href="demo-zoom/index.html">Webinar Gratuito</a>
+        <a href="coaching.html">Coaching 1:1</a>
+        <a href="risorse-gratuite.html">Risorse Gratuite</a>
+        <a href="blog.html">Blog</a>
+      </div>
+      <div class="footer-col">
+        <h4>Azienda</h4>
+        <a href="testimonianze.html">Testimonianze</a>
+        <a href="https://www.linkedin.com/company/apprendimento-rapido" target="_blank">LinkedIn</a>
+        <a href="mailto:info@apprendimentorapido.it">info@apprendimentorapido.it</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Apprendimento Rapido — Metodo Eureka. Tutti i diritti riservati.</p>
+      <div class="footer-legal">
+        <a href="https://www.iubenda.com/privacy-policy/89530968" target="_blank">Privacy Policy</a>
+        <a href="https://www.iubenda.com/privacy-policy/89530968/cookie-policy" target="_blank">Cookie Policy</a>
+        <a href="https://www.iubenda.com/termini-e-condizioni/89530968" target="_blank">Termini e Condizioni</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script>
+document.querySelectorAll('#mm a').forEach(a=>a.addEventListener('click',()=>document.getElementById('mm').classList.remove('open')));
+function animateCounters(){
+  document.querySelectorAll('[data-count]').forEach(el=>{
+    const target=parseInt(el.dataset.count);
+    const suffix=el.dataset.suffix||'';
+    const divisor=parseInt(el.dataset.divisor)||1;
+    let current=0;const step=target/60;
+    const timer=setInterval(()=>{
+      current+=step;
+      if(current>=target){current=target;clearInterval(timer);}
+      const v=Math.floor(current/divisor);
+      el.textContent=(divisor>1?v.toLocaleString('it-IT'):v)+suffix;
+    },16);
+  });
+}
+const obs=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');
+    if(e.target.classList.contains('stats-section'))animateCounters();}});
+},{threshold:0.2});
+document.querySelectorAll('.stats-section,[data-animate]').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
