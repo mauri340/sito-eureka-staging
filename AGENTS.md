@@ -4,13 +4,21 @@ This is a **static HTML website** with no build system, no package manager, and 
 
 ### Running the dev server
 
-Serve the site locally with Python's built-in HTTP server:
+For local development with the chat widget, use the mock API server (serves static files + chat API):
 
 ```
-python3 -m http.server 8000
+python3 mock-api.py
 ```
 
-Then open `http://localhost:8000/` in a browser.
+This starts on port 8000 and handles both static files and the 4 chat endpoints. Open `http://localhost:8000/` in a browser.
+
+For static-only serving (no chat backend): `python3 -m http.server 8000`
+
+### Chat widget
+
+`chat-widget.js` is a self-contained widget injected via `<script>` in all HTML pages. It reads `data-api=""` from the script tag for the backend base URL (empty = same origin). For production, set `data-api="https://your-render-url"`.
+
+`mock-api.py` provides a local mock of the chat backend for testing. It returns contextual greetings per page and keyword-based responses.
 
 ### Key caveats
 
