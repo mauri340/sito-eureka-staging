@@ -1,14 +1,22 @@
-"""Lightweight mock of the chat backend for local testing."""
+"""Lightweight mock of the chat backend for local testing.
+
+Automatically injects chat-widget.js into every HTML page served,
+so no manual <script> tags are needed in any HTML file.
+"""
 import http.server
 import json
 import uuid
 import os
+import io
 import mimetypes
 
 PORT = 8000
 ROOT = os.path.dirname(os.path.abspath(__file__))
+WIDGET_SNIPPET = '<script src="/chat-widget.js" data-api=""></script>'
 
 PAGE_GREETINGS = {
+    '': "Ciao! Sono Mentor Eureka. Posso aiutarti a scoprire il metodo di apprendimento rapido piu' efficace d'Italia?",
+    'index': "Ciao! Sono Mentor Eureka. Posso aiutarti a scoprire il metodo di apprendimento rapido piu' efficace d'Italia?",
     'coaching': "Vedo che ti interessa la coaching 1:1 gratuita. Vuoi sapere come funziona la sessione?",
     'libro': "Stai guardando il nostro libro! Oltre 80.000 copie vendute. Posso aiutarti a capire se fa per te?",
     'metodo-eureka': "Vuoi capire meglio come funziona il Metodo Eureka? Sono qui per spiegarti tutto!",
@@ -26,6 +34,8 @@ class Handler(http.server.SimpleHTTPRequestHandler):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, directory=ROOT, **kwargs)
 
+    # ── Routing ────────────────────────────────────────
+
     def do_POST(self):
         length = int(self.headers.get('Content-Length', 0))
         body = json.loads(self.rfile.read(length)) if length else {}
@@ -42,8 +52,48 @@ class Handler(http.server.SimpleHTTPRequestHandler):
     def do_GET(self):
         if self.path == '/api/chat/health':
             self._json_response({'status': 'ok'})
+            return
+
+        path = self.translate_path(self.path)
+
+        if os.path.isdir(path):
+            index = os.path.join(path, 'index.html')
+            if os.path.isfile(index):
+                path = index
+            else:
+                super().do_GET()
+                return
+
+        if path.endswith('.html') and os.path.isfile(path):
+            self._serve_html_with_widget(path)
         else:
             super().do_GET()
+
+    def do_OPTIONS(self):
+        self.send_response(204)
+        self.send_header('Access-Control-Allow-Origin', '*')
+        self.send_header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
+        self.send_header('Access-Control-Allow-Headers', 'Content-Type')
+        self.end_headers()
+
+    # ── HTML injection ─────────────────────────────────
+
+    def _serve_html_with_widget(self, filepath):
+        """Read an HTML file, inject the chat widget, and serve it."""
+        with open(filepath, 'r', encoding='utf-8') as f:
+            html = f.read()
+
+        if 'chat-widget.js' not in html and '</body>' in html:
+            html = html.replace('</body>', WIDGET_SNIPPET + '\n</body>')
+
+        data = html.encode('utf-8')
+        self.send_response(200)
+        self.send_header('Content-Type', 'text/html; charset=utf-8')
+        self.send_header('Content-Length', len(data))
+        self.end_headers()
+        self.wfile.write(data)
+
+    # ── Chat API handlers ──────────────────────────────
 
     def _handle_start(self, body):
         ctx = body.get('page_context', {})
@@ -106,15 +156,9 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(data)
 
-    def do_OPTIONS(self):
-        self.send_response(204)
-        self.send_header('Access-Control-Allow-Origin', '*')
-        self.send_header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
-        self.send_header('Access-Control-Allow-Headers', 'Content-Type')
-        self.end_headers()
-
 
 if __name__ == '__main__':
     print(f"Mock API + static server on http://localhost:{PORT}")
+    print(f"Chat widget auto-injected into all HTML pages")
     with http.server.HTTPServer(('', PORT), Handler) as srv:
         srv.serve_forever()
