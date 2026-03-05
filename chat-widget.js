@@ -1,9 +1,11 @@
 (function () {
   'use strict';
 
-  var API_BASE = document.currentScript
-    ? document.currentScript.getAttribute('data-api') || ''
-    : '';
+  var PRODUCTION_API = 'https://ai-chat-service-nls9.onrender.com';
+
+  var scriptEl = document.currentScript;
+  var dataApi = scriptEl ? scriptEl.getAttribute('data-api') : null;
+  var API_BASE = dataApi !== null ? dataApi : PRODUCTION_API;
 
   var sessionId = null;
   var chatOpened = false;
