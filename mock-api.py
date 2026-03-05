@@ -9,6 +9,8 @@ PORT = 8000
 ROOT = os.path.dirname(os.path.abspath(__file__))
 
 PAGE_GREETINGS = {
+    '': "Ciao! Sono Mentor Eureka. Posso aiutarti a scoprire il metodo di apprendimento rapido piu' efficace d'Italia?",
+    'index': "Ciao! Sono Mentor Eureka. Posso aiutarti a scoprire il metodo di apprendimento rapido piu' efficace d'Italia?",
     'coaching': "Vedo che ti interessa la coaching 1:1 gratuita. Vuoi sapere come funziona la sessione?",
     'libro': "Stai guardando il nostro libro! Oltre 80.000 copie vendute. Posso aiutarti a capire se fa per te?",
     'metodo-eureka': "Vuoi capire meglio come funziona il Metodo Eureka? Sono qui per spiegarti tutto!",
