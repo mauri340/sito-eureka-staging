@@ -386,13 +386,6 @@ const obs=new IntersectionObserver((entries)=>{
 },{threshold:0.2});
 document.querySelectorAll('.stats-section,[data-animate]').forEach(el=>obs.observe(el));
 </script>
-<script>
-window.AIChatWidgetConfig = {
-  startSessionUrl: 'https://ai-chat-service-nls9.onrender.com/api/chat/session/start',
-  messageUrl: 'https://ai-chat-service-nls9.onrender.com/api/chat/message',
-  endSessionUrl: 'https://ai-chat-service-nls9.onrender.com/api/chat/session/end'
-};
-</script>
-<script src="assets/ai-chat-widget.js" defer></script>
+<script src="chat-widget.js" data-api=""></script>
 </body>
 </html>
