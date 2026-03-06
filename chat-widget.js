@@ -77,6 +77,7 @@
   .ew-msg{max-width:82%;animation:ew-fadeIn .3s ease both;}
   .ew-msg-bot{align-self:flex-start;}
   .ew-msg-user{align-self:flex-end;}
+  .ew-msg-form{align-self:flex-start;max-width:94%;}
 
   .ew-msg-bot .ew-bubble{
     background:#fff;color:#1a1a2e;
@@ -96,6 +97,10 @@
   .ew-msg-bot .ew-bubble.ew-success{
     border-left:3px solid #00A988;
     background:#e6f7f4;
+  }
+  .ew-msg-bot .ew-bubble.ew-error{
+    border-left:3px solid #e74c3c;
+    background:#fdf0ef;
   }
 
   .ew-typing{align-self:flex-start;display:none;}
@@ -134,6 +139,66 @@
     text-align:center;padding:6px 0;font-size:10px;
     color:#aaa;background:#fff;flex-shrink:0;
     font-family:'Montserrat',sans-serif;
+  }
+
+  /* ── Inline Form ── */
+  .ew-form-card{
+    background:#fff;border-radius:2px 16px 16px 16px;
+    box-shadow:0 1px 4px rgba(0,0,0,.06);
+    overflow:hidden;font-family:'Montserrat',sans-serif;
+    animation:ew-fadeIn .3s ease both;
+  }
+  .ew-form-title{
+    background:linear-gradient(135deg,#0D1B2A 0%,#1C2B3A 100%);
+    color:#fff;padding:14px 16px;font-size:14px;font-weight:700;
+  }
+  .ew-form-body{padding:16px;}
+  .ew-form-group{margin-bottom:12px;}
+  .ew-form-group label{
+    display:block;font-size:12px;font-weight:600;
+    color:#1a1a2e;margin-bottom:4px;
+  }
+  .ew-form-group input[type="text"],
+  .ew-form-group input[type="email"],
+  .ew-form-group input[type="tel"]{
+    width:100%;padding:9px 12px;border:1.5px solid #F0EDE8;
+    border-radius:8px;font-size:13px;font-family:'Montserrat',sans-serif;
+    outline:none;transition:border-color .2s;background:#F8F7F4;color:#1a1a2e;
+    box-sizing:border-box;
+  }
+  .ew-form-group input:focus{border-color:#00A988;}
+
+  .ew-form-privacy{
+    display:flex;align-items:flex-start;gap:8px;
+    margin:14px 0 16px;font-size:12px;color:#6B7280;line-height:1.5;
+  }
+  .ew-form-privacy input[type="checkbox"]{
+    margin-top:2px;width:16px;height:16px;flex-shrink:0;
+    accent-color:#00A988;cursor:pointer;
+  }
+
+  .ew-form-submit{
+    width:100%;padding:11px;border:none;border-radius:10px;
+    background:linear-gradient(135deg,#00A988 0%,#007a63 100%);
+    color:#fff;font-size:14px;font-weight:600;cursor:pointer;
+    font-family:'Montserrat',sans-serif;transition:opacity .2s;
+  }
+  .ew-form-submit:hover{opacity:.9;}
+  .ew-form-submit:disabled{opacity:.5;cursor:not-allowed;}
+
+  .ew-form-error{
+    margin-top:10px;padding:8px 12px;border-radius:8px;
+    background:#fdf0ef;border:1px solid #f5c6cb;
+    color:#c0392b;font-size:12px;line-height:1.5;
+    display:none;
+  }
+  .ew-form-error.ew-visible{display:block;}
+
+  .ew-form-done{
+    text-align:center;padding:20px 16px;color:#6B7280;font-size:13px;
+  }
+  .ew-form-done svg{
+    width:40px;height:40px;fill:#00A988;display:block;margin:0 auto 10px;
   }
 
   @keyframes ew-fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
@@ -202,20 +267,11 @@
   // ── Events ───────────────────────────────────────────
   function bindEvents() {
     $('ew-chat-toggle').addEventListener('click', function () {
-      if (chatOpened) {
-        closeChat();
-      } else {
-        openChat();
-      }
+      if (chatOpened) { closeChat(); } else { openChat(); }
     });
-
     $('ew-send').addEventListener('click', sendMessage);
-
     $('ew-input').addEventListener('keydown', function (e) {
-      if (e.key === 'Enter' && !e.shiftKey) {
-        e.preventDefault();
-        sendMessage();
-      }
+      if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
     });
   }
 
@@ -225,12 +281,7 @@
     $('ew-chat-box').classList.add('ew-visible');
     $('ew-chat-toggle').classList.add('ew-open');
     $('ew-chat-toggle').classList.remove('ew-has-badge');
-
-    if (!sessionId) {
-      startSession();
-    } else {
-      focusInput();
-    }
+    if (!sessionId) { startSession(); } else { focusInput(); }
   }
 
   function closeChat() {
@@ -258,7 +309,6 @@
   // ── Session Start ───────────────────────────────────
   function startSession() {
     showTyping();
-
     fetch(API_BASE + '/api/chat/session/start', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -268,9 +318,7 @@
       .then(function (data) {
         hideTyping();
         sessionId = data.session_id;
-        if (data.speech) {
-          appendBot(data.speech);
-        }
+        if (data.speech) { appendBot(data.speech); }
         focusInput();
       })
       .catch(function () {
@@ -283,7 +331,6 @@
   // ── Send Message ────────────────────────────────────
   function sendMessage() {
     if (inputDisabled) return;
-
     var inp = $('ew-input');
     var text = inp.value.trim();
     if (!text) return;
@@ -308,28 +355,24 @@
         return fetch(API_BASE + '/api/chat/message', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            session_id: sessionId,
-            message: text,
-            voice: false
-          })
+          body: JSON.stringify({ session_id: sessionId, message: text, voice: false })
         });
       })
-      .then(function (r) { return r.json(); })
-      .then(function (data) {
-        hideTyping();
-        disableInput(false);
-
-        if (data.speech) {
-          var isSuccess = data.business_result &&
-                          data.business_result.success === true;
-          appendBot(data.speech, isSuccess);
-        }
-
-        if (data.action === 'end_session') {
+      .then(function (r) {
+        if (r.status === 410) {
+          hideTyping();
           disableInput(true);
           inputDisabled = true;
+          appendBot('Sessione chiusa. Apri una nuova chat.', false, true);
+          return null;
         }
+        return r.json();
+      })
+      .then(function (data) {
+        if (!data) return;
+        hideTyping();
+        disableInput(false);
+        handleBotResponse(data);
       })
       .catch(function () {
         hideTyping();
@@ -338,13 +381,50 @@
       });
   }
 
+  // ── Handle bot response (all action types) ──────────
+  function handleBotResponse(data) {
+    var action = data.action || 'reply';
+
+    switch (action) {
+      case 'show_form':
+        if (data.speech) { appendBot(data.speech); }
+        if (data.form) { appendForm(data.form); }
+        break;
+
+      case 'action_completed':
+        appendBot(data.speech || '', true);
+        break;
+
+      case 'action_failed':
+        appendBot(data.speech || '', false, true);
+        break;
+
+      case 'end_session':
+        if (data.speech) { appendBot(data.speech); }
+        disableInput(true);
+        inputDisabled = true;
+        break;
+
+      default:
+        if (data.speech) {
+          var isSuccess = data.business_result &&
+                          data.business_result.success === true;
+          appendBot(data.speech, isSuccess);
+        }
+        break;
+    }
+  }
+
   // ── DOM helpers ─────────────────────────────────────
-  function appendBot(text, success) {
+  function appendBot(text, success, isError) {
     var msgs = $('ew-messages');
     var div = document.createElement('div');
     div.className = 'ew-msg ew-msg-bot';
     var bubble = document.createElement('div');
-    bubble.className = 'ew-bubble' + (success ? ' ew-success' : '');
+    var cls = 'ew-bubble';
+    if (success) cls += ' ew-success';
+    if (isError) cls += ' ew-error';
+    bubble.className = cls;
     bubble.textContent = text;
     div.appendChild(bubble);
     msgs.insertBefore(div, $('ew-typing'));
@@ -361,6 +441,170 @@
     div.appendChild(bubble);
     msgs.insertBefore(div, $('ew-typing'));
     scrollDown();
+  }
+
+  // ── Inline Form Rendering ──────────────────────────
+  function appendForm(formConfig) {
+    var msgs = $('ew-messages');
+    var wrapper = document.createElement('div');
+    wrapper.className = 'ew-msg ew-msg-form';
+
+    var card = document.createElement('div');
+    card.className = 'ew-form-card';
+
+    var title = document.createElement('div');
+    title.className = 'ew-form-title';
+    title.textContent = formConfig.title || 'Compila il modulo';
+    card.appendChild(title);
+
+    var body = document.createElement('div');
+    body.className = 'ew-form-body';
+
+    var fields = formConfig.fields || [];
+    for (var i = 0; i < fields.length; i++) {
+      var f = fields[i];
+      var group = document.createElement('div');
+      group.className = 'ew-form-group';
+
+      var label = document.createElement('label');
+      label.textContent = f.label || f.name;
+      label.setAttribute('for', 'ew-f-' + f.name);
+      group.appendChild(label);
+
+      var input = document.createElement('input');
+      input.type = f.type || 'text';
+      input.id = 'ew-f-' + f.name;
+      input.name = f.name;
+      input.placeholder = f.placeholder || '';
+      if (f.required) input.required = true;
+      group.appendChild(input);
+
+      body.appendChild(group);
+    }
+
+    if (formConfig.privacy_checkbox) {
+      var privDiv = document.createElement('div');
+      privDiv.className = 'ew-form-privacy';
+
+      var cb = document.createElement('input');
+      cb.type = 'checkbox';
+      cb.id = 'ew-f-privacy';
+
+      var privLabel = document.createElement('label');
+      privLabel.setAttribute('for', 'ew-f-privacy');
+      privLabel.textContent = formConfig.privacy_text ||
+        'Acconsento al trattamento dei dati personali ai sensi del GDPR.';
+
+      privDiv.appendChild(cb);
+      privDiv.appendChild(privLabel);
+      body.appendChild(privDiv);
+    }
+
+    var submitBtn = document.createElement('button');
+    submitBtn.type = 'button';
+    submitBtn.className = 'ew-form-submit';
+    submitBtn.textContent = formConfig.submit_label || 'Invia';
+    body.appendChild(submitBtn);
+
+    var errorDiv = document.createElement('div');
+    errorDiv.className = 'ew-form-error';
+    body.appendChild(errorDiv);
+
+    card.appendChild(body);
+    wrapper.appendChild(card);
+    msgs.insertBefore(wrapper, $('ew-typing'));
+    scrollDown();
+
+    submitBtn.addEventListener('click', function () {
+      submitForm(formConfig, card, fields, errorDiv, submitBtn);
+    });
+  }
+
+  // ── Form Submission ─────────────────────────────────
+  function submitForm(formConfig, card, fields, errorDiv, submitBtn) {
+    errorDiv.classList.remove('ew-visible');
+
+    if (formConfig.privacy_checkbox) {
+      var privCb = document.getElementById('ew-f-privacy');
+      if (!privCb || !privCb.checked) {
+        errorDiv.textContent = 'Devi accettare il trattamento dei dati personali per continuare.';
+        errorDiv.classList.add('ew-visible');
+        return;
+      }
+    }
+
+    var data = {};
+    var missing = [];
+    for (var i = 0; i < fields.length; i++) {
+      var f = fields[i];
+      var input = document.getElementById('ew-f-' + f.name);
+      var val = input ? input.value.trim() : '';
+      if (f.required && !val) {
+        missing.push(f.label || f.name);
+      }
+      data[f.name] = val;
+    }
+
+    if (missing.length > 0) {
+      errorDiv.textContent = 'Compila i campi obbligatori: ' + missing.join(', ');
+      errorDiv.classList.add('ew-visible');
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Invio in corso...';
+
+    fetch(API_BASE + '/api/chat/submit-form', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        session_id: sessionId,
+        form_id: formConfig.form_id,
+        data: data,
+        privacy_accepted: formConfig.privacy_checkbox
+          ? document.getElementById('ew-f-privacy').checked
+          : true
+      })
+    })
+      .then(function (r) {
+        if (r.status === 422 || r.status === 400) {
+          return r.json().then(function (err) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = formConfig.submit_label || 'Invia';
+            var msg = err.detail || err.message || 'Errore di validazione.';
+            errorDiv.textContent = msg;
+            errorDiv.classList.add('ew-visible');
+            return null;
+          });
+        }
+        if (r.status === 410) {
+          disableInput(true);
+          inputDisabled = true;
+          appendBot('Sessione chiusa. Apri una nuova chat.', false, true);
+          return null;
+        }
+        return r.json();
+      })
+      .then(function (result) {
+        if (!result) return;
+
+        var bodyEl = card.querySelector('.ew-form-body');
+        bodyEl.innerHTML = '';
+        var done = document.createElement('div');
+        done.className = 'ew-form-done';
+        done.innerHTML = '<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>' +
+          '<span>Inviato con successo!</span>';
+        bodyEl.appendChild(done);
+
+        handleBotResponse(result);
+        scrollDown();
+      })
+      .catch(function () {
+        submitBtn.disabled = false;
+        submitBtn.textContent = formConfig.submit_label || 'Invia';
+        errorDiv.textContent = 'Errore di connessione. Riprova.';
+        errorDiv.classList.add('ew-visible');
+      });
   }
 
   function showTyping() {
@@ -386,7 +630,6 @@
   function startAutoOpen() {
     setTimeout(function () {
       if (chatOpened) return;
-
       fetch(API_BASE + '/api/chat/session/start', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -395,21 +638,15 @@
         .then(function (r) { return r.json(); })
         .then(function (data) {
           if (chatOpened) return;
-
           sessionId = data.session_id;
-
           if (data.proactive) {
             openChat();
-            if (data.speech) {
-              appendBot(data.speech);
-            }
+            if (data.speech) { appendBot(data.speech); }
           } else {
             $('ew-chat-toggle').classList.add('ew-has-badge');
           }
         })
-        .catch(function () {
-          // backend unreachable — silently ignore
-        });
+        .catch(function () {});
     }, 40000);
   }
 
@@ -418,7 +655,6 @@
     if (!sessionId) return;
     var url = API_BASE + '/api/chat/session/end';
     var body = JSON.stringify({ session_id: sessionId });
-
     if (navigator.sendBeacon) {
       navigator.sendBeacon(url, new Blob([body], { type: 'application/json' }));
     } else {
