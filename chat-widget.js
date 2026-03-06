@@ -525,7 +525,7 @@
     errorDiv.classList.remove('ew-visible');
 
     if (formConfig.privacy_checkbox) {
-      var privCb = document.getElementById('ew-f-privacy');
+      var privCb = card.querySelector('input[type="checkbox"]');
       if (!privCb || !privCb.checked) {
         errorDiv.textContent = 'Devi accettare il trattamento dei dati personali per continuare.';
         errorDiv.classList.add('ew-visible');
@@ -537,7 +537,7 @@
     var missing = [];
     for (var i = 0; i < fields.length; i++) {
       var f = fields[i];
-      var input = document.getElementById('ew-f-' + f.name);
+      var input = card.querySelector('input[name="' + f.name + '"]');
       var val = input ? input.value.trim() : '';
       if (f.required && !val) {
         missing.push(f.label || f.name);
@@ -554,6 +554,10 @@
     submitBtn.disabled = true;
     submitBtn.textContent = 'Invio in corso...';
 
+    var privAccepted = formConfig.privacy_checkbox
+      ? card.querySelector('input[type="checkbox"]').checked
+      : true;
+
     fetch(API_BASE + '/api/chat/submit-form', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -561,9 +565,7 @@
         session_id: sessionId,
         form_id: formConfig.form_id,
         data: data,
-        privacy_accepted: formConfig.privacy_checkbox
-          ? document.getElementById('ew-f-privacy').checked
-          : true
+        privacy_accepted: privAccepted
       })
     })
       .then(function (r) {
