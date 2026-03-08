@@ -1,0 +1,733 @@
+/* Import del font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap');
+
+/* --- Stili Generali (Versione Corretta e Definitiva) --- */
+
+html {
+    box-sizing: border-box; /* Migliore pratica per il box model */
+}
+*, *:before, *:after {
+    box-sizing: inherit; /* Tutti gli elementi ereditano questo comportamento */
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f0f2f5;
+    color: #1a202c;
+    line-height: 1.7;
+    margin: 0;
+
+    /* QUESTA è l'unica regola che crea lo spazio in fondo.
+       Funzionerà perché abbiamo rimosso i conflitti di altezza. */
+    padding: 40px 20px 100px 20px; /* Prova con 200px e aumenta se necessario */
+}
+
+.page-container {
+    /* Lasciamo questo contenitore semplice, senza altezze forzate */
+    /* Le vecchie regole sono state rimosse per risolvere il conflitto */
+}
+
+main {
+    flex-grow: 1;
+}
+.message {
+    padding: 12px 18px;
+    border-radius: 20px;
+    max-width: 80%;
+    line-height: 1.5;
+}
+.user {
+    background-color: #007bff;
+    color: white;
+    align-self: flex-end;
+    border-bottom-right-radius: 5px;
+}
+.bot {
+    background-color: #ffffff;
+    color: #1a202c;
+    align-self: flex-start;
+    border: 1px solid #e2e8f0;
+    border-bottom-left-radius: 5px;
+}
+
+/* Contenitori principali */
+.hub-content-wrapper, #test-container {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* Stili per la Pagina di Scelta (Hub) */
+.hub-page h1 { font-size: 2.8rem; font-weight: 800; color: #007bff; margin-bottom: 15px; line-height: 1.2; text-align: center; }
+.hub-page .hub-subtitle { font-size: 1.1rem; color: #4a5568; max-width: 650px; margin: 0 auto 40px auto; text-align: center; }
+.hub-container { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+.quiz-card { background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 30px; text-decoration: none; color: #1a202c; transition: all 0.3s ease; text-align: left; }
+.quiz-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1); border-color: #3182ce; }
+.card-icon { font-size: 2.5rem; margin-bottom: 15px; }
+.quiz-card h2 { color: #2c5282; margin-top: 0; margin-bottom: 10px; font-size: 1.4em; font-weight: 700; text-transform: none; }
+.quiz-card p { font-size: 1em; color: #4a5568; margin: 0; }
+
+/* Stili per il Contenitore del Quiz */
+#test-container { background-color: #ffffff; padding: 40px 50px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); }
+.screen { display: none; animation: fadeIn 0.5s ease-in-out; }
+.screen.active { display: block; visibility: visible; }
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Stili per gli elementi comuni del quiz */
+
+/* ================================================= */
+/* === STILI PER LA PAGINA DEL QUIZ === */
+/* ================================================= */
+#test-container {
+    width: 100%;
+    max-width: 800px;
+    background-color: #ffffff;
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.screen { display: none; animation: fadeIn 0.5s ease-in-out; }
+.screen.active { display: block; }
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+h1, h2 { text-align: left; color: #2c3e50; margin-bottom: 25px; }
+p { text-align: left; color: #555; margin-bottom: 20px; }
+
+#reading-title {
+    text-transform: none; /* CORREZIONE MAIUSCOLE */
+}
+
+#instructions {
+    text-align: left; background-color: #f8f9fa; padding: 15px 20px;
+    border-radius: 8px; margin: 25px 0; border: 1px solid #e9ecef;
+}
+#instructions p { text-align: left; margin: 10px 0; }
+
+button {
+    display: block; width: 100%; padding: 15px; font-size: 1.1em;
+    font-weight: 600; color: #fff; background: linear-gradient(90deg, #007bff, #0056b3);
+    border: none; border-radius: 8px; cursor: pointer; transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2); margin-top: 20px;
+}
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 123, 255, 0.3);
+}
+
+#reading-text {
+    text-align: justify; 
+    max-height: 500px; overflow-y: auto;
+    border: 1px solid #e0e0e0; padding: 20px; margin: 20px 0;
+    border-radius: 8px; background-color: #fdfdfd;
+}
+
+#progress-bar-container {
+    width: 100%; background-color: #e0e0e0; border-radius: 5px;
+    margin-bottom: 25px; overflow: hidden;
+}
+#progress-bar {
+    width: 0%; height: 10px; background-color: #28a745;
+    border-radius: 5px; transition: width 0.4s ease-in-out;
+}
+
+/* Modifiche qui per far funzionare la formattazione del quiz */
+.form-group {
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    border-left: 5px solid #007bff;
+}
+.form-group p {
+    text-align: left;
+    font-weight: 600;
+    margin-top: 0;
+}
+.form-group label {
+    display: block;
+    margin-bottom: 10px;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.2s ease;
+}
+.form-group label:hover {
+    background-color: #e9ecef;
+}
+.form-group input[type="radio"] {
+    margin-right: 12px;
+}
+
+/* Sezione originale question-block mantenuta, anche se non usata dal JS attuale */
+.question-block {
+    margin-bottom: 20px; padding: 20px; background-color: #f9f9f9;
+    border-radius: 8px; border-left: 5px solid #007bff;
+}
+.question-block p { text-align: left; font-weight: 600; margin-top: 0; }
+.question-block label {
+    display: block; margin-bottom: 10px; cursor: pointer;
+    padding: 10px; border-radius: 5px; transition: background-color 0.2s ease;
+}
+.question-block label:hover { background-color: #e9ecef; }
+.question-block input[type="radio"] { margin-right: 12px; }
+/* --- INIZIO BLOCCO PRESENTAZIONE MENTOR EUREKA --- */
+
+/* 1. Stile per il contenitore principale del box */
+.mentor-profile-box {
+  display: flex; /* Allinea l'avatar e il testo fianco a fianco */
+  align-items: center; /* Centra verticalmente il contenuto */
+  background-color: #ffffff; /* Sfondo bianco per un look pulito */
+  border: 1px solid #e2e8f0; /* Bordo leggero in linea col tuo stile */
+  border-radius: 16px; /* Angoli arrotondati come le tue card */
+  padding: 25px;
+  margin: 40px 0; /* Spazio sopra e sotto */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); /* Ombra leggera per dare profondità */
+}
+
+/* 2. Stile per l'area che contiene il logo (l'avatar) */
+/* Stile per l'avatar/logo di Mentor Eureka */
+.mentor-avatar.mentor-logo {
+  flex-shrink: 0; /* Impedisce di rimpicciolirsi */
+  margin-right: 25px; /* Spazio a destra */
+
+  /* Dimensioni e immagine di sfondo */
+  width: 150px;
+  height: 150px;
+  background-image: url('images/logo_mentor_eureka .png');
+  
+  /* Stili per visualizzare correttamente l'immagine */
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  
+  /* Stili di pulizia */
+  background-color: transparent;
+  border-radius: 50%; /* Rende l'avatar circolare */
+}
+/* 3. Stile per la sezione di testo a destra */
+.mentor-details h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: #2c5282;
+  font-size: 1.4rem;
+}
+
+.mentor-details p {
+  margin-bottom: 0;
+  color: #4a5568;
+  line-height: 1.6;
+}
+
+/* --- FINE BLOCCO PRESENTAZIONE MENTOR EUREKA --- */
+/* Stili per l'header della schermata risultati con il logo */
+.results-header {
+    display: flex;
+    align-items: center; /* Allinea verticalmente logo e titolo */
+    margin-bottom: 25px; /* Spazio sotto l'header */
+}
+
+.results-header h2 {
+    margin-bottom: 0; /* Rimuove il margine sotto il titolo per un migliore allineamento */
+    margin-left: 15px; /* Spazio tra il logo e il titolo */
+    font-size: 1.8rem; /* Rendi il titolo leggermente più grande e d'impatto */
+    color: #2c5282;
+}
+
+/* Stile specifico per il logo piccolo nella pagina risultati */
+.mentor-avatar.mentor-logo.small-logo {
+    width: 50px; /* Larghezza ridotta */
+    height: 50px; /* Altezza ridotta */
+    /* Il resto degli stili del logo (background-image, border-radius, etc.)
+       verrà ereditato dalla regola .mentor-avatar.mentor-logo già esistente */
+}
+/* Stile per il box di introduzione a Mentor Eureka nella pagina risultati */
+.mentor-intro-box {
+  background-color: #e9f2ff; /* Un azzurro molto chiaro, colore di fiducia */
+  border-left: 5px solid #007bff; /* Un bordo di accento blu */
+  padding: 20px 25px;
+  margin: 30px 0;
+  border-radius: 8px;
+}
+
+.mentor-intro-box p {
+  margin: 0;
+  color: #2c5282; /* Un colore di testo più scuro e leggibile */
+  line-height: 1.6;
+}
+
+.mentor-intro-box p:not(:last-child) {
+  margin-bottom: 15px; /* Aggiunge spazio tra i due paragrafi */
+}
+/* --- Stili Aggiornati per l'Header della Chat --- */
+
+#chat-header {
+    display: flex; /* Allinea il logo e il blocco di testo fianco a fianco */
+    align-items: center; /* Centra tutto verticalmente */
+    padding: 15px 20px;
+    border-bottom: 1px solid #e2e8f0;
+    flex-shrink: 0;
+}
+
+/* Stile per il logo nell'header (puoi regolare la dimensione qui) */
+#chat-header .mentor-avatar.mentor-logo.chat-logo {
+    width: 50px;
+    height: 50px;
+    flex-shrink: 0; /* Impedisce al logo di rimpicciolirsi */
+}
+
+/* Nuovo contenitore per tutto il testo a destra del logo */
+.chat-header-text {
+    margin-left: 15px; /* Crea spazio tra il logo e il testo */
+}
+
+.chat-header-text h2 {
+    margin: 0;
+    font-size: 1.3rem;
+    color: #1a202c;
+}
+
+.chat-header-text p {
+    margin: 5px 0 0 0; /* Piccolo spazio sopra la descrizione */
+    font-size: 0.85rem;
+    color: #4a5568;
+}
+/* Stile per il box delle istruzioni "Walkie-Talkie" */
+.chat-instructions-box {
+  background-color: #e9f2ff; /* Azzurro chiaro */
+  border: 1px solid #b3e0ff; /* Bordo azzurro */
+  border-radius: 16px;
+  padding: 15px 20px;
+  margin-bottom: 20px;
+  width: 100%;
+  max-width: 700px;
+  box-sizing: border-box;
+  color: #2c5282; /* Colore testo scuro per buona leggibilità su azzurro */
+  font-size: 0.9rem;
+  line-height: 1.6; /* Aggiunto per coerenza */
+}
+
+.chat-instructions-box h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.chat-instructions-box ul {
+  list-style-type: none; /* Rimuove i pallini */
+  padding-left: 0;
+  margin-bottom: 10px;
+}
+
+.chat-instructions-box li {
+  margin-bottom: 5px;
+}
+
+.chat-instructions-box p {
+  margin-bottom: 0;
+  font-style: italic;
+  text-align: center;
+}
+/* Stile per il blocco di valore aggiunto sulla homepage */
+.value-add-section {
+  background-color: #f8f9fa; /* Un grigio chiarissimo che usi già */
+  border-left: 4px solid #007bff; /* Usa il tuo blu primario come accento */
+  padding: 25px;                 /* Spazio interno per dare respiro al testo */
+  margin: 40px 0;                /* Spazio verticale per separarlo bene */
+  border-radius: 8px;              /* Angoli arrotondati in linea con il tuo stile */
+}
+
+.value-add-section h3 {
+  margin-top: 0;                 /* Allinea meglio il titolo */
+  color: #2c5282;                /* Un colore scuro ma non nero, come nelle card */
+}
+
+.value-add-section p {
+  color: #4a5568; /* Colore del testo secondario, per coerenza */
+}
+
+.value-add-section ul {
+  padding-left: 20px; /* Sposta la lista leggermente a destra */
+}
+/* ✅ NUOVI STILI PER IL BLOCCO DEL CONSENSO */
+.consent-group {
+    display: flex;
+    align-items: flex-start; /* Allinea la checkbox in alto con il testo */
+    margin-top: 25px;
+    margin-bottom: 25px;
+    text-align: left;
+}
+
+.consent-group input[type="checkbox"] {
+    margin-top: 5px; /* Sposta leggermente in basso la checkbox per un allineamento visivo migliore */
+    margin-right: 15px;
+    flex-shrink: 0; /* Impedisce alla checkbox di rimpicciolirsi */
+    width: 1.2em;
+    height: 1.2em;
+}
+
+.consent-group label {
+    font-size: 0.85rem;
+    color: #555;
+    line-height: 1.5;
+    margin: 0;
+    cursor: pointer;
+}
+
+.consent-group label strong {
+    font-size: 1rem;
+    color: #333;
+    display: block;
+    margin-bottom: 5px;
+}
+
+#results-list { list-style-type: none; padding: 0; margin-bottom: 30px; }
+#results-list li {
+    background-color: #f8f9fa; border: 1px solid #dee2e6;
+    padding: 15px; margin-bottom: 10px; border-radius: 8px;
+    font-size: 1.1em; display: flex; justify-content: space-between;
+}
+#results-list li strong { color: #333; }
+
+.custom-section {
+    margin-top: 30px; background: #e9f7ff; border: 1px solid #b3e0ff;
+    padding: 25px; border-radius: 12px;
+}
+.custom-section p { text-align: center; } 
+.time-saving-highlight {
+    font-size: 1.8em; font-weight: 600; color: #e67e22;
+    display: block; margin: 10px 0;
+}
+.call-to-action { margin-top: 20px; text-align: center; }
+
+@media (max-width: 600px) {
+    #test-container { padding: 20px; }
+    .question-block, .form-group { padding: 15px; } /* Applica lo stile anche a form-group */
+    h1, h2 { font-size: 1.5em; }
+    .hub-page h1 { font-size: 2.2em; } /* Adatta anche il titolo hub */
+    .hub-page .hub-subtitle { font-size: 1.1em; }
+    .hub-container { flex-direction: column; align-items: center; }
+    .quiz-card { width: 90%; }
+}
+
+/* Stili per la Chat */
+#chat-page-container {
+    display: flex;
+    flex-direction: column; /* Impila gli elementi in verticale */
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Usa min-height per flessibilità */
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #f0f2f5;
+}
+#chat-container {
+    width: 100%;
+    max-width: 700px;
+    height: 85vh; /* Altezza fissa per il box della chat */
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column; /* Impila gli elementi verticalmente */
+    overflow: hidden;
+}
+
+#chat-header {
+    padding: 15px 20px;
+    border-bottom: 1px solid #e2e8f0;
+    text-align: center;
+    flex-shrink: 0; /* Impedisce all'header di rimpicciolirsi */
+}
+
+#chat-header h2 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #1a202c;
+}
+
+#chat-window {
+    flex-grow: 1; /* Fa espandere questa finestra per riempire lo spazio */
+    padding: 20px;
+    overflow-y: auto; /* Aggiunge la barra di scorrimento solo quando serve */
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Stili per le Vignette / Fumetti */
+.message {
+    padding: 10px 15px;
+    border-radius: 18px;
+    max-width: 75%;
+    line-height: 1.5;
+}
+.user {
+    background-color: #007bff; /* Blu per l'utente */
+    color: white;
+    align-self: flex-end;
+    border-bottom-right-radius: 4px;
+}
+
+.bot {
+    background-color: #f8f9fa; /* Bianco sporco per il bot */
+    border: 1px solid #e9ecef; /* Un leggero bordo per definire la vignetta */
+    color: #1a202c;
+    align-self: flex-start;
+    border-bottom-left-radius: 4px;
+}
+
+
+/* Stili per l'input form della chat */
+#chat-form {
+    display: flex;
+    padding: 15px;
+    border-top: 1px solid #e2e8f0;
+    background-color: #f8f9fa;
+    align-items: center;
+    flex-shrink: 0; /* Impedisce al form di rimpicciolirsi */
+}
+
+#chat-input {
+    flex-grow: 1;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    padding: 10px 18px;
+    font-size: 1rem;
+    outline: none;
+}
+
+#chat-form button {
+    width: auto;
+    margin-top: 0;
+    flex-shrink: 0;
+}
+
+#chat-form button[type="submit"] {
+    background: #007bff;
+    color: white;
+}
+
+#mic-button {
+    background-color: transparent;
+    font-size: 1.5rem;
+    box-shadow: none;
+}
+
+/* STILI AGGIORNATI PER IL PULSANTE MICROFONO */
+#mic-btn {
+    background-color: transparent;
+    border: 2px solid transparent; /* Aggiunto per evitare spostamenti */
+    font-size: 1.8rem;
+    cursor: pointer;
+    margin-right: 10px;
+    padding: 0 10px;
+    color: #6c757d;
+    transition: all 0.3s ease;
+    margin-top: 0;
+    box-shadow: none;
+    border-radius: 50%; /* Cerchio perfetto */
+}
+#mic-btn:hover {
+    color: #007bff;
+    background: #e9f2ff;
+    transform: none;
+    box-shadow: none;
+}
+
+/* ✅ NUOVO STILE per quando la modalità conversazione è ATTIVA */
+#mic-btn.active {
+    color: #007bff;
+    border-color: #007bff;
+}
+
+/* Stile per quando sta ascoltando attivamente */
+#mic-btn.listening {
+    color: #dc3545;
+    border-color: #dc3545;
+    animation: pulse 1.5s infinite;
+}
+/* Aggiungi questo blocco nel tuo style.css */
+#chat-form button {
+    width: auto;      /* La larghezza si adatta al contenuto */
+    margin-top: 0;    /* Annulla il margine dall'alto dei bottoni generici */
+    flex-shrink: 0;   /* Impedisce ai pulsanti di rimpicciolirsi se lo spazio è poco */
+}
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(220, 53, 69, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0); }
+}
+
+#chat-form button:hover { background-color: #0056b3; }
+.mic-button {
+    padding: 12px 25px;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    background-color: #007bff;
+    color: #ffffff;
+    transition: background-color 0.3s ease;
+}
+.mic-button:hover {
+    background-color: #0056b3;
+}
+.mic-button.recording {
+    background-color: #ff4d4d; /* Rosso quando registra */
+    color: white;
+    animation: pulse 1.5s infinite; /* MODIFICA: Animazione pulsante durante registrazione */
+}
+
+/* Animazione pulsante microfono */
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(255, 77, 77, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(255, 77, 77, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 77, 77, 0); }
+}
+/* Inizio modifica (22/08/2025 10:37): Stile per indicatore visivo */
+.message.processing {
+  text-align: left;
+  color: #666;
+  font-style: italic;
+  margin: 10px 0;
+}
+
+.dots {
+  display: inline-block;
+  width: 30px; /* Spazio per i puntini */
+  text-align: left;
+}
+
+.dots::after {
+  content: '...';
+  animation: dots 1.5s infinite;
+}
+
+@keyframes dots {
+  0% { content: '.'; }
+  33% { content: '..'; }
+  66% { content: '...'; }
+}
+
+/* Footer */
+.site-footer { position: fixed; bottom: 0; left: 0; width: 100%; background-color: #ffffff; border-top: 1px solid #e2e8f0; padding: 15px 0; text-align: center; font-size: 0.85rem; color: #6c757d; z-index: 1000; box-shadow: 0 -5px 15px rgba(0,0,0,0.05); }
+.site-footer a { color: #4a5568; text-decoration: none; margin: 0 10px; transition: color 0.2s ease; }
+.site-footer a:hover { color: #007bff; text-decoration: underline; }
+/*
+
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hub-container { grid-template-columns: 1fr; }
+    #test-container { padding: 20px; }
+}
+/* --- Fix barra input chat su mobile --- */
+#chat-form {
+  display: flex;
+  align-items: center;
+  gap: 6px;              /* spazio tra pulsanti e input */
+  padding: 6px;
+  background: #fff;
+  border-top: 1px solid #ddd;
+}
+
+#chat-form button {
+  flex: 0 0 auto;        /* i pulsanti mantengono la loro larghezza */
+  font-size: 18px;
+  padding: 8px 10px;
+}
+
+#chat-input {
+  flex: 1 1 auto;        /* l'input prende tutto lo spazio disponibile */
+  min-width: 0;          /* evita che forzi overflow */
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+/* Mobile ottimizzato */
+@media (max-width: 600px) {
+  #chat-form {
+    gap: 4px;
+    padding: 4px;
+  }
+
+  #chat-input {
+    font-size: 14px;
+    padding: 6px;
+  }
+
+  #chat-form button {
+    padding: 6px 8px;
+    font-size: 16px;
+  }
+}
+/* --- Mobile: avatar SOPRA il testo nel box Mentor --- */
+@media (max-width: 640px){
+  .mentor-profile-box{
+    flex-direction: column;         /* stack */
+    align-items: center;            /* centra */
+    text-align: center;
+  }
+  .mentor-avatar.mentor-logo{
+    width: 96px;                    /* dimensioni più sobrie */
+    height: 96px;
+    margin: 0 0 12px 0;             /* spazio sotto il logo */
+  }
+  .mentor-details{
+    width: 100%;
+  }
+}
+/* --- FIX TYPING (desktop) --- */
+#chat-window { overflow-x: hidden; }
+
+/* Le bolle devono poter andare a capo e crescere */
+.message .message-text{
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  max-height: none !important;
+}
+
+/* Assicurati che SOLO l’INPUT resti su una riga */
+#chat-input{
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+/* --- FIX FINALE TYPING & PULIZIA OVERRIDES --- */
+
+/* Le bolle devono poter andare a capo e crescere (typing visibile) */
+.message .message-text {
+  display: block !important;
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  max-height: none !important;
+}
+
+/* Assicurati che SOLO l’input usi nowrap/ellipsis */
+#chat-input {
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+/* Evita che altri contenitori “taglino” il testo digitato */
+#chat-window { 
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+}
+
+/* Rimuovi eventuali outline/debug residui sulle bolle (se presenti) */
+.message, .message .message-text {
+  outline: none !important;
+}
+
