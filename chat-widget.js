@@ -64,11 +64,11 @@
     display:flex;align-items:center;gap:12px;
   }
   .ew-header-avatar{
-    width:42px;height:42px;border-radius:50%;flex-shrink:0;
-    overflow:hidden;background:#1C2B3A;
-    border:2px solid rgba(0,169,136,.4);
+    width:40px;height:40px;border-radius:50%;flex-shrink:0;
+    background:linear-gradient(135deg,#00A988 0%,#007a63 100%);
+    display:flex;align-items:center;justify-content:center;
   }
-  .ew-header-avatar img{width:100%;height:100%;object-fit:cover;display:block;}
+  .ew-header-avatar svg{width:22px;height:22px;fill:#fff;}
   .ew-header-info{flex:1;min-width:0;}
   .ew-header-name{font-family:'Montserrat',sans-serif;font-weight:700;font-size:15px;}
   .ew-header-status{font-size:11px;color:rgba(255,255,255,.6);margin-top:1px;}
@@ -266,14 +266,6 @@
   `;
 
   // ── HTML ─────────────────────────────────────────────
-  var LOGO_URL = (function () {
-    var s = document.currentScript;
-    if (!s) return 'images/logo_mentor_eureka.png';
-    var src = s.getAttribute('src') || '';
-    var base = src.substring(0, src.lastIndexOf('/') + 1);
-    return base + 'images/logo_mentor_eureka.png';
-  })();
-
   var html = `
   <button id="ew-chat-toggle" aria-label="Apri chat">
     <svg class="ew-ico-chat" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.17L4 17.17V4h16v12z"/><path d="M7 9h10v2H7zm0-3h10v2H7zm0 6h7v2H7z"/></svg>
@@ -283,7 +275,7 @@
   <div id="ew-chat-box">
     <div class="ew-header">
       <div class="ew-header-avatar">
-        <img src="${LOGO_URL}" alt="Mentor Eureka" onerror="this.style.display='none'"/>
+        <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
       </div>
       <div class="ew-header-info">
         <div class="ew-header-name">Mentor Eureka</div>
