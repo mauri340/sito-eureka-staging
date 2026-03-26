@@ -794,12 +794,40 @@
       var label = document.createElement('label');
       label.textContent = f.label || f.name;
       group.appendChild(label);
-      var input = document.createElement('input');
-      input.type = f.type || 'text';
-      input.name = f.name;
-      input.placeholder = f.placeholder || '';
-      if (f.required) input.required = true;
-      group.appendChild(input);
+      
+      if (f.type === 'select') {
+        var select = document.createElement('select');
+        select.name = f.name;
+        select.style.cssText = 'width:100%;padding:9px 12px;border:1.5px solid #F0EDE8;border-radius:8px;font-size:13px;font-family:"Montserrat",sans-serif;outline:none;transition:border-color .2s;background:#F8F7F4;color:#1a1a2e;box-sizing:border-box;';
+        if (f.required) select.required = true;
+        
+        // Add placeholder option
+        var placeholderOption = document.createElement('option');
+        placeholderOption.value = '';
+        placeholderOption.textContent = f.placeholder || 'Seleziona...';
+        placeholderOption.disabled = true;
+        placeholderOption.selected = true;
+        select.appendChild(placeholderOption);
+        
+        // Add options
+        if (f.options) {
+          for (var j = 0; j < f.options.length; j++) {
+            var opt = f.options[j];
+            var option = document.createElement('option');
+            option.value = opt.value || opt;
+            option.textContent = opt.label || opt;
+            select.appendChild(option);
+          }
+        }
+        group.appendChild(select);
+      } else {
+        var input = document.createElement('input');
+        input.type = f.type || 'text';
+        input.name = f.name;
+        input.placeholder = f.placeholder || '';
+        if (f.required) input.required = true;
+        group.appendChild(input);
+      }
       body.appendChild(group);
     }
 
@@ -852,8 +880,10 @@
     var missing = [];
     for (var i = 0; i < fields.length; i++) {
       var f = fields[i];
-      var input = card.querySelector('input[name="' + f.name + '"]');
-      var val = input ? input.value.trim() : '';
+      var element = f.type === 'select' 
+        ? card.querySelector('select[name="' + f.name + '"]')
+        : card.querySelector('input[name="' + f.name + '"]');
+      var val = element ? element.value.trim() : '';
       if (f.required && !val) { missing.push(f.label || f.name); }
       data[f.name] = val;
     }
