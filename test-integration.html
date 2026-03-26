@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Chat Widget Integration</title>
+    <meta name="description" content="Test page per verificare l'integrazione delle funzionalità avanzate">
+</head>
+<body>
+    <div style="padding: 40px; font-family: Arial, sans-serif;">
+        <h1>Test Integrazione Chat Widget Avanzato</h1>
+        <p>Questa pagina serve per testare le funzionalità integrate dalla cartella tool-ai.</p>
+        
+        <div style="margin: 20px 0; padding: 20px; background: #f5f5f5; border-radius: 8px;">
+            <h3>🧪 Test Scenarios</h3>
+            <ul>
+                <li><strong>Utente Standard:</strong> Accesso normale alla pagina</li>
+                <li><strong>Test Lettura:</strong> <a href="?userId=test123&nome=Mario&email=mario@test.com&pam=250&punteggio=85&quiz_status=completed">Simula utente da test lettura</a></li>
+                <li><strong>Test Memoria:</strong> <a href="?userId=test456&nome=Laura&email=laura@test.com&test_type=memoria&memory_score=75">Simula utente da test memoria</a></li>
+                <li><strong>Test Ignoranza:</strong> <a href="?userId=test789&nome=Giovanni&email=giovanni@test.com&test_type=costo_ignoranza&ignorance_score=90">Simula utente da test ignoranza</a></li>
+            </ul>
+        </div>
+
+        <div style="margin: 20px 0; padding: 20px; background: #e8f4fd; border-radius: 8px;">
+            <h3>🔧 Debug Console</h3>
+            <p>Apri la console del browser per vedere i log di debug dell'integrazione.</p>
+            <button onclick="showDebugInfo()">Mostra Info Debug</button>
+            <div id="debug-output" style="margin-top: 10px; padding: 10px; background: white; border-radius: 4px; font-family: monospace; font-size: 12px;"></div>
+        </div>
+
+        <div style="margin: 20px 0; padding: 20px; background: #fff3cd; border-radius: 8px;">
+            <h3>📊 Analytics Test</h3>
+            <p>Testa il tracking analytics:</p>
+            <button onclick="testAnalytics()">Test Event Tracking</button>
+            <div id="analytics-output" style="margin-top: 10px;"></div>
+        </div>
+    </div>
+
+    <script>
+        // Debug functions
+        function showDebugInfo() {
+            const output = document.getElementById('debug-output');
+            const info = {
+                userSource: window.userSource ? window.userSource.getUserSourceInfo() : 'Not loaded',
+                analytics: window.analytics ? window.analytics.getStatus() : 'Not loaded',
+                audioSync: window.audioSync ? window.audioSync.getStatus() : 'Not loaded',
+                wsClient: window.WebSocketClient ? 'Available' : 'Not loaded',
+                currentUrl: window.location.href,
+                urlParams: Object.fromEntries(new URLSearchParams(window.location.search))
+            };
+            
+            output.innerHTML = '<pre>' + JSON.stringify(info, null, 2) + '</pre>';
+        }
+
+        function testAnalytics() {
+            const output = document.getElementById('analytics-output');
+            if (window.analytics) {
+                window.analytics.trackEvent('test_integration', {
+                    test_type: 'manual_test',
+                    page: 'test-integration'
+                });
+                output.innerHTML = '<span style="color: green;">✅ Analytics event sent successfully!</span>';
+            } else {
+                output.innerHTML = '<span style="color: orange;">⚠️ Analytics not loaded yet</span>';
+            }
+        }
+
+        // Wait for modules to load and auto-show debug info
+        setTimeout(() => {
+            showDebugInfo();
+        }, 3000);
+    </script>
+
+    <!-- Load the enhanced chat widget -->
+    <script src="chat-widget.js"></script>
+</body>
+</html>
