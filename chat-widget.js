@@ -13,6 +13,13 @@
   var inputDisabled = false;
   var widgetReady = false;
 
+  // ── Advanced Systems ────────────────────────────────
+  var wsClient = null;
+  var audioSync = null;
+  var userSource = null;
+  var analytics = null;
+  var useWebSocketStreaming = false;
+
   // ── Voice state ─────────────────────────────────────
   var isRecording = false;
   var recognition = null;
@@ -312,9 +319,97 @@
     wrap.innerHTML = html;
     document.body.appendChild(wrap);
 
+    // Load advanced modules
+    loadAdvancedModules();
+
     widgetReady = true;
     bindEvents();
     startAutoOpen();
+  }
+
+  function loadAdvancedModules() {
+    var modulesLoaded = 0;
+    var totalModules = 4;
+
+    function checkAllModulesLoaded() {
+      modulesLoaded++;
+      if (modulesLoaded === totalModules) {
+        initializeAdvancedSystems();
+      }
+    }
+
+    // Load WebSocket client
+    var wsScript = document.createElement('script');
+    wsScript.src = '/js/websocket-client.js';
+    wsScript.onload = function() { 
+      console.log('WebSocket client loaded'); 
+      checkAllModulesLoaded();
+    };
+    document.head.appendChild(wsScript);
+
+    // Load audio synchronization
+    var audioScript = document.createElement('script');
+    audioScript.src = '/js/audio-sync.js';
+    audioScript.onload = function() { 
+      console.log('Audio sync loaded'); 
+      checkAllModulesLoaded();
+    };
+    document.head.appendChild(audioScript);
+
+    // Load user source detection
+    var sourceScript = document.createElement('script');
+    sourceScript.src = '/js/user-source-detector.js';
+    sourceScript.onload = function() { 
+      console.log('User source detector loaded'); 
+      checkAllModulesLoaded();
+    };
+    document.head.appendChild(sourceScript);
+
+    // Load analytics integration
+    var analyticsScript = document.createElement('script');
+    analyticsScript.src = '/js/analytics-integration.js';
+    analyticsScript.onload = function() { 
+      console.log('Analytics integration loaded'); 
+      checkAllModulesLoaded();
+    };
+    document.head.appendChild(analyticsScript);
+  }
+
+  function initializeAdvancedSystems() {
+    // Initialize analytics first
+    if (window.AnalyticsIntegration) {
+      analytics = new window.AnalyticsIntegration();
+      console.log('Analytics system initialized');
+    }
+
+    // Initialize user source detector
+    if (window.UserSourceDetector) {
+      userSource = new window.UserSourceDetector();
+      console.log('User source detector initialized:', userSource.getUserSourceInfo());
+      
+      // Track chat widget load based on user source
+      if (analytics) {
+        analytics.trackEvent('chat_widget_loaded', {
+          user_source: userSource.userSource,
+          has_test_data: userSource.testData !== null,
+          page_category: userSource.pageContext ? userSource.pageContext.category : 'unknown'
+        });
+      }
+    }
+
+    // Initialize audio synchronization
+    if (window.AudioSyncManager) {
+      audioSync = new window.AudioSyncManager();
+      console.log('Audio sync system initialized');
+    }
+
+    // Check if we should use WebSocket streaming (for test users or advanced API)
+    if (userSource && userSource.userSource.includes('test')) {
+      useWebSocketStreaming = true;
+      console.log('WebSocket streaming enabled for test user');
+    }
+
+    console.log('All advanced systems initialized');
   }
 
   function $(id) { return document.getElementById(id); }
@@ -338,6 +433,12 @@
     $('ew-chat-box').classList.add('ew-visible');
     $('ew-chat-toggle').classList.add('ew-open');
     $('ew-chat-toggle').classList.remove('ew-has-badge');
+    
+    // Track chat opened with analytics
+    if (analytics && userSource) {
+      analytics.trackChatOpened(userSource.userSource);
+    }
+    
     if (!sessionId) { startSession(); } else { focusInput(); }
   }
 
@@ -354,32 +455,68 @@
   }
 
   function getPageContext() {
-    return {
+    var basicContext = {
       url: window.location.pathname,
       title: document.title,
       description: (document.querySelector('meta[name="description"]') || {}).content || '',
       section: window.location.pathname.split('/').filter(Boolean)[0] || ''
     };
+
+    // If user source detector is available, use enhanced context
+    if (userSource && userSource.getChatInitContext) {
+      var enhancedContext = userSource.getChatInitContext();
+      return Object.assign(basicContext, enhancedContext);
+    }
+
+    return basicContext;
   }
 
   // ── Session Start ───────────────────────────────────
   function startSession() {
     showTyping();
+    
+    // Get personalized greeting if user source is available
+    var personalizedGreeting = 'Ciao! Sono Mentor Eureka. Come posso aiutarti?';
+    if (userSource && userSource.getPersonalizedGreeting) {
+      personalizedGreeting = userSource.getPersonalizedGreeting();
+    }
+
+    var contextData = getPageContext();
+    
     fetch(API_BASE + '/api/chat/session/start', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ page_context: getPageContext() })
+      body: JSON.stringify({ 
+        page_context: contextData,
+        personalized_greeting: personalizedGreeting
+      })
     })
       .then(function (r) { return r.json(); })
       .then(function (data) {
         hideTyping();
         sessionId = data.session_id;
-        if (data.speech) { typeBotMessage(data.speech); }
+        
+        // Use personalized greeting if server doesn't provide one
+        var message = data.speech || personalizedGreeting;
+        
+        if (audioSync && data.audio_base64) {
+          // Use advanced audio sync for streaming TTS
+          var messageId = 'msg-' + Date.now();
+          appendBotWithId(message, false, false, messageId);
+          audioSync.queueText(messageId, message);
+          audioSync.queueAudio(data.audio_base64, messageId);
+        } else {
+          typeBotMessage(message);
+          if (ttsEnabled && data.audio_base64) {
+            playBase64Audio(data.audio_base64);
+          }
+        }
+        
         focusInput();
       })
       .catch(function () {
         hideTyping();
-        typeBotMessage('Ciao! Sono Mentor Eureka. Come posso aiutarti?');
+        typeBotMessage(personalizedGreeting);
         focusInput();
       });
   }
@@ -391,6 +528,11 @@
     var text = inp.value.trim();
     if (!text) return;
 
+    // Track message sent
+    if (analytics && userSource) {
+      analytics.trackMessageSent('text', userSource.userSource);
+    }
+
     inp.value = '';
     appendUser(text);
     showTyping();
@@ -401,17 +543,31 @@
       : fetch(API_BASE + '/api/chat/session/start', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ page_context: getPageContext() })
+          body: JSON.stringify({ 
+            page_context: getPageContext(),
+            personalized_greeting: userSource ? userSource.getPersonalizedGreeting() : null
+          })
         })
           .then(function (r) { return r.json(); })
           .then(function (d) { sessionId = d.session_id; });
 
     startPromise
       .then(function () {
+        var requestBody = { 
+          session_id: sessionId, 
+          message: text, 
+          voice: ttsEnabled 
+        };
+        
+        // Add user context for intelligent routing
+        if (userSource) {
+          requestBody.user_context = userSource.getChatInitContext();
+        }
+
         return fetch(API_BASE + '/api/chat/message', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ session_id: sessionId, message: text, voice: ttsEnabled })
+          body: JSON.stringify(requestBody)
         });
       })
       .then(function (r) {
@@ -465,8 +621,20 @@
         break;
     }
 
+    // Enhanced audio handling with synchronization
     if (ttsEnabled && data.audio_base64) {
-      playBase64Audio(data.audio_base64);
+      if (audioSync) {
+        // Find the last bot message for audio sync
+        var lastBotMsg = document.querySelector('.ew-msg-bot:last-of-type:not(#ew-typing)');
+        if (lastBotMsg && lastBotMsg.id) {
+          audioSync.queueAudio(data.audio_base64, lastBotMsg.id);
+        } else {
+          // Fallback to legacy audio
+          playBase64Audio(data.audio_base64);
+        }
+      } else {
+        playBase64Audio(data.audio_base64);
+      }
     }
   }
 
@@ -475,6 +643,7 @@
     var msgs = $('ew-messages');
     var div = document.createElement('div');
     div.className = 'ew-msg ew-msg-bot';
+    div.id = 'msg-' + Date.now(); // Add ID for audio sync
     var bubble = document.createElement('div');
     var cls = 'ew-bubble';
     if (success) cls += ' ew-success';
@@ -484,16 +653,24 @@
     div.appendChild(bubble);
     msgs.insertBefore(div, $('ew-typing'));
 
-    var i = 0;
-    var speed = 18;
-    function typeNext() {
-      if (i < text.length) {
-        bubble.textContent = text.slice(0, ++i);
-        scrollDown();
-        setTimeout(typeNext, speed);
+    // Use audio sync typing if available
+    if (audioSync && !isError) {
+      audioSync.queueText(div.id, text);
+    } else {
+      // Fallback to traditional typing
+      var i = 0;
+      var speed = 18;
+      function typeNext() {
+        if (i < text.length) {
+          bubble.textContent = text.slice(0, ++i);
+          scrollDown();
+          setTimeout(typeNext, speed);
+        }
       }
+      typeNext();
     }
-    typeNext();
+
+    return div.id;
   }
 
   function appendBot(text, success, isError) {
@@ -509,6 +686,23 @@
     div.appendChild(bubble);
     msgs.insertBefore(div, $('ew-typing'));
     scrollDown();
+  }
+
+  function appendBotWithId(text, success, isError, messageId) {
+    var msgs = $('ew-messages');
+    var div = document.createElement('div');
+    div.className = 'ew-msg ew-msg-bot';
+    div.id = messageId || ('msg-' + Date.now());
+    var bubble = document.createElement('div');
+    var cls = 'ew-bubble';
+    if (success) cls += ' ew-success';
+    if (isError) cls += ' ew-error';
+    bubble.className = cls;
+    bubble.textContent = text;
+    div.appendChild(bubble);
+    msgs.insertBefore(div, $('ew-typing'));
+    scrollDown();
+    return div.id;
   }
 
   function appendUser(text) {
@@ -558,6 +752,12 @@
         var transcript = (result[0].transcript || '').trim();
         if (transcript) {
           $('ew-input').value = transcript;
+          
+          // Track voice message
+          if (analytics && userSource) {
+            analytics.trackMessageSent('voice', userSource.userSource);
+          }
+          
           sendMessage();
         }
       }
@@ -608,6 +808,13 @@
   // ── Audio Playback ──────────────────────────────────
   function playBase64Audio(base64) {
     try {
+      // Use advanced audio sync if available
+      if (audioSync) {
+        audioSync.playBase64Audio(base64);
+        return;
+      }
+
+      // Fallback to legacy audio playback
       stopAudio();
       var binary = atob(base64);
       var bytes = new Uint8Array(binary.length);
@@ -628,6 +835,12 @@
   }
 
   function stopAudio() {
+    // Stop advanced audio sync
+    if (audioSync) {
+      audioSync.stopCurrentAudio();
+    }
+    
+    // Stop legacy audio
     if (currentAudio) {
       currentAudio.pause();
       currentAudio.src = '';
@@ -724,6 +937,14 @@
 
     callBtn.disabled = true;
     callBtn.textContent = 'Avvio chiamata...';
+
+    // Track call request
+    if (analytics) {
+      analytics.trackFormSubmitted('call_request', {
+        nome: nome.value.trim(),
+        telefono: telefono.value.trim()
+      });
+    }
 
     fetch(API_BASE + '/api/chat/submit-form', {
       method: 'POST',
@@ -899,6 +1120,11 @@
 
     var privAccepted = formConfig.privacy_checkbox
       ? card.querySelector('input[name="ew_privacy"]').checked : true;
+
+    // Track form submission
+    if (analytics) {
+      analytics.trackFormSubmitted(formConfig.form_id, data);
+    }
 
     fetch(API_BASE + '/api/chat/submit-form', {
       method: 'POST',
