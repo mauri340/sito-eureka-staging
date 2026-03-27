@@ -575,7 +575,9 @@
       .then(function (r) {
         if (r.status === 410) {
           hideTyping(); disableInput(true); inputDisabled = true;
-          appendBot('Sessione chiusa. Apri una nuova chat.', false, true);
+          var sessionClosedMessage = 'Sessione chiusa. Apri una nuova chat.';
+          conversationHistory.push({role: 'assistant', content: sessionClosedMessage, timestamp: new Date().toISOString()});
+          appendBot(sessionClosedMessage, false, true);
           return null;
         }
         return r.json();
@@ -588,7 +590,9 @@
       })
       .catch(function () {
         hideTyping(); disableInput(false);
-        appendBot('Mi dispiace, c\'è stato un errore. Riprova tra poco.');
+        var errorMessage = 'Mi dispiace, c\'è stato un errore. Riprova tra poco.';
+        conversationHistory.push({role: 'assistant', content: errorMessage, timestamp: new Date().toISOString()});
+        appendBot(errorMessage);
       });
   }
 
@@ -744,7 +748,9 @@
   function startMic() {
     var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (!SR) {
-      appendBot('Il riconoscimento vocale non è supportato dal tuo browser.', false, true);
+      var micErrorMessage = 'Il riconoscimento vocale non è supportato dal tuo browser.';
+      conversationHistory.push({role: 'assistant', content: micErrorMessage, timestamp: new Date().toISOString()});
+      appendBot(micErrorMessage, false, true);
       return;
     }
 
@@ -1163,7 +1169,9 @@
         }
         if (r.status === 410) {
           disableInput(true); inputDisabled = true;
-          appendBot('Sessione chiusa. Apri una nuova chat.', false, true);
+          var sessionClosedMessage = 'Sessione chiusa. Apri una nuova chat.';
+          conversationHistory.push({role: 'assistant', content: sessionClosedMessage, timestamp: new Date().toISOString()});
+          appendBot(sessionClosedMessage, false, true);
           return null;
         }
         return r.json();
@@ -1214,7 +1222,10 @@
           sessionId = data.session_id;
           if (data.proactive) {
             openChat();
-            if (data.speech) { typeBotMessage(data.speech); }
+            if (data.speech) { 
+              conversationHistory.push({role: 'assistant', content: data.speech, timestamp: new Date().toISOString()});
+              typeBotMessage(data.speech); 
+            }
           } else {
             $('ew-chat-toggle').classList.add('ew-has-badge');
           }
@@ -1399,7 +1410,9 @@
           }
 
           // Send success message to chat
-          typeBotMessage('Perfetto! Il tuo appuntamento è stato confermato. Riceverai una email di conferma a breve.', true);
+          var successMessage = 'Perfetto! Il tuo appuntamento è stato confermato. Riceverai una email di conferma a breve.';
+          conversationHistory.push({role: 'assistant', content: successMessage, timestamp: new Date().toISOString()});
+          typeBotMessage(successMessage, true);
         } else {
           showAppointmentError(wrapperId, result.error || 'Si è verificato un errore durante la prenotazione.');
         }
