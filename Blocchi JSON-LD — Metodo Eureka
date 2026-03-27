@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Blocchi JSON-LD — Metodo Eureka / Apprendimento Rapido</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 900px; margin: 40px auto; padding: 0 20px; background: #f5f5f5; color: #222; }
+    h1 { color: #0D1B2A; border-bottom: 3px solid #00A988; padding-bottom: 10px; }
+    h2 { color: #00A988; margin-top: 50px; }
+    .blocco { background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 20px; margin: 20px 0; }
+    .istruzione { background: #e8f8f5; border-left: 4px solid #00A988; padding: 12px 16px; margin-bottom: 16px; border-radius: 0 6px 6px 0; font-size: 0.95em; }
+    .attenzione { background: #fff8e1; border-left: 4px solid #B8973E; padding: 12px 16px; margin-bottom: 16px; border-radius: 0 6px 6px 0; font-size: 0.95em; }
+    .info { background: #e3f2fd; border-left: 4px solid #1976d2; padding: 12px 16px; margin-bottom: 16px; border-radius: 0 6px 6px 0; font-size: 0.95em; }
+    pre { background: #1e1e1e; color: #d4d4d4; padding: 20px; border-radius: 6px; overflow-x: auto; font-size: 0.88em; line-height: 1.6; }
+    .priorita { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 0.8em; font-weight: bold; margin-bottom: 8px; }
+    .critica { background: #ffebee; color: #c62828; }
+    .alta { background: #fff3e0; color: #e65100; }
+    .media { background: #f3e5f5; color: #6a1b9a; }
+    .info-tag { background: #e3f2fd; color: #1565c0; }
+    .indice { background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 20px 30px; margin-bottom: 30px; }
+    .indice li { margin: 6px 0; }
+    .indice a { color: #00A988; text-decoration: none; }
+    .indice a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+<h1>📋 Blocchi JSON-LD — Metodo Eureka / Apprendimento Rapido</h1>
+<p>Generato il: <strong>27 marzo 2026</strong> — Sito: <strong>apprendimentorapido.it</strong></p>
+<p>Questo file contiene tutti i blocchi di dati strutturati (Schema.org in formato JSON-LD) pronti da incollare nelle pagine del sito. Ogni blocco include le istruzioni su dove inserirlo.</p>
+
+<div class="indice">
+  <strong>Indice dei blocchi:</strong>
+  <ol>
+    <li><a href="#blocco1">EducationalOrganization — Tutte le pagine (CRITICO)</a></li>
+    <li><a href="#blocco2">WebSite + SearchAction — Solo Homepage (CRITICO)</a></li>
+    <li><a href="#blocco3">Book — Pagina /libro.html (ALTA)</a></li>
+    <li><a href="#blocco4">Review + AggregateRating — Homepage e Testimonianze (ALTA)</a></li>
+    <li><a href="#blocco5">EducationEvent — Pagina Webinar /demo-zoom/index.html (ALTA)</a></li>
+    <li><a href="#blocco6">Course — Pagine delle tecniche (MEDIA)</a></li>
+    <li><a href="#blocco7">BreadcrumbList — Tutte le pagine interne (MEDIA)</a></li>
+    <li><a href="#blocco8">FAQPage — Homepage (solo beneficio AI/GEO)</a></li>
+  </ol>
+</div>
+
+
+<!-- ============================================================ -->
+<h2 id="blocco1">1. EducationalOrganization</h2>
+<div class="blocco">
+  <span class="priorita critica">CRITICO</span>
+
+  <div class="istruzione">
+    📌 <strong>Dove inserirlo:</strong> In <em>tutte le pagine</em> del sito, all'interno del tag <code>&lt;head&gt;</code>.<br>
+    Questo blocco identifica l'organizzazione agli occhi di Google e degli altri motori di ricerca. È il punto di partenza per qualsiasi risultato arricchito.
+  </div>
+
+  <div class="attenzione">
+    ⚠️ <strong>Da personalizzare prima di pubblicare:</strong><br>
+    — Sostituisci l'URL del logo con il percorso reale dell'immagine (larghezza e altezza corrette).<br>
+    — Aggiungi gli URL dei profili social nell'array <code>sameAs</code> (LinkedIn, Facebook, YouTube, ecc.).<br>
+    — Il <code>ratingValue</code> di 4.9 è una stima basata sul "98% soddisfatti". Se disponi di un punteggio medio da una piattaforma di recensioni esterna, usa quello.
+  </div>
+
+<pre>&lt;script type="application/ld+json"&gt;
+{
+  "@context": "https://schema.org",
+  "@type": "EducationalOrganization",
+  "@id": "https://www.apprendimentorapido.it/#organizzazione",
+  "name": "Apprendimento Rapido — Metodo Eureka",
+  "alternateName": "Metodo Eureka",
+  "url": "https://www.apprendimentorapido.it/",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://www.apprendimentorapido.it/images/logo.png",
+    "width": 300,
+    "height": 60
+  },
+  "description": "Dal 2001 formiamo professionisti, studenti e imprenditori con il Metodo Eureka: tecniche di memoria, lettura veloce e mappe mentali. Oltre 20.000 persone formate, 98% di soddisfazione.",
+  "foundingDate": "2001",
+  "inLanguage": "it",
+  "areaServed": [
+    { "@type": "Country", "name": "Italy" },
+    { "@type": "Country", "name": "Switzerland" }
+  ],
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Via Gardiscia 10",
+    "addressLocality": "Rovio",
+    "addressRegion": "Canton Ticino",
+    "postalCode": "6821",
+    "addressCountry": "CH"
+  },
+  "telephone": "+390240702168",
+  "email": "info@apprendimentorapido.it",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "bestRating": "5",
+    "worstRating": "1",
+    "ratingCount": "20000",
+    "reviewCount": "20000"
+  },
+  "sameAs": [
+    "INSERISCI_URL_LINKEDIN",
+    "INSERISCI_URL_FACEBOOK",
+    "INSERISCI_URL_YOUTUBE"
+  ]
+}
+&lt;/script&gt;</pre>
+</div>
+
+
+<!-- ============================================================ -->
+<h2 id="blocco2">2. WebSite + SearchAction</h2>
+<div class="blocco">
+  <span class="priorita critica">CRITICO</span>
+
+  <div class="istruzione">
+    📌 <strong>Dove inserirlo:</strong> Solo nella <em>homepage</em> (index.html), all'interno del tag <code>&lt;head&gt;</code>.<br>
+    Questo blocco abilita il campo di ricerca diretto nei risultati Google (Sitelinks Searchbox) e dichiara il sito come entità web riconoscibile.
+  </div>
+
+  <div class="attenzione">
+    ⚠️ <strong>Da personalizzare:</strong><br>
+    — Il campo <code>urlTemplate</code> nella <code>SearchAction</code> deve corrispondere all'URL effettivo della ricerca interna del sito (es. <code>?s=</code> per WordPress, <code>?q=</code> per altri sistemi).<br>
+    — Se il sito non ha una funzione di ricerca interna, elimina l'intero blocco <code>potentialAction</code>.
+  </div>
+
+<pre>&lt;script type="application/ld+json"&gt;
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": "https://www.apprendimentorapido.it/#sito",
+  "url": "https://www.apprendimentorapido.it/",
+  "name": "Apprendimento Rapido — Metodo Eureka",
+  "description": "Il sito ufficiale del Metodo Eureka per tecniche di memoria, lettura veloce e mappe mentali.",
+  "inLanguage": "it",
+  "publisher": {
+    "@id": "https://www.apprendimentorapido.it/#organizzazione"
+  },
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": "https://www.apprendimentorapido.it/?s={search_term_string}"
+    },
+    "query-input": "required name=search_term_string"
+  }
+}
+&lt;/script&gt;</pre>
+</div>
+
+
+<!-- ============================================================ -->
+<h2 id="blocco3">Book — Il Libro</h2>
+<div class="blocco">
+  <span class="priorita alta">ALTA</span>
+
+  <div class="istruzione">
+    📌 <strong>Dove inserirlo:</strong> Solo nella pagina <em>/libro.html</em>, all'interno del tag <code>&lt;head&gt;</code>.<br>
+    Questo blocco rende il libro eleggibile per i risultati arricchiti "Book" di Google.
+  </div>
+
+  <div class="attenzione">
+    ⚠️ <strong>Da personalizzare:</strong><br>
+    — Aggiungi il codice <code>isbn</code> del libro (ISBN-10 o ISBN-13) per massimizzare l'eligibilità al risultato arricchito.<br>
+    — Aggiungi il numero di pagine in <code>numberOfPages</code>.<br>
+    — Se il libro è acquistabile online, aggiungi il prezzo in <code>offers.price</code>.<br>
+    — Se l'autore è una persona fisica (non l'organizzazione), cambia <code>"@type": "Organization"</code> in <code>"@type": "Person"</code> e inserisci il nome completo.
+  </div>
+
+<pre>&lt;script type="application/ld+json"&gt;
+{
+  "@context": "https://schema.org",
+  "@type": "Book",
+  "@id": "https://www.apprendimentorapido.it/libro.html#libro",
+  "name": "Tecniche di Memoria e Lettura Veloce",
+  "author": {
+    "@type": "Organization",
+    "@id": "https://www.apprendimentorapido.it/#organizzazione",
+    "name": "Apprendimento Rapido — Metodo Eureka"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Giunti Demetra",
+    "url": "https://www.giunti.it/"
+  },
+  "inLanguage": "it",
+  "isbn": "INSERISCI_ISBN",
+  "numberOfPages": "INSERISCI_NUMERO_PAGINE",
+  "bookEdition": "3a edizione",
+  "datePublished": "2021",
+  "description": "Il manuale ufficiale del Metodo Eureka sulle tecniche di memoria e lettura veloce. Oltre 80.000 copie vendute in tre edizioni (2009, 2015, 2021), pubblicato da Giunti Demetra.",
+  "url": "https://www.apprendimentorapido.it/libro.html",
+  "workExample": [
+    {
+      "@type": "Book",
+      "bookEdition": "1a edizione",
+      "datePublished": "2009",
+      "bookFormat": "https://schema.org/Paperback"
+    },
+    {
+      "@type": "Book",
+      "bookEdition": "2a edizione",
+      "datePublished": "2015",
+      "bookFormat": "https://schema.org/Paperback"
+    },
+    {
+      "@type": "Book",
+      "bookEdition": "3a edizione",
+      "datePublished": "2021",
+      "bookFormat": "https://schema.org/Paperback"
+    }
+  ],
+  "offers": {
+    "@type": "Offer",
+    "url": "https://www.apprendimentorapido.it/libro.html",
+    "priceCurrency": "EUR",
+    "price": "INSERISCI_PREZZO",
+    "availability": "https://schema.org/InStock",
+    "seller": {
+      "@id": "https://www.apprendimentorapido.it/#organizzazione"
+    }
+  }
+}
+&lt;/script&gt;</pre>
+</div>
+
+
+<!-- ============================================================ -->
+<h2 id="blocco4">4. Review + AggregateRating — Testimonianze</h2>
+<div class="blocco">
+  <span class="priorita alta">ALTA</span>
+
+  <div class="istruzione">
+    📌 <strong>Dove inserirlo:</strong> Nella <em>homepage</em> e nella pagina <em>/testimonianze.html</em>, all'interno del tag <code>&lt;head&gt;</code>.<br>
+    Questo blocco permette a Google di mostrare le stelle di valutazione nei risultati di ricerca e segnala recensioni reali con nome e professione.
+  </div>
+
+  <div class="attenzione">
+    ⚠️ <strong>Da personalizzare:</strong><br>
+    — Aggiungi il campo <code>reviewBody</code> a ogni recensione con il testo completo della testimonianza.<br>
+    — Se hai altre testimonianze con nome e professione, aggiungile come ulteriori blocchi <code>Review</code> nell'array.
+  </div>
+
+<pre>&lt;script type="application/ld+json"&gt;
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Testimonianze — Metodo Eureka",
+  "itemListElement": [
+    {
+      "@type": "Review",
+      "position": 1,
+      "itemReviewed": {
+        "@id": "https://www.apprendimentorapido.it/#organizzazione"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Francesca Riboldi",
+        "jobTitle": "Notaio"
+      },
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "reviewBody": "Studiare più di 14.000 pagine di atti creando 40 mappe mentali in soli 6 mesi. Ho raggiunto il mio obiettivo: diventare notaio.",
+      "inLanguage": "it"
+    },
+    {
+      "@type": "Review",
+      "position": 2,
+      "itemReviewed": {
+        "@id": "https://www.apprendimentorapido.it/#organizzazione"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Eva Vigato",
+        "jobTitle": "Avvocato Penalista"
+      },
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "reviewBody": "Dopo il Master Eureka ho superato 5 esami in una sessione, uno preparato in sole 8 ore. Risultato impensabile prima.",
+      "inLanguage": "it"
+    },
+    {
+      "@type": "Review",
+      "position": 3,
+      "itemReviewed": {
+        "@id": "https://www.apprendimentorapido.it/#organizzazione"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Yuri Zhou",
+        "jobTitle": "Studente e Imprenditore"
+      },
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "reviewBody": "Grazie al corso ho potuto conciliare studio e lavoro e laurearmi con 102/110. La mia tesi è stata acquisita dall'arch. Renzo Piano.",
+      "inLanguage": "it"
+    }
+  ]
+}
+&lt;/script&gt;</pre>
+</div>
+
+
+<!-- ============================================================ -->
+<h2 id="blocco5">5. EducationEvent — Webinar Gratuito</h2>
+<div class="blocco">
+  <span class="priorita alta">ALTA</span>
+
+  <div class="istruzione">
+    📌 <strong>Dove inserirlo:</strong> Solo nella pagina <em>/demo-zoom/index.html</em>, all'interno del tag <code>&lt;head&gt;</code>.<br>
+    Questo blocco rende il webinar eleggibile per i risultati "Evento" di Google (carosello eventi). Aggiornalo ogni volta che cambia la data del prossimo webinar.
+  </div>
+
+  <div class="attenzione">
+    ⚠️ <strong>IMPORTANTE — campo obbligatorio mancante:</strong><br>
+    — Devi aggiungere <code>startDate</code> e <code>endDate</code> con la data effettiva del prossimo webinar nel formato ISO 8601 (esempio: <code>"2026-04-15T18:00:00+02:00"</code>).<br>
+    — Senza <code>startDate</code> Google non mostra il risultato arricchito Evento.<br>
+    — Aggiorna questi campi ad ogni nuovo webinar programmato.
+  </div>
+
+<pre>&lt;script type="application/ld+json"&gt;
+{
+  "@context": "https://schema.org",
+  "@type": "EducationEvent",
+  "@id": "https://www.apprendimentorapido.it/demo-zoom/index.html#evento",
+  "name": "Webinar Gratuito — Metodo Eureka: Tecniche di Memoria e Lettura Veloce",
+  "description": "Partecipa al webinar gratuito per scoprire le tecniche di memoria, lettura veloce e mappe mentali del Metodo Eureka. Sessione dimostrativa via Zoom, aperta a tutti. Durata: 120 minuti.",
+  "startDate": "INSERISCI_DATA_INIZIO (es: 2026-04-15T18:00:00+02:00)",
+  "endDate": "INSERISCI_DATA_FINE (es: 2026-04-15T20:00:00+02:00)",
+  "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
+  "eventStatus": "https://schema.org/EventScheduled",
+  "inLanguage": "it",
+  "isAccessibleForFree": true,
+  "url": "https://www.apprendimentorapido.it/demo-zoom/index.html",
+  "location": {
+    "@type": "VirtualLocation",
+    "url": "https://www.apprendimentorapido.it/demo-zoom/index.html"
+  },
+  "organizer": {
+    "@id": "https://www.apprendimentorapido.it/#organizzazione"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "EUR",
+    "availability": "https://schema.org/InStock",
+    "url": "https://www.apprendimentorapido.it/demo-zoom/index.html"
+  }
+}
+&lt;/script&gt;</pre>
+</div>
+
+
+<!-- ============================================================ -->
+<h2 id="blocco6">6. Course — Le 4 Tecniche</h2>
+<div class="blocco">
+  <span class="priorita media">MEDIA</span>
+
+  <div class="istruzione">
+    📌 <strong>Dove inserirlo:</strong> Un blocco <em>diverso</em> per ciascuna delle 4 pagine delle tecniche:<br>
+    &nbsp;&nbsp;• /tecniche-memoria.html<br>
+    &nbsp;&nbsp;• /lettura-veloce.html<br>
+    &nbsp;&nbsp;• /mappe-mentali.html<br>
+    &nbsp;&nbsp;• /master-eureka.html (o la pagina relativa alle tecniche di sintesi)<br>
+    Questo blocco rende ogni corso eleggibile per i risultati arricchiti "Corso" di Google.
+  </div>
+
+  <div class="attenzione">
+    ⚠️ <strong>Da personalizzare per ogni pagina:</strong><br>
+    — Cambia <code>name</code>, <code>description</code>, <code>url</code>, <code>@id</code> e <code>teaches</code> per ogni corso.<br>
+    — Aggiungi il prezzo reale in <code>offers.price</code> quando disponibile.<br>
+    — I 4 blocchi qui sotto sono già separati e pronti, uno per pagina.
+  </div>
+
+  <h3 style="color:#0D1B2A;">Blocco 6a — Tecniche di Memoria (/tecniche-memoria.html)</h3>
+<pre>&lt;script type="application/ld+json"&gt;
+{
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "@id": "https://www.apprendimentorapido.it/tecniche-memoria.html#corso",
+  "name": "Tecniche di Memoria — Metodo Eureka",
+  "description": "Impara le tecniche di memoria del Metodo Eureka per ricordare nomi, numeri, testi e concetti in modo rapido e duraturo. Corso pratico per professionisti e studenti.",
+  "url": "https://www.apprendimentorapido.it/tecniche-memoria.html",
+  "inLanguage": "it",
+  "teaches": "Tecniche mnemoniche, memorizzazione rapida, metodo dei loci, associazioni visive",
+  "provider": {
+    "@id": "https://www.apprendimentorapido.it/#organizzazione"
+  },
+  "availableLanguage": { "@type": "Language", "name": "Italian", "alternateName": "it" },
+  "offers": {
+    "@type": "Offer",
+    "url": "https://www.apprendimentorapido.it/tecniche-memoria.html",
+    "priceCurrency": "EUR",
+    "price": "INSERISCI_PREZZO",
+    "availability": "https://schema.org/InStock"
+  }
+}
+&lt;/script&gt;</pre>
+
+  <h3 style="color:#0D1B2A;">Blocco 6b — Lettura Veloce (/lettura-veloce.html)</h3>
+<pre>&lt;script type="application/ld+json"&gt;
+{
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "@id": "https://www.apprendimentorapido.it/lettura-veloce.html#corso",
+  "name": "Lettura Veloce — Metodo Eureka",
+  "description": "Triplica la velocità di lettura mantenendo la comprensione al 100%. Tecniche pratiche per leggere e assimilare più libri e documenti professionali in meno tempo.",
+  "url": "https://www.apprendimentorapido.it/lettura-veloce.html",
+  "inLanguage": "it",
+  "teaches": "Lettura veloce, tecnica RSVP, riduzione della subvocalizzazione, comprensione del testo",
+  "provider": {
+    "@id": "https://www.apprendimentorapido.it/#organizzazione"
+  },
+  "availableLanguage": { "@type": "Language", "name": "Italian", "alternateName": "it" },
+  "offers": {
+    "@type": "Offer",
+    "url": "https://www.apprendimentorapido.it/lettura-veloce.html",
+    "priceCurrency": "EUR",
+    "price": "INSERISCI_PREZZO",
+    "availability": "https://schema.org/InStock"
+  }
+}
+&lt;/script&gt;</pre>
+
+  <h3 style="color:#0D1B2A;">Blocco 6c — Mappe Mentali (/mappe-mentali.html)</h3>
+<pre>&lt;script type="application/ld+json"&gt;
+{
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "@id": "https://www.apprendimentorapido.it/mappe-mentali.html#corso",
+  "name": "Mappe Mentali — Metodo Eureka",
+  "description": "Sintetizza migliaia di pagine in strutture visive immediate con le mappe mentali. Tecnica usata da grandi pensatori per organizzare idee, prendere appunti e studiare.",
+  "url": "https://www.apprendimentorapido.it/mappe-mentali.html",
+  "inLanguage": "it",
+  "teaches": "Mappe mentali, organizzazione visiva delle informazioni, sintesi di testi, creatività applicata",
+  "provider": {
+    "@id": "https://www.apprendimentorapido.it/#organizzazione"
+  },
+  "availableLanguage": { "@type": "Language", "name": "Italian", "alternateName": "it" },
+  "offers": {
+    "@type": "Offer",
+    "url": "https://www.apprendimentorapido.it/mappe-mentali.html",
+    "priceCurrency": "EUR",
+    "price": "INSERISCI_PREZZO",
+    "availability": "https://schema.org/InStock"
+  }
+}
+&lt;/script&gt;</pre>
+
+  <h3 style="color:#0D1B2A;">Blocco 6d — Master Eureka / Tecniche di Sintesi (/master-eureka.html)</h3>
+<pre>&lt;script type="application/ld+json"&gt;
+{
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "@id": "https://www.apprendimentorapido.it/master-eureka.html#corso",
+  "name": "Master Eureka — Tecniche di Sintesi e Apprendimento Avanzato",
+  "description": "Il percorso completo del Metodo Eureka: tecniche di sintesi avanzate per estrarre il massimo valore da testi, riunioni e materiali di studio nel minimo tempo. Ideale per professionisti.",
+  "url": "https://www.apprendimentorapido.it/master-eureka.html",
+  "inLanguage": "it",
+  "teaches": "Tecniche di sintesi, speed reading avanzato, mappe mentali integrate, apprendimento accelerato",
+  "provider": {
+    "@id": "https://www.apprendimentorapido.it/#organizzazione"
+  },
+  "availableLanguage": { "@type": "Language", "name": "Italian", "alternateName": "it" },
+  "offers": {
+    "@type": "Offer",
+    "url": "https://www.apprendimentorapido.it/master-eureka.html",
+    "priceCurrency": "EUR",
+    "price": "INSERISCI_PREZZO",
+    "availability": "https://schema.org/InStock"
+  }
+}
+&lt;/script&gt;</pre>
+</div>
+
+
+<!-- ============================================================ -->
+<h2 id="blocco7">7. BreadcrumbList — Briciole di Pane</h2>
+<div class="blocco">
+  <span class="priorita media">MEDIA</span>
+
+  <div class="istruzione">
+    📌 <strong>Dove inserirlo:</strong> In tutte le pagine <em>interne</em> (non nella homepage), all'interno del tag <code>&lt;head&gt;</code>.<br>
+    Le briciole di pane appaiono nell'URL mostrato nei risultati Google, rendendo più chiaro il percorso di navigazione.
+  </div>
+
+  <div class="attenzione">
+    ⚠️ <strong>Da personalizzare per ogni pagina:</strong><br>
+    — Cambia <code>name</code> e <code>item</code> nel secondo <code>ListItem</code> con il nome e l'URL della pagina corrente.<br>
+    — Per pagine a 3 livelli (es. sottosezioni), aggiungi un terzo <code>ListItem</code> con <code>"position": 3</code>.
+  </div>
+
+  <h3 style="color:#0D1B2A;">Esempio per /tecniche-memoria.html (adatta per tutte le altre pagine)</h3>
+<pre>&lt;script type="application/ld+json"&gt;
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.apprendimentorapido.it/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Tecniche di Memoria",
+      "item": "https://www.apprendimentorapido.it/tecniche-memoria.html"
+    }
+  ]
+}
+&lt;/script&gt;</pre>
+
+  <p style="margin-top:16px;"><strong>Nomi e URL per le altre pagine principali:</strong></p>
+  <table style="width:100%;border-collapse:collapse;font-size:0.9em;">
+    <tr style="background:#f0f0f0;"><th style="padding:8px;text-align:left;border:1px solid #ddd;">Pagina</th><th style="padding:8px;text-align:left;border:1px solid #ddd;">name da usare</th><th style="padding:8px;text-align:left;border:1px solid #ddd;">item (URL)</th></tr>
+    <tr><td style="padding:8px;border:1px solid #ddd;">/metodo-eureka.html</td><td style="padding:8px;border:1px solid #ddd;">Il Metodo Eureka</td><td style="padding:8px;border:1px solid #ddd;">.../metodo-eureka.html</td></tr>
+    <tr><td style="padding:8px;border:1px solid #ddd;">/master-eureka.html</td><td style="padding:8px;border:1px solid #ddd;">Master Eureka</td><td style="padding:8px;border:1px solid #ddd;">.../master-eureka.html</td></tr>
+    <tr><td style="padding:8px;border:1px solid #ddd;">/lettura-veloce.html</td><td style="padding:8px;border:1px solid #ddd;">Lettura Veloce</td><td style="padding:8px;border:1px solid #ddd;">.../lettura-veloce.html</td></tr>
+    <tr><td style="padding:8px;border:1px solid #ddd;">/mappe-mentali.html</td><td style="padding:8px;border:1px solid #ddd;">Mappe Mentali</td><td style="padding:8px;border:1px solid #ddd;">.../mappe-mentali.html</td></tr>
+    <tr><td style="padding:8px;border:1px solid #ddd;">/testimonianze.html</td><td style="padding:8px;border:1px solid #ddd;">Testimonianze</td><td style="padding:8px;border:1px solid #ddd;">.../testimonianze.html</td></tr>
+    <tr><td style="padding:8px;border:1px solid #ddd;">/coaching.html</td><td style="padding:8px;border:1px solid #ddd;">Coaching Gratuita</td><td style="padding:8px;border:1px solid #ddd;">.../coaching.html</td></tr>
+    <tr><td style="padding:8px;border:1px solid #ddd;">/libro.html</td><td style="padding:8px;border:1px solid #ddd;">Il Libro</td><td style="padding:8px;border:1px solid #ddd;">.../libro.html</td></tr>
+    <tr><td style="padding:8px;border:1px solid #ddd;">/demo-zoom/index.html</td><td style="padding:8px;border:1px solid #ddd;">Webinar Gratuito</td><td style="padding:8px;border:1px solid #ddd;">.../demo-zoom/index.html</td></tr>
+  </table>
+</div>
+
+
+<!-- ============================================================ -->
+<h2 id="blocco8">8. FAQPage — Domande Frequenti</h2>
+<div class="blocco">
+  <span class="priorita info-tag">INFO — Solo beneficio AI/GEO</span>
+
+  <div class="info">
+    ℹ️ <strong>Nota importante:</strong> Da agosto 2023, Google NON mostra i risultati arricchiti FAQ per i siti commerciali (come questo). Questo blocco <strong>non comparirà nei risultati di ricerca Google</strong> come FAQ visibile.<br><br>
+    <strong>Perché inserirlo comunque:</strong> I sistemi di intelligenza artificiale (ChatGPT, Perplexity, Gemini, Claude) leggono questo schema per capire i contenuti del sito e citarli nelle risposte. Se il tuo obiettivo è comparire nelle risposte AI, questo blocco ha valore.
+  </div>
+
+  <div class="istruzione">
+    📌 <strong>Dove inserirlo:</strong> Nella <em>homepage</em> e/o nelle pagine delle tecniche, all'interno del tag <code>&lt;head&gt;</code>.<br>
+    Personalizza le domande e le risposte con le domande reali che i tuoi potenziali clienti fanno.
+  </div>
+
+<pre>&lt;script type="application/ld+json"&gt;
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Cos'è il Metodo Eureka?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Il Metodo Eureka è un sistema di apprendimento sviluppato dal 2001 che integra tecniche di memoria, lettura veloce e mappe mentali. È stato seguito da oltre 20.000 persone tra professionisti, studenti e imprenditori, con un tasso di soddisfazione del 98%."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Per chi è adatto il Metodo Eureka?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Il metodo è adatto a professionisti che devono gestire grandi quantità di informazioni, studenti universitari e liceali, imprenditori e manager. Non sono richiesti prerequisiti. Il corso prevede un massimo di 25 partecipanti per garantire un'attenzione personalizzata."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Quanto tempo ci vuole per vedere i risultati?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Il 76% dei partecipanti applica le tecniche quotidianamente dopo il corso. Il 50% riferisce di aver ridotto i tempi di studio del 50% già entro 12 mesi dalla fine del corso. I risultati sono misurati su un campione di oltre 20.000 persone formate dal 2001."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Esiste un modo per provare il metodo gratuitamente?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sì. È disponibile un webinar gratuito di 120 minuti via Zoom in cui vengono dimostrate le tecniche base del metodo con esercizi pratici. È disponibile anche una sessione di coaching individuale gratuita di 60 minuti con un esperto Eureka. Entrambi sono gratuiti e senza obbligo di acquisto."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Il corso è disponibile online o solo in presenza?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Il Metodo Eureka offre una formula ibrida: il corso è disponibile sia dal vivo (in presenza) che online, con lo stesso livello di qualità. Puoi scegliere il formato più adatto alla tua situazione."
+      }
+    }
+  ]
+}
+&lt;/script&gt;</pre>
+</div>
+
+
+<!-- ============================================================ -->
+<div style="margin-top:60px;padding:20px;background:#0D1B2A;color:#fff;border-radius:8px;text-align:center;">
+  <p style="margin:0;font-size:0.9em;">Report generato da Claude Code — Audit SEO apprendimentorapido.it — 27 marzo 2026</p>
+  <p style="margin:8px 0 0;font-size:0.85em;color:#aaa;">⚠️ Ricorda di aggiornare tutti i campi contrassegnati con INSERISCI_ prima di pubblicare</p>
+</div>
+
+</body>
+</html>
