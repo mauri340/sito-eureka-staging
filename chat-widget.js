@@ -12,6 +12,7 @@
   var chatOpened = false;
   var inputDisabled = false;
   var widgetReady = false;
+  var conversationHistory = [];
 
   // ── Advanced Systems ────────────────────────────────
   var wsClient = null;
@@ -494,6 +495,9 @@
         // Use personalized greeting if server doesn't provide one
         var message = data.speech || personalizedGreeting;
         
+        // Add bot's initial message to conversation history
+        conversationHistory.push({role: 'assistant', content: message, timestamp: new Date().toISOString()});
+        
         if (audioSync && data.audio_base64) {
           // Use advanced audio sync for streaming TTS
           var messageId = 'msg-' + Date.now();
@@ -511,6 +515,7 @@
       })
       .catch(function () {
         hideTyping();
+        conversationHistory.push({role: 'assistant', content: personalizedGreeting, timestamp: new Date().toISOString()});
         typeBotMessage(personalizedGreeting);
         focusInput();
       });
@@ -530,6 +535,7 @@
 
     inp.value = '';
     appendUser(text);
+    conversationHistory.push({role: 'user', content: text, timestamp: new Date().toISOString()});
     showTyping();
     disableInput(true);
 
@@ -551,7 +557,8 @@
         var requestBody = { 
           session_id: sessionId, 
           message: text, 
-          voice: ttsEnabled 
+          voice: ttsEnabled,
+          conversation_history: conversationHistory
         };
         
         // Add user context for intelligent routing
@@ -591,26 +598,39 @@
 
     switch (action) {
       case 'show_form':
-        if (data.speech) { typeBotMessage(data.speech); }
+        if (data.speech) { 
+          conversationHistory.push({role: 'assistant', content: data.speech, timestamp: new Date().toISOString()});
+          typeBotMessage(data.speech); 
+        }
         if (data.form) { appendForm(data.form); }
         break;
       case 'show_call':
-        if (data.speech) { typeBotMessage(data.speech); }
+        if (data.speech) { 
+          conversationHistory.push({role: 'assistant', content: data.speech, timestamp: new Date().toISOString()});
+          typeBotMessage(data.speech); 
+        }
         appendCallCard();
         break;
       case 'action_completed':
+        if (data.speech) {
+          conversationHistory.push({role: 'assistant', content: data.speech, timestamp: new Date().toISOString()});
+        }
         typeBotMessage(data.speech || '', true);
         break;
       case 'action_failed':
         appendBot(data.speech || '', false, true);
         break;
       case 'end_session':
-        if (data.speech) { typeBotMessage(data.speech); }
+        if (data.speech) { 
+          conversationHistory.push({role: 'assistant', content: data.speech, timestamp: new Date().toISOString()});
+          typeBotMessage(data.speech); 
+        }
         disableInput(true); inputDisabled = true;
         break;
       default:
         if (data.speech) {
           var isSuccess = data.business_result && data.business_result.success === true;
+          conversationHistory.push({role: 'assistant', content: data.speech, timestamp: new Date().toISOString()});
           typeBotMessage(data.speech, isSuccess);
         }
         break;
