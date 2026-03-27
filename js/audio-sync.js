@@ -27,13 +27,67 @@ class AudioSyncManager {
         console.log('AudioContext initialized, state:', this.audioContext.state);
         
         if (this.audioContext.state === 'suspended') {
-          // Wait for user interaction to resume
-          document.addEventListener('click', this.resumeAudioContext.bind(this), { once: true });
-          document.addEventListener('touchstart', this.resumeAudioContext.bind(this), { once: true });
+          // Mobile-specific audio unlock strategies
+          this.setupMobileAudioUnlock();
         }
       }
     } catch (error) {
       console.error('Failed to initialize AudioContext:', error);
+      this.audioContext = null;
+    }
+  }
+
+  setupMobileAudioUnlock() {
+    const unlockAudio = async () => {
+      try {
+        await this.audioContext.resume();
+        console.log('AudioContext unlocked on user interaction');
+        
+        // Play silent audio to fully unlock on iOS
+        if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+          await this.playSilentAudio();
+        }
+        
+        // Remove event listeners after successful unlock
+        document.removeEventListener('click', unlockAudio);
+        document.removeEventListener('touchstart', unlockAudio);
+        document.removeEventListener('keydown', unlockAudio);
+        
+      } catch (error) {
+        console.error('Failed to unlock AudioContext:', error);
+      }
+    };
+
+    // Multiple event listeners for better mobile compatibility
+    document.addEventListener('click', unlockAudio, { once: true });
+    document.addEventListener('touchstart', unlockAudio, { once: true });
+    document.addEventListener('touchend', unlockAudio, { once: true });
+    document.addEventListener('keydown', unlockAudio, { once: true });
+    
+    // For chat widget specifically
+    const chatToggle = document.getElementById('ew-chat-toggle');
+    const micButton = document.getElementById('ew-mic');
+    const sendButton = document.getElementById('ew-send');
+    
+    if (chatToggle) chatToggle.addEventListener('click', unlockAudio, { once: true });
+    if (micButton) micButton.addEventListener('click', unlockAudio, { once: true });
+    if (sendButton) sendButton.addEventListener('click', unlockAudio, { once: true });
+  }
+
+  async playSilentAudio() {
+    if (!this.audioContext) return;
+    
+    try {
+      // Create a silent 100ms buffer
+      const buffer = this.audioContext.createBuffer(1, this.audioContext.sampleRate * 0.1, this.audioContext.sampleRate);
+      const source = this.audioContext.createBufferSource();
+      source.buffer = buffer;
+      source.connect(this.audioContext.destination);
+      source.start();
+      
+      console.log('Silent audio played for iOS unlock');
+    } catch (error) {
+      console.warn('Failed to play silent audio:', error);
     }
   }
 
@@ -139,8 +193,18 @@ class AudioSyncManager {
   async playAudioBlob(blob, isFirstChunk = false) {
     return new Promise(async (resolve) => {
       try {
-        if (this.audioContext.state === 'suspended') {
+        // Ensure AudioContext is ready
+        if (!this.audioContext) {
+          await this.initAudioContext();
+        }
+        
+        if (this.audioContext && this.audioContext.state === 'suspended') {
           await this.audioContext.resume();
+        }
+
+        // Fallback to HTML5 Audio for mobile compatibility
+        if (!this.audioContext || this.shouldUseFallbackAudio()) {
+          return this.playAudioBlobFallback(blob, isFirstChunk, resolve);
         }
 
         const arrayBuffer = await blob.arrayBuffer();
@@ -148,13 +212,22 @@ class AudioSyncManager {
         
         const source = this.audioContext.createBufferSource();
         source.buffer = audioBuffer;
-        source.connect(this.audioContext.destination);
+        
+        // Apply mobile-specific audio settings
+        if (this.isMobile()) {
+          const gainNode = this.audioContext.createGain();
+          gainNode.gain.value = 0.8; // Slightly lower volume for mobile
+          source.connect(gainNode);
+          gainNode.connect(this.audioContext.destination);
+        } else {
+          source.connect(this.audioContext.destination);
+        }
         
         // Start typing animation with first audio chunk
         if (isFirstChunk && this.textQueue.length > 0) {
           setTimeout(() => {
             this.processTextQueue();
-          }, 100); // Small delay to sync with audio start
+          }, 150); // Slightly longer delay for mobile
         }
 
         source.onended = () => {
@@ -164,13 +237,72 @@ class AudioSyncManager {
         source.start(this.audioContext.currentTime + 0.01);
         this.currentSource = source;
         
-        console.log('Playing audio chunk, duration:', audioBuffer.duration);
+        console.log('Playing audio chunk (WebAudio), duration:', audioBuffer.duration);
         
       } catch (error) {
-        console.error('Audio playback error:', error);
-        resolve();
+        console.error('WebAudio playback failed, using fallback:', error);
+        this.playAudioBlobFallback(blob, isFirstChunk, resolve);
       }
     });
+  }
+
+  playAudioBlobFallback(blob, isFirstChunk, resolve) {
+    try {
+      const url = URL.createObjectURL(blob);
+      const audio = new Audio(url);
+      
+      // Mobile-specific audio settings
+      if (this.isMobile()) {
+        audio.preload = 'auto';
+        audio.volume = 0.8;
+        // Force audio to play inline on iOS
+        audio.setAttribute('playsinline', 'true');
+        audio.setAttribute('webkit-playsinline', 'true');
+      }
+      
+      audio.onloadeddata = () => {
+        if (isFirstChunk && this.textQueue.length > 0) {
+          setTimeout(() => {
+            this.processTextQueue();
+          }, 100);
+        }
+      };
+      
+      audio.onended = () => {
+        URL.revokeObjectURL(url);
+        resolve();
+      };
+      
+      audio.onerror = () => {
+        URL.revokeObjectURL(url);
+        console.error('HTML5 Audio fallback failed');
+        resolve();
+      };
+      
+      const playPromise = audio.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(error => {
+          console.error('Audio play failed:', error);
+          URL.revokeObjectURL(url);
+          resolve();
+        });
+      }
+      
+      console.log('Playing audio chunk (HTML5 Audio fallback)');
+      
+    } catch (error) {
+      console.error('Fallback audio playback failed:', error);
+      resolve();
+    }
+  }
+
+  shouldUseFallbackAudio() {
+    // Use fallback on problematic browsers or mobile with suspended context
+    return this.isMobile() && this.audioContext && this.audioContext.state !== 'running';
+  }
+
+  isMobile() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
   }
 
   processTextQueue() {
@@ -220,23 +352,49 @@ class AudioSyncManager {
 
     const bubble = messageElement.querySelector('.ew-bubble');
     let currentIndex = 0;
+    
+    // Adaptive typing speed based on device and text length
+    const adaptiveSpeed = this.calculateTypingSpeed(text.length);
 
     const typeNextChar = () => {
       if (currentIndex < text.length) {
+        // Handle word boundaries for more natural typing
+        const char = text[currentIndex];
         bubble.textContent = text.slice(0, currentIndex + 1);
         currentIndex++;
         this.scrollToBottom();
-        setTimeout(typeNextChar, this.typingSpeed);
+        
+        // Variable delay for punctuation and word boundaries
+        let delay = adaptiveSpeed;
+        if (char === '.' || char === '!' || char === '?') {
+          delay = adaptiveSpeed * 3; // Pause at sentence end
+        } else if (char === ',' || char === ';') {
+          delay = adaptiveSpeed * 2; // Pause at clause end
+        } else if (char === ' ') {
+          delay = adaptiveSpeed * 0.5; // Faster word spacing
+        }
+        
+        setTimeout(typeNextChar, delay);
       } else {
         this.isTyping = false;
         // Continue with next message after small delay
         if (this.textQueue.length > 0) {
-          setTimeout(() => this.processTextQueue(), 200);
+          setTimeout(() => this.processTextQueue(), 300);
         }
       }
     };
 
     typeNextChar();
+  }
+  
+  calculateTypingSpeed(textLength) {
+    // Adaptive typing speed: faster for short messages, slower for long ones
+    const baseSpeed = this.isMobile() ? 25 : 18; // Slightly slower on mobile
+    
+    if (textLength < 50) return baseSpeed * 0.8; // Fast for short messages
+    if (textLength < 150) return baseSpeed; // Normal speed
+    if (textLength < 300) return baseSpeed * 1.2; // Slightly slower for medium
+    return baseSpeed * 1.5; // Slower for long messages
   }
 
   // Legacy audio playback for existing base64 system

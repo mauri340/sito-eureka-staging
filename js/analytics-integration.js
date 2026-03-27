@@ -198,13 +198,25 @@ class AnalyticsIntegration {
     }
   }
 
-  trackLead(leadType = 'chat_lead') {
+  trackLead(leadType = 'chat_lead', leadData = {}) {
+    // Enhanced lead tracking with CRM bridge
+    const enhancedLeadData = {
+      lead_type: leadType,
+      lead_source: 'chat_widget',
+      timestamp: new Date().toISOString(),
+      page_url: window.location.href,
+      user_agent: navigator.userAgent,
+      session_id: this.getSessionId(),
+      ...leadData
+    };
+
     // Facebook Pixel Lead event
     if (window.fbq) {
       try {
         window.fbq('track', 'Lead', { 
           content_name: leadType,
-          content_category: 'chat_widget'
+          content_category: 'chat_widget',
+          value: this.calculateLeadValue(leadType)
         });
         console.log('Facebook lead tracked:', leadType);
       } catch (error) {
@@ -228,12 +240,63 @@ class AnalyticsIntegration {
         window.gtag('event', 'generate_lead', {
           event_category: 'chat_widget',
           event_label: leadType,
-          value: 1
+          value: this.calculateLeadValue(leadType),
+          currency: 'EUR',
+          lead_source: 'chat'
         });
         console.log('GA4 lead tracked:', leadType);
       } catch (error) {
         console.warn('GA4 lead tracking error:', error);
       }
+    }
+    
+    // Send to CRM bridge
+    this.sendToCRMBridge(enhancedLeadData);
+  }
+  
+  calculateLeadValue(leadType) {
+    // Assign values based on lead quality
+    const leadValues = {
+      'test_completion': 50,
+      'consultation_request': 100,
+      'call_request': 75,
+      'webinar_registration': 25,
+      'course_interest': 80,
+      'chat_lead': 30
+    };
+    return leadValues[leadType] || 30;
+  }
+  
+  async sendToCRMBridge(leadData) {
+    try {
+      const crmBridgeUrl = 'https://ai-chat-service-nls9.onrender.com/api/crm/lead';
+      
+      const response = await fetch(crmBridgeUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Source': 'chat-widget',
+          'X-Timestamp': new Date().toISOString()
+        },
+        body: JSON.stringify(leadData)
+      });
+      
+      if (response.ok) {
+        console.log('Lead sent to CRM successfully');
+        this.trackEvent('crm_sync_success', { lead_type: leadData.lead_type });
+      } else {
+        console.warn('CRM bridge response not ok:', response.status);
+        this.trackEvent('crm_sync_failed', { 
+          lead_type: leadData.lead_type, 
+          status: response.status 
+        });
+      }
+    } catch (error) {
+      console.error('Failed to send lead to CRM:', error);
+      this.trackEvent('crm_sync_error', { 
+        lead_type: leadData.lead_type, 
+        error: error.message 
+      });
     }
   }
 
@@ -360,6 +423,84 @@ class AnalyticsIntegration {
     }
   }
 
+  // Enhanced conversion tracking for specific user actions
+  trackUserJourney(stage, additionalData = {}) {
+    const journeyData = {
+      journey_stage: stage,
+      session_id: this.getSessionId(),
+      timestamp: new Date().toISOString(),
+      page_path: window.location.pathname,
+      ...additionalData
+    };
+    
+    this.trackEvent('user_journey', journeyData);
+    
+    // Track specific conversion funnels
+    switch (stage) {
+      case 'chat_opened':
+        this.trackEvent('funnel_step_1', journeyData);
+        break;
+      case 'message_sent':
+        this.trackEvent('funnel_step_2', journeyData);
+        break;
+      case 'form_started':
+        this.trackEvent('funnel_step_3', journeyData);
+        break;
+      case 'form_submitted':
+        this.trackEvent('funnel_step_4', journeyData);
+        break;
+      case 'conversion':
+        this.trackEvent('funnel_complete', journeyData);
+        break;
+    }
+  }
+  
+  // Track WebSocket streaming performance
+  trackWebSocketPerformance(eventType, performanceData) {
+    this.trackEvent(`websocket_${eventType}`, {
+      ...performanceData,
+      connection_type: this.getConnectionType(),
+      timestamp: new Date().toISOString()
+    });
+  }
+  
+  // Track audio performance and mobile compatibility
+  trackAudioPerformance(eventType, audioData) {
+    this.trackEvent(`audio_${eventType}`, {
+      ...audioData,
+      device_type: this.getDeviceType(),
+      browser: this.getBrowser(),
+      timestamp: new Date().toISOString()
+    });
+  }
+  
+  getConnectionType() {
+    if ('connection' in navigator) {
+      return navigator.connection.effectiveType || 'unknown';
+    }
+    return 'unknown';
+  }
+  
+  getDeviceType() {
+    const userAgent = navigator.userAgent;
+    if (/tablet|ipad|playbook|silk/i.test(userAgent)) {
+      return 'tablet';
+    }
+    if (/mobile|iphone|ipod|android|blackberry|opera|mini|windows\sce|palm|smartphone|iemobile/i.test(userAgent)) {
+      return 'mobile';
+    }
+    return 'desktop';
+  }
+  
+  getBrowser() {
+    const userAgent = navigator.userAgent;
+    if (userAgent.includes('Chrome')) return 'chrome';
+    if (userAgent.includes('Firefox')) return 'firefox';
+    if (userAgent.includes('Safari')) return 'safari';
+    if (userAgent.includes('Edge')) return 'edge';
+    return 'unknown';
+  }
+
   // Get analytics status for debugging
   getStatus() {
     return {
@@ -367,7 +508,10 @@ class AnalyticsIntegration {
       facebookPixelLoaded: this.isFacebookPixelLoaded,
       linkedInLoaded: this.isLinkedInLoaded,
       queuedEvents: this.eventQueue.length,
-      sessionId: this.getSessionId()
+      sessionId: this.getSessionId(),
+      deviceType: this.getDeviceType(),
+      connectionType: this.getConnectionType(),
+      browser: this.getBrowser()
     };
   }
 }
