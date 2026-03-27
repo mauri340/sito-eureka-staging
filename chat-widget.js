@@ -18,7 +18,9 @@
   var audioSync = null;
   var userSource = null;
   var analytics = null;
+  var appointmentSystem = null;
   var useWebSocketStreaming = false;
+  var enhancedFeaturesEnabled = false;
 
   // ── Voice state ─────────────────────────────────────
   var isRecording = false;
@@ -329,50 +331,42 @@
 
   function loadAdvancedModules() {
     var modulesLoaded = 0;
-    var totalModules = 4;
+    var totalModules = 5; // Increased for appointment system
 
     function checkAllModulesLoaded() {
       modulesLoaded++;
+      console.log(`Advanced module loaded (${modulesLoaded}/${totalModules})`);
       if (modulesLoaded === totalModules) {
         initializeAdvancedSystems();
       }
     }
 
-    // Load WebSocket client
-    var wsScript = document.createElement('script');
-    wsScript.src = '/js/websocket-client.js';
-    wsScript.onload = function() { 
-      console.log('WebSocket client loaded'); 
-      checkAllModulesLoaded();
-    };
-    document.head.appendChild(wsScript);
+    function loadModuleWithFallback(src, name) {
+      var script = document.createElement('script');
+      script.src = src;
+      script.onload = function() { 
+        console.log(name + ' loaded successfully'); 
+        checkAllModulesLoaded();
+      };
+      script.onerror = function() {
+        console.warn(name + ' failed to load, continuing without it');
+        checkAllModulesLoaded();
+      };
+      document.head.appendChild(script);
+    }
 
-    // Load audio synchronization
-    var audioScript = document.createElement('script');
-    audioScript.src = '/js/audio-sync.js';
-    audioScript.onload = function() { 
-      console.log('Audio sync loaded'); 
-      checkAllModulesLoaded();
-    };
-    document.head.appendChild(audioScript);
+    // Load all advanced modules with error handling
+    loadModuleWithFallback('/js/websocket-client.js', 'WebSocket client');
+    loadModuleWithFallback('/js/audio-sync.js', 'Audio sync');
+    loadModuleWithFallback('/js/user-source-detector.js', 'User source detector');
+    loadModuleWithFallback('/js/analytics-integration.js', 'Analytics integration');
+    loadModuleWithFallback('/js/appointment-system.js', 'Appointment system');
 
-    // Load user source detection
-    var sourceScript = document.createElement('script');
-    sourceScript.src = '/js/user-source-detector.js';
-    sourceScript.onload = function() { 
-      console.log('User source detector loaded'); 
-      checkAllModulesLoaded();
-    };
-    document.head.appendChild(sourceScript);
-
-    // Load analytics integration
-    var analyticsScript = document.createElement('script');
-    analyticsScript.src = '/js/analytics-integration.js';
-    analyticsScript.onload = function() { 
-      console.log('Analytics integration loaded'); 
-      checkAllModulesLoaded();
-    };
-    document.head.appendChild(analyticsScript);
+    // Load appointment styles
+    var styleLink = document.createElement('link');
+    styleLink.rel = 'stylesheet';
+    styleLink.href = '/js/appointment-styles.css';
+    document.head.appendChild(styleLink);
   }
 
   function initializeAdvancedSystems() {
@@ -434,9 +428,10 @@
     $('ew-chat-toggle').classList.add('ew-open');
     $('ew-chat-toggle').classList.remove('ew-has-badge');
     
-    // Track chat opened with analytics
-    if (analytics && userSource) {
-      analytics.trackChatOpened(userSource.userSource);
+    // Enhanced analytics tracking
+    if (analytics) {
+      var userSourceData = userSource ? userSource.userSource : 'unknown';
+      analytics.trackChatOpened(userSourceData);
     }
     
     if (!sessionId) { startSession(); } else { focusInput(); }
@@ -1206,6 +1201,232 @@
         })
         .catch(function () {});
     }, 40000);
+  }
+
+  // ── Appointment Widget ──────────────────────────────
+  function appendAppointmentWidget() {
+    var msgs = $('ew-messages');
+    var wrapper = document.createElement('div');
+    wrapper.className = 'ew-msg ew-msg-form';
+    wrapper.id = 'appointment-widget-' + Date.now();
+
+    var widget = document.createElement('div');
+    widget.className = 'ew-form-card';
+
+    var title = document.createElement('div');
+    title.className = 'ew-form-title';
+    title.innerHTML = '<svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:#fff;margin-right:8px;"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>Prenota un appuntamento';
+    widget.appendChild(title);
+
+    var body = document.createElement('div');
+    body.className = 'ew-form-body';
+    body.innerHTML = `
+      <div id="appointment-calendar-container"></div>
+      <div id="appointment-slots-container" style="display:none;"></div>
+      <div id="appointment-booking-form" style="display:none;">
+        <div class="appointment-form-group">
+          <label>Nome *</label>
+          <input type="text" name="appointment_nome" placeholder="Il tuo nome" required>
+        </div>
+        <div class="appointment-form-group">
+          <label>Email *</label>
+          <input type="email" name="appointment_email" placeholder="La tua email" required>
+        </div>
+        <div class="appointment-form-group">
+          <label>Telefono</label>
+          <input type="tel" name="appointment_telefono" placeholder="+39 333 1234567">
+        </div>
+        <div class="appointment-form-group">
+          <label>Note aggiuntive</label>
+          <textarea name="appointment_note" placeholder="Puoi aggiungere dettagli specifici per l'appuntamento..."></textarea>
+        </div>
+        <div class="ew-form-privacy">
+          <input type="checkbox" name="appointment_privacy" required>
+          <label>Acconsento al trattamento dei dati personali ai sensi del GDPR.</label>
+        </div>
+        <button type="button" class="appointment-submit" id="appointment-submit-btn">
+          Conferma Appuntamento
+        </button>
+        <div class="ew-form-error" id="appointment-error"></div>
+      </div>
+    `;
+    widget.appendChild(body);
+
+    wrapper.appendChild(widget);
+    msgs.insertBefore(wrapper, $('ew-typing'));
+    scrollDown();
+
+    // Initialize appointment system
+    if (appointmentSystem) {
+      initializeAppointmentWidget(wrapper.id);
+    } else {
+      body.innerHTML = '<div class="no-slots">Il sistema appuntamenti non è disponibile al momento.</div>';
+    }
+  }
+
+  function initializeAppointmentWidget(wrapperId) {
+    var selectedDate = null;
+    var selectedSlot = null;
+
+    // Initialize calendar
+    appointmentSystem.createCalendarWidget('appointment-calendar-container', function(date, slots) {
+      selectedDate = date;
+      selectedSlot = null;
+      
+      var slotsContainer = $('#appointment-slots-container');
+      slotsContainer.style.display = 'block';
+      
+      appointmentSystem.createTimeSlotsWidget('appointment-slots-container', slots, function(slot) {
+        selectedSlot = slot;
+        
+        // Show booking form
+        var bookingForm = $('#appointment-booking-form');
+        bookingForm.style.display = 'block';
+        
+        // Pre-fill with user data if available
+        if (userSource && userSource.testData) {
+          var nomeField = bookingForm.querySelector('input[name="appointment_nome"]');
+          var emailField = bookingForm.querySelector('input[name="appointment_email"]');
+          var telefonoField = bookingForm.querySelector('input[name="appointment_telefono"]');
+          
+          if (userSource.testData.nome && nomeField) nomeField.value = userSource.testData.nome;
+          if (userSource.testData.email && emailField) emailField.value = userSource.testData.email;
+          if (userSource.testData.telefono && telefonoField) telefonoField.value = userSource.testData.telefono;
+        }
+        
+        scrollDown();
+      });
+      
+      scrollDown();
+    });
+
+    // Handle appointment booking
+    $(wrapperId).addEventListener('click', function(e) {
+      if (e.target.id === 'appointment-submit-btn') {
+        handleAppointmentBooking(wrapperId, selectedSlot);
+      }
+    });
+  }
+
+  function handleAppointmentBooking(wrapperId, slot) {
+    if (!slot) {
+      showAppointmentError(wrapperId, 'Seleziona prima un orario disponibile.');
+      return;
+    }
+
+    var form = $('#appointment-booking-form');
+    var submitBtn = $('#appointment-submit-btn');
+    var errorDiv = $('#appointment-error');
+    
+    errorDiv.classList.remove('ew-visible');
+
+    // Validate form
+    var nome = form.querySelector('input[name="appointment_nome"]').value.trim();
+    var email = form.querySelector('input[name="appointment_email"]').value.trim();
+    var telefono = form.querySelector('input[name="appointment_telefono"]').value.trim();
+    var note = form.querySelector('textarea[name="appointment_note"]').value.trim();
+    var privacy = form.querySelector('input[name="appointment_privacy"]').checked;
+
+    if (!nome || !email) {
+      showAppointmentError(wrapperId, 'Nome ed email sono obbligatori.');
+      return;
+    }
+
+    if (!privacy) {
+      showAppointmentError(wrapperId, 'Devi accettare il trattamento dei dati personali.');
+      return;
+    }
+
+    // Disable form and show loading
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<div class="appointment-loading"><div class="spinner"></div><span>Prenotazione in corso...</span></div>';
+
+    var userData = {
+      nome: nome,
+      email: email,
+      telefono: telefono,
+      note: note
+    };
+
+    // Track appointment booking attempt
+    if (analytics) {
+      analytics.trackEvent('appointment_booking_started', {
+        slot_id: slot.id,
+        slot_time: slot.start.toISOString(),
+        user_source: userSource ? userSource.userSource : 'unknown'
+      });
+    }
+
+    // Book appointment
+    appointmentSystem.bookAppointment(slot.id, userData, sessionId)
+      .then(function(result) {
+        if (result.success) {
+          showAppointmentSuccess(wrapperId, result.appointment, result.confirmation_code);
+          
+          // Track successful booking
+          if (analytics) {
+            analytics.trackEvent('appointment_booked', {
+              appointment_id: result.appointment.id,
+              confirmation_code: result.confirmation_code,
+              slot_time: result.appointment.start_time
+            });
+            
+            analytics.trackLead('appointment_booking', {
+              ...userData,
+              appointment_time: result.appointment.start_time,
+              user_source: userSource ? userSource.userSource : 'unknown'
+            });
+          }
+
+          // Send success message to chat
+          typeBotMessage('Perfetto! Il tuo appuntamento è stato confermato. Riceverai una email di conferma a breve.', true);
+        } else {
+          showAppointmentError(wrapperId, result.error || 'Si è verificato un errore durante la prenotazione.');
+        }
+      })
+      .catch(function(error) {
+        console.error('Appointment booking error:', error);
+        showAppointmentError(wrapperId, 'Errore di connessione. Riprova tra qualche momento.');
+      })
+      .finally(function() {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Conferma Appuntamento';
+      });
+  }
+
+  function showAppointmentError(wrapperId, message) {
+    var errorDiv = $(wrapperId).querySelector('#appointment-error');
+    if (errorDiv) {
+      errorDiv.textContent = message;
+      errorDiv.classList.add('ew-visible');
+      scrollDown();
+    }
+  }
+
+  function showAppointmentSuccess(wrapperId, appointment, confirmationCode) {
+    var widget = $(wrapperId);
+    var body = widget.querySelector('.ew-form-body');
+    
+    var appointmentDetails = appointmentSystem.formatAppointmentDetails(appointment);
+    
+    body.innerHTML = `
+      <div class="appointment-success">
+        <div class="success-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+        </div>
+        <h4>Appuntamento Confermato!</h4>
+        <p><strong>${appointmentDetails}</strong></p>
+        <div class="confirmation-code">
+          Codice: ${confirmationCode}
+        </div>
+        <p style="font-size:12px;margin-top:12px;color:#6B7280;">
+          Riceverai una email di conferma con tutti i dettagli. 
+          Se hai bisogno di modificare l'appuntamento, contattaci.
+        </p>
+      </div>
+    `;
+    
+    scrollDown();
   }
 
   // ── End session on page unload ──────────────────────
