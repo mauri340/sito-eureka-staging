@@ -211,6 +211,134 @@ footer{background:var(--navy);color:rgba(255,255,255,.75);padding:56px 0 32px;}
   .footer-inner{grid-template-columns:1fr 1fr;}
 }
 </style>
+
+<!-- JSON-LD Schema.org - EducationalOrganization (Blocco 1) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "EducationalOrganization",
+  "@id": "https://www.apprendimentorapido.it/#organizzazione",
+  "name": "Apprendimento Rapido — Metodo Eureka",
+  "alternateName": "Metodo Eureka",
+  "url": "https://www.apprendimentorapido.it/",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://www.apprendimentorapido.it/images/logo.png",
+    "width": 300,
+    "height": 60
+  },
+  "description": "Dal 2001 formiamo professionisti, studenti e imprenditori con il Metodo Eureka: tecniche di memoria, lettura veloce e mappe mentali. Oltre 20.000 persone formate, 98% di soddisfazione.",
+  "foundingDate": "2001",
+  "inLanguage": "it",
+  "areaServed": [
+    { "@type": "Country", "name": "Italy" },
+    { "@type": "Country", "name": "Switzerland" }
+  ],
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Via Gardiscia 10",
+    "addressLocality": "Rovio",
+    "addressRegion": "Canton Ticino",
+    "postalCode": "6821",
+    "addressCountry": "CH"
+  },
+  "telephone": "+390240702168",
+  "email": "info@apprendimentorapido.it",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "bestRating": "5",
+    "worstRating": "1",
+    "ratingCount": "20000",
+    "reviewCount": "20000"
+  },
+  "sameAs": [
+    "https://www.linkedin.com/company/apprendimento-rapido",
+    "https://www.facebook.com/apprendimentorapido",
+    "https://www.youtube.com/user/apprendimentorapido"
+  ]
+}
+</script>
+
+<!-- JSON-LD Schema.org - Book (Blocco 3) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Book",
+  "@id": "https://www.apprendimentorapido.it/libro.html#libro",
+  "name": "Tecniche di Memoria e Lettura Veloce",
+  "author": {
+    "@type": "Organization",
+    "@id": "https://www.apprendimentorapido.it/#organizzazione",
+    "name": "Apprendimento Rapido — Metodo Eureka"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Giunti Demetra",
+    "url": "https://www.giunti.it/"
+  },
+  "inLanguage": "it",
+  "isbn": "9788844052359",
+  "numberOfPages": "224",
+  "bookEdition": "3a edizione",
+  "datePublished": "2021",
+  "description": "Il manuale ufficiale del Metodo Eureka sulle tecniche di memoria e lettura veloce. Oltre 80.000 copie vendute in tre edizioni (2009, 2015, 2021), pubblicato da Giunti Demetra.",
+  "url": "https://www.apprendimentorapido.it/libro.html",
+  "workExample": [
+    {
+      "@type": "Book",
+      "bookEdition": "1a edizione",
+      "datePublished": "2009",
+      "bookFormat": "https://schema.org/Paperback"
+    },
+    {
+      "@type": "Book",
+      "bookEdition": "2a edizione",
+      "datePublished": "2015",
+      "bookFormat": "https://schema.org/Paperback"
+    },
+    {
+      "@type": "Book",
+      "bookEdition": "3a edizione",
+      "datePublished": "2021",
+      "bookFormat": "https://schema.org/Paperback"
+    }
+  ],
+  "offers": {
+    "@type": "Offer",
+    "url": "https://www.apprendimentorapido.it/libro.html",
+    "priceCurrency": "EUR",
+    "price": "19.90",
+    "availability": "https://schema.org/InStock",
+    "seller": {
+      "@id": "https://www.apprendimentorapido.it/#organizzazione"
+    }
+  }
+}
+</script>
+
+<!-- JSON-LD Schema.org - BreadcrumbList (Blocco 7) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.apprendimentorapido.it/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Il Libro",
+      "item": "https://www.apprendimentorapido.it/libro.html"
+    }
+  ]
+}
+</script>
+
 </head>
 <body>
 <nav class="nav">

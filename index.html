@@ -1279,6 +1279,192 @@ body{
     .sbar-item{min-width:50%;border-right:none;border-bottom:1px solid var(--border);}
 }
 </style>
+
+<!-- JSON-LD Schema.org - EducationalOrganization (Blocco 1) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "EducationalOrganization",
+  "@id": "https://www.apprendimentorapido.it/#organizzazione",
+  "name": "Apprendimento Rapido — Metodo Eureka",
+  "alternateName": "Metodo Eureka",
+  "url": "https://www.apprendimentorapido.it/",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://www.apprendimentorapido.it/images/logo.png",
+    "width": 300,
+    "height": 60
+  },
+  "description": "Dal 2001 formiamo professionisti, studenti e imprenditori con il Metodo Eureka: tecniche di memoria, lettura veloce e mappe mentali. Oltre 20.000 persone formate, 98% di soddisfazione.",
+  "foundingDate": "2001",
+  "inLanguage": "it",
+  "areaServed": [
+    { "@type": "Country", "name": "Italy" },
+    { "@type": "Country", "name": "Switzerland" }
+  ],
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Via Gardiscia 10",
+    "addressLocality": "Rovio",
+    "addressRegion": "Canton Ticino",
+    "postalCode": "6821",
+    "addressCountry": "CH"
+  },
+  "telephone": "+390240702168",
+  "email": "info@apprendimentorapido.it",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "bestRating": "5",
+    "worstRating": "1",
+    "ratingCount": "20000",
+    "reviewCount": "20000"
+  },
+  "sameAs": [
+    "https://www.linkedin.com/company/apprendimento-rapido",
+    "https://www.facebook.com/apprendimentorapido",
+    "https://www.youtube.com/user/apprendimentorapido"
+  ]
+}
+</script>
+
+<!-- JSON-LD Schema.org - WebSite + SearchAction (Blocco 2) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": "https://www.apprendimentorapido.it/#sito",
+  "url": "https://www.apprendimentorapido.it/",
+  "name": "Apprendimento Rapido — Metodo Eureka",
+  "description": "Il sito ufficiale del Metodo Eureka per tecniche di memoria, lettura veloce e mappe mentali.",
+  "inLanguage": "it",
+  "publisher": {
+    "@id": "https://www.apprendimentorapido.it/#organizzazione"
+  }
+}
+</script>
+
+<!-- JSON-LD Schema.org - Reviews + AggregateRating (Blocco 4) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Testimonianze — Metodo Eureka",
+  "itemListElement": [
+    {
+      "@type": "Review",
+      "position": 1,
+      "itemReviewed": {
+        "@id": "https://www.apprendimentorapido.it/#organizzazione"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Francesca Riboldi",
+        "jobTitle": "Notaio"
+      },
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "reviewBody": "Studiare più di 14.000 pagine di atti creando 40 mappe mentali in soli 6 mesi. Ho raggiunto il mio obiettivo: diventare notaio.",
+      "inLanguage": "it"
+    },
+    {
+      "@type": "Review",
+      "position": 2,
+      "itemReviewed": {
+        "@id": "https://www.apprendimentorapido.it/#organizzazione"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Eva Vigato",
+        "jobTitle": "Avvocato Penalista"
+      },
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "reviewBody": "Dopo il Master Eureka ho superato 5 esami in una sessione, uno preparato in sole 8 ore. Risultato impensabile prima.",
+      "inLanguage": "it"
+    },
+    {
+      "@type": "Review",
+      "position": 3,
+      "itemReviewed": {
+        "@id": "https://www.apprendimentorapido.it/#organizzazione"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Yuri Zhou",
+        "jobTitle": "Studente e Imprenditore"
+      },
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "reviewBody": "Grazie al corso ho potuto conciliare studio e lavoro e laurearmi con 102/110. La mia tesi è stata acquisita dall'arch. Renzo Piano.",
+      "inLanguage": "it"
+    }
+  ]
+}
+</script>
+
+<!-- JSON-LD Schema.org - FAQPage (Blocco 8) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Cos'è il Metodo Eureka?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Il Metodo Eureka è un sistema di apprendimento sviluppato dal 2001 che integra tecniche di memoria, lettura veloce e mappe mentali. È stato seguito da oltre 20.000 persone tra professionisti, studenti e imprenditori, con un tasso di soddisfazione del 98%."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Per chi è adatto il Metodo Eureka?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Il metodo è adatto a professionisti che devono gestire grandi quantità di informazioni, studenti universitari e liceali, imprenditori e manager. Non sono richiesti prerequisiti. Il corso prevede un massimo di 25 partecipanti per garantire un'attenzione personalizzata."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Quanto tempo ci vuole per vedere i risultati?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Il 76% dei partecipanti applica le tecniche quotidianamente dopo il corso. Il 50% riferisce di aver ridotto i tempi di studio del 50% già entro 12 mesi dalla fine del corso. I risultati sono misurati su un campione di oltre 20.000 persone formate dal 2001."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Esiste un modo per provare il metodo gratuitamente?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sì. È disponibile un webinar gratuito di 120 minuti via Zoom in cui vengono dimostrate le tecniche base del metodo con esercizi pratici. È disponibile anche una sessione di coaching individuale gratuita di 60 minuti con un esperto Eureka. Entrambi sono gratuiti e senza obbligo di acquisto."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Il corso è disponibile online o solo in presenza?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Il Metodo Eureka offre una formula ibrida: il corso è disponibile sia dal vivo (in presenza) che online, con lo stesso livello di qualità. Puoi scegliere il formato più adatto alla tua situazione."
+      }
+    }
+  ]
+}
+</script>
+
 </head>
 <body>
 
