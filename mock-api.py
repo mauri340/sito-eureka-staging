@@ -317,8 +317,25 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             speech = "Ciao! Piacere di conoscerti. Come posso aiutarti oggi? Posso parlarti del metodo, del webinar gratuito, o delle nostre risorse."
         elif any(w in msg for w in ['grazie', 'thanks']):
             speech = "Prego! Se hai altre domande, sono qui. In bocca al lupo per il tuo percorso di apprendimento!"
-        else:
+        elif any(w in msg for w in ['come', 'cosa', 'funziona', 'metodo']):
             speech = "Ottima domanda! Il Metodo Eureka ti insegna tecniche di memoria, lettura veloce e mappe mentali. Con soli 30 minuti al giorno puoi migliorare drasticamente. Vuoi saperne di piu'?"
+        elif any(w in msg for w in ['struttur', 'organizzat', 'come era', 'come è']):
+            speech = "Il metodo è strutturato in 3 moduli principali: tecniche di memoria per ricordare meglio, lettura veloce per studiare più rapidamente, e mappe mentali per organizzare le informazioni. Vuoi che ti spieghi uno di questi in dettaglio?"
+        elif any(w in msg for w in ['capire', 'capito', 'voglio sapere']):
+            speech = "Perfetto! Ti spiego brevemente: il Metodo Eureka combina neuroscienza e tecniche pratiche per ottimizzare l'apprendimento. È pensato per professionisti che hanno poco tempo ma grandi obiettivi. Di cosa vorresti sapere di più?"
+        elif any(w in msg for w in ['normale', 'normalmente', 'parlare normale']):
+            speech = "Hai ragione! Dimmi pure, cosa vorresti sapere? Sono qui per rispondere alle tue domande in modo naturale."
+        else:
+            # More varied responses for unrecognized input
+            import random
+            fallback_responses = [
+                "Interessante punto! Potresti essere più specifico? Ti posso aiutare con informazioni sul metodo, webinar gratuiti, o coaching 1:1.",
+                "Non sono sicuro di aver capito bene. Potresti riformulare la domanda? Sono qui per aiutarti con il Metodo Eureka.",
+                "Buona domanda! Per darti una risposta più precisa, potresti dirmi cosa ti interessa di più: il metodo di studio, i corsi disponibili, o altro?",
+                "Mi spiace, non ho capito bene. Puoi essere più specifico? Posso parlarti del metodo, dei webinar gratuiti, o prenotare una coaching.",
+                "Hmm, potresti chiarire meglio la tua richiesta? Sono qui per aiutarti con tutto quello che riguarda l'apprendimento rapido!"
+            ]
+            speech = random.choice(fallback_responses)
 
         self._json_response({
             'session_id': session_id,
