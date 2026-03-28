@@ -366,7 +366,7 @@
     // Load appointment styles
     var styleLink = document.createElement('link');
     styleLink.rel = 'stylesheet';
-    styleLink.href = '/js/appointment-styles.css';
+    styleLink.href = '/css/appointment-styles.css';
     document.head.appendChild(styleLink);
   }
 
