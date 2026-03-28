@@ -615,6 +615,13 @@
         }
         appendCallCard();
         break;
+      case 'show_booking_form':
+        if (data.speech) { 
+          conversationHistory.push({role: 'assistant', content: data.speech, timestamp: new Date().toISOString()});
+          typeBotMessage(data.speech); 
+        }
+        if (data.slot) { appendBookingForm(data.slot); }
+        break;
       case 'action_completed':
         if (data.speech) {
           conversationHistory.push({role: 'assistant', content: data.speech, timestamp: new Date().toISOString()});
@@ -1191,6 +1198,214 @@
       .catch(function () {
         submitBtn.disabled = false;
         submitBtn.textContent = formConfig.submit_label || 'Invia';
+        errorDiv.textContent = 'Errore di connessione. Riprova.';
+        errorDiv.classList.add('ew-visible');
+      });
+  }
+
+  // ── Booking Form ────────────────────────────────────
+  var bookingFormTimeout = null;
+
+  function appendBookingForm(slotData) {
+    var msgs = $('ew-messages');
+    var wrapper = document.createElement('div');
+    wrapper.className = 'ew-msg ew-msg-form';
+    wrapper.id = 'booking-form-' + Date.now();
+
+    var card = document.createElement('div');
+    card.className = 'ew-form-card';
+
+    var title = document.createElement('div');
+    title.className = 'ew-form-title';
+    title.textContent = 'Conferma Prenotazione';
+    card.appendChild(title);
+
+    var body = document.createElement('div');
+    body.className = 'ew-form-body';
+
+    // Slot info (non-modifiable)
+    var slotInfo = document.createElement('div');
+    slotInfo.className = 'ew-form-group';
+    slotInfo.style.cssText = 'background:#F0EDE8;padding:10px 12px;border-radius:8px;margin-bottom:16px;';
+    slotInfo.innerHTML = '<strong>Orario selezionato:</strong><br>' + (slotData || 'Slot non specificato');
+    body.appendChild(slotInfo);
+
+    // Form fields
+    var fields = [
+      { name: 'nome', label: 'Nome *', type: 'text', placeholder: 'Il tuo nome', required: true },
+      { name: 'cognome', label: 'Cognome *', type: 'text', placeholder: 'Il tuo cognome', required: true },
+      { name: 'email', label: 'Email *', type: 'email', placeholder: 'La tua email', required: true },
+      { name: 'telefono', label: 'Telefono', type: 'tel', placeholder: '+39 333 1234567', required: false }
+    ];
+
+    for (var i = 0; i < fields.length; i++) {
+      var f = fields[i];
+      var group = document.createElement('div');
+      group.className = 'ew-form-group';
+      var label = document.createElement('label');
+      label.textContent = f.label;
+      group.appendChild(label);
+      var input = document.createElement('input');
+      input.type = f.type;
+      input.name = f.name;
+      input.placeholder = f.placeholder;
+      if (f.required) input.required = true;
+      group.appendChild(input);
+      body.appendChild(group);
+    }
+
+    var submitBtn = document.createElement('button');
+    submitBtn.type = 'button';
+    submitBtn.className = 'ew-form-submit';
+    submitBtn.textContent = 'Conferma prenotazione';
+    body.appendChild(submitBtn);
+
+    var errorDiv = document.createElement('div');
+    errorDiv.className = 'ew-form-error';
+    body.appendChild(errorDiv);
+
+    card.appendChild(body);
+    wrapper.appendChild(card);
+    msgs.insertBefore(wrapper, $('ew-typing'));
+    scrollDown();
+
+    // Start 4-minute timeout
+    startBookingFormTimeout();
+
+    submitBtn.addEventListener('click', function () {
+      submitBookingForm(wrapper, fields, slotData, errorDiv, submitBtn);
+    });
+  }
+
+  function startBookingFormTimeout() {
+    // Clear any existing timeout
+    if (bookingFormTimeout) {
+      clearTimeout(bookingFormTimeout);
+    }
+
+    // Start 4-minute (240000ms) timeout
+    bookingFormTimeout = setTimeout(function() {
+      // Send timeout message to AI
+      sendTimeoutMessage();
+    }, 240000);
+  }
+
+  function sendTimeoutMessage() {
+    if (!sessionId || inputDisabled) return;
+    
+    // Add timeout message to conversation history
+    conversationHistory.push({role: 'user', content: '[TIMEOUT_FORM]', timestamp: new Date().toISOString()});
+    showTyping();
+    disableInput(true);
+
+    fetch(API_BASE + '/api/chat/message', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        session_id: sessionId,
+        message: '[TIMEOUT_FORM]',
+        voice: false,
+        conversation_history: conversationHistory
+      })
+    })
+      .then(function (r) {
+        if (r.status === 410) {
+          hideTyping(); disableInput(true); inputDisabled = true;
+          var sessionClosedMessage = 'Sessione chiusa. Apri una nuova chat.';
+          conversationHistory.push({role: 'assistant', content: sessionClosedMessage, timestamp: new Date().toISOString()});
+          appendBot(sessionClosedMessage, false, true);
+          return null;
+        }
+        return r.json();
+      })
+      .then(function (data) {
+        if (!data) return;
+        hideTyping();
+        disableInput(false);
+        handleBotResponse(data);
+      })
+      .catch(function () {
+        hideTyping(); disableInput(false);
+        var errorMessage = 'Mi dispiace, c\'è stato un errore. Riprova tra poco.';
+        conversationHistory.push({role: 'assistant', content: errorMessage, timestamp: new Date().toISOString()});
+        appendBot(errorMessage);
+      });
+  }
+
+  function submitBookingForm(wrapper, fields, slotData, errorDiv, submitBtn) {
+    // Clear timeout since user is submitting
+    if (bookingFormTimeout) {
+      clearTimeout(bookingFormTimeout);
+      bookingFormTimeout = null;
+    }
+
+    errorDiv.classList.remove('ew-visible');
+
+    var data = {};
+    var missing = [];
+    for (var i = 0; i < fields.length; i++) {
+      var f = fields[i];
+      var input = wrapper.querySelector('input[name="' + f.name + '"]');
+      var val = input ? input.value.trim() : '';
+      if (f.required && !val) { missing.push(f.label.replace(' *', '')); }
+      data[f.name] = val;
+    }
+
+    if (missing.length > 0) {
+      errorDiv.textContent = 'Compila i campi obbligatori: ' + missing.join(', ');
+      errorDiv.classList.add('ew-visible');
+      return;
+    }
+
+    // Basic email validation
+    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(data.email)) {
+      errorDiv.textContent = 'Inserisci un indirizzo email valido.';
+      errorDiv.classList.add('ew-visible');
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Invio in corso...';
+
+    // Add slot data to the submission
+    data.slot = slotData;
+
+    fetch('https://ai-chat-service-nls9.onrender.com/api/chat/book-appointment', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    })
+      .then(function (r) {
+        if (r.status === 422 || r.status === 400) {
+          return r.json().then(function (err) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Conferma prenotazione';
+            errorDiv.textContent = err.detail || err.message || 'Errore di validazione.';
+            errorDiv.classList.add('ew-visible');
+            return null;
+          });
+        }
+        if (!r.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return r.json();
+      })
+      .then(function (result) {
+        if (!result) return;
+        var bodyEl = wrapper.querySelector('.ew-form-body');
+        bodyEl.innerHTML = '';
+        var done = document.createElement('div');
+        done.className = 'ew-form-done';
+        done.innerHTML = '<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>' +
+          '<span>Prenotazione confermata! Controlla la tua email.</span>';
+        bodyEl.appendChild(done);
+        scrollDown();
+      })
+      .catch(function (error) {
+        console.error('Booking error:', error);
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Conferma prenotazione';
         errorDiv.textContent = 'Errore di connessione. Riprova.';
         errorDiv.classList.add('ew-visible');
       });
