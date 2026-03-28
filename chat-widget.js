@@ -1368,8 +1368,9 @@
     submitBtn.disabled = true;
     submitBtn.textContent = 'Invio in corso...';
 
-    // Add slot data to the submission
-    data.slot = slotData;
+    // Add slot data and session_id to the submission
+    data.slot_datetime = slotData;
+    data.session_id = sessionId;
 
     fetch('https://ai-chat-service-nls9.onrender.com/api/chat/book-appointment', {
       method: 'POST',
