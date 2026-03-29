@@ -1377,15 +1377,20 @@
     submitBtn.disabled = true;
     submitBtn.textContent = 'Invio in corso...';
 
-    // Add slot data and session_id to the submission
-    data.slot_datetime = slotData;
-    data.session_id = sessionId;
+    // Map form data to backend expected fields
+    var apiData = {
+      session_id: sessionId,
+      appointment_datetime: slotData.datetime || slotData,
+      user_name: (data.nome + ' ' + data.cognome).trim(),
+      user_email: data.email,
+      user_phone: data.telefono || ''
+    };
 
-    console.log('Making API call to /api/chat/book-appointment with data:', data);
+    console.log('Making API call to /api/chat/book-appointment with data:', apiData);
     fetch('https://ai-chat-service-nls9.onrender.com/api/chat/book-appointment', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
+      body: JSON.stringify(apiData)
     })
       .then(function (r) {
         if (r.status === 422 || r.status === 400) {
