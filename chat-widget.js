@@ -1234,7 +1234,7 @@
     var slotInfo = document.createElement('div');
     slotInfo.className = 'ew-form-group';
     slotInfo.style.cssText = 'background:#F0EDE8;padding:10px 12px;border-radius:8px;margin-bottom:16px;';
-    slotInfo.innerHTML = '<strong>Orario selezionato:</strong><br>' + (slotData || 'Slot non specificato');
+    slotInfo.innerHTML = '<strong>Orario selezionato:</strong><br>' + (slotData.label || slotData.datetime || JSON.stringify(slotData) || 'Slot non specificato');
     body.appendChild(slotInfo);
 
     // Form fields
