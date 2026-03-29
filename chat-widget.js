@@ -598,7 +598,9 @@
 
   // ── Handle bot response ─────────────────────────────
   function handleBotResponse(data) {
+    console.log('handleBotResponse called with data:', data);
     var action = data.action || 'reply';
+    console.log('Action detected:', action);
 
     switch (action) {
       case 'show_form':
@@ -616,11 +618,15 @@
         appendCallCard();
         break;
       case 'show_booking_form':
+        console.log('Processing show_booking_form action with speech:', data.speech, 'and slot:', data.slot);
         if (data.speech) { 
           conversationHistory.push({role: 'assistant', content: data.speech, timestamp: new Date().toISOString()});
           typeBotMessage(data.speech); 
         }
-        if (data.slot) { appendBookingForm(data.slot); }
+        if (data.slot) { 
+          console.log('Calling appendBookingForm with slot data:', data.slot);
+          appendBookingForm(data.slot); 
+        }
         break;
       case 'action_completed':
         if (data.speech) {
@@ -1207,6 +1213,7 @@
   var bookingFormTimeout = null;
 
   function appendBookingForm(slotData) {
+    console.log('appendBookingForm called with slotData:', slotData);
     var msgs = $('ew-messages');
     var wrapper = document.createElement('div');
     wrapper.className = 'ew-msg ew-msg-form';
@@ -1273,6 +1280,7 @@
     startBookingFormTimeout();
 
     submitBtn.addEventListener('click', function () {
+      console.log('Booking form submit button clicked');
       submitBookingForm(wrapper, fields, slotData, errorDiv, submitBtn);
     });
   }
@@ -1333,6 +1341,7 @@
   }
 
   function submitBookingForm(wrapper, fields, slotData, errorDiv, submitBtn) {
+    console.log('submitBookingForm called with slotData:', slotData);
     // Clear timeout since user is submitting
     if (bookingFormTimeout) {
       clearTimeout(bookingFormTimeout);
@@ -1372,6 +1381,7 @@
     data.slot_datetime = slotData;
     data.session_id = sessionId;
 
+    console.log('Making API call to /api/chat/book-appointment with data:', data);
     fetch('https://ai-chat-service-nls9.onrender.com/api/chat/book-appointment', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -1394,6 +1404,7 @@
       })
       .then(function (result) {
         if (!result) return;
+        console.log('Booking API success response:', result);
         var bodyEl = wrapper.querySelector('.ew-form-body');
         bodyEl.innerHTML = '';
         var done = document.createElement('div');
