@@ -1,0 +1,224 @@
+/*
+ Theme Name: Kadence Child
+ Template:   kadence
+ Description: Child theme luxury — Apprendimento Rapido v4
+ Version:    4.0
+*/
+
+/* ─── 1. GOOGLE FONTS ─────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&subset=latin-ext,cyrillic,cyrillic-ext&display=swap');
+
+/* ─── 2. VARIABILI COLORI ─────────────────────────────── */
+:root {
+  --ar-navy:      #0D1B2A;
+  --ar-navy2:     #1C2B3A;
+  --ar-teal:      #00A988;
+  --ar-teal-dk:   #007a63;
+  --ar-gold:      #B8973E;
+  --ar-offwhite:  #F8F7F4;
+  --ar-light:     #E8E7E2;
+  --ar-text:      #1a1a2e;
+  --ar-muted:     #5a6a7a;
+}
+
+/* ─── 3. TIPOGRAFIA BASE ──────────────────────────────── */
+/* Font rounding abilitato */
+html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; }
+
+body,
+.site,
+.entry-content,
+.wp-block-post-content {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  font-size: 17px !important;
+  font-weight: 400 !important;
+  color: var(--ar-text) !important;
+  background-color: var(--ar-offwhite) !important;
+}
+
+/* ─── 4. INTESTAZIONI H1–H6 ──────────────────────────── */
+h1, h2, h3, h4, h5, h6,
+.entry-content h1,
+.entry-content h2,
+.entry-content h3,
+.entry-content h4,
+.entry-content h5,
+.entry-content h6 {
+  font-family: inherit !important;   /* eredita system-ui dal body */
+  font-weight: 700 !important;
+  color: var(--ar-navy) !important;
+  line-height: 1.25 !important;
+}
+
+h1, .entry-content h1 { font-size: 32px !important; }
+h2, .entry-content h2 { font-size: 28px !important; }
+h3, .entry-content h3 { font-size: 24px !important; }
+h4, .entry-content h4 { font-size: 22px !important; }
+h5, .entry-content h5 { font-size: 20px !important; }
+h6, .entry-content h6 { font-size: 18px !important; }
+
+/* ─── 5. TITOLO SOPRA CONTENUTO (H1 titolo articolo) ─── */
+/* Questo è l'H1 visibile nell'header della pagina/articolo */
+.entry-title,
+h1.entry-title,
+.page-title,
+.wp-block-post-title {
+  font-family: 'Playfair Display', Georgia, serif !important;
+  font-weight: 400 !important;   /* regular come da brief */
+  font-size: inherit !important; /* eredita la dimensione H1 (32px) */
+  color: var(--ar-navy) !important;
+}
+
+/* ─── 6. BREADCRUMB ─────────────────────────────────────*/
+.kadence-breadcrumbs,
+.breadcrumb,
+nav.breadcrumb,
+.breadcrumb-trail,
+.breadcrumb-trail a {
+  font-family: inherit !important;
+  font-size: inherit !important;
+  font-weight: inherit !important;
+  color: var(--ar-muted) !important;
+}
+
+/* ─── 7. HEADER SITO ────────────────────────────────── */
+.site-header, #masthead {
+  background: rgba(255,255,255,.97) !important;
+  border-bottom: 1px solid var(--ar-light) !important;
+  box-shadow: 0 1px 12px rgba(0,0,0,.06) !important;
+}
+.site-branding .site-title a,
+.header-branding .site-title a {
+  font-family: 'Playfair Display', serif !important;
+  color: var(--ar-navy) !important;
+  font-weight: 700 !important;
+}
+.main-navigation ul li a,
+#site-navigation ul li a {
+  font-family: inherit !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  color: var(--ar-muted) !important;
+}
+
+/* ─── 8. ARTICOLO SINGOLO — HERO HEADER ─────────────── */
+.single .entry-header,
+article.single-entry header.entry-header {
+  background: linear-gradient(135deg, var(--ar-navy) 0%, var(--ar-navy2) 100%) !important;
+  padding: 72px 48px 52px !important;
+}
+/* H1 nel hero ha Playfair bianco */
+.single .entry-title,
+.single h1.entry-title {
+  color: #ffffff !important;
+  font-size: clamp(1.8rem, 3vw, 2.6rem) !important;
+  font-weight: 700 !important;
+}
+.single .entry-meta,
+.single .entry-meta a,
+.single .entry-meta time {
+  color: rgba(255,255,255,.55) !important;
+  font-size: 13px !important;
+}
+
+/* ─── 9. ARTICOLO SINGOLO — CONTENUTO ───────────────── */
+.single .entry-content,
+.single div.entry-content {
+  max-width: 760px !important;
+  margin: 52px auto 64px !important;
+  background: #ffffff !important;
+  border-radius: 16px !important;
+  box-shadow: 0 2px 28px rgba(0,0,0,.07) !important;
+  padding: 52px 60px !important;
+}
+.single .entry-content p { line-height: 1.9 !important; margin-bottom: 20px !important; }
+.single .entry-content h2 { border-bottom: 2px solid var(--ar-light) !important; padding-bottom: 12px !important; margin: 44px 0 14px !important; }
+.single .entry-content h3 { margin: 32px 0 10px !important; }
+.single .entry-content h4 {
+  background: var(--ar-offwhite) !important;
+  border-left: 3px solid var(--ar-teal) !important;
+  padding: 14px 18px !important;
+  border-radius: 0 8px 8px 0 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+  margin: 28px 0 10px !important;
+}
+.single .entry-content blockquote {
+  border-left: 3px solid var(--ar-gold) !important;
+  background: rgba(184,151,62,.1) !important;
+  padding: 22px 28px !important;
+  border-radius: 0 12px 12px 0 !important;
+  margin: 30px 0 !important;
+}
+.single .entry-content blockquote p {
+  font-family: 'Playfair Display', serif !important;
+  font-style: italic !important;
+  font-size: 1.1rem !important;
+  color: var(--ar-navy) !important;
+  margin: 0 !important;
+}
+.single .entry-content a { color: var(--ar-teal-dk) !important; font-weight: 500 !important; }
+.single .entry-content img { border-radius: 10px !important; box-shadow: 0 4px 20px rgba(0,0,0,.1) !important; max-width: 100% !important; }
+
+/* ─── 10. ARCHIVIO / BLOG — CARD ARTICOLI ───────────── */
+.archive article,
+.blog article,
+.category article {
+  background: #ffffff !important;
+  border: 1px solid var(--ar-light) !important;
+  border-radius: 16px !important;
+  overflow: hidden !important;
+  margin-bottom: 32px !important;
+  box-shadow: 0 2px 12px rgba(0,0,0,.04) !important;
+  transition: box-shadow .25s, transform .25s !important;
+}
+.archive article:hover,
+.blog article:hover { box-shadow: 0 12px 40px rgba(0,0,0,.1) !important; transform: translateY(-3px) !important; }
+
+.archive .post-thumbnail img,
+.blog .post-thumbnail img { width: 100% !important; height: 230px !important; object-fit: cover !important; }
+
+.archive .entry-title a,
+.blog .entry-title a { color: var(--ar-navy) !important; text-decoration: none !important; }
+.archive .entry-title a:hover,
+.blog .entry-title a:hover { color: var(--ar-teal-dk) !important; }
+
+.archive .entry-summary p,
+.blog .entry-summary p { font-size: .93rem !important; color: var(--ar-muted) !important; line-height: 1.75 !important; }
+
+a.more-link {
+  display: inline-flex !important;
+  padding: 9px 20px !important;
+  background: var(--ar-navy) !important;
+  color: #fff !important;
+  border-radius: 8px !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  margin-top: 10px !important;
+}
+a.more-link:hover { background: var(--ar-navy2) !important; }
+
+/* ─── 11. FOOTER ─────────────────────────────────────── */
+.site-footer, #colophon {
+  background: var(--ar-navy) !important;
+  color: rgba(255,255,255,.7) !important;
+}
+.site-footer a, #colophon a { color: rgba(255,255,255,.5) !important; }
+.site-footer a:hover, #colophon a:hover { color: var(--ar-teal) !important; }
+#colophon .site-info {
+  color: rgba(255,255,255,.3) !important;
+  font-size: 12px !important;
+  border-top: 1px solid rgba(255,255,255,.08) !important;
+  padding-top: 18px !important;
+  text-align: center !important;
+}
+
+/* ─── 12. RESPONSIVE ─────────────────────────────────── */
+@media (max-width: 768px) {
+  .single .entry-header { padding: 52px 20px 36px !important; }
+  .single .entry-content { padding: 28px 20px !important; margin: 24px 10px !important; }
+  h1, .entry-content h1 { font-size: 26px !important; }
+  h2, .entry-content h2 { font-size: 22px !important; }
+}
+
