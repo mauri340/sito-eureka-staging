@@ -26,3 +26,19 @@ For static-only serving (no chat backend): `python3 -m http.server 8000`
 - **External API dependency:** Pages make `fetch()` calls to `https://api.apprendimentorapido.it`. These calls will succeed or fail depending on network access; the pages handle failures gracefully with fallback text (e.g., "Prossimamente" / "Data da confermare").
 - **Images hosted externally:** Most images are loaded from `genspark.ai` CDN. They will not render if the VM has no outbound internet access.
 - **No CORS issues with `file://`:** Always use an HTTP server rather than opening HTML files directly via `file://` protocol, as `fetch()` API calls will fail due to CORS restrictions.
+## WordPress Staging Environment
+- Staging URL: https://staging.apprendimentorapido.it
+- Hosting: Artera cPanel, server Lugano CH
+- Theme: Kadence (wp-content/themes/kadence/)
+- Deploy: automatic via GitHub Actions on every push to main
+
+## Repository structure
+- HTML standalone pages in root (master-eureka.html, coaching.html, etc.)
+- Page-specific folders in root (black-friday/, demo-zoom/, dai-una-svolta/, etc.)
+- WordPress theme in wp-content/themes/kadence/
+
+## Rules
+- Never modify wp-admin/, wp-includes/
+- Never create files in wp-content/uploads/
+- Every push to main auto-deploys to staging within 20 seconds
+- Chat widget backend URL: https://api.apprendimentorapido.it
