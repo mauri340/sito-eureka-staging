@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test di Memoria</title>
+<script type="text/javascript">
+var _iub = _iub || [];
+_iub.csConfiguration = {"applyGdprForCH":false,"askConsentAtCookiePolicyUpdate":true,"countryDetection":true,"enableFadp":true,"enableLgpd":true,"enableUspr":true,"gdprAppliesGlobally":false,"lgpdAppliesGlobally":false,"perPurposeConsent":true,"siteId":1598928,"whitelabel":false,"cookiePolicyId":89530968,"lang":"it","banner":{"acceptButtonCaptionColor":"#FFFFFF","acceptButtonColor":"#0A513C","acceptButtonDisplay":true,"backgroundColor":"#F5FEFB","closeButtonRejects":true,"customizeButtonCaptionColor":"#0A513C","customizeButtonColor":"#DDEDE8","customizeButtonDisplay":true,"explicitWithdrawal":true,"listPurposes":true,"ownerName":"www.apprendimentorapido.it","position":"bottom","rejectButtonCaptionColor":"#FFFFFF","rejectButtonColor":"#0A513C","rejectButtonDisplay":true,"showPurposesToggles":true,"showTotalNumberOfProviders":true,"theme":"mint-neutral","textColor":"#262626"}};
+</script>
+<script type="text/javascript" src="https://cs.iubenda.com/sync/1598928.js"></script>
+<script type="text/javascript" src="https://cdn.iubenda.com/cs/gpp/stub.js"></script>
+<script type="text/javascript" src="https://cdn.iubenda.com/cs/iubenda_cs.js" charset="UTF-8" async></script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2X3V7JZPBJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-2X3V7JZPBJ');
+</script>
+    <script type="text/javascript">
+    _linkedin_partner_id = "6819532";
+    window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || [];
+    window._linkedin_data_partner_ids.push(_linkedin_partner_id);
+    </script>
+    <script type="text/javascript">
+    (function(l) {
+    if (!l){window.lintrk = function(a,b){window.lintrk.q.push([a,b])};
+    window.lintrk.q=[]}
+    var s = document.getElementsByTagName("script")[0];
+    var b = document.createElement("script");
+    b.type = "text/javascript";b.async = true;
+    b.src = "https://snap.licdn.com/li.lms-analytics/insight.min.js";
+    s.parentNode.insertBefore(b, s);})(window.lintrk);
+    </script>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1749584092436791');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1749584092436791&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+    <noscript>
+    <img height="1" width="1" style="display:none;" alt="" src="https://px.ads.linkedin.com/collect/?pid=6819532&fmt=gif" />
+    </noscript>
+
+    <style>
+        /* Stili Generali */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+    padding-bottom: 70px; /* <-- RIGA DA AGGIUNGERE */
+
+        }
+
+        /* Contenitore principale del test */
+        main {
+            background-color: #ffffff;
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        /* Classe per nascondere le schermate non attive */
+        .nascosto {
+            display: none;
+        }
+
+        /* Titoli e Testo */
+        h1 {
+            color: #1a2a6c;
+            margin-bottom: 15px;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        p, li {
+            font-size: 1.1em;
+            line-height: 1.6;
+            text-align: left;
+        }
+        
+        ul {
+            list-style-position: inside;
+            padding-left: 0;
+            margin-bottom: 25px;
+        }
+
+        /* Pulsanti */
+        .btn {
+            background-image: linear-gradient(to right, #4e54c8, #8f94fb);
+            color: #ffffff;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1em;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Timer */
+        #timer {
+            font-size: 2em;
+            font-weight: bold;
+            color: #d9534f;
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+        
+        /* Lista di Parole e Campi di Input */
+        .lista-parole, .lista-input {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .lista-parole span {
+            font-size: 1.2em;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .campo-input {
+            width: 100%;
+            padding: 12px;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        
+        .campo-input::placeholder {
+            color: #aaa;
+        }
+
+        /* Form di Contatto */
+        .form-contatto {
+            display: grid;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .form-contatto input {
+            width: 100%;
+            padding: 12px;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        
+        /* Contenuto post-form */
+        #contenuto-post-form {
+            padding: 20px;
+            background-color: #e9f7ef;
+            border: 1px solid #a3e9a4;
+            border-radius: 8px;
+            margin-top: 25px;
+        }
+        
+        /* Stile per il video */
+        .video-container {
+            margin: 20px 0;
+            border-radius: 8px;
+            overflow: hidden; /* Per arrotondare i bordi del video */
+            background-color: #000;
+        }
+        .video-container video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+/* Stile per il footer fisso */
+.site-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #f8f9fa;
+    border-top: 1px solid #dee2e6;
+    padding: 15px 0;
+    text-align: center;
+    font-size: 0.9em;
+    z-index: 1000;
+}
+.site-footer a {
+    color: #0056b3;
+    text-decoration: none;
+    margin: 0 10px;
+}
+    </style>
+</head>
+<body>
+
+    <main id="test-container">
+
+        <section id="schermata-iniziale">
+            <h1>Ciao!</h1>
+            <p style="text-align: center;">Tra poco potrai metterti alla prova facendo un test sulla tua memoria!</p>
+            <h2>Regole dell'esercizio:</h2>
+            <ul>
+                <li><strong>Tempo:</strong> Prenditi 5 minuti liberi. Il test di memorizzazione è a tempo (3 minuti). Usa tutto il tempo che ti serve, oppure procedi quando ti senti pronto.</li>
+                <li><strong>Usa la memoria:</strong> Quando vedrai le informazioni da ricordare, leggile e ripetile. Quando il tempo si blocca, dovrai usare solo il ricordo mnemonico, senza appunti!</li>
+                <li><strong>Divertiti:</strong> Apprezzo che ti stia mettendo alla prova, quindi prendila come un gioco. L'obiettivo è capire come usi le tue capacità mnemoniche.</li>
+            </ul>
+            <button class="btn" onclick="iniziaTest()">Inizia il test</button>
+        </section>
+
+        <section id="schermata-memorizzazione" class="nascosto">
+            <h1>Memorizza le seguenti parole</h1>
+            <div id="timer">03:00</div>
+            <div id="lista-parole" class="lista-parole"></div>
+            <button class="btn" onclick="vaiAllaVerifica(1)">Son già pronto</button>
+        </section>
+
+        <section id="schermata-verifica-1" class="nascosto">
+            <h1>Reinserisci le parole nello stesso ordine</h1>
+            <p>Scrivi le parole che ricordi nei campi qui sotto.</p>
+            <form onsubmit="event.preventDefault(); calcolaPunteggio(1);">
+                <div id="lista-input-1" class="lista-input"></div>
+                <button type="submit" class="btn">Fatto</button>
+            </form>
+        </section>
+
+        <section id="schermata-lead-gen" class="nascosto">
+   <h1>Complimenti per aver completato il test!</h1>
+
+<p id="risultato-1-testo" style="text-align: center; font-size: 1.3em; font-weight: bold;"></p>
+
+
+<h2 style="color: #4e54c8; margin-top: 25px;">La tua vera crescita inizia adesso.</h2>
+
+<p style="text-align: center; font-size: 1.1em;">
+    Il tuo punteggio è solo un punto di partenza. Esiste una tecnica specifica che ti permette di ricordare tutte le parole, senza sforzo.
+</p>
+
+<p style="text-align: center; font-weight: 600;">
+    Inserisci i tuoi dati per accedere subito al video che te la svelerà!
+</p>
+    <form id="form-contatto" class="form-contatto">
+        <input type="text" name="nome" placeholder="Nome" required>
+        <input type="text" name="cognome" placeholder="Cognome" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="tel" name="telefono" placeholder="Numero di telefono" required>
+        
+        <input type="hidden" name="punteggio_primo_tentativo" id="punteggio-primo-tentativo-form">
+        <input type="hidden" name="punteggio_secondo_tentativo" id="punteggio-secondo-tentativo-form">
+        <input type="hidden" name="miglioramento_percentuale" id="miglioramento-percentuale-form">
+        <input type="hidden" name="tipo_quiz" value="Test Memoria">
+
+        <div style="display: flex; align-items: flex-start; margin: 20px 0; font-size: 0.9em; text-align: left;">
+            <input type="checkbox" id="privacy-consent" name="privacy-consent" required style="margin-top: 5px; margin-right: 10px;">
+            <label for="privacy-consent">
+                <strong>Accettazione *</strong><br>
+                Cliccando sul pulsante "Invia e Scopri di più", dichiaro di aver preso visione dell’informativa privacy e acconsento al trattamento dei dati personali per finalità di marketing diretto di Apprendimento Rapido.
+            </label>
+        </div>
+
+        <button type="submit" class="btn" onclick="handleSubmitContactForm(event)">Invia e Scopri di più</button>
+    </form>
+</section>
+
+<section id="schermata-video" class="nascosto">
+    <h2>Ottima scelta!</h2>
+<h3 style="color: #4e54c8;">Stai per sbloccare il vero potenziale della tua memoria.</h3>
+
+<p style="text-align: center; font-size: 1.1em;">
+    Il video qui sotto non ti mostrerà un trucco, ma una vera e propria <strong>tecnica di memorizzazione</strong>.
+    Non importa il tuo risultato precedente: seguendo le indicazioni, rimarrai stupito/a di quanto velocemente puoi migliorare.
+</p>
+
+<p style="text-align: center; font-weight: 600;">
+    Guarda ora il video e preparati a superare te stesso nel secondo tentativo!
+</p>
+    
+    <div class="video-container">
+        <video controls src="https://content.jwplatform.com/videos/tWtfvoic-1PBwHMZW.mp4">
+            Il tuo browser non supporta il tag video.
+        </video>
+    </div>
+
+    <button class="btn" onclick="vaiAllaVerifica(2)">Fai il test una seconda volta</button>
+</section>
+        
+        <section id="schermata-verifica-2" class="nascosto">
+            <h1>Secondo Tentativo</h1>
+            <p>Ora che conosci la tecnica, reinserisci le parole nello stesso ordine.</p>
+            <form> <div id="lista-input-2" class="lista-input"></div>
+                <button type="button" class="btn" onclick="inviaRisultatoFinale()">Vai al Risultato Finale</button>
+            </form>
+        </section>
+
+        <section id="schermata-finale" class="nascosto">
+            <h1>Risultato Finale</h1>
+            <p id="risultato-finale-testo" style="text-align: center; font-size: 1.3em;"></p>
+            <hr style="margin: 30px 0; border: 1px solid #eee;">
+            <h2>Vuoi dimezzare i tuoi tempi di studio?</h2>
+            <p style="text-align: center;">Scopri le nostre tecniche avanzate per preparare esami, concorsi e imparare lingue straniere in modo efficace.</p>
+            <a href="https://ApprendimentoRapido.as.me/" class="btn" id="cta-finale">Fissa una coaching gratuita con un nostro coach</a>
+        </section>
+
+    </main>
+<footer class="site-footer">
+        <a href="https://www.iubenda.com/privacy-policy/89530968" class="iubenda-nostyle no-brand iubenda-noiframe iubenda-embed iubenda-noiframe " title="Privacy Policy ">Privacy Policy</a> &bull;
+        <a href="https://www.iubenda.com/privacy-policy/89530968/cookie-policy" class="iubenda-nostyle no-brand iubenda-noiframe iubenda-embed iubenda-noiframe " title="Cookie Policy ">Cookie Policy</a> &bull;
+        <a href="https://www.iubenda.com/termini-e-condizioni/89530968" class="iubenda-nostyle iubenda-noiframe iubenda-embed iubenda-noiframe " title="Termini e Condizioni ">Termini e Condizioni</a>
+        <script type="text/javascript">(function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src="https://cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent){w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);</script>
+    </footer>
+
+<script>
+    // --- CONFIGURAZIONE ---
+    const paroleCorrette = [
+        "Trottola", "Pancia", "Lama", "Lava", "Buca", "Piumino", "Muffa", "Regina", "Cero",
+        "Mamma", "Fiamma", "Nuca", "Palazzo", "Neve", "Frutta", "Pacco", "Doccia", "Bomba"
+    ];
+    const numeroParole = paroleCorrette.length;
+    const ZAPIER_WEBHOOK_URL = "https://hooks.zapier.com/hooks/catch/2958748/u3tzbh9/";
+
+    // --- VARIABILI DI STATO ---
+    let punteggio1 = 0;
+    let punteggio2 = 0;
+    let timerInterval;
+    let miglioramentoPercentualeCalcolato = 0;
+    let datiContatto = {};
+
+    // --- FUNZIONI DI NAVIGAZIONE ---
+    function mostraSchermata(idSchermata) {
+        document.querySelectorAll('section').forEach(sezione => {
+            sezione.classList.add('nascosto');
+        });
+        document.getElementById(idSchermata).classList.remove('nascosto');
+        window.scrollTo(0, 0);
+    }
+
+    // --- FLUSSO DEL TEST ---
+    function iniziaTest() {
+        const contenitoreParole = document.getElementById('lista-parole');
+        contenitoreParole.innerHTML = '';
+        paroleCorrette.forEach(parola => {
+            const span = document.createElement('span');
+            span.textContent = parola;
+            contenitoreParole.appendChild(span);
+        });
+        mostraSchermata('schermata-memorizzazione');
+        avviaTimer(3 * 60, document.getElementById('timer'));
+    }
+
+    function avviaTimer(durata, display) {
+        let tempoRimanente = durata;
+        clearInterval(timerInterval);
+        timerInterval = setInterval(() => {
+            let minuti = parseInt(tempoRimanente / 60, 10);
+            let secondi = parseInt(tempoRimanente % 60, 10);
+            minuti = minuti < 10 ? "0" + minuti : minuti;
+            secondi = secondi < 10 ? "0" + secondi : secondi;
+            display.textContent = minuti + ":" + secondi;
+            if (--tempoRimanente < 0) {
+                clearInterval(timerInterval);
+                vaiAllaVerifica(1);
+            }
+        }, 1000);
+    }
+
+    function vaiAllaVerifica(tentativo) {
+        clearInterval(timerInterval);
+        const idSchermata = `schermata-verifica-${tentativo}`;
+        const idListaInput = `lista-input-${tentativo}`;
+        const contenitoreInput = document.getElementById(idListaInput);
+        contenitoreInput.innerHTML = '';
+        for (let i = 0; i < numeroParole; i++) {
+            const input = document.createElement('input');
+            input.type = "text";
+            input.className = "campo-input";
+            input.placeholder = `Parola #${i + 1}`;
+            contenitoreInput.appendChild(input);
+        }
+        mostraSchermata(idSchermata);
+    }
+
+    function calcolaPunteggio(tentativo) {
+        const idListaInput = `lista-input-${tentativo}`;
+        const inputs = document.getElementById(idListaInput).getElementsByTagName('input');
+        let punteggio = 0;
+        for (let i = 0; i < numeroParole; i++) {
+            if (inputs[i].value.trim().toLowerCase() === paroleCorrette[i].toLowerCase()) {
+                punteggio++;
+            }
+        }
+        if (tentativo === 1) {
+            punteggio1 = punteggio;
+            document.getElementById('risultato-1-testo').textContent = `Ora hai ottenuto ${punteggio1} risposte giuste su ${numeroParole}.`;
+            mostraSchermata('schermata-lead-gen');
+        } else {
+            punteggio2 = punteggio;
+            // La vecchia riga 'mostraSchermata' è rimossa da qui, 
+            // la chiamata avverrà dopo l'invio dati in 'inviaRisultatoFinale'
+        }
+    }
+
+    async function handleSubmitContactForm(event) {
+        event.preventDefault();
+        const form = document.getElementById('form-contatto');
+        const submitButton = form.querySelector('button[type="submit"]');
+        const consentCheckbox = document.getElementById('privacy-consent');
+
+        if (!consentCheckbox.checked) {
+            alert("Per procedere, è necessario accettare la policy sulla privacy.");
+            return;
+        }
+        if (!form.nome.value.trim() || !form.cognome.value.trim() || !form.email.value.trim() || !form.telefono.value.trim()) {
+            alert("Per favore, compila tutti i campi richiesti.");
+            return;
+        }
+
+        submitButton.textContent = 'Invio...';
+        submitButton.disabled = true;
+
+        datiContatto = {
+            nome: form.nome.value.trim(),
+            cognome: form.cognome.value.trim(),
+            email: form.email.value.trim(),
+            telefono: form.telefono.value.trim()
+        };
+
+        document.getElementById('punteggio-primo-tentativo-form').value = punteggio1;
+        document.getElementById('punteggio-secondo-tentativo-form').value = 0;
+        document.getElementById('miglioramento-percentuale-form').value = 0;
+
+        try {
+            const response = await fetch(ZAPIER_WEBHOOK_URL, {
+                method: "POST",
+                body: new FormData(form),
+            });
+            if (response.ok) {
+                console.log('Dati iniziali inviati a Zapier con successo.');
+                mostraSchermata('schermata-video');
+            } else {
+                throw new Error('Risposta dal server non OK.');
+            }
+        } catch (error) {
+            console.error('Errore di rete o di invio:', error);
+            alert('Si è verificato un errore durante l\'invio. Riprova.');
+            submitButton.textContent = 'Invia e Scopri di più';
+            submitButton.disabled = false;
+        }
+    }
+
+    async function inviaRisultatoFinale() {
+        const submitButton = document.querySelector('#schermata-verifica-2 .btn');
+        submitButton.textContent = 'Invio Risultato...';
+        submitButton.disabled = true;
+
+        calcolaPunteggio(2); // Calcola il punteggio 2
+
+        if (punteggio1 < punteggio2) {
+            if (punteggio1 === 0) {
+                miglioramentoPercentualeCalcolato = 100;
+            } else {
+                miglioramentoPercentualeCalcolato = ((punteggio2 - punteggio1) / punteggio1) * 100;
+            }
+        } else {
+            miglioramentoPercentualeCalcolato = 0; // O un valore negativo se peggiora
+        }
+
+        let testoMiglioramento = '';
+        if (punteggio1 < punteggio2) {
+            testoMiglioramento = `Sei migliorato del <strong>${miglioramentoPercentualeCalcolato.toFixed(0)}%</strong>, passando da ${punteggio1} a ${punteggio2} risposte corrette!`;
+        } else {
+            testoMiglioramento = `Il tuo punteggio è rimasto invariato o è peggiorato. Il secondo punteggio è stato: ${punteggio2} su ${numeroParole}.`;
+        }
+        document.getElementById('risultato-finale-testo').innerHTML = testoMiglioramento;
+
+        const formDataFinal = new FormData();
+        formDataFinal.append('nome', datiContatto.nome);
+        formDataFinal.append('cognome', datiContatto.cognome);
+        formDataFinal.append('email', datiContatto.email);
+        formDataFinal.append('telefono', datiContatto.telefono);
+        formDataFinal.append('tipo_quiz', "Test Memoria");
+        formDataFinal.append('punteggio_primo_tentativo', punteggio1);
+        formDataFinal.append('punteggio_secondo_tentativo', punteggio2);
+        formDataFinal.append('miglioramento_percentuale', miglioramentoPercentualeCalcolato.toFixed(2));
+        formDataFinal.append('fase_invio', "Risultato Finale Completato");
+
+        try {
+            const response = await fetch(ZAPIER_WEBHOOK_URL, {
+                method: 'POST',
+                body: formDataFinal
+            });
+            if (response.ok) {
+                console.log('Dati finali inviati a Zapier con successo.');
+                mostraSchermata('schermata-finale');
+            } else {
+                throw new Error('Risposta dal server non OK.');
+            }
+        } catch (error) {
+            console.error('Errore di rete durante l\'invio dati finali a Zapier:', error);
+            alert('Impossibile connettersi. Controlla la tua connessione e riprova.');
+            submitButton.textContent = 'Errore! Riprova';
+            submitButton.disabled = false;
+        }
+    }
+    
+    document.addEventListener('DOMContentLoaded', () => {
+        const ctaFinale = document.getElementById('cta-finale');
+        if (ctaFinale) {
+            const ctaOptions = [
+                { text: "Pianifica la settimana, prenota il webinar gratuito!", url: "https://apprendimentorapido.it/diretta-live-gratuita/" },
+                { text: "Inizia alla grande, prenota il webinar gratuito!", url: "https://apprendimentorapido.it/diretta-live-gratuita/" },
+                { text: "Fissa una coaching gratuita con un nostro coach!", url: "https://ApprendimentoRapido.as.me/" },
+                { text: "Non aspettare! Fissa una coaching gratuita ora!", url: "https://ApprendimentoRapido.as.me/" },
+                { text: "Prenota il webinar gratuito del prossimo martedì!", url: "https://apprendimentorapido.it/diretta-live-gratuita/" },
+                { text: "Inizia il weekend con un boost: prenota il webinar!", url: "https://apprendimentorapido.it/diretta-live-gratuita/" },
+                { text: "Approfitta del weekend, prenota il webinar di martedì!", url: "https://apprendimentorapido.it/diretta-live-gratuita/" }
+            ];
+            const currentCta = ctaOptions[new Date().getDay()];
+            ctaFinale.href = currentCta.url;
+            ctaFinale.textContent = currentCta.text;
+        }
+        mostraSchermata('schermata-iniziale');
+    });
+
+</script>
+</body>
+</html>
+</body>
+</html>

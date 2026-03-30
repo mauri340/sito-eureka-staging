@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prenotazione Master - APPRENDIMENTO RAPIDO</title>
+     <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2X3V7JZPBJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-2X3V7JZPBJ');
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            margin-bottom: 40px;
+        }
+        
+        .logo {
+            max-width: 300px;
+            margin: 0 auto 20px;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            font-style: italic;
+        }
+        
+        .content-section {
+            background: white;
+            padding: 40px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .content-section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 2em;
+        }
+        
+        .content-section h3 {
+            color: #764ba2;
+            margin: 25px 0 15px;
+            font-size: 1.5em;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+        
+        .phases {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 30px 0;
+        }
+        
+        .phase {
+            background: #f9f9f9;
+            padding: 25px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .phase h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+        
+        .phase ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .phase li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .phase li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+        
+        .dates-section {
+            background: #fff3cd;
+            padding: 30px;
+            border-radius: 8px;
+            border-left: 4px solid #ffc107;
+            margin: 30px 0;
+        }
+        
+        .dates-section h4 {
+            color: #856404;
+            margin-bottom: 15px;
+        }
+        
+        .dates-section ul {
+            list-style: none;
+            padding-left: 20px;
+        }
+        
+        .dates-section li {
+            padding: 5px 0;
+            font-weight: 500;
+        }
+        
+        .guarantee-box {
+            background: #d1ecf1;
+            border: 2px solid #17a2b8;
+            padding: 30px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+        
+        .guarantee-box h2 {
+            color: #0c5460;
+            margin-bottom: 20px;
+        }
+        
+        .guarantee-item {
+            margin: 20px 0;
+        }
+        
+        .guarantee-item h3 {
+            color: #0c5460;
+            margin-bottom: 10px;
+        }
+        
+        .guarantee-item p {
+            margin-bottom: 10px;
+        }
+        
+        .restart-section {
+            background: #d4edda;
+            border: 2px solid #28a745;
+            padding: 30px;
+            border-radius: 8px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        
+        .restart-section h3 {
+            color: #155724;
+            margin-bottom: 15px;
+        }
+        
+        .restart-section p {
+            color: #155724;
+            font-size: 1.1em;
+        }
+        
+        .ultimatum {
+            background: #dc3545;
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        .ultimatum h3 {
+            color: white;
+            margin-bottom: 20px;
+        }
+        
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        
+        .countdown-item {
+            background: white;
+            color: #dc3545;
+            padding: 20px;
+            border-radius: 8px;
+            min-width: 100px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .countdown-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            display: block;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+        
+        .countdown-label {
+            font-size: 0.9em;
+            text-transform: uppercase;
+            display: block;
+            line-height: 1;
+        }
+        
+        .form-section {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            margin: 40px 0;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: start;
+            gap: 10px;
+        }
+        
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+            margin-top: 5px;
+        }
+        
+        .checkbox-group label {
+            margin: 0;
+            font-weight: normal;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.2s;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        .message {
+            padding: 15px;
+            border-radius: 4px;
+            margin: 20px 0;
+            display: none;
+        }
+        
+        .message.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .message.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .message.show {
+            display: block;
+        }
+        
+        .footer {
+            background: #333;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            margin-top: 60px;
+        }
+        
+        .footer h6 {
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+        
+        .footer a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .content-section {
+                padding: 20px;
+            }
+            
+            .countdown {
+                flex-wrap: wrap;
+            }
+            
+            .countdown-item {
+                min-width: 80px;
+                padding: 15px;
+            }
+            
+            .countdown-number {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <img src="https://apprendimentorapido.it/wp-content/uploads/2022/12/LA-TUA-MENTE-AL-100-1024x1024.png" alt="LA TUA MENTE AL 100" class="logo">
+            <h1>Il Master Eureka</h1>
+            <p><em>Il percorso che hai scelto per imparare più velocemente e trasformare la tua vita con risultati duraturi.</em></p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="content-section">
+            <h2>Il nostro "patto di ripartenza": le tue nuove garanzie</h2>
+            <p>Per ripagare la tua pazienza e dimostrarti che siamo tornati a supportarti con la professionalità di sempre, abbiamo deciso di trasformare il tuo percorso in un'esperienza ancora più esclusiva. Ecco cosa ti garantiamo da oggi:</p>
+            
+            <h3>1. Date blindate al 100%</h3>
+            <p>Abbiamo ricalibrato i nostri processi organizzativi. Le date del 2026 sono confermate: puoi procedere con la logistica (hotel, viaggi, permessi) con la totale certezza che il corso si terrà come previsto.</p>
+            
+            <h3>2. 5 ore di coaching individuale (Bonus compensativo)</h3>
+            <p>Al posto del semplice supporto, abbiamo deciso di assegnarti un Coach dedicato per 5 ore di consulenza privata 1-to-1. È il nostro modo per farci perdonare l'attesa e darti uno strumento potentissimo per accelerare i tuoi risultati (valore commerciale 500€).</p>
+            
+            <h3>3. Ritorno all'eccellenza</h3>
+            <p>Ritroverai la qualità e l'attenzione che hanno sempre contraddistinto il passato del Master Eureka, con un team pronto a seguirti passo dopo passo affinché il tuo investimento produca finalmente i frutti sperati.</p>
+            
+            <h3 style="margin-top: 40px;">Riprendiamo da dove ci eravamo lasciati</h3>
+            <p>La nostra passione per la tua crescita non è mai cambiata. Vogliamo che tu senta di nuovo quella spinta che ti ha portato a sceglierci.</p>
+            <p>Ti invitiamo a guardare le nuove date e a riprendere il tuo posto in aula. Non vediamo l'ora di stringerti la mano dal vivo e concentrarci sul tuo successo personale e professionale.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Il tuo pacchetto Eureka, ecco cosa hai già sbloccato!</h2>
+            <h3>Le due fasi del Master Eureka:</h3>
+            
+            <div class="phases">
+                <div class="phase">
+                    <h3>Fase 1: Apprendimento rapido</h3>
+                    <ul>
+                        <li>68 Video Lezioni Ondemand</li>
+                        <li>12 Dirette Live su Zoom - Tutti i lunedì dalle 21 alle 23</li>
+                        <li>Corso dal vivo 4 giorni - Sedi: Roma o Milano - Giorni: da Giovedì a Domenica</li>
+                    </ul>
+                </div>
+                
+                <div class="phase">
+                    <h3>Fase 2: Crescita personale</h3>
+                    <ul>
+                        <li>Gestione del tempo - 6h su Zoom di Sabato</li>
+                        <li>Lingue straniere - 6h su Zoom di Sabato</li>
+                        <li>Tecniche del colloquio - 6h su Zoom di Sabato</li>
+                        <li>Life Emotion dal vivo - 5 giorni dal Giovedì al Lunedì</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="dates-section">
+                <h4>📅 Corso dal vivo Apprendimento Rapido</h4>
+                <ul>
+                    <li>05-08 Febbraio 2026 a Roma</li>
+                    <li>19-22 Marzo 2026 a Milano</li>
+                    <li>02-05 Luglio 2026 a Milano</li>
+                    <li>30 Luglio-02 Agosto 2026 a Roma</li>
+                </ul>
+                
+                <h4 style="margin-top: 20px;">📅 Webinar Fase 2 su Zoom</h4>
+                <ul>
+                    <li>21 Febbraio - Gestione del tempo Zoom</li>
+                    <li>11 Aprile - Tecniche del colloquio</li>
+                    <li>27 Giugno - Lingue Straniere</li>
+                </ul>
+                
+                <h4 style="margin-top: 20px;">📅 Corso dal vivo Life Emotion</h4>
+                <ul>
+                    <li>30 Aprile - 04 Maggio 2026 a Perugia</li>
+                    <li>08-12 Ottobre 2026 a Perugia</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="warning-box">
+            <h2>⚠️ Leggi attentamente prima di procedere</h2>
+            <h3>Un patto di correttezza per il successo di tutti</h3>
+            <p>Sappiamo bene che nel tuo caso non ce ne sarebbe bisogno, perché hai già dimostrato la tua serietà e il tuo interesse verso il Master Eureka. Tuttavia, a causa dei passati disguidi organizzativi, abbiamo deciso di chiedere a tutti i nostri corsisti di accettare formalmente le seguenti condizioni.</p>
+            <p>Questo ci permette di proteggere la qualità del corso e di garantire a te, e ai tuoi colleghi, una pianificazione impeccabile e senza più slittamenti.</p>
+            
+            <div class="warning-item">
+                <h3>1. La tua parola è un impegno vincolante</h3>
+                <p>I nostri corsi sono rigorosamente a numero chiuso. Prenotare e non presentarsi significa sottrarre un'opportunità a un altro corsista. Ti chiediamo di confermare la data solo se sei certo di poterla rispettare, nel rispetto del nostro lavoro e della classe.</p>
+            </div>
+            
+            <div class="warning-item">
+                <h3>2. Organizzazione immediata</h3>
+                <p>Per evitare contrattempi dell'ultimo minuto, ti chiediamo di bloccare ferie, viaggi e alloggi non appena avrai ricevuto la nostra conferma. Se prenoti oggi, organizza oggi: è il modo migliore per proteggere il tuo investimento.</p>
+            </div>
+            
+            <div class="warning-item">
+                <h3>3. Richiesta di proroga (Casi eccezionali)</h3>
+                <p>Se nessuna delle date indicate fosse compatibile con le tue esigenze, puoi richiedere una data alternativa motivando la tua necessità. La concessione di una nuova data resta a nostra totale discrezione e verrà valutata solo in base alla reale intenzione di concludere il percorso.</p>
+            </div>
+            
+            <div class="warning-item">
+                <h3>4. Opzione Rinuncia trasparente</h3>
+                <p>Se hai deciso che non potrai frequentare i corsi dal vivo, ti chiediamo la cortesia di comunicarcelo cliccando sul pulsante <strong>"Rinuncio alla frequenza Live"</strong>. Questo ci permetterà di gestire meglio i posti e liberare spazio per chi è pronto a partire.</p>
+            </div>
+            
+            <div style="background: white; padding: 20px; border-radius: 8px; margin-top: 20px; border-left: 4px solid #dc3545;">
+                <h3 style="color: #dc3545; margin-bottom: 10px;">🛑 NOTA IMPORTANTE</h3>
+                <p style="margin: 0;">Per questioni logistiche, abbiamo necessità di chiudere il calendario entro 7 giorni. Se non riceveremo la tua prenotazione o una tua comunicazione entro questo termine, saremo costretti a considerare la mancata azione come una rinuncia definitiva alla partecipazione dal vivo.</p>
+            </div>
+        </div>
+
+        <div class="ultimatum">
+            <h3>🔴 ULTIMATUM: 7 GIORNI ALLA SCADENZA</h3>
+            <p>Hai <strong>7 giorni di tempo</strong> dalla ricezione della mail che ti ha portato su questa pagina per compilare il modulo di prenotazione. La mancata azione entro questo termine verrà considerata come una <strong>rinuncia formale e definitiva</strong> alla partecipazione dal vivo, senza possibilità di appello o recupero futuro.</p>
+            
+            <div class="countdown" id="countdown">
+                <div class="countdown-item">
+                    <span class="countdown-number" id="days">-</span>
+                    <span class="countdown-label">Giorni</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="hours">-</span>
+                    <span class="countdown-label">Ore</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="minutes">-</span>
+                    <span class="countdown-label">Minuti</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="seconds">-</span>
+                    <span class="countdown-label">Secondi</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <div id="message" class="message"></div>
+            
+            <form id="registrationForm">
+                <div class="form-group">
+                    <label for="nome">Nome *</label>
+                    <input type="text" id="nome" name="nome" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="cognome">Cognome *</label>
+                    <input type="text" id="cognome" name="cognome" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="telefono">Telefono *</label>
+                    <input type="tel" id="telefono" name="telefono" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="data_corso_apprendimentorapido">Data corso dal vivo Apprendimento Rapido *</label>
+                    <select id="data_corso_apprendimentorapido" name="data_corso_apprendimentorapido" required>
+                        <option value="">Seleziona una data</option>
+                        <option value="L'ho già frequentato!">L'ho già frequentato!</option>
+                        <option value="5-8 Febbraio 2026 a Roma">5-8 Febbraio 2026 a Roma</option>
+                        <option value="19-22 Marzo 2026 a Milano">19-22 Marzo 2026 a Milano</option>
+                        <option value="02-05 Luglio 2026 a Milano">02-05 Luglio 2026 a Milano</option>
+                        <option value="30 Luglio-02 Agosto 2026 Roma">30 Luglio-02 Agosto 2026 Roma</option>
+                        <option value="Rinuncio alla frequenza">Rinuncio alla frequenza</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="data_corso_life">Data corso dal vivo Life Emotion *</label>
+                    <select id="data_corso_life" name="data_corso_life" required>
+                        <option value="">Seleziona una data</option>
+                        <option value="L'ho già frequentato!">L'ho già frequentato!</option>
+                        <option value="30 Aprile - 04 Maggio 2026 a Perugia">30 Aprile - 04 Maggio 2026 a Perugia</option>
+                        <option value="08-12 Ottobre 2026 a Perugia">08-12 Ottobre 2026 a Perugia</option>
+                        <option value="Rinuncio alla frequenza">Rinuncio alla frequenza</option>
+                    </select>
+                </div>
+                
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" id="consenso" name="consenso" required>
+                    <label for="consenso">Dichiaro di aver letto le condizioni e mi impegno a rispettare la data scelta organizzando per tempo la mia partecipazione *</label>
+                </div>
+                
+                <button type="submit" class="submit-btn" id="submitBtn">Prenoto il mio posto!</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="container">
+            <h6>Contatti</h6>
+            <p>Via Gardiscia 10<br>
+            Rovio, (CH) 6821</p>
+            <p>
+                <a href="mailto:info@apprendimentorapido.it">Email: info@apprendimentorapido.it</a><br>
+                <a href="tel:+390240702168">Phone: +390240702168</a><br>
+                Hours: Lun-Ven 9:00-18:30
+            </p>
+            <p style="margin-top: 20px;">
+                <a href="https://www.iubenda.com/privacy-policy/89530968" target="_blank">Privacy Policy</a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // ===== CONFIGURAZIONE COUNTDOWN =====
+        // OPZIONE 1: Imposta una data specifica (formato: 'YYYY-MM-DD HH:MM:SS')
+        const DEADLINE_DATE = '2026-01-20 23:59:59'; // <-- CAMBIA QUESTA DATA
+        
+        // OPZIONE 2: Oppure usa "+7 giorni da ora" (lascia vuoto DEADLINE_DATE)
+        // const DEADLINE_DATE = null;
+        
+        // Countdown Timer
+        function updateCountdown() {
+            let deadline;
+            
+            if (DEADLINE_DATE && DEADLINE_DATE.trim() !== '') {
+                // Usa data specifica
+                deadline = new Date(DEADLINE_DATE).getTime();
+            } else {
+                // Usa +7 giorni da ora
+                deadline = new Date();
+                deadline.setDate(deadline.getDate() + 7);
+                deadline = deadline.getTime();
+            }
+            
+            const now = new Date().getTime();
+            const distance = deadline - now;
+            
+            if (distance < 0) {
+                document.getElementById('countdown').innerHTML = '<p style="color: white; font-size: 1.5em;">SCADUTO</p>';
+                return;
+            }
+            
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            // Aggiungi zero iniziale se necessario
+            const daysEl = document.getElementById('days');
+            const hoursEl = document.getElementById('hours');
+            const minutesEl = document.getElementById('minutes');
+            const secondsEl = document.getElementById('seconds');
+            
+            if (daysEl) daysEl.textContent = days;
+            if (hoursEl) hoursEl.textContent = hours.toString().padStart(2, '0');
+            if (minutesEl) minutesEl.textContent = minutes.toString().padStart(2, '0');
+            if (secondsEl) secondsEl.textContent = seconds.toString().padStart(2, '0');
+        }
+        
+        // Avvia countdown quando il DOM è pronto
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', function() {
+                updateCountdown();
+                setInterval(updateCountdown, 1000);
+            });
+        } else {
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+        }
+        
+        // Gestione form
+        document.getElementById('registrationForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const messageDiv = document.getElementById('message');
+            
+            // Disabilita bottone
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Invio in corso...';
+            
+            // Nascondi messaggi precedenti
+            messageDiv.className = 'message';
+            messageDiv.textContent = '';
+            
+            // Raccogli dati form
+            const formData = new FormData(this);
+            
+            // Aggiungi lista_id
+            formData.append('lista_id', '8e57c1de-d778-4f94-b999-bff07b14666a');
+            
+            // Converti in URL-encoded format
+            const urlEncodedData = new URLSearchParams(formData).toString();
+            
+            try {
+                const response = await fetch('https://api.apprendimentorapido.it/api/webhook/elementor', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: urlEncodedData
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    // Nascondi il form
+                    this.style.display = 'none';
+                    
+                    // Mostra messaggio di successo grande e chiaro
+                    messageDiv.className = 'message success show';
+                    messageDiv.innerHTML = `
+                        <h2 style="color: #155724; margin-bottom: 15px; font-size: 2em;">✅ Complimenti!</h2>
+                        <p style="font-size: 1.3em; margin-bottom: 10px;"><strong>I dati sono stati inviati con successo.</strong></p>
+                        <p style="font-size: 1.1em;">A breve riceverai una mail di conferma.</p>
+                    `;
+                    messageDiv.style.padding = '40px';
+                    messageDiv.style.textAlign = 'center';
+                    
+                    // Se c'è un redirect_url, reindirizza dopo 3 secondi
+                    if (result.redirect_url) {
+                        setTimeout(() => {
+                            window.location.href = result.redirect_url;
+                        }, 3000);
+                    }
+                } else {
+                    messageDiv.className = 'message error show';
+                    messageDiv.textContent = result.message || 'Si è verificato un errore. Riprova.';
+                }
+            } catch (error) {
+                console.error('Errore:', error);
+                messageDiv.className = 'message error show';
+                messageDiv.textContent = 'Errore di connessione. Verifica la tua connessione e riprova.';
+            } finally {
+                // Riabilita bottone
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Prenoto il mio posto!';
+                
+                // Scroll al messaggio
+                messageDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        });
+        
+        // Validazione telefono italiano
+        document.getElementById('telefono').addEventListener('input', function(e) {
+            // Rimuovi caratteri non numerici tranne + iniziale
+            this.value = this.value.replace(/[^\d+]/g, '');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1662 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://js.stripe.com https://api.whatsapp.com https://cdn.iubenda.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;">
+    <title>Master Eureka Black Friday - Solo 997€ | Apprendimento Rapido</title>
+    <meta name="description" content="Offerta Black Friday imperdibile: Master Eureka a 997€ invece di 4.997€. Solo 30 posti disponibili fino al 29 Novembre ore 14:00!">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Check if promo expired and redirect IMMEDIATELY -->
+    <script>
+        (function() {
+            // Deadline: 29 Novembre 2025 ore 14:00
+            const deadline = new Date('2025-11-29T14:00:00').getTime();
+            const now = new Date().getTime();
+            
+            // If expired, redirect immediately before page loads
+            if (now > deadline) {
+                window.location.replace('https://apprendimentorapido.it/master-eureka/');
+            }
+        })();
+    </script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: #1a202c;
+            background: #ffffff;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #3b82f6 100%);
+            color: white;
+            padding: 60px 20px 80px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255, 255, 255, 0.03) 10px,
+                rgba(255, 255, 255, 0.03) 20px
+            );
+            animation: slide 20s linear infinite;
+        }
+        
+        @keyframes slide {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+        
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.3) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(30, 64, 175, 0.3) 0%, transparent 50%);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-size: 15px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            animation: pulse-badge 2s infinite;
+            box-shadow: 0 8px 25px rgba(220, 38, 38, 0.5);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            z-index: 1;
+        }
+        
+        @keyframes pulse-badge {
+            0%, 100% { 
+                transform: scale(1);
+                box-shadow: 0 8px 25px rgba(220, 38, 38, 0.5);
+            }
+            50% { 
+                transform: scale(1.05);
+                box-shadow: 0 12px 35px rgba(220, 38, 38, 0.7);
+            }
+        }
+        
+        h1 {
+            font-size: 48px;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+        
+        .subtitle {
+            font-size: 24px;
+            font-weight: 500;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+        
+        .price-box {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            border: 3px solid rgba(255, 255, 255, 0.4);
+            border-radius: 25px;
+            padding: 40px;
+            margin: 40px 0;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .price-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+        
+        @keyframes shimmer {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(10%, 10%); }
+        }
+        
+        .old-price {
+            font-size: 32px;
+            text-decoration: line-through;
+            opacity: 0.7;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .new-price {
+            font-size: 90px;
+            font-weight: 900;
+            color: #fbbf24;
+            line-height: 1;
+            margin: 20px 0;
+            text-shadow: 0 8px 30px rgba(251, 191, 36, 0.5);
+            animation: glow 2s ease-in-out infinite;
+            position: relative;
+            z-index: 1;
+        }
+        
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 8px 30px rgba(251, 191, 36, 0.5); }
+            50% { text-shadow: 0 8px 40px rgba(251, 191, 36, 0.8); }
+        }
+        
+        .savings {
+            font-size: 22px;
+            font-weight: 700;
+            color: #ffffff;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 50px;
+            margin-top: 20px;
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+            position: relative;
+            z-index: 1;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        /* Countdown Timer */
+        .countdown-section {
+            margin: 40px 0;
+        }
+        
+        .countdown-title {
+            text-align: center;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.95;
+        }
+        
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .countdown-item {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            border-radius: 20px;
+            padding: 25px 20px;
+            min-width: 110px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .countdown-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .countdown-item:hover::before {
+            left: 100%;
+        }
+        
+        .countdown-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .countdown-number {
+            font-size: 56px;
+            font-weight: 900;
+            line-height: 1;
+            display: block;
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .countdown-label {
+            font-size: 13px;
+            text-transform: uppercase;
+            opacity: 0.95;
+            margin-top: 10px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Spots Countdown */
+        .spots-countdown {
+            background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 25px;
+            padding: 30px 40px;
+            margin: 30px auto;
+            max-width: 500px;
+            text-align: center;
+            box-shadow: 0 15px 50px rgba(220, 38, 38, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .spots-countdown::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 8s linear infinite;
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .spots-countdown-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .spots-title {
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            opacity: 0.95;
+        }
+        
+        .spots-number {
+            font-size: 80px;
+            font-weight: 900;
+            line-height: 1;
+            margin: 15px 0;
+            text-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+            animation: pulse-spots 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse-spots {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .spots-label {
+            font-size: 18px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        /* CTA Button */
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+            color: white;
+            padding: 22px 55px;
+            font-size: 22px;
+            font-weight: 800;
+            text-decoration: none;
+            border-radius: 50px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 15px 40px rgba(249, 115, 22, 0.5);
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .cta-button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .cta-button:hover {
+            background: linear-gradient(135deg, #ea580c 0%, #dc2626 100%);
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(249, 115, 22, 0.6);
+        }
+        
+        .cta-button:active {
+            transform: translateY(-2px) scale(1);
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 80px 20px;
+            background: #f9fafb;
+        }
+        
+        .section-title {
+            font-size: 42px;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 60px;
+            color: #1a202c;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+        
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 50px rgba(59, 130, 246, 0.2);
+            border-color: rgba(59, 130, 246, 0.2);
+        }
+        
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        
+        .feature-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #1e40af;
+        }
+        
+        .feature-description {
+            color: #4b5563;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        
+        /* What's Included */
+        .whats-included {
+            padding: 80px 20px;
+            background: white;
+        }
+        
+        .included-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .included-item {
+            display: flex;
+            align-items: start;
+            gap: 20px;
+            padding: 25px;
+            margin-bottom: 20px;
+            background: #f9fafb;
+            border-radius: 15px;
+            border-left: 4px solid #3b82f6;
+        }
+        
+        .check-icon {
+            color: #10b981;
+            font-size: 28px;
+            flex-shrink: 0;
+        }
+        
+        .included-content h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #1a202c;
+        }
+        
+        .included-content p {
+            color: #4b5563;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        
+        .included-content p + p {
+            margin-top: 10px;
+        }
+        
+        .included-content p strong {
+            color: #1a202c;
+            font-weight: 700;
+        }
+        
+        /* Phase sections */
+        .phase-section {
+            margin-bottom: 60px;
+            padding: 40px;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border-radius: 25px;
+            border: 2px solid #bae6fd;
+        }
+        
+        .phase-title {
+            font-size: 28px;
+            font-weight: 900;
+            color: #1e40af;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .phase-subtitle {
+            font-size: 20px;
+            font-weight: 600;
+            color: #3b82f6;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+        
+        .phase-description {
+            font-size: 17px;
+            line-height: 1.7;
+            color: #1e3a8a;
+            margin-bottom: 35px;
+            font-weight: 500;
+        }
+        
+        .phase-section .included-list {
+            background: transparent;
+        }
+        
+        .phase-section .included-item {
+            background: white;
+            border-left: 4px solid #3b82f6;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            padding: 80px 20px;
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .testimonial-card {
+            background: white;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        .testimonial-text {
+            font-size: 16px;
+            line-height: 1.7;
+            color: #374151;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .author-info h4 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1a202c;
+        }
+        
+        .author-info p {
+            font-size: 14px;
+            color: #6b7280;
+        }
+        
+        .stars {
+            color: #fbbf24;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        
+        /* Form Section */
+        .form-section {
+            padding: 80px 20px;
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            color: white;
+        }
+        
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 50px;
+            border-radius: 25px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+        }
+        
+        .form-container h2 {
+            color: #1a202c;
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .form-container p {
+            color: #4b5563;
+            text-align: center;
+            margin-bottom: 35px;
+            font-size: 16px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        label {
+            display: block;
+            color: #1a202c;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 15px;
+        }
+        
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"] {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            font-size: 16px;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+        
+        .submit-button {
+            width: 100%;
+            background: #f97316;
+            color: white;
+            padding: 18px;
+            font-size: 18px;
+            font-weight: 700;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+        
+        .submit-button:hover {
+            background: #ea580c;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(249, 115, 22, 0.3);
+        }
+        
+        .spots-left {
+            text-align: center;
+            margin-top: 25px;
+            color: #dc2626;
+            font-weight: 700;
+            font-size: 16px;
+        }
+        
+        .consent-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin: 25px 0;
+            padding: 20px;
+            background: #fffbeb;
+            border-radius: 12px;
+            border: 2px solid #fbbf24;
+        }
+        
+        .consent-group input[type="checkbox"] {
+            margin-top: 4px;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+        
+        .consent-group label {
+            color: #1a202c;
+            font-size: 13px;
+            line-height: 1.6;
+            cursor: pointer;
+            margin: 0;
+        }
+        
+        .consent-group label strong {
+            font-weight: 700;
+        }
+        
+        /* Footer */
+        footer {
+            background: #1a202c;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        
+        footer a {
+            color: #60a5fa;
+            text-decoration: none;
+        }
+        
+        footer a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 36px;
+            }
+            
+            .subtitle {
+                font-size: 18px;
+            }
+            
+            .new-price {
+                font-size: 56px;
+            }
+            
+            .countdown-item {
+                min-width: 80px;
+                padding: 15px;
+            }
+            
+            .countdown-number {
+                font-size: 36px;
+            }
+            
+            .section-title {
+                font-size: 32px;
+            }
+            
+            .form-container {
+                padding: 30px 25px;
+            }
+        }
+        
+        .urgency-banner {
+            background: #dc2626;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            font-weight: 700;
+            font-size: 16px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* Enhanced Services List in Price Box */
+        .services-list-compact {
+            margin: 30px 0;
+            padding: 40px 35px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(240, 249, 255, 0.98) 100%);
+            border-radius: 20px;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 8px 30px rgba(30, 64, 175, 0.15);
+            border: 2px solid rgba(59, 130, 246, 0.3);
+        }
+        
+        .services-list-compact::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 20px;
+            padding: 2px;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0.3;
+            pointer-events: none;
+        }
+        
+        .services-list-compact h3 {
+            font-size: 22px;
+            font-weight: 800;
+            color: #1e40af;
+            margin-bottom: 30px;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 4px rgba(30, 64, 175, 0.1);
+        }
+        
+        .compact-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px 20px;
+            margin-bottom: 25px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .compact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 16px;
+            color: #1a202c;
+            font-weight: 600;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(59, 130, 246, 0.1);
+        }
+        
+        .compact-item:hover {
+            transform: translateX(5px);
+            background: rgba(59, 130, 246, 0.08);
+            border-color: rgba(59, 130, 246, 0.3);
+        }
+        
+        .compact-item .check {
+            color: #10b981;
+            font-size: 20px;
+            flex-shrink: 0;
+            font-weight: 900;
+        }
+        
+        .compact-extras {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 25px;
+            padding-top: 25px;
+            border-top: 2px solid rgba(59, 130, 246, 0.15);
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .compact-badge {
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+            color: #1e40af;
+            padding: 14px 18px;
+            border-radius: 15px;
+            font-size: 14px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(59, 130, 246, 0.2);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1);
+        }
+        
+        .compact-badge:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.2);
+            background: linear-gradient(135deg, #bfdbfe 0%, #93c5fd 100%);
+        }
+        
+        .compact-badge .icon {
+            font-size: 20px;
+        }
+        
+        /* FAQ Section */
+        .faq-section {
+            padding: 80px 20px;
+            background: #f9fafb;
+        }
+        
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            background: white;
+            margin-bottom: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .faq-item:hover {
+            border-color: #3b82f6;
+            box-shadow: 0 6px 25px rgba(59, 130, 246, 0.15);
+        }
+        
+        .faq-question {
+            padding: 25px 30px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            background: white;
+            transition: all 0.3s ease;
+        }
+        
+        .faq-question:hover {
+            background: #f0f9ff;
+        }
+        
+        .faq-question h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1a202c;
+            margin: 0;
+            flex: 1;
+        }
+        
+        .faq-icon {
+            font-size: 24px;
+            color: #3b82f6;
+            font-weight: 700;
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+        }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+            padding: 0 30px;
+        }
+        
+        .faq-answer p {
+            color: #4b5563;
+            font-size: 16px;
+            line-height: 1.7;
+            padding-bottom: 25px;
+        }
+        
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            padding: 0 30px;
+        }
+        
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+        
+        @media (max-width: 768px) {
+            .compact-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            
+            .compact-item {
+                font-size: 14px;
+                padding: 10px 12px;
+            }
+            
+            .services-list-compact {
+                padding: 25px 20px;
+            }
+            
+            .services-list-compact h3 {
+                font-size: 18px;
+                margin-bottom: 20px;
+            }
+            
+            .compact-extras {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            
+            .compact-badge {
+                padding: 12px 15px;
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Urgency Banner -->
+    <div class="urgency-banner">
+        <a href="#prenota" style="color: white; text-decoration: none; display: block;">⚡ OFFERTA BLACK FRIDAY: Solo 30 posti disponibili - Scade Sabato 29 Novembre ore 14:00!</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <a href="#prenota" style="text-decoration: none;"><div class="badge">🔥 Black Friday - Solo 30 Posti</div></a>
+            <h1>Trasforma la Tua Vita<br>con il Master Eureka</h1>
+            <p class="subtitle">Perché trasforma tutto: la mente, le emozioni, il modo di studiare, di comunicare, di decidere chi vuoi essere.</p>
+            
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="#cosa-include" class="cta-button">Scopri Come Funziona</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Perché il Master Eureka è Unico</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3 class="feature-title">Risultati in 12 Giorni</h3>
+                    <p class="feature-description">Un percorso intensivo che ti garantisce risultati concreti e misurabili in meno di due settimane.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3 class="feature-title">Produttività +300%</h3>
+                    <p class="feature-description">Triplica la tua capacità di apprendimento e leggi 3 volte più velocemente mantenendo la comprensione.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🧠</div>
+                    <h3 class="feature-title">Memoria Infallibile</h3>
+                    <p class="feature-description">Tecniche avanzate per memorizzare qualsiasi informazione: date, formule, lingue, codici e molto altro.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📚</div>
+                    <h3 class="feature-title">Sintesi Professionale</h3>
+                    <p class="feature-description">Sintetizza 14.000 pagine in 40 fogli. 500 pagine in 10 fogli. Massima efficienza garantita.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">💪</div>
+                    <h3 class="feature-title">Crescita Personale</h3>
+                    <p class="feature-description">Supera blocchi mentali, gestisci emozioni e sblocca il tuo vero potenziale con Life Emotion.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🏆</div>
+                    <h3 class="feature-title">40.000+ Successi</h3>
+                    <p class="feature-description">Oltre 40.000 studenti e professionisti hanno trasformato la loro vita con il nostro metodo.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What's Included -->
+    <section class="whats-included" id="cosa-include">
+        <div class="container">
+            <h2 class="section-title">Il Servizio Completo del Master Eureka Comprende</h2>
+            
+            <!-- FASE 1 -->
+            <div class="phase-section">
+                <h3 class="phase-title">FASE 1 — IL POTENZIAMENTO DELL'APPRENDIMENTO</h3>
+                <p class="phase-subtitle">(Mente al 100% — il tuo nuovo livello di performance)</p>
+                <p class="phase-description">Questa fase è costruita per fare una cosa molto precisa: triplicare la tua capacità di apprendimento in pochi giorni e darti quella elasticità mentale necessaria oggi nella vita professionale.</p>
+                
+                <div class="included-list">
+                    <div class="included-item">
+                        <div class="check-icon">✓</div>
+                        <div class="included-content">
+                            <h3>4 GIORNATE DAL VIVO — 40 ore in aula</h3>
+                            <p>Una full immersion di 4 giorni, dal giovedì alla domenica, che cambia la testa. Lavoreremo sull'Apprendimento Rapido con il metodo Education – Entertainment – Empowerment, così da trasformare la teoria in abilità concrete nel giro di poche ore.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="included-item">
+                        <div class="check-icon">✓</div>
+                        <div class="included-content">
+                            <h3>68 VIDEO LEZIONI ON-DEMAND</h3>
+                            <p>Qui trovi le fondamenta: Tecniche di memoria, Lettura veloce, Mappe mentali, Tecniche di sintesi. Potrai collegarti con 3 dispositivi diversi e ogni lezione ha un quiz finale: non impari guardando, impari facendo.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="included-item">
+                        <div class="check-icon">✓</div>
+                        <div class="included-content">
+                            <h3>12 WEBINAR DIDATTICI INTERATTIVI</h3>
+                            <p>Appuntamenti di 2 ore in diretta Zoom ogni lunedì sera alle 21:00. Attraverso l'interazione con i nostri docenti ti permetteranno di chiarire dubbi, fare esercizi, applicare il metodo. È come avere una classe che ti accompagna ogni settimana.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- FASE 2 -->
+            <div class="phase-section">
+                <h3 class="phase-title">FASE 2 — PSICOLOGIA E STRATEGIE AVANZATE</h3>
+                <p class="phase-subtitle">(La parte che cambia la tua vita, non solo la tua mente)</p>
+                <p class="phase-description">Questa fase è pensata per una cosa che quasi nessuno insegna: liberare il gigante che vive dentro di te e togliere quelle zavorre emotive che ti frenano senza che tu te ne accorga.</p>
+                
+                <div class="included-list">
+                    <div class="included-item">
+                        <div class="check-icon">✓</div>
+                        <div class="included-content">
+                            <h3>5 GIORNI INTENSIVI - LIFE EMOTION</h3>
+                            <p>Un'esperienza focalizzata sulla crescita personale, dove imparerai: come gestire gli STATI D'ANIMO e usarli per raggiungere i tuoi OBIETTIVI; come gestire le EMOZIONI in modo produttivo; i 6 BISOGNI UMANI e le strategie per soddisfarli; come liberarsi dagli AUTO-SABOTAGGI; come focalizzare il tuo impegno con la DOMANDA GUIDA; come trovare la tua MISSION PERSONALE; come trasformare le esperienze negative in ESPERIENZE POSITIVE; come risolvere i CONFLITTI INTERIORI e di relazione.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="included-item">
+                        <div class="check-icon">✓</div>
+                        <div class="included-content">
+                            <h3>3 CORSI SPECIALI (6 ore ciascuno su Zoom)</h3>
+                            <p><strong>Gestione del Tempo:</strong> Per sviluppare un approccio proattivo, saper scegliere cosa fare e quando, per essere padrone del tuo tempo e non esserne vittima.</p>
+                            <p><strong>Lingue Straniere:</strong> Per imparare una lingua senza blocchi, grazie alle tecniche di apprendimento e alla gestione emozionale legata alla paura di parlare.</p>
+                            <p><strong>Tecniche del Colloquio:</strong> Comunicazione efficace, sicurezza, leadership. Imparerai i segreti della comunicazione efficace per gestire le distanze dagli altri e ottenere tutto ciò che desideri sia nella vita professionale che in quella personale.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- QUALITÀ E GARANZIE -->
+            <div class="phase-section" style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border: 2px solid #fbbf24;">
+                <h3 class="phase-title" style="color: #92400e;">QUALITÀ E GARANZIE</h3>
+                <p class="phase-subtitle" style="color: #b45309;">(Il nostro impegno per il tuo successo)</p>
+                <p class="phase-description" style="color: #78350f;">Sappiamo quanto sia importante per te investire in un percorso di qualità. Per questo mettiamo al centro la tua esperienza e i tuoi risultati con garanzie concrete.</p>
+                
+                <div class="included-list">
+                    <div class="included-item" style="background: white; border-left-color: #f59e0b;">
+                        <div class="check-icon" style="color: #f59e0b;">✓</div>
+                        <div class="included-content">
+                            <h3>POSTI LIMITATI IN AULA</h3>
+                            <p>Lavoriamo con classi sotto le 25 persone per garantire un'attenzione personalizzata. Ogni partecipante riceve il supporto necessario per applicare al meglio le tecniche apprese. Qualità prima di quantità.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="included-item" style="background: white; border-left-color: #f59e0b;">
+                        <div class="check-icon" style="color: #f59e0b;">✓</div>
+                        <div class="included-content">
+                            <h3>CHAT INTERATTIVA H24</h3>
+                            <p>Potrai parlare con noi in qualsiasi momento e chiedere aiuto attraverso la nostra chat dedicata. Che tu stia seguendo i video, applicando il metodo o avendo dubbi, il nostro team è sempre disponibile per supportarti nel tuo percorso.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="included-item" style="background: white; border-left-color: #f59e0b;">
+                        <div class="check-icon" style="color: #f59e0b;">✓</div>
+                        <div class="included-content">
+                            <h3>1 ANNO DI ACCESSO COMPLETO</h3>
+                            <p>Avrai accesso a tutti i servizi, sia in aula che online, per un anno intero. Questo ti dà tutto il tempo necessario per seguire il percorso con tranquillità, conciliandolo con i tuoi impegni personali e professionali. Massima flessibilità e disponibilità da parte nostra.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="included-item" style="background: white; border-left-color: #f59e0b;">
+                        <div class="check-icon" style="color: #f59e0b;">✓</div>
+                        <div class="included-content">
+                            <h3>MATERIALE DIDATTICO COMPLETO</h3>
+                            <p>Riceverai tutto il materiale didattico necessario per seguire e rivedere le lezioni, esercitarti e applicare le tecniche nella tua vita quotidiana. Risorse complete per garantire il tuo successo.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="included-item" style="background: white; border-left-color: #f59e0b;">
+                        <div class="check-icon" style="color: #f59e0b;">✓</div>
+                        <div class="included-content">
+                            <h3>DIPLOMA DI PARTECIPAZIONE</h3>
+                            <p>Al termine del percorso riceverai un Diploma di Partecipazione ufficiale. Un riconoscimento importante da aggiungere al tuo curriculum che testimonia l'acquisizione di soft skills fondamentali per la tua crescita professionale e personale.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing-section" style="background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%); padding: 80px 0; margin: 0;">
+        <div class="container" style="text-align: center;">
+            <h2 style="color: white; font-size: 42px; font-weight: 900; margin-bottom: 20px;">Offerta Esclusiva Black Friday</h2>
+            <p style="color: #bfdbfe; font-size: 20px; margin-bottom: 50px;">Tutto Questo a un Prezzo Straordinario</p>
+            
+            <div class="price-box">
+                <!-- Compact Services List -->
+                <div class="services-list-compact">
+                    <h3>📦 Tutto Incluso nell'Offerta</h3>
+                    <div class="compact-grid">
+                        <div class="compact-item">
+                            <span class="check">✓</span>
+                            <span>68 Video Lezioni</span>
+                        </div>
+                        <div class="compact-item">
+                            <span class="check">✓</span>
+                            <span>12 Dirette Live</span>
+                        </div>
+                        <div class="compact-item">
+                            <span class="check">✓</span>
+                            <span>Corso in Aula (4gg)</span>
+                        </div>
+                        <div class="compact-item">
+                            <span class="check">✓</span>
+                            <span>Life Emotion (5gg)</span>
+                        </div>
+                        <div class="compact-item">
+                            <span class="check">✓</span>
+                            <span>Gestione Tempo (6h)</span>
+                        </div>
+                        <div class="compact-item">
+                            <span class="check">✓</span>
+                            <span>Lingue Straniere (6h)</span>
+                        </div>
+                        <div class="compact-item">
+                            <span class="check">✓</span>
+                            <span>Tecniche Colloquio (6h)</span>
+                        </div>
+                    </div>
+                    <div class="compact-extras">
+                        <div class="compact-badge">
+                            <span class="icon">💬</span> Chat Interattiva
+                        </div>
+                        <div class="compact-badge">
+                            <span class="icon">📅</span> 1 Anno Accesso
+                        </div>
+                        <div class="compact-badge">
+                            <span class="icon">🎓</span> Diploma
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="old-price">Prezzo di listino: <span style="text-decoration: line-through;">4.997€</span></div>
+                <div class="new-price">997€</div>
+                <div class="savings">✨ Risparmi 4.000€</div>
+            </div>
+            
+            <!-- Countdown Timer -->
+            <div class="countdown-section">
+                <div class="countdown-title">⏰ L'Offerta Scade Tra:</div>
+                <div class="countdown" id="countdown">
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="days">0</span>
+                        <span class="countdown-label">Giorni</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="hours">0</span>
+                        <span class="countdown-label">Ore</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="minutes">0</span>
+                        <span class="countdown-label">Minuti</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="seconds">0</span>
+                        <span class="countdown-label">Secondi</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Spots Countdown -->
+            <div class="spots-countdown">
+                <div class="spots-countdown-content">
+                    <div class="spots-title">🔥 Posti Rimasti</div>
+                    <div class="spots-number" id="spotsRemaining">30</div>
+                    <div class="spots-label">su 30 Totali</div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="#prenota" class="cta-button" style="background: white; color: #1e40af; font-size: 24px; padding: 20px 60px;">Prenota il Tuo Posto Ora</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title">Storie di Successo Reali</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text">"Ho sintetizzato 14.000 pagine di atti in 40 mappe mentali in soli sei mesi e sono diventata notaio. Il Master Eureka ha trasformato il mio approccio allo studio."</p>
+                    <div class="testimonial-author">
+                        <div class="author-info">
+                            <h4>Francesca Riboldi</h4>
+                            <p>Notaio</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text">"Dopo il Master ho superato 5 esami in una sessione, di cui uno preparato in sole 8 ore! Non avrei mai creduto fosse possibile."</p>
+                    <div class="testimonial-author">
+                        <div class="author-info">
+                            <h4>Eva Vigato</h4>
+                            <p>Avvocato Penalista</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text">"Come imprenditore, il ROI di questo corso è stato straordinario. Ho recuperato l'investimento in poche settimane grazie alla maggiore efficienza."</p>
+                    <div class="testimonial-author">
+                        <div class="author-info">
+                            <h4>Marco Cavazzoni</h4>
+                            <p>Imprenditore e Veterinario</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Form Section -->
+    <section class="form-section" id="prenota">
+        <div class="container">
+            <div class="form-container">
+                <h2>Prenota il Tuo Posto</h2>
+                <p>Compila il form per assicurarti uno dei 30 posti disponibili a 997€</p>
+                
+                <form id="bookingForm" onsubmit="handleSubmit(event)">
+                    <div class="form-group">
+                        <label for="nome">Nome *</label>
+                        <input type="text" id="nome" name="nome" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="cognome">Cognome *</label>
+                        <input type="text" id="cognome" name="cognome" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="telefono">Numero di Telefono *</label>
+                        <input type="tel" id="telefono" name="telefono" required>
+                    </div>
+                    
+                    <div class="consent-group">
+                        <input type="checkbox" id="consent" required aria-label="Accettazione privacy">
+                        <label for="consent"><strong>Accettazione *</strong><br>
+                            Cliccando sul pulsante "CONFERMA PRENOTAZIONE", Lei dichiara di aver preso visione dell'informativa privacy – ai sensi degli art. 6 e 19 LPD (CH) │ 12 e 13 GDPR (EU) e acconsente al trattamento dei dati personali per finalità di marketing diretto di Apprendimento Rapido.
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="submit-button">Conferma Prenotazione</button>
+                    
+                    <div class="spots-left">⚠️ Solo <strong id="spotsLeft">30</strong> posti rimasti!</div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <h2 class="section-title">Domande Frequenti</h2>
+            <div class="faq-container">
+                <!-- FAQ 1 -->
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>Come si struttura il corso? È online o in presenza?</h3>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Il Master Eureka offre una modalità ibrida: potrai accedere a lezioni registrate per lo studio autonomo, partecipare a sessioni interattive in diretta, e, per un'esperienza più immersiva, frequentare lezioni in presenza presso le nostre sedi. In questo modo, hai la flessibilità di scegliere la modalità che meglio si adatta alle tue esigenze.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ 2 -->
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>Posso iscrivermi e ottenere risultati anche se ho poco tempo a disposizione?</h3>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Assolutamente! Il Master Eureka è progettato per adattarsi a chi ha poco tempo. La flessibilità del corso ti permette di organizzare lo studio secondo le tue esigenze, così da ottenere risultati senza stravolgere la tua routine.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ 3 -->
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>Il Master Eureka è adatto anche agli studenti?</h3>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Sì, il Master Eureka è ideale per studenti a partire dagli 8 anni. Le tecniche di apprendimento rapido sono perfette per chi deve prepararsi agli esami o affrontare volumi elevati di studio in tempi brevi. La Fase 2 del corso, focalizzata sulla crescita personale, è consigliata a partire dai 16 anni.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ 4 -->
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>Quanto tempo dovrò dedicare al percorso?</h3>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Il Master Eureka è flessibile e può essere seguito secondo i tuoi ritmi. Tuttavia, per ottenere risultati concreti, è consigliato un impegno costante. Suggeriamo di iniziare dedicando almeno 30 minuti al giorno per praticare le tecniche apprese.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ 5 -->
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>Sarò seguito/a durante il percorso?</h3>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Durante tutto il percorso, avrai accesso a un supporto dedicato. Forniamo tutor personali, sessioni di gruppo e materiali extra per assicurarti di applicare correttamente le tecniche e superare eventuali ostacoli.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ 6 -->
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>Posso applicare subito ciò che imparo nel Master Eureka?</h3>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Sì, già dai primi moduli avrai a disposizione strumenti pratici che potrai immediatamente mettere in pratica nella tua vita quotidiana e professionale. Il corso è pensato per offrire risultati concreti fin da subito, grazie all'approccio altamente operativo.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ 7 -->
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>Cosa succede dopo aver completato la prenotazione?</h3>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Dopo aver confermato la prenotazione, riceverai immediatamente un'email di conferma con tutti i dettagli per completare il pagamento. Avrai 1 ora di tempo per finalizzare l'acquisto tramite carta di credito o prepagata o Bonifico Bancario. Una volta completato il pagamento, riceverai tutte le informazioni per accedere al Master Eureka e iniziare il tuo percorso di trasformazione.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ 8 -->
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>Quando e dove si terranno i corsi dal vivo?</h3>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p><strong>Sedi e Frequenza:</strong> I nostri corsi dal vivo si tengono ogni mese in diverse città, principalmente a Roma o Milano.</p>
+                        <p><strong>Accesso al Calendario Completo:</strong> Non appena avrai completato l'iscrizione, avrai accesso immediato al nostro calendario completo con tutte le date disponibili nell'arco dell'anno 2026, permettendoti di pianificare con anticipo.</p>
+                        <p><strong>Pianificazione Personalizzata:</strong> Entro 48 ore dalla tua iscrizione, sarai contattato personalmente dal nostro team. Insieme, potrete scegliere e concordare la data e la sede del corso dal vivo più funzionale e comoda per le tue esigenze.</p>
+                        <p><strong>Inizia Subito Online:</strong> Nel frattempo, e in attesa della data del corso dal vivo, potrai usufruire immediatamente di tutti i nostri contenuti e servizi online per iniziare subito il tuo percorso formativo e ottenere i primi risultati senza attese.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>© 2024 Apprendimento Rapido - Tutti i diritti riservati</p>
+            <p style="margin-top: 15px;">
+                <a href="mailto:info@apprendimentorapido.it">info@apprendimentorapido.it</a> | 
+                <a href="tel:+390240702168">+39 02 4070 2168</a>
+            </p>
+            <p style="margin-top: 10px; font-size: 14px; opacity: 0.8;">
+                Via Gardiscia 10, Rovio (CH) 6821
+            </p>
+            <p style="margin-top: 20px; font-size: 13px;">
+                <a href="https://www.iubenda.com/privacy-policy/89530968" class="iubenda-nostyle no-brand iubenda-noiframe iubenda-embed iubenda-noiframe" title="Privacy Policy" style="color: #60a5fa; text-decoration: none; margin: 0 10px;">Privacy Policy</a> | 
+                <a href="https://www.iubenda.com/privacy-policy/89530968/cookie-policy" class="iubenda-nostyle no-brand iubenda-noiframe iubenda-embed iubenda-noiframe" title="Cookie Policy" style="color: #60a5fa; text-decoration: none; margin: 0 10px;">Cookie Policy</a> | 
+                <a href="https://www.iubenda.com/termini-e-condizioni/89530968" class="iubenda-nostyle iubenda-noiframe iubenda-embed iubenda-noiframe" title="Termini e Condizioni" style="color: #60a5fa; text-decoration: none; margin: 0 10px;">Termini e Condizioni</a>
+            </p>
+        </div>
+    </footer>
+    
+    <!-- Iubenda Scripts -->
+    <script type="text/javascript">
+        (function (w,d) {
+            var loader = function () {
+                var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; 
+                s.src="https://cdn.iubenda.com/iubenda.js"; 
+                tag.parentNode.insertBefore(s,tag);
+            }; 
+            if(w.addEventListener){
+                w.addEventListener("load", loader, false);
+            }else if(w.attachEvent){
+                w.attachEvent("onload", loader);
+            }else{
+                w.onload = loader;
+            }
+        })(window, document);
+    </script>
+
+    <script>
+        // Countdown Timer
+        function updateCountdown() {
+            const deadline = new Date('November 29, 2025 14:00:00').getTime();
+            const now = new Date().getTime();
+            const difference = deadline - now;
+            
+            if (difference > 0) {
+                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+                
+                document.getElementById('days').textContent = String(days).padStart(2, '0');
+                document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+                document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+                document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+            } else {
+                document.getElementById('countdown').innerHTML = '<p style="font-size: 24px; font-weight: 700;">Offerta Scaduta</p>';
+            }
+        }
+        
+        // Update countdown every second
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+        
+        // Backend API URL
+        const API_URL = 'https://blackfriday-2025.onrender.com/api';
+        
+        // Real spots counter from database
+        let spotsLeft = 30;
+        
+        // Fetch real spots from backend
+        async function fetchSpots() {
+            try {
+                const response = await fetch(`${API_URL}/spots-left`);
+                const data = await response.json();
+                spotsLeft = data.spots_available;
+                updateSpotsDisplay();
+            } catch (error) {
+                console.error('Error fetching spots:', error);
+                // Fallback to localStorage if API fails
+                const savedSpots = localStorage.getItem('spotsLeft');
+                if (savedSpots) {
+                    spotsLeft = parseInt(savedSpots);
+                    updateSpotsDisplay();
+                }
+            }
+        }
+        
+        // Update spots display
+        function updateSpotsDisplay() {
+            document.getElementById('spotsRemaining').textContent = spotsLeft;
+            document.getElementById('spotsLeft').textContent = spotsLeft;
+        }
+        
+        // Fetch spots on load and every 10 seconds
+        fetchSpots();
+        setInterval(fetchSpots, 10000); // Update every 10 seconds
+        
+        // Form submission handler
+        async function handleSubmit(event) {
+            event.preventDefault();
+            
+            const formData = {
+                nome: document.getElementById('nome').value,
+                cognome: document.getElementById('cognome').value,
+                email: document.getElementById('email').value,
+                telefono: document.getElementById('telefono').value
+            };
+            
+            // Disable submit button
+            const submitBtn = event.target.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Invio in corso...';
+            submitBtn.disabled = true;
+            
+            try {
+                // Send to backend
+                const response = await fetch(`${API_URL}/bookings`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    // Store in localStorage for thank you page
+                    const bookingData = {
+                        ...formData,
+                        timestamp: new Date().toISOString(),
+                        offerta: 'Black Friday 997€',
+                        booking_id: result.booking_id
+                    };
+                    localStorage.setItem('bookingData', JSON.stringify(bookingData));
+                    
+                    // Update spots
+                    spotsLeft = result.spots_available;
+                    updateSpotsDisplay();
+                    
+                    // Redirect to thank you page
+                    window.location.href = 'grazie.html';
+                } else {
+                    // Check if it's a duplicate email error
+                    if (result.already_registered) {
+                        alert('⚠️ ' + result.message + '\n\nSe hai bisogno di modificare i tuoi dati, contattaci a:\npagamenti@apprendimentorapido.it');
+                    } else {
+                        alert(result.message || 'Errore nella prenotazione. Riprova.');
+                    }
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                }
+            } catch (error) {
+                console.error('Error submitting booking:', error);
+                alert('Errore di connessione. Verifica la connessione e riprova.');
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }
+        }
+        
+        // Smooth scroll for CTA
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+        
+        // FAQ Toggle Function
+        function toggleFAQ(element) {
+            const faqItem = element.parentElement;
+            const wasActive = faqItem.classList.contains('active');
+            
+            // Close all FAQ items
+            document.querySelectorAll('.faq-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Open clicked item if it wasn't already active
+            if (!wasActive) {
+                faqItem.classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>

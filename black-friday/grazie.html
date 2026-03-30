@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://api.whatsapp.com https://cdn.iubenda.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;">
+    <title>Grazie per la Tua Prenotazione | Master Eureka</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: #1a202c;
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 700px;
+            width: 100%;
+            background: white;
+            border-radius: 30px;
+            padding: 60px 50px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            animation: slideUp 0.6s ease-out;
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .success-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            font-size: 50px;
+            color: white;
+            animation: scaleIn 0.5s ease-out 0.3s both;
+        }
+        
+        @keyframes scaleIn {
+            from {
+                transform: scale(0);
+            }
+            to {
+                transform: scale(1);
+            }
+        }
+        
+        h1 {
+            font-size: 42px;
+            font-weight: 900;
+            color: #1a202c;
+            margin-bottom: 20px;
+        }
+        
+        .subtitle {
+            font-size: 20px;
+            color: #4b5563;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+        
+        .info-box {
+            background: #f0fdf4;
+            border: 2px solid #86efac;
+            border-radius: 20px;
+            padding: 30px;
+            margin: 40px 0;
+            text-align: left;
+        }
+        
+        .info-box h3 {
+            color: #166534;
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .info-item {
+            padding: 15px 0;
+            border-bottom: 1px solid #d1fae5;
+        }
+        
+        .info-item:last-child {
+            border-bottom: none;
+        }
+        
+        .info-label {
+            font-weight: 600;
+            color: #166534;
+            margin-bottom: 5px;
+        }
+        
+        .info-value {
+            color: #374151;
+            font-size: 16px;
+        }
+        
+        .next-steps {
+            background: #eff6ff;
+            border-radius: 20px;
+            padding: 35px;
+            margin: 30px 0;
+            text-align: left;
+        }
+        
+        .next-steps h3 {
+            color: #1e40af;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .step {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 25px;
+            align-items: start;
+        }
+        
+        .step-number {
+            background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        
+        .step-content {
+            flex: 1;
+        }
+        
+        .step-content h4 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1a202c;
+            margin-bottom: 5px;
+        }
+        
+        .step-content p {
+            color: #4b5563;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: #f97316;
+            color: white;
+            padding: 18px 40px;
+            font-size: 18px;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            box-shadow: 0 10px 30px rgba(249, 115, 22, 0.3);
+        }
+        
+        .cta-button:hover {
+            background: #ea580c;
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(249, 115, 22, 0.4);
+        }
+        
+        .contact-info {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid #e5e7eb;
+            color: #6b7280;
+            font-size: 15px;
+        }
+        
+        .contact-info a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Payment Section */
+        .payment-section {
+            margin: 40px 0;
+            padding: 40px;
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            border-radius: 25px;
+            border: 3px solid #86efac;
+        }
+        
+        .payment-title {
+            text-align: center;
+            font-size: 28px;
+            font-weight: 800;
+            color: #166534;
+            margin-bottom: 15px;
+        }
+        
+        .payment-countdown {
+            background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(220, 38, 38, 0.3);
+        }
+        
+        .payment-countdown-text {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .payment-timer {
+            font-size: 48px;
+            font-weight: 900;
+            line-height: 1;
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .payment-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .payment-option {
+            background: white;
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 3px solid transparent;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .payment-option:hover {
+            border-color: #3b82f6;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(59, 130, 246, 0.2);
+        }
+        
+        .payment-option.selected {
+            border-color: #10b981;
+            background: #f0fdf4;
+        }
+        
+        .payment-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .payment-name {
+            font-size: 22px;
+            font-weight: 700;
+            color: #1a202c;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        
+        .payment-description {
+            font-size: 14px;
+            color: #6b7280;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .payment-button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .payment-button:hover {
+            background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
+            transform: translateY(-2px);
+        }
+        
+        .bank-details {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background: #f9fafb;
+            border-radius: 12px;
+            border-left: 4px solid #3b82f6;
+        }
+        
+        .bank-details.show {
+            display: block;
+        }
+        
+        .bank-detail-item {
+            margin-bottom: 15px;
+        }
+        
+        .bank-detail-label {
+            font-weight: 600;
+            color: #1a202c;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        
+        .bank-detail-value {
+            font-size: 16px;
+            color: #374151;
+            font-family: 'Courier New', monospace;
+            background: white;
+            padding: 10px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .copy-button {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 5px 15px;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        
+        .copy-button:hover {
+            background: #1e40af;
+        }
+        
+        .upload-section {
+            margin-top: 20px;
+            padding: 30px;
+            background: #f0fdf4;
+            border-radius: 15px;
+            border: 2px solid #86efac;
+        }
+        
+        .upload-title {
+            font-weight: 700;
+            color: #166534;
+            margin-bottom: 15px;
+            font-size: 20px;
+            text-align: center;
+        }
+        
+        .stripe-container {
+            text-align: center;
+            padding: 20px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 25px;
+            }
+            
+            h1 {
+                font-size: 32px;
+            }
+            
+            .subtitle {
+                font-size: 18px;
+            }
+            
+            .info-box,
+            .next-steps,
+            .payment-section {
+                padding: 25px 20px;
+            }
+            
+            .payment-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .payment-timer {
+                font-size: 36px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="success-icon">✓</div>
+        
+        <h1>Prenotazione Confermata!</h1>
+        <p class="subtitle">Complimenti! Hai appena fatto il primo passo verso la trasformazione della tua vita con il Master Eureka.</p>
+        
+        <div class="info-box">
+            <h3>📋 I Tuoi Dati</h3>
+            <div class="info-item">
+                <div class="info-label">Nome e Cognome</div>
+                <div class="info-value" id="fullName">-</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Email</div>
+                <div class="info-value" id="email">-</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Telefono</div>
+                <div class="info-value" id="telefono">-</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Offerta</div>
+                <div class="info-value" style="color: #059669; font-weight: 700;">Black Friday - 997€ (Risparmi 4.000€)</div>
+            </div>
+        </div>
+        
+        <!-- Payment Section -->
+        <div class="payment-section">
+            <h2 class="payment-title">💳 Completa il Tuo Pagamento</h2>
+            
+            <div class="payment-countdown">
+                <div class="payment-countdown-text">⏰ Completa il Pagamento Entro:</div>
+                <div class="payment-timer" id="paymentTimer">59:59</div>
+            </div>
+            
+            <p style="text-align: center; color: #166534; font-size: 16px; margin-bottom: 30px;">
+                <strong>Scegli il tuo metodo di pagamento preferito:</strong>
+            </p>
+            
+            <div class="payment-options">
+                <!-- Stripe Payment -->
+                <div class="payment-option" id="stripeOption">
+                    <div class="payment-icon">💳</div>
+                    <div class="payment-name">Carta di Credito/Debito</div>
+                    <div class="payment-description">Pagamento istantaneo e sicuro con Stripe</div>
+                    <button class="payment-button" onclick="goToStripeCheckout()">Paga con Carta</button>
+                </div>
+                
+                <!-- Bank Transfer -->
+                <div class="payment-option" id="bankOption">
+                    <div class="payment-icon">🏦</div>
+                    <div class="payment-name">Bonifico Bancario</div>
+                    <div class="payment-description">Bonifico immediato o tradizionale</div>
+                    <button class="payment-button" onclick="selectBank()">Paga con Bonifico</button>
+                    
+                    <div id="bankDetails" class="bank-details">
+                        <h4 style="margin-bottom: 20px; color: #1a202c;">Coordinate Bancarie:</h4>
+                        
+                        <div class="bank-detail-item">
+                            <div class="bank-detail-label">Beneficiario:</div>
+                            <div class="bank-detail-value">
+                                <span id="beneficiary">Maurizio Possenti</span>
+                                <button class="copy-button" onclick="copyText('beneficiary')">Copia</button>
+                            </div>
+                        </div>
+                        
+                        <div class="bank-detail-item">
+                            <div class="bank-detail-label">IBAN:</div>
+                            <div class="bank-detail-value">
+                                <span id="iban">LT59 3250 0308 7589 8093</span>
+                                <button class="copy-button" onclick="copyText('iban')">Copia</button>
+                            </div>
+                        </div>
+                        
+                        <div class="bank-detail-item">
+                            <div class="bank-detail-label">BIC/SWIFT:</div>
+                            <div class="bank-detail-value">
+                                <span id="bic">REVOLT21</span>
+                                <button class="copy-button" onclick="copyText('bic')">Copia</button>
+                            </div>
+                        </div>
+                        
+                        <div class="bank-detail-item">
+                            <div class="bank-detail-label">Banca:</div>
+                            <div class="bank-detail-value">
+                                <span style="font-size: 14px;">Revolut Bank UAB</span>
+                            </div>
+                        </div>
+                        
+                        <div class="bank-detail-item">
+                            <div class="bank-detail-label">Importo:</div>
+                            <div class="bank-detail-value">
+                                <span style="font-size: 24px; font-weight: 900; color: #10b981;">997,00 €</span>
+                            </div>
+                        </div>
+                        
+                        <div class="bank-detail-item">
+                            <div class="bank-detail-label">Causale:</div>
+                            <div class="bank-detail-value">
+                                <span id="causale">Master Eureka Black Friday - <span id="causaleName"></span></span>
+                                <button class="copy-button" onclick="copyText('causale')">Copia</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Send Receipt Instructions -->
+                        <div class="upload-section">
+                            <div class="upload-title">📤 Invia la Distinta di Pagamento</div>
+                            <p style="font-size: 16px; color: #1a202c; margin-bottom: 20px; text-align: center; font-weight: 600;">
+                                Dopo aver effettuato il bonifico, invia la ricevuta tramite:
+                            </p>
+                            
+                            <div style="display: flex; gap: 15px; flex-direction: column;">
+                                <!-- Email Button -->
+                                <a href="mailto:pagamenti@apprendimentorapido.it?subject=Distinta Bonifico Master Eureka - [NOME COGNOME]&body=In allegato la distinta del bonifico di 997€ per il Master Eureka Black Friday.%0D%0A%0D%0ANome:%0D%0AEmail:%0D%0ATelefono:" 
+                                   style="
+                                       display: flex;
+                                       align-items: center;
+                                       justify-content: center;
+                                       gap: 10px;
+                                       padding: 18px 30px;
+                                       background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+                                       color: white;
+                                       text-decoration: none;
+                                       border-radius: 12px;
+                                       font-weight: 700;
+                                       font-size: 16px;
+                                       transition: all 0.3s ease;
+                                       box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+                                   "
+                                   onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(59, 130, 246, 0.4)';"
+                                   onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(59, 130, 246, 0.3)';">
+                                    📧 Invia via Email
+                                </a>
+                                
+                                <!-- WhatsApp Button -->
+                                <a href="#" id="whatsappButton"
+                                   target="_blank"
+                                   style="
+                                       display: flex;
+                                       align-items: center;
+                                       justify-content: center;
+                                       gap: 10px;
+                                       padding: 18px 30px;
+                                       background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+                                       color: white;
+                                       text-decoration: none;
+                                       border-radius: 12px;
+                                       font-weight: 700;
+                                       font-size: 16px;
+                                       transition: all 0.3s ease;
+                                       box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+                                   "
+                                   onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(37, 211, 102, 0.4)';"
+                                   onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(37, 211, 102, 0.3)';">
+                                    💬 Invia su WhatsApp
+                                </a>
+                            </div>
+                            
+                            <p style="font-size: 13px; color: #6b7280; margin-top: 20px; text-align: center; line-height: 1.6;">
+                                📸 Allega la ricevuta/screenshot del bonifico<br>
+                                ⚡ Riceverai conferma entro 1 ora durante l'orario lavorativo
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="next-steps">
+            <h3>🚀 Dopo il Pagamento</h3>
+            
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h4>Ricevi Conferma Pagamento</h4>
+                    <p>Dopo il pagamento, riceverai immediatamente una email di conferma con la ricevuta.</p>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h4>Accesso al Materiale</h4>
+                    <p>Entro 24 ore riceverai le credenziali per accedere alla piattaforma con tutte le 68 lezioni video.</p>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h4>Benvenuto da Parte del Coach</h4>
+                    <p>Il coach ti chiamerà per calendarizzare le date del tuo corso, definire i tuoi obiettivi e farti prendere visione di tutto il materiale che hai a disposizione per accelerare i tuoi risultati.</p>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h4>Inizia il Tuo Percorso di Trasformazione</h4>
+                    <p>Buon corso! 🚀</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="contact-info">
+            <p><strong>Hai domande?</strong></p>
+            <p style="margin-top: 10px; line-height: 2;">
+                <strong>📧 Info generali:</strong> <a href="mailto:info@apprendimentorapido.it">info@apprendimentorapido.it</a><br>
+                <strong>💰 Pagamenti:</strong> <a href="mailto:pagamenti@apprendimentorapido.it">pagamenti@apprendimentorapido.it</a><br>
+                <strong>📞 Telefono:</strong> <a href="tel:+390240702168">+39 02 4070 2168</a><br>
+                <strong>💬 WhatsApp:</strong> <a href="https://api.whatsapp.com/send/?phone=390240702168&text&type=phone_number&app_absent=0" target="_blank" style="color: #25D366; font-weight: 700;">Chatta con noi</a><br>
+                <span style="opacity: 0.8;">Lun-Ven 9:00-18:30</span>
+            </p>
+            
+            <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e5e7eb;">
+                <a href="https://www.iubenda.com/privacy-policy/65797068" class="iubenda-white iubenda-noiframe iubenda-embed iubenda-noiframe" title="Privacy Policy" style="color: #3b82f6; text-decoration: none; margin: 0 10px; font-size: 14px;">Privacy Policy</a>
+                <script type="text/javascript">(function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src="https://cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent){w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);</script>
+                
+                <a href="https://www.iubenda.com/privacy-policy/65797068/cookie-policy" class="iubenda-white iubenda-noiframe iubenda-embed iubenda-noiframe" title="Cookie Policy" style="color: #3b82f6; text-decoration: none; margin: 0 10px; font-size: 14px;">Cookie Policy</a>
+                <script type="text/javascript">(function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src="https://cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent){w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);</script>
+                
+                <a href="https://www.iubenda.com/termini-e-condizioni/65797068" class="iubenda-white iubenda-noiframe iubenda-embed iubenda-noiframe" title="Termini e Condizioni" style="color: #3b82f6; text-decoration: none; margin: 0 10px; font-size: 14px;">Termini e Condizioni</a>
+                <script type="text/javascript">(function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src="https://cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent){w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);</script>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Load booking data from localStorage or URL parameters
+        window.addEventListener('DOMContentLoaded', function() {
+            // Try to get data from localStorage first
+            let data = null;
+            const bookingData = localStorage.getItem('bookingData');
+            
+            if (bookingData) {
+                // Data from form submission
+                data = JSON.parse(bookingData);
+            } else {
+                // Try to get data from URL parameters (from email link)
+                const urlParams = new URLSearchParams(window.location.search);
+                const nome = urlParams.get('nome');
+                const cognome = urlParams.get('cognome');
+                const email = urlParams.get('email');
+                const telefono = urlParams.get('telefono');
+                
+                if (nome && cognome && email && telefono) {
+                    // Data from email link
+                    data = {
+                        nome: nome,
+                        cognome: cognome,
+                        email: email,
+                        telefono: telefono,
+                        timestamp: new Date().toISOString() // Use current time for countdown
+                    };
+                }
+            }
+            
+            if (data) {
+                const fullName = data.nome + ' ' + data.cognome;
+                
+                document.getElementById('fullName').textContent = fullName;
+                document.getElementById('email').textContent = data.email;
+                document.getElementById('telefono').textContent = data.telefono;
+                
+                // Set causale with name
+                document.getElementById('causaleName').textContent = fullName;
+                
+                // Set WhatsApp link with personalized message
+                const whatsappMessage = `${fullName} (persona che seguirà il corso) - distinta di pagamento per Master Eureka. Allego la distinta, chiedo di attivarmi il servizio. Grazie`;
+                const whatsappUrl = `https://api.whatsapp.com/send/?phone=390240702168&text=${encodeURIComponent(whatsappMessage)}&type=phone_number&app_absent=0`;
+                
+                const whatsappButton = document.getElementById('whatsappButton');
+                if (whatsappButton) {
+                    whatsappButton.href = whatsappUrl;
+                }
+            } else {
+                // No booking data found
+                console.warn('No booking data found');
+                // Could show error message or redirect to booking page
+            }
+            
+            // Start payment countdown
+            startPaymentCountdown();
+        });
+        
+        // Payment Countdown (1 hour)
+        function startPaymentCountdown() {
+            // Check if reservation timestamp exists
+            const bookingData = localStorage.getItem('bookingData');
+            if (!bookingData) return;
+            
+            const data = JSON.parse(bookingData);
+            const reservationTime = new Date(data.timestamp).getTime();
+            const expirationTime = reservationTime + (60 * 60 * 1000); // 1 hour
+            
+            function updateTimer() {
+                const now = new Date().getTime();
+                const difference = expirationTime - now;
+                
+                if (difference > 0) {
+                    const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+                    
+                    document.getElementById('paymentTimer').textContent = 
+                        String(minutes).padStart(2, '0') + ':' + String(seconds).padStart(2, '0');
+                } else {
+                    // Time expired
+                    document.getElementById('paymentTimer').textContent = '00:00';
+                    document.querySelector('.payment-section').innerHTML = `
+                        <div style="text-align: center; padding: 60px 20px;">
+                            <div style="font-size: 80px; margin-bottom: 20px;">⏰</div>
+                            <h2 style="font-size: 32px; font-weight: 800; color: #dc2626; margin-bottom: 15px;">
+                                Tempo Scaduto
+                            </h2>
+                            <p style="font-size: 18px; color: #6b7280; margin-bottom: 30px;">
+                                La prenotazione è scaduta. Il posto è stato rilasciato.
+                            </p>
+                            <a href="/index-blackfriday.html" style="
+                                display: inline-block;
+                                padding: 15px 40px;
+                                background: #3b82f6;
+                                color: white;
+                                border-radius: 50px;
+                                text-decoration: none;
+                                font-weight: 700;
+                            ">Torna alla Home</a>
+                        </div>
+                    `;
+                    clearInterval(countdownInterval);
+                }
+            }
+            
+            updateTimer();
+            const countdownInterval = setInterval(updateTimer, 1000);
+        }
+        
+        // Go directly to Stripe Checkout
+        function goToStripeCheckout() {
+            // Get booking data to pass to Stripe (optional)
+            const bookingData = localStorage.getItem('bookingData');
+            
+            // Open Stripe checkout page directly
+            window.location.href = 'https://buy.stripe.com/6oUbJ1eqo4GG51QbwLbwk02';
+        }
+        
+        // Select Bank Transfer
+        function selectBank() {
+            const bankDetails = document.getElementById('bankDetails');
+            const stripeOption = document.getElementById('stripeOption');
+            const bankOption = document.getElementById('bankOption');
+            
+            // Show Bank details
+            if (bankDetails) {
+                bankDetails.classList.add('show');
+            }
+            
+            // Visual feedback
+            if (bankOption) {
+                bankOption.classList.add('selected');
+            }
+            if (stripeOption) {
+                stripeOption.classList.remove('selected');
+            }
+            
+            // Scroll to bank details
+            setTimeout(() => {
+                if (bankDetails) {
+                    bankDetails.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+            }, 300);
+        }
+        
+        // Copy text to clipboard
+        function copyText(elementId) {
+            const element = document.getElementById(elementId);
+            const text = element.textContent;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                // Visual feedback
+                const button = event.target;
+                const originalText = button.textContent;
+                button.textContent = '✓ Copiato!';
+                button.style.background = '#10b981';
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = '#3b82f6';
+                }, 2000);
+            });
+        }
+        
+        // Function removed - using direct email/WhatsApp links instead
+    </script>
+</body>
+</html>

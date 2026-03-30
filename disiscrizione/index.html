@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disiscrizione - Metodo Eureka</title>
+    
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2X3V7JZPBJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-2X3V7JZPBJ');
+    </script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #00A988 0%, #007a62 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+        .logo {
+            width: 150px;
+            margin-bottom: 30px;
+        }
+        h1 {
+            color: #333;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-weight: 400;
+        }
+        .status {
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .status.loading {
+            background: #e6f7f3;
+            color: #00A988;
+        }
+        .status.success {
+            background: #e6f7f3;
+            color: #00A988;
+        }
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        .spinner {
+            border: 4px solid #e6f7f3;
+            border-top: 4px solid #00A988;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: #00A988;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            margin-top: 20px;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+        .btn:hover {
+            background: #008c70;
+        }
+        .footer {
+            margin-top: 30px;
+            font-size: 12px;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="https://www.apprendimentorapido.it/wp-content/uploads/logo.png" alt="Metodo Eureka" class="logo" onerror="this.style.display='none'">
+        
+        <div id="content">
+            <div class="status loading">
+                <div class="spinner"></div>
+                <p>Elaborazione in corso...</p>
+            </div>
+        </div>
+        
+        <div class="footer">
+            &copy; 2026 Metodo Eureka - Apprendimento Rapido<br>
+            Tutti i diritti riservati
+        </div>
+    </div>
+
+    <script>
+        var urlParams = new URLSearchParams(window.location.search);
+        var contactId = urlParams.get('id');
+        var email = urlParams.get('email');
+        var token = urlParams.get('token');
+        
+        var contentDiv = document.getElementById('content');
+        
+        function showMessage(type, icon, title, message, showButton) {
+            var html = '<div class="status ' + type + '">' +
+                '<div class="icon">' + icon + '</div>' +
+                '<h1>' + title + '</h1>' +
+                '<p>' + message + '</p>' +
+                '</div>';
+            if (showButton) {
+                html += '<a href="https://www.apprendimentorapido.it" class="btn">Torna al sito</a>';
+            }
+            contentDiv.innerHTML = html;
+        }
+        
+        if (!contactId || !email || !token) {
+            showMessage('error', '⚠️', 'Link non valido', 
+                'Il link di disiscrizione non è valido o è incompleto. Contattaci se hai bisogno di assistenza.', true);
+        } else {
+            fetch('https://api.apprendimentorapido.it/api/email/unsubscribe/process?id=' + encodeURIComponent(contactId) + '&email=' + encodeURIComponent(email) + '&token=' + encodeURIComponent(token), {method: 'POST'})
+                .then(function(response) {
+                    if (response.ok) {
+                        return response.json();
+                    } else if (response.status === 400) {
+                        throw new Error('invalid_token');
+                    } else {
+                        throw new Error('server_error');
+                    }
+                })
+                .then(function(data) {
+                    showMessage('success', '✅', 'Disiscrizione completata', 
+                        'Hai cancellato con successo la tua iscrizione per <strong>' + email + '</strong>.<br><br>Non riceverai più le nostre comunicazioni email. Ci dispiace vederti andare!', true);
+                    gtag('event', 'unsubscribe', {'event_category': 'email', 'event_label': email});
+                })
+                .catch(function(error) {
+                    if (error.message === 'invalid_token') {
+                        showMessage('error', '⚠️', 'Link scaduto o non valido', 
+                            'Questo link di disiscrizione potrebbe essere scaduto o già utilizzato. Se desideri cancellarti, contattaci direttamente.', true);
+                    } else {
+                        showMessage('error', '❌', 'Errore temporaneo', 
+                            'Si è verificato un errore durante la disiscrizione. Riprova tra qualche minuto o contattaci per assistenza.', true);
+                    }
+                });
+        }
+    </script>
+</body>
+</html>
+
