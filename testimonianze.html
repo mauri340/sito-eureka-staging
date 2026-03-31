@@ -198,14 +198,22 @@ footer{background:var(--navy);color:rgba(255,255,255,.75);padding:56px 0 32px;}
   box-shadow:0 8px 24px rgba(13,27,42,.3);}
 
 /* ── RESPONSIVE ── */
+/* ── TESTIMONIAL VIDEO CARDS ── */
+.testimonial-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:32px;}
+.testimonial-video-card{background:#fff;border:1px solid var(--light2);border-radius:16px;padding:32px;transition:box-shadow .25s,transform .25s;}
+.testimonial-video-card:hover{box-shadow:0 12px 40px rgba(0,0,0,.09);transform:translateY(-2px);}
+.video-container{transition:transform .2s;}
+.video-container:hover{transform:scale(1.02);}
+
 @media(max-width:900px){
   .hamburger{display:flex;}
   .nav-menu{display:none;}
   .nav{padding:0 20px;}
-  .hero-inner,.grid-2,.grid-3,.grid-4,.stats-grid,.footer-inner{grid-template-columns:1fr;}
+  .hero-inner,.grid-2,.grid-3,.grid-4,.stats-grid,.footer-inner,.testimonial-grid{grid-template-columns:1fr;}
   .hero{min-height:auto;padding:calc(var(--nav-h) + 40px) 0 60px;}
   .section{padding:64px 0;}
   .banner-navy,.banner-gold,.banner-light{padding:32px 24px;}
+  .testimonial-video-card{padding:24px;}
 }
 @media(max-width:600px){
   .footer-inner{grid-template-columns:1fr 1fr;}
@@ -395,68 +403,163 @@ footer{background:var(--navy);color:rgba(255,255,255,.75);padding:56px 0 32px;}
 </section>
 
 <section class="section bg-off">
-  <div class="container" style="display:flex;flex-direction:column;gap:32px;">
+  <div class="container">
+    <div class="testimonial-grid" style="display:grid;grid-template-columns:repeat(2,1fr);gap:32px;">
+      
+      <!-- Testimonial 1: Francesca - Notaio -->
+      <div class="card testimonial-video-card">
+        <p style="font-size:1rem;color:var(--muted);line-height:1.8;margin-bottom:20px;">Studiare più di 14000 pagine di atti con le tecniche, creando 40 mappe mentali in soli sei mesi e alla fine raggiungere l'obiettivo: diventare notaio! Questa è la storia di Francesca, ascoltala dalla sua viva voce.</p>
+        <div class="video-container" data-video-id="jr5JuIH8Dqw" data-start="154" style="position:relative;width:100%;aspect-ratio:16/9;background:var(--navy);border-radius:12px;overflow:hidden;cursor:pointer;">
+          <div class="video-placeholder" style="display:flex;align-items:center;justify-content:center;height:100%;background:linear-gradient(135deg,var(--navy),var(--navy2));">
+            <div style="text-align:center;">
+              <div style="width:60px;height:60px;background:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;cursor:pointer;">
+                <svg style="width:24px;height:24px;fill:#fff;margin-left:2px;" viewBox="0 0 24 24">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+              </div>
+              <div style="color:#fff;font-size:14px;font-weight:500;">Guarda la testimonianza</div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-    <div class="card" style="display:grid;grid-template-columns:180px 1fr;gap:48px;align-items:center;">
-      <div style="text-align:center;">
-        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=300&auto=format&fit=crop&q=80" alt="Francesca Riboldi" style="width:110px;height:110px;border-radius:50%;object-fit:cover;border:3px solid var(--gold);margin-bottom:14px;">
-        <div style="font-weight:700;color:var(--navy);font-size:15px;">Francesca Riboldi</div>
-        <div style="color:var(--teal-dk);font-size:13px;margin-top:3px;font-weight:500;">Notaio</div>
+      <!-- Testimonial 2: Susan - Lingue -->
+      <div class="card testimonial-video-card">
+        <p style="font-size:1rem;color:var(--muted);line-height:1.8;margin-bottom:20px;">Funziona veramente questo percorso per imparare le lingue straniere? Ascolta cosa ci dice Susan, insegnante madrelingua inglese...</p>
+        <div class="video-container" data-video-id="rWtxp1h5osk" style="position:relative;width:100%;aspect-ratio:16/9;background:var(--navy);border-radius:12px;overflow:hidden;cursor:pointer;">
+          <div class="video-placeholder" style="display:flex;align-items:center;justify-content:center;height:100%;background:linear-gradient(135deg,var(--navy),var(--navy2));">
+            <div style="text-align:center;">
+              <div style="width:60px;height:60px;background:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;cursor:pointer;">
+                <svg style="width:24px;height:24px;fill:#fff;margin-left:2px;" viewBox="0 0 24 24">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+              </div>
+              <div style="color:#fff;font-size:14px;font-weight:500;">Guarda la testimonianza</div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div>
-        <p style="font-size:1.05rem;color:var(--muted);line-height:1.85;font-style:italic;margin-bottom:18px;">"Ho studiato oltre 14.000 pagine e creato 40 mappe mentali in 6 mesi. Grazie al Metodo Eureka sono diventata notaio. Non avrei mai pensato di riuscirci con la mia agenda di lavoro. Il metodo mi ha dato gli strumenti per studiare in modo intelligente, non solo duro."</p>
-        <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="tag tag-gold">Concorso Notarile</span><span class="tag tag-navy">14.000+ pagine</span><span class="tag tag-teal">40 mappe mentali</span></div>
+
+      <!-- Testimonial 3: Eva - Avvocato -->
+      <div class="card testimonial-video-card">
+        <p style="font-size:1rem;color:var(--muted);line-height:1.8;margin-bottom:20px;">Eva è un avvocato penalista di Padova che si è iscritta alla facoltà di psicologia per regalarsi la seconda laurea. Dopo aver seguito il Master Eureka ha superato 5 esami in una sessione di cui uno preparato in solo 8 ore! Fai partire il video per sentire la sua video intervista.</p>
+        <div class="video-container" data-video-id="Y1LgOgMtErQ" data-start="255" style="position:relative;width:100%;aspect-ratio:16/9;background:var(--navy);border-radius:12px;overflow:hidden;cursor:pointer;">
+          <div class="video-placeholder" style="display:flex;align-items:center;justify-content:center;height:100%;background:linear-gradient(135deg,var(--navy),var(--navy2));">
+            <div style="text-align:center;">
+              <div style="width:60px;height:60px;background:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;cursor:pointer;">
+                <svg style="width:24px;height:24px;fill:#fff;margin-left:2px;" viewBox="0 0 24 24">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+              </div>
+              <div style="color:#fff;font-size:14px;font-weight:500;">Guarda la testimonianza</div>
+            </div>
+          </div>
+        </div>
       </div>
+
+      <!-- Testimonial 4: Roberta - Insegnante -->
+      <div class="card testimonial-video-card">
+        <p style="font-size:1rem;color:var(--muted);line-height:1.8;margin-bottom:20px;">Roberta insegnante dell'infanzia, 2 lauree all'attivo, ora vuole prepararsi per il concorso. Che vantaggio dà apprendere il metodo con la struttura del Master Eureka?</p>
+        <div class="video-container" data-video-id="jvgTNjdMpvA" style="position:relative;width:100%;aspect-ratio:16/9;background:var(--navy);border-radius:12px;overflow:hidden;cursor:pointer;">
+          <div class="video-placeholder" style="display:flex;align-items:center;justify-content:center;height:100%;background:linear-gradient(135deg,var(--navy),var(--navy2));">
+            <div style="text-align:center;">
+              <div style="width:60px;height:60px;background:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;cursor:pointer;">
+                <svg style="width:24px;height:24px;fill:#fff;margin-left:2px;" viewBox="0 0 24 24">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+              </div>
+              <div style="color:#fff;font-size:14px;font-weight:500;">Guarda la testimonianza</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Testimonial 5: Daniela - Medico -->
+      <div class="card testimonial-video-card">
+        <p style="font-size:1rem;color:var(--muted);line-height:1.8;margin-bottom:20px;">Quanto tempo ci vorrà per ottenere i primi risultati con il MASTER EUREKA? Daniela è un medico chirurgo che ha superato il concorso per la sua seconda specializzazione grazie al MASTER EUREKA. Guarda la sua testimonianza!</p>
+        <div class="video-container" data-video-id="rRlWbTh7SCY" style="position:relative;width:100%;aspect-ratio:16/9;background:var(--navy);border-radius:12px;overflow:hidden;cursor:pointer;">
+          <div class="video-placeholder" style="display:flex;align-items:center;justify-content:center;height:100%;background:linear-gradient(135deg,var(--navy),var(--navy2));">
+            <div style="text-align:center;">
+              <div style="width:60px;height:60px;background:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;cursor:pointer;">
+                <svg style="width:24px;height:24px;fill:#fff;margin-left:2px;" viewBox="0 0 24 24">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+              </div>
+              <div style="color:#fff;font-size:14px;font-weight:500;">Guarda la testimonianza</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Testimonial 6: Ciro - Aeronautica -->
+      <div class="card testimonial-video-card">
+        <p style="font-size:1rem;color:var(--muted);line-height:1.8;margin-bottom:20px;">Ciro lavora nell'aeronautica militare, vuole affrontare un esame in lingua inglese a livello accademico. Ascolta cosa dice: 'sono riuscito a memorizzare 1500 vocaboli in 3 mesi'.</p>
+        <div class="video-container" data-video-id="nr2Qv95mQR0" style="position:relative;width:100%;aspect-ratio:16/9;background:var(--navy);border-radius:12px;overflow:hidden;cursor:pointer;">
+          <div class="video-placeholder" style="display:flex;align-items:center;justify-content:center;height:100%;background:linear-gradient(135deg,var(--navy),var(--navy2));">
+            <div style="text-align:center;">
+              <div style="width:60px;height:60px;background:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;cursor:pointer;">
+                <svg style="width:24px;height:24px;fill:#fff;margin-left:2px;" viewBox="0 0 24 24">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+              </div>
+              <div style="color:#fff;font-size:14px;font-weight:500;">Guarda la testimonianza</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Testimonial 7: Stefano - Ingegnere -->
+      <div class="card testimonial-video-card">
+        <p style="font-size:1rem;color:var(--muted);line-height:1.8;margin-bottom:20px;">Perché uno studente universitario dovrebbe apprendere il Metodo Eureka? Ce ne parla Stefano Sambruna, laureato in ingegneria informatica.</p>
+        <div class="video-container" data-video-id="kq1EL1XuVyE" style="position:relative;width:100%;aspect-ratio:16/9;background:var(--navy);border-radius:12px;overflow:hidden;cursor:pointer;">
+          <div class="video-placeholder" style="display:flex;align-items:center;justify-content:center;height:100%;background:linear-gradient(135deg,var(--navy),var(--navy2));">
+            <div style="text-align:center;">
+              <div style="width:60px;height:60px;background:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;cursor:pointer;">
+                <svg style="width:24px;height:24px;fill:#fff;margin-left:2px;" viewBox="0 0 24 24">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+              </div>
+              <div style="color:#fff;font-size:14px;font-weight:500;">Guarda la testimonianza</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Testimonial 8: Marco - Veterinario -->
+      <div class="card testimonial-video-card">
+        <p style="font-size:1rem;color:var(--muted);line-height:1.8;margin-bottom:20px;">Conviene investire denaro in un corso come questo? Marco Cavazzoni, imprenditore e veterinario, ci spiegherà i benefici economici che ha ottenuto dopo aver applicato il Metodo Eureka.</p>
+        <div class="video-container" data-video-id="-mHqLmV-MzY" style="position:relative;width:100%;aspect-ratio:16/9;background:var(--navy);border-radius:12px;overflow:hidden;cursor:pointer;">
+          <div class="video-placeholder" style="display:flex;align-items:center;justify-content:center;height:100%;background:linear-gradient(135deg,var(--navy),var(--navy2));">
+            <div style="text-align:center;">
+              <div style="width:60px;height:60px;background:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;cursor:pointer;">
+                <svg style="width:24px;height:24px;fill:#fff;margin-left:2px;" viewBox="0 0 24 24">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+              </div>
+              <div style="color:#fff;font-size:14px;font-weight:500;">Guarda la testimonianza</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Testimonial 9: Francesca - Mamma di Sofia -->
+      <div class="card testimonial-video-card">
+        <p style="font-size:1rem;color:var(--muted);line-height:1.8;margin-bottom:20px;">Quanto è importante insegnare un metodo di studio ai propri figli? Francesca, mamma di Sofia, ci spiega quanto sia fondamentale per un genitore investire nella formazione fin dai primi anni di scuola.</p>
+        <div class="video-container" data-video-id="fnR_zvp6ewQ" style="position:relative;width:100%;aspect-ratio:16/9;background:var(--navy);border-radius:12px;overflow:hidden;cursor:pointer;">
+          <div class="video-placeholder" style="display:flex;align-items:center;justify-content:center;height:100%;background:linear-gradient(135deg,var(--navy),var(--navy2));">
+            <div style="text-align:center;">
+              <div style="width:60px;height:60px;background:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;cursor:pointer;">
+                <svg style="width:24px;height:24px;fill:#fff;margin-left:2px;" viewBox="0 0 24 24">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+              </div>
+              <div style="color:#fff;font-size:14px;font-weight:500;">Guarda la testimonianza</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
-
-    <div class="card" style="display:grid;grid-template-columns:180px 1fr;gap:48px;align-items:center;">
-      <div style="text-align:center;">
-        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300&auto=format&fit=crop&q=80" alt="Eva Vigato" style="width:110px;height:110px;border-radius:50%;object-fit:cover;border:3px solid var(--gold);margin-bottom:14px;">
-        <div style="font-weight:700;color:var(--navy);font-size:15px;">Eva Vigato</div>
-        <div style="color:var(--teal-dk);font-size:13px;margin-top:3px;font-weight:500;">Avvocato Penalista</div>
-      </div>
-      <div>
-        <p style="font-size:1.05rem;color:var(--muted);line-height:1.85;font-style:italic;margin-bottom:18px;">"Dopo il Master Eureka ho superato 5 esami in una sola sessione. Uno di questi l'ho preparato in sole 8 ore. Prima impiegavo settimane. Il cambiamento nel mio modo di studiare è stato radicale: studio meno tempo ma ricordo molto di più."</p>
-        <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="tag tag-gold">5 esami in una sessione</span><span class="tag tag-navy">Preparato in 8 ore</span></div>
-      </div>
-    </div>
-
-    <div class="card" style="display:grid;grid-template-columns:180px 1fr;gap:48px;align-items:center;">
-      <div style="text-align:center;">
-        <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=300&auto=format&fit=crop&q=80" alt="Daniela Angelucci" style="width:110px;height:110px;border-radius:50%;object-fit:cover;border:3px solid var(--gold);margin-bottom:14px;">
-        <div style="font-weight:700;color:var(--navy);font-size:15px;">Daniela Angelucci</div>
-        <div style="color:var(--teal-dk);font-size:13px;margin-top:3px;font-weight:500;">Medico Chirurgo</div>
-      </div>
-      <div>
-        <p style="font-size:1.05rem;color:var(--muted);line-height:1.85;font-style:italic;margin-bottom:18px;">"Ho superato il concorso di specializzazione in tempi che non avrei mai creduto possibili. Finalmente un metodo di studio vero, basato su come funziona davvero il cervello. Non su vecchie abitudini che non funzionano."</p>
-        <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="tag tag-gold">Specializzazione Medica</span><span class="tag tag-teal">Concorso superato</span></div>
-      </div>
-    </div>
-
-    <div class="card" style="display:grid;grid-template-columns:180px 1fr;gap:48px;align-items:center;">
-      <div style="text-align:center;">
-        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&auto=format&fit=crop&q=80" alt="Yuri Zhou" style="width:110px;height:110px;border-radius:50%;object-fit:cover;border:3px solid var(--gold);margin-bottom:14px;">
-        <div style="font-weight:700;color:var(--navy);font-size:15px;">Yuri Zhou</div>
-        <div style="color:var(--teal-dk);font-size:13px;margin-top:3px;font-weight:500;">Studente e Lavoratore</div>
-      </div>
-      <div>
-        <p style="font-size:1.05rem;color:var(--muted);line-height:1.85;font-style:italic;margin-bottom:18px;">"Ho preso 102/110 mentre gestivo il bar di famiglia con i miei genitori. La mia tesi è stata revisionata da Renzo Piano in persona. Senza il Metodo Eureka non avrei avuto il tempo fisico per farcela."</p>
-        <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="tag tag-gold">102/110</span><span class="tag tag-navy">Lavoro + Studio</span><span class="tag tag-teal">Tesi con Renzo Piano</span></div>
-      </div>
-    </div>
-
-    <div class="card" style="display:grid;grid-template-columns:180px 1fr;gap:48px;align-items:center;">
-      <div style="text-align:center;">
-        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&auto=format&fit=crop&q=80" alt="Laura Magnani" style="width:110px;height:110px;border-radius:50%;object-fit:cover;border:3px solid var(--gold);margin-bottom:14px;">
-        <div style="font-weight:700;color:var(--navy);font-size:15px;">Laura Magnani</div>
-        <div style="color:var(--teal-dk);font-size:13px;margin-top:3px;font-weight:500;">Farmacista</div>
-      </div>
-      <div>
-        <p style="font-size:1.05rem;color:var(--muted);line-height:1.85;font-style:italic;margin-bottom:18px;">"Ho superato le mie difficoltà di studio che portavo avanti da anni. Ho vinto un concorso e ottenuto un contratto a tempo indeterminato. Il team di Apprendimento Rapido è straordinario: competente, presente, umano."</p>
-        <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="tag tag-gold">Concorso vinto</span><span class="tag tag-teal">Contratto indeterminato</span></div>
-      </div>
-    </div>
-
   </div>
 </section>
 
@@ -526,6 +629,30 @@ const obs=new IntersectionObserver((entries)=>{
     if(e.target.classList.contains('stats-section'))animateCounters();}});
 },{threshold:0.2});
 document.querySelectorAll('.stats-section,[data-animate]').forEach(el=>obs.observe(el));
+
+// Lazy loading YouTube videos
+function loadVideo(container) {
+  const videoId = container.dataset.videoId;
+  const startTime = container.dataset.start;
+  let embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`;
+  if (startTime) {
+    embedUrl += `&start=${startTime}`;
+  }
+  
+  const iframe = document.createElement('iframe');
+  iframe.src = embedUrl;
+  iframe.style.cssText = 'width:100%;height:100%;border:0;border-radius:12px;';
+  iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+  iframe.allowFullscreen = true;
+  
+  container.innerHTML = '';
+  container.appendChild(iframe);
+}
+
+// Add click listeners to video containers
+document.querySelectorAll('.video-container').forEach(container => {
+  container.addEventListener('click', () => loadVideo(container));
+});
 </script>
 <script src="chat-widget.js"></script>
 </body>
