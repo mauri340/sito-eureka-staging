@@ -608,31 +608,22 @@ src="https://www.facebook.com/tr?id=1749584092436791&ev=PageView&noscript=1"
         submitButton.textContent = 'Invio...';
         submitButton.disabled = true;
 
-        datiContatto = {
-            nome: form.nome.value.trim(),
-            cognome: form.cognome.value.trim(),
-            email: form.email.value.trim(),
-            telefono: form.telefono.value.trim()
-        };
-
-        document.getElementById('punteggio-primo-tentativo-form').value = punteggio1;
-        document.getElementById('punteggio-secondo-tentativo-form').value = 0;
-        document.getElementById('miglioramento-percentuale-form').value = 0;
-
+        // Collect form data
+        const nome = form.nome.value.trim();
+        const cognome = form.cognome.value.trim();
+        const email = form.email.value.trim();
+        const telefono = form.telefono.value.trim();
+        
+        // Generate unique userId
+        const userId = Date.now().toString();
+        
         try {
-            const response = await fetch(ZAPIER_WEBHOOK_URL, {
-                method: "POST",
-                body: new FormData(form),
-            });
-            if (response.ok) {
-                console.log('Dati iniziali inviati a Zapier con successo.');
-                mostraSchermata('schermata-video');
-            } else {
-                throw new Error('Risposta dal server non OK.');
-            }
+            // Redirect to shared chat system
+            const chatUrl = `/chat-system/chat.html?userId=${encodeURIComponent(userId)}&nome=${encodeURIComponent(nome)}&cognome=${encodeURIComponent(cognome)}&email=${encodeURIComponent(email)}&telefono=${encodeURIComponent(telefono)}&punteggio=${encodeURIComponent(punteggio1)}&quiz_status=memoria&pam=non_definito`;
+            window.location.href = chatUrl;
         } catch (error) {
-            console.error('Errore di rete o di invio:', error);
-            alert('Si è verificato un errore durante l\'invio. Riprova.');
+            console.error('Errore durante il redirect:', error);
+            alert('Si è verificato un errore. Riprova.');
             submitButton.textContent = 'Invia e Scopri di più';
             submitButton.disabled = false;
         }
