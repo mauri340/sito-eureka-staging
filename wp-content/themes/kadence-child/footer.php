@@ -78,5 +78,10 @@ do_action( 'kadence_after_content' );
 <?php do_action( 'kadence_after_wrapper' ); ?>
 
 <?php wp_footer(); ?>
+
+<!-- AI Chat Widget -->
+<script src="<?php echo esc_url(home_url('/chat-widget.js')); ?>"></script>
+<script src="<?php echo esc_url(home_url('/whatsapp-widget.js')); ?>"></script>
+
 </body>
 </html>
