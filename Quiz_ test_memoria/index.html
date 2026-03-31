@@ -211,23 +211,129 @@ src="https://www.facebook.com/tr?id=1749584092436791&ev=PageView&noscript=1"
             height: auto;
             display: block;
         }
-/* Stile per il footer fisso */
-.site-footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background-color: #f8f9fa;
-    border-top: 1px solid #dee2e6;
-    padding: 15px 0;
-    text-align: center;
-    font-size: 0.9em;
-    z-index: 1000;
+/* Footer styles */
+.footer {
+    background: #0D1B2A;
+    color: rgba(255,255,255,.75);
+    padding: 56px 0 32px;
+    margin-top: 40px;
 }
-.site-footer a {
-    color: #0056b3;
+
+.footer .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 28px;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 48px;
+    margin-bottom: 44px;
+}
+
+.footer-brand img {
+    height: 44px;
+    width: auto;
+    display: block;
+    margin-bottom: 14px;
+}
+
+.footer-brand p {
+    font-size: 14px;
+    color: rgba(255,255,255,.6);
+    line-height: 1.8;
+}
+
+.footer-col h4 {
+    font-size: 11px;
+    font-weight: 700;
+    color: rgba(255,255,255,.4);
+    margin-bottom: 18px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.footer-col a {
+    display: block;
+    font-size: 13px;
+    color: rgba(255,255,255,.65);
     text-decoration: none;
-    margin: 0 10px;
+    margin-bottom: 10px;
+    transition: color .2s;
+    font-weight: 400;
+}
+
+.footer-col a:hover {
+    color: #fff;
+}
+
+.footer-contact {
+    font-size: 13px;
+    color: rgba(255,255,255,.65);
+    line-height: 1.8;
+}
+
+.footer-contact a {
+    color: rgba(255,255,255,.65);
+    text-decoration: none;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.footer-contact a:hover {
+    color: #fff;
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255,255,255,.08);
+    padding-top: 26px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px;
+}
+
+.footer-bottom p {
+    font-size: 12px;
+    color: rgba(255,255,255,.4);
+}
+
+.footer-bottom div {
+    display: flex;
+    gap: 20px;
+}
+
+.footer-bottom a {
+    font-size: 12px;
+    color: rgba(255,255,255,.4);
+    text-decoration: none;
+}
+
+.footer-bottom a:hover {
+    color: rgba(255,255,255,.8);
+}
+
+@media (max-width: 900px) {
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+}
+
+@media (max-width: 600px) {
+    .footer-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+    .footer-bottom {
+        text-align: center;
+        justify-content: center;
+    }
+    .footer-bottom div {
+        flex-direction: column;
+        gap: 10px;
+    }
 }
     </style>
 </head>
@@ -341,12 +447,55 @@ src="https://www.facebook.com/tr?id=1749584092436791&ev=PageView&noscript=1"
         </section>
 
     </main>
-<footer class="site-footer">
-        <a href="https://www.iubenda.com/privacy-policy/89530968" class="iubenda-nostyle no-brand iubenda-noiframe iubenda-embed iubenda-noiframe " title="Privacy Policy ">Privacy Policy</a> &bull;
-        <a href="https://www.iubenda.com/privacy-policy/89530968/cookie-policy" class="iubenda-nostyle no-brand iubenda-noiframe iubenda-embed iubenda-noiframe " title="Cookie Policy ">Cookie Policy</a> &bull;
-        <a href="https://www.iubenda.com/termini-e-condizioni/89530968" class="iubenda-nostyle iubenda-noiframe iubenda-embed iubenda-noiframe " title="Termini e Condizioni ">Termini e Condizioni</a>
-        <script type="text/javascript">(function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src="https://cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent){w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);</script>
-    </footer>
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <img src="../images/logo.png" alt="Metodo Eureka">
+                <p>Dal 2001 aiutiamo professionisti, imprenditori e studenti a imparare più velocemente e ricordare di più — con un metodo provato su oltre 20.000 persone.</p>
+            </div>
+
+            <div class="footer-col">
+                <h4>Il Metodo</h4>
+                <a href="../metodo-eureka.html">Il Metodo Eureka</a>
+                <a href="../master-eureka.html">Il Master Eureka</a>
+                <a href="../tecniche-memoria.html">Tecniche di Memoria</a>
+                <a href="../lettura-veloce.html">Lettura Veloce</a>
+                <a href="../mappe-mentali.html">Mappe Mentali</a>
+            </div>
+
+            <div class="footer-col">
+                <h4>Risorse</h4>
+                <a href="../demo-zoom/index.html">Webinar Gratuito</a>
+                <a href="../coaching.html">Coaching Gratuita</a>
+                <a href="../testimonianze.html">Testimonianze</a>
+                <a href="../libro.html">Il Nostro Libro</a>
+                <a href="https://academy.apprendimentorapido.it/users/sign_in" target="_blank">Login Allievi</a>
+            </div>
+
+            <div class="footer-col">
+                <h4>Contatti</h4>
+                <div class="footer-contact">
+                    Via Gardiscia 10<br>
+                    Rovio, (CH) 6821<br><br>
+                    <a href="mailto:info@apprendimentorapido.it">info@apprendimentorapido.it</a>
+                    <a href="tel:+390240702168">+390240702168</a><br>
+                    Lun–Ven 9:00–18:30
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2025 Apprendimento Rapido – Metodo Eureka. Tutti i diritti riservati.</p>
+            <div>
+                <a href="https://www.iubenda.com/privacy-policy/89530968" target="_blank">Privacy Policy</a>
+                <a href="https://www.iubenda.com/privacy-policy/89530968/cookie-policy" target="_blank">Cookie Policy</a>
+                <a href="https://www.iubenda.com/termini-e-condizioni/89530968" target="_blank">Termini e Condizioni</a>
+            </div>
+        </div>
+    </div>
+</footer>
+<script type="text/javascript">(function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src="https://cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent){w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);</script>
 
 <script>
     // --- CONFIGURAZIONE ---

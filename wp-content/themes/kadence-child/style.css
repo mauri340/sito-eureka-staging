@@ -276,11 +276,118 @@ a.more-link:hover { background: var(--ar-navy2) !important; }
   text-align: center !important;
 }
 
-/* ─── 12. RESPONSIVE ─────────────────────────────────── */
+/* ─── 12. UNIFIED FOOTER (matching static HTML pages) ─── */
+.footer.unified-footer {
+    background: var(--ar-navy) !important;
+    border-top: 1px solid rgba(255,255,255,.05) !important;
+    padding: 70px 0 0 !important;
+    color: rgba(255,255,255,.75) !important;
+}
+
+.footer.unified-footer .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 28px;
+}
+
+.footer.unified-footer .footer-grid {
+    display: grid !important;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr !important;
+    gap: 40px !important;
+    padding-bottom: 56px !important;
+    border-bottom: 1px solid rgba(255,255,255,.06) !important;
+}
+
+.footer.unified-footer .footer-brand img {
+    height: 48px !important;
+    margin-bottom: 18px !important;
+    opacity: .9 !important;
+}
+
+.footer.unified-footer .footer-brand p {
+    font-size: 13px !important;
+    color: rgba(255,255,255,.4) !important;
+    line-height: 1.75 !important;
+    max-width: 240px !important;
+}
+
+.footer.unified-footer .footer-col h4 {
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    color: rgba(255,255,255,.6) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1.5px !important;
+    margin-bottom: 18px !important;
+}
+
+.footer.unified-footer .footer-col a {
+    display: block !important;
+    font-size: 13px !important;
+    color: rgba(255,255,255,.35) !important;
+    text-decoration: none !important;
+    margin-bottom: 10px !important;
+    transition: color .2s !important;
+    font-weight: 400 !important;
+}
+
+.footer.unified-footer .footer-col a:hover {
+    color: var(--ar-teal) !important;
+}
+
+.footer.unified-footer .footer-contact {
+    font-size: 13px !important;
+    color: rgba(255,255,255,.35) !important;
+    line-height: 2 !important;
+}
+
+.footer.unified-footer .footer-bottom {
+    padding: 22px 0 !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    flex-wrap: wrap !important;
+    gap: 12px !important;
+}
+
+.footer.unified-footer .footer-bottom p {
+    font-size: 11px !important;
+    color: rgba(255,255,255,.2) !important;
+    letter-spacing: .2px !important;
+    margin: 0 !important;
+}
+
+.footer.unified-footer .footer-bottom div {
+    display: flex !important;
+    gap: 20px !important;
+}
+
+.footer.unified-footer .footer-bottom a {
+    font-size: 11px !important;
+    color: rgba(255,255,255,.3) !important;
+    text-decoration: none !important;
+    letter-spacing: .2px !important;
+}
+
+.footer.unified-footer .footer-bottom a:hover {
+    color: var(--ar-teal) !important;
+}
+
+/* ─── 13. RESPONSIVE ─────────────────────────────────── */
 @media (max-width: 768px) {
   .single .entry-header { padding: 52px 20px 36px !important; }
   .single .entry-content { padding: 28px 20px !important; margin: 24px 10px !important; }
   h1, .entry-content h1 { font-size: 26px !important; }
   h2, .entry-content h2 { font-size: 22px !important; }
+  
+  /* Unified footer responsive */
+  .footer.unified-footer .footer-grid {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+  }
+  
+  .footer.unified-footer .footer-bottom {
+    flex-direction: column !important;
+    text-align: center !important;
+  }
 }
 
