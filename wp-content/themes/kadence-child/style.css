@@ -557,7 +557,209 @@ a.more-link:hover { background: var(--ar-navy2) !important; }
     color: var(--ar-teal) !important;
 }
 
-/* ─── 13. RESPONSIVE ─────────────────────────────────── */
+/* ─── 13. HIDE COMMENTS COMPLETELY ─────────────────── */
+/* Users should interact via AI chat widget instead */
+#comments,
+.comments-area,
+.comment-respond,
+.comment-form,
+.comment-list,
+.comment-navigation,
+.comments-title,
+.no-comments,
+#respond,
+.single-comment,
+.comment-content,
+.comment-meta,
+.comment-author,
+.says,
+.comment-reply-link,
+.form-submit,
+.comment-form-comment,
+.comment-form-author,
+.comment-form-email,
+.comment-form-url,
+.comment-notes,
+.comment-awaiting-moderation,
+.bypostauthor,
+.comment-body,
+.reply,
+.form-allowed-tags {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* ─── 14. RELATED/SUGGESTED ARTICLES STYLING ───────── */
+/* Fix title sizes and visual consistency with dark site design */
+
+/* Related posts section container */
+.entry-related,
+.related-posts,
+.kadence-related-posts,
+.wp-block-query,
+.related-articles,
+.suggested-posts {
+  background: var(--ar-navy) !important;
+  margin: 0 !important;
+  padding: 60px 48px !important;
+  border-radius: 0 !important;
+}
+
+/* Related posts main title */
+.entry-related .entry-related-title,
+.related-posts h2,
+.related-posts h3,
+.kadence-related-posts h2,
+.kadence-related-posts h3,
+.related-articles h2,
+.related-articles h3,
+.suggested-posts h2,
+.suggested-posts h3 {
+  font-family: 'Playfair Display', serif !important;
+  font-size: 28px !important;
+  font-weight: 600 !important;
+  color: var(--ar-white) !important;
+  text-align: center !important;
+  margin-bottom: 40px !important;
+  margin-top: 0 !important;
+  padding-bottom: 16px !important;
+  border-bottom: 2px solid rgba(255,255,255,0.1) !important;
+}
+
+/* Related posts grid/list */
+.entry-related .entry-related-content,
+.related-posts .post-grid,
+.related-posts .posts-container,
+.kadence-related-posts .post-grid,
+.related-articles .posts-grid,
+.suggested-posts .posts-container {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
+  gap: 32px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Individual related post cards */
+.entry-related article,
+.related-posts article,
+.kadence-related-posts article,
+.related-articles article,
+.suggested-posts article,
+.entry-related .post,
+.related-posts .post,
+.kadence-related-posts .post {
+  background: rgba(255,255,255,0.05) !important;
+  border: 1px solid rgba(255,255,255,0.08) !important;
+  border-radius: 12px !important;
+  padding: 24px !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2) !important;
+}
+
+.entry-related article:hover,
+.related-posts article:hover,
+.kadence-related-posts article:hover,
+.related-articles article:hover,
+.suggested-posts article:hover {
+  background: rgba(255,255,255,0.08) !important;
+  border-color: rgba(0,169,136,0.4) !important;
+  transform: translateY(-4px) !important;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.3) !important;
+}
+
+/* Related post titles - reduce size and improve consistency */
+.entry-related .entry-title,
+.entry-related .entry-title a,
+.related-posts .entry-title,
+.related-posts .entry-title a,
+.kadence-related-posts .entry-title,
+.kadence-related-posts .entry-title a,
+.related-articles .entry-title,
+.related-articles .entry-title a,
+.suggested-posts .entry-title,
+.suggested-posts .entry-title a,
+.entry-related h2,
+.entry-related h3,
+.entry-related h4,
+.related-posts h2,
+.related-posts h3,
+.related-posts h4 {
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  color: var(--ar-white) !important;
+  text-decoration: none !important;
+  line-height: 1.4 !important;
+  margin: 0 0 12px 0 !important;
+  display: block !important;
+}
+
+.entry-related .entry-title a:hover,
+.related-posts .entry-title a:hover,
+.kadence-related-posts .entry-title a:hover,
+.related-articles .entry-title a:hover,
+.suggested-posts .entry-title a:hover {
+  color: var(--ar-teal) !important;
+}
+
+/* Related post meta/excerpt */
+.entry-related .entry-meta,
+.related-posts .entry-meta,
+.kadence-related-posts .entry-meta,
+.entry-related .entry-summary,
+.related-posts .entry-summary,
+.kadence-related-posts .entry-summary {
+  font-size: 13px !important;
+  color: rgba(255,255,255,0.6) !important;
+  line-height: 1.6 !important;
+  margin: 0 !important;
+}
+
+.entry-related .entry-meta a,
+.related-posts .entry-meta a,
+.kadence-related-posts .entry-meta a {
+  color: rgba(255,255,255,0.5) !important;
+  text-decoration: none !important;
+}
+
+.entry-related .entry-meta a:hover,
+.related-posts .entry-meta a:hover,
+.kadence-related-posts .entry-meta a:hover {
+  color: var(--ar-teal) !important;
+}
+
+/* Related post thumbnails */
+.entry-related .post-thumbnail,
+.related-posts .post-thumbnail,
+.kadence-related-posts .post-thumbnail {
+  margin-bottom: 16px !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+}
+
+.entry-related .post-thumbnail img,
+.related-posts .post-thumbnail img,
+.kadence-related-posts .post-thumbnail img {
+  width: 100% !important;
+  height: 160px !important;
+  object-fit: cover !important;
+  border-radius: 8px !important;
+  transition: transform 0.3s ease !important;
+}
+
+.entry-related article:hover .post-thumbnail img,
+.related-posts article:hover .post-thumbnail img,
+.kadence-related-posts article:hover .post-thumbnail img {
+  transform: scale(1.05) !important;
+}
+
+/* ─── 15. RESPONSIVE ─────────────────────────────────── */
 @media (max-width: 768px) {
   .single .entry-header { padding: 52px 20px 36px !important; }
   .single .entry-content { padding: 28px 20px !important; margin: 24px 10px !important; }
@@ -573,6 +775,27 @@ a.more-link:hover { background: var(--ar-navy2) !important; }
   .footer.unified-footer .footer-bottom {
     flex-direction: column !important;
     text-align: center !important;
+  }
+  
+  /* Related posts responsive */
+  .entry-related,
+  .related-posts,
+  .kadence-related-posts {
+    padding: 40px 20px !important;
+  }
+  
+  .entry-related .entry-related-content,
+  .related-posts .post-grid,
+  .kadence-related-posts .post-grid {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+  
+  .entry-related .entry-related-title,
+  .related-posts h2,
+  .kadence-related-posts h2 {
+    font-size: 24px !important;
+    margin-bottom: 32px !important;
   }
 }
 
