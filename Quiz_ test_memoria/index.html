@@ -507,7 +507,6 @@ src="https://www.facebook.com/tr?id=1749584092436791&ev=PageView&noscript=1"
         "Mamma", "Fiamma", "Nuca", "Palazzo", "Neve", "Frutta", "Pacco", "Doccia", "Bomba"
     ];
     const numeroParole = paroleCorrette.length;
-    const ZAPIER_WEBHOOK_URL = "https://hooks.zapier.com/hooks/catch/2958748/u3tzbh9/";
 
     // --- VARIABILI DI STATO ---
     let punteggio1 = 0;
@@ -619,7 +618,10 @@ src="https://www.facebook.com/tr?id=1749584092436791&ev=PageView&noscript=1"
         
         try {
             // Redirect to shared chat system
-            const chatUrl = `/chat-system/chat.html?userId=${encodeURIComponent(userId)}&nome=${encodeURIComponent(nome)}&cognome=${encodeURIComponent(cognome)}&email=${encodeURIComponent(email)}&telefono=${encodeURIComponent(telefono)}&punteggio=${encodeURIComponent(punteggio1)}&quiz_status=memoria&pam=non_definito`;
+            // Save contact data for later use in final results
+            datiContatto = { nome, cognome, email, telefono, userId };
+            
+            const chatUrl = `/chat-system/chat.html?userId=${encodeURIComponent(userId)}&nome=${encodeURIComponent(nome)}&cognome=${encodeURIComponent(cognome)}&email=${encodeURIComponent(email)}&telefono=${encodeURIComponent(telefono)}&quiz_status=memoria&punteggio1=${encodeURIComponent(punteggio1)}&punteggio2=da_completare&miglioramento=da_completare&totale_parole=${encodeURIComponent(numeroParole)}`;
             window.location.href = chatUrl;
         } catch (error) {
             console.error('Errore durante il redirect:', error);
@@ -654,32 +656,20 @@ src="https://www.facebook.com/tr?id=1749584092436791&ev=PageView&noscript=1"
         }
         document.getElementById('risultato-finale-testo').innerHTML = testoMiglioramento;
 
-        const formDataFinal = new FormData();
-        formDataFinal.append('nome', datiContatto.nome);
-        formDataFinal.append('cognome', datiContatto.cognome);
-        formDataFinal.append('email', datiContatto.email);
-        formDataFinal.append('telefono', datiContatto.telefono);
-        formDataFinal.append('tipo_quiz', "Test Memoria");
-        formDataFinal.append('punteggio_primo_tentativo', punteggio1);
-        formDataFinal.append('punteggio_secondo_tentativo', punteggio2);
-        formDataFinal.append('miglioramento_percentuale', miglioramentoPercentualeCalcolato.toFixed(2));
-        formDataFinal.append('fase_invio', "Risultato Finale Completato");
-
+        // The improvement percentage is the main lever for the AI conversation.
+        // Example: "You improved 180% in 5 minutes with one technique — 
+        // imagine what the complete Metodo Eureka can do for you."
+        // The backend will use 'miglioramento' param to personalize the opening message.
+        
         try {
-            const response = await fetch(ZAPIER_WEBHOOK_URL, {
-                method: 'POST',
-                body: formDataFinal
-            });
-            if (response.ok) {
-                console.log('Dati finali inviati a Zapier con successo.');
-                mostraSchermata('schermata-finale');
-            } else {
-                throw new Error('Risposta dal server non OK.');
-            }
+            // Redirect to chat with complete final results
+            const finalChatUrl = `/chat-system/chat.html?userId=${encodeURIComponent(datiContatto.userId)}&nome=${encodeURIComponent(datiContatto.nome)}&cognome=${encodeURIComponent(datiContatto.cognome)}&email=${encodeURIComponent(datiContatto.email)}&telefono=${encodeURIComponent(datiContatto.telefono)}&quiz_status=memoria&punteggio1=${encodeURIComponent(punteggio1)}&punteggio2=${encodeURIComponent(punteggio2)}&miglioramento=${encodeURIComponent(miglioramentoPercentualeCalcolato.toFixed(0))}&totale_parole=${encodeURIComponent(numeroParole)}`;
+            window.location.href = finalChatUrl;
         } catch (error) {
-            console.error('Errore di rete durante l\'invio dati finali a Zapier:', error);
-            alert('Impossibile connettersi. Controlla la tua connessione e riprova.');
-            submitButton.textContent = 'Errore! Riprova';
+            console.error('Errore durante il redirect:', error);
+            // Fallback to showing finale screen if redirect fails
+            mostraSchermata('schermata-finale');
+            submitButton.textContent = 'Vai al Risultato Finale';
             submitButton.disabled = false;
         }
     }
