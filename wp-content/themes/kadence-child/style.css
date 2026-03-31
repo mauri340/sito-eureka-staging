@@ -82,13 +82,18 @@ nav.breadcrumb,
 }
 
 /* ─── 7. HEADER SITO — DARK NAVBAR STYLE ──────────── */
-/* Match the exact styling from index.html */
+/* Match the exact styling from index.html with stronger selectors for WordPress */
 .site-header, 
 #masthead,
-header.entry-header,
-.header-wrap,
+.site-header-wrap,
+.site-main-header-wrap,
 .site-top-header-wrap,
-.site-header-wrap {
+#wrapper .site-header,
+#wrapper #masthead,
+body #masthead,
+body .site-header,
+body .site-header-wrap,
+body .site-main-header-wrap {
   position: fixed !important;
   top: 0 !important;
   left: 0 !important;
@@ -106,28 +111,69 @@ header.entry-header,
   justify-content: space-between !important;
 }
 
-/* Logo styling to match index.html */
+/* Additional stronger selectors for WordPress header containers */
+.wp-site-blocks #masthead,
+.wp-site-blocks .site-header,
+.site .site-header,
+.site #masthead,
+#wrapper #masthead .site-header-inner-wrap,
+#masthead .site-header-inner-wrap,
+.site-header .site-header-inner-wrap,
+#masthead .site-main-header-wrap .site-header-row-container-inner,
+.site-main-header-wrap .site-header-row-container-inner {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  z-index: 1000 !important;
+  height: 72px !important;
+  background: rgba(255,255,255,0.97) !important;
+  border-bottom: 1px solid rgba(0,0,0,0.08) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  box-shadow: 0 1px 12px rgba(0,0,0,.06) !important;
+  display: flex !important;
+  align-items: center !important;
+  padding: 0 40px !important;
+  justify-content: space-between !important;
+}
+
+/* Logo styling to match index.html with stronger selectors */
 .site-branding .site-title a,
 .header-branding .site-title a,
 .site-branding img,
-.custom-logo-link img {
+.custom-logo-link img,
+#masthead .site-branding img,
+#masthead .custom-logo-link img,
+body #masthead .site-branding img,
+body .site-header .site-branding img,
+#wrapper #masthead .site-branding img {
   height: 46px !important;
   width: auto !important;
   display: block !important;
 }
 
-.site-branding .site-title a {
+.site-branding .site-title a,
+#masthead .site-branding .site-title a,
+body #masthead .site-branding .site-title a {
   font-family: 'Playfair Display', serif !important;
   color: var(--ar-navy) !important;
   font-weight: 700 !important;
   text-decoration: none !important;
 }
 
-/* Navigation menu styling to match index.html */
+/* Navigation menu styling to match index.html with stronger selectors */
 .main-navigation ul li a,
 #site-navigation ul li a,
 .header-navigation ul li a,
-.primary-menu-container ul li a {
+.primary-menu-container ul li a,
+#masthead .main-navigation ul li a,
+#masthead .header-navigation ul li a,
+body #masthead .main-navigation ul li a,
+body .site-header .main-navigation ul li a,
+#wrapper #masthead .main-navigation ul li a,
+.site-header .header-navigation ul li a {
   font-family: inherit !important;
   font-size: 13px !important;
   font-weight: 500 !important;
@@ -143,7 +189,13 @@ header.entry-header,
 .main-navigation ul li a:hover,
 #site-navigation ul li a:hover,
 .header-navigation ul li a:hover,
-.primary-menu-container ul li a:hover {
+.primary-menu-container ul li a:hover,
+#masthead .main-navigation ul li a:hover,
+#masthead .header-navigation ul li a:hover,
+body #masthead .main-navigation ul li a:hover,
+body .site-header .main-navigation ul li a:hover,
+#wrapper #masthead .main-navigation ul li a:hover,
+.site-header .header-navigation ul li a:hover {
   color: var(--ar-text) !important;
   background: var(--ar-offwhite) !important;
 }
@@ -153,12 +205,59 @@ body {
   padding-top: 72px !important;
 }
 
+/* Reset any default Kadence header styles that might interfere */
+#masthead,
+.site-header,
+.site-header-wrap,
+.site-main-header-wrap {
+  position: relative !important; /* Reset first */
+  position: fixed !important; /* Then apply fixed */
+  max-width: none !important;
+  width: 100% !important;
+  margin: 0 !important;
+  transform: none !important;
+  min-height: 72px !important;
+  max-height: 72px !important;
+}
+
+/* Ensure header inner containers don't break the layout */
+#masthead .site-header-inner-wrap,
+.site-header .site-header-inner-wrap,
+#masthead .site-main-header-wrap,
+.site-main-header-wrap {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 auto !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  height: 72px !important;
+  padding: 0 40px !important;
+}
+
+/* Override any sticky header behavior that might conflict */
+#masthead.kadence-sticky-header,
+.site-header.kadence-sticky-header,
+#masthead.item-is-sticky,
+.site-header.item-is-sticky {
+  position: fixed !important;
+  top: 0 !important;
+}
+
 /* Mobile responsive adjustments */
 @media (max-width: 860px) {
   .site-header, 
   #masthead,
   .header-wrap,
-  .site-header-wrap {
+  .site-header-wrap,
+  #masthead .site-header-inner-wrap,
+  .site-main-header-wrap {
+    padding: 0 20px !important;
+  }
+  
+  #masthead .site-header-inner-wrap,
+  .site-header .site-header-inner-wrap,
+  .site-main-header-wrap {
     padding: 0 20px !important;
   }
 }
