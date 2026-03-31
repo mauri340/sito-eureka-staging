@@ -179,7 +179,7 @@ const utmParams = {
     }
     // =======================================================
     const quizData = data.quizData || formData;
-    const redirectUrl = `chat.html?userId=${encodeURIComponent(data.userId)}&email=${encodeURIComponent(formData.email)}&nome=${encodeURIComponent(formData.nome)}&cognome=${encodeURIComponent(formData.cognome)}&telefono=${encodeURIComponent(formData.telefono)}&pam=${encodeURIComponent(quizData.pam)}&punteggio=${encodeURIComponent(quizData.punteggio_comprensione)}&quiz_status=available`;
+    const redirectUrl = `/chat-system/chat.html?userId=${encodeURIComponent(data.userId)}&email=${encodeURIComponent(formData.email)}&nome=${encodeURIComponent(formData.nome)}&cognome=${encodeURIComponent(formData.cognome)}&telefono=${encodeURIComponent(formData.telefono)}&pam=${encodeURIComponent(quizData.pam)}&punteggio=${encodeURIComponent(quizData.punteggio_comprensione)}&quiz_status=lettura`;
     console.log('DEBUG: Redirect a:', redirectUrl);
     window.location.href = redirectUrl;
   } catch (error) {

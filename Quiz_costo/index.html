@@ -444,16 +444,25 @@ body {
             if (typeof lintrk === 'function') { lintrk('track', 'conversion'); }
 
             try {
-                const response = await fetch(event.target.action, { // L'action è già nel tag <form>
-                    method: 'POST',
-                    body: new FormData(event.target),
-                });
-                if (response.ok) {
-                    showResultDesk();
-                } else { throw new Error('Risposta dal server non OK.'); }
+                // Collect form data for chat system redirect
+                const formData = new FormData(event.target);
+                const nome = formData.get('nome') || 'Utente';
+                const cognome = formData.get('cognome') || 'Sconosciuto';
+                const email = formData.get('email') || '';
+                const telefono = formData.get('telefono') || '';
+                
+                // Calculate total score (sum of all individual scores)
+                const totalScore = scoresDesk.opportunità + scoresDesk.inefficienza + scoresDesk.competitività + scoresDesk.innovazione;
+                
+                // Generate unique userId
+                const userId = Date.now().toString();
+                
+                // Redirect to shared chat system
+                const chatUrl = `/chat-system/chat.html?userId=${encodeURIComponent(userId)}&nome=${encodeURIComponent(nome)}&cognome=${encodeURIComponent(cognome)}&email=${encodeURIComponent(email)}&telefono=${encodeURIComponent(telefono)}&punteggio=${encodeURIComponent(totalScore)}&quiz_status=costo_ignoranza&pam=${encodeURIComponent(fatturatoPotenzialeCalculatedDesk)}`;
+                window.location.href = chatUrl;
             } catch (error) {
-                console.error('Errore durante l\'invio fetch:', error);
-                alert('Si è verificato un errore durante l\'invio. Riprova.');
+                console.error('Errore durante il redirect:', error);
+                alert('Si è verificato un errore. Riprova.');
                 submitButton.textContent = 'Visualizza il Risultato';
                 submitButton.disabled = false;
             }

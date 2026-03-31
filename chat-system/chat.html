@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La tua Conversazione con Mentor Eureka</title>
+    <link rel="stylesheet" href="style.css" type="text/css">
+ <style>
+    /* Aggiunta per evidenziare lo stato di registrazione */
+    .mic-button {
+      padding: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .mic-button.recording {
+      background-color: #ff4d4d; /* Rosso quando registra */
+      color: white;
+    }
+  </style>
+</head>
+<body>
+    <div id="chat-page-container">
+        <div class="chat-instructions-box">
+        <h3>Come funziona la modalità "Walkie-Talkie":</h3>
+        <ul>
+            <li><strong>1. Premi il microfono</strong> per registrare il tuo messaggio (attendi che Mentor Eureka abbia finito di parlare per evitare di registrare la sua voce).</li>
+            <li><strong>2. Premi di nuovo</strong> il pulsante per inviare.</li>
+            <li><strong>3. Ascolta la sua risposta</strong> e procedi allo stesso modo per il tuo prossimo intervento.</li>
+        </ul>
+        <p>Se preferisci, puoi anche scrivere. Buona conversazione!</p>
+    </div>
+
+    <div id="chat-container">
+        <div id="chat-header">
+            <div class="mentor-avatar mentor-logo chat-logo"></div>
+            <div class="chat-header-text">
+                <h2>Conversazione con Mentor Eureka</h2>
+                <p>Poni domande, chiedi spiegazioni o consigli: il Coach AI è a tua disposizione!</p>
+            </div>
+        </div>
+            <div id="chat-window"></div>
+            <form id="chat-form">
+                <button type="button" id="mic-button" title="Attiva microfono">🎤</button>
+                <button type="button" id="mic-stop-button" title="Ferma registrazione" style="display: none;">⏹️</button>
+                <input type="text" id="chat-input" placeholder="Scrivi il tuo messaggio..." required>
+                <button type="submit" id="send-button">Invia</button>
+            </form>
+        </div>
+    </div>
+    <footer class="site-footer">
+    
+        <div>
+            <a href="https://www.iubenda.com/privacy-policy/89530968" title="Privacy Policy">Privacy Policy</a> •
+            <a href="https://www.iubenda.com/privacy-policy/89530968/cookie-policy" title="Cookie Policy">Cookie Policy</a> •
+            <a href="https://www.iubenda.com/termini-e-condizioni/89530968" title="Termini e Condizioni">Termini e Condizioni</a>
+       
+    </footer>
+ <script type="module" src="js/utils/analytics.js"></script>
+  <script type="module" src="js/ui/chat-ui.js"></script>
+  <script type="module" src="js/audio/tts-utils.js"></script>
+  <script type="module" src="js/audio/audio-player.js"></script>
+  <script type="module" src="js/audio/speech-utils.js"></script>
+  <script type="module" src="chat-ai.js"></script>
+</body>
+</html>
