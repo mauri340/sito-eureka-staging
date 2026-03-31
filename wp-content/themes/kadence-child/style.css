@@ -81,24 +81,86 @@ nav.breadcrumb,
   color: var(--ar-muted) !important;
 }
 
-/* ─── 7. HEADER SITO ────────────────────────────────── */
-.site-header, #masthead {
-  background: rgba(255,255,255,.97) !important;
-  border-bottom: 1px solid var(--ar-light) !important;
+/* ─── 7. HEADER SITO — DARK NAVBAR STYLE ──────────── */
+/* Match the exact styling from index.html */
+.site-header, 
+#masthead,
+header.entry-header,
+.header-wrap,
+.site-top-header-wrap,
+.site-header-wrap {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 1000 !important;
+  height: 72px !important;
+  background: rgba(255,255,255,0.97) !important;
+  border-bottom: 1px solid rgba(0,0,0,0.08) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
   box-shadow: 0 1px 12px rgba(0,0,0,.06) !important;
+  display: flex !important;
+  align-items: center !important;
+  padding: 0 40px !important;
+  justify-content: space-between !important;
 }
+
+/* Logo styling to match index.html */
 .site-branding .site-title a,
-.header-branding .site-title a {
+.header-branding .site-title a,
+.site-branding img,
+.custom-logo-link img {
+  height: 46px !important;
+  width: auto !important;
+  display: block !important;
+}
+
+.site-branding .site-title a {
   font-family: 'Playfair Display', serif !important;
   color: var(--ar-navy) !important;
   font-weight: 700 !important;
+  text-decoration: none !important;
 }
+
+/* Navigation menu styling to match index.html */
 .main-navigation ul li a,
-#site-navigation ul li a {
+#site-navigation ul li a,
+.header-navigation ul li a,
+.primary-menu-container ul li a {
   font-family: inherit !important;
   font-size: 13px !important;
   font-weight: 500 !important;
   color: var(--ar-muted) !important;
+  text-decoration: none !important;
+  padding: 8px 16px !important;
+  border-radius: 8px !important;
+  transition: color 0.2s, background 0.2s !important;
+  white-space: nowrap !important;
+  letter-spacing: 0.2px !important;
+}
+
+.main-navigation ul li a:hover,
+#site-navigation ul li a:hover,
+.header-navigation ul li a:hover,
+.primary-menu-container ul li a:hover {
+  color: var(--ar-text) !important;
+  background: var(--ar-offwhite) !important;
+}
+
+/* Ensure body has top padding for fixed header */
+body {
+  padding-top: 72px !important;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 860px) {
+  .site-header, 
+  #masthead,
+  .header-wrap,
+  .site-header-wrap {
+    padding: 0 20px !important;
+  }
 }
 
 /* ─── 8. ARTICOLO SINGOLO — HERO HEADER ─────────────── */
