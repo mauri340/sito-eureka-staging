@@ -421,6 +421,12 @@ body {
             document.getElementById("desk-hiddenFatturatoPotenziale").value = fatturatoPotenzialeCalculatedDesk;
         }
 
+        function getCriticality(score) {
+            if (score >= 11) return 'alta';
+            if (score >= 6) return 'media';
+            return 'bassa';
+        }
+
         async function handleSubmitWithFetch(event) {
             event.preventDefault();
             const submitButton = event.target.querySelector('button[type="submit"]');
@@ -451,14 +457,33 @@ body {
                 const email = formData.get('email') || '';
                 const telefono = formData.get('telefono') || '';
                 
-                // Calculate total score (sum of all individual scores)
+                // Calculate total score and growth potential
                 const totalScore = scoresDesk.opportunità + scoresDesk.inefficienza + scoresDesk.competitività + scoresDesk.innovazione;
+                const crescitaPotenziale = Math.round(fatturatoPotenzialeCalculatedDesk - fatturatoAttualeDesk);
                 
                 // Generate unique userId
                 const userId = Date.now().toString();
                 
-                // Redirect to shared chat system
-                const chatUrl = `/chat-system/chat.html?userId=${encodeURIComponent(userId)}&nome=${encodeURIComponent(nome)}&cognome=${encodeURIComponent(cognome)}&email=${encodeURIComponent(email)}&telefono=${encodeURIComponent(telefono)}&punteggio=${encodeURIComponent(totalScore)}&quiz_status=costo_ignoranza&pam=${encodeURIComponent(fatturatoPotenzialeCalculatedDesk)}`;
+                // Redirect to chat system with ALL parameters
+                const chatUrl = `/chat-system/chat.html?` +
+                    `userId=${encodeURIComponent(userId)}` +
+                    `&nome=${encodeURIComponent(nome)}` +
+                    `&cognome=${encodeURIComponent(cognome)}` +
+                    `&email=${encodeURIComponent(email)}` +
+                    `&telefono=${encodeURIComponent(telefono)}` +
+                    `&quiz_status=costo_ignoranza` +
+                    `&fatturato_attuale=${encodeURIComponent(fatturatoAttualeDesk)}` +
+                    `&fatturato_potenziale=${encodeURIComponent(Math.round(fatturatoPotenzialeCalculatedDesk))}` +
+                    `&crescita_potenziale=${encodeURIComponent(crescitaPotenziale)}` +
+                    `&punteggio_opportunita=${encodeURIComponent(scoresDesk.opportunità)}` +
+                    `&punteggio_inefficienza=${encodeURIComponent(scoresDesk.inefficienza)}` +
+                    `&punteggio_competitivita=${encodeURIComponent(scoresDesk.competitività)}` +
+                    `&punteggio_innovazione=${encodeURIComponent(scoresDesk.innovazione)}` +
+                    `&punteggio_totale=${encodeURIComponent(totalScore)}` +
+                    `&criticita_opportunita=${encodeURIComponent(getCriticality(scoresDesk.opportunità))}` +
+                    `&criticita_inefficienza=${encodeURIComponent(getCriticality(scoresDesk.inefficienza))}` +
+                    `&criticita_competitivita=${encodeURIComponent(getCriticality(scoresDesk.competitività))}` +
+                    `&criticita_innovazione=${encodeURIComponent(getCriticality(scoresDesk.innovazione))}`;
                 window.location.href = chatUrl;
             } catch (error) {
                 console.error('Errore durante il redirect:', error);
