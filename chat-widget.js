@@ -603,12 +603,12 @@
     console.log('Action detected:', action);
 
     switch (action) {
-      case 'show_form':
+      case 'show_webinar':
         if (data.speech) { 
           conversationHistory.push({role: 'assistant', content: data.speech, timestamp: new Date().toISOString()});
           typeBotMessage(data.speech); 
         }
-        if (data.form) { appendForm(data.form); }
+        appendWebinarForm();
         break;
       case 'show_call':
         if (data.speech) { 
@@ -617,8 +617,8 @@
         }
         appendCallCard();
         break;
-      case 'show_booking_form':
-        console.log('Processing show_booking_form action with speech:', data.speech, 'and slot:', data.slot);
+      case 'show_coaching':
+        console.log('Processing show_coaching action with speech:', data.speech, 'and slot:', data.slot);
         if (data.speech) { 
           conversationHistory.push({role: 'assistant', content: data.speech, timestamp: new Date().toISOString()});
           typeBotMessage(data.speech); 
@@ -636,6 +636,34 @@
         break;
       case 'action_failed':
         appendBot(data.speech || '', false, true);
+        break;
+      case 'show_human':
+        if (data.speech) { 
+          conversationHistory.push({role: 'assistant', content: data.speech, timestamp: new Date().toISOString()});
+          typeBotMessage(data.speech); 
+        }
+        appendHumanForm();
+        break;
+      case 'show_test_lettura':
+        if (data.speech) { 
+          conversationHistory.push({role: 'assistant', content: data.speech, timestamp: new Date().toISOString()});
+          typeBotMessage(data.speech); 
+        }
+        appendTestButton('Fai il test di lettura →', '/quiz_test_lettura/index.html');
+        break;
+      case 'show_test_memoria':
+        if (data.speech) { 
+          conversationHistory.push({role: 'assistant', content: data.speech, timestamp: new Date().toISOString()});
+          typeBotMessage(data.speech); 
+        }
+        appendTestButton('Fai il test di memoria →', '/Quiz_test_memoria/index.html');
+        break;
+      case 'show_test_costo':
+        if (data.speech) { 
+          conversationHistory.push({role: 'assistant', content: data.speech, timestamp: new Date().toISOString()});
+          typeBotMessage(data.speech); 
+        }
+        appendTestButton('Scopri il costo della tua ignoranza →', '/Quiz_costo/index.html');
         break;
       case 'end_session':
         if (data.speech) { 
@@ -1025,6 +1053,189 @@
       });
   }
 
+  // ── Webinar Form ───────────────────────────────────
+  function appendWebinarForm() {
+    var msgs = $('ew-messages');
+    var wrapper = document.createElement('div');
+    wrapper.className = 'ew-msg ew-msg-form';
+
+    var card = document.createElement('div');
+    card.className = 'ew-form-card';
+
+    var title = document.createElement('div');
+    title.className = 'ew-form-title';
+    title.textContent = 'Iscriviti al Webinar';
+    card.appendChild(title);
+
+    var body = document.createElement('div');
+    body.className = 'ew-form-body';
+
+    var fields = [
+      { name: 'webinar_nome', label: 'Nome', type: 'text', placeholder: 'Il tuo nome' },
+      { name: 'webinar_cognome', label: 'Cognome', type: 'text', placeholder: 'Il tuo cognome' },
+      { name: 'webinar_email', label: 'Email', type: 'email', placeholder: 'La tua email' },
+      { name: 'webinar_telefono', label: 'Telefono', type: 'tel', placeholder: '+39 333 1234567' }
+    ];
+
+    for (var i = 0; i < fields.length; i++) {
+      var f = fields[i];
+      var group = document.createElement('div');
+      group.className = 'ew-form-group';
+      var label = document.createElement('label');
+      label.textContent = f.label;
+      group.appendChild(label);
+      var input = document.createElement('input');
+      input.type = f.type;
+      input.name = f.name;
+      input.placeholder = f.placeholder;
+      group.appendChild(input);
+      body.appendChild(group);
+    }
+
+    var privDiv = document.createElement('div');
+    privDiv.className = 'ew-form-privacy';
+    var cb = document.createElement('input');
+    cb.type = 'checkbox';
+    cb.name = 'webinar_privacy';
+    var privLabel = document.createElement('label');
+    privLabel.textContent = 'Acconsento al trattamento dei dati personali ai sensi del GDPR.';
+    privDiv.appendChild(cb);
+    privDiv.appendChild(privLabel);
+    body.appendChild(privDiv);
+
+    var submitBtn = document.createElement('button');
+    submitBtn.type = 'button';
+    submitBtn.className = 'ew-form-submit';
+    submitBtn.textContent = 'Iscriviti al Webinar';
+    body.appendChild(submitBtn);
+
+    var errorDiv = document.createElement('div');
+    errorDiv.className = 'ew-form-error';
+    body.appendChild(errorDiv);
+
+    card.appendChild(body);
+    wrapper.appendChild(card);
+    msgs.insertBefore(wrapper, $('ew-typing'));
+    scrollDown();
+
+    submitBtn.addEventListener('click', function () {
+      submitWebinarForm(card, errorDiv, submitBtn);
+    });
+  }
+
+  // ── Human Form ──────────────────────────────────────
+  function appendHumanForm() {
+    var msgs = $('ew-messages');
+    var wrapper = document.createElement('div');
+    wrapper.className = 'ew-msg ew-msg-form';
+
+    var card = document.createElement('div');
+    card.className = 'ew-form-card';
+
+    var title = document.createElement('div');
+    title.className = 'ew-form-title';
+    title.textContent = 'Richiedi richiamata';
+    card.appendChild(title);
+
+    var body = document.createElement('div');
+    body.className = 'ew-form-body';
+
+    var infoDiv = document.createElement('div');
+    infoDiv.style.cssText = 'background:#F0EDE8;padding:10px 12px;border-radius:8px;margin-bottom:16px;font-size:13px;color:#1a1a2e;';
+    infoDiv.textContent = 'Ti contatteremo entro 24 ore';
+    body.appendChild(infoDiv);
+
+    var fields = [
+      { name: 'human_nome', label: 'Nome', type: 'text', placeholder: 'Il tuo nome' },
+      { name: 'human_email', label: 'Email', type: 'email', placeholder: 'La tua email' },
+      { name: 'human_telefono', label: 'Telefono', type: 'tel', placeholder: '+39 333 1234567' }
+    ];
+
+    // Pre-fill fields if userSource data is available
+    var prefilledData = {};
+    if (userSource && userSource.testData) {
+      if (userSource.testData.nome) prefilledData.human_nome = userSource.testData.nome;
+      if (userSource.testData.email) prefilledData.human_email = userSource.testData.email;
+      if (userSource.testData.telefono) prefilledData.human_telefono = userSource.testData.telefono;
+    }
+
+    for (var i = 0; i < fields.length; i++) {
+      var f = fields[i];
+      var group = document.createElement('div');
+      group.className = 'ew-form-group';
+      var label = document.createElement('label');
+      label.textContent = f.label;
+      group.appendChild(label);
+      var input = document.createElement('input');
+      input.type = f.type;
+      input.name = f.name;
+      input.placeholder = f.placeholder;
+      if (prefilledData[f.name]) {
+        input.value = prefilledData[f.name];
+      }
+      group.appendChild(input);
+      body.appendChild(group);
+    }
+
+    var privDiv = document.createElement('div');
+    privDiv.className = 'ew-form-privacy';
+    var cb = document.createElement('input');
+    cb.type = 'checkbox';
+    cb.name = 'human_privacy';
+    var privLabel = document.createElement('label');
+    privLabel.textContent = 'Acconsento al trattamento dei dati personali ai sensi del GDPR.';
+    privDiv.appendChild(cb);
+    privDiv.appendChild(privLabel);
+    body.appendChild(privDiv);
+
+    var submitBtn = document.createElement('button');
+    submitBtn.type = 'button';
+    submitBtn.className = 'ew-form-submit';
+    submitBtn.textContent = 'Richiedi richiamata';
+    body.appendChild(submitBtn);
+
+    var errorDiv = document.createElement('div');
+    errorDiv.className = 'ew-form-error';
+    body.appendChild(errorDiv);
+
+    card.appendChild(body);
+    wrapper.appendChild(card);
+    msgs.insertBefore(wrapper, $('ew-typing'));
+    scrollDown();
+
+    submitBtn.addEventListener('click', function () {
+      submitHumanForm(card, errorDiv, submitBtn);
+    });
+  }
+
+  // ── Test Button ─────────────────────────────────────
+  function appendTestButton(buttonText, linkUrl) {
+    var msgs = $('ew-messages');
+    var wrapper = document.createElement('div');
+    wrapper.className = 'ew-msg ew-msg-form';
+
+    var card = document.createElement('div');
+    card.className = 'ew-form-card';
+
+    var body = document.createElement('div');
+    body.className = 'ew-form-body';
+    body.style.textAlign = 'center';
+    body.style.padding = '20px';
+
+    var testBtn = document.createElement('a');
+    testBtn.href = linkUrl;
+    testBtn.target = '_blank';
+    testBtn.className = 'ew-form-submit';
+    testBtn.style.cssText = 'display:inline-block;text-decoration:none;margin:0;';
+    testBtn.textContent = buttonText;
+    body.appendChild(testBtn);
+
+    card.appendChild(body);
+    wrapper.appendChild(card);
+    msgs.insertBefore(wrapper, $('ew-typing'));
+    scrollDown();
+  }
+
   // ── Inline Form Rendering ──────────────────────────
   function appendForm(formConfig) {
     var msgs = $('ew-messages');
@@ -1117,6 +1328,163 @@
     submitBtn.addEventListener('click', function () {
       submitForm(formConfig, card, fields, errorDiv, submitBtn);
     });
+  }
+
+  function submitWebinarForm(card, errorDiv, submitBtn) {
+    errorDiv.classList.remove('ew-visible');
+
+    var nome = card.querySelector('input[name="webinar_nome"]');
+    var cognome = card.querySelector('input[name="webinar_cognome"]');
+    var email = card.querySelector('input[name="webinar_email"]');
+    var telefono = card.querySelector('input[name="webinar_telefono"]');
+    var privacy = card.querySelector('input[name="webinar_privacy"]');
+
+    if (!nome.value.trim() || !cognome.value.trim() || !email.value.trim() || !telefono.value.trim()) {
+      errorDiv.textContent = 'Compila tutti i campi.';
+      errorDiv.classList.add('ew-visible');
+      return;
+    }
+    if (!privacy.checked) {
+      errorDiv.textContent = 'Devi accettare il trattamento dei dati personali.';
+      errorDiv.classList.add('ew-visible');
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Iscrizione in corso...';
+
+    // Track webinar registration
+    if (analytics) {
+      analytics.trackFormSubmitted('webinar_registration', {
+        nome: nome.value.trim(),
+        cognome: cognome.value.trim(),
+        email: email.value.trim(),
+        telefono: telefono.value.trim()
+      });
+    }
+
+    fetch(API_BASE + '/api/chat/submit-form', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        session_id: sessionId,
+        form_id: 'webinar_registration',
+        data: {
+          nome: nome.value.trim(),
+          cognome: cognome.value.trim(),
+          email: email.value.trim(),
+          telefono: telefono.value.trim()
+        },
+        privacy_accepted: true
+      })
+    })
+      .then(function (r) {
+        if (r.status === 422 || r.status === 400) {
+          return r.json().then(function (err) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Iscriviti al Webinar';
+            errorDiv.textContent = err.detail || 'Errore di validazione.';
+            errorDiv.classList.add('ew-visible');
+            return null;
+          });
+        }
+        return r.json();
+      })
+      .then(function (result) {
+        if (!result) return;
+        var bodyEl = card.querySelector('.ew-form-body');
+        bodyEl.innerHTML = '';
+        var done = document.createElement('div');
+        done.className = 'ew-form-done';
+        done.innerHTML = '<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>' +
+          '<span>Iscrizione completata con successo!</span>';
+        bodyEl.appendChild(done);
+        if (result.speech) { typeBotMessage(result.speech, true); }
+        scrollDown();
+      })
+      .catch(function () {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Iscriviti al Webinar';
+        errorDiv.textContent = 'Errore di connessione. Riprova.';
+        errorDiv.classList.add('ew-visible');
+      });
+  }
+
+  function submitHumanForm(card, errorDiv, submitBtn) {
+    errorDiv.classList.remove('ew-visible');
+
+    var nome = card.querySelector('input[name="human_nome"]');
+    var email = card.querySelector('input[name="human_email"]');
+    var telefono = card.querySelector('input[name="human_telefono"]');
+    var privacy = card.querySelector('input[name="human_privacy"]');
+
+    if (!nome.value.trim() || !email.value.trim() || !telefono.value.trim()) {
+      errorDiv.textContent = 'Compila tutti i campi.';
+      errorDiv.classList.add('ew-visible');
+      return;
+    }
+    if (!privacy.checked) {
+      errorDiv.textContent = 'Devi accettare il trattamento dei dati personali.';
+      errorDiv.classList.add('ew-visible');
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Invio richiesta...';
+
+    // Track human callback request
+    if (analytics) {
+      analytics.trackFormSubmitted('human_callback', {
+        nome: nome.value.trim(),
+        email: email.value.trim(),
+        telefono: telefono.value.trim()
+      });
+    }
+
+    fetch(API_BASE + '/api/chat/submit-form', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        session_id: sessionId,
+        form_id: 'human_callback',
+        data: {
+          nome: nome.value.trim(),
+          email: email.value.trim(),
+          telefono: telefono.value.trim()
+        },
+        privacy_accepted: true
+      })
+    })
+      .then(function (r) {
+        if (r.status === 422 || r.status === 400) {
+          return r.json().then(function (err) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Richiedi richiamata';
+            errorDiv.textContent = err.detail || 'Errore di validazione.';
+            errorDiv.classList.add('ew-visible');
+            return null;
+          });
+        }
+        return r.json();
+      })
+      .then(function (result) {
+        if (!result) return;
+        var bodyEl = card.querySelector('.ew-form-body');
+        bodyEl.innerHTML = '';
+        var done = document.createElement('div');
+        done.className = 'ew-form-done';
+        done.innerHTML = '<svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>' +
+          '<span>Richiesta inviata! Ti contatteremo entro 24 ore.</span>';
+        bodyEl.appendChild(done);
+        if (result.speech) { typeBotMessage(result.speech, true); }
+        scrollDown();
+      })
+      .catch(function () {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Richiedi richiamata';
+        errorDiv.textContent = 'Errore di connessione. Riprova.';
+        errorDiv.classList.add('ew-visible');
+      });
   }
 
   function submitForm(formConfig, card, fields, errorDiv, submitBtn) {
