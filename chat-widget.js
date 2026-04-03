@@ -482,13 +482,42 @@
 
     var contextData = getPageContext();
     
+    const quizParams = window.ChatWidget 
+      ? window.ChatWidget.getParams() 
+      : {};
+
+    const payload = {
+      page_context: contextData,
+      personalized_greeting: personalizedGreeting,
+      known_contact: quizParams.email ? {
+        nome: quizParams.nome,
+        cognome: quizParams.cognome,
+        email: quizParams.email,
+        telefono: quizParams.telefono
+      } : null,
+      session_extra: quizParams.quiz_status ? {
+        test_results: {
+          test_type: quizParams.quiz_status,
+          pam: quizParams.pam,
+          punteggio: quizParams.punteggio,
+          punteggio1: quizParams.punteggio1,
+          punteggio2: quizParams.punteggio2,
+          miglioramento: quizParams.miglioramento,
+          fatturato_attuale: quizParams.fatturato_attuale,
+          fatturato_potenziale: quizParams.fatturato_potenziale,
+          crescita_potenziale: quizParams.crescita_potenziale,
+          criticita_opportunita: quizParams.criticita_opportunita,
+          criticita_inefficienza: quizParams.criticita_inefficienza,
+          criticita_competitivita: quizParams.criticita_competitivita,
+          criticita_innovazione: quizParams.criticita_innovazione
+        }
+      } : null
+    };
+    
     fetch(API_BASE + '/api/chat/session/start', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ 
-        page_context: contextData,
-        personalized_greeting: personalizedGreeting
-      })
+      body: JSON.stringify(payload)
     })
       .then(function (r) { return r.json(); })
       .then(function (data) {
@@ -544,14 +573,45 @@
 
     var startPromise = sessionId
       ? Promise.resolve()
-      : fetch(API_BASE + '/api/chat/session/start', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ 
+      : (function() {
+          const quizParams = window.ChatWidget 
+            ? window.ChatWidget.getParams() 
+            : {};
+
+          const payload = {
             page_context: getPageContext(),
-            personalized_greeting: userSource ? userSource.getPersonalizedGreeting() : null
-          })
-        })
+            personalized_greeting: userSource ? userSource.getPersonalizedGreeting() : null,
+            known_contact: quizParams.email ? {
+              nome: quizParams.nome,
+              cognome: quizParams.cognome,
+              email: quizParams.email,
+              telefono: quizParams.telefono
+            } : null,
+            session_extra: quizParams.quiz_status ? {
+              test_results: {
+                test_type: quizParams.quiz_status,
+                pam: quizParams.pam,
+                punteggio: quizParams.punteggio,
+                punteggio1: quizParams.punteggio1,
+                punteggio2: quizParams.punteggio2,
+                miglioramento: quizParams.miglioramento,
+                fatturato_attuale: quizParams.fatturato_attuale,
+                fatturato_potenziale: quizParams.fatturato_potenziale,
+                crescita_potenziale: quizParams.crescita_potenziale,
+                criticita_opportunita: quizParams.criticita_opportunita,
+                criticita_inefficienza: quizParams.criticita_inefficienza,
+                criticita_competitivita: quizParams.criticita_competitivita,
+                criticita_innovazione: quizParams.criticita_innovazione
+              }
+            } : null
+          };
+
+          return fetch(API_BASE + '/api/chat/session/start', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+        })()
           .then(function (r) { return r.json(); })
           .then(function (d) { sessionId = d.session_id; });
 
@@ -1827,10 +1887,42 @@
   function startAutoOpen() {
     setTimeout(function () {
       if (chatOpened) return;
+      const quizParams = window.ChatWidget 
+        ? window.ChatWidget.getParams() 
+        : {};
+
+      const payload = {
+        page_context: getPageContext(),
+        personalized_greeting: null,
+        known_contact: quizParams.email ? {
+          nome: quizParams.nome,
+          cognome: quizParams.cognome,
+          email: quizParams.email,
+          telefono: quizParams.telefono
+        } : null,
+        session_extra: quizParams.quiz_status ? {
+          test_results: {
+            test_type: quizParams.quiz_status,
+            pam: quizParams.pam,
+            punteggio: quizParams.punteggio,
+            punteggio1: quizParams.punteggio1,
+            punteggio2: quizParams.punteggio2,
+            miglioramento: quizParams.miglioramento,
+            fatturato_attuale: quizParams.fatturato_attuale,
+            fatturato_potenziale: quizParams.fatturato_potenziale,
+            crescita_potenziale: quizParams.crescita_potenziale,
+            criticita_opportunita: quizParams.criticita_opportunita,
+            criticita_inefficienza: quizParams.criticita_inefficienza,
+            criticita_competitivita: quizParams.criticita_competitivita,
+            criticita_innovazione: quizParams.criticita_innovazione
+          }
+        } : null
+      };
+
       fetch(API_BASE + '/api/chat/session/start', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ page_context: getPageContext() })
+        body: JSON.stringify(payload)
       })
         .then(function (r) { return r.json(); })
         .then(function (data) {
@@ -2099,4 +2191,23 @@
   } else {
     inject();
   }
+
+  // ── Public API ──────────────────────────────────────
+  window.ChatWidget = {
+    
+    _params: {},
+    
+    init: function(params) {
+      this._params = params || {};
+    },
+    
+    open: function() {
+      openChat();
+    },
+    
+    getParams: function() {
+      return this._params;
+    }
+  };
+
 })();
