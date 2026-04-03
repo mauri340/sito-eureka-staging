@@ -458,33 +458,56 @@ body {
                 const telefono = formData.get('telefono') || '';
                 
                 // Calculate total score and growth potential
-                const totalScore = scoresDesk.opportunità + scoresDesk.inefficienza + scoresDesk.competitività + scoresDesk.innovazione;
                 const crescitaPotenziale = Math.round(fatturatoPotenzialeCalculatedDesk - fatturatoAttualeDesk);
                 
-                // Generate unique userId
-                const userId = Date.now().toString();
-                
-                // Redirect to chat system with ALL parameters
-                const chatUrl = `/chat-system/chat.html?` +
-                    `userId=${encodeURIComponent(userId)}` +
+                const quizPayload = {
+                  quiz_status: "costo_ignoranza",
+                  nome: nome,
+                  cognome: cognome,
+                  email: email,
+                  telefono: telefono,
+                  fatturato_attuale: fatturatoAttualeDesk,
+                  fatturato_potenziale: Math.round(fatturatoPotenzialeCalculatedDesk),
+                  crescita_potenziale: crescitaPotenziale,
+                  criticita_opportunita: getCriticality(scoresDesk.opportunità),
+                  criticita_inefficienza: getCriticality(scoresDesk.inefficienza),
+                  criticita_competitivita: getCriticality(scoresDesk.competitività),
+                  criticita_innovazione: getCriticality(scoresDesk.innovazione)
+                };
+
+                try {
+                  const response = await fetch(
+                    'https://ai-chat-service-nls9.onrender.com/api/quiz/submit',
+                    {
+                      method: 'POST',
+                      headers: {'Content-Type': 'application/json'},
+                      body: JSON.stringify(quizPayload)
+                    }
+                  );
+                  const data = await response.json();
+                  if (data.token) {
+                    window.location.href = 
+                      `/chat-system/chat.html?token=${data.token}`;
+                  } else {
+                    throw new Error('Token non ricevuto');
+                  }
+                } catch (error) {
+                  // Fallback con parametri URL
+                  window.location.href = 
+                    `/chat-system/chat.html?` +
+                    `quiz_status=costo_ignoranza` +
                     `&nome=${encodeURIComponent(nome)}` +
                     `&cognome=${encodeURIComponent(cognome)}` +
                     `&email=${encodeURIComponent(email)}` +
                     `&telefono=${encodeURIComponent(telefono)}` +
-                    `&quiz_status=costo_ignoranza` +
                     `&fatturato_attuale=${encodeURIComponent(fatturatoAttualeDesk)}` +
                     `&fatturato_potenziale=${encodeURIComponent(Math.round(fatturatoPotenzialeCalculatedDesk))}` +
                     `&crescita_potenziale=${encodeURIComponent(crescitaPotenziale)}` +
-                    `&punteggio_opportunita=${encodeURIComponent(scoresDesk.opportunità)}` +
-                    `&punteggio_inefficienza=${encodeURIComponent(scoresDesk.inefficienza)}` +
-                    `&punteggio_competitivita=${encodeURIComponent(scoresDesk.competitività)}` +
-                    `&punteggio_innovazione=${encodeURIComponent(scoresDesk.innovazione)}` +
-                    `&punteggio_totale=${encodeURIComponent(totalScore)}` +
                     `&criticita_opportunita=${encodeURIComponent(getCriticality(scoresDesk.opportunità))}` +
                     `&criticita_inefficienza=${encodeURIComponent(getCriticality(scoresDesk.inefficienza))}` +
                     `&criticita_competitivita=${encodeURIComponent(getCriticality(scoresDesk.competitività))}` +
                     `&criticita_innovazione=${encodeURIComponent(getCriticality(scoresDesk.innovazione))}`;
-                window.location.href = chatUrl;
+                }
             } catch (error) {
                 console.error('Errore durante il redirect:', error);
                 alert('Si è verificato un errore. Riprova.');
