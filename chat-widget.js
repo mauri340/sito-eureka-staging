@@ -1,28 +1,6 @@
 (function () {
   'use strict';
 
-  // Define ChatWidget API first - always available
-  window.ChatWidget = {
-    _params: {},
-    
-    init: function(params) {
-      this._params = params || {};
-    },
-    
-    open: function() {
-      if (!window.DISABLE_CHAT_WIDGET) {
-        openChat();
-      }
-    },
-    
-    getParams: function() {
-      return this._params;
-    }
-  };
-
-  // Check if chat widget should be disabled on this page
-  if (window.DISABLE_CHAT_WIDGET) return;
-
   var PRODUCTION_API = 'https://ai-chat-service-nls9.onrender.com';
   var CALL_API = 'https://ai-chat-service-nls9.onrender.com';
 
@@ -500,10 +478,7 @@
   // ── Session Start ───────────────────────────────────
   function startSession() {
     showTyping();
-    var payload = { page_context: getPageContext() };
-    if (userParams) { payload.user_data = userParams; }
     
-    // Get personalized greeting if user source is available
     var personalizedGreeting = 'Ciao! Sono Mentor Eureka. Come posso aiutarti?';
     if (userSource && userSource.getPersonalizedGreeting) {
       personalizedGreeting = userSource.getPersonalizedGreeting();
@@ -511,11 +486,11 @@
 
     var contextData = getPageContext();
     
-    const quizParams = window.ChatWidget 
+    var quizParams = window.ChatWidget 
       ? window.ChatWidget.getParams() 
       : {};
 
-    const payload = {
+    var payload = {
       page_context: contextData,
       personalized_greeting: personalizedGreeting,
       known_contact: quizParams.email ? {
@@ -2228,20 +2203,18 @@
     },
     close: function () {
       closeChat();
+    },
+    getParams: function () {
+      return userParams || {};
     }
   };
 
   // ── Boot ────────────────────────────────────────────
-  if (window.DISABLE_CHAT_WIDGET) {
-    return;
+  if (!window.DISABLE_CHAT_WIDGET) {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', inject);
+    } else {
+      inject();
+    }
   }
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', inject);
-  } else {
-    inject();
-  }
-
-  // ── Public API ──────────────────────────────────────
-  // ChatWidget already defined at the top of the file
-
 })();
