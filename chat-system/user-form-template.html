@@ -1,0 +1,83 @@
+<!-- User Form Template for Quiz Results -->
+<!-- Copy this form structure into any quiz results screen -->
+
+<div class="user-form-container">
+    <h2>Complimenti per aver completato il test!</h2>
+    
+    <p id="quiz-result-text" style="text-align: center; font-size: 1.3em; font-weight: bold;">
+        <!-- Insert quiz-specific result text here -->
+    </p>
+    
+    <h3 style="color: #4e54c8; margin-top: 25px;">La tua vera crescita inizia adesso.</h3>
+    
+    <p style="text-align: center; font-size: 1.1em;">
+        Il tuo punteggio è solo un punto di partenza. Scopri le tecniche specifiche che ti permettono di migliorare drasticamente i tuoi risultati.
+    </p>
+    
+    <p style="text-align: center; font-weight: 600;">
+        Inserisci i tuoi dati per accedere subito al video che te le svelerà!
+    </p>
+    
+    <form id="user-contact-form" class="form-contatto">
+        <input type="text" name="nome" placeholder="Nome" required>
+        <input type="text" name="cognome" placeholder="Cognome" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="tel" name="telefono" placeholder="Numero di telefono" required>
+        
+        <!-- Hidden fields for quiz results - customize these for each quiz -->
+        <input type="hidden" name="punteggio" id="quiz-score">
+        <input type="hidden" name="quiz_type" value=""> <!-- Set this value for each quiz -->
+        
+        <div style="display: flex; align-items: flex-start; margin: 20px 0; font-size: 0.9em; text-align: left;">
+            <input type="checkbox" id="privacy-consent" name="privacy-consent" required style="margin-top: 5px; margin-right: 10px;">
+            <label for="privacy-consent">
+                <strong>Accettazione *</strong><br>
+                Cliccando sul pulsante "Invia e Scopri di più", dichiaro di aver preso visione dell'informativa privacy e acconsento al trattamento dei dati personali per finalità di marketing diretto di Apprendimento Rapido.
+            </label>
+        </div>
+        
+        <button type="submit" class="btn">Invia e Scopri di più</button>
+    </form>
+</div>
+
+<script>
+// Template script for handling form submission
+// Customize the quiz_status parameter for each quiz
+function handleUserFormSubmit(event, quizStatus) {
+    event.preventDefault();
+    
+    const form = document.getElementById('user-contact-form');
+    const consentCheckbox = document.getElementById('privacy-consent');
+    
+    if (!consentCheckbox.checked) {
+        alert("Per procedere, è necessario accettare la policy sulla privacy.");
+        return;
+    }
+    
+    if (!form.nome.value.trim() || !form.cognome.value.trim() || 
+        !form.email.value.trim() || !form.telefono.value.trim()) {
+        alert("Per favore, compila tutti i campi richiesti.");
+        return;
+    }
+    
+    // Collect form data
+    const nome = form.nome.value.trim();
+    const cognome = form.cognome.value.trim();
+    const email = form.email.value.trim();
+    const telefono = form.telefono.value.trim();
+    const punteggio = form.punteggio.value || '0';
+    
+    // Generate unique userId
+    const userId = Date.now().toString();
+    
+    // Redirect to shared chat system with URL parameters
+    const chatUrl = `/chat-system/chat.html?userId=${encodeURIComponent(userId)}&nome=${encodeURIComponent(nome)}&cognome=${encodeURIComponent(cognome)}&email=${encodeURIComponent(email)}&telefono=${encodeURIComponent(telefono)}&punteggio=${encodeURIComponent(punteggio)}&quiz_status=${encodeURIComponent(quizStatus)}&pam=non_definito`;
+    
+    window.location.href = chatUrl;
+}
+
+// Example usage for specific quiz:
+// document.getElementById('user-contact-form').addEventListener('submit', (e) => {
+//     handleUserFormSubmit(e, 'memoria'); // or 'lettura', 'costo_ignoranza', etc.
+// });
+</script>

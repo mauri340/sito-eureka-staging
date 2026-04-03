@@ -9,6 +9,7 @@ import uuid
 import os
 import io
 import mimetypes
+from datetime import datetime, timedelta
 
 PORT = 8000
 ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -28,6 +29,78 @@ PAGE_GREETINGS = {
 }
 
 DEFAULT_GREETING = "Ciao! Sono Mentor Eureka. Come posso aiutarti?"
+
+# ── Slot Availability System ─────────────────────────
+# Simulazione slot disponibili per coaching 1:1
+AVAILABLE_SLOTS = {
+    # Lunedì - Venerdì: 9:00-12:00, 14:00-18:00
+    'monday': ['09:00', '10:00', '11:00', '14:00', '15:00', '16:00', '17:00'],
+    'tuesday': ['09:00', '10:00', '11:00', '14:00', '15:00', '16:00', '17:00'],
+    'wednesday': ['09:00', '10:00', '11:00', '14:00', '15:00', '16:00', '17:00'],
+    'thursday': ['09:00', '10:00', '11:00', '14:00', '15:00', '16:00', '17:00'],
+    'friday': ['09:00', '10:00', '11:00', '14:00', '15:00', '16:00', '17:00']
+}
+
+# Simulazione appuntamenti già prenotati
+BOOKED_APPOINTMENTS = [
+    {'date': '2026-03-27', 'time': '10:00', 'nome': 'Mario Rossi'},
+    {'date': '2026-03-27', 'time': '15:00', 'nome': 'Laura Bianchi'},
+    {'date': '2026-03-28', 'time': '09:00', 'nome': 'Giuseppe Verdi'}
+]
+
+def get_available_slots(target_date=None):
+    """Restituisce gli slot disponibili per una data specifica o i prossimi 7 giorni"""
+    available = []
+    start_date = datetime.now() if not target_date else datetime.strptime(target_date, '%Y-%m-%d')
+    
+    for i in range(7):  # Prossimi 7 giorni
+        check_date = start_date + timedelta(days=i)
+        date_str = check_date.strftime('%Y-%m-%d')
+        weekday = check_date.strftime('%A').lower()
+        
+        # Solo giorni lavorativi
+        if weekday not in AVAILABLE_SLOTS:
+            continue
+            
+        # Controlla se è nel futuro (non nel passato)
+        if check_date.date() < datetime.now().date():
+            continue
+            
+        day_slots = AVAILABLE_SLOTS[weekday].copy()
+        
+        # Rimuovi slot già prenotati
+        booked_times = [apt['time'] for apt in BOOKED_APPOINTMENTS if apt['date'] == date_str]
+        available_times = [time for time in day_slots if time not in booked_times]
+        
+        if available_times:
+            available.append({
+                'date': date_str,
+                'weekday': weekday.capitalize(),
+                'slots': available_times
+            })
+    
+    return available
+
+def book_appointment(date, time, nome, email, telefono):
+    """Prenota un appuntamento se lo slot è disponibile"""
+    # Verifica se lo slot è ancora disponibile
+    available = get_available_slots(date)
+    date_available = next((d for d in available if d['date'] == date), None)
+    
+    if not date_available or time not in date_available['slots']:
+        return False, "Lo slot selezionato non è più disponibile."
+    
+    # Simula prenotazione (in un sistema reale salveresti nel database)
+    BOOKED_APPOINTMENTS.append({
+        'date': date,
+        'time': time,
+        'nome': nome,
+        'email': email,
+        'telefono': telefono,
+        'created_at': datetime.now().isoformat()
+    })
+    
+    return True, f"Appuntamento confermato per {nome} il {date} alle {time}"
 
 
 class Handler(http.server.SimpleHTTPRequestHandler):
@@ -137,6 +210,8 @@ class Handler(http.server.SimpleHTTPRequestHandler):
                 {'name': 'cognome', 'label': 'Cognome', 'type': 'text', 'placeholder': 'Il tuo cognome', 'required': True},
                 {'name': 'email', 'label': 'Email', 'type': 'email', 'placeholder': 'la.tua@email.it', 'required': True},
                 {'name': 'telefono', 'label': 'Telefono', 'type': 'tel', 'placeholder': '+39 333 1234567', 'required': True},
+                {'name': 'preferred_date', 'label': 'Data Preferita', 'type': 'date', 'placeholder': '', 'required': True},
+                {'name': 'preferred_time', 'label': 'Orario Preferito', 'type': 'select', 'placeholder': 'Seleziona orario', 'required': True, 'options': []},
             ],
             'privacy_checkbox': True,
             'privacy_text': 'Acconsento al trattamento dei dati personali ai sensi del GDPR.',
@@ -159,6 +234,30 @@ class Handler(http.server.SimpleHTTPRequestHandler):
     def _handle_message(self, body):
         msg = body.get('message', '').lower()
         session_id = body.get('session_id', '')
+        
+        # Gestione richiesta slot disponibili
+        if any(w in msg for w in ['slot', 'orari', 'disponibilit', 'quando']):
+            available_slots = get_available_slots()
+            if available_slots:
+                slots_text = "Ecco i prossimi slot disponibili:\n\n"
+                for day in available_slots[:3]:  # Primi 3 giorni
+                    slots_text += f"📅 {day['weekday']} {day['date']}:\n"
+                    for slot in day['slots'][:4]:  # Primi 4 slot del giorno
+                        slots_text += f"   • {slot}\n"
+                    slots_text += "\n"
+                slots_text += "Vuoi prenotare una coaching gratuita?"
+            else:
+                slots_text = "Attualmente non ci sono slot disponibili nei prossimi giorni. Ti contatteremo per trovare un orario che va bene per entrambi."
+            
+            self._json_response({
+                'session_id': session_id,
+                'action': 'reply',
+                'speech': slots_text,
+                'display_text': slots_text,
+                'state': {'stage': 'slot_inquiry'},
+                'business_result': None, 'audio_base64': None,
+            })
+            return
 
         if any(w in msg for w in ['iscri', 'registr', 'prenot']) and any(w in msg for w in ['webinar', 'zoom', 'diretta']):
             self._json_response({
@@ -174,12 +273,32 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             return
 
         if any(w in msg for w in ['iscri', 'registr', 'prenot']) and any(w in msg for w in ['coaching', 'sessione', '1:1']):
+            # Aggiorna dinamicamente gli slot disponibili nel form
+            coaching_form = self.FORMS['coaching_booking'].copy()
+            coaching_form['fields'] = coaching_form['fields'].copy()
+            
+            # Popola le opzioni di orario con gli slot disponibili
+            available_slots = get_available_slots()
+            time_options = []
+            for day in available_slots:
+                for slot in day['slots']:
+                    time_options.append({
+                        'value': f"{day['date']}|{slot}",
+                        'label': f"{day['weekday']} {day['date']} - {slot}"
+                    })
+            
+            # Trova il campo orario e aggiorna le opzioni
+            for field in coaching_form['fields']:
+                if field['name'] == 'preferred_time':
+                    field['options'] = time_options[:20]  # Limita a 20 opzioni
+                    break
+            
             self._json_response({
                 'session_id': session_id,
                 'action': 'show_form',
-                'speech': "Ottimo! Compila il modulo per prenotare la tua coaching gratuita.",
-                'display_text': "Ottimo! Compila il modulo per prenotare la tua coaching gratuita.",
-                'form': self.FORMS['coaching_booking'],
+                'speech': "Ottimo! Compila il modulo per prenotare la tua coaching gratuita. Seleziona uno slot disponibile.",
+                'display_text': "Ottimo! Compila il modulo per prenotare la tua coaching gratuita. Seleziona uno slot disponibile.",
+                'form': coaching_form,
                 'state': {'stage': 'data_collection', 'flow_target': 'coaching',
                           'collected_fields': {}, 'awaiting_confirmation': False, 'action_executed': False},
                 'business_result': None, 'audio_base64': None,
@@ -198,8 +317,25 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             speech = "Ciao! Piacere di conoscerti. Come posso aiutarti oggi? Posso parlarti del metodo, del webinar gratuito, o delle nostre risorse."
         elif any(w in msg for w in ['grazie', 'thanks']):
             speech = "Prego! Se hai altre domande, sono qui. In bocca al lupo per il tuo percorso di apprendimento!"
-        else:
+        elif any(w in msg for w in ['come', 'cosa', 'funziona', 'metodo']):
             speech = "Ottima domanda! Il Metodo Eureka ti insegna tecniche di memoria, lettura veloce e mappe mentali. Con soli 30 minuti al giorno puoi migliorare drasticamente. Vuoi saperne di piu'?"
+        elif any(w in msg for w in ['struttur', 'organizzat', 'come era', 'come è']):
+            speech = "Il metodo è strutturato in 3 moduli principali: tecniche di memoria per ricordare meglio, lettura veloce per studiare più rapidamente, e mappe mentali per organizzare le informazioni. Vuoi che ti spieghi uno di questi in dettaglio?"
+        elif any(w in msg for w in ['capire', 'capito', 'voglio sapere']):
+            speech = "Perfetto! Ti spiego brevemente: il Metodo Eureka combina neuroscienza e tecniche pratiche per ottimizzare l'apprendimento. È pensato per professionisti che hanno poco tempo ma grandi obiettivi. Di cosa vorresti sapere di più?"
+        elif any(w in msg for w in ['normale', 'normalmente', 'parlare normale']):
+            speech = "Hai ragione! Dimmi pure, cosa vorresti sapere? Sono qui per rispondere alle tue domande in modo naturale."
+        else:
+            # More varied responses for unrecognized input
+            import random
+            fallback_responses = [
+                "Interessante punto! Potresti essere più specifico? Ti posso aiutare con informazioni sul metodo, webinar gratuiti, o coaching 1:1.",
+                "Non sono sicuro di aver capito bene. Potresti riformulare la domanda? Sono qui per aiutarti con il Metodo Eureka.",
+                "Buona domanda! Per darti una risposta più precisa, potresti dirmi cosa ti interessa di più: il metodo di studio, i corsi disponibili, o altro?",
+                "Mi spiace, non ho capito bene. Puoi essere più specifico? Posso parlarti del metodo, dei webinar gratuiti, o prenotare una coaching.",
+                "Hmm, potresti chiarire meglio la tua richiesta? Sono qui per aiutarti con tutto quello che riguarda l'apprendimento rapido!"
+            ]
+            speech = random.choice(fallback_responses)
 
         self._json_response({
             'session_id': session_id,
@@ -230,7 +366,22 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         if form_id == 'webinar_registration':
             speech = f"Perfetto {nome}! Ti abbiamo iscritto al webinar gratuito. A breve riceverai un'email di conferma a {email}."
         elif form_id == 'coaching_booking':
-            speech = f"Ottimo {nome}! La tua richiesta di coaching e' stata inviata. Ti contatteremo a {email} per confermare data e orario."
+            # Gestione prenotazione coaching con verifica slot
+            preferred_time = data.get('preferred_time', '')
+            if '|' in preferred_time:
+                date, time = preferred_time.split('|')
+                telefono = data.get('telefono', '')
+                
+                success, message = book_appointment(date, time, nome, email, telefono)
+                
+                if success:
+                    speech = f"🎉 Perfetto {nome}! Il tuo appuntamento è confermato per {date} alle {time}. Ti invieremo un'email di conferma a {email} con il link Zoom."
+                else:
+                    # Slot non più disponibile
+                    self._json_response({'detail': message}, 422)
+                    return
+            else:
+                speech = f"Ottimo {nome}! La tua richiesta di coaching è stata inviata. Ti contatteremo a {email} per confermare data e orario."
         else:
             speech = f"Grazie {nome}! Abbiamo ricevuto i tuoi dati. Ti contatteremo presto a {email}."
 

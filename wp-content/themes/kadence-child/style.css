@@ -1,0 +1,801 @@
+/*
+ Theme Name: Kadence Child
+ Template:   kadence
+ Description: Child theme luxury — Apprendimento Rapido v4
+ Version:    4.0
+*/
+
+/* ─── 1. GOOGLE FONTS (match index.html fonts exactly) ─── */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500;600;700;800&display=swap');
+
+/* ─── 2. VARIABILI COLORI (match index.html exactly) ─── */
+:root {
+  --ar-navy:      #0D1B2A;
+  --ar-navy2:     #1C2B3A;
+  --ar-teal:      #00A988;
+  --ar-teal-dk:   #007a63;
+  --ar-teal-lt:   #e6f7f4;
+  --ar-gold:      #B8973E;
+  --ar-gold-lt:   #f9f3e7;
+  --ar-white:     #ffffff;
+  --ar-light:     #F8F7F4;
+  --ar-light2:    #F0EDE8;
+  --ar-offwhite:  #F8F7F4;
+  --ar-text:      #1a1a2e;
+  --ar-muted:     #6B7280;
+  --ar-muted-dk:  #4B5563;
+  --ar-border:    rgba(0,0,0,0.08);
+  --ar-nav-h:     72px;
+}
+
+/* ─── 3. TIPOGRAFIA BASE ──────────────────────────────── */
+/* Font rounding abilitato */
+html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; }
+
+body,
+.site,
+.entry-content,
+.wp-block-post-content {
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: 17px !important;
+  font-weight: 400 !important;
+  color: var(--ar-text) !important;
+  background-color: var(--ar-white) !important;
+}
+
+/* ─── 4. INTESTAZIONI H1–H6 ──────────────────────────── */
+h1, h2, h3, h4, h5, h6,
+.entry-content h1,
+.entry-content h2,
+.entry-content h3,
+.entry-content h4,
+.entry-content h5,
+.entry-content h6 {
+  font-family: inherit !important;   /* eredita system-ui dal body */
+  font-weight: 700 !important;
+  color: var(--ar-navy) !important;
+  line-height: 1.25 !important;
+}
+
+h1, .entry-content h1 { font-size: 32px !important; }
+h2, .entry-content h2 { font-size: 28px !important; }
+h3, .entry-content h3 { font-size: 24px !important; }
+h4, .entry-content h4 { font-size: 22px !important; }
+h5, .entry-content h5 { font-size: 20px !important; }
+h6, .entry-content h6 { font-size: 18px !important; }
+
+/* ─── 5. TITOLO SOPRA CONTENUTO (H1 titolo articolo) ─── */
+/* Questo è l'H1 visibile nell'header della pagina/articolo */
+.entry-title,
+h1.entry-title,
+.page-title,
+.wp-block-post-title {
+  font-family: 'Playfair Display', Georgia, serif !important;
+  font-weight: 400 !important;   /* regular come da brief */
+  font-size: inherit !important; /* eredita la dimensione H1 (32px) */
+  color: var(--ar-navy) !important;
+}
+
+/* ─── 6. BREADCRUMB ─────────────────────────────────────*/
+.kadence-breadcrumbs,
+.breadcrumb,
+nav.breadcrumb,
+.breadcrumb-trail,
+.breadcrumb-trail a {
+  font-family: inherit !important;
+  font-size: inherit !important;
+  font-weight: inherit !important;
+  color: var(--ar-muted) !important;
+}
+
+/* ─── 7. NAVBAR — EXACT INDEX.HTML MATCH ──────────── */
+/* Strong selectors to override Kadence header builder */
+
+/* Main header container - fixed positioning with backdrop blur */
+.site-header, 
+#masthead,
+.site-header-wrap,
+.site-main-header-wrap,
+.site-top-header-wrap,
+.wp-site-blocks .site-header,
+.wp-site-blocks #masthead,
+#wrapper .site-header,
+#wrapper #masthead,
+body #masthead,
+body .site-header,
+body .site-header-wrap,
+body .site-main-header-wrap,
+html body #masthead,
+html body .site-header {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 1000 !important;
+  height: var(--ar-nav-h) !important;
+  background: rgba(255,255,255,0.97) !important;
+  border-bottom: 1px solid var(--ar-border) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  display: flex !important;
+  align-items: center !important;
+  padding: 0 40px !important;
+  justify-content: space-between !important;
+  max-width: none !important;
+  width: 100% !important;
+  margin: 0 !important;
+  transform: none !important;
+  min-height: var(--ar-nav-h) !important;
+  max-height: var(--ar-nav-h) !important;
+}
+
+/* Header inner containers */
+#masthead .site-header-inner-wrap,
+.site-header .site-header-inner-wrap,
+#masthead .site-main-header-wrap,
+.site-main-header-wrap,
+#masthead .site-main-header-wrap .site-header-row-container-inner,
+.site-main-header-wrap .site-header-row-container-inner,
+#wrapper #masthead .site-header-inner-wrap,
+body #masthead .site-header-inner-wrap,
+html body #masthead .site-header-inner-wrap {
+  position: static !important;
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  height: var(--ar-nav-h) !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: none !important;
+}
+
+/* Logo styling - exact match to index.html */
+.site-branding,
+.header-branding,
+.custom-logo-link,
+#masthead .site-branding,
+#masthead .custom-logo-link,
+body #masthead .site-branding,
+body .site-header .site-branding,
+#wrapper #masthead .site-branding,
+html body #masthead .site-branding {
+  text-decoration: none !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+}
+
+.site-branding img,
+.custom-logo-link img,
+#masthead .site-branding img,
+#masthead .custom-logo-link img,
+body #masthead .site-branding img,
+body .site-header .site-branding img,
+#wrapper #masthead .site-branding img,
+html body #masthead .site-branding img {
+  height: 46px !important;
+  width: auto !important;
+  display: block !important;
+}
+
+.site-branding .site-title a,
+#masthead .site-branding .site-title a,
+body #masthead .site-branding .site-title a,
+html body #masthead .site-branding .site-title a {
+  font-family: 'Playfair Display', serif !important;
+  color: var(--ar-navy) !important;
+  font-weight: 700 !important;
+  text-decoration: none !important;
+}
+
+/* Navigation menu - exact match to index.html */
+.main-navigation,
+.header-navigation,
+.primary-menu-container,
+#site-navigation,
+#masthead .main-navigation,
+#masthead .header-navigation,
+body #masthead .main-navigation,
+body .site-header .main-navigation,
+#wrapper #masthead .main-navigation,
+html body #masthead .main-navigation {
+  display: flex !important;
+  align-items: center !important;
+  gap: 2px !important;
+}
+
+.main-navigation ul,
+.header-navigation ul,
+.primary-menu-container ul,
+#site-navigation ul,
+#masthead .main-navigation ul,
+#masthead .header-navigation ul,
+body #masthead .main-navigation ul,
+body .site-header .main-navigation ul,
+#wrapper #masthead .main-navigation ul,
+html body #masthead .main-navigation ul {
+  display: flex !important;
+  align-items: center !important;
+  gap: 2px !important;
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.main-navigation ul li,
+.header-navigation ul li,
+.primary-menu-container ul li,
+#site-navigation ul li,
+#masthead .main-navigation ul li,
+#masthead .header-navigation ul li,
+body #masthead .main-navigation ul li,
+body .site-header .main-navigation ul li,
+#wrapper #masthead .main-navigation ul li,
+html body #masthead .main-navigation ul li {
+  position: relative !important;
+  list-style: none !important;
+  margin: 0 !important;
+}
+
+/* Navigation links - exact match to index.html nav styling */
+.main-navigation ul li a,
+.header-navigation ul li a,
+.primary-menu-container ul li a,
+#site-navigation ul li a,
+#masthead .main-navigation ul li a,
+#masthead .header-navigation ul li a,
+body #masthead .main-navigation ul li a,
+body .site-header .main-navigation ul li a,
+#wrapper #masthead .main-navigation ul li a,
+html body #masthead .main-navigation ul li a,
+.site-header .header-navigation ul li a {
+  display: flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+  padding: 8px 16px !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  color: var(--ar-muted-dk) !important;
+  text-decoration: none !important;
+  border-radius: 8px !important;
+  cursor: pointer !important;
+  transition: color .2s, background .2s !important;
+  white-space: nowrap !important;
+  letter-spacing: 0.2px !important;
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+/* Navigation hover states - exact match to index.html */
+.main-navigation ul li a:hover,
+.header-navigation ul li a:hover,
+.primary-menu-container ul li a:hover,
+#site-navigation ul li a:hover,
+#masthead .main-navigation ul li a:hover,
+#masthead .header-navigation ul li a:hover,
+body #masthead .main-navigation ul li a:hover,
+body .site-header .main-navigation ul li a:hover,
+#wrapper #masthead .main-navigation ul li a:hover,
+html body #masthead .main-navigation ul li a:hover,
+.site-header .header-navigation ul li a:hover {
+  color: var(--ar-text) !important;
+  background: var(--ar-light) !important;
+}
+
+/* Login button styling - match index.html btn-login */
+.main-navigation ul li a.btn-login,
+.header-navigation ul li a.btn-login,
+#masthead .main-navigation ul li a.btn-login,
+body #masthead .main-navigation ul li a.btn-login {
+  background: var(--ar-navy) !important;
+  color: #fff !important;
+  margin-left: 12px !important;
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+}
+
+.main-navigation ul li a.btn-login:hover,
+.header-navigation ul li a.btn-login:hover,
+#masthead .main-navigation ul li a.btn-login:hover,
+body #masthead .main-navigation ul li a.btn-login:hover {
+  background: var(--ar-navy2) !important;
+}
+
+/* Body padding for fixed header */
+body {
+  padding-top: var(--ar-nav-h) !important;
+}
+
+/* Override sticky header behaviors */
+#masthead.kadence-sticky-header,
+.site-header.kadence-sticky-header,
+#masthead.item-is-sticky,
+.site-header.item-is-sticky,
+#masthead.item-is-stuck,
+.site-header.item-is-stuck {
+  position: fixed !important;
+  top: 0 !important;
+  transform: none !important;
+}
+
+/* Mobile responsive - match index.html breakpoints */
+@media(max-width: 860px) {
+  .site-header, 
+  #masthead,
+  .site-header-wrap,
+  .site-main-header-wrap,
+  body #masthead,
+  body .site-header,
+  html body #masthead {
+    padding: 0 20px !important;
+  }
+  
+  #masthead .site-header-inner-wrap,
+  .site-header .site-header-inner-wrap,
+  .site-main-header-wrap,
+  body #masthead .site-header-inner-wrap {
+    padding: 0 !important;
+  }
+  
+  /* Hide desktop menu on mobile */
+  .main-navigation,
+  .header-navigation,
+  #masthead .main-navigation,
+  body #masthead .main-navigation {
+    display: none !important;
+  }
+}
+
+/* ─── 8. ARTICOLO SINGOLO — HERO HEADER ─────────────── */
+.single .entry-header,
+article.single-entry header.entry-header {
+  background: linear-gradient(135deg, var(--ar-navy) 0%, var(--ar-navy2) 100%) !important;
+  padding: 72px 48px 52px !important;
+}
+/* H1 nel hero ha Playfair bianco */
+.single .entry-title,
+.single h1.entry-title {
+  color: #ffffff !important;
+  font-size: clamp(1.8rem, 3vw, 2.6rem) !important;
+  font-weight: 700 !important;
+}
+.single .entry-meta,
+.single .entry-meta a,
+.single .entry-meta time {
+  color: rgba(255,255,255,.55) !important;
+  font-size: 13px !important;
+}
+
+/* ─── 9. ARTICOLO SINGOLO — CONTENUTO ───────────────── */
+.single .entry-content,
+.single div.entry-content {
+  max-width: 760px !important;
+  margin: 52px auto 64px !important;
+  background: #ffffff !important;
+  border-radius: 16px !important;
+  box-shadow: 0 2px 28px rgba(0,0,0,.07) !important;
+  padding: 52px 60px !important;
+}
+.single .entry-content p { line-height: 1.9 !important; margin-bottom: 20px !important; }
+.single .entry-content h2 { border-bottom: 2px solid var(--ar-light) !important; padding-bottom: 12px !important; margin: 44px 0 14px !important; }
+.single .entry-content h3 { margin: 32px 0 10px !important; }
+.single .entry-content h4 {
+  background: var(--ar-offwhite) !important;
+  border-left: 3px solid var(--ar-teal) !important;
+  padding: 14px 18px !important;
+  border-radius: 0 8px 8px 0 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+  margin: 28px 0 10px !important;
+}
+.single .entry-content blockquote {
+  border-left: 3px solid var(--ar-gold) !important;
+  background: rgba(184,151,62,.1) !important;
+  padding: 22px 28px !important;
+  border-radius: 0 12px 12px 0 !important;
+  margin: 30px 0 !important;
+}
+.single .entry-content blockquote p {
+  font-family: 'Playfair Display', serif !important;
+  font-style: italic !important;
+  font-size: 1.1rem !important;
+  color: var(--ar-navy) !important;
+  margin: 0 !important;
+}
+.single .entry-content a { color: var(--ar-teal-dk) !important; font-weight: 500 !important; }
+.single .entry-content img { border-radius: 10px !important; box-shadow: 0 4px 20px rgba(0,0,0,.1) !important; max-width: 100% !important; }
+
+/* ─── 10. ARCHIVIO / BLOG — CARD ARTICOLI ───────────── */
+.archive article,
+.blog article,
+.category article {
+  background: #ffffff !important;
+  border: 1px solid var(--ar-light) !important;
+  border-radius: 16px !important;
+  overflow: hidden !important;
+  margin-bottom: 32px !important;
+  box-shadow: 0 2px 12px rgba(0,0,0,.04) !important;
+  transition: box-shadow .25s, transform .25s !important;
+}
+.archive article:hover,
+.blog article:hover { box-shadow: 0 12px 40px rgba(0,0,0,.1) !important; transform: translateY(-3px) !important; }
+
+.archive .post-thumbnail img,
+.blog .post-thumbnail img { width: 100% !important; height: 230px !important; object-fit: cover !important; }
+
+.archive .entry-title a,
+.blog .entry-title a { color: var(--ar-navy) !important; text-decoration: none !important; }
+.archive .entry-title a:hover,
+.blog .entry-title a:hover { color: var(--ar-teal-dk) !important; }
+
+.archive .entry-summary p,
+.blog .entry-summary p { font-size: .93rem !important; color: var(--ar-muted) !important; line-height: 1.75 !important; }
+
+a.more-link {
+  display: inline-flex !important;
+  padding: 9px 20px !important;
+  background: var(--ar-navy) !important;
+  color: #fff !important;
+  border-radius: 8px !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  margin-top: 10px !important;
+}
+a.more-link:hover { background: var(--ar-navy2) !important; }
+
+/* ─── 11. FOOTER ─────────────────────────────────────── */
+.site-footer, #colophon {
+  background: var(--ar-navy) !important;
+  color: rgba(255,255,255,.7) !important;
+}
+.site-footer a, #colophon a { color: rgba(255,255,255,.5) !important; }
+.site-footer a:hover, #colophon a:hover { color: var(--ar-teal) !important; }
+#colophon .site-info {
+  color: rgba(255,255,255,.3) !important;
+  font-size: 12px !important;
+  border-top: 1px solid rgba(255,255,255,.08) !important;
+  padding-top: 18px !important;
+  text-align: center !important;
+}
+
+/* ─── 12. UNIFIED FOOTER (matching static HTML pages) ─── */
+.footer.unified-footer {
+    background: var(--ar-navy) !important;
+    border-top: 1px solid rgba(255,255,255,.05) !important;
+    padding: 70px 0 0 !important;
+    color: rgba(255,255,255,.75) !important;
+}
+
+.footer.unified-footer .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 28px;
+}
+
+.footer.unified-footer .footer-grid {
+    display: grid !important;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr !important;
+    gap: 40px !important;
+    padding-bottom: 56px !important;
+    border-bottom: 1px solid rgba(255,255,255,.06) !important;
+}
+
+.footer.unified-footer .footer-brand img {
+    height: 48px !important;
+    margin-bottom: 18px !important;
+    opacity: .9 !important;
+}
+
+.footer.unified-footer .footer-brand p {
+    font-size: 13px !important;
+    color: rgba(255,255,255,.4) !important;
+    line-height: 1.75 !important;
+    max-width: 240px !important;
+}
+
+.footer.unified-footer .footer-col h4 {
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    color: rgba(255,255,255,.6) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1.5px !important;
+    margin-bottom: 18px !important;
+}
+
+.footer.unified-footer .footer-col a {
+    display: block !important;
+    font-size: 13px !important;
+    color: rgba(255,255,255,.35) !important;
+    text-decoration: none !important;
+    margin-bottom: 10px !important;
+    transition: color .2s !important;
+    font-weight: 400 !important;
+}
+
+.footer.unified-footer .footer-col a:hover {
+    color: var(--ar-teal) !important;
+}
+
+.footer.unified-footer .footer-contact {
+    font-size: 13px !important;
+    color: rgba(255,255,255,.35) !important;
+    line-height: 2 !important;
+}
+
+.footer.unified-footer .footer-bottom {
+    padding: 22px 0 !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    flex-wrap: wrap !important;
+    gap: 12px !important;
+}
+
+.footer.unified-footer .footer-bottom p {
+    font-size: 11px !important;
+    color: rgba(255,255,255,.2) !important;
+    letter-spacing: .2px !important;
+    margin: 0 !important;
+}
+
+.footer.unified-footer .footer-bottom div {
+    display: flex !important;
+    gap: 20px !important;
+}
+
+.footer.unified-footer .footer-bottom a {
+    font-size: 11px !important;
+    color: rgba(255,255,255,.3) !important;
+    text-decoration: none !important;
+    letter-spacing: .2px !important;
+}
+
+.footer.unified-footer .footer-bottom a:hover {
+    color: var(--ar-teal) !important;
+}
+
+/* ─── 13. HIDE COMMENTS COMPLETELY ─────────────────── */
+/* Users should interact via AI chat widget instead */
+#comments,
+.comments-area,
+.comment-respond,
+.comment-form,
+.comment-list,
+.comment-navigation,
+.comments-title,
+.no-comments,
+#respond,
+.single-comment,
+.comment-content,
+.comment-meta,
+.comment-author,
+.says,
+.comment-reply-link,
+.form-submit,
+.comment-form-comment,
+.comment-form-author,
+.comment-form-email,
+.comment-form-url,
+.comment-notes,
+.comment-awaiting-moderation,
+.bypostauthor,
+.comment-body,
+.reply,
+.form-allowed-tags {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* ─── 14. RELATED/SUGGESTED ARTICLES STYLING ───────── */
+/* Fix title sizes and visual consistency with dark site design */
+
+/* Related posts section container */
+.entry-related,
+.related-posts,
+.kadence-related-posts,
+.wp-block-query,
+.related-articles,
+.suggested-posts {
+  background: var(--ar-navy) !important;
+  margin: 0 !important;
+  padding: 60px 48px !important;
+  border-radius: 0 !important;
+}
+
+/* Related posts main title */
+.entry-related .entry-related-title,
+.related-posts h2,
+.related-posts h3,
+.kadence-related-posts h2,
+.kadence-related-posts h3,
+.related-articles h2,
+.related-articles h3,
+.suggested-posts h2,
+.suggested-posts h3 {
+  font-family: 'Playfair Display', serif !important;
+  font-size: 28px !important;
+  font-weight: 600 !important;
+  color: var(--ar-white) !important;
+  text-align: center !important;
+  margin-bottom: 40px !important;
+  margin-top: 0 !important;
+  padding-bottom: 16px !important;
+  border-bottom: 2px solid rgba(255,255,255,0.1) !important;
+}
+
+/* Related posts grid/list */
+.entry-related .entry-related-content,
+.related-posts .post-grid,
+.related-posts .posts-container,
+.kadence-related-posts .post-grid,
+.related-articles .posts-grid,
+.suggested-posts .posts-container {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
+  gap: 32px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Individual related post cards */
+.entry-related article,
+.related-posts article,
+.kadence-related-posts article,
+.related-articles article,
+.suggested-posts article,
+.entry-related .post,
+.related-posts .post,
+.kadence-related-posts .post {
+  background: rgba(255,255,255,0.05) !important;
+  border: 1px solid rgba(255,255,255,0.08) !important;
+  border-radius: 12px !important;
+  padding: 24px !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2) !important;
+}
+
+.entry-related article:hover,
+.related-posts article:hover,
+.kadence-related-posts article:hover,
+.related-articles article:hover,
+.suggested-posts article:hover {
+  background: rgba(255,255,255,0.08) !important;
+  border-color: rgba(0,169,136,0.4) !important;
+  transform: translateY(-4px) !important;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.3) !important;
+}
+
+/* Related post titles - reduce size and improve consistency */
+.entry-related .entry-title,
+.entry-related .entry-title a,
+.related-posts .entry-title,
+.related-posts .entry-title a,
+.kadence-related-posts .entry-title,
+.kadence-related-posts .entry-title a,
+.related-articles .entry-title,
+.related-articles .entry-title a,
+.suggested-posts .entry-title,
+.suggested-posts .entry-title a,
+.entry-related h2,
+.entry-related h3,
+.entry-related h4,
+.related-posts h2,
+.related-posts h3,
+.related-posts h4 {
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  color: var(--ar-white) !important;
+  text-decoration: none !important;
+  line-height: 1.4 !important;
+  margin: 0 0 12px 0 !important;
+  display: block !important;
+}
+
+.entry-related .entry-title a:hover,
+.related-posts .entry-title a:hover,
+.kadence-related-posts .entry-title a:hover,
+.related-articles .entry-title a:hover,
+.suggested-posts .entry-title a:hover {
+  color: var(--ar-teal) !important;
+}
+
+/* Related post meta/excerpt */
+.entry-related .entry-meta,
+.related-posts .entry-meta,
+.kadence-related-posts .entry-meta,
+.entry-related .entry-summary,
+.related-posts .entry-summary,
+.kadence-related-posts .entry-summary {
+  font-size: 13px !important;
+  color: rgba(255,255,255,0.6) !important;
+  line-height: 1.6 !important;
+  margin: 0 !important;
+}
+
+.entry-related .entry-meta a,
+.related-posts .entry-meta a,
+.kadence-related-posts .entry-meta a {
+  color: rgba(255,255,255,0.5) !important;
+  text-decoration: none !important;
+}
+
+.entry-related .entry-meta a:hover,
+.related-posts .entry-meta a:hover,
+.kadence-related-posts .entry-meta a:hover {
+  color: var(--ar-teal) !important;
+}
+
+/* Related post thumbnails */
+.entry-related .post-thumbnail,
+.related-posts .post-thumbnail,
+.kadence-related-posts .post-thumbnail {
+  margin-bottom: 16px !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+}
+
+.entry-related .post-thumbnail img,
+.related-posts .post-thumbnail img,
+.kadence-related-posts .post-thumbnail img {
+  width: 100% !important;
+  height: 160px !important;
+  object-fit: cover !important;
+  border-radius: 8px !important;
+  transition: transform 0.3s ease !important;
+}
+
+.entry-related article:hover .post-thumbnail img,
+.related-posts article:hover .post-thumbnail img,
+.kadence-related-posts article:hover .post-thumbnail img {
+  transform: scale(1.05) !important;
+}
+
+/* ─── 15. RESPONSIVE ─────────────────────────────────── */
+@media (max-width: 768px) {
+  .single .entry-header { padding: 52px 20px 36px !important; }
+  .single .entry-content { padding: 28px 20px !important; margin: 24px 10px !important; }
+  h1, .entry-content h1 { font-size: 26px !important; }
+  h2, .entry-content h2 { font-size: 22px !important; }
+  
+  /* Unified footer responsive */
+  .footer.unified-footer .footer-grid {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+  }
+  
+  .footer.unified-footer .footer-bottom {
+    flex-direction: column !important;
+    text-align: center !important;
+  }
+  
+  /* Related posts responsive */
+  .entry-related,
+  .related-posts,
+  .kadence-related-posts {
+    padding: 40px 20px !important;
+  }
+  
+  .entry-related .entry-related-content,
+  .related-posts .post-grid,
+  .kadence-related-posts .post-grid {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+  
+  .entry-related .entry-related-title,
+  .related-posts h2,
+  .kadence-related-posts h2 {
+    font-size: 24px !important;
+    margin-bottom: 32px !important;
+  }
+}
+

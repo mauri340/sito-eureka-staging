@@ -1187,7 +1187,7 @@ body{
 
 .footer-grid{
     display:grid;
-    grid-template-columns:1.5fr 1fr 1fr 1fr;
+    grid-template-columns:1.5fr 1fr 1fr 1fr 1fr;
     gap:40px;
     padding-bottom:56px;
     border-bottom:1px solid rgba(255,255,255,.06);
@@ -1251,7 +1251,7 @@ body{
    ============================ */
 @media(max-width:1024px){
     .tools-grid{grid-template-columns:repeat(2,1fr);}
-    .footer-grid{grid-template-columns:1fr 1fr;}
+    .footer-grid{grid-template-columns:1fr 1fr 1fr;}
 }
 
 @media(max-width:860px){
@@ -1279,6 +1279,193 @@ body{
     .sbar-item{min-width:50%;border-right:none;border-bottom:1px solid var(--border);}
 }
 </style>
+
+<!-- JSON-LD Schema.org - EducationalOrganization (Blocco 1) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "EducationalOrganization",
+  "@id": "https://www.apprendimentorapido.it/#organizzazione",
+  "name": "Apprendimento Rapido — Metodo Eureka",
+  "alternateName": "Metodo Eureka",
+  "url": "https://www.apprendimentorapido.it/",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "/images/logo.png",
+    "width": 300,
+    "height": 60
+  },
+  "description": "Dal 2001 formiamo professionisti, studenti e imprenditori con il Metodo Eureka: tecniche di memoria, lettura veloce e mappe mentali. Oltre 20.000 persone formate, 98% di soddisfazione.",
+  "foundingDate": "2001",
+  "inLanguage": "it",
+  "areaServed": [
+    { "@type": "Country", "name": "Italy" },
+    { "@type": "Country", "name": "Switzerland" }
+  ],
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Via Gardiscia 10",
+    "addressLocality": "Rovio",
+    "addressRegion": "Canton Ticino",
+    "postalCode": "6821",
+    "addressCountry": "CH"
+  },
+  "telephone": "+390240702168",
+  "email": "info@apprendimentorapido.it",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "bestRating": "5",
+    "worstRating": "1",
+    "ratingCount": "20000",
+    "reviewCount": "20000"
+  },
+  "sameAs": [
+    "https://www.linkedin.com/company/apprendimentorapido/",
+    "https://www.facebook.com/apprendimentorapido",
+    "https://www.youtube.com/user/apprendimentorapido",
+    "https://www.instagram.com/apprendimento_rapido/"
+  ]
+}
+</script>
+
+<!-- JSON-LD Schema.org - WebSite + SearchAction (Blocco 2) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": "https://www.apprendimentorapido.it/#sito",
+  "url": "https://www.apprendimentorapido.it/",
+  "name": "Apprendimento Rapido — Metodo Eureka",
+  "description": "Il sito ufficiale del Metodo Eureka per tecniche di memoria, lettura veloce e mappe mentali.",
+  "inLanguage": "it",
+  "publisher": {
+    "@id": "https://www.apprendimentorapido.it/#organizzazione"
+  }
+}
+</script>
+
+<!-- JSON-LD Schema.org - Reviews + AggregateRating (Blocco 4) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Testimonianze — Metodo Eureka",
+  "itemListElement": [
+    {
+      "@type": "Review",
+      "position": 1,
+      "itemReviewed": {
+        "@id": "https://www.apprendimentorapido.it/#organizzazione"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Francesca Riboldi",
+        "jobTitle": "Notaio"
+      },
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "reviewBody": "Studiare più di 14.000 pagine di atti creando 40 mappe mentali in soli 6 mesi. Ho raggiunto il mio obiettivo: diventare notaio.",
+      "inLanguage": "it"
+    },
+    {
+      "@type": "Review",
+      "position": 2,
+      "itemReviewed": {
+        "@id": "https://www.apprendimentorapido.it/#organizzazione"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Eva Vigato",
+        "jobTitle": "Avvocato Penalista"
+      },
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "reviewBody": "Dopo il Master Eureka ho superato 5 esami in una sessione, uno preparato in sole 8 ore. Risultato impensabile prima.",
+      "inLanguage": "it"
+    },
+    {
+      "@type": "Review",
+      "position": 3,
+      "itemReviewed": {
+        "@id": "https://www.apprendimentorapido.it/#organizzazione"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Yuri Zhou",
+        "jobTitle": "Studente e Imprenditore"
+      },
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "reviewBody": "Grazie al corso ho potuto conciliare studio e lavoro e laurearmi con 102/110. La mia tesi è stata acquisita dall'arch. Renzo Piano.",
+      "inLanguage": "it"
+    }
+  ]
+}
+</script>
+
+<!-- JSON-LD Schema.org - FAQPage (Blocco 8) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Cos'è il Metodo Eureka?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Il Metodo Eureka è un sistema di apprendimento sviluppato dal 2001 che integra tecniche di memoria, lettura veloce e mappe mentali. È stato seguito da oltre 20.000 persone tra professionisti, studenti e imprenditori, con un tasso di soddisfazione del 98%."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Per chi è adatto il Metodo Eureka?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Il metodo è adatto a professionisti che devono gestire grandi quantità di informazioni, studenti universitari e liceali, imprenditori e manager. Non sono richiesti prerequisiti. Il corso prevede un massimo di 25 partecipanti per garantire un'attenzione personalizzata."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Quanto tempo ci vuole per vedere i risultati?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Il 76% dei partecipanti applica le tecniche quotidianamente dopo il corso. Il 50% riferisce di aver ridotto i tempi di studio del 50% già entro 12 mesi dalla fine del corso. I risultati sono misurati su un campione di oltre 20.000 persone formate dal 2001."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Esiste un modo per provare il metodo gratuitamente?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sì. È disponibile un webinar gratuito di 120 minuti via Zoom in cui vengono dimostrate le tecniche base del metodo con esercizi pratici. È disponibile anche una sessione di coaching individuale gratuita di 60 minuti con un esperto Eureka. Entrambi sono gratuiti e senza obbligo di acquisto."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Il corso è disponibile online o solo in presenza?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Il Metodo Eureka offre una formula ibrida: il corso è disponibile sia dal vivo (in presenza) che online, con lo stesso livello di qualità. Puoi scegliere il formato più adatto alla tua situazione."
+      }
+    }
+  ]
+}
+</script>
+
 </head>
 <body>
 
@@ -1286,9 +1473,7 @@ body{
      NAVBAR
      ============================ -->
 <nav class="nav">
-    <a href="index.html" class="nav-logo">
-        <img src="https://www.genspark.ai/api/files/s/2DnfPNcp" alt="Metodo Eureka — Apprendimento Rapido">
-    </a>
+    <a href="index.html" class="nav-logo"><img src="images/logo.png" alt="Metodo Eureka" style="height:44px;width:auto;display:block;" onerror="this.style.display='none'"></a>
 
     <ul class="nav-menu">
         <li>
@@ -1781,7 +1966,7 @@ body{
     <div class="container">
         <div class="footer-grid">
             <div class="footer-brand">
-                <img src="https://www.genspark.ai/api/files/s/2DnfPNcp" alt="Metodo Eureka">
+                <img src="images/logo.png" alt="Metodo Eureka">
                 <p>Dal 2001 aiutiamo professionisti, imprenditori e studenti a imparare più velocemente e ricordare di più — con un metodo provato su oltre 20.000 persone.</p>
             </div>
 
@@ -1812,6 +1997,14 @@ body{
                     <a href="tel:+390240702168">+390240702168</a><br>
                     Lun–Ven 9:00–18:30
                 </div>
+            </div>
+
+            <div class="footer-col">
+                <h4>Seguici</h4>
+                <a href="https://www.linkedin.com/company/apprendimentorapido/" target="_blank">LinkedIn</a>
+                <a href="https://www.instagram.com/apprendimento_rapido/" target="_blank">Instagram</a>
+                <a href="https://www.facebook.com/apprendimentorapido" target="_blank">Facebook</a>
+                <a href="https://www.youtube.com/user/apprendimentorapido" target="_blank">YouTube</a>
             </div>
         </div>
 
@@ -1922,5 +2115,6 @@ document.querySelectorAll('#stats, #results, .stats-bar').forEach(el => observer
 document.addEventListener('DOMContentLoaded', loadWebinar);
 </script>
 <script src="chat-widget.js"></script>
+<script src="whatsapp-widget.js"></script>
 </body>
 </html>

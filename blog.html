@@ -158,20 +158,22 @@ body{font-family:'Inter',sans-serif;background:var(--off-white);color:var(--text
 
 /* ── FOOTER ── */
 footer{background:var(--navy);color:rgba(255,255,255,.75);padding:56px 0 32px;}
-.footer-inner{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:44px;}
-.footer-logo{font-family:'Playfair Display',serif;font-size:19px;font-weight:700;
-  color:#fff;letter-spacing:.5px;margin-bottom:14px;}
-.footer-brand p{font-size:14px;color:rgba(255,255,255,.6);line-height:1.8;}
-.footer-col h4{font-size:11px;font-weight:700;color:rgba(255,255,255,.4);
+.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr 1fr;gap:40px;padding-bottom:56px;border-bottom:1px solid rgba(255,255,255,.06);}
+.footer-brand img{height:48px;width:auto;display:block;margin-bottom:18px;opacity:.9;}
+.footer-brand p{font-size:13px;color:rgba(255,255,255,.4);line-height:1.75;max-width:240px;}
+.footer-col h4{font-size:11px;font-weight:700;color:rgba(255,255,255,.6);
   margin-bottom:18px;text-transform:uppercase;letter-spacing:1.5px;}
-.footer-col a{display:block;font-size:13px;color:rgba(255,255,255,.65);
+.footer-col a{display:block;font-size:13px;color:rgba(255,255,255,.35);
   text-decoration:none;margin-bottom:10px;transition:color .2s;font-weight:400;}
-.footer-col a:hover{color:#fff;}
+.footer-col a:hover{color:var(--teal);}
+.footer-contact{font-size:13px;color:rgba(255,255,255,.35);line-height:2;}
 .footer-bottom{border-top:1px solid rgba(255,255,255,.08);padding-top:26px;
   display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;}
-.footer-bottom p{font-size:12px;color:rgba(255,255,255,.4);}
+.footer-bottom p{font-size:11px;color:rgba(255,255,255,.2);letter-spacing:.2px;}
+.footer-bottom a{font-size:11px;color:rgba(255,255,255,.3);text-decoration:none;margin-left:20px;letter-spacing:.2px;}
+.footer-bottom a:hover{color:var(--teal);}
 .footer-legal{display:flex;gap:20px;}
-.footer-legal a{font-size:12px;color:rgba(255,255,255,.4);text-decoration:none;}
+.footer-legal a{font-size:11px;color:rgba(255,255,255,.3);text-decoration:none;margin-left:20px;letter-spacing:.2px;}
 .footer-legal a:hover{color:rgba(255,255,255,.8);}
 
 /* ── FORM ── */
@@ -202,19 +204,91 @@ footer{background:var(--navy);color:rgba(255,255,255,.75);padding:56px 0 32px;}
   .hamburger{display:flex;}
   .nav-menu{display:none;}
   .nav{padding:0 20px;}
-  .hero-inner,.grid-2,.grid-3,.grid-4,.stats-grid,.footer-inner{grid-template-columns:1fr;}
+  .hero-inner,.grid-2,.grid-3,.grid-4,.stats-grid,.footer-grid{grid-template-columns:1fr;}
   .hero{min-height:auto;padding:calc(var(--nav-h) + 40px) 0 60px;}
   .section{padding:64px 0;}
   .banner-navy,.banner-gold,.banner-light{padding:32px 24px;}
 }
 @media(max-width:600px){
-  .footer-inner{grid-template-columns:1fr 1fr;}
+  .footer-grid{grid-template-columns:1fr;}
 }
 </style>
+
+<!-- JSON-LD Schema.org - EducationalOrganization (Blocco 1) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "EducationalOrganization",
+  "@id": "https://www.apprendimentorapido.it/#organizzazione",
+  "name": "Apprendimento Rapido — Metodo Eureka",
+  "alternateName": "Metodo Eureka",
+  "url": "https://www.apprendimentorapido.it/",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "/images/logo.png",
+    "width": 300,
+    "height": 60
+  },
+  "description": "Dal 2001 formiamo professionisti, studenti e imprenditori con il Metodo Eureka: tecniche di memoria, lettura veloce e mappe mentali. Oltre 20.000 persone formate, 98% di soddisfazione.",
+  "foundingDate": "2001",
+  "inLanguage": "it",
+  "areaServed": [
+    { "@type": "Country", "name": "Italy" },
+    { "@type": "Country", "name": "Switzerland" }
+  ],
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Via Gardiscia 10",
+    "addressLocality": "Rovio",
+    "addressRegion": "Canton Ticino",
+    "postalCode": "6821",
+    "addressCountry": "CH"
+  },
+  "telephone": "+390240702168",
+  "email": "info@apprendimentorapido.it",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "bestRating": "5",
+    "worstRating": "1",
+    "ratingCount": "20000",
+    "reviewCount": "20000"
+  },
+  "sameAs": [
+    "https://www.linkedin.com/company/apprendimentorapido/",
+    "https://www.facebook.com/apprendimentorapido",
+    "https://www.youtube.com/user/apprendimentorapido",
+    "https://www.instagram.com/apprendimento_rapido/"
+  ]
+}
+</script>
+
+<!-- JSON-LD Schema.org - BreadcrumbList (Blocco 7) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.apprendimentorapido.it/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://www.apprendimentorapido.it/blog.html"
+    }
+  ]
+}
+</script>
+
 </head>
 <body>
 <nav class="nav">
-  <a href="index.html" class="nav-logo">Metodo Eureka</a>
+  <a href="index.html" class="nav-logo"><img src="images/logo.png" alt="Metodo Eureka" style="height:44px;width:auto;display:block;" onerror="this.style.display='none'"></a>
   <ul class="nav-menu">
     <li><a href="metodo-eureka.html">Il Metodo</a></li>
     <li><a href="master-eureka.html">Master Eureka</a></li>
@@ -249,78 +323,25 @@ footer{background:var(--navy);color:rgba(255,255,255,.75);padding:56px 0 32px;}
 
 <section class="section bg-white">
   <div class="container">
-    <div class="grid-3" style="gap:32px;">
-
-      <article class="card" style="display:flex;flex-direction:column;">
-        <div style="border-radius:12px;overflow:hidden;aspect-ratio:16/9;margin-bottom:20px;">
-          <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=600&auto=format&fit=crop" alt="Memoria" style="width:100%;height:100%;object-fit:cover;">
-        </div>
-        <div class="section-label">Tecniche di Memoria</div>
-        <h3 style="font-family:'Playfair Display',serif;font-weight:700;color:var(--navy);font-size:1.1rem;margin-bottom:10px;line-height:1.4;">Come ricordare tutto quello che studi senza ripetere all'infinito</h3>
-        <p style="font-size:14px;color:var(--muted);flex:1;line-height:1.75;">Il metodo della ripetizione spaziata e le associazioni visive spiegati in modo pratico per chi ha poco tempo.</p>
-        <div style="margin-top:18px;display:flex;gap:8px;align-items:center;font-size:13px;color:var(--muted-lt);">
-          <span>8 min lettura</span>
-        </div>
-      </article>
-
-      <article class="card" style="display:flex;flex-direction:column;">
-        <div style="border-radius:12px;overflow:hidden;aspect-ratio:16/9;margin-bottom:20px;">
-          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&auto=format&fit=crop" alt="Lettura veloce" style="width:100%;height:100%;object-fit:cover;">
-        </div>
-        <div class="section-label">Lettura Veloce</div>
-        <h3 style="font-family:'Playfair Display',serif;font-weight:700;color:var(--navy);font-size:1.1rem;margin-bottom:10px;line-height:1.4;">Da 200 a 600 parole al minuto: il metodo che funziona davvero</h3>
-        <p style="font-size:14px;color:var(--muted);flex:1;line-height:1.75;">Perché la subvocalizzazione ti rallenta e come eliminarla in poche settimane di pratica guidata.</p>
-        <div style="margin-top:18px;display:flex;gap:8px;align-items:center;font-size:13px;color:var(--muted-lt);">
-          <span>6 min lettura</span>
-        </div>
-      </article>
-
-      <article class="card" style="display:flex;flex-direction:column;">
-        <div style="border-radius:12px;overflow:hidden;aspect-ratio:16/9;margin-bottom:20px;">
-          <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&auto=format&fit=crop" alt="Mappe mentali" style="width:100%;height:100%;object-fit:cover;">
-        </div>
-        <div class="section-label">Mappe Mentali</div>
-        <h3 style="font-family:'Playfair Display',serif;font-weight:700;color:var(--navy);font-size:1.1rem;margin-bottom:10px;line-height:1.4;">Come creare una mappa mentale efficace in 10 minuti</h3>
-        <p style="font-size:14px;color:var(--muted);flex:1;line-height:1.75;">La guida passo passo per costruire mappe che ti aiutano davvero a studiare, pianificare e presentare.</p>
-        <div style="margin-top:18px;display:flex;gap:8px;align-items:center;font-size:13px;color:var(--muted-lt);">
-          <span>5 min lettura</span>
-        </div>
-      </article>
-
-      <article class="card" style="display:flex;flex-direction:column;">
-        <div style="border-radius:12px;overflow:hidden;aspect-ratio:16/9;margin-bottom:20px;">
-          <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600&auto=format&fit=crop" alt="Produttività" style="width:100%;height:100%;object-fit:cover;">
-        </div>
-        <div class="section-label">Produttività</div>
-        <h3 style="font-family:'Playfair Display',serif;font-weight:700;color:var(--navy);font-size:1.1rem;margin-bottom:10px;line-height:1.4;">Il blocco mentale che impedisce a molti professionisti di studiare bene</h3>
-        <p style="font-size:14px;color:var(--muted);flex:1;line-height:1.75;">Come identificare e superare le convinzioni limitanti che sabotano il tuo apprendimento da anni.</p>
-        <div style="margin-top:18px;display:flex;gap:8px;align-items:center;font-size:13px;color:var(--muted-lt);">
-          <span>7 min lettura</span>
-        </div>
-      </article>
-
-      <article class="card" style="display:flex;flex-direction:column;">
-        <div style="border-radius:12px;overflow:hidden;aspect-ratio:16/9;margin-bottom:20px;">
-          <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=600&auto=format&fit=crop" alt="Studio" style="width:100%;height:100%;object-fit:cover;">
-        </div>
-        <div class="section-label">Metodo di Studio</div>
-        <h3 style="font-family:'Playfair Display',serif;font-weight:700;color:var(--navy);font-size:1.1rem;margin-bottom:10px;line-height:1.4;">Perché studiare di più non significa imparare di più</h3>
-        <p style="font-size:14px;color:var(--muted);flex:1;line-height:1.75;">La differenza tra ore di studio e qualità dell'apprendimento, e come ottimizzare ogni sessione.</p>
-        <div style="margin-top:18px;display:flex;gap:8px;align-items:center;font-size:13px;color:var(--muted-lt);">
-          <span>9 min lettura</span>
-        </div>
-      </article>
-
-      <article class="card" style="display:flex;flex-direction:column;background:var(--navy);">
-        <div style="border-radius:12px;overflow:hidden;aspect-ratio:16/9;margin-bottom:20px;">
-          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&auto=format&fit=crop" alt="Webinar" style="width:100%;height:100%;object-fit:cover;opacity:.8;">
-        </div>
-        <div class="section-label" style="color:var(--gold);">Evento Live</div>
-        <h3 style="font-family:'Playfair Display',serif;font-weight:700;color:#fff;font-size:1.1rem;margin-bottom:10px;line-height:1.4;">Scopri il Metodo Eureka dal vivo — Webinar Gratuito</h3>
-        <p style="font-size:14px;color:rgba(255,255,255,.65);flex:1;line-height:1.75;">Due ore su Zoom per vedere il metodo in azione, fare domande e capire se fa per te.</p>
-        <div style="margin-top:18px;"><a href="demo-zoom/index.html" class="btn btn-gold" style="font-size:13px;padding:10px 20px;">Prenota il tuo posto</a></div>
-      </article>
-
+    <div id="blog-loading" style="text-align:center;padding:60px 0;display:none;">
+      <div style="display:inline-block;width:32px;height:32px;border:3px solid var(--light2);border-top:3px solid var(--navy);border-radius:50%;animation:spin 1s linear infinite;margin-bottom:20px;"></div>
+      <p style="color:var(--muted);font-size:14px;">Caricamento articoli...</p>
+    </div>
+    
+    <div id="blog-error" style="text-align:center;padding:60px 0;display:none;">
+      <p style="color:var(--muted);font-size:14px;margin-bottom:20px;">Si è verificato un errore nel caricamento degli articoli.</p>
+      <button onclick="loadBlogPosts()" class="btn btn-outline" style="padding:10px 20px;font-size:13px;">Riprova</button>
+    </div>
+    
+    <div id="blog-posts" class="grid-3" style="gap:32px;"></div>
+    
+    <div id="load-more-container" style="text-align:center;margin-top:48px;display:none;">
+      <button id="load-more-btn" class="btn btn-outline" style="padding:12px 24px;">
+        <span id="load-more-text">Carica altri articoli</span>
+        <span id="load-more-spinner" style="display:none;margin-left:8px;">
+          <div style="display:inline-block;width:14px;height:14px;border:2px solid var(--light2);border-top:2px solid var(--navy);border-radius:50%;animation:spin 1s linear infinite;"></div>
+        </span>
+      </button>
     </div>
   </div>
 </section>
@@ -334,43 +355,69 @@ footer{background:var(--navy);color:rgba(255,255,255,.75);padding:56px 0 32px;}
   </div>
 </section>
 
-<footer>
-  <div class="container">
-    <div class="footer-inner">
-      <div class="footer-brand">
-        <div class="footer-logo">Metodo Eureka</div>
-        <p>Dal 2001 aiutiamo professionisti e manager a imparare più velocemente, ricordare di più e restare competitivi in un mondo che cambia.</p>
-      </div>
-      <div class="footer-col">
-        <h4>Il Metodo</h4>
-        <a href="metodo-eureka.html">Metodo Eureka</a>
-        <a href="master-eureka.html">Master Eureka</a>
-        <a href="libro.html">Il Libro</a>
-      </div>
-      <div class="footer-col">
-        <h4>Risorse</h4>
-        <a href="demo-zoom/index.html">Webinar Gratuito</a>
-        <a href="coaching.html">Coaching 1:1</a>
-        <a href="risorse-gratuite.html">Risorse Gratuite</a>
-        <a href="blog.html">Blog</a>
-      </div>
-      <div class="footer-col">
-        <h4>Azienda</h4>
-        <a href="testimonianze.html">Testimonianze</a>
-        <a href="https://www.linkedin.com/company/apprendimento-rapido" target="_blank">LinkedIn</a>
-        <a href="mailto:info@apprendimentorapido.it">info@apprendimentorapido.it</a>
-      </div>
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <img src="images/logo.png" alt="Metodo Eureka">
+                <p>Dal 2001 aiutiamo professionisti, imprenditori e studenti a imparare più velocemente e ricordare di più — con un metodo provato su oltre 20.000 persone.</p>
+            </div>
+
+            <div class="footer-col">
+                <h4>Il Metodo</h4>
+                <a href="metodo-eureka.html">Il Metodo Eureka</a>
+                <a href="master-eureka.html">Il Master Eureka</a>
+                <a href="tecniche-memoria.html">Tecniche di Memoria</a>
+                <a href="lettura-veloce.html">Lettura Veloce</a>
+                <a href="mappe-mentali.html">Mappe Mentali</a>
+            </div>
+
+            <div class="footer-col">
+                <h4>Risorse</h4>
+                <a href="demo-zoom/index.html">Webinar Gratuito</a>
+                <a href="coaching.html">Coaching Gratuita</a>
+                <a href="testimonianze.html">Testimonianze</a>
+                <a href="libro.html">Il Nostro Libro</a>
+                <a href="https://academy.apprendimentorapido.it/users/sign_in" target="_blank">Login Allievi</a>
+            </div>
+
+            <div class="footer-col">
+                <h4>Contatti</h4>
+                <div class="footer-contact">
+                    Via Gardiscia 10<br>
+                    Rovio, (CH) 6821<br><br>
+                    <a href="mailto:info@apprendimentorapido.it">info@apprendimentorapido.it</a>
+                    <a href="tel:+390240702168">+390240702168</a><br>
+                    Lun–Ven 9:00–18:30
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4>Seguici</h4>
+                <a href="https://www.linkedin.com/company/apprendimentorapido/" target="_blank">LinkedIn</a>
+                <a href="https://www.instagram.com/apprendimento_rapido/" target="_blank">Instagram</a>
+                <a href="https://www.facebook.com/apprendimentorapido" target="_blank">Facebook</a>
+                <a href="https://www.youtube.com/user/apprendimentorapido" target="_blank">YouTube</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2025 Apprendimento Rapido – Metodo Eureka. Tutti i diritti riservati.</p>
+            <div>
+                <a href="https://www.iubenda.com/privacy-policy/89530968" target="_blank">Privacy Policy</a>
+                <a href="https://www.iubenda.com/privacy-policy/89530968/cookie-policy" target="_blank">Cookie Policy</a>
+                <a href="https://www.iubenda.com/termini-e-condizioni/89530968" target="_blank">Termini e Condizioni</a>
+            </div>
+        </div>
     </div>
-    <div class="footer-bottom">
-      <p>&copy; 2025 Apprendimento Rapido — Metodo Eureka. Tutti i diritti riservati.</p>
-      <div class="footer-legal">
-        <a href="https://www.iubenda.com/privacy-policy/89530968" target="_blank">Privacy Policy</a>
-        <a href="https://www.iubenda.com/privacy-policy/89530968/cookie-policy" target="_blank">Cookie Policy</a>
-        <a href="https://www.iubenda.com/termini-e-condizioni/89530968" target="_blank">Termini e Condizioni</a>
-      </div>
-    </div>
-  </div>
 </footer>
+<style>
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+</style>
+
 <script>
 document.querySelectorAll('#mm a').forEach(a=>a.addEventListener('click',()=>document.getElementById('mm').classList.remove('open')));
 function animateCounters(){
@@ -392,7 +439,213 @@ const obs=new IntersectionObserver((entries)=>{
     if(e.target.classList.contains('stats-section'))animateCounters();}});
 },{threshold:0.2});
 document.querySelectorAll('.stats-section,[data-animate]').forEach(el=>obs.observe(el));
+
+// WordPress Blog API Integration
+let currentPage = 1;
+let isLoading = false;
+let hasMorePosts = true;
+
+function formatDate(dateString) {
+  const date = new Date(dateString);
+  return date.toLocaleDateString('it-IT', { 
+    year: 'numeric', 
+    month: 'long', 
+    day: 'numeric' 
+  });
+}
+
+function extractFeaturedImage(post) {
+  if (post._embedded && post._embedded['wp:featuredmedia'] && post._embedded['wp:featuredmedia'][0]) {
+    const media = post._embedded['wp:featuredmedia'][0];
+    if (media.media_details && media.media_details.sizes) {
+      // Try to get a medium-large size, fallback to full
+      return media.media_details.sizes.medium_large?.source_url || 
+             media.media_details.sizes.large?.source_url || 
+             media.media_details.sizes.full?.source_url ||
+             media.source_url;
+    }
+    return media.source_url;
+  }
+  return 'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=600&auto=format&fit=crop';
+}
+
+function extractCategory(post) {
+  if (post._embedded && post._embedded['wp:term'] && post._embedded['wp:term'][0]) {
+    const categories = post._embedded['wp:term'][0];
+    if (categories.length > 0) {
+      return categories[0].name;
+    }
+  }
+  return 'Articolo';
+}
+
+function stripHtml(html) {
+  const tmp = document.createElement('div');
+  tmp.innerHTML = html;
+  return tmp.textContent || tmp.innerText || '';
+}
+
+function createPostCard(post, isWebinarCard = false) {
+  const featuredImage = extractFeaturedImage(post);
+  const category = extractCategory(post);
+  const excerpt = stripHtml(post.excerpt.rendered).substring(0, 160) + '...';
+  const date = formatDate(post.date);
+  
+  if (isWebinarCard) {
+    return `
+      <article class="card" style="display:flex;flex-direction:column;background:var(--navy);">
+        <div style="border-radius:12px;overflow:hidden;aspect-ratio:16/9;margin-bottom:20px;">
+          <img src="${featuredImage}" alt="${post.title.rendered}" style="width:100%;height:100%;object-fit:cover;opacity:.8;" onerror="this.src='https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&auto=format&fit=crop'">
+        </div>
+        <div class="section-label" style="color:var(--gold);">${category}</div>
+        <h3 style="font-family:'Playfair Display',serif;font-weight:700;color:#fff;font-size:1.1rem;margin-bottom:10px;line-height:1.4;">
+          <a href="${post.link}" style="color:inherit;text-decoration:none;" target="_blank">${post.title.rendered}</a>
+        </h3>
+        <p style="font-size:14px;color:rgba(255,255,255,.65);flex:1;line-height:1.75;">${excerpt}</p>
+        <div style="margin-top:18px;display:flex;gap:8px;align-items:center;font-size:13px;color:rgba(255,255,255,.4);">
+          <span>${date}</span>
+        </div>
+      </article>
+    `;
+  }
+  
+  return `
+    <article class="card" style="display:flex;flex-direction:column;">
+      <div style="border-radius:12px;overflow:hidden;aspect-ratio:16/9;margin-bottom:20px;">
+        <img src="${featuredImage}" alt="${post.title.rendered}" style="width:100%;height:100%;object-fit:cover;" onerror="this.src='https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=600&auto=format&fit=crop'">
+      </div>
+      <div class="section-label">${category}</div>
+      <h3 style="font-family:'Playfair Display',serif;font-weight:700;color:var(--navy);font-size:1.1rem;margin-bottom:10px;line-height:1.4;">
+        <a href="${post.link}" style="color:inherit;text-decoration:none;" target="_blank">${post.title.rendered}</a>
+      </h3>
+      <p style="font-size:14px;color:var(--muted);flex:1;line-height:1.75;">${excerpt}</p>
+      <div style="margin-top:18px;display:flex;gap:8px;align-items:center;font-size:13px;color:var(--muted-lt);">
+        <span>${date}</span>
+      </div>
+    </article>
+  `;
+}
+
+async function loadBlogPosts(page = 1, append = false) {
+  if (isLoading) return;
+  
+  isLoading = true;
+  const loadingEl = document.getElementById('blog-loading');
+  const errorEl = document.getElementById('blog-error');
+  const postsEl = document.getElementById('blog-posts');
+  const loadMoreContainer = document.getElementById('load-more-container');
+  const loadMoreBtn = document.getElementById('load-more-btn');
+  const loadMoreText = document.getElementById('load-more-text');
+  const loadMoreSpinner = document.getElementById('load-more-spinner');
+  
+  // Show loading states
+  if (!append) {
+    loadingEl.style.display = 'block';
+    errorEl.style.display = 'none';
+    postsEl.style.display = 'none';
+    loadMoreContainer.style.display = 'none';
+  } else {
+    loadMoreText.textContent = 'Caricamento...';
+    loadMoreSpinner.style.display = 'inline-block';
+    loadMoreBtn.disabled = true;
+  }
+  
+  try {
+    const response = await fetch(`https://staging.apprendimentorapido.it/wp-json/wp/v2/posts?_embed&per_page=12&page=${page}`);
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    
+    const posts = await response.json();
+    const totalPages = parseInt(response.headers.get('X-WP-TotalPages') || '1');
+    
+    hasMorePosts = page < totalPages;
+    
+    if (posts.length === 0 && page === 1) {
+      throw new Error('Nessun articolo trovato');
+    }
+    
+    let postsHtml = '';
+    
+    // Add webinar card every 6 posts (on first load and subsequent loads)
+    posts.forEach((post, index) => {
+      const globalIndex = ((page - 1) * 12) + index;
+      
+      // Add webinar card at position 5 (6th position) on first page only
+      if (globalIndex === 5 && page === 1) {
+        postsHtml += `
+          <article class="card" style="display:flex;flex-direction:column;background:var(--navy);">
+            <div style="border-radius:12px;overflow:hidden;aspect-ratio:16/9;margin-bottom:20px;">
+              <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&auto=format&fit=crop" alt="Webinar" style="width:100%;height:100%;object-fit:cover;opacity:.8;">
+            </div>
+            <div class="section-label" style="color:var(--gold);">Evento Live</div>
+            <h3 style="font-family:'Playfair Display',serif;font-weight:700;color:#fff;font-size:1.1rem;margin-bottom:10px;line-height:1.4;">Scopri il Metodo Eureka dal vivo — Webinar Gratuito</h3>
+            <p style="font-size:14px;color:rgba(255,255,255,.65);flex:1;line-height:1.75;">Due ore su Zoom per vedere il metodo in azione, fare domande e capire se fa per te.</p>
+            <div style="margin-top:18px;"><a href="demo-zoom/index.html" class="btn btn-gold" style="font-size:13px;padding:10px 20px;">Prenota il tuo posto</a></div>
+          </article>
+        `;
+      }
+      
+      postsHtml += createPostCard(post);
+    });
+    
+    if (append) {
+      postsEl.innerHTML += postsHtml;
+    } else {
+      postsEl.innerHTML = postsHtml;
+    }
+    
+    // Hide loading, show content
+    loadingEl.style.display = 'none';
+    errorEl.style.display = 'none';
+    postsEl.style.display = 'grid';
+    
+    // Show/hide load more button
+    if (hasMorePosts) {
+      loadMoreContainer.style.display = 'block';
+      loadMoreText.textContent = 'Carica altri articoli';
+      loadMoreSpinner.style.display = 'none';
+      loadMoreBtn.disabled = false;
+    } else {
+      loadMoreContainer.style.display = 'none';
+    }
+    
+  } catch (error) {
+    console.error('Error loading blog posts:', error);
+    
+    if (!append) {
+      loadingEl.style.display = 'none';
+      errorEl.style.display = 'block';
+      postsEl.style.display = 'none';
+    } else {
+      loadMoreText.textContent = 'Errore nel caricamento';
+      loadMoreSpinner.style.display = 'none';
+      loadMoreBtn.disabled = false;
+      setTimeout(() => {
+        loadMoreText.textContent = 'Carica altri articoli';
+      }, 3000);
+    }
+  }
+  
+  isLoading = false;
+}
+
+function loadMorePosts() {
+  if (!hasMorePosts || isLoading) return;
+  currentPage++;
+  loadBlogPosts(currentPage, true);
+}
+
+// Initialize blog posts when page loads
+document.addEventListener('DOMContentLoaded', () => {
+  loadBlogPosts();
+  
+  // Add click handler for load more button
+  document.getElementById('load-more-btn').addEventListener('click', loadMorePosts);
+});
 </script>
 <script src="chat-widget.js"></script>
+<script src="whatsapp-widget.js"></script>
 </body>
 </html>

@@ -158,20 +158,22 @@ body{font-family:'Inter',sans-serif;background:var(--off-white);color:var(--text
 
 /* ── FOOTER ── */
 footer{background:var(--navy);color:rgba(255,255,255,.75);padding:56px 0 32px;}
-.footer-inner{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:44px;}
-.footer-logo{font-family:'Playfair Display',serif;font-size:19px;font-weight:700;
-  color:#fff;letter-spacing:.5px;margin-bottom:14px;}
-.footer-brand p{font-size:14px;color:rgba(255,255,255,.6);line-height:1.8;}
-.footer-col h4{font-size:11px;font-weight:700;color:rgba(255,255,255,.4);
+.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr 1fr;gap:40px;padding-bottom:56px;border-bottom:1px solid rgba(255,255,255,.06);}
+.footer-brand img{height:48px;width:auto;display:block;margin-bottom:18px;opacity:.9;}
+.footer-brand p{font-size:13px;color:rgba(255,255,255,.4);line-height:1.75;max-width:240px;}
+.footer-col h4{font-size:11px;font-weight:700;color:rgba(255,255,255,.6);
   margin-bottom:18px;text-transform:uppercase;letter-spacing:1.5px;}
-.footer-col a{display:block;font-size:13px;color:rgba(255,255,255,.65);
+.footer-col a{display:block;font-size:13px;color:rgba(255,255,255,.35);
   text-decoration:none;margin-bottom:10px;transition:color .2s;font-weight:400;}
-.footer-col a:hover{color:#fff;}
+.footer-col a:hover{color:var(--teal);}
+.footer-contact{font-size:13px;color:rgba(255,255,255,.35);line-height:2;}
 .footer-bottom{border-top:1px solid rgba(255,255,255,.08);padding-top:26px;
   display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;}
-.footer-bottom p{font-size:12px;color:rgba(255,255,255,.4);}
+.footer-bottom p{font-size:11px;color:rgba(255,255,255,.2);letter-spacing:.2px;}
+.footer-bottom a{font-size:11px;color:rgba(255,255,255,.3);text-decoration:none;margin-left:20px;letter-spacing:.2px;}
+.footer-bottom a:hover{color:var(--teal);}
 .footer-legal{display:flex;gap:20px;}
-.footer-legal a{font-size:12px;color:rgba(255,255,255,.4);text-decoration:none;}
+.footer-legal a{font-size:11px;color:rgba(255,255,255,.3);text-decoration:none;margin-left:20px;letter-spacing:.2px;}
 .footer-legal a:hover{color:rgba(255,255,255,.8);}
 
 /* ── FORM ── */
@@ -202,19 +204,116 @@ footer{background:var(--navy);color:rgba(255,255,255,.75);padding:56px 0 32px;}
   .hamburger{display:flex;}
   .nav-menu{display:none;}
   .nav{padding:0 20px;}
-  .hero-inner,.grid-2,.grid-3,.grid-4,.stats-grid,.footer-inner{grid-template-columns:1fr;}
+  .hero-inner,.grid-2,.grid-3,.grid-4,.stats-grid,.footer-grid{grid-template-columns:1fr;}
   .hero{min-height:auto;padding:calc(var(--nav-h) + 40px) 0 60px;}
   .section{padding:64px 0;}
   .banner-navy,.banner-gold,.banner-light{padding:32px 24px;}
 }
 @media(max-width:600px){
-  .footer-inner{grid-template-columns:1fr 1fr;}
+  .footer-grid{grid-template-columns:1fr;}
 }
 </style>
+
+<!-- JSON-LD Schema.org - EducationalOrganization (Blocco 1) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "EducationalOrganization",
+  "@id": "https://www.apprendimentorapido.it/#organizzazione",
+  "name": "Apprendimento Rapido — Metodo Eureka",
+  "alternateName": "Metodo Eureka",
+  "url": "https://www.apprendimentorapido.it/",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "/images/logo.png",
+    "width": 300,
+    "height": 60
+  },
+  "description": "Dal 2001 formiamo professionisti, studenti e imprenditori con il Metodo Eureka: tecniche di memoria, lettura veloce e mappe mentali. Oltre 20.000 persone formate, 98% di soddisfazione.",
+  "foundingDate": "2001",
+  "inLanguage": "it",
+  "areaServed": [
+    { "@type": "Country", "name": "Italy" },
+    { "@type": "Country", "name": "Switzerland" }
+  ],
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Via Gardiscia 10",
+    "addressLocality": "Rovio",
+    "addressRegion": "Canton Ticino",
+    "postalCode": "6821",
+    "addressCountry": "CH"
+  },
+  "telephone": "+390240702168",
+  "email": "info@apprendimentorapido.it",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "bestRating": "5",
+    "worstRating": "1",
+    "ratingCount": "20000",
+    "reviewCount": "20000"
+  },
+  "sameAs": [
+    "https://www.linkedin.com/company/apprendimentorapido/",
+    "https://www.facebook.com/apprendimentorapido",
+    "https://www.youtube.com/user/apprendimentorapido",
+    "https://www.instagram.com/apprendimento_rapido/"
+  ]
+}
+</script>
+
+<!-- JSON-LD Schema.org - Course (Blocco 6a) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "@id": "https://www.apprendimentorapido.it/metodo-eureka.html#corso",
+  "name": "Il Metodo Eureka — Sistema di Apprendimento Rapido",
+  "description": "Il sistema completo di apprendimento rapido in 4 pilastri: tecniche di memoria, lettura veloce, mappe mentali e sintesi. Metodo sviluppato dal 2001 per professionisti, studenti e imprenditori.",
+  "url": "https://www.apprendimentorapido.it/metodo-eureka.html",
+  "inLanguage": "it",
+  "teaches": "Metodo Eureka completo, tecniche di memoria, lettura veloce, mappe mentali, sintesi avanzata",
+  "provider": {
+    "@id": "https://www.apprendimentorapido.it/#organizzazione"
+  },
+  "availableLanguage": { "@type": "Language", "name": "Italian", "alternateName": "it" },
+  "offers": {
+    "@type": "Offer",
+    "url": "https://www.apprendimentorapido.it/metodo-eureka.html",
+    "priceCurrency": "EUR",
+    "price": "397",
+    "availability": "https://schema.org/InStock"
+  }
+}
+</script>
+
+<!-- JSON-LD Schema.org - BreadcrumbList (Blocco 7) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.apprendimentorapido.it/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Il Metodo Eureka",
+      "item": "https://www.apprendimentorapido.it/metodo-eureka.html"
+    }
+  ]
+}
+</script>
+
 </head>
 <body>
 <nav class="nav">
-  <a href="index.html" class="nav-logo">Metodo Eureka</a>
+  <a href="index.html" class="nav-logo"><img src="images/logo.png" alt="Metodo Eureka" style="height:44px;width:auto;display:block;" onerror="this.style.display='none'"></a>
   <ul class="nav-menu">
     <li><a href="metodo-eureka.html" class="active">Il Metodo</a></li>
     <li><a href="master-eureka.html">Master Eureka</a></li>
@@ -409,42 +508,61 @@ footer{background:var(--navy);color:rgba(255,255,255,.75);padding:56px 0 32px;}
   </div>
 </section>
 
-<footer>
-  <div class="container">
-    <div class="footer-inner">
-      <div class="footer-brand">
-        <div class="footer-logo">Metodo Eureka</div>
-        <p>Dal 2001 aiutiamo professionisti e manager a imparare più velocemente, ricordare di più e restare competitivi in un mondo che cambia.</p>
-      </div>
-      <div class="footer-col">
-        <h4>Il Metodo</h4>
-        <a href="metodo-eureka.html">Metodo Eureka</a>
-        <a href="master-eureka.html">Master Eureka</a>
-        <a href="libro.html">Il Libro</a>
-      </div>
-      <div class="footer-col">
-        <h4>Risorse</h4>
-        <a href="demo-zoom/index.html">Webinar Gratuito</a>
-        <a href="coaching.html">Coaching 1:1</a>
-        <a href="risorse-gratuite.html">Risorse Gratuite</a>
-        <a href="blog.html">Blog</a>
-      </div>
-      <div class="footer-col">
-        <h4>Azienda</h4>
-        <a href="testimonianze.html">Testimonianze</a>
-        <a href="https://www.linkedin.com/company/apprendimento-rapido" target="_blank">LinkedIn</a>
-        <a href="mailto:info@apprendimentorapido.it">info@apprendimentorapido.it</a>
-      </div>
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <img src="images/logo.png" alt="Metodo Eureka">
+                <p>Dal 2001 aiutiamo professionisti, imprenditori e studenti a imparare più velocemente e ricordare di più — con un metodo provato su oltre 20.000 persone.</p>
+            </div>
+
+            <div class="footer-col">
+                <h4>Il Metodo</h4>
+                <a href="metodo-eureka.html">Il Metodo Eureka</a>
+                <a href="master-eureka.html">Il Master Eureka</a>
+                <a href="tecniche-memoria.html">Tecniche di Memoria</a>
+                <a href="lettura-veloce.html">Lettura Veloce</a>
+                <a href="mappe-mentali.html">Mappe Mentali</a>
+            </div>
+
+            <div class="footer-col">
+                <h4>Risorse</h4>
+                <a href="demo-zoom/index.html">Webinar Gratuito</a>
+                <a href="coaching.html">Coaching Gratuita</a>
+                <a href="testimonianze.html">Testimonianze</a>
+                <a href="libro.html">Il Nostro Libro</a>
+                <a href="https://academy.apprendimentorapido.it/users/sign_in" target="_blank">Login Allievi</a>
+            </div>
+
+            <div class="footer-col">
+                <h4>Contatti</h4>
+                <div class="footer-contact">
+                    Via Gardiscia 10<br>
+                    Rovio, (CH) 6821<br><br>
+                    <a href="mailto:info@apprendimentorapido.it">info@apprendimentorapido.it</a>
+                    <a href="tel:+390240702168">+390240702168</a><br>
+                    Lun–Ven 9:00–18:30
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4>Seguici</h4>
+                <a href="https://www.linkedin.com/company/apprendimentorapido/" target="_blank">LinkedIn</a>
+                <a href="https://www.instagram.com/apprendimento_rapido/" target="_blank">Instagram</a>
+                <a href="https://www.facebook.com/apprendimentorapido" target="_blank">Facebook</a>
+                <a href="https://www.youtube.com/user/apprendimentorapido" target="_blank">YouTube</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2025 Apprendimento Rapido – Metodo Eureka. Tutti i diritti riservati.</p>
+            <div>
+                <a href="https://www.iubenda.com/privacy-policy/89530968" target="_blank">Privacy Policy</a>
+                <a href="https://www.iubenda.com/privacy-policy/89530968/cookie-policy" target="_blank">Cookie Policy</a>
+                <a href="https://www.iubenda.com/termini-e-condizioni/89530968" target="_blank">Termini e Condizioni</a>
+            </div>
+        </div>
     </div>
-    <div class="footer-bottom">
-      <p>&copy; 2025 Apprendimento Rapido — Metodo Eureka. Tutti i diritti riservati.</p>
-      <div class="footer-legal">
-        <a href="https://www.iubenda.com/privacy-policy/89530968" target="_blank">Privacy Policy</a>
-        <a href="https://www.iubenda.com/privacy-policy/89530968/cookie-policy" target="_blank">Cookie Policy</a>
-        <a href="https://www.iubenda.com/termini-e-condizioni/89530968" target="_blank">Termini e Condizioni</a>
-      </div>
-    </div>
-  </div>
 </footer>
 <script>
 document.querySelectorAll('#mm a').forEach(a=>a.addEventListener('click',()=>document.getElementById('mm').classList.remove('open')));
@@ -469,5 +587,6 @@ const obs=new IntersectionObserver((entries)=>{
 document.querySelectorAll('.stats-section,[data-animate]').forEach(el=>obs.observe(el));
 </script>
 <script src="chat-widget.js"></script>
+<script src="whatsapp-widget.js"></script>
 </body>
 </html>

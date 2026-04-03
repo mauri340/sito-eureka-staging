@@ -1,6 +1,28 @@
 (function () {
   'use strict';
 
+  // Define ChatWidget API first - always available
+  window.ChatWidget = {
+    _params: {},
+    
+    init: function(params) {
+      this._params = params || {};
+    },
+    
+    open: function() {
+      if (!window.DISABLE_CHAT_WIDGET) {
+        openChat();
+      }
+    },
+    
+    getParams: function() {
+      return this._params;
+    }
+  };
+
+  // Check if chat widget should be disabled on this page
+  if (window.DISABLE_CHAT_WIDGET) return;
+
   var PRODUCTION_API = 'https://ai-chat-service-nls9.onrender.com';
   var CALL_API = 'https://ai-chat-service-nls9.onrender.com';
 
@@ -14,6 +36,16 @@
   var widgetReady = false;
   var userParams = null;
   var fullscreenMode = false;
+  var conversationHistory = [];
+
+  // ── Advanced Systems ────────────────────────────────
+  var wsClient = null;
+  var audioSync = null;
+  var userSource = null;
+  var analytics = null;
+  var appointmentSystem = null;
+  var useWebSocketStreaming = false;
+  var enhancedFeaturesEnabled = false;
 
   // ── Voice state ─────────────────────────────────────
   var isRecording = false;
@@ -320,9 +352,89 @@
       document.body.appendChild(wrap);
     }
 
+    // Load advanced modules
+    loadAdvancedModules();
+
     widgetReady = true;
     bindEvents();
     if (!fullscreenMode) { startAutoOpen(); }
+  }
+
+  function loadAdvancedModules() {
+    var modulesLoaded = 0;
+    var totalModules = 5; // Increased for appointment system
+
+    function checkAllModulesLoaded() {
+      modulesLoaded++;
+      console.log(`Advanced module loaded (${modulesLoaded}/${totalModules})`);
+      if (modulesLoaded === totalModules) {
+        initializeAdvancedSystems();
+      }
+    }
+
+    function loadModuleWithFallback(src, name) {
+      var script = document.createElement('script');
+      script.src = src;
+      script.onload = function() { 
+        console.log(name + ' loaded successfully'); 
+        checkAllModulesLoaded();
+      };
+      script.onerror = function() {
+        console.warn(name + ' failed to load, continuing without it');
+        checkAllModulesLoaded();
+      };
+      document.head.appendChild(script);
+    }
+
+    // Load all advanced modules with error handling
+    loadModuleWithFallback('/js/websocket-client.js', 'WebSocket client');
+    loadModuleWithFallback('/js/audio-sync.js', 'Audio sync');
+    loadModuleWithFallback('/js/user-source-detector.js', 'User source detector');
+    loadModuleWithFallback('/js/analytics-integration.js', 'Analytics integration');
+    loadModuleWithFallback('/js/appointment-system.js', 'Appointment system');
+
+    // Load appointment styles
+    var styleLink = document.createElement('link');
+    styleLink.rel = 'stylesheet';
+    styleLink.href = '/css/appointment-styles.css';
+    document.head.appendChild(styleLink);
+  }
+
+  function initializeAdvancedSystems() {
+    // Initialize analytics first
+    if (window.AnalyticsIntegration) {
+      analytics = new window.AnalyticsIntegration();
+      console.log('Analytics system initialized');
+    }
+
+    // Initialize user source detector
+    if (window.UserSourceDetector) {
+      userSource = new window.UserSourceDetector();
+      console.log('User source detector initialized:', userSource.getUserSourceInfo());
+      
+      // Track chat widget load based on user source
+      if (analytics) {
+        analytics.trackEvent('chat_widget_loaded', {
+          user_source: userSource.userSource,
+          has_test_data: userSource.testData !== null,
+          page_category: userSource.pageContext ? userSource.pageContext.category : 'unknown'
+        });
+      }
+    }
+
+    // Initialize audio synchronization
+    if (window.AudioSyncManager) {
+      audioSync = new window.AudioSyncManager();
+      console.log('Audio sync system initialized');
+    }
+
+    // Check if we should use WebSocket streaming (for test users or advanced API)
+    if (userSource && userSource.userSource.includes('test')) {
+      useWebSocketStreaming = true;
+      console.log('WebSocket streaming enabled for test user');
+    }
+
+    console.log('All advanced systems initialized');
   }
 
   function $(id) { return document.getElementById(id); }
@@ -346,6 +458,13 @@
     $('ew-chat-box').classList.add('ew-visible');
     $('ew-chat-toggle').classList.add('ew-open');
     $('ew-chat-toggle').classList.remove('ew-has-badge');
+    
+    // Enhanced analytics tracking
+    if (analytics) {
+      var userSourceData = userSource ? userSource.userSource : 'unknown';
+      analytics.trackChatOpened(userSourceData);
+    }
+    
     if (!sessionId) { startSession(); } else { focusInput(); }
   }
 
@@ -362,12 +481,20 @@
   }
 
   function getPageContext() {
-    return {
+    var basicContext = {
       url: window.location.pathname,
       title: document.title,
       description: (document.querySelector('meta[name="description"]') || {}).content || '',
       section: window.location.pathname.split('/').filter(Boolean)[0] || ''
     };
+
+    // If user source detector is available, use enhanced context
+    if (userSource && userSource.getChatInitContext) {
+      var enhancedContext = userSource.getChatInitContext();
+      return Object.assign(basicContext, enhancedContext);
+    }
+
+    return basicContext;
   }
 
   // ── Session Start ───────────────────────────────────
@@ -375,6 +502,47 @@
     showTyping();
     var payload = { page_context: getPageContext() };
     if (userParams) { payload.user_data = userParams; }
+    
+    // Get personalized greeting if user source is available
+    var personalizedGreeting = 'Ciao! Sono Mentor Eureka. Come posso aiutarti?';
+    if (userSource && userSource.getPersonalizedGreeting) {
+      personalizedGreeting = userSource.getPersonalizedGreeting();
+    }
+
+    var contextData = getPageContext();
+    
+    const quizParams = window.ChatWidget 
+      ? window.ChatWidget.getParams() 
+      : {};
+
+    const payload = {
+      page_context: contextData,
+      personalized_greeting: personalizedGreeting,
+      known_contact: quizParams.email ? {
+        nome: quizParams.nome,
+        cognome: quizParams.cognome,
+        email: quizParams.email,
+        telefono: quizParams.telefono
+      } : null,
+      session_extra: quizParams.quiz_status ? {
+        test_results: {
+          test_type: quizParams.quiz_status,
+          pam: quizParams.pam,
+          punteggio: quizParams.punteggio,
+          punteggio1: quizParams.punteggio1,
+          punteggio2: quizParams.punteggio2,
+          miglioramento: quizParams.miglioramento,
+          fatturato_attuale: quizParams.fatturato_attuale,
+          fatturato_potenziale: quizParams.fatturato_potenziale,
+          crescita_potenziale: quizParams.crescita_potenziale,
+          criticita_opportunita: quizParams.criticita_opportunita,
+          criticita_inefficienza: quizParams.criticita_inefficienza,
+          criticita_competitivita: quizParams.criticita_competitivita,
+          criticita_innovazione: quizParams.criticita_innovazione
+        }
+      } : null
+    };
+    
     fetch(API_BASE + '/api/chat/session/start', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -384,12 +552,32 @@
       .then(function (data) {
         hideTyping();
         sessionId = data.session_id;
-        if (data.speech) { typeBotMessage(data.speech); }
+        
+        // Use personalized greeting if server doesn't provide one
+        var message = data.speech || personalizedGreeting;
+        
+        // Add bot's initial message to conversation history
+        conversationHistory.push({role: 'assistant', content: message, timestamp: new Date().toISOString()});
+        
+        if (audioSync && data.audio_base64) {
+          // Use advanced audio sync for streaming TTS
+          var messageId = 'msg-' + Date.now();
+          appendBotWithId(message, false, false, messageId);
+          audioSync.queueText(messageId, message);
+          audioSync.queueAudio(data.audio_base64, messageId);
+        } else {
+          typeBotMessage(message);
+          if (ttsEnabled && data.audio_base64) {
+            playBase64Audio(data.audio_base64);
+          }
+        }
+        
         focusInput();
       })
       .catch(function () {
         hideTyping();
-        typeBotMessage('Ciao! Sono Mentor Eureka. Come posso aiutarti?');
+        conversationHistory.push({role: 'assistant', content: personalizedGreeting, timestamp: new Date().toISOString()});
+        typeBotMessage(personalizedGreeting);
         focusInput();
       });
   }
@@ -401,33 +589,87 @@
     var text = inp.value.trim();
     if (!text) return;
 
+    // Track message sent
+    if (analytics && userSource) {
+      analytics.trackMessageSent('text', userSource.userSource);
+    }
+
     inp.value = '';
     appendUser(text);
+    conversationHistory.push({role: 'user', content: text, timestamp: new Date().toISOString()});
     showTyping();
     disableInput(true);
 
     var startPromise = sessionId
       ? Promise.resolve()
-      : fetch(API_BASE + '/api/chat/session/start', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ page_context: getPageContext() })
-        })
+      : (function() {
+          const quizParams = window.ChatWidget 
+            ? window.ChatWidget.getParams() 
+            : {};
+
+          const payload = {
+            page_context: getPageContext(),
+            personalized_greeting: userSource ? userSource.getPersonalizedGreeting() : null,
+            known_contact: quizParams.email ? {
+              nome: quizParams.nome,
+              cognome: quizParams.cognome,
+              email: quizParams.email,
+              telefono: quizParams.telefono
+            } : null,
+            session_extra: quizParams.quiz_status ? {
+              test_results: {
+                test_type: quizParams.quiz_status,
+                pam: quizParams.pam,
+                punteggio: quizParams.punteggio,
+                punteggio1: quizParams.punteggio1,
+                punteggio2: quizParams.punteggio2,
+                miglioramento: quizParams.miglioramento,
+                fatturato_attuale: quizParams.fatturato_attuale,
+                fatturato_potenziale: quizParams.fatturato_potenziale,
+                crescita_potenziale: quizParams.crescita_potenziale,
+                criticita_opportunita: quizParams.criticita_opportunita,
+                criticita_inefficienza: quizParams.criticita_inefficienza,
+                criticita_competitivita: quizParams.criticita_competitivita,
+                criticita_innovazione: quizParams.criticita_innovazione
+              }
+            } : null
+          };
+
+          return fetch(API_BASE + '/api/chat/session/start', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+        })()
           .then(function (r) { return r.json(); })
           .then(function (d) { sessionId = d.session_id; });
 
     startPromise
       .then(function () {
+        var requestBody = { 
+          session_id: sessionId, 
+          message: text, 
+          voice: ttsEnabled,
+          conversation_history: conversationHistory
+        };
+        
+        // Add user context for intelligent routing
+        if (userSource) {
+          requestBody.user_context = userSource.getChatInitContext();
+        }
+
         return fetch(API_BASE + '/api/chat/message', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ session_id: sessionId, message: text, voice: ttsEnabled })
+          body: JSON.stringify(requestBody)
         });
       })
       .then(function (r) {
         if (r.status === 410) {
           hideTyping(); disableInput(true); inputDisabled = true;
-          appendBot('Sessione chiusa. Apri una nuova chat.', false, true);
+          var sessionClosedMessage = 'Sessione chiusa. Apri una nuova chat.';
+          conversationHistory.push({role: 'assistant', content: sessionClosedMessage, timestamp: new Date().toISOString()});
+          appendBot(sessionClosedMessage, false, true);
           return null;
         }
         return r.json();
@@ -440,43 +682,111 @@
       })
       .catch(function () {
         hideTyping(); disableInput(false);
-        appendBot('Mi dispiace, c\'è stato un errore. Riprova tra poco.');
+        var errorMessage = 'Mi dispiace, c\'è stato un errore. Riprova tra poco.';
+        conversationHistory.push({role: 'assistant', content: errorMessage, timestamp: new Date().toISOString()});
+        appendBot(errorMessage);
       });
   }
 
   // ── Handle bot response ─────────────────────────────
   function handleBotResponse(data) {
+    console.log('handleBotResponse called with data:', data);
     var action = data.action || 'reply';
+    console.log('Action detected:', action);
 
     switch (action) {
-      case 'show_form':
-        if (data.speech) { typeBotMessage(data.speech); }
-        if (data.form) { appendForm(data.form); }
+      case 'show_webinar':
+        if (data.speech) { 
+          conversationHistory.push({role: 'assistant', content: data.speech, timestamp: new Date().toISOString()});
+          typeBotMessage(data.speech); 
+        }
+        appendWebinarForm();
         break;
       case 'show_call':
-        if (data.speech) { typeBotMessage(data.speech); }
+        if (data.speech) { 
+          conversationHistory.push({role: 'assistant', content: data.speech, timestamp: new Date().toISOString()});
+          typeBotMessage(data.speech); 
+        }
         appendCallCard();
         break;
+      case 'show_coaching':
+        console.log('Processing show_coaching action with speech:', data.speech, 'and slot:', data.slot);
+        if (data.speech) { 
+          conversationHistory.push({role: 'assistant', content: data.speech, timestamp: new Date().toISOString()});
+          typeBotMessage(data.speech); 
+        }
+        if (data.slot) { 
+          console.log('Calling appendBookingForm with slot data:', data.slot);
+          appendBookingForm(data.slot); 
+        }
+        break;
       case 'action_completed':
+        if (data.speech) {
+          conversationHistory.push({role: 'assistant', content: data.speech, timestamp: new Date().toISOString()});
+        }
         typeBotMessage(data.speech || '', true);
         break;
       case 'action_failed':
         appendBot(data.speech || '', false, true);
         break;
+      case 'show_human':
+        if (data.speech) { 
+          conversationHistory.push({role: 'assistant', content: data.speech, timestamp: new Date().toISOString()});
+          typeBotMessage(data.speech); 
+        }
+        appendHumanForm();
+        break;
+      case 'show_test_lettura':
+        if (data.speech) { 
+          conversationHistory.push({role: 'assistant', content: data.speech, timestamp: new Date().toISOString()});
+          typeBotMessage(data.speech); 
+        }
+        appendTestButton('Fai il test di lettura →', '/quiz_test_lettura/index.html');
+        break;
+      case 'show_test_memoria':
+        if (data.speech) { 
+          conversationHistory.push({role: 'assistant', content: data.speech, timestamp: new Date().toISOString()});
+          typeBotMessage(data.speech); 
+        }
+        appendTestButton('Fai il test di memoria →', '/quiz_test_memoria/index.html');
+        break;
+      case 'show_test_costo':
+        if (data.speech) { 
+          conversationHistory.push({role: 'assistant', content: data.speech, timestamp: new Date().toISOString()});
+          typeBotMessage(data.speech); 
+        }
+        appendTestButton('Scopri il costo della tua ignoranza →', '/quiz_test_costo/index.html');
+        break;
       case 'end_session':
-        if (data.speech) { typeBotMessage(data.speech); }
+        if (data.speech) { 
+          conversationHistory.push({role: 'assistant', content: data.speech, timestamp: new Date().toISOString()});
+          typeBotMessage(data.speech); 
+        }
         disableInput(true); inputDisabled = true;
         break;
       default:
         if (data.speech) {
           var isSuccess = data.business_result && data.business_result.success === true;
+          conversationHistory.push({role: 'assistant', content: data.speech, timestamp: new Date().toISOString()});
           typeBotMessage(data.speech, isSuccess);
         }
         break;
     }
 
+    // Enhanced audio handling with synchronization
     if (ttsEnabled && data.audio_base64) {
-      playBase64Audio(data.audio_base64);
+      if (audioSync) {
+        // Find the last bot message for audio sync
+        var lastBotMsg = document.querySelector('.ew-msg-bot:last-of-type:not(#ew-typing)');
+        if (lastBotMsg && lastBotMsg.id) {
+          audioSync.queueAudio(data.audio_base64, lastBotMsg.id);
+        } else {
+          // Fallback to legacy audio
+          playBase64Audio(data.audio_base64);
+        }
+      } else {
+        playBase64Audio(data.audio_base64);
+      }
     }
   }
 
@@ -485,6 +795,7 @@
     var msgs = $('ew-messages');
     var div = document.createElement('div');
     div.className = 'ew-msg ew-msg-bot';
+    div.id = 'msg-' + Date.now(); // Add ID for audio sync
     var bubble = document.createElement('div');
     var cls = 'ew-bubble';
     if (success) cls += ' ew-success';
@@ -494,16 +805,24 @@
     div.appendChild(bubble);
     msgs.insertBefore(div, $('ew-typing'));
 
-    var i = 0;
-    var speed = 18;
-    function typeNext() {
-      if (i < text.length) {
-        bubble.textContent = text.slice(0, ++i);
-        scrollDown();
-        setTimeout(typeNext, speed);
+    // Use audio sync typing if available
+    if (audioSync && !isError) {
+      audioSync.queueText(div.id, text);
+    } else {
+      // Fallback to traditional typing
+      var i = 0;
+      var speed = 18;
+      function typeNext() {
+        if (i < text.length) {
+          bubble.textContent = text.slice(0, ++i);
+          scrollDown();
+          setTimeout(typeNext, speed);
+        }
       }
+      typeNext();
     }
-    typeNext();
+
+    return div.id;
   }
 
   function appendBot(text, success, isError) {
@@ -519,6 +838,23 @@
     div.appendChild(bubble);
     msgs.insertBefore(div, $('ew-typing'));
     scrollDown();
+  }
+
+  function appendBotWithId(text, success, isError, messageId) {
+    var msgs = $('ew-messages');
+    var div = document.createElement('div');
+    div.className = 'ew-msg ew-msg-bot';
+    div.id = messageId || ('msg-' + Date.now());
+    var bubble = document.createElement('div');
+    var cls = 'ew-bubble';
+    if (success) cls += ' ew-success';
+    if (isError) cls += ' ew-error';
+    bubble.className = cls;
+    bubble.textContent = text;
+    div.appendChild(bubble);
+    msgs.insertBefore(div, $('ew-typing'));
+    scrollDown();
+    return div.id;
   }
 
   function appendUser(text) {
@@ -545,7 +881,9 @@
   function startMic() {
     var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (!SR) {
-      appendBot('Il riconoscimento vocale non è supportato dal tuo browser.', false, true);
+      var micErrorMessage = 'Il riconoscimento vocale non è supportato dal tuo browser.';
+      conversationHistory.push({role: 'assistant', content: micErrorMessage, timestamp: new Date().toISOString()});
+      appendBot(micErrorMessage, false, true);
       return;
     }
 
@@ -568,6 +906,12 @@
         var transcript = (result[0].transcript || '').trim();
         if (transcript) {
           $('ew-input').value = transcript;
+          
+          // Track voice message
+          if (analytics && userSource) {
+            analytics.trackMessageSent('voice', userSource.userSource);
+          }
+          
           sendMessage();
         }
       }
@@ -618,6 +962,13 @@
   // ── Audio Playback ──────────────────────────────────
   function playBase64Audio(base64) {
     try {
+      // Use advanced audio sync if available
+      if (audioSync) {
+        audioSync.playBase64Audio(base64);
+        return;
+      }
+
+      // Fallback to legacy audio playback
       stopAudio();
       var binary = atob(base64);
       var bytes = new Uint8Array(binary.length);
@@ -638,6 +989,12 @@
   }
 
   function stopAudio() {
+    // Stop advanced audio sync
+    if (audioSync) {
+      audioSync.stopCurrentAudio();
+    }
+    
+    // Stop legacy audio
     if (currentAudio) {
       currentAudio.pause();
       currentAudio.src = '';
@@ -735,6 +1092,14 @@
     callBtn.disabled = true;
     callBtn.textContent = 'Avvio chiamata...';
 
+    // Track call request
+    if (analytics) {
+      analytics.trackFormSubmitted('call_request', {
+        nome: nome.value.trim(),
+        telefono: telefono.value.trim()
+      });
+    }
+
     fetch(API_BASE + '/api/chat/submit-form', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -780,6 +1145,189 @@
       });
   }
 
+  // ── Webinar Form ───────────────────────────────────
+  function appendWebinarForm() {
+    var msgs = $('ew-messages');
+    var wrapper = document.createElement('div');
+    wrapper.className = 'ew-msg ew-msg-form';
+
+    var card = document.createElement('div');
+    card.className = 'ew-form-card';
+
+    var title = document.createElement('div');
+    title.className = 'ew-form-title';
+    title.textContent = 'Iscriviti al Webinar';
+    card.appendChild(title);
+
+    var body = document.createElement('div');
+    body.className = 'ew-form-body';
+
+    var fields = [
+      { name: 'webinar_nome', label: 'Nome', type: 'text', placeholder: 'Il tuo nome' },
+      { name: 'webinar_cognome', label: 'Cognome', type: 'text', placeholder: 'Il tuo cognome' },
+      { name: 'webinar_email', label: 'Email', type: 'email', placeholder: 'La tua email' },
+      { name: 'webinar_telefono', label: 'Telefono', type: 'tel', placeholder: '+39 333 1234567' }
+    ];
+
+    for (var i = 0; i < fields.length; i++) {
+      var f = fields[i];
+      var group = document.createElement('div');
+      group.className = 'ew-form-group';
+      var label = document.createElement('label');
+      label.textContent = f.label;
+      group.appendChild(label);
+      var input = document.createElement('input');
+      input.type = f.type;
+      input.name = f.name;
+      input.placeholder = f.placeholder;
+      group.appendChild(input);
+      body.appendChild(group);
+    }
+
+    var privDiv = document.createElement('div');
+    privDiv.className = 'ew-form-privacy';
+    var cb = document.createElement('input');
+    cb.type = 'checkbox';
+    cb.name = 'webinar_privacy';
+    var privLabel = document.createElement('label');
+    privLabel.textContent = 'Acconsento al trattamento dei dati personali ai sensi del GDPR.';
+    privDiv.appendChild(cb);
+    privDiv.appendChild(privLabel);
+    body.appendChild(privDiv);
+
+    var submitBtn = document.createElement('button');
+    submitBtn.type = 'button';
+    submitBtn.className = 'ew-form-submit';
+    submitBtn.textContent = 'Iscriviti al Webinar';
+    body.appendChild(submitBtn);
+
+    var errorDiv = document.createElement('div');
+    errorDiv.className = 'ew-form-error';
+    body.appendChild(errorDiv);
+
+    card.appendChild(body);
+    wrapper.appendChild(card);
+    msgs.insertBefore(wrapper, $('ew-typing'));
+    scrollDown();
+
+    submitBtn.addEventListener('click', function () {
+      submitWebinarForm(card, errorDiv, submitBtn);
+    });
+  }
+
+  // ── Human Form ──────────────────────────────────────
+  function appendHumanForm() {
+    var msgs = $('ew-messages');
+    var wrapper = document.createElement('div');
+    wrapper.className = 'ew-msg ew-msg-form';
+
+    var card = document.createElement('div');
+    card.className = 'ew-form-card';
+
+    var title = document.createElement('div');
+    title.className = 'ew-form-title';
+    title.textContent = 'Richiedi richiamata';
+    card.appendChild(title);
+
+    var body = document.createElement('div');
+    body.className = 'ew-form-body';
+
+    var infoDiv = document.createElement('div');
+    infoDiv.style.cssText = 'background:#F0EDE8;padding:10px 12px;border-radius:8px;margin-bottom:16px;font-size:13px;color:#1a1a2e;';
+    infoDiv.textContent = 'Ti contatteremo entro 24 ore';
+    body.appendChild(infoDiv);
+
+    var fields = [
+      { name: 'human_nome', label: 'Nome', type: 'text', placeholder: 'Il tuo nome' },
+      { name: 'human_email', label: 'Email', type: 'email', placeholder: 'La tua email' },
+      { name: 'human_telefono', label: 'Telefono', type: 'tel', placeholder: '+39 333 1234567' }
+    ];
+
+    // Pre-fill fields if userSource data is available
+    var prefilledData = {};
+    if (userSource && userSource.testData) {
+      if (userSource.testData.nome) prefilledData.human_nome = userSource.testData.nome;
+      if (userSource.testData.email) prefilledData.human_email = userSource.testData.email;
+      if (userSource.testData.telefono) prefilledData.human_telefono = userSource.testData.telefono;
+    }
+
+    for (var i = 0; i < fields.length; i++) {
+      var f = fields[i];
+      var group = document.createElement('div');
+      group.className = 'ew-form-group';
+      var label = document.createElement('label');
+      label.textContent = f.label;
+      group.appendChild(label);
+      var input = document.createElement('input');
+      input.type = f.type;
+      input.name = f.name;
+      input.placeholder = f.placeholder;
+      if (prefilledData[f.name]) {
+        input.value = prefilledData[f.name];
+      }
+      group.appendChild(input);
+      body.appendChild(group);
+    }
+
+    var privDiv = document.createElement('div');
+    privDiv.className = 'ew-form-privacy';
+    var cb = document.createElement('input');
+    cb.type = 'checkbox';
+    cb.name = 'human_privacy';
+    var privLabel = document.createElement('label');
+    privLabel.textContent = 'Acconsento al trattamento dei dati personali ai sensi del GDPR.';
+    privDiv.appendChild(cb);
+    privDiv.appendChild(privLabel);
+    body.appendChild(privDiv);
+
+    var submitBtn = document.createElement('button');
+    submitBtn.type = 'button';
+    submitBtn.className = 'ew-form-submit';
+    submitBtn.textContent = 'Richiedi richiamata';
+    body.appendChild(submitBtn);
+
+    var errorDiv = document.createElement('div');
+    errorDiv.className = 'ew-form-error';
+    body.appendChild(errorDiv);
+
+    card.appendChild(body);
+    wrapper.appendChild(card);
+    msgs.insertBefore(wrapper, $('ew-typing'));
+    scrollDown();
+
+    submitBtn.addEventListener('click', function () {
+      submitHumanForm(card, errorDiv, submitBtn);
+    });
+  }
+
+  // ── Test Button ─────────────────────────────────────
+  function appendTestButton(buttonText, linkUrl) {
+    var msgs = $('ew-messages');
+    var wrapper = document.createElement('div');
+    wrapper.className = 'ew-msg ew-msg-form';
+
+    var card = document.createElement('div');
+    card.className = 'ew-form-card';
+
+    var body = document.createElement('div');
+    body.className = 'ew-form-body';
+    body.style.textAlign = 'center';
+    body.style.padding = '20px';
+
+    var testBtn = document.createElement('a');
+    testBtn.href = linkUrl;
+    testBtn.target = '_blank';
+    testBtn.className = 'ew-form-submit';
+    testBtn.style.cssText = 'display:inline-block;text-decoration:none;margin:0;';
+    testBtn.textContent = buttonText;
+    body.appendChild(testBtn);
+
+    card.appendChild(body);
+    wrapper.appendChild(card);
+    msgs.insertBefore(wrapper, $('ew-typing'));
+    scrollDown();
+  }
+
   // ── Inline Form Rendering ──────────────────────────
   function appendForm(formConfig) {
     var msgs = $('ew-messages');
@@ -804,12 +1352,40 @@
       var label = document.createElement('label');
       label.textContent = f.label || f.name;
       group.appendChild(label);
-      var input = document.createElement('input');
-      input.type = f.type || 'text';
-      input.name = f.name;
-      input.placeholder = f.placeholder || '';
-      if (f.required) input.required = true;
-      group.appendChild(input);
+      
+      if (f.type === 'select') {
+        var select = document.createElement('select');
+        select.name = f.name;
+        select.style.cssText = 'width:100%;padding:9px 12px;border:1.5px solid #F0EDE8;border-radius:8px;font-size:13px;font-family:"Montserrat",sans-serif;outline:none;transition:border-color .2s;background:#F8F7F4;color:#1a1a2e;box-sizing:border-box;';
+        if (f.required) select.required = true;
+        
+        // Add placeholder option
+        var placeholderOption = document.createElement('option');
+        placeholderOption.value = '';
+        placeholderOption.textContent = f.placeholder || 'Seleziona...';
+        placeholderOption.disabled = true;
+        placeholderOption.selected = true;
+        select.appendChild(placeholderOption);
+        
+        // Add options
+        if (f.options) {
+          for (var j = 0; j < f.options.length; j++) {
+            var opt = f.options[j];
+            var option = document.createElement('option');
+            option.value = opt.value || opt;
+            option.textContent = opt.label || opt;
+            select.appendChild(option);
+          }
+        }
+        group.appendChild(select);
+      } else {
+        var input = document.createElement('input');
+        input.type = f.type || 'text';
+        input.name = f.name;
+        input.placeholder = f.placeholder || '';
+        if (f.required) input.required = true;
+        group.appendChild(input);
+      }
       body.appendChild(group);
     }
 
@@ -846,6 +1422,163 @@
     });
   }
 
+  function submitWebinarForm(card, errorDiv, submitBtn) {
+    errorDiv.classList.remove('ew-visible');
+
+    var nome = card.querySelector('input[name="webinar_nome"]');
+    var cognome = card.querySelector('input[name="webinar_cognome"]');
+    var email = card.querySelector('input[name="webinar_email"]');
+    var telefono = card.querySelector('input[name="webinar_telefono"]');
+    var privacy = card.querySelector('input[name="webinar_privacy"]');
+
+    if (!nome.value.trim() || !cognome.value.trim() || !email.value.trim() || !telefono.value.trim()) {
+      errorDiv.textContent = 'Compila tutti i campi.';
+      errorDiv.classList.add('ew-visible');
+      return;
+    }
+    if (!privacy.checked) {
+      errorDiv.textContent = 'Devi accettare il trattamento dei dati personali.';
+      errorDiv.classList.add('ew-visible');
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Iscrizione in corso...';
+
+    // Track webinar registration
+    if (analytics) {
+      analytics.trackFormSubmitted('webinar_registration', {
+        nome: nome.value.trim(),
+        cognome: cognome.value.trim(),
+        email: email.value.trim(),
+        telefono: telefono.value.trim()
+      });
+    }
+
+    fetch(API_BASE + '/api/chat/submit-form', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        session_id: sessionId,
+        form_id: 'webinar_registration',
+        data: {
+          nome: nome.value.trim(),
+          cognome: cognome.value.trim(),
+          email: email.value.trim(),
+          telefono: telefono.value.trim()
+        },
+        privacy_accepted: true
+      })
+    })
+      .then(function (r) {
+        if (r.status === 422 || r.status === 400) {
+          return r.json().then(function (err) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Iscriviti al Webinar';
+            errorDiv.textContent = err.detail || 'Errore di validazione.';
+            errorDiv.classList.add('ew-visible');
+            return null;
+          });
+        }
+        return r.json();
+      })
+      .then(function (result) {
+        if (!result) return;
+        var bodyEl = card.querySelector('.ew-form-body');
+        bodyEl.innerHTML = '';
+        var done = document.createElement('div');
+        done.className = 'ew-form-done';
+        done.innerHTML = '<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>' +
+          '<span>Iscrizione completata con successo!</span>';
+        bodyEl.appendChild(done);
+        if (result.speech) { typeBotMessage(result.speech, true); }
+        scrollDown();
+      })
+      .catch(function () {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Iscriviti al Webinar';
+        errorDiv.textContent = 'Errore di connessione. Riprova.';
+        errorDiv.classList.add('ew-visible');
+      });
+  }
+
+  function submitHumanForm(card, errorDiv, submitBtn) {
+    errorDiv.classList.remove('ew-visible');
+
+    var nome = card.querySelector('input[name="human_nome"]');
+    var email = card.querySelector('input[name="human_email"]');
+    var telefono = card.querySelector('input[name="human_telefono"]');
+    var privacy = card.querySelector('input[name="human_privacy"]');
+
+    if (!nome.value.trim() || !email.value.trim() || !telefono.value.trim()) {
+      errorDiv.textContent = 'Compila tutti i campi.';
+      errorDiv.classList.add('ew-visible');
+      return;
+    }
+    if (!privacy.checked) {
+      errorDiv.textContent = 'Devi accettare il trattamento dei dati personali.';
+      errorDiv.classList.add('ew-visible');
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Invio richiesta...';
+
+    // Track human callback request
+    if (analytics) {
+      analytics.trackFormSubmitted('human_callback', {
+        nome: nome.value.trim(),
+        email: email.value.trim(),
+        telefono: telefono.value.trim()
+      });
+    }
+
+    fetch(API_BASE + '/api/chat/submit-form', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        session_id: sessionId,
+        form_id: 'human_callback',
+        data: {
+          nome: nome.value.trim(),
+          email: email.value.trim(),
+          telefono: telefono.value.trim()
+        },
+        privacy_accepted: true
+      })
+    })
+      .then(function (r) {
+        if (r.status === 422 || r.status === 400) {
+          return r.json().then(function (err) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Richiedi richiamata';
+            errorDiv.textContent = err.detail || 'Errore di validazione.';
+            errorDiv.classList.add('ew-visible');
+            return null;
+          });
+        }
+        return r.json();
+      })
+      .then(function (result) {
+        if (!result) return;
+        var bodyEl = card.querySelector('.ew-form-body');
+        bodyEl.innerHTML = '';
+        var done = document.createElement('div');
+        done.className = 'ew-form-done';
+        done.innerHTML = '<svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>' +
+          '<span>Richiesta inviata! Ti contatteremo entro 24 ore.</span>';
+        bodyEl.appendChild(done);
+        if (result.speech) { typeBotMessage(result.speech, true); }
+        scrollDown();
+      })
+      .catch(function () {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Richiedi richiamata';
+        errorDiv.textContent = 'Errore di connessione. Riprova.';
+        errorDiv.classList.add('ew-visible');
+      });
+  }
+
   function submitForm(formConfig, card, fields, errorDiv, submitBtn) {
     errorDiv.classList.remove('ew-visible');
 
@@ -862,8 +1595,10 @@
     var missing = [];
     for (var i = 0; i < fields.length; i++) {
       var f = fields[i];
-      var input = card.querySelector('input[name="' + f.name + '"]');
-      var val = input ? input.value.trim() : '';
+      var element = f.type === 'select' 
+        ? card.querySelector('select[name="' + f.name + '"]')
+        : card.querySelector('input[name="' + f.name + '"]');
+      var val = element ? element.value.trim() : '';
       if (f.required && !val) { missing.push(f.label || f.name); }
       data[f.name] = val;
     }
@@ -879,6 +1614,11 @@
 
     var privAccepted = formConfig.privacy_checkbox
       ? card.querySelector('input[name="ew_privacy"]').checked : true;
+
+    // Track form submission
+    if (analytics) {
+      analytics.trackFormSubmitted(formConfig.form_id, data);
+    }
 
     fetch(API_BASE + '/api/chat/submit-form', {
       method: 'POST',
@@ -902,7 +1642,9 @@
         }
         if (r.status === 410) {
           disableInput(true); inputDisabled = true;
-          appendBot('Sessione chiusa. Apri una nuova chat.', false, true);
+          var sessionClosedMessage = 'Sessione chiusa. Apri una nuova chat.';
+          conversationHistory.push({role: 'assistant', content: sessionClosedMessage, timestamp: new Date().toISOString()});
+          appendBot(sessionClosedMessage, false, true);
           return null;
         }
         return r.json();
@@ -927,6 +1669,238 @@
       });
   }
 
+  // ── Booking Form ────────────────────────────────────
+  var bookingFormTimeout = null;
+
+  function appendBookingForm(slotData) {
+    console.log('appendBookingForm called with slotData:', slotData);
+    var msgs = $('ew-messages');
+    var wrapper = document.createElement('div');
+    wrapper.className = 'ew-msg ew-msg-form';
+    wrapper.id = 'booking-form-' + Date.now();
+
+    var card = document.createElement('div');
+    card.className = 'ew-form-card';
+
+    var title = document.createElement('div');
+    title.className = 'ew-form-title';
+    title.textContent = 'Conferma Prenotazione';
+    card.appendChild(title);
+
+    var body = document.createElement('div');
+    body.className = 'ew-form-body';
+
+    // Slot info (non-modifiable)
+    var slotInfo = document.createElement('div');
+    slotInfo.className = 'ew-form-group';
+    slotInfo.style.cssText = 'background:#F0EDE8;padding:10px 12px;border-radius:8px;margin-bottom:16px;';
+    slotInfo.innerHTML = '<strong>Orario selezionato:</strong><br>' + (slotData.label || slotData.datetime || JSON.stringify(slotData) || 'Slot non specificato');
+    body.appendChild(slotInfo);
+
+    // Form fields
+    var fields = [
+      { name: 'nome', label: 'Nome *', type: 'text', placeholder: 'Il tuo nome', required: true },
+      { name: 'cognome', label: 'Cognome *', type: 'text', placeholder: 'Il tuo cognome', required: true },
+      { name: 'email', label: 'Email *', type: 'email', placeholder: 'La tua email', required: true },
+      { name: 'telefono', label: 'Telefono', type: 'tel', placeholder: '+39 333 1234567', required: false }
+    ];
+
+    for (var i = 0; i < fields.length; i++) {
+      var f = fields[i];
+      var group = document.createElement('div');
+      group.className = 'ew-form-group';
+      var label = document.createElement('label');
+      label.textContent = f.label;
+      group.appendChild(label);
+      var input = document.createElement('input');
+      input.type = f.type;
+      input.name = f.name;
+      input.placeholder = f.placeholder;
+      if (f.required) input.required = true;
+      group.appendChild(input);
+      body.appendChild(group);
+    }
+
+    var submitBtn = document.createElement('button');
+    submitBtn.type = 'button';
+    submitBtn.className = 'ew-form-submit';
+    submitBtn.textContent = 'Conferma prenotazione';
+    body.appendChild(submitBtn);
+
+    var errorDiv = document.createElement('div');
+    errorDiv.className = 'ew-form-error';
+    body.appendChild(errorDiv);
+
+    card.appendChild(body);
+    wrapper.appendChild(card);
+    msgs.insertBefore(wrapper, $('ew-typing'));
+    scrollDown();
+
+    // Start 4-minute timeout
+    startBookingFormTimeout();
+
+    submitBtn.addEventListener('click', function () {
+      console.log('Booking form submit button clicked');
+      submitBookingForm(wrapper, fields, slotData, errorDiv, submitBtn);
+    });
+  }
+
+  function startBookingFormTimeout() {
+    // Clear any existing timeout
+    if (bookingFormTimeout) {
+      clearTimeout(bookingFormTimeout);
+    }
+
+    // Start 4-minute (240000ms) timeout
+    bookingFormTimeout = setTimeout(function() {
+      // Send timeout message to AI
+      sendTimeoutMessage();
+    }, 240000);
+  }
+
+  function sendTimeoutMessage() {
+    if (!sessionId || inputDisabled) return;
+    
+    // Add timeout message to conversation history
+    conversationHistory.push({role: 'user', content: '[TIMEOUT_FORM]', timestamp: new Date().toISOString()});
+    showTyping();
+    disableInput(true);
+
+    fetch(API_BASE + '/api/chat/message', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        session_id: sessionId,
+        message: '[TIMEOUT_FORM]',
+        voice: false,
+        conversation_history: conversationHistory
+      })
+    })
+      .then(function (r) {
+        if (r.status === 410) {
+          hideTyping(); disableInput(true); inputDisabled = true;
+          var sessionClosedMessage = 'Sessione chiusa. Apri una nuova chat.';
+          conversationHistory.push({role: 'assistant', content: sessionClosedMessage, timestamp: new Date().toISOString()});
+          appendBot(sessionClosedMessage, false, true);
+          return null;
+        }
+        return r.json();
+      })
+      .then(function (data) {
+        if (!data) return;
+        hideTyping();
+        disableInput(false);
+        handleBotResponse(data);
+      })
+      .catch(function () {
+        hideTyping(); disableInput(false);
+        var errorMessage = 'Mi dispiace, c\'è stato un errore. Riprova tra poco.';
+        conversationHistory.push({role: 'assistant', content: errorMessage, timestamp: new Date().toISOString()});
+        appendBot(errorMessage);
+      });
+  }
+
+  function submitBookingForm(wrapper, fields, slotData, errorDiv, submitBtn) {
+    console.log('submitBookingForm called with slotData:', slotData);
+    // Clear timeout since user is submitting
+    if (bookingFormTimeout) {
+      clearTimeout(bookingFormTimeout);
+      bookingFormTimeout = null;
+    }
+
+    errorDiv.classList.remove('ew-visible');
+
+    var data = {};
+    var missing = [];
+    for (var i = 0; i < fields.length; i++) {
+      var f = fields[i];
+      var input = wrapper.querySelector('input[name="' + f.name + '"]');
+      var val = input ? input.value.trim() : '';
+      if (f.required && !val) { missing.push(f.label.replace(' *', '')); }
+      data[f.name] = val;
+    }
+
+    if (missing.length > 0) {
+      errorDiv.textContent = 'Compila i campi obbligatori: ' + missing.join(', ');
+      errorDiv.classList.add('ew-visible');
+      return;
+    }
+
+    // Basic email validation
+    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(data.email)) {
+      errorDiv.textContent = 'Inserisci un indirizzo email valido.';
+      errorDiv.classList.add('ew-visible');
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Invio in corso...';
+
+    // Map form data to backend expected fields
+    var apiData = {
+      session_id: sessionId,
+      appointment_datetime: slotData.datetime || slotData,
+      user_name: (data.nome + ' ' + data.cognome).trim(),
+      user_email: data.email,
+      user_phone: data.telefono || ''
+    };
+
+    console.log('Making API call to /api/chat/book-appointment with data:', apiData);
+    fetch('https://ai-chat-service-nls9.onrender.com/api/chat/book-appointment', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(apiData)
+    })
+      .then(function (r) {
+        if (r.status === 422 || r.status === 400) {
+          return r.json().then(function (err) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Conferma prenotazione';
+            errorDiv.textContent = err.detail || err.message || 'Errore di validazione.';
+            errorDiv.classList.add('ew-visible');
+            return null;
+          });
+        }
+        if (!r.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return r.json();
+      })
+      .then(function (result) {
+        if (!result) return;
+        console.log('Booking API success response:', result);
+        var bodyEl = wrapper.querySelector('.ew-form-body');
+        bodyEl.innerHTML = '';
+        var done = document.createElement('div');
+        done.className = 'ew-form-done';
+        done.innerHTML = '<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>' +
+          '<span>Prenotazione confermata! Controlla la tua email.</span>';
+        bodyEl.appendChild(done);
+        
+        // Handle backend response if it contains additional data
+        if (result && typeof result === 'object' && !Array.isArray(result) && result.action) {
+          handleBotResponse(result);
+        } else if (result && Array.isArray(result)) {
+          // If backend returns array, process each item that has valid action
+          result.forEach(function(item) {
+            if (item && typeof item === 'object' && item.action) {
+              handleBotResponse(item);
+            }
+          });
+        }
+        
+        scrollDown();
+      })
+      .catch(function (error) {
+        console.error('Booking error:', error);
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Conferma prenotazione';
+        errorDiv.textContent = 'Errore di connessione. Riprova.';
+        errorDiv.classList.add('ew-visible');
+      });
+  }
+
   function showTyping() { $('ew-typing').style.display = 'block'; scrollDown(); }
   function hideTyping() { $('ew-typing').style.display = 'none'; }
   function scrollDown() {
@@ -942,10 +1916,42 @@
   function startAutoOpen() {
     setTimeout(function () {
       if (chatOpened) return;
+      const quizParams = window.ChatWidget 
+        ? window.ChatWidget.getParams() 
+        : {};
+
+      const payload = {
+        page_context: getPageContext(),
+        personalized_greeting: null,
+        known_contact: quizParams.email ? {
+          nome: quizParams.nome,
+          cognome: quizParams.cognome,
+          email: quizParams.email,
+          telefono: quizParams.telefono
+        } : null,
+        session_extra: quizParams.quiz_status ? {
+          test_results: {
+            test_type: quizParams.quiz_status,
+            pam: quizParams.pam,
+            punteggio: quizParams.punteggio,
+            punteggio1: quizParams.punteggio1,
+            punteggio2: quizParams.punteggio2,
+            miglioramento: quizParams.miglioramento,
+            fatturato_attuale: quizParams.fatturato_attuale,
+            fatturato_potenziale: quizParams.fatturato_potenziale,
+            crescita_potenziale: quizParams.crescita_potenziale,
+            criticita_opportunita: quizParams.criticita_opportunita,
+            criticita_inefficienza: quizParams.criticita_inefficienza,
+            criticita_competitivita: quizParams.criticita_competitivita,
+            criticita_innovazione: quizParams.criticita_innovazione
+          }
+        } : null
+      };
+
       fetch(API_BASE + '/api/chat/session/start', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ page_context: getPageContext() })
+        body: JSON.stringify(payload)
       })
         .then(function (r) { return r.json(); })
         .then(function (data) {
@@ -953,13 +1959,244 @@
           sessionId = data.session_id;
           if (data.proactive) {
             openChat();
-            if (data.speech) { typeBotMessage(data.speech); }
+            if (data.speech) { 
+              conversationHistory.push({role: 'assistant', content: data.speech, timestamp: new Date().toISOString()});
+              typeBotMessage(data.speech); 
+            }
           } else {
             $('ew-chat-toggle').classList.add('ew-has-badge');
           }
         })
         .catch(function () {});
     }, 40000);
+  }
+
+  // ── Appointment Widget ──────────────────────────────
+  function appendAppointmentWidget() {
+    var msgs = $('ew-messages');
+    var wrapper = document.createElement('div');
+    wrapper.className = 'ew-msg ew-msg-form';
+    wrapper.id = 'appointment-widget-' + Date.now();
+
+    var widget = document.createElement('div');
+    widget.className = 'ew-form-card';
+
+    var title = document.createElement('div');
+    title.className = 'ew-form-title';
+    title.innerHTML = '<svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:#fff;margin-right:8px;"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>Prenota un appuntamento';
+    widget.appendChild(title);
+
+    var body = document.createElement('div');
+    body.className = 'ew-form-body';
+    body.innerHTML = `
+      <div id="appointment-calendar-container"></div>
+      <div id="appointment-slots-container" style="display:none;"></div>
+      <div id="appointment-booking-form" style="display:none;">
+        <div class="appointment-form-group">
+          <label>Nome *</label>
+          <input type="text" name="appointment_nome" placeholder="Il tuo nome" required>
+        </div>
+        <div class="appointment-form-group">
+          <label>Email *</label>
+          <input type="email" name="appointment_email" placeholder="La tua email" required>
+        </div>
+        <div class="appointment-form-group">
+          <label>Telefono</label>
+          <input type="tel" name="appointment_telefono" placeholder="+39 333 1234567">
+        </div>
+        <div class="appointment-form-group">
+          <label>Note aggiuntive</label>
+          <textarea name="appointment_note" placeholder="Puoi aggiungere dettagli specifici per l'appuntamento..."></textarea>
+        </div>
+        <div class="ew-form-privacy">
+          <input type="checkbox" name="appointment_privacy" required>
+          <label>Acconsento al trattamento dei dati personali ai sensi del GDPR.</label>
+        </div>
+        <button type="button" class="appointment-submit" id="appointment-submit-btn">
+          Conferma Appuntamento
+        </button>
+        <div class="ew-form-error" id="appointment-error"></div>
+      </div>
+    `;
+    widget.appendChild(body);
+
+    wrapper.appendChild(widget);
+    msgs.insertBefore(wrapper, $('ew-typing'));
+    scrollDown();
+
+    // Initialize appointment system
+    if (appointmentSystem) {
+      initializeAppointmentWidget(wrapper.id);
+    } else {
+      body.innerHTML = '<div class="no-slots">Il sistema appuntamenti non è disponibile al momento.</div>';
+    }
+  }
+
+  function initializeAppointmentWidget(wrapperId) {
+    var selectedDate = null;
+    var selectedSlot = null;
+
+    // Initialize calendar
+    appointmentSystem.createCalendarWidget('appointment-calendar-container', function(date, slots) {
+      selectedDate = date;
+      selectedSlot = null;
+      
+      var slotsContainer = $('#appointment-slots-container');
+      slotsContainer.style.display = 'block';
+      
+      appointmentSystem.createTimeSlotsWidget('appointment-slots-container', slots, function(slot) {
+        selectedSlot = slot;
+        
+        // Show booking form
+        var bookingForm = $('#appointment-booking-form');
+        bookingForm.style.display = 'block';
+        
+        // Pre-fill with user data if available
+        if (userSource && userSource.testData) {
+          var nomeField = bookingForm.querySelector('input[name="appointment_nome"]');
+          var emailField = bookingForm.querySelector('input[name="appointment_email"]');
+          var telefonoField = bookingForm.querySelector('input[name="appointment_telefono"]');
+          
+          if (userSource.testData.nome && nomeField) nomeField.value = userSource.testData.nome;
+          if (userSource.testData.email && emailField) emailField.value = userSource.testData.email;
+          if (userSource.testData.telefono && telefonoField) telefonoField.value = userSource.testData.telefono;
+        }
+        
+        scrollDown();
+      });
+      
+      scrollDown();
+    });
+
+    // Handle appointment booking
+    $(wrapperId).addEventListener('click', function(e) {
+      if (e.target.id === 'appointment-submit-btn') {
+        handleAppointmentBooking(wrapperId, selectedSlot);
+      }
+    });
+  }
+
+  function handleAppointmentBooking(wrapperId, slot) {
+    if (!slot) {
+      showAppointmentError(wrapperId, 'Seleziona prima un orario disponibile.');
+      return;
+    }
+
+    var form = $('#appointment-booking-form');
+    var submitBtn = $('#appointment-submit-btn');
+    var errorDiv = $('#appointment-error');
+    
+    errorDiv.classList.remove('ew-visible');
+
+    // Validate form
+    var nome = form.querySelector('input[name="appointment_nome"]').value.trim();
+    var email = form.querySelector('input[name="appointment_email"]').value.trim();
+    var telefono = form.querySelector('input[name="appointment_telefono"]').value.trim();
+    var note = form.querySelector('textarea[name="appointment_note"]').value.trim();
+    var privacy = form.querySelector('input[name="appointment_privacy"]').checked;
+
+    if (!nome || !email) {
+      showAppointmentError(wrapperId, 'Nome ed email sono obbligatori.');
+      return;
+    }
+
+    if (!privacy) {
+      showAppointmentError(wrapperId, 'Devi accettare il trattamento dei dati personali.');
+      return;
+    }
+
+    // Disable form and show loading
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<div class="appointment-loading"><div class="spinner"></div><span>Prenotazione in corso...</span></div>';
+
+    var userData = {
+      nome: nome,
+      email: email,
+      telefono: telefono,
+      note: note
+    };
+
+    // Track appointment booking attempt
+    if (analytics) {
+      analytics.trackEvent('appointment_booking_started', {
+        slot_id: slot.id,
+        slot_time: slot.start.toISOString(),
+        user_source: userSource ? userSource.userSource : 'unknown'
+      });
+    }
+
+    // Book appointment
+    appointmentSystem.bookAppointment(slot.id, userData, sessionId)
+      .then(function(result) {
+        if (result.success) {
+          showAppointmentSuccess(wrapperId, result.appointment, result.confirmation_code);
+          
+          // Track successful booking
+          if (analytics) {
+            analytics.trackEvent('appointment_booked', {
+              appointment_id: result.appointment.id,
+              confirmation_code: result.confirmation_code,
+              slot_time: result.appointment.start_time
+            });
+            
+            analytics.trackLead('appointment_booking', {
+              ...userData,
+              appointment_time: result.appointment.start_time,
+              user_source: userSource ? userSource.userSource : 'unknown'
+            });
+          }
+
+          // Send success message to chat
+          var successMessage = 'Perfetto! Il tuo appuntamento è stato confermato. Riceverai una email di conferma a breve.';
+          conversationHistory.push({role: 'assistant', content: successMessage, timestamp: new Date().toISOString()});
+          typeBotMessage(successMessage, true);
+        } else {
+          showAppointmentError(wrapperId, result.error || 'Si è verificato un errore durante la prenotazione.');
+        }
+      })
+      .catch(function(error) {
+        console.error('Appointment booking error:', error);
+        showAppointmentError(wrapperId, 'Errore di connessione. Riprova tra qualche momento.');
+      })
+      .finally(function() {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Conferma Appuntamento';
+      });
+  }
+
+  function showAppointmentError(wrapperId, message) {
+    var errorDiv = $(wrapperId).querySelector('#appointment-error');
+    if (errorDiv) {
+      errorDiv.textContent = message;
+      errorDiv.classList.add('ew-visible');
+      scrollDown();
+    }
+  }
+
+  function showAppointmentSuccess(wrapperId, appointment, confirmationCode) {
+    var widget = $(wrapperId);
+    var body = widget.querySelector('.ew-form-body');
+    
+    var appointmentDetails = appointmentSystem.formatAppointmentDetails(appointment);
+    
+    body.innerHTML = `
+      <div class="appointment-success">
+        <div class="success-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+        </div>
+        <h4>Appuntamento Confermato!</h4>
+        <p><strong>${appointmentDetails}</strong></p>
+        <div class="confirmation-code">
+          Codice: ${confirmationCode}
+        </div>
+        <p style="font-size:12px;margin-top:12px;color:#6B7280;">
+          Riceverai una email di conferma con tutti i dettagli. 
+          Se hai bisogno di modificare l'appuntamento, contattaci.
+        </p>
+      </div>
+    `;
+    
+    scrollDown();
   }
 
   // ── End session on page unload ──────────────────────
@@ -1003,4 +2240,8 @@
   } else {
     inject();
   }
+
+  // ── Public API ──────────────────────────────────────
+  // ChatWidget already defined at the top of the file
+
 })();

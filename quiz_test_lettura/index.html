@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Benvenuto al Test di lettura</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="hub-content-wrapper">
+    <div class="hub-page">
+     <h1>Benvenuto al Test di lettura</h1>
+    <div class="mentor-profile-box">
+  <div class="mentor-avatar mentor-logo"></div>
+  <div class="mentor-details">
+    <h3>Incontra il tuo coach AI personale Mentor Eureka</h3>
+
+    <p>Ciao, sono <strong>Mentor Eureka</strong>.<br>
+      Immagina di avere al tuo fianco un mentore con <strong>venticinque anni di esperienza</strong>:
+      capace di <strong>riconoscere i tuoi blocchi</strong>, <strong>mostrarti la via più rapida</strong>
+      e trasformare la fatica di studiare in <strong>energia mentale libera</strong>.
+    </p>
+
+    <p>Sono nato dall'esperienza di <strong>Apprendimento Rapido</strong> e dal
+      <strong>Metodo Eureka (dal duemiluno)</strong>, che ha aiutato <strong>migliaia di professionisti</strong>
+      a <strong>imparare rapidamente</strong>, <strong>ricordare meglio</strong> e
+      <strong>restare concentrati</strong>.
+    </p>
+
+    <p>Il mio obiettivo è <strong>parlare con te</strong>: <strong>capire come apprendi</strong>,
+      mostrarti <strong>dove puoi crescere</strong> e darti <strong>azioni semplici</strong>
+      da mettere subito in pratica.
+    </p>
+  </div>
+</div>
+<div class="value-add-section">
+    <h2>Oltre il punteggio: la tua analisi personale gratuita con Mentor Eureka</h2>
+     <h4><center>Questo test gratuito è progettato per valutare la tua velocità di lettura e la tua capacità di ricordo.</center></h4>
+<p>Ti faremo leggere un breve testo. Una volta terminata la lettura, ti chiederemo di rispondere a una serie di semplici domande a risposta multipla.</p>
+
+<strong>Durante la lettura:</strong>
+
+<ul class="lista-allineata-a-sinistra">
+    
+    <li>Leggi il testo come faresti con qualsiasi contenuto (un libro, un giornale, un'email, ecc.).</li>
+    <li>Se c'è qualcosa che non capisci, non soffermarti. Passa avanti e non perdere tempo a rileggerlo.</li>
+    <li>Quando hai finito di leggere il testo, premi il pulsante "FINE".</li>
+</ul>
+<p>
+    <strong>E dopo?</strong> Riceverai i tuoi risultati direttamente da Mentor Eureka, che sarà felice di parlare con te.
+    Potrai <strong>interagire in tempo reale</strong>, fare domande, chiedere esempi, <strong>ascoltare suggerimenti</strong>
+    e capire come trasformare un semplice punteggio in azioni concrete per migliorare.
+  </p>
+  <p>
+     Se preferisci,<strong> potrai usare la tua voce</strong>. Il nostro consiglio è di parlargli come faresti <strong>con un amico</strong>: più condividi il tuo contesto (obiettivi, difficoltà, necessità),
+    <strong>più precisa sarà la sua lettura</strong> e <strong>più utili saranno i suoi suggerimenti</strong>.
+    È uno <strong>scambio vero</strong>, con un obiettivo chiaro: <strong>eccellere nell'apprendimento</strong> — <em>più tu darai, più lui ti darà</em>.
+  </p>
+  
+
+<p>Se è tutto chiaro e sei pronto per iniziare, scegli qui sotto uno degli articoli che ti incuriosisce maggiormente e poi premi il pulsante e partirai con il test. <strong>Buona lettura</strong>.</p>
+        </div>
+      <div class="hub-container">
+        <a class="quiz-card" href="#" data-article="infelice">
+          <span class="card-icon">🧠</span>
+          <h2>Successo e Felicità</h2>
+          <p>Valuta l'allineamento tra i tuoi obiettivi e i tuoi valori più profondi.</p>
+        </a>
+        <a class="quiz-card" href="#" data-article="focus">
+          <span class="card-icon">🎯</span>
+          <h2>Gestione del Focus</h2>
+          <p>Misura la tua capacità di concentrazione nell'era della distrazione.</p>
+        </a>
+        <a class="quiz-card" href="#" data-article="memoria">
+          <span class="card-icon">📚</span>
+          <h2>Potenza della Memoria</h2>
+          <p>Testa la tua abilità di richiamare informazioni per non dimenticare più nulla.</p>
+        </a>
+        <a class="quiz-card" href="#" data-article="sistemico">
+          <span class="card-icon">⚙️</span>
+          <h2>Pensiero Sistemico</h2>
+          <p>Scopri se hai una visione d'insieme o sei intrappolato in problemi ricorrenti.</p>
+        </a>
+         
+      </div>
+ <footer class="site-footer">
+    
+        <div>
+            <a href="https://www.iubenda.com/privacy-policy/89530968" class="iubenda-nostyle iubenda-embed">Privacy Policy</a> •
+            <a href="https://www.iubenda.com/privacy-policy/89530968/cookie-policy" class="iubenda-nostyle iubenda-embed">Cookie Policy</a> •
+            <a href="https://www.iubenda.com/termini-e-condizioni/89530968" class="iubenda-nostyle iubenda-embed">Termini e Condizioni</a>
+    </footer>
+
+  <script>
+    // Gestione click card
+    document.querySelectorAll('.quiz-card').forEach(card => {
+      card.addEventListener('click', (e) => {
+        e.preventDefault();
+        const articleId = card.getAttribute('data-article');
+        window.location.href = `test-lettura.html?article=${articleId}`;
+      });
+    });
+    </script>
+   <script type="text/javascript">
+var _iub = _iub || [];
+_iub.csConfiguration = {
+  "lang": "it",
+  "siteId": 89530968, // Il tuo ID specifico
+  "cookiePolicyId": 89530968, // Il tuo ID specifico
+};
+</script>
+<script type="text/javascript" src="https://cdn.iubenda.com/iubenda.js" charset="UTF-8" async></script>
+
+
+</body>
+</html>

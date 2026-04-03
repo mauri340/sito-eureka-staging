@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Enhanced Chat Widget - Metodo Eureka</title>
+    <meta name="description" content="Pagina di test per le funzionalità avanzate del chat widget di Metodo Eureka">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .header h1 {
+            color: #1a1a2e;
+            font-size: 2.5em;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            color: #666;
+            font-size: 1.1em;
+            font-weight: 400;
+        }
+        
+        .test-scenarios {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .test-card {
+            background: #fff;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            border-left: 5px solid #00A988;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .test-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .test-card h3 {
+            color: #00A988;
+            font-size: 1.3em;
+            font-weight: 700;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .test-card p {
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .test-btn {
+            background: linear-gradient(135deg, #00A988 0%, #007a63 100%);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9em;
+            transition: opacity 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .test-btn:hover {
+            opacity: 0.9;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .feature-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 3px solid #00A988;
+        }
+        
+        .feature-item h4 {
+            color: #1a1a2e;
+            font-weight: 600;
+            margin-bottom: 5px;
+            font-size: 0.95em;
+        }
+        
+        .feature-item p {
+            color: #666;
+            font-size: 0.85em;
+            margin: 0;
+        }
+        
+        .status-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        
+        .status-active { background-color: #28a745; }
+        .status-loading { background-color: #ffc107; }
+        .status-error { background-color: #dc3545; }
+        
+        .debug-panel {
+            background: #2d3748;
+            color: #e2e8f0;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 30px;
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 0.85em;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .debug-panel h4 {
+            color: #00A988;
+            margin-bottom: 10px;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .url-examples {
+            background: #fff;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .url-examples h4 {
+            color: #1a1a2e;
+            margin-bottom: 15px;
+        }
+        
+        .url-example {
+            background: #f7fafc;
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 0.85em;
+            word-break: break-all;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .test-scenarios {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Enhanced Chat Widget Test</h1>
+            <p>Test completo di tutte le funzionalità avanzate integrate</p>
+        </div>
+        
+        <div class="features-grid">
+            <div class="feature-item">
+                <h4>📱 Mobile Audio Fix</h4>
+                <p>AudioContext unlock per iOS/Android + fallback HTML5</p>
+            </div>
+            <div class="feature-item">
+                <h4>🔌 WebSocket Streaming</h4>
+                <p>Auto-reconnect intelligente + chunked messages</p>
+            </div>
+            <div class="feature-item">
+                <h4>🎨 Sync Audio-Text</h4>
+                <p>Typing animation sincronizzata con audio</p>
+            </div>
+            <div class="feature-item">
+                <h4>📊 Analytics Multi-Platform</h4>
+                <p>GA4 + Facebook Pixel + LinkedIn + CRM Bridge</p>
+            </div>
+            <div class="feature-item">
+                <h4>🎯 User Source Detection</h4>
+                <p>Riconoscimento automatico sorgente utente</p>
+            </div>
+            <div class="feature-item">
+                <h4>📅 Sistema Appuntamenti</h4>
+                <p>Calendar widget + booking completo</p>
+            </div>
+        </div>
+        
+        <div class="test-scenarios">
+            <div class="test-card">
+                <h3>
+                    <span class="status-indicator status-active"></span>
+                    💻 Test Standard
+                </h3>
+                <p>Test del widget base senza parametri speciali. Verifica funzionamento chat normale, audio e analytics.</p>
+                <a href="?test=standard" class="test-btn">Testa Chat Standard</a>
+            </div>
+            
+            <div class="test-card">
+                <h3>
+                    <span class="status-indicator status-loading"></span>
+                    📖 Test Lettura
+                </h3>
+                <p>Simula utente che arriva dal test di lettura veloce con risultati PAM e dati personali.</p>
+                <a href="?test_type=lettura&userId=123&nome=Mario&email=mario@test.com&pam=280&punteggio=85" class="test-btn">Testa Scenario Lettura</a>
+            </div>
+            
+            <div class="test-card">
+                <h3>
+                    <span class="status-indicator status-loading"></span>
+                    🧠 Test Memoria
+                </h3>
+                <p>Simula utente che arriva dal test di memoria con risultati specifici.</p>
+                <a href="?test_type=memoria&userId=456&nome=Anna&email=anna@test.com&memory_score=75&memory_level=buono" class="test-btn">Testa Scenario Memoria</a>
+            </div>
+            
+            <div class="test-card">
+                <h3>
+                    <span class="status-indicator status-loading"></span>
+                    💰 Test Costo Ignoranza
+                </h3>
+                <p>Simula utente che arriva dal test sul costo dell'ignoranza.</p>
+                <a href="?test_type=costo_ignoranza&userId=789&nome=Giuseppe&email=giuseppe@test.com&ignorance_score=65" class="test-btn">Testa Scenario Ignoranza</a>
+            </div>
+            
+            <div class="test-card">
+                <h3>
+                    <span class="status-indicator status-active"></span>
+                    📞 Test Chiamata
+                </h3>
+                <p>Test del sistema di richiesta chiamate con form inline e tracking CRM.</p>
+                <a href="?focus=call_system" class="test-btn">Testa Sistema Chiamate</a>
+            </div>
+            
+            <div class="test-card">
+                <h3>
+                    <span class="status-indicator status-active"></span>
+                    📅 Test Appuntamenti
+                </h3>
+                <p>Test completo del sistema di prenotazione appuntamenti con calendario.</p>
+                <a href="?focus=appointments" class="test-btn">Testa Sistema Appuntamenti</a>
+            </div>
+        </div>
+        
+        <div class="url-examples">
+            <h4>🔗 URL di Test Esempio</h4>
+            <div class="url-example">
+                <strong>Utente Test Lettura Completo:</strong><br>
+                ?test_type=lettura&userId=123&nome=Mario&cognome=Rossi&email=mario.rossi@example.com&telefono=3331234567&pam=320&punteggio=92&quiz_status=completato
+            </div>
+            <div class="url-example">
+                <strong>Utente Test Memoria:</strong><br>
+                ?test_type=memoria&userId=456&nome=Anna&email=anna@example.com&memory_score=85&memory_level=ottimo
+            </div>
+            <div class="url-example">
+                <strong>Focus su Feature Specifica:</strong><br>
+                ?focus=appointments&enhanced=true
+            </div>
+        </div>
+        
+        <div class="debug-panel" id="debug-panel">
+            <h4>🔍 Debug Console</h4>
+            <div id="debug-output">
+                Console di debug caricata. I log del sistema appariranno qui...
+            </div>
+        </div>
+    </div>
+
+    <!-- Chat Widget -->
+    <script src="chat-widget.js" data-api=""></script>
+    <script src="whatsapp-widget.js"></script>
+
+    <script>
+        // Debug console integration
+        const debugOutput = document.getElementById('debug-output');
+        const originalLog = console.log;
+        const originalWarn = console.warn;
+        const originalError = console.error;
+
+        function addToDebug(message, type = 'log') {
+            const timestamp = new Date().toLocaleTimeString();
+            const logEntry = document.createElement('div');
+            logEntry.style.marginBottom = '5px';
+            logEntry.style.padding = '2px 0';
+            
+            let color = '#e2e8f0';
+            let icon = '📝';
+            
+            switch (type) {
+                case 'warn':
+                    color = '#ffd700';
+                    icon = '⚠️';
+                    break;
+                case 'error':
+                    color = '#ff6b6b';
+                    icon = '❌';
+                    break;
+                case 'success':
+                    color = '#00A988';
+                    icon = '✅';
+                    break;
+            }
+            
+            logEntry.innerHTML = `<span style="color: #888;">[${timestamp}]</span> <span style="color: ${color};">${icon} ${message}</span>`;
+            debugOutput.appendChild(logEntry);
+            debugOutput.scrollTop = debugOutput.scrollHeight;
+        }
+
+        console.log = function(...args) {
+            originalLog.apply(console, args);
+            if (args[0] && typeof args[0] === 'string') {
+                if (args[0].includes('✅') || args[0].includes('🚀')) {
+                    addToDebug(args.join(' '), 'success');
+                } else {
+                    addToDebug(args.join(' '), 'log');
+                }
+            }
+        };
+
+        console.warn = function(...args) {
+            originalWarn.apply(console, args);
+            addToDebug(args.join(' '), 'warn');
+        };
+
+        console.error = function(...args) {
+            originalError.apply(console, args);
+            addToDebug(args.join(' '), 'error');
+        };
+
+        // Test specific functionality based on URL parameters
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const testType = urlParams.get('test');
+            const focus = urlParams.get('focus');
+            
+            // Update page title based on test
+            if (testType) {
+                document.title = `Test ${testType.charAt(0).toUpperCase() + testType.slice(1)} - Enhanced Chat Widget`;
+            }
+            
+            // Log current test scenario
+            if (testType || focus) {
+                console.log(`🎯 Test Scenario: ${testType || focus}`);
+                console.log('📋 URL Parameters:', Object.fromEntries(urlParams.entries()));
+            } else {
+                console.log('🏠 Standard test mode - no special parameters');
+            }
+            
+            // Monitor chat widget initialization
+            setTimeout(() => {
+                if (window.analytics) {
+                    console.log('📊 Analytics Status:', window.analytics.getStatus());
+                }
+                
+                if (window.userSource) {
+                    console.log('🎯 User Source Info:', window.userSource.getUserSourceInfo());
+                }
+                
+                if (window.audioSync) {
+                    console.log('🔊 Audio System Status:', window.audioSync.getStatus());
+                }
+                
+                // Test specific features
+                if (focus === 'appointments') {
+                    console.log('📅 Testing appointment system...');
+                    setTimeout(() => {
+                        if (window.appointmentSystem) {
+                            console.log('✅ Appointment system ready');
+                        } else {
+                            console.warn('⚠️ Appointment system not loaded');
+                        }
+                    }, 2000);
+                }
+                
+                if (focus === 'call_system') {
+                    console.log('📞 Testing call system...');
+                }
+                
+            }, 3000);
+            
+            // Monitor chat events
+            window.addEventListener('chatOpened', function() {
+                console.log('💬 Chat opened event detected');
+            });
+            
+            // Add test instructions to debug
+            addToDebug('🧪 Test page loaded successfully', 'success');
+            addToDebug('💡 Open chat widget to test enhanced features', 'log');
+            addToDebug('🎨 Check browser console for detailed logs', 'log');
+        });
+
+        // Keyboard shortcuts for testing
+        document.addEventListener('keydown', function(e) {
+            // Ctrl+Shift+C = Open chat
+            if (e.ctrlKey && e.shiftKey && e.key === 'C') {
+                const chatToggle = document.getElementById('ew-chat-toggle');
+                if (chatToggle) {
+                    chatToggle.click();
+                    addToDebug('⌨️ Chat opened via keyboard shortcut', 'log');
+                }
+            }
+            
+            // Ctrl+Shift+D = Clear debug
+            if (e.ctrlKey && e.shiftKey && e.key === 'D') {
+                debugOutput.innerHTML = '<div style="color: #00A988;">Debug console cleared</div>';
+            }
+        });
+
+        // Add periodic status updates
+        setInterval(() => {
+            const chatWidget = document.getElementById('ew-chat-widget');
+            if (chatWidget) {
+                const statusText = chatWidget.style.display === 'none' ? 'Hidden' : 'Visible';
+                // Only log if status changed (to avoid spam)
+            }
+        }, 10000);
+    </script>
+</body>
+</html>

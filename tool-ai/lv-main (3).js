@@ -1,5 +1,5 @@
 
-import { CONTENUTI } from './lv-config.js';
+import { CONTENUTI } from './lv-config (1).js';
 
 // Recupera ID articolo da query string
 const urlParams = new URLSearchParams(window.location.search);
@@ -165,25 +165,33 @@ const utmParams = {
       },
       body: JSON.stringify(payload)
     });
+    
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    }
+    
     const data = await response.json();
     console.log('DEBUG: Risposta da /quiz/submit:', JSON.stringify(data, null, 2));
-    if (!response.ok) {
-      throw new Error(data.error || 'Errore invio quiz');
-    }
-// =======================================================
+    
     // ✅ PUNTO CHIAVE: INSERISCI IL CODICE DI FACEBOOK QUI
-    // =======================================================
     if (typeof fbq === 'function') {
       fbq('track', 'Lead');
       console.log('Evento "Lead" inviato al Pixel di Meta.');
     }
-    // =======================================================
+    
     const quizData = data.quizData || formData;
-    const redirectUrl = `chat.html?userId=${encodeURIComponent(data.userId)}&email=${encodeURIComponent(formData.email)}&nome=${encodeURIComponent(formData.nome)}&cognome=${encodeURIComponent(formData.cognome)}&telefono=${encodeURIComponent(formData.telefono)}&pam=${encodeURIComponent(quizData.pam)}&punteggio=${encodeURIComponent(quizData.punteggio_comprensione)}&quiz_status=available`;
+    const redirectUrl = `/chat-system/chat.html?userId=${encodeURIComponent(data.userId || formData.email)}&email=${encodeURIComponent(formData.email)}&nome=${encodeURIComponent(formData.nome)}&cognome=${encodeURIComponent(formData.cognome)}&telefono=${encodeURIComponent(formData.telefono)}&pam=${encodeURIComponent(quizData.pam)}&punteggio=${encodeURIComponent(quizData.punteggio_comprensione)}&quiz_status=lettura`;
     console.log('DEBUG: Redirect a:', redirectUrl);
     window.location.href = redirectUrl;
   } catch (error) {
     console.error('Errore invio quiz:', error.message);
+    
+    // Fallback: proceed to chat even if backend fails
+    alert('Si è verificato un problema temporaneo con il server. Procediamo comunque alla conversazione con Mentor Eureka.');
+    
+    const fallbackRedirectUrl = `/chat-system/chat.html?userId=${encodeURIComponent(formData.email)}&email=${encodeURIComponent(formData.email)}&nome=${encodeURIComponent(formData.nome)}&cognome=${encodeURIComponent(formData.cognome)}&telefono=${encodeURIComponent(formData.telefono)}&pam=${encodeURIComponent(results.pam)}&punteggio=${encodeURIComponent(results.score)}&quiz_status=lettura&offline=true`;
+    console.log('DEBUG: Fallback redirect a:', fallbackRedirectUrl);
+    window.location.href = fallbackRedirectUrl;
   }
 });
 }

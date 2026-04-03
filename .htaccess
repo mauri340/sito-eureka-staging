@@ -1,0 +1,61 @@
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^www\.apprendimentorapido\.it$ [NC]
+RewriteRule ^(.*)$ https://apprendimentorapido.it/$1 [R=301,L]
+
+# ══════════════════════════════════════════
+#  SITO STATICO — bypassa WordPress per tutte le pagine principali
+# ══════════════════════════════════════════
+
+# 1. Servi file .html direttamente
+<FilesMatch "\.html$">
+    SetHandler default-handler
+</FilesMatch>
+
+# 2. Homepage: / → index.html
+DirectoryIndex index.html index.php
+
+# 3. Reindirizza URL WordPress → pagine statiche
+RewriteEngine On
+RewriteRule ^$                    /index.html             [L]
+RewriteRule ^metodo-eureka/?$     /metodo-eureka.html     [L,R=302]
+RewriteRule ^master-eureka/?$     /master-eureka.html     [L,R=302]
+RewriteRule ^testimonianze/?$     /testimonianze.html     [L,R=302]
+RewriteRule ^coaching/?$          /coaching.html          [L,R=302]
+RewriteRule ^libro/?$             /libro.html             [L,R=302]
+RewriteRule ^risorse-gratuite/?$  /risorse-gratuite.html  [L,R=302]
+RewriteRule ^demo-zoom/?$         /demo-zoom/index.html   [L,R=302]
+RewriteRule ^blog/?$              /blog.html              [L,R=302]
+
+# ══════════════════════════════════════════
+# BEGIN WordPress (lascia invariato sotto)
+# ══════════════════════════════════════════
+
+
+# BEGIN WordPress
+# Le direttive (linee) tra "BEGIN WordPress" e "END WordPress" sono
+# generate dinamicamente, e dovrebbero essere modificate solo tramite i filtri di WordPress.
+# Ogni modifica alle direttive tra questi marcatori verrà sovrascritta.
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+	RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+	RewriteBase /
+	RewriteRule ^index\.php$ - [L]
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteRule . /index.php [L]
+</IfModule>
+
+# END WordPress
+
+php_value upload_max_filesize 64M
+php_value post_max_size 128M
+php_value memory_limit 256M
+php_value max_execution_time 300
+php_value max_input_time 300
+
+# BEGIN WPvivid Rewrite Rule for LiteSpeed
+# Le direttive (linee) tra "BEGIN WPvivid Rewrite Rule for LiteSpeed" e "END WPvivid Rewrite Rule for LiteSpeed" sono
+# generate dinamicamente, e dovrebbero essere modificate solo tramite i filtri di WordPress.
+# Ogni modifica alle direttive tra questi marcatori verrà sovrascritta.
+
+# END WPvivid Rewrite Rule for LiteSpeed
