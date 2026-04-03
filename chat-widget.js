@@ -11,6 +11,8 @@
   var chatOpened = false;
   var inputDisabled = false;
   var widgetReady = false;
+  var userParams = null;
+  var fullscreenMode = false;
 
   // ── CSS ──────────────────────────────────────────────
   var css = `
@@ -189,11 +191,17 @@
     var wrap = document.createElement('div');
     wrap.id = 'ew-chat-widget';
     wrap.innerHTML = html;
-    document.body.appendChild(wrap);
+
+    var target = fullscreenMode && document.getElementById('chat-fullscreen');
+    if (target) {
+      target.appendChild(wrap);
+    } else {
+      document.body.appendChild(wrap);
+    }
 
     widgetReady = true;
     bindEvents();
-    startAutoOpen();
+    if (!fullscreenMode) { startAutoOpen(); }
   }
 
   // ── DOM refs (resolved lazily) ───────────────────────
@@ -258,11 +266,13 @@
   // ── Session Start ───────────────────────────────────
   function startSession() {
     showTyping();
+    var payload = { page_context: getPageContext() };
+    if (userParams) { payload.user_data = userParams; }
 
     fetch(API_BASE + '/api/chat/session/start', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ page_context: getPageContext() })
+      body: JSON.stringify(payload)
     })
       .then(function (r) { return r.json(); })
       .then(function (data) {
@@ -431,7 +441,27 @@
 
   window.addEventListener('beforeunload', endSession);
 
+  // ── Public API ───────────────────────────────────────
+  window.ChatWidget = {
+    init: function (params) {
+      userParams = params || {};
+    },
+    open: function () {
+      if (!widgetReady) {
+        fullscreenMode = true;
+        inject();
+      }
+      openChat();
+    },
+    close: function () {
+      closeChat();
+    }
+  };
+
   // ── Boot ────────────────────────────────────────────
+  if (window.DISABLE_CHAT_WIDGET) {
+    return;
+  }
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', inject);
   } else {
