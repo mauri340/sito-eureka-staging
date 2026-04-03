@@ -5,42 +5,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chat con Mentor Eureka</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
+        /* Import del font */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap');
+
+        /* Stili Generali (basati sulla struttura di riferimento) */
+        html {
             box-sizing: border-box;
+        }
+        *, *:before, *:after {
+            box-sizing: inherit;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            color: #fff;
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+            color: #1a202c;
+            line-height: 1.7;
+            margin: 0;
+            padding: 0;
             height: 100vh;
-            display: flex;
-            flex-direction: column;
+            overflow: hidden;
         }
 
-        .chat-container {
-            flex: 1;
+        /* Contenitore principale della pagina chat (struttura di riferimento) */
+        #chat-page-container {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            min-height: 100vh;
+            height: 100vh;
             padding: 20px;
+            box-sizing: border-box;
+            background-color: #f0f2f5;
         }
 
-        .chat-wrapper {
+        /* Contenitore della chat con altezza fissa (come nel riferimento) */
+        #chat-container {
             width: 100%;
-            max-width: 800px;
-            height: 80vh;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            position: relative;
+            max-width: 700px;
+            height: 85vh;
+            background-color: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
         }
 
-        /* Override chat widget styles for fullscreen */
+        /* Override per il widget chat per integrarlo nella struttura */
         #ew-chat-widget #ew-chat-box {
             position: relative !important;
             bottom: auto !important;
@@ -49,172 +62,147 @@
             height: 100% !important;
             max-width: none !important;
             max-height: none !important;
-            border-radius: 20px !important;
+            border-radius: 16px !important;
             transform: none !important;
             opacity: 1 !important;
             pointer-events: auto !important;
             box-shadow: none !important;
+            border: none !important;
+            background: transparent !important;
+            display: flex !important;
+            flex-direction: column !important;
         }
 
+        /* Nasconde il toggle del widget */
         #ew-chat-widget #ew-chat-toggle {
             display: none !important;
         }
 
-        /* Footer styles */
-        .footer {
-            background: #0a0a0a;
-            padding: 40px 0 20px;
-            color: #fff;
-            margin-top: auto;
+        /* Assicura che l'header del widget sia fisso */
+        #ew-chat-widget #ew-chat-header {
+            flex-shrink: 0 !important;
+            padding: 15px 20px !important;
+            border-bottom: 1px solid #e2e8f0 !important;
         }
 
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 28px;
+        /* Area messaggi con scroll interno */
+        #ew-chat-widget #ew-chat-messages {
+            flex-grow: 1 !important;
+            overflow-y: auto !important;
+            padding: 20px !important;
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 15px !important;
         }
 
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr 1fr;
-            gap: 40px;
-            margin-bottom: 40px;
+        /* Form input fisso in fondo */
+        #ew-chat-widget #ew-chat-input {
+            flex-shrink: 0 !important;
+            padding: 15px !important;
+            border-top: 1px solid #e2e8f0 !important;
+            background-color: #f8f9fa !important;
         }
 
-        @media (max-width: 768px) {
-            .footer-grid {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
+        /* Stili per i messaggi (basati sul riferimento) */
+        .message {
+            padding: 10px 15px;
+            border-radius: 18px;
+            max-width: 75%;
+            line-height: 1.5;
+        }
+        .user {
+            background-color: #007bff;
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+        .bot {
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            color: #1a202c;
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
         }
 
-        .footer-brand img {
-            width: 160px;
-            height: auto;
-            margin-bottom: 20px;
+        /* Footer fisso (come nel riferimento) */
+        .site-footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #ffffff;
+            border-top: 1px solid #e2e8f0;
+            padding: 15px 0;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #6c757d;
+            z-index: 1000;
+            box-shadow: 0 -5px 15px rgba(0,0,0,0.05);
         }
-
-        .footer-brand p {
-            color: #aaa;
-            line-height: 1.6;
-            font-size: 14px;
-        }
-
-        .footer-col h4 {
-            color: #fff;
-            font-size: 16px;
-            font-weight: 700;
-            margin-bottom: 20px;
-        }
-
-        .footer-col a {
-            display: block;
-            color: #aaa;
+        .site-footer a {
+            color: #4a5568;
             text-decoration: none;
-            margin-bottom: 12px;
-            font-size: 14px;
-            transition: color 0.3s ease;
+            margin: 0 10px;
+            transition: color 0.2s ease;
+        }
+        .site-footer a:hover {
+            color: #007bff;
+            text-decoration: underline;
         }
 
-        .footer-col a:hover {
-            color: #00A988;
-        }
-
-        .footer-bottom {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-top: 30px;
-            border-top: 1px solid #333;
-            font-size: 14px;
-        }
-
+        /* Media queries per mobile */
         @media (max-width: 768px) {
-            .footer-bottom {
-                flex-direction: column;
-                gap: 20px;
-                text-align: center;
+            #chat-page-container {
+                padding: 10px;
+            }
+            
+            #chat-container {
+                height: 90vh;
+                max-width: 100%;
+                border-radius: 8px;
             }
         }
 
-        .footer-bottom p {
-            color: #aaa;
-        }
-
-        .footer-bottom div {
-            display: flex;
-            gap: 20px;
-        }
-
-        @media (max-width: 768px) {
-            .footer-bottom div {
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 15px;
+        /* Stili mobile specifici (dalla referenza mobile) */
+        @media (max-width: 600px) {
+            body {
+                -webkit-text-size-adjust: 100%;
+                background: #f5f7fb;
             }
-        }
 
-        .footer-bottom a {
-            color: #aaa;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
+            #chat-page-container, #chat-container {
+                min-height: 100dvh;
+                overflow-x: visible;
+            }
 
-        .footer-bottom a:hover {
-            color: #00A988;
+            #ew-chat-widget #ew-chat-messages {
+                background: #fafafa !important;
+                -webkit-overflow-scrolling: touch !important;
+                scroll-padding-bottom: 120px !important;
+                scroll-behavior: smooth !important;
+            }
+
+            #ew-chat-widget #ew-chat-input {
+                position: sticky !important;
+                bottom: 0 !important;
+                z-index: 20 !important;
+                box-shadow: 0 -6px 18px rgba(17,24,39,.06) !important;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="chat-container">
-        <div class="chat-wrapper" id="chat-fullscreen">
+    <div id="chat-page-container">
+        <div id="chat-container">
             <!-- Chat widget will be injected here -->
         </div>
     </div>
 
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <img src="../images/logo.png" alt="Metodo Eureka">
-                    <p>Dal 2001 aiutiamo professionisti, imprenditori e studenti a imparare più velocemente e ricordare di più — con un metodo provato su oltre 20.000 persone.</p>
-                </div>
-
-                <div class="footer-col">
-                    <h4>Il Metodo</h4>
-                    <a href="../metodo-eureka.html">Il Metodo Eureka</a>
-                    <a href="../master-eureka.html">Il Master Eureka</a>
-                    <a href="../tecniche-memoria.html">Tecniche di Memoria</a>
-                    <a href="../lettura-veloce.html">Lettura Veloce</a>
-                    <a href="../mappe-mentali.html">Mappe Mentali</a>
-                </div>
-
-                <div class="footer-col">
-                    <h4>Risorse</h4>
-                    <a href="../demo-zoom/index.html">Webinar Gratuito</a>
-                    <a href="../coaching.html">Coaching Gratuita</a>
-                    <a href="../quiz_test_lettura/index.html">Test di Lettura</a>
-                    <a href="../quiz_test_memoria/index.html">Test di Memoria</a>
-                    <a href="../quiz_test_costo/index.html">Test del Costo</a>
-                </div>
-
-                <div class="footer-col">
-                    <h4>Seguici</h4>
-                    <a href="https://www.linkedin.com/company/apprendimentorapido/" target="_blank">LinkedIn</a>
-                    <a href="https://www.instagram.com/apprendimento_rapido/" target="_blank">Instagram</a>
-                    <a href="https://www.facebook.com/apprendimentorapido" target="_blank">Facebook</a>
-                    <a href="https://www.youtube.com/user/apprendimentorapido" target="_blank">YouTube</a>
-                </div>
-            </div>
-
-            <div class="footer-bottom">
-                <p>© 2025 Apprendimento Rapido – Metodo Eureka. Tutti i diritti riservati.</p>
-                <div>
-                    <a href="https://www.iubenda.com/privacy-policy/89530968" target="_blank">Privacy Policy</a>
-                    <a href="https://www.iubenda.com/privacy-policy/89530968/cookie-policy" target="_blank">Cookie Policy</a>
-                    <a href="https://www.iubenda.com/termini-e-condizioni/89530968" target="_blank">Termini e Condizioni</a>
-                </div>
-            </div>
+    <footer class="site-footer">
+        <div>
+            <a href="https://www.iubenda.com/privacy-policy/89530968" title="Privacy Policy">Privacy Policy</a> •
+            <a href="https://www.iubenda.com/privacy-policy/89530968/cookie-policy" title="Cookie Policy">Cookie Policy</a> •
+            <a href="https://www.iubenda.com/termini-e-condizioni/89530968" title="Termini e Condizioni">Termini e Condizioni</a>
         </div>
     </footer>
 
