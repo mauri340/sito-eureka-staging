@@ -34,6 +34,8 @@
   var chatOpened = false;
   var inputDisabled = false;
   var widgetReady = false;
+  var userParams = null;
+  var fullscreenMode = false;
   var conversationHistory = [];
 
   // ── Advanced Systems ────────────────────────────────
@@ -342,14 +344,20 @@
     var wrap = document.createElement('div');
     wrap.id = 'ew-chat-widget';
     wrap.innerHTML = html;
-    document.body.appendChild(wrap);
+
+    var target = fullscreenMode && document.getElementById('chat-fullscreen');
+    if (target) {
+      target.appendChild(wrap);
+    } else {
+      document.body.appendChild(wrap);
+    }
 
     // Load advanced modules
     loadAdvancedModules();
 
     widgetReady = true;
     bindEvents();
-    startAutoOpen();
+    if (!fullscreenMode) { startAutoOpen(); }
   }
 
   function loadAdvancedModules() {
@@ -492,6 +500,8 @@
   // ── Session Start ───────────────────────────────────
   function startSession() {
     showTyping();
+    var payload = { page_context: getPageContext() };
+    if (userParams) { payload.user_data = userParams; }
     
     // Get personalized greeting if user source is available
     var personalizedGreeting = 'Ciao! Sono Mentor Eureka. Come posso aiutarti?';
@@ -2204,7 +2214,27 @@
     }
   });
 
+  // ── Public API ───────────────────────────────────────
+  window.ChatWidget = {
+    init: function (params) {
+      userParams = params || {};
+    },
+    open: function () {
+      if (!widgetReady) {
+        fullscreenMode = true;
+        inject();
+      }
+      openChat();
+    },
+    close: function () {
+      closeChat();
+    }
+  };
+
   // ── Boot ────────────────────────────────────────────
+  if (window.DISABLE_CHAT_WIDGET) {
+    return;
+  }
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', inject);
   } else {
