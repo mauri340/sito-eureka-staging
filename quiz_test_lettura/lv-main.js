@@ -122,77 +122,54 @@ function init() {
   });
 
   userDataForm.addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const results = calculateResults();
-  const formData = {
-    nome: document.getElementById('nome').value,
-    cognome: document.getElementById('cognome').value,
-    email: document.getElementById('email').value,
-    telefono: document.getElementById('telefono').value,
-    pam: Math.round(results.pam), // Arrotonda il PAM prima di inviarlo
-    punteggio_comprensione: results.score,
-    readingTimeInSeconds: Math.round(results.readingTimeInSeconds) // Arrotonda anche il tempo per coerenza
-  };
-    
-   // Cattura parametri UTM (opzionali)
-const utmParams = {
-  utm_source: urlParams.get('utm_source') || '',
-  utm_medium: urlParams.get('utm_medium') || '',
-  utm_campaign: urlParams.get('utm_campaign') || '',
-  utm_content: urlParams.get('utm_content') || '',
-  utm_term: urlParams.get('utm_term') || ''
-};
+    e.preventDefault();
+    const results = calculateResults();
+    const formData = {
+      nome: document.getElementById('nome').value,
+      cognome: document.getElementById('cognome').value,
+      email: document.getElementById('email').value,
+      telefono: document.getElementById('telefono').value
+    };
 
- // Prepara il payload completo per il backend (con la correzione per userId)
-  const payload = {
-    userId: formData.email, // <-- CORREZIONE APPLICATA QUI
-    quizData: formData,
-    utmParams: utmParams
-  };
+    const quizPayload = {
+      quiz_status: "lettura",
+      nome: formData.nome,
+      cognome: formData.cognome,
+      email: formData.email,
+      telefono: formData.telefono,
+      pam: Math.round(results.pam),
+      punteggio: results.score
+    };
 
-
-    console.log('DEBUG: Invio payload a /quiz/submit:', JSON.stringify(payload, null, 2));
-    console.log('DEBUG: Dati utente:', formData);
-    console.log('DEBUG: Parametri UTM:', utmParams);
-    
- 
-  try {
-    const response = await fetch('https://ai-chat-service-nls9.onrender.com/api/quiz/submit', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(payload)
-    });
-    
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    try {
+      const response = await fetch(
+        'https://ai-chat-service-nls9.onrender.com/api/quiz/submit',
+        {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify(quizPayload)
+        }
+      );
+      const data = await response.json();
+      if (data.token) {
+        window.location.href = 
+          `/chat-system/chat.html?token=${data.token}`;
+      } else {
+        throw new Error('Token non ricevuto');
+      }
+    } catch (error) {
+      // Fallback con parametri URL
+      window.location.href = 
+        `/chat-system/chat.html?` +
+        `quiz_status=lettura` +
+        `&nome=${encodeURIComponent(formData.nome)}` +
+        `&cognome=${encodeURIComponent(formData.cognome)}` +
+        `&email=${encodeURIComponent(formData.email)}` +
+        `&telefono=${encodeURIComponent(formData.telefono)}` +
+        `&pam=${encodeURIComponent(Math.round(results.pam))}` +
+        `&punteggio=${encodeURIComponent(results.score)}`;
     }
-    
-    const data = await response.json();
-    console.log('DEBUG: Risposta da /quiz/submit:', JSON.stringify(data, null, 2));
-    
-    // ✅ PUNTO CHIAVE: INSERISCI IL CODICE DI FACEBOOK QUI
-    if (typeof fbq === 'function') {
-      fbq('track', 'Lead');
-      console.log('Evento "Lead" inviato al Pixel di Meta.');
-    }
-    
-    const quizData = data.quizData || formData;
-    const redirectUrl = `/chat-system/chat.html?userId=${encodeURIComponent(data.userId || formData.email)}&email=${encodeURIComponent(formData.email)}&nome=${encodeURIComponent(formData.nome)}&cognome=${encodeURIComponent(formData.cognome)}&telefono=${encodeURIComponent(formData.telefono)}&pam=${encodeURIComponent(quizData.pam)}&punteggio=${encodeURIComponent(quizData.punteggio_comprensione)}&quiz_status=lettura`;
-    console.log('DEBUG: Redirect a:', redirectUrl);
-    window.location.href = redirectUrl;
-  } catch (error) {
-    console.error('Errore invio quiz:', error.message);
-    
-    // Fallback: proceed to chat even if backend fails
-    alert('Si è verificato un problema temporaneo con il server. Procediamo comunque alla conversazione con Mentor Eureka.');
-    
-    const fallbackRedirectUrl = `/chat-system/chat.html?userId=${encodeURIComponent(formData.email)}&email=${encodeURIComponent(formData.email)}&nome=${encodeURIComponent(formData.nome)}&cognome=${encodeURIComponent(formData.cognome)}&telefono=${encodeURIComponent(formData.telefono)}&pam=${encodeURIComponent(results.pam)}&punteggio=${encodeURIComponent(results.score)}&quiz_status=lettura&offline=true`;
-    console.log('DEBUG: Fallback redirect a:', fallbackRedirectUrl);
-    window.location.href = fallbackRedirectUrl;
-  }
-});
+  });
 }
 
 // Esegui inizializzazione

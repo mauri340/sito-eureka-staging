@@ -225,44 +225,85 @@
     <script src="../chat-widget.js"></script>
     
     <script>
-        // Read URL parameters and pass them to chat widget
         const urlParams = new URLSearchParams(window.location.search);
-        const chatParams = {
-            userId: urlParams.get('userId'),
-            nome: urlParams.get('nome'),
-            cognome: urlParams.get('cognome'),
-            email: urlParams.get('email'),
-            telefono: urlParams.get('telefono'),
-            quiz_status: urlParams.get('quiz_status'),
-            pam: urlParams.get('pam'),
-            punteggio: urlParams.get('punteggio'),
-            punteggio1: urlParams.get('punteggio1'),
-            punteggio2: urlParams.get('punteggio2'),
-            miglioramento: urlParams.get('miglioramento'),
-            fatturato_attuale: urlParams.get('fatturato_attuale'),
-            fatturato_potenziale: urlParams.get('fatturato_potenziale'),
-            crescita_potenziale: urlParams.get('crescita_potenziale'),
-            criticita_opportunita: urlParams.get('criticita_opportunita'),
-            criticita_inefficienza: urlParams.get('criticita_inefficienza'),
-            criticita_competitivita: urlParams.get('criticita_competitivita'),
-            criticita_innovazione: urlParams.get('criticita_innovazione')
-        };
+        const token = urlParams.get('token');
+
+        let chatParams = {};
+
+        async function initializeChat() {
+            if (token) {
+              try {
+                const response = await fetch(
+                  `https://ai-chat-service-nls9.onrender.com/api/quiz/token/${token}`
+                );
+                const data = await response.json();
+                if (data.valid) {
+                  chatParams = data.data;
+                } else {
+                  throw new Error('Token non valido');
+                }
+              } catch (error) {
+                // Fallback — leggi parametri URL
+                chatParams = {
+                  quiz_status: urlParams.get('quiz_status'),
+                  nome: urlParams.get('nome'),
+                  cognome: urlParams.get('cognome'),
+                  email: urlParams.get('email'),
+                  telefono: urlParams.get('telefono'),
+                  pam: urlParams.get('pam'),
+                  punteggio: urlParams.get('punteggio'),
+                  punteggio1: urlParams.get('punteggio1'),
+                  punteggio2: urlParams.get('punteggio2'),
+                  miglioramento: urlParams.get('miglioramento'),
+                  fatturato_attuale: urlParams.get('fatturato_attuale'),
+                  fatturato_potenziale: urlParams.get('fatturato_potenziale'),
+                  crescita_potenziale: urlParams.get('crescita_potenziale'),
+                  criticita_opportunita: urlParams.get('criticita_opportunita'),
+                  criticita_inefficienza: urlParams.get('criticita_inefficienza'),
+                  criticita_competitivita: urlParams.get('criticita_competitivita'),
+                  criticita_innovazione: urlParams.get('criticita_innovazione')
+                };
+              }
+            } else {
+              // Nessun token — leggi parametri URL direttamente
+              chatParams = {
+                quiz_status: urlParams.get('quiz_status'),
+                nome: urlParams.get('nome'),
+                cognome: urlParams.get('cognome'),
+                email: urlParams.get('email'),
+                telefono: urlParams.get('telefono'),
+                pam: urlParams.get('pam'),
+                punteggio: urlParams.get('punteggio'),
+                punteggio1: urlParams.get('punteggio1'),
+                punteggio2: urlParams.get('punteggio2'),
+                miglioramento: urlParams.get('miglioramento'),
+                fatturato_attuale: urlParams.get('fatturato_attuale'),
+                fatturato_potenziale: urlParams.get('fatturato_potenziale'),
+                crescita_potenziale: urlParams.get('crescita_potenziale'),
+                criticita_opportunita: urlParams.get('criticita_opportunita'),
+                criticita_inefficienza: urlParams.get('criticita_inefficienza'),
+                criticita_competitivita: urlParams.get('criticita_competitivita'),
+                criticita_innovazione: urlParams.get('criticita_innovazione')
+              };
+            }
+
+            // Inizializza il widget con i dati
+            if (window.ChatWidget) {
+                window.ChatWidget.init(chatParams);
+                window.ChatWidget.open();
+            } else {
+                console.log('ChatWidget not found, trying alternative approach...');
+                const chatBox = document.querySelector('#ew-chat-box');
+                if (chatBox) {
+                    chatBox.style.display = 'flex';
+                    chatBox.classList.add('ew-visible');
+                }
+            }
+        }
 
         window.addEventListener('load', () => {
-            // Wait for chat widget to be ready, then initialize
             setTimeout(() => {
-                if (window.ChatWidget) {
-                    window.ChatWidget.init(chatParams);
-                    window.ChatWidget.open();
-                } else {
-                    console.log('ChatWidget not found, trying alternative approach...');
-                    // The widget auto-injects, so we just need to make sure it shows in fullscreen
-                    const chatBox = document.querySelector('#ew-chat-box');
-                    if (chatBox) {
-                        chatBox.style.display = 'flex';
-                        chatBox.classList.add('ew-visible');
-                    }
-                }
+                initializeChat();
             }, 500);
         });
     </script>

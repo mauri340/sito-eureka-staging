@@ -656,21 +656,46 @@ src="https://www.facebook.com/tr?id=1749584092436791&ev=PageView&noscript=1"
         }
         document.getElementById('risultato-finale-testo').innerHTML = testoMiglioramento;
 
-        // The improvement percentage is the main lever for the AI conversation.
-        // Example: "You improved 180% in 5 minutes with one technique — 
-        // imagine what the complete Metodo Eureka can do for you."
-        // The backend will use 'miglioramento' param to personalize the opening message.
-        
+        const quizPayload = {
+          quiz_status: "memoria",
+          nome: datiContatto.nome,
+          cognome: datiContatto.cognome,
+          email: datiContatto.email,
+          telefono: datiContatto.telefono,
+          punteggio1: punteggio1,
+          punteggio2: punteggio2,
+          miglioramento: miglioramentoPercentualeCalcolato.toFixed(0),
+          totale_parole: numeroParole
+        };
+
         try {
-            // Redirect to chat with complete final results
-            const finalChatUrl = `/chat-system/chat.html?userId=${encodeURIComponent(datiContatto.userId)}&nome=${encodeURIComponent(datiContatto.nome)}&cognome=${encodeURIComponent(datiContatto.cognome)}&email=${encodeURIComponent(datiContatto.email)}&telefono=${encodeURIComponent(datiContatto.telefono)}&quiz_status=memoria&punteggio1=${encodeURIComponent(punteggio1)}&punteggio2=${encodeURIComponent(punteggio2)}&miglioramento=${encodeURIComponent(miglioramentoPercentualeCalcolato.toFixed(0))}&totale_parole=${encodeURIComponent(numeroParole)}`;
-            window.location.href = finalChatUrl;
+          const response = await fetch(
+            'https://ai-chat-service-nls9.onrender.com/api/quiz/submit',
+            {
+              method: 'POST',
+              headers: {'Content-Type': 'application/json'},
+              body: JSON.stringify(quizPayload)
+            }
+          );
+          const data = await response.json();
+          if (data.token) {
+            window.location.href = 
+              `/chat-system/chat.html?token=${data.token}`;
+          } else {
+            throw new Error('Token non ricevuto');
+          }
         } catch (error) {
-            console.error('Errore durante il redirect:', error);
-            // Fallback to showing finale screen if redirect fails
-            mostraSchermata('schermata-finale');
-            submitButton.textContent = 'Vai al Risultato Finale';
-            submitButton.disabled = false;
+          // Fallback con parametri URL
+          window.location.href = 
+            `/chat-system/chat.html?` +
+            `quiz_status=memoria` +
+            `&nome=${encodeURIComponent(datiContatto.nome)}` +
+            `&cognome=${encodeURIComponent(datiContatto.cognome)}` +
+            `&email=${encodeURIComponent(datiContatto.email)}` +
+            `&telefono=${encodeURIComponent(datiContatto.telefono)}` +
+            `&punteggio1=${encodeURIComponent(punteggio1)}` +
+            `&punteggio2=${encodeURIComponent(punteggio2)}` +
+            `&miglioramento=${encodeURIComponent(miglioramentoPercentualeCalcolato.toFixed(0))}`;
         }
     }
     
