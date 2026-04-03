@@ -1,6 +1,25 @@
 (function () {
   'use strict';
 
+  // Define ChatWidget API first - always available
+  window.ChatWidget = {
+    _params: {},
+    
+    init: function(params) {
+      this._params = params || {};
+    },
+    
+    open: function() {
+      if (!window.DISABLE_CHAT_WIDGET) {
+        openChat();
+      }
+    },
+    
+    getParams: function() {
+      return this._params;
+    }
+  };
+
   // Check if chat widget should be disabled on this page
   if (window.DISABLE_CHAT_WIDGET) return;
 
@@ -2193,21 +2212,6 @@
   }
 
   // ── Public API ──────────────────────────────────────
-  window.ChatWidget = {
-    
-    _params: {},
-    
-    init: function(params) {
-      this._params = params || {};
-    },
-    
-    open: function() {
-      openChat();
-    },
-    
-    getParams: function() {
-      return this._params;
-    }
-  };
+  // ChatWidget already defined at the top of the file
 
 })();
