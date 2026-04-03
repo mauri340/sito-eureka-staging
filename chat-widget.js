@@ -1,6 +1,9 @@
 (function () {
   'use strict';
 
+  // Check if chat widget should be disabled on this page
+  if (window.DISABLE_CHAT_WIDGET) return;
+
   var PRODUCTION_API = 'https://ai-chat-service-nls9.onrender.com';
   var CALL_API = 'https://ai-chat-service-nls9.onrender.com';
 
