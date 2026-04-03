@@ -230,6 +230,18 @@
 
         let chatParams = {};
 
+        async function waitForWidget(callback, maxWait = 5000) {
+            const start = Date.now();
+            while (Date.now() - start < maxWait) {
+                if (window.ChatWidget) {
+                    callback();
+                    return;
+                }
+                await new Promise(r => setTimeout(r, 100));
+            }
+            console.error('ChatWidget non disponibile');
+        }
+
         async function initializeChat() {
             if (token) {
               try {
@@ -287,25 +299,15 @@
               };
             }
 
-            // Inizializza il widget con i dati
-            if (window.ChatWidget) {
+            // Usa il polling per aspettare che il widget sia disponibile
+            waitForWidget(() => {
                 window.ChatWidget.init(chatParams);
                 window.ChatWidget.open();
-            } else {
-                console.log('ChatWidget not found, trying alternative approach...');
-                const chatBox = document.querySelector('#ew-chat-box');
-                if (chatBox) {
-                    chatBox.style.display = 'flex';
-                    chatBox.classList.add('ew-visible');
-                }
-            }
+            });
         }
 
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                initializeChat();
-            }, 500);
-        });
+        // Avvia l'inizializzazione quando il DOM è caricato
+        initializeChat();
     </script>
 </body>
 </html>
