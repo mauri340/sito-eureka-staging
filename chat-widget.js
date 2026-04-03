@@ -431,6 +431,79 @@
   }
 
   // ── Open / Close ────────────────────────────────────
+  function updateChatHistoryInStorage() {
+    if (sessionId) {
+      localStorage.setItem('ar_chat_history', JSON.stringify(conversationHistory));
+    }
+  }
+
+  function checkSessionExpiry() {
+    var savedSessionId = localStorage.getItem('ar_session_id');
+    var savedHistory = localStorage.getItem('ar_chat_history');
+    var sessionTimestamp = localStorage.getItem('ar_session_timestamp');
+    
+    if (!savedSessionId || !savedHistory) {
+      return false;
+    }
+    
+    // Check if session is older than 24 hours
+    if (sessionTimestamp) {
+      var currentTime = new Date().getTime();
+      var storedTime = parseInt(sessionTimestamp);
+      var hoursDiff = (currentTime - storedTime) / (1000 * 60 * 60);
+      
+      if (hoursDiff > 24) {
+        // Session expired, clear localStorage
+        localStorage.removeItem('ar_session_id');
+        localStorage.removeItem('ar_chat_history');
+        localStorage.removeItem('ar_session_timestamp');
+        return false;
+      }
+    } else {
+      // No timestamp, add current one
+      localStorage.setItem('ar_session_timestamp', new Date().getTime().toString());
+    }
+    
+    return true;
+  }
+
+  function restoreSession() {
+    var savedSessionId = localStorage.getItem('ar_session_id');
+    var savedHistory = localStorage.getItem('ar_chat_history');
+    
+    if (savedSessionId && savedHistory) {
+      try {
+        sessionId = savedSessionId;
+        conversationHistory = JSON.parse(savedHistory);
+        
+        // Restore chat messages in UI
+        var messagesContainer = $('ew-messages');
+        messagesContainer.innerHTML = '';
+        
+        conversationHistory.forEach(function(msg) {
+          if (msg.role === 'assistant') {
+            appendBot(msg.content);
+          } else if (msg.role === 'user') {
+            appendUser(msg.content);
+          }
+        });
+        
+        // Scroll to bottom
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        
+        return true;
+      } catch (e) {
+        // Error parsing saved data, clear localStorage
+        localStorage.removeItem('ar_session_id');
+        localStorage.removeItem('ar_chat_history');
+        localStorage.removeItem('ar_session_timestamp');
+        return false;
+      }
+    }
+    
+    return false;
+  }
+
   function openChat() {
     chatOpened = true;
     $('ew-chat-box').classList.add('ew-visible');
@@ -443,7 +516,14 @@
       analytics.trackChatOpened(userSourceData);
     }
     
-    if (!sessionId) { startSession(); } else { focusInput(); }
+    // Check for existing session and restore if valid
+    if (checkSessionExpiry() && restoreSession()) {
+      focusInput();
+    } else if (!sessionId) {
+      startSession();
+    } else {
+      focusInput();
+    }
   }
 
   function closeChat() {
@@ -528,11 +608,18 @@
         hideTyping();
         sessionId = data.session_id;
         
+        // Save session to localStorage with timestamp
+        localStorage.setItem('ar_session_id', sessionId);
+        localStorage.setItem('ar_session_timestamp', new Date().getTime().toString());
+        
         // Use personalized greeting if server doesn't provide one
         var message = data.speech || personalizedGreeting;
         
         // Add bot's initial message to conversation history
         conversationHistory.push({role: 'assistant', content: message, timestamp: new Date().toISOString()});
+        
+        // Save conversation history to localStorage
+        updateChatHistoryInStorage();
         
         if (audioSync && data.audio_base64) {
           // Use advanced audio sync for streaming TTS
@@ -552,6 +639,7 @@
       .catch(function () {
         hideTyping();
         conversationHistory.push({role: 'assistant', content: personalizedGreeting, timestamp: new Date().toISOString()});
+        updateChatHistoryInStorage();
         typeBotMessage(personalizedGreeting);
         focusInput();
       });
@@ -572,6 +660,7 @@
     inp.value = '';
     appendUser(text);
     conversationHistory.push({role: 'user', content: text, timestamp: new Date().toISOString()});
+    updateChatHistoryInStorage();
     showTyping();
     disableInput(true);
 
@@ -644,6 +733,7 @@
           hideTyping(); disableInput(true); inputDisabled = true;
           var sessionClosedMessage = 'Sessione chiusa. Apri una nuova chat.';
           conversationHistory.push({role: 'assistant', content: sessionClosedMessage, timestamp: new Date().toISOString()});
+        updateChatHistoryInStorage();
           appendBot(sessionClosedMessage, false, true);
           return null;
         }
@@ -659,6 +749,7 @@
         hideTyping(); disableInput(false);
         var errorMessage = 'Mi dispiace, c\'è stato un errore. Riprova tra poco.';
         conversationHistory.push({role: 'assistant', content: errorMessage, timestamp: new Date().toISOString()});
+        updateChatHistoryInStorage();
         appendBot(errorMessage);
       });
   }
@@ -673,6 +764,8 @@
       case 'show_webinar':
         if (data.speech) { 
           conversationHistory.push({role: 'assistant', content: data.speech, timestamp: new Date().toISOString()});
+          updateChatHistoryInStorage();
+        updateChatHistoryInStorage();
           typeBotMessage(data.speech); 
         }
         appendWebinarForm();
@@ -680,6 +773,8 @@
       case 'show_call':
         if (data.speech) { 
           conversationHistory.push({role: 'assistant', content: data.speech, timestamp: new Date().toISOString()});
+          updateChatHistoryInStorage();
+        updateChatHistoryInStorage();
           typeBotMessage(data.speech); 
         }
         appendCallCard();
@@ -688,6 +783,8 @@
         console.log('Processing show_coaching action with speech:', data.speech, 'and slot:', data.slot);
         if (data.speech) { 
           conversationHistory.push({role: 'assistant', content: data.speech, timestamp: new Date().toISOString()});
+          updateChatHistoryInStorage();
+        updateChatHistoryInStorage();
           typeBotMessage(data.speech); 
         }
         if (data.slot) { 
@@ -698,6 +795,8 @@
       case 'action_completed':
         if (data.speech) {
           conversationHistory.push({role: 'assistant', content: data.speech, timestamp: new Date().toISOString()});
+          updateChatHistoryInStorage();
+        updateChatHistoryInStorage();
         }
         typeBotMessage(data.speech || '', true);
         break;
@@ -707,6 +806,8 @@
       case 'show_human':
         if (data.speech) { 
           conversationHistory.push({role: 'assistant', content: data.speech, timestamp: new Date().toISOString()});
+          updateChatHistoryInStorage();
+        updateChatHistoryInStorage();
           typeBotMessage(data.speech); 
         }
         appendHumanForm();
@@ -714,6 +815,8 @@
       case 'show_test_lettura':
         if (data.speech) { 
           conversationHistory.push({role: 'assistant', content: data.speech, timestamp: new Date().toISOString()});
+          updateChatHistoryInStorage();
+        updateChatHistoryInStorage();
           typeBotMessage(data.speech); 
         }
         appendTestButton('Fai il test di lettura →', '/quiz_test_lettura/index.html');
@@ -721,6 +824,8 @@
       case 'show_test_memoria':
         if (data.speech) { 
           conversationHistory.push({role: 'assistant', content: data.speech, timestamp: new Date().toISOString()});
+          updateChatHistoryInStorage();
+        updateChatHistoryInStorage();
           typeBotMessage(data.speech); 
         }
         appendTestButton('Fai il test di memoria →', '/quiz_test_memoria/index.html');
@@ -728,6 +833,8 @@
       case 'show_test_costo':
         if (data.speech) { 
           conversationHistory.push({role: 'assistant', content: data.speech, timestamp: new Date().toISOString()});
+          updateChatHistoryInStorage();
+        updateChatHistoryInStorage();
           typeBotMessage(data.speech); 
         }
         appendTestButton('Scopri il costo della tua ignoranza →', '/quiz_test_costo/index.html');
@@ -735,14 +842,23 @@
       case 'end_session':
         if (data.speech) { 
           conversationHistory.push({role: 'assistant', content: data.speech, timestamp: new Date().toISOString()});
+          updateChatHistoryInStorage();
+        updateChatHistoryInStorage();
+          updateChatHistoryInStorage();
           typeBotMessage(data.speech); 
         }
+        // Clean up localStorage when session ends
+        localStorage.removeItem('ar_session_id');
+        localStorage.removeItem('ar_chat_history');
+        localStorage.removeItem('ar_session_timestamp');
         disableInput(true); inputDisabled = true;
         break;
       default:
         if (data.speech) {
           var isSuccess = data.business_result && data.business_result.success === true;
           conversationHistory.push({role: 'assistant', content: data.speech, timestamp: new Date().toISOString()});
+          updateChatHistoryInStorage();
+        updateChatHistoryInStorage();
           typeBotMessage(data.speech, isSuccess);
         }
         break;
@@ -858,6 +974,7 @@
     if (!SR) {
       var micErrorMessage = 'Il riconoscimento vocale non è supportato dal tuo browser.';
       conversationHistory.push({role: 'assistant', content: micErrorMessage, timestamp: new Date().toISOString()});
+      updateChatHistoryInStorage();
       appendBot(micErrorMessage, false, true);
       return;
     }
@@ -1295,6 +1412,14 @@
     testBtn.className = 'ew-form-submit';
     testBtn.style.cssText = 'display:inline-block;text-decoration:none;margin:0;';
     testBtn.textContent = buttonText;
+    
+    // Save current session ID before user goes to test
+    testBtn.addEventListener('click', function() {
+      if (sessionId) {
+        localStorage.setItem('ar_previous_session_id', sessionId);
+      }
+    });
+    
     body.appendChild(testBtn);
 
     card.appendChild(body);
@@ -1619,6 +1744,7 @@
           disableInput(true); inputDisabled = true;
           var sessionClosedMessage = 'Sessione chiusa. Apri una nuova chat.';
           conversationHistory.push({role: 'assistant', content: sessionClosedMessage, timestamp: new Date().toISOString()});
+        updateChatHistoryInStorage();
           appendBot(sessionClosedMessage, false, true);
           return null;
         }
@@ -1738,6 +1864,7 @@
     
     // Add timeout message to conversation history
     conversationHistory.push({role: 'user', content: '[TIMEOUT_FORM]', timestamp: new Date().toISOString()});
+    updateChatHistoryInStorage();
     showTyping();
     disableInput(true);
 
@@ -1756,6 +1883,7 @@
           hideTyping(); disableInput(true); inputDisabled = true;
           var sessionClosedMessage = 'Sessione chiusa. Apri una nuova chat.';
           conversationHistory.push({role: 'assistant', content: sessionClosedMessage, timestamp: new Date().toISOString()});
+        updateChatHistoryInStorage();
           appendBot(sessionClosedMessage, false, true);
           return null;
         }
@@ -1771,6 +1899,7 @@
         hideTyping(); disableInput(false);
         var errorMessage = 'Mi dispiace, c\'è stato un errore. Riprova tra poco.';
         conversationHistory.push({role: 'assistant', content: errorMessage, timestamp: new Date().toISOString()});
+        updateChatHistoryInStorage();
         appendBot(errorMessage);
       });
   }
@@ -1936,6 +2065,8 @@
             openChat();
             if (data.speech) { 
               conversationHistory.push({role: 'assistant', content: data.speech, timestamp: new Date().toISOString()});
+          updateChatHistoryInStorage();
+        updateChatHistoryInStorage();
               typeBotMessage(data.speech); 
             }
           } else {
@@ -2124,6 +2255,7 @@
           // Send success message to chat
           var successMessage = 'Perfetto! Il tuo appuntamento è stato confermato. Riceverai una email di conferma a breve.';
           conversationHistory.push({role: 'assistant', content: successMessage, timestamp: new Date().toISOString()});
+          updateChatHistoryInStorage();
           typeBotMessage(successMessage, true);
         } else {
           showAppointmentError(wrapperId, result.error || 'Si è verificato un errore durante la prenotazione.');
