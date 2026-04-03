@@ -656,14 +656,14 @@
           conversationHistory.push({role: 'assistant', content: data.speech, timestamp: new Date().toISOString()});
           typeBotMessage(data.speech); 
         }
-        appendTestButton('Fai il test di memoria →', '/Quiz_test_memoria/index.html');
+        appendTestButton('Fai il test di memoria →', '/quiz_test_memoria/index.html');
         break;
       case 'show_test_costo':
         if (data.speech) { 
           conversationHistory.push({role: 'assistant', content: data.speech, timestamp: new Date().toISOString()});
           typeBotMessage(data.speech); 
         }
-        appendTestButton('Scopri il costo della tua ignoranza →', '/Quiz_costo/index.html');
+        appendTestButton('Scopri il costo della tua ignoranza →', '/quiz_test_costo/index.html');
         break;
       case 'end_session':
         if (data.speech) { 
