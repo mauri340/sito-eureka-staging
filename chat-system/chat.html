@@ -3,63 +3,265 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>La tua Conversazione con Mentor Eureka</title>
-    <link rel="stylesheet" href="style.css" type="text/css">
- <style>
-    /* Aggiunta per evidenziare lo stato di registrazione */
-    .mic-button {
-      padding: 10px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-    .mic-button.recording {
-      background-color: #ff4d4d; /* Rosso quando registra */
-      color: white;
-    }
-  </style>
+    <title>Chat con Mentor Eureka</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #fff;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .chat-wrapper {
+            width: 100%;
+            max-width: 800px;
+            height: 80vh;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+        }
+
+        /* Override chat widget styles for fullscreen */
+        #ew-chat-widget #ew-chat-box {
+            position: relative !important;
+            bottom: auto !important;
+            right: auto !important;
+            width: 100% !important;
+            height: 100% !important;
+            max-width: none !important;
+            max-height: none !important;
+            border-radius: 20px !important;
+            transform: none !important;
+            opacity: 1 !important;
+            pointer-events: auto !important;
+            box-shadow: none !important;
+        }
+
+        #ew-chat-widget #ew-chat-toggle {
+            display: none !important;
+        }
+
+        /* Footer styles */
+        .footer {
+            background: #0a0a0a;
+            padding: 40px 0 20px;
+            color: #fff;
+            margin-top: auto;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 28px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+
+        .footer-brand img {
+            width: 160px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        .footer-brand p {
+            color: #aaa;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        .footer-col h4 {
+            color: #fff;
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .footer-col a {
+            display: block;
+            color: #aaa;
+            text-decoration: none;
+            margin-bottom: 12px;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-col a:hover {
+            color: #00A988;
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 30px;
+            border-top: 1px solid #333;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .footer-bottom {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+        }
+
+        .footer-bottom p {
+            color: #aaa;
+        }
+
+        .footer-bottom div {
+            display: flex;
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .footer-bottom div {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+        }
+
+        .footer-bottom a {
+            color: #aaa;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-bottom a:hover {
+            color: #00A988;
+        }
+    </style>
 </head>
 <body>
-    <div id="chat-page-container">
-        <div class="chat-instructions-box">
-        <h3>Come funziona la modalità "Walkie-Talkie":</h3>
-        <ul>
-            <li><strong>1. Premi il microfono</strong> per registrare il tuo messaggio (attendi che Mentor Eureka abbia finito di parlare per evitare di registrare la sua voce).</li>
-            <li><strong>2. Premi di nuovo</strong> il pulsante per inviare.</li>
-            <li><strong>3. Ascolta la sua risposta</strong> e procedi allo stesso modo per il tuo prossimo intervento.</li>
-        </ul>
-        <p>Se preferisci, puoi anche scrivere. Buona conversazione!</p>
+    <div class="chat-container">
+        <div class="chat-wrapper" id="chat-fullscreen">
+            <!-- Chat widget will be injected here -->
+        </div>
     </div>
 
-    <div id="chat-container">
-        <div id="chat-header">
-            <div class="mentor-avatar mentor-logo chat-logo"></div>
-            <div class="chat-header-text">
-                <h2>Conversazione con Mentor Eureka</h2>
-                <p>Poni domande, chiedi spiegazioni o consigli: il Coach AI è a tua disposizione!</p>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <img src="../images/logo.png" alt="Metodo Eureka">
+                    <p>Dal 2001 aiutiamo professionisti, imprenditori e studenti a imparare più velocemente e ricordare di più — con un metodo provato su oltre 20.000 persone.</p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Il Metodo</h4>
+                    <a href="../metodo-eureka.html">Il Metodo Eureka</a>
+                    <a href="../master-eureka.html">Il Master Eureka</a>
+                    <a href="../tecniche-memoria.html">Tecniche di Memoria</a>
+                    <a href="../lettura-veloce.html">Lettura Veloce</a>
+                    <a href="../mappe-mentali.html">Mappe Mentali</a>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Risorse</h4>
+                    <a href="../demo-zoom/index.html">Webinar Gratuito</a>
+                    <a href="../coaching.html">Coaching Gratuita</a>
+                    <a href="../quiz_test_lettura/index.html">Test di Lettura</a>
+                    <a href="../quiz_test_memoria/index.html">Test di Memoria</a>
+                    <a href="../quiz_test_costo/index.html">Test del Costo</a>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Seguici</h4>
+                    <a href="https://www.linkedin.com/company/apprendimentorapido/" target="_blank">LinkedIn</a>
+                    <a href="https://www.instagram.com/apprendimento_rapido/" target="_blank">Instagram</a>
+                    <a href="https://www.facebook.com/apprendimentorapido" target="_blank">Facebook</a>
+                    <a href="https://www.youtube.com/user/apprendimentorapido" target="_blank">YouTube</a>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2025 Apprendimento Rapido – Metodo Eureka. Tutti i diritti riservati.</p>
+                <div>
+                    <a href="https://www.iubenda.com/privacy-policy/89530968" target="_blank">Privacy Policy</a>
+                    <a href="https://www.iubenda.com/privacy-policy/89530968/cookie-policy" target="_blank">Cookie Policy</a>
+                    <a href="https://www.iubenda.com/termini-e-condizioni/89530968" target="_blank">Termini e Condizioni</a>
+                </div>
             </div>
         </div>
-            <div id="chat-window"></div>
-            <form id="chat-form">
-                <button type="button" id="mic-button" title="Attiva microfono">🎤</button>
-                <button type="button" id="mic-stop-button" title="Ferma registrazione" style="display: none;">⏹️</button>
-                <input type="text" id="chat-input" placeholder="Scrivi il tuo messaggio..." required>
-                <button type="submit" id="send-button">Invia</button>
-            </form>
-        </div>
-    </div>
-    <footer class="site-footer">
-    
-        <div>
-            <a href="https://www.iubenda.com/privacy-policy/89530968" title="Privacy Policy">Privacy Policy</a> •
-            <a href="https://www.iubenda.com/privacy-policy/89530968/cookie-policy" title="Cookie Policy">Cookie Policy</a> •
-            <a href="https://www.iubenda.com/termini-e-condizioni/89530968" title="Termini e Condizioni">Termini e Condizioni</a>
-       
     </footer>
- <script type="module" src="js/utils/analytics.js"></script>
-  <script type="module" src="js/ui/chat-ui.js"></script>
-  <script type="module" src="js/audio/tts-utils.js"></script>
-  <script type="module" src="js/audio/audio-player.js"></script>
-  <script type="module" src="js/audio/speech-utils.js"></script>
-  <script type="module" src="chat-ai.js"></script>
+
+    <!-- Load chat widget -->
+    <script src="../chat-widget.js"></script>
+    
+    <script>
+        // Read URL parameters and pass them to chat widget
+        const urlParams = new URLSearchParams(window.location.search);
+        const chatParams = {
+            userId: urlParams.get('userId'),
+            nome: urlParams.get('nome'),
+            cognome: urlParams.get('cognome'),
+            email: urlParams.get('email'),
+            telefono: urlParams.get('telefono'),
+            quiz_status: urlParams.get('quiz_status'),
+            pam: urlParams.get('pam'),
+            punteggio: urlParams.get('punteggio'),
+            punteggio1: urlParams.get('punteggio1'),
+            punteggio2: urlParams.get('punteggio2'),
+            miglioramento: urlParams.get('miglioramento'),
+            fatturato_attuale: urlParams.get('fatturato_attuale'),
+            fatturato_potenziale: urlParams.get('fatturato_potenziale'),
+            crescita_potenziale: urlParams.get('crescita_potenziale'),
+            criticita_opportunita: urlParams.get('criticita_opportunita'),
+            criticita_inefficienza: urlParams.get('criticita_inefficienza'),
+            criticita_competitivita: urlParams.get('criticita_competitivita'),
+            criticita_innovazione: urlParams.get('criticita_innovazione')
+        };
+
+        window.addEventListener('load', () => {
+            // Wait for chat widget to be ready, then initialize
+            setTimeout(() => {
+                if (window.ChatWidget) {
+                    window.ChatWidget.init(chatParams);
+                    window.ChatWidget.open();
+                } else {
+                    console.log('ChatWidget not found, trying alternative approach...');
+                    // The widget auto-injects, so we just need to make sure it shows in fullscreen
+                    const chatBox = document.querySelector('#ew-chat-box');
+                    if (chatBox) {
+                        chatBox.style.display = 'flex';
+                        chatBox.classList.add('ew-visible');
+                    }
+                }
+            }, 500);
+        });
+    </script>
 </body>
 </html>
