@@ -33,8 +33,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            height: 100vh;
+            min-height: calc(100vh - 300px);
             padding: 20px;
             box-sizing: border-box;
             background-color: #f0f2f5;
@@ -44,7 +43,7 @@
         #chat-fullscreen {
             width: 100%;
             max-width: 700px;
-            height: 85vh;
+            height: 70vh;
             background-color: #ffffff;
             border-radius: 16px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
@@ -124,30 +123,102 @@
             border-bottom-left-radius: 4px;
         }
 
-        /* Footer fisso (come nel riferimento) */
-        .site-footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: #ffffff;
-            border-top: 1px solid #e2e8f0;
-            padding: 15px 0;
-            text-align: center;
-            font-size: 0.85rem;
-            color: #6c757d;
-            z-index: 1000;
-            box-shadow: 0 -5px 15px rgba(0,0,0,0.05);
+        /* CSS Variables for consistency */
+        :root {
+            --teal:    #00A988;
+            --teal-dk: #007a63;
+            --teal-lt: #e6f7f4;
+            --gold:    #B8973E;
+            --gold-lt: #f9f3e7;
+            --navy:    #0D1B2A;
+            --navy2:   #1C2B3A;
+            --white:   #ffffff;
+            --light:   #F8F7F4;
+            --light2:  #F0EDE8;
+            --text:    #1a1a2e;
+            --muted:   #6B7280;
+            --muted-dk:#4B5563;
+            --border:  rgba(0,0,0,0.08);
         }
-        .site-footer a {
-            color: #4a5568;
-            text-decoration: none;
-            margin: 0 10px;
-            transition: color 0.2s ease;
+
+        /* Container helper */
+        .container{max-width:1100px;margin:0 auto;padding:0 28px;}
+
+        /* Footer styles from index.html */
+        .footer{
+            background:var(--navy);
+            border-top:1px solid rgba(255,255,255,.05);
+            padding:70px 0 0;
         }
-        .site-footer a:hover {
-            color: #007bff;
-            text-decoration: underline;
+
+        .footer-grid{
+            display:grid;
+            grid-template-columns:1.5fr 1fr 1fr 1fr 1fr;
+            gap:40px;
+            padding-bottom:56px;
+            border-bottom:1px solid rgba(255,255,255,.06);
+        }
+
+        .footer-brand img{
+            height:48px;
+            margin-bottom:18px;
+            opacity:.9;
+        }
+
+        .footer-brand p{
+            font-size:13px;
+            color:rgba(255,255,255,.4);
+            line-height:1.75;
+            max-width:240px;
+        }
+
+        .footer-col h4{
+            font-size:11px;
+            font-weight:700;
+            color:rgba(255,255,255,.6);
+            text-transform:uppercase;
+            letter-spacing:1.5px;
+            margin-bottom:18px;
+        }
+
+        .footer-col a{
+            display:block;
+            font-size:13px;
+            color:rgba(255,255,255,.35);
+            text-decoration:none;
+            margin-bottom:10px;
+            transition:color .2s;
+            font-weight:400;
+        }
+
+        .footer-col a:hover{color:var(--teal);}
+
+        .footer-contact{
+            font-size:13px;
+            color:rgba(255,255,255,.35);
+            line-height:2;
+        }
+
+        .footer-bottom{
+            padding:22px 0;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            flex-wrap:wrap;
+            gap:12px;
+        }
+
+        .footer-bottom p{font-size:11px;color:rgba(255,255,255,.2);letter-spacing:.2px;}
+        .footer-bottom a{font-size:11px;color:rgba(255,255,255,.3);text-decoration:none;margin-left:20px;letter-spacing:.2px;}
+        .footer-bottom a:hover{color:var(--teal);}
+
+        /* Responsive footer */
+        @media(max-width:1024px){
+            .footer-grid{grid-template-columns:1fr 1fr 1fr;}
+        }
+
+        @media(max-width:580px){
+            .footer-grid{grid-template-columns:1fr;}
         }
 
         /* Media queries per mobile */
@@ -198,11 +269,63 @@
         </div>
     </div>
 
-    <footer class="site-footer">
-        <div>
-            <a href="https://www.iubenda.com/privacy-policy/89530968" title="Privacy Policy">Privacy Policy</a> •
-            <a href="https://www.iubenda.com/privacy-policy/89530968/cookie-policy" title="Cookie Policy">Cookie Policy</a> •
-            <a href="https://www.iubenda.com/termini-e-condizioni/89530968" title="Termini e Condizioni">Termini e Condizioni</a>
+    <!-- ============================
+         FOOTER
+         ============================ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <img src="../images/logo.png" alt="Metodo Eureka">
+                    <p>Dal 2001 aiutiamo professionisti, imprenditori e studenti a imparare più velocemente e ricordare di più — con un metodo provato su oltre 20.000 persone.</p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Il Metodo</h4>
+                    <a href="../metodo-eureka.html">Il Metodo Eureka</a>
+                    <a href="../master-eureka.html">Il Master Eureka</a>
+                    <a href="../tecniche-memoria.html">Tecniche di Memoria</a>
+                    <a href="../lettura-veloce.html">Lettura Veloce</a>
+                    <a href="../mappe-mentali.html">Mappe Mentali</a>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Risorse</h4>
+                    <a href="../demo-zoom/index.html">Webinar Gratuito</a>
+                    <a href="../coaching.html">Coaching Gratuita</a>
+                    <a href="../testimonianze.html">Testimonianze</a>
+                    <a href="../libro.html">Il Nostro Libro</a>
+                    <a href="https://academy.apprendimentorapido.it/users/sign_in" target="_blank">Login Allievi</a>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Contatti</h4>
+                    <div class="footer-contact">
+                        Via Gardiscia 10<br>
+                        Rovio, (CH) 6821<br><br>
+                        <a href="mailto:info@apprendimentorapido.it">info@apprendimentorapido.it</a>
+                        <a href="tel:+390240702168">+390240702168</a><br>
+                        Lun–Ven 9:00–18:30
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Seguici</h4>
+                    <a href="https://www.linkedin.com/company/apprendimentorapido/" target="_blank">LinkedIn</a>
+                    <a href="https://www.instagram.com/apprendimento_rapido/" target="_blank">Instagram</a>
+                    <a href="https://www.facebook.com/apprendimentorapido" target="_blank">Facebook</a>
+                    <a href="https://www.youtube.com/user/apprendimentorapido" target="_blank">YouTube</a>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2025 Apprendimento Rapido – Metodo Eureka. Tutti i diritti riservati.</p>
+                <div>
+                    <a href="https://www.iubenda.com/privacy-policy/89530968" target="_blank">Privacy Policy</a>
+                    <a href="https://www.iubenda.com/privacy-policy/89530968/cookie-policy" target="_blank">Cookie Policy</a>
+                    <a href="https://www.iubenda.com/termini-e-condizioni/89530968" target="_blank">Termini e Condizioni</a>
+                </div>
+            </div>
         </div>
     </footer>
 
