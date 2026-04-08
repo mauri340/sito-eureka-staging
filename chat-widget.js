@@ -1341,6 +1341,12 @@
       return;
     }
 
+    // Pre-unlock audio for iOS so TTS plays after voice recognition responds
+    try {
+      var unlock = new Audio('data:audio/mp3;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4Ljc2LjEwMAAAAAAAAAAAAAAA//tQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWGluZwAAAA8AAAACAAABhgC7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7//////////////////////////////////////////////////////////////////8AAAAATGF2YzU4LjEzAAAAAAAAAAAAAAAAJAAAAAAAAAAAAYYoRwBHAAAAAAD/+1DEAAAKACZ1UAAAI1iwqep5kRAAADSAAAAA+Bh+XBcP/6gfBwEP/xQEA4CAIBAMf/KBAGBA4Jw//+CDgQ/Lhx/UCDv5cHBCH+XAgDBQdAENfhw/KBB3///Lg4P/ygfB8HwfygeD4f////+sGP/7UsQYAApAHgBgBAABmKCxjACAAAf8uO7+Ug+D4f///yg4///5QdBwTB8H////WDH5cHBD8uD////+UEwYPgIf////1g+D7///8oEB0HAfB/////WD4IeXHd/lBMGD7///0g+/7+UHQf///ygQDQOCYI=');
+      unlock.play().catch(function () {});
+    } catch (e) {}
+
     isRecording = true;
     $('ew-mic').classList.add('ew-recording');
 
