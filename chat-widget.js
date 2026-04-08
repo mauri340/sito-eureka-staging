@@ -260,13 +260,123 @@
     100%{box-shadow:0 0 0 0 rgba(231,76,60,0);}
   }
 
-  @media(max-width:480px){
+  /* ── Europe 2026 Breakpoints ── */
+  
+  /* 360px — Samsung Galaxy A (volume principale Europa) */
+  @media(max-width:360px){
     #ew-chat-box{
       bottom:0;right:0;left:0;
       width:100%;max-width:100%;
       height:100dvh;max-height:100dvh;
       border-radius:0;
-      /* Fix iOS safe area support */
+      padding-top:env(safe-area-inset-top);
+    }
+    #ew-chat-toggle{
+      bottom:max(16px,env(safe-area-inset-bottom));
+      right:16px;width:50px;height:50px;
+    }
+    .ew-header{
+      padding:14px 16px;
+      padding-top:max(14px,calc(env(safe-area-inset-top) + 14px));
+    }
+    .ew-header-btn{
+      width:44px;height:44px;
+      min-width:44px;min-height:44px;
+    }
+    .ew-messages{
+      overflow-y:auto;
+      overflow-x:hidden;
+      -webkit-overflow-scrolling:touch;
+      overscroll-behavior:contain;
+      padding:16px 12px;
+      padding-bottom:env(safe-area-inset-bottom);
+    }
+    .ew-input-bar{
+      position:sticky;
+      bottom:0;
+      padding:10px 12px max(10px,calc(env(safe-area-inset-bottom) + 10px));
+      background:#fff;
+      border-top:1px solid #F0EDE8;
+      font-size:16px;
+    }
+    .ew-input-bar input{
+      font-size:16px !important;
+      -webkit-text-size-adjust:100%;
+    }
+    .ew-input-bar button{
+      width:44px;height:44px;
+      min-width:44px;min-height:44px;
+    }
+    .ew-msg{max-width:90%;}
+    .ew-msg-form,.ew-msg-call{max-width:96%;}
+    body.ew-chat-open{
+      overflow:hidden;
+      position:fixed;
+      width:100%;
+    }
+  }
+
+  /* 390px — iPhone 14/15/16 standard */
+  @media(min-width:361px) and (max-width:390px){
+    #ew-chat-box{
+      bottom:0;right:0;left:0;
+      width:100%;max-width:100%;
+      height:100dvh;max-height:100dvh;
+      border-radius:0;
+      padding-top:env(safe-area-inset-top);
+    }
+    #ew-chat-toggle{
+      bottom:max(16px,env(safe-area-inset-bottom));
+      right:16px;width:52px;height:52px;
+    }
+    .ew-header{
+      padding:16px 18px;
+      padding-top:max(16px,calc(env(safe-area-inset-top) + 16px));
+    }
+    .ew-header-btn{
+      width:44px;height:44px;
+      min-width:44px;min-height:44px;
+    }
+    .ew-messages{
+      overflow-y:auto;
+      overflow-x:hidden;
+      -webkit-overflow-scrolling:touch;
+      overscroll-behavior:contain;
+      padding:18px 14px;
+      padding-bottom:env(safe-area-inset-bottom);
+    }
+    .ew-input-bar{
+      position:sticky;
+      bottom:0;
+      padding:12px max(12px,calc(env(safe-area-inset-bottom) + 12px));
+      background:#fff;
+      border-top:1px solid #F0EDE8;
+      font-size:16px;
+    }
+    .ew-input-bar input{
+      font-size:16px !important;
+      -webkit-text-size-adjust:100%;
+    }
+    .ew-input-bar button{
+      width:44px;height:44px;
+      min-width:44px;min-height:44px;
+    }
+    .ew-msg{max-width:88%;}
+    .ew-msg-form,.ew-msg-call{max-width:96%;}
+    body.ew-chat-open{
+      overflow:hidden;
+      position:fixed;
+      width:100%;
+    }
+  }
+
+  /* 393px — iPhone 15/16 Pro */
+  @media(min-width:391px) and (max-width:393px){
+    #ew-chat-box{
+      bottom:0;right:0;left:0;
+      width:100%;max-width:100%;
+      height:100dvh;max-height:100dvh;
+      border-radius:0;
       padding-top:env(safe-area-inset-top);
     }
     #ew-chat-toggle{
@@ -274,50 +384,214 @@
       right:16px;width:54px;height:54px;
     }
     .ew-header{
-      /* Ensure header accounts for notch/Dynamic Island */
-      padding-top:max(16px,calc(env(safe-area-inset-top) + 16px));
-    }
-    .ew-messages{
-      /* Better scroll behavior - internal scrolling only */
-      overflow-y:auto;
-      overflow-x:hidden;
-      -webkit-overflow-scrolling:touch;
-      /* Prevent body scroll on iOS */
-      overscroll-behavior:contain;
-      /* Account for input bar and safe areas */
-      padding-bottom:env(safe-area-inset-bottom);
-    }
-    .ew-input-bar{
-      /* Fixed positioning for keyboard */
-      position:sticky;
-      bottom:0;
-      padding:12px clamp(8px,3vw,12px) max(12px,calc(env(safe-area-inset-bottom) + 12px));
-      background:#fff;
-      border-top:1px solid #F0EDE8;
-      /* Prevent input zoom on iOS */
-      font-size:16px;
-    }
-    .ew-input-bar input{
-      font-size:16px !important; /* Prevent iOS zoom */
-      -webkit-text-size-adjust:100%;
-    }
-    /* Ensure minimum tap target size 44x44px */
-    .ew-input-bar button{
-      width:44px;height:44px;
-      min-width:44px;min-height:44px;
+      padding:16px 20px;
+      /* Extra padding for Dynamic Island */
+      padding-top:max(20px,calc(env(safe-area-inset-top) + 20px));
     }
     .ew-header-btn{
       width:44px;height:44px;
       min-width:44px;min-height:44px;
     }
+    .ew-messages{
+      overflow-y:auto;
+      overflow-x:hidden;
+      -webkit-overflow-scrolling:touch;
+      overscroll-behavior:contain;
+      padding:20px 16px;
+      padding-bottom:env(safe-area-inset-bottom);
+    }
+    .ew-input-bar{
+      position:sticky;
+      bottom:0;
+      padding:12px clamp(8px,3vw,12px) max(12px,calc(env(safe-area-inset-bottom) + 12px));
+      background:#fff;
+      border-top:1px solid #F0EDE8;
+      font-size:16px;
+    }
+    .ew-input-bar input{
+      font-size:16px !important;
+      -webkit-text-size-adjust:100%;
+    }
+    .ew-input-bar button{
+      width:44px;height:44px;
+      min-width:44px;min-height:44px;
+    }
     .ew-msg{max-width:88%;}
     .ew-msg-form,.ew-msg-call{max-width:96%;}
-    /* Better viewport handling */
     body.ew-chat-open{
       overflow:hidden;
       position:fixed;
       width:100%;
     }
+  }
+
+  /* 412px — Samsung Galaxy S series */
+  @media(min-width:394px) and (max-width:412px){
+    #ew-chat-box{
+      bottom:0;right:0;left:0;
+      width:100%;max-width:100%;
+      height:100dvh;max-height:100dvh;
+      border-radius:0;
+      padding-top:env(safe-area-inset-top);
+    }
+    #ew-chat-toggle{
+      bottom:max(16px,env(safe-area-inset-bottom));
+      right:16px;width:54px;height:54px;
+    }
+    .ew-header{
+      padding:16px 20px;
+      padding-top:max(16px,calc(env(safe-area-inset-top) + 16px));
+    }
+    .ew-header-btn{
+      width:44px;height:44px;
+      min-width:44px;min-height:44px;
+    }
+    .ew-messages{
+      overflow-y:auto;
+      overflow-x:hidden;
+      -webkit-overflow-scrolling:touch;
+      overscroll-behavior:contain;
+      padding:20px 16px;
+      padding-bottom:env(safe-area-inset-bottom);
+    }
+    .ew-input-bar{
+      position:sticky;
+      bottom:0;
+      padding:12px clamp(8px,3vw,16px) max(12px,calc(env(safe-area-inset-bottom) + 12px));
+      background:#fff;
+      border-top:1px solid #F0EDE8;
+      font-size:16px;
+    }
+    .ew-input-bar input{
+      font-size:16px !important;
+      -webkit-text-size-adjust:100%;
+    }
+    .ew-input-bar button{
+      width:44px;height:44px;
+      min-width:44px;min-height:44px;
+    }
+    .ew-msg{max-width:86%;}
+    .ew-msg-form,.ew-msg-call{max-width:94%;}
+    body.ew-chat-open{
+      overflow:hidden;
+      position:fixed;
+      width:100%;
+    }
+  }
+
+  /* 430px — iPhone 15/16 Pro Max */
+  @media(min-width:413px) and (max-width:430px){
+    #ew-chat-box{
+      bottom:0;right:0;left:0;
+      width:100%;max-width:100%;
+      height:100dvh;max-height:100dvh;
+      border-radius:0;
+      padding-top:env(safe-area-inset-top);
+    }
+    #ew-chat-toggle{
+      bottom:max(16px,env(safe-area-inset-bottom));
+      right:16px;width:56px;height:56px;
+    }
+    .ew-header{
+      padding:18px 22px;
+      /* Extra padding for larger Pro Max */
+      padding-top:max(18px,calc(env(safe-area-inset-top) + 18px));
+    }
+    .ew-header-btn{
+      width:44px;height:44px;
+      min-width:44px;min-height:44px;
+    }
+    .ew-messages{
+      overflow-y:auto;
+      overflow-x:hidden;
+      -webkit-overflow-scrolling:touch;
+      overscroll-behavior:contain;
+      padding:22px 18px;
+      padding-bottom:env(safe-area-inset-bottom);
+    }
+    .ew-input-bar{
+      position:sticky;
+      bottom:0;
+      padding:14px clamp(10px,3vw,18px) max(14px,calc(env(safe-area-inset-bottom) + 14px));
+      background:#fff;
+      border-top:1px solid #F0EDE8;
+      font-size:16px;
+    }
+    .ew-input-bar input{
+      font-size:16px !important;
+      -webkit-text-size-adjust:100%;
+    }
+    .ew-input-bar button{
+      width:44px;height:44px;
+      min-width:44px;min-height:44px;
+    }
+    .ew-msg{max-width:84%;}
+    .ew-msg-form,.ew-msg-call{max-width:92%;}
+    body.ew-chat-open{
+      overflow:hidden;
+      position:fixed;
+      width:100%;
+    }
+  }
+
+  /* General mobile breakpoint for backward compatibility */
+  @media(max-width:480px){
+    body.ew-chat-open{
+      overflow:hidden;
+      position:fixed;
+      width:100%;
+    }
+  }
+
+  /* 768px — Tablet */
+  @media(min-width:431px) and (max-width:768px){
+    #ew-chat-box{
+      /* Chat centrata con max-width appropriato */
+      width:420px;max-width:calc(100vw - 48px);
+      height:580px;max-height:calc(100vh - 150px);
+      bottom:120px;right:24px;
+      /* Non si allunga a piena larghezza tablet */
+      border-radius:20px;
+    }
+    #ew-chat-toggle{
+      width:60px;height:60px;
+      bottom:24px;right:24px;
+    }
+    .ew-header-btn{
+      width:44px;height:44px;
+      min-width:44px;min-height:44px;
+    }
+    .ew-input-bar button{
+      width:44px;height:44px;
+      min-width:44px;min-height:44px;
+    }
+    .ew-msg{max-width:82%;}
+    .ew-msg-form,.ew-msg-call{max-width:94%;}
+  }
+
+  /* 1280px — Desktop */
+  @media(min-width:769px){
+    /* Nessuna regressione dai fix mobile - Widget funziona come prima */
+    #ew-chat-box{
+      width:380px;max-width:calc(100vw - 32px);
+      height:520px;max-height:calc(100vh - 130px);
+      bottom:96px;right:24px;
+      border-radius:20px;
+    }
+    #ew-chat-toggle{
+      width:60px;height:60px;
+      bottom:24px;right:24px;
+    }
+    .ew-header-btn{
+      width:32px;height:32px;
+      min-width:32px;min-height:32px;
+    }
+    .ew-input-bar button{
+      width:42px;height:42px;
+      min-width:42px;min-height:42px;
+    }
+    .ew-msg{max-width:82%;}
+    .ew-msg-form,.ew-msg-call{max-width:94%;}
   }
   `;
 
