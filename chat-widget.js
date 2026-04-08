@@ -870,8 +870,10 @@
       analytics.trackChatOpened(userSourceData);
     }
     
-    // Check for existing session and restore if valid
-    if (checkSessionExpiry() && restoreSession()) {
+    if (fullscreenMode) {
+      sessionId = null;
+      startSession();
+    } else if (checkSessionExpiry() && restoreSession()) {
       focusInput();
     } else if (!sessionId) {
       startSession();
@@ -951,6 +953,8 @@
       } : null
     };
     
+    console.log('SESSION START BODY:', JSON.stringify(payload));
+
     fetch(API_BASE + '/api/chat/session/start', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
