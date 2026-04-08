@@ -32,7 +32,8 @@
   var currentAudio = null;
 
   // ── CSS ──────────────────────────────────────────────
-  var css = `
+  // CSS moved to external files: chat-widget-mobile.css and chat-widget-desktop.css
+  /* var css = `
   #ew-chat-toggle{
     position:fixed;bottom:24px;right:24px;z-index:10001;
     width:60px;height:60px;border-radius:50%;border:none;cursor:pointer;
@@ -593,7 +594,7 @@
     .ew-msg{max-width:82%;}
     .ew-msg-form,.ew-msg-call{max-width:94%;}
   }
-  `;
+  */;
 
   // ── HTML ─────────────────────────────────────────────
   var html = `
@@ -633,9 +634,18 @@
 
   // ── Inject ───────────────────────────────────────────
   function inject() {
-    var style = document.createElement('style');
-    style.textContent = css;
-    document.head.appendChild(style);
+    // Conditional CSS loading based on device type
+    var isMobile = window.innerWidth < 768 || 
+      /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    
+    var styleLink = document.createElement('link');
+    styleLink.rel = 'stylesheet';
+    if (isMobile) {
+      styleLink.href = '/chat-widget-mobile.css';
+    } else {
+      styleLink.href = '/chat-widget-desktop.css';
+    }
+    document.head.appendChild(styleLink);
 
     var wrap = document.createElement('div');
     wrap.id = 'ew-chat-widget';
