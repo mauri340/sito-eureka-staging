@@ -266,14 +266,58 @@
       width:100%;max-width:100%;
       height:100dvh;max-height:100dvh;
       border-radius:0;
+      /* Fix iOS safe area support */
+      padding-top:env(safe-area-inset-top);
     }
-    #ew-chat-toggle{bottom:16px;right:16px;width:54px;height:54px;}
+    #ew-chat-toggle{
+      bottom:max(16px,env(safe-area-inset-bottom));
+      right:16px;width:54px;height:54px;
+    }
+    .ew-header{
+      /* Ensure header accounts for notch/Dynamic Island */
+      padding-top:max(16px,calc(env(safe-area-inset-top) + 16px));
+    }
+    .ew-messages{
+      /* Better scroll behavior - internal scrolling only */
+      overflow-y:auto;
+      overflow-x:hidden;
+      -webkit-overflow-scrolling:touch;
+      /* Prevent body scroll on iOS */
+      overscroll-behavior:contain;
+      /* Account for input bar and safe areas */
+      padding-bottom:env(safe-area-inset-bottom);
+    }
     .ew-input-bar{
-      padding:10px clamp(8px,3vw,12px) max(10px,env(safe-area-inset-bottom));
+      /* Fixed positioning for keyboard */
+      position:sticky;
+      bottom:0;
+      padding:12px clamp(8px,3vw,12px) max(12px,calc(env(safe-area-inset-bottom) + 12px));
+      background:#fff;
+      border-top:1px solid #F0EDE8;
+      /* Prevent input zoom on iOS */
+      font-size:16px;
     }
-    .ew-input-bar button{width:44px;height:44px;}
+    .ew-input-bar input{
+      font-size:16px !important; /* Prevent iOS zoom */
+      -webkit-text-size-adjust:100%;
+    }
+    /* Ensure minimum tap target size 44x44px */
+    .ew-input-bar button{
+      width:44px;height:44px;
+      min-width:44px;min-height:44px;
+    }
+    .ew-header-btn{
+      width:44px;height:44px;
+      min-width:44px;min-height:44px;
+    }
     .ew-msg{max-width:88%;}
     .ew-msg-form,.ew-msg-call{max-width:96%;}
+    /* Better viewport handling */
+    body.ew-chat-open{
+      overflow:hidden;
+      position:fixed;
+      width:100%;
+    }
   }
   `;
 
@@ -420,14 +464,39 @@
   // ── Events ───────────────────────────────────────────
   function bindEvents() {
     $('ew-chat-toggle').addEventListener('click', function () {
+      // Ensure audio context is unlocked on first user interaction
+      if (audioSync && audioSync.audioContext && audioSync.audioContext.state === 'suspended') {
+        audioSync.resumeAudioContext();
+      }
       if (chatOpened) { closeChat(); } else { openChat(); }
     });
-    $('ew-send').addEventListener('click', sendMessage);
+    $('ew-send').addEventListener('click', function() {
+      // Unlock audio on mobile before sending message
+      if (audioSync && audioSync.audioContext && audioSync.audioContext.state === 'suspended') {
+        audioSync.resumeAudioContext();
+      }
+      sendMessage();
+    });
     $('ew-input').addEventListener('keydown', function (e) {
       if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
     });
-    $('ew-mic').addEventListener('click', toggleMic);
+    $('ew-mic').addEventListener('click', function() {
+      // Unlock audio before using microphone
+      if (audioSync && audioSync.audioContext && audioSync.audioContext.state === 'suspended') {
+        audioSync.resumeAudioContext();
+      }
+      toggleMic();
+    });
     $('ew-tts-toggle').addEventListener('click', toggleTts);
+    
+    // Additional mobile-specific touch events for audio unlocking
+    if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+      $('ew-chat-box').addEventListener('touchstart', function() {
+        if (audioSync && audioSync.audioContext && audioSync.audioContext.state === 'suspended') {
+          audioSync.resumeAudioContext();
+        }
+      }, { once: true });
+    }
   }
 
   // ── Open / Close ────────────────────────────────────
@@ -510,6 +579,17 @@
     $('ew-chat-toggle').classList.add('ew-open');
     $('ew-chat-toggle').classList.remove('ew-has-badge');
     
+    // Hide WhatsApp widget when chat is open
+    var whatsappWidget = document.getElementById('whatsapp-widget');
+    if (whatsappWidget) {
+      whatsappWidget.style.display = 'none';
+    }
+    
+    // Prevent body scroll on mobile
+    if (window.innerWidth <= 480) {
+      document.body.classList.add('ew-chat-open');
+    }
+    
     // Enhanced analytics tracking
     if (analytics) {
       var userSourceData = userSource ? userSource.userSource : 'unknown';
@@ -530,6 +610,15 @@
     chatOpened = false;
     $('ew-chat-box').classList.remove('ew-visible');
     $('ew-chat-toggle').classList.remove('ew-open');
+    
+    // Show WhatsApp widget when chat is closed
+    var whatsappWidget = document.getElementById('whatsapp-widget');
+    if (whatsappWidget) {
+      whatsappWidget.style.display = 'block';
+    }
+    
+    // Restore body scroll on mobile
+    document.body.classList.remove('ew-chat-open');
   }
 
   function focusInput() {
