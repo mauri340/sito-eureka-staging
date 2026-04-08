@@ -31,9 +31,8 @@
   var ttsEnabled = true;
   var currentAudio = null;
 
-  // ── CSS ──────────────────────────────────────────────
-  // CSS moved to external files: chat-widget-mobile.css and chat-widget-desktop.css
-  /* var css = `
+  // ── CSS (moved to chat-widget-mobile.css and chat-widget-desktop.css) ──
+  if (false) { var css = `
   #ew-chat-toggle{
     position:fixed;bottom:24px;right:24px;z-index:10001;
     width:60px;height:60px;border-radius:50%;border:none;cursor:pointer;
@@ -594,7 +593,7 @@
     .ew-msg{max-width:82%;}
     .ew-msg-form,.ew-msg-call{max-width:94%;}
   }
-  */;
+  `; }
 
   // ── HTML ─────────────────────────────────────────────
   var html = `
@@ -638,13 +637,13 @@
     var isMobile = window.innerWidth < 768 || 
       /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
     
+    var cssBase = '';
+    if (scriptEl && scriptEl.src) {
+      cssBase = scriptEl.src.substring(0, scriptEl.src.lastIndexOf('/') + 1);
+    }
     var styleLink = document.createElement('link');
     styleLink.rel = 'stylesheet';
-    if (isMobile) {
-      styleLink.href = '/chat-widget-mobile.css';
-    } else {
-      styleLink.href = '/chat-widget-desktop.css';
-    }
+    styleLink.href = cssBase + (isMobile ? 'chat-widget-mobile.css' : 'chat-widget-desktop.css');
     document.head.appendChild(styleLink);
 
     var wrap = document.createElement('div');
