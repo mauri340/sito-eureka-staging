@@ -772,13 +772,19 @@
     });
     $('ew-tts-toggle').addEventListener('click', toggleTts);
     
-    // Additional mobile-specific touch events for audio unlocking
+    function unlockAudioOnMobile() {
+      if (audioSync && audioSync.audioContext && audioSync.audioContext.state === 'suspended') {
+        audioSync.resumeAudioContext();
+      }
+      var silence = new Audio('data:audio/mp3;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4Ljc2LjEwMAAAAAAAAAAAAAAA//tQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWGluZwAAAA8AAAACAAABhgC7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7//////////////////////////////////////////////////////////////////8AAAAATGF2YzU4LjEzAAAAAAAAAAAAAAAAJAAAAAAAAAAAAYYoRwBHAAAAAAD/+1DEAAAKACZ1UAAAI1iwqep5kRAAADSAAAAA+Bh+XBcP/6gfBwEP/xQEA4CAIBAMf/KBAGBA4Jw//+CDgQ/Lhx/UCDv5cHBCH+XAgDBQdAENfhw/KBB3///Lg4P/ygfB8HwfygeD4f////+sGP/7UsQYAApAHgBgBAABmKCxjACAAAf8uO7+Ug+D4f///yg4///5QdBwTB8H////WDH5cHBD8uD////+UEwYPgIf////1g+D7///8oEB0HAfB/////WD4IeXHd/lBMGD7///0g+/7+UHQf///ygQDQOCYI=');
+      silence.play().catch(function () {});
+    }
+
     if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
-      $('ew-chat-box').addEventListener('touchstart', function() {
-        if (audioSync && audioSync.audioContext && audioSync.audioContext.state === 'suspended') {
-          audioSync.resumeAudioContext();
-        }
-      }, { once: true });
+      ['touchstart', 'click'].forEach(function (evt) {
+        $('ew-chat-box').addEventListener(evt, unlockAudioOnMobile, { once: true });
+      });
+      $('ew-chat-toggle').addEventListener('click', unlockAudioOnMobile, { once: true });
     }
   }
 
@@ -1427,10 +1433,16 @@
       currentAudio.onended = function () {
         URL.revokeObjectURL(url); currentAudio = null;
       };
-      currentAudio.onerror = function () {
+      currentAudio.onerror = function (e) {
+        console.warn('Audio element error:', e);
         URL.revokeObjectURL(url); currentAudio = null;
       };
-      currentAudio.play().catch(function () {});
+      var playPromise = currentAudio.play();
+      if (playPromise) {
+        playPromise.catch(function (e) {
+          console.warn('Audio play blocked:', e.message);
+        });
+      }
     } catch (e) {
       console.warn('Audio playback error:', e);
     }
