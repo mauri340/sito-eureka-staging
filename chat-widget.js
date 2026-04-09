@@ -888,12 +888,28 @@
     if (fullscreenMode) {
       sessionId = null;
       startSession();
-    } else if (checkSessionExpiry() && restoreSession()) {
-      focusInput();
-    } else if (!sessionId) {
-      startSession();
     } else {
-      focusInput();
+      // Check for existing session before starting new one
+      const savedId = localStorage.getItem('ew_session_id');
+      const savedTs = localStorage.getItem('ew_session_ts');
+      const isRecent = savedTs && (Date.now() - parseInt(savedTs)) < 3600000; // 1 hour
+      
+      if (savedId && isRecent) {
+        sessionId = savedId;
+        // Restore saved messages if available
+        if (checkSessionExpiry() && restoreSession()) {
+          focusInput();
+        } else {
+          focusInput();
+        }
+        return;
+      } else if (checkSessionExpiry() && restoreSession()) {
+        focusInput();
+      } else if (!sessionId) {
+        startSession();
+      } else {
+        focusInput();
+      }
     }
   }
 
@@ -980,9 +996,11 @@
         hideTyping();
         sessionId = data.session_id;
         
-        // Save session to localStorage with timestamp
+        // Save session to localStorage with timestamp (both old and new format)
         localStorage.setItem('ar_session_id', sessionId);
         localStorage.setItem('ar_session_timestamp', new Date().getTime().toString());
+        localStorage.setItem('ew_session_id', sessionId);
+        localStorage.setItem('ew_session_ts', Date.now());
         
         // Use personalized greeting if server doesn't provide one
         var message = data.speech || personalizedGreeting;
@@ -1213,6 +1231,8 @@
         localStorage.removeItem('ar_session_id');
         localStorage.removeItem('ar_chat_history');
         localStorage.removeItem('ar_session_timestamp');
+        localStorage.removeItem('ew_session_id');
+        localStorage.removeItem('ew_session_ts');
         disableInput(true); inputDisabled = true;
         break;
       default:
@@ -2670,7 +2690,10 @@
     scrollDown();
   }
 
-  // ── End session on page unload ──────────────────────
+  // ── Disabled: End session on page unload ──────────────────────
+  // Commented out to prevent session ending on page navigation
+  // Sessions now persist across pages and expire naturally after 1 hour of inactivity
+  /*
   window.addEventListener('beforeunload', function () {
     if (!sessionId) return;
     var url = API_BASE + '/api/chat/session/end';
@@ -2684,6 +2707,7 @@
       xhr.send(body);
     }
   });
+  */
 
   // ── Public API ───────────────────────────────────────
   window.ChatWidget = {
