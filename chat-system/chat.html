@@ -18,32 +18,33 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f0f2f5;
+            background: linear-gradient(135deg, #0D1B2A 0%, #1C2B3A 100%);
             color: #1a202c;
             line-height: 1.7;
             margin: 0;
             padding: 0;
             height: 100vh;
+            height: 100dvh;
             overflow: hidden;
         }
 
-        /* Contenitore principale della pagina chat */
+        /* Contenitore principale — centra la chat */
         #chat-page-container {
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
-            min-height: calc(100vh - 300px);
-            padding: 20px;
+            height: 100vh;
+            height: 100dvh;
+            padding: 16px;
             box-sizing: border-box;
-            background-color: #f0f2f5;
         }
 
-        /* Contenitore della chat */
+        /* Contenitore della chat — occupa quasi tutto lo schermo */
         #chat-fullscreen {
             width: 100%;
             max-width: 700px;
-            height: 75vh;
+            height: calc(100vh - 32px);
+            height: calc(100dvh - 32px);
             background-color: #ffffff;
             border-radius: 16px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
@@ -229,18 +230,17 @@
             .footer-grid{grid-template-columns:1fr;}
         }
 
-        /* Media queries per mobile */
+        /* Nasconde il footer nella pagina chat dedicata */
+        .footer { display: none !important; }
+
+        /* Mobile */
         @media (max-width: 768px) {
-            body {
-                overflow: auto;
-                height: auto;
-            }
             #chat-page-container {
                 padding: 0;
-                min-height: 100dvh;
+                height: 100dvh;
             }
             #chat-fullscreen {
-                height: calc(100dvh - env(safe-area-inset-bottom));
+                height: 100dvh;
                 max-width: 100%;
                 border-radius: 0;
                 box-shadow: none;
