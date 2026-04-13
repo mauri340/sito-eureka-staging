@@ -53,11 +53,15 @@
             overflow: hidden;
         }
 
-        /* Override per il widget chat per integrarlo nella struttura */
-        #ew-chat-widget #ew-chat-box {
+        /* Override widget per fullscreen — alta specificita' */
+        #chat-fullscreen #ew-chat-widget,
+        #chat-fullscreen #ew-chat-widget #ew-chat-box,
+        #chat-fullscreen #ew-chat-widget #ew-chat-box.ew-visible {
             position: relative !important;
             bottom: auto !important;
             right: auto !important;
+            left: auto !important;
+            top: auto !important;
             width: 100% !important;
             height: 100% !important;
             max-width: none !important;
@@ -68,47 +72,46 @@
             pointer-events: auto !important;
             box-shadow: none !important;
             border: none !important;
-            background: transparent !important;
             display: flex !important;
             flex-direction: column !important;
+            overflow: hidden !important;
+        }
+        #chat-fullscreen #ew-chat-widget #ew-chat-box {
+            background: #fff !important;
+        }
+        #chat-fullscreen #ew-chat-widget {
+            background: transparent !important;
         }
 
-        /* Nasconde il toggle del widget */
-        #ew-chat-widget #ew-chat-toggle {
+        /* Nasconde toggle */
+        #chat-fullscreen #ew-chat-toggle {
             display: none !important;
         }
 
-        /* Header del widget fisso */
-        #ew-chat-widget .ew-header {
+        /* Header fisso */
+        #chat-fullscreen .ew-header {
             flex-shrink: 0 !important;
         }
 
-        /* Area messaggi con scroll interno */
-        #ew-chat-widget .ew-messages,
-        #ew-chat-widget #ew-messages {
+        /* Messaggi: scrollabile, occupa tutto lo spazio */
+        #chat-fullscreen .ew-messages,
+        #chat-fullscreen #ew-messages {
             flex: 1 1 0 !important;
             min-height: 0 !important;
             overflow-y: auto !important;
             -webkit-overflow-scrolling: touch !important;
-            padding: 20px !important;
-            display: flex !important;
-            flex-direction: column !important;
-            gap: 15px !important;
         }
 
-        /* Input bar fissa in fondo */
-        #ew-chat-widget .ew-input-bar {
+        /* Input bar in fondo */
+        #chat-fullscreen .ew-input-bar {
             flex-shrink: 0 !important;
-            position: sticky !important;
-            bottom: 0 !important;
-            background: #fff !important;
-            border-top: 1px solid #e2e8f0 !important;
-            z-index: 10 !important;
+            order: 99 !important;
         }
 
-        /* Footer powered fissa */
-        #ew-chat-widget .ew-powered {
+        /* Powered in fondo */
+        #chat-fullscreen .ew-powered {
             flex-shrink: 0 !important;
+            order: 100 !important;
         }
 
         /* Stili per i messaggi (basati sul riferimento) */
