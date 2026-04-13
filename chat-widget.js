@@ -864,9 +864,13 @@
 
   function openChat() {
     chatOpened = true;
-    $('ew-chat-box').classList.add('ew-visible');
-    $('ew-chat-toggle').classList.add('ew-open');
-    $('ew-chat-toggle').classList.remove('ew-has-badge');
+    var chatBox = $('ew-chat-box');
+    var chatToggle = $('ew-chat-toggle');
+    if (chatBox) chatBox.classList.add('ew-visible');
+    if (chatToggle) {
+      chatToggle.classList.add('ew-open');
+      chatToggle.classList.remove('ew-has-badge');
+    }
     
     // Hide WhatsApp widget when chat is open
     var whatsappWidget = document.getElementById('whatsapp-widget');
@@ -915,8 +919,10 @@
 
   function closeChat() {
     chatOpened = false;
-    $('ew-chat-box').classList.remove('ew-visible');
-    $('ew-chat-toggle').classList.remove('ew-open');
+    var chatBox = $('ew-chat-box');
+    var chatToggle = $('ew-chat-toggle');
+    if (chatBox) chatBox.classList.remove('ew-visible');
+    if (chatToggle) chatToggle.classList.remove('ew-open');
     
     // Show WhatsApp widget when chat is closed
     var whatsappWidget = document.getElementById('whatsapp-widget');
@@ -1368,7 +1374,8 @@
     } catch (e) {}
 
     isRecording = true;
-    $('ew-mic').classList.add('ew-recording');
+    var micBtn = $('ew-mic');
+    if (micBtn) micBtn.classList.add('ew-recording');
 
     recognition = new SR();
     recognition.lang = 'it-IT';
@@ -1385,7 +1392,8 @@
       if (result && result.isFinal) {
         var transcript = (result[0].transcript || '').trim();
         if (transcript) {
-          $('ew-input').value = transcript;
+          var input = $('ew-input');
+          if (input) input.value = transcript;
           
           // Track voice message
           if (analytics && userSource) {
@@ -1404,7 +1412,8 @@
     recognition.onend = function () {
       clearTimeout(inactivityTimer);
       isRecording = false;
-      $('ew-mic').classList.remove('ew-recording');
+      var micBtn = $('ew-mic');
+      if (micBtn) micBtn.classList.remove('ew-recording');
       recognition = null;
     };
 
@@ -1412,7 +1421,8 @@
       recognition.start();
     } catch (e) {
       isRecording = false;
-      $('ew-mic').classList.remove('ew-recording');
+      var micBtn = $('ew-mic');
+      if (micBtn) micBtn.classList.remove('ew-recording');
       recognition = null;
     }
   }
@@ -1422,7 +1432,8 @@
       try { recognition.stop(); } catch (e) {}
     }
     isRecording = false;
-    $('ew-mic').classList.remove('ew-recording');
+    var micBtn = $('ew-mic');
+    if (micBtn) micBtn.classList.remove('ew-recording');
   }
 
   // ── TTS Toggle ──────────────────────────────────────
@@ -2399,15 +2410,24 @@
       });
   }
 
-  function showTyping() { $('ew-typing').style.display = 'block'; scrollDown(); }
-  function hideTyping() { $('ew-typing').style.display = 'none'; }
+  function showTyping() { 
+    var typingElement = $('ew-typing');
+    if (typingElement) typingElement.style.display = 'block'; 
+    scrollDown(); 
+  }
+  function hideTyping() { 
+    var typingElement = $('ew-typing');
+    if (typingElement) typingElement.style.display = 'none'; 
+  }
   function scrollDown() {
     var m = $('ew-messages');
-    setTimeout(function () { m.scrollTop = m.scrollHeight; }, 50);
+    if (m) setTimeout(function () { m.scrollTop = m.scrollHeight; }, 50);
   }
   function disableInput(flag) {
-    $('ew-input').disabled = flag;
-    $('ew-send').disabled = flag;
+    var input = $('ew-input');
+    var sendBtn = $('ew-send');
+    if (input) input.disabled = flag;
+    if (sendBtn) sendBtn.disabled = flag;
   }
 
   // ── Auto-open after 40s ─────────────────────────────
@@ -2454,7 +2474,8 @@
               typeBotMessage(data.speech); 
             }
           } else {
-            $('ew-chat-toggle').classList.add('ew-has-badge');
+            var chatToggle = $('ew-chat-toggle');
+            if (chatToggle) chatToggle.classList.add('ew-has-badge');
           }
         })
         .catch(function () {});
