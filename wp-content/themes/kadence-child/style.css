@@ -913,3 +913,42 @@ body #masthead .site-branding .brand {
   }
 }
 
+/* Fix layout logo-menu distanziati */
+.site-main-header-inner-wrap,
+.site-header-row,
+#masthead .site-main-header-inner-wrap,
+body #masthead .site-main-header-inner-wrap {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  width: 100% !important;
+  padding: 0 !important;
+}
+
+.site-header-main-section-left,
+#masthead .site-header-main-section-left {
+  flex: 0 0 auto !important;
+  margin-right: auto !important;
+}
+
+.site-header-main-section-right,
+#masthead .site-header-main-section-right {
+  flex: 0 0 auto !important;
+  margin-left: auto !important;
+}
+
+.site-header-main-section-center,
+#masthead .site-header-main-section-center {
+  flex: 0 0 0 !important;
+  width: 0 !important;
+  overflow: hidden !important;
+}
+
+/* Nascondi testo titolo sito */
+.site-title,
+.site-title-wrap,
+#masthead .site-title,
+#masthead .site-title-wrap {
+  display: none !important;
+}
+
