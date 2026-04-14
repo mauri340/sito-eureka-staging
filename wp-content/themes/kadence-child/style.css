@@ -654,9 +654,21 @@ body #masthead .site-branding .brand {
 .related-articles,
 .suggested-posts {
   background: var(--ar-navy) !important;
-  margin: 0 !important;
+  margin: 0 auto !important;
   padding: 60px 48px !important;
   border-radius: 0 !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* Fix centering for related posts inner containers */
+.entry-related .entry-related-inner,
+.entry-related .entry-related-inner-content {
+  margin: 0 auto !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 }
 
 /* Related posts main title */
