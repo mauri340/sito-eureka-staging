@@ -435,38 +435,39 @@ body {
                 
                 console.log('QUIZ PAYLOAD:', JSON.stringify(quizPayload));
 
-                try {
-                  const response = await fetch(
-                    'https://ai-chat-service-nls9.onrender.com/api/quiz/submit',
-                    {
-                      method: 'POST',
-                      headers: {'Content-Type': 'application/json'},
-                      body: JSON.stringify(quizPayload)
-                    }
-                  );
-                  const data = await response.json();
-                  if (data.token) {
-                    window.location.href = 
-                      `/chat-system/chat.html?token=${data.token}`;
-                  } else {
-                    throw new Error('Token non ricevuto');
+                // POST a /api/quiz/submit
+                const response = await fetch(
+                  'https://ai-chat-service-nls9.onrender.com/api/quiz/submit',
+                  {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(quizPayload)
                   }
-                } catch (error) {
-                  // Fallback con parametri URL
-                  window.location.href = 
-                    `/chat-system/chat.html?` +
-                    `quiz_status=costo_ignoranza` +
-                    `&nome=${encodeURIComponent(nome)}` +
-                    `&cognome=${encodeURIComponent(cognome)}` +
-                    `&email=${encodeURIComponent(email)}` +
-                    `&telefono=${encodeURIComponent(telefono)}` +
-                    `&fatturato_attuale=${encodeURIComponent(fatturatoAttualeDesk)}` +
-                    `&fatturato_potenziale=${encodeURIComponent(Math.round(fatturatoPotenzialeCalculatedDesk))}` +
-                    `&crescita_potenziale=${encodeURIComponent(crescitaPotenziale)}` +
-                    `&criticita_opportunita=${encodeURIComponent(getCriticality(scoresDesk.opportunità))}` +
-                    `&criticita_inefficienza=${encodeURIComponent(getCriticality(scoresDesk.inefficienza))}` +
-                    `&criticita_competitivita=${encodeURIComponent(getCriticality(scoresDesk.competitività))}` +
-                    `&criticita_innovazione=${encodeURIComponent(getCriticality(scoresDesk.innovazione))}`;
+                );
+                
+                // DEBUG: Console log dopo POST response
+                console.log('SUBMIT RESPONSE:', JSON.stringify(response));
+                
+                const data = await response.json();
+                
+                if (data.token) {
+                  const token = data.token;
+                  // DEBUG: Console log del token ricevuto
+                  console.log('TOKEN RICEVUTO:', token);
+                  
+                  // GET /api/quiz/token/{token} per recuperare i dati
+                  const tokenResponse = await fetch(
+                    `https://ai-chat-service-nls9.onrender.com/api/quiz/token/${token}`
+                  );
+                  const tokenData = await tokenResponse.json();
+                  
+                  // DEBUG: Console log dei dati del token
+                  console.log('TOKEN DATA:', JSON.stringify(tokenData));
+                  
+                  // Redirect alla chat con token
+                  window.location.href = `/chat-system/chat.html?token=${token}`;
+                } else {
+                  throw new Error('Token non ricevuto dal backend');
                 }
             } catch (error) {
                 console.error('Errore durante il redirect:', error);
