@@ -984,8 +984,18 @@
       session_extra: quizParams.quiz_status ? {
         test_results: {
           quiz_status: quizParams.quiz_status,
-          pam: quizParams.pam,
-          punteggio: quizParams.punteggio
+          pam: quizParams.pam || null,
+          punteggio: quizParams.punteggio || null,
+          punteggio1: quizParams.punteggio1 || null,
+          punteggio2: quizParams.punteggio2 || null,
+          miglioramento: quizParams.miglioramento || null,
+          fatturato_attuale: quizParams.fatturato_attuale || null,
+          fatturato_potenziale: quizParams.fatturato_potenziale || null,
+          crescita_potenziale: quizParams.crescita_potenziale || null,
+          criticita_opportunita: quizParams.criticita_opportunita || null,
+          criticita_inefficienza: quizParams.criticita_inefficienza || null,
+          criticita_competitivita: quizParams.criticita_competitivita || null,
+          criticita_innovazione: quizParams.criticita_innovazione || null
         }
       } : null
     };
@@ -1079,8 +1089,18 @@
             session_extra: quizParams.quiz_status ? {
               test_results: {
                 quiz_status: quizParams.quiz_status,
-                pam: quizParams.pam,
-                punteggio: quizParams.punteggio
+                pam: quizParams.pam || null,
+                punteggio: quizParams.punteggio || null,
+                punteggio1: quizParams.punteggio1 || null,
+                punteggio2: quizParams.punteggio2 || null,
+                miglioramento: quizParams.miglioramento || null,
+                fatturato_attuale: quizParams.fatturato_attuale || null,
+                fatturato_potenziale: quizParams.fatturato_potenziale || null,
+                crescita_potenziale: quizParams.crescita_potenziale || null,
+                criticita_opportunita: quizParams.criticita_opportunita || null,
+                criticita_inefficienza: quizParams.criticita_inefficienza || null,
+                criticita_competitivita: quizParams.criticita_competitivita || null,
+                criticita_innovazione: quizParams.criticita_innovazione || null
               }
             } : null
           };
@@ -2450,8 +2470,18 @@
         session_extra: quizParams.quiz_status ? {
           test_results: {
             quiz_status: quizParams.quiz_status,
-            pam: quizParams.pam,
-            punteggio: quizParams.punteggio
+            pam: quizParams.pam || null,
+            punteggio: quizParams.punteggio || null,
+            punteggio1: quizParams.punteggio1 || null,
+            punteggio2: quizParams.punteggio2 || null,
+            miglioramento: quizParams.miglioramento || null,
+            fatturato_attuale: quizParams.fatturato_attuale || null,
+            fatturato_potenziale: quizParams.fatturato_potenziale || null,
+            crescita_potenziale: quizParams.crescita_potenziale || null,
+            criticita_opportunita: quizParams.criticita_opportunita || null,
+            criticita_inefficienza: quizParams.criticita_inefficienza || null,
+            criticita_competitivita: quizParams.criticita_competitivita || null,
+            criticita_innovazione: quizParams.criticita_innovazione || null
           }
         } : null
       };
