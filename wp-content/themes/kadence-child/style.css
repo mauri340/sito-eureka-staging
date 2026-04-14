@@ -913,3 +913,34 @@ body #masthead .site-branding .brand {
   }
 }
 
+/* Header layout fix - Kadence sections */
+.site-main-header-inner-wrap.site-header-row {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  width: 100% !important;
+  padding: 0 40px !important;
+}
+
+.site-header-main-section-left {
+  flex: 0 0 auto !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+.site-header-main-section-center {
+  flex: 1 1 auto !important;
+}
+
+.site-header-main-section-right {
+  flex: 0 0 auto !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+}
+
+/* Nascondi titolo testo - solo logo */
+.site-title-wrap {
+  display: none !important;
+}
+
