@@ -952,3 +952,24 @@ body #masthead .site-main-header-inner-wrap {
   display: none !important;
 }
 
+/* Fix site-container larghezza header */
+#main-header .site-container,
+#main-header .site-header-row-container-inner,
+#masthead .site-container,
+#masthead .site-header-row-container-inner {
+  max-width: none !important;
+  width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Fix site-main-header-inner-wrap */
+#main-header .site-main-header-inner-wrap,
+#masthead .site-main-header-inner-wrap {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  width: 100% !important;
+  padding: 0 40px !important;
+}
+
