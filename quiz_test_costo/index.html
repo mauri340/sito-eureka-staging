@@ -58,8 +58,8 @@ src="https://www.facebook.com/tr?id=1749584092436791&ev=PageView&noscript=1"
     </noscript>
     <style>
         body { font-family: 'Poppins', sans-serif; background: linear-gradient(135deg, #e0e6ed 0%, #c1cfe0 100%); display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 100vh; margin: 0; color: #334e68; text-align: center; padding: 20px; box-sizing: border-box; }
-        .container { background-color: #ffffff; padding: 40px; border-radius: 12px; box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15); width: 90%; max-width: 800px; box-sizing: border-box; text-align: center; margin-bottom: 20px; }
-        .container:last-child { margin-bottom: 0; }
+        .quiz-card { background-color: #ffffff; padding: 40px; border-radius: 12px; box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15); width: 90%; max-width: 800px; box-sizing: border-box; text-align: center; margin-bottom: 20px; }
+        .quiz-card:last-child { margin-bottom: 0; }
         h1, h2 { color: #002949; }
         .header-icon { font-size: 2.5em; color: #00A988; margin-bottom: 20px; display: block; }
         .subtitle { font-size: 1.1em; color: #526c84; margin-bottom: 10px; }
@@ -84,18 +84,26 @@ src="https://www.facebook.com/tr?id=1749584092436791&ev=PageView&noscript=1"
         .privacy-checkbox-container input[type="checkbox"] { width: 20px; height: 20px; margin: 0; border: 2px solid #00A988; border-radius: 4px; cursor: pointer; flex-shrink: 0; }
         .hidden { display: none !important; }
         .cta-banner { width: 100%; box-sizing: border-box; }
+
 /* Footer styles */
 .footer {
     background: #0D1B2A;
     color: rgba(255,255,255,.75);
     padding: 56px 0 32px;
     margin-top: 40px;
+    width: 100%;
 }
 
 .footer .container {
     max-width: 1100px;
     margin: 0 auto;
     padding: 0 28px;
+    /* Reset: evita che .quiz-card contamine il footer */
+    background-color: transparent;
+    box-shadow: none;
+    border-radius: 0;
+    text-align: left;
+    width: auto;
 }
 
 .footer-grid {
@@ -212,14 +220,12 @@ src="https://www.facebook.com/tr?id=1749584092436791&ev=PageView&noscript=1"
     }
 }
 
-/* Updated body padding */
 body {
-    /* ...existing rules... */
-    padding-bottom: 0; /* Remove fixed footer padding */
+    padding-bottom: 0;
 }
     </style>
 <body>
-    <div class="container" id="desk-home">
+    <div class="quiz-card" id="desk-home">
         <h1>TEST | Sai quanto il tuo "learning gap" incide sul tuo business? Scoprilo ora</h1>
         <span class="header-icon">💵</span>
         <p class="subtitle">Questo strumento per analizzare le tue performance è offerto da <strong class="highlight">Apprendimento Rapido</strong>.</p>
@@ -238,7 +244,7 @@ body {
         <button class="btn" onclick="startQuizDesk()">Inizia il Test</button>
     </div>
 
-    <div class="container hidden" id="desk-quiz">
+    <div class="quiz-card hidden" id="desk-quiz">
         <h2>📊 Rispondi alle domande</h2>
         <p id="desk-question-text"></p>
         <button class="btn" id="desk-option1" onclick="answerDesk(0)"></button>
@@ -246,7 +252,7 @@ body {
         <button class="btn" id="desk-option3" onclick="answerDesk(2)"></button>
     </div>
 
-    <div class="container hidden" id="desk-fatturatoScreen">
+    <div class="quiz-card hidden" id="desk-fatturatoScreen">
         <h2>💰 Qual è il tuo fatturato annuo attuale?</h2>
         <p class="fatturato-description">Grazie a questo dato, potremo calcolare in modo preciso l'impatto economico del tuo potenziale miglioramento.</p>
         <span class="fatturato-note">*(Inserisci solo il numero intero, senza simboli di valuta)*</span>
@@ -255,14 +261,14 @@ body {
         <button class="btn" onclick="submitFatturatoDesk()">Procedi</button>
     </div>
 
-    <div class="container hidden" id="desk-contactForm">
+    <div class="quiz-card hidden" id="desk-contactForm">
         <h2>📇 Inserisci i tuoi dati per ricevere il risultato</h2>
         <form id="desk-dataSubmissionForm" onsubmit="handleSubmitWithFetch(event)">
             <input type="text" id="desk-nome" name="nome" placeholder="Nome" required><br>
             <input type="text" id="desk-cognome" name="cognome" placeholder="Cognome" required><br>
             <input type="email" id="desk-email" name="email" placeholder="Email" required><br>
             <input type="tel" id="desk-telefono" name="telefono" placeholder="Telefono" required><br>
-            
+
             <div class="consent-group" style="display: flex; align-items: flex-start; margin: 20px 0; font-size: 0.9em;">
                 <input type="checkbox" id="privacy-consent" name="privacy-consent" required style="margin-top: 5px; margin-right: 10px;">
                 <label for="privacy-consent" style="text-align: left;">
@@ -270,25 +276,25 @@ body {
                     Cliccando sul pulsante "Visualizza il Risultato", dichiaro di aver preso visione dell'informativa privacy e acconsento al trattamento dei dati personali per finalità di marketing diretto di Apprendimento Rapido.
                 </label>
             </div>
-            
+
             <input type="hidden" id="desk-hiddenFatturato" name="fatturato">
             <input type="hidden" id="desk-hiddenScoresOpportunita" name="scores_opportunita">
             <input type="hidden" id="desk-hiddenScoresInefficienza" name="scores_inefficienza">
             <input type="hidden" id="desk-hiddenScoresCompetitivita" name="scores_competitivita">
             <input type="hidden" id="desk-hiddenScoresInnovazione" name="scores_innovazione">
             <input type="hidden" id="desk-hiddenFatturatoPotenziale" name="fatturatoPotenziale">
-            
+
             <button class="btn" type="submit">Visualizza il Risultato</button>
         </form>
     </div>
 
-    <div id="desk-resultTopSection" class="container hidden">
+    <div id="desk-resultTopSection" class="quiz-card hidden">
         <a id="desk-dynamicCtaBanner" href="#" target="_blank" class="btn cta-banner" style="margin-bottom: 25px;">
             Scopri come sbloccare il tuo potenziale di crescita di <span id="desk-fatturatoStimatoText"></span> € all'anno!
         </a>
     </div>
 
-    <div id="desk-chartContainer" class="container hidden">
+    <div id="desk-chartContainer" class="quiz-card hidden">
         <h2>📊 Il tuo potenziale di crescita è di <span id="desk-fatturatoStimatoTitle"></span> € all'anno</h2>
         <canvas id="desk-resultChart"></canvas>
         <a id="desk-dynamicCtaButton" href="#" target="_blank" class="btn"></a>
@@ -392,9 +398,9 @@ body {
                 submitButton.disabled = false;
                 return;
             }
-            
+
             populateHiddenFieldsDesk();
-            
+
             // Tracciamento Facebook Lead
             if (typeof fbq === 'function') {
                 fbq('track', 'Lead', { content_name: 'Quiz Learning Gap' });
@@ -403,21 +409,18 @@ body {
             if (typeof lintrk === 'function') { lintrk('track', 'conversion'); }
 
             try {
-                // Collect form data for chat system redirect
                 const formData = new FormData(event.target);
                 const nome = formData.get('nome') || 'Utente';
                 const cognome = formData.get('cognome') || 'Sconosciuto';
                 const email = formData.get('email') || '';
                 const telefono = formData.get('telefono') || '';
-                
-                // Calculate total score and growth potential
+
                 const crescitaPotenziale = Math.round(fatturatoPotenzialeCalculatedDesk - fatturatoAttualeDesk);
-                
-                // DEBUG: Console log per verificare i valori prima del POST
+
                 console.log('fatturato:', fatturatoAttualeDesk);
                 console.log('potenziale:', fatturatoPotenzialeCalculatedDesk);
                 console.log('scores:', scoresDesk);
-                
+
                 const quizPayload = {
                   quiz_status: "costo_ignoranza",
                   nome: nome,
@@ -432,10 +435,9 @@ body {
                   criticita_competitivita: getCriticality(scoresDesk.competitività),
                   criticita_innovazione: getCriticality(scoresDesk.innovazione)
                 };
-                
+
                 console.log('QUIZ PAYLOAD:', JSON.stringify(quizPayload));
 
-                // POST a /api/quiz/submit
                 const response = await fetch(
                   'https://ai-chat-service-nls9.onrender.com/api/quiz/submit',
                   {
@@ -444,27 +446,22 @@ body {
                     body: JSON.stringify(quizPayload)
                   }
                 );
-                
-                // DEBUG: Console log dopo POST response
+
                 console.log('SUBMIT RESPONSE:', JSON.stringify(response));
-                
+
                 const data = await response.json();
-                
+
                 if (data.token) {
                   const token = data.token;
-                  // DEBUG: Console log del token ricevuto
                   console.log('TOKEN RICEVUTO:', token);
-                  
-                  // GET /api/quiz/token/{token} per recuperare i dati
+
                   const tokenResponse = await fetch(
                     `https://ai-chat-service-nls9.onrender.com/api/quiz/token/${token}`
                   );
                   const tokenData = await tokenResponse.json();
-                  
-                  // DEBUG: Console log dei dati del token
+
                   console.log('TOKEN DATA:', JSON.stringify(tokenData));
-                  
-                  // Redirect alla chat con token
+
                   window.location.href = `/chat-system/chat.html?token=${token}`;
                 } else {
                   throw new Error('Token non ricevuto dal backend');
@@ -478,15 +475,14 @@ body {
         }
 
         function showResultDesk() {
-            // Nasconde tutte le sezioni tranne quelle dei risultati
-            document.querySelectorAll('.container').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.quiz-card').forEach(el => el.classList.add('hidden'));
             document.getElementById("desk-resultTopSection").classList.remove("hidden");
             document.getElementById("desk-chartContainer").classList.remove("hidden");
 
             const crescitaPotenziale = fatturatoPotenzialeCalculatedDesk - fatturatoAttualeDesk;
             document.getElementById("desk-fatturatoStimatoTitle").textContent = Math.round(fatturatoPotenzialeCalculatedDesk).toLocaleString('it-IT');
             document.getElementById("desk-fatturatoStimatoText").textContent = Math.round(crescitaPotenziale).toLocaleString('it-IT');
-            
+
             if (chartInstanceDesk) { chartInstanceDesk.destroy(); }
             const ctx = document.getElementById('desk-resultChart').getContext('2d');
             chartInstanceDesk = new Chart(ctx, {
@@ -520,7 +516,6 @@ body {
             dynamicCtaButtonElement.textContent = text;
         }
 
-        // --- PUNTO DI INGRESSO DELLO SCRIPT ---
         document.addEventListener('DOMContentLoaded', () => {
             document.getElementById("desk-home").classList.remove("hidden");
         });
