@@ -570,12 +570,11 @@ src="https://www.facebook.com/tr?id=1749584092436791&ev=PageView&noscript=1"
         const userId = Date.now().toString();
         
         try {
-            // Redirect to shared chat system
             // Save contact data for later use in final results
-            datiContatto = { nome, cognome, email, telefono, userId };
-            
-            const chatUrl = `/chat-system/chat.html?userId=${encodeURIComponent(userId)}&nome=${encodeURIComponent(nome)}&cognome=${encodeURIComponent(cognome)}&email=${encodeURIComponent(email)}&telefono=${encodeURIComponent(telefono)}&quiz_status=memoria&punteggio1=${encodeURIComponent(punteggio1)}&punteggio2=da_completare&miglioramento=da_completare&totale_parole=${encodeURIComponent(numeroParole)}`;
-            window.location.href = chatUrl;
+            datiContatto = { nome, cognome, email, telefono };
+            submitButton.textContent = 'Invia e Scopri di più';
+            submitButton.disabled = false;
+            mostraSchermata('schermata-video');
         } catch (error) {
             console.error('Errore durante il redirect:', error);
             alert('Si è verificato un errore. Riprova.');
