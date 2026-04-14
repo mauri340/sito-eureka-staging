@@ -973,3 +973,8 @@ body #masthead .site-main-header-inner-wrap {
   padding: 0 40px !important;
 }
 
+/* Fix site-container larghezza header */
+#main-header .site-container {
+  flex: 1 1 auto !important;
+}
+
