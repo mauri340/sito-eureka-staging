@@ -434,62 +434,7 @@ async function submitCoaching(e){
 }
 </script>
 
-<footer class="footer">
-    <div class="container">
-        <div class="footer-grid">
-            <div class="footer-brand">
-                <img src="images/logo.png" alt="Metodo Eureka">
-                <p>Dal 2001 aiutiamo professionisti, imprenditori e studenti a imparare più velocemente e ricordare di più — con un metodo provato su oltre 20.000 persone.</p>
-            </div>
-
-            <div class="footer-col">
-                <h4>Il Metodo</h4>
-                <a href="metodo-eureka.html">Il Metodo Eureka</a>
-                <a href="master-eureka.html">Il Master Eureka</a>
-                <a href="tecniche-memoria.html">Tecniche di Memoria</a>
-                <a href="lettura-veloce.html">Lettura Veloce</a>
-                <a href="mappe-mentali.html">Mappe Mentali</a>
-            </div>
-
-            <div class="footer-col">
-                <h4>Risorse</h4>
-                <a href="demo-zoom/index.html">Webinar Gratuito</a>
-                <a href="coaching.html">Coaching Gratuita</a>
-                <a href="testimonianze.html">Testimonianze</a>
-                <a href="libro.html">Il Nostro Libro</a>
-                <a href="https://academy.apprendimentorapido.it/users/sign_in" target="_blank">Login Allievi</a>
-            </div>
-
-            <div class="footer-col">
-                <h4>Contatti</h4>
-                <div class="footer-contact">
-                    Via Gardiscia 10<br>
-                    Rovio, (CH) 6821<br><br>
-                    <a href="mailto:info@apprendimentorapido.it">info@apprendimentorapido.it</a>
-                    <a href="tel:+390240702168">+390240702168</a><br>
-                    Lun–Ven 9:00–18:30
-                </div>
-            </div>
-
-            <div class="footer-col">
-                <h4>Seguici</h4>
-                <a href="https://www.linkedin.com/company/apprendimentorapido/" target="_blank">LinkedIn</a>
-                <a href="https://www.instagram.com/apprendimento_rapido/" target="_blank">Instagram</a>
-                <a href="https://www.facebook.com/apprendimentorapido" target="_blank">Facebook</a>
-                <a href="https://www.youtube.com/user/apprendimentorapido" target="_blank">YouTube</a>
-            </div>
-        </div>
-
-        <div class="footer-bottom">
-            <p>© 2025 Apprendimento Rapido – Metodo Eureka. Tutti i diritti riservati.</p>
-            <div>
-                <a href="https://www.iubenda.com/privacy-policy/89530968" target="_blank">Privacy Policy</a>
-                <a href="https://www.iubenda.com/privacy-policy/89530968/cookie-policy" target="_blank">Cookie Policy</a>
-                <a href="https://www.iubenda.com/termini-e-condizioni/89530968" target="_blank">Termini e Condizioni</a>
-            </div>
-        </div>
-    </div>
-</footer>
+<div id="footer-placeholder"></div>
 <script>
 document.querySelectorAll('#mm a').forEach(a=>a.addEventListener('click',()=>document.getElementById('mm').classList.remove('open')));
 function animateCounters(){
@@ -514,5 +459,6 @@ document.querySelectorAll('.stats-section,[data-animate]').forEach(el=>obs.obser
 </script>
 <script src="chat-widget.js"></script>
 <script src="whatsapp-widget.js"></script>
+<script src="/components/footer-loader.js"></script>
 </body>
 </html>
