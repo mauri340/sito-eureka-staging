@@ -978,3 +978,8 @@ body #masthead .site-main-header-inner-wrap {
   flex: 1 1 auto !important;
 }
 
+/* Fix 2: espande il wrapper intermedio che blocca la larghezza */
+.site-header-inner-wrap > .site-header-upper-wrap {
+  flex: 1 1 auto;
+}
+
