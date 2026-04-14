@@ -697,21 +697,24 @@ body #masthead .site-branding .brand {
   border-bottom: 2px solid rgba(255,255,255,0.1) !important;
 }
 
-/* Related posts grid/list */
+/* Related posts grid/list - Fix card layout for "Articoli simili" */
 .entry-related .entry-related-content,
+.entry-related .entry-related-carousel,
+.entry-related .entry-related-carousel .splide__track,
+.entry-related .entry-related-carousel .splide__list,
 .related-posts .post-grid,
 .related-posts .posts-container,
 .kadence-related-posts .post-grid,
 .related-articles .posts-grid,
 .suggested-posts .posts-container {
   display: grid !important;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
-  gap: 32px !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 24px !important;
   margin: 0 !important;
   padding: 0 !important;
 }
 
-/* Individual related post cards */
+/* Individual related post cards - Fix width and layout */
 .entry-related article,
 .related-posts article,
 .kadence-related-posts article,
@@ -719,13 +722,19 @@ body #masthead .site-branding .brand {
 .suggested-posts article,
 .entry-related .post,
 .related-posts .post,
-.kadence-related-posts .post {
+.kadence-related-posts .post,
+.entry-related .entry-list-item,
+.entry-related .carousel-item,
+.entry-related .splide__slide {
   background: rgba(255,255,255,0.05) !important;
   border: 1px solid rgba(255,255,255,0.08) !important;
   border-radius: 12px !important;
   padding: 24px !important;
   transition: all 0.3s ease !important;
   box-shadow: 0 4px 20px rgba(0,0,0,0.2) !important;
+  min-width: 250px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
 }
 
 .entry-related article:hover,
@@ -739,7 +748,7 @@ body #masthead .site-branding .brand {
   box-shadow: 0 8px 30px rgba(0,0,0,0.3) !important;
 }
 
-/* Related post titles - reduce size and improve consistency */
+/* Related post titles - fix text wrapping and size */
 .entry-related .entry-title,
 .entry-related .entry-title a,
 .related-posts .entry-title,
@@ -764,6 +773,9 @@ body #masthead .site-branding .brand {
   line-height: 1.4 !important;
   margin: 0 0 12px 0 !important;
   display: block !important;
+  word-break: normal !important;
+  white-space: normal !important;
+  overflow-wrap: break-word !important;
 }
 
 .entry-related .entry-title a:hover,
@@ -825,6 +837,41 @@ body #masthead .site-branding .brand {
   transform: scale(1.05) !important;
 }
 
+/* ─── OVERRIDE SPLIDE CAROUSEL - Force 3-card grid layout ─── */
+.entry-related .entry-related-carousel.kadence-slide-init.splide {
+  display: block !important;
+}
+
+.entry-related .entry-related-carousel .splide__track {
+  overflow: visible !important;
+  width: 100% !important;
+  display: block !important;
+}
+
+.entry-related .entry-related-carousel .splide__list.kadence-posts-list {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 24px !important;
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+  transform: none !important;
+}
+
+.entry-related .entry-related-carousel .splide__slide {
+  display: block !important;
+  width: 100% !important;
+  flex: none !important;
+  margin: 0 !important;
+}
+
+/* Hide Splide carousel controls */
+.entry-related .splide__arrows,
+.entry-related .splide__pagination {
+  display: none !important;
+}
+
 /* ─── 16. RESPONSIVE ─────────────────────────────────── */
 @media (max-width: 768px) {
   .single .entry-header { padding: 52px 20px 36px !important; }
@@ -851,6 +898,7 @@ body #masthead .site-branding .brand {
   }
   
   .entry-related .entry-related-content,
+  .entry-related .entry-related-carousel .splide__list.kadence-posts-list,
   .related-posts .post-grid,
   .kadence-related-posts .post-grid {
     grid-template-columns: 1fr !important;
