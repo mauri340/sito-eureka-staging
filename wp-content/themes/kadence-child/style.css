@@ -138,7 +138,8 @@ html body .site-header {
 .site-main-header-wrap .site-header-row-container-inner,
 #wrapper #masthead .site-header-inner-wrap,
 body #masthead .site-header-inner-wrap,
-html body #masthead .site-header-inner-wrap {
+html body #masthead .site-header-inner-wrap,
+.site-header .header-inner {
   position: static !important;
   width: 100% !important;
   max-width: none !important;
@@ -166,6 +167,7 @@ html body #masthead .site-branding {
   display: flex !important;
   align-items: center !important;
   gap: 10px !important;
+  flex: 0 0 auto !important;
 }
 
 .site-branding img,
@@ -205,6 +207,9 @@ html body #masthead .main-navigation {
   display: flex !important;
   align-items: center !important;
   gap: 2px !important;
+  flex: 1 1 auto !important;
+  justify-content: flex-end !important;
+  margin-left: 20px !important;
 }
 
 .main-navigation ul,
