@@ -413,6 +413,11 @@ body {
                 // Calculate total score and growth potential
                 const crescitaPotenziale = Math.round(fatturatoPotenzialeCalculatedDesk - fatturatoAttualeDesk);
                 
+                // DEBUG: Console log per verificare i valori prima del POST
+                console.log('fatturato:', fatturatoAttualeDesk);
+                console.log('potenziale:', fatturatoPotenzialeCalculatedDesk);
+                console.log('scores:', scoresDesk);
+                
                 const quizPayload = {
                   quiz_status: "costo_ignoranza",
                   nome: nome,
@@ -427,6 +432,8 @@ body {
                   criticita_competitivita: getCriticality(scoresDesk.competitività),
                   criticita_innovazione: getCriticality(scoresDesk.innovazione)
                 };
+                
+                console.log('payload:', JSON.stringify(quizPayload));
 
                 try {
                   const response = await fetch(
