@@ -1004,9 +1004,9 @@ body #masthead .site-main-header-inner-wrap {
   width: 100% !important;
 }
 
+/* Articoli simili: 2 card per riga */
 .entry-related .splide__list {
-  grid-template-columns: repeat(3, 1fr) !important;
-  gap: 24px !important;
+  grid-template-columns: repeat(2, 1fr) !important;
 }
 
 .entry-related .splide__slide {
