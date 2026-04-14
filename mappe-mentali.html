@@ -191,6 +191,47 @@ footer{background:var(--navy);color:rgba(255,255,255,.75);padding:56px 0 32px;}
   .section{padding:64px 0;}
   .banner-navy,.banner-light{padding:32px 24px;}
 }
+.banner{
+  width:100%;
+  min-height:140px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:32px 24px;
+  border-radius:16px;
+  background:linear-gradient(160deg,#0D1B2A 0%,#1C2B3A 100%);
+  box-shadow:0 16px 48px rgba(13,27,42,.15);
+  border:1px solid rgba(255,255,255,.08);
+  margin:40px 0;
+  cursor:pointer;
+  transition:transform 0.2s ease, box-shadow 0.2s ease;
+}
+.banner:hover{
+  transform:translateY(-3px);
+  box-shadow:0 20px 56px rgba(13,27,42,.22);
+}
+.banner h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1.8rem,4.5vw,3.2rem);
+  line-height:1.1;
+  font-weight:700;
+  color:#fff;
+  letter-spacing:-0.02em;
+  margin:0;
+}
+.banner h1 em{
+  color:#B8973E;
+  font-style:italic;
+  font-weight:700;
+}
+@media(max-width:768px){
+.banner{
+  min-height:120px;
+  padding:24px 16px;
+  margin:32px 0;
+}
+}
 @media(max-width:600px){
   .footer-grid{grid-template-columns:1fr;}
   .container{padding:0 16px;}
@@ -299,6 +340,12 @@ footer{background:var(--navy);color:rgba(255,255,255,.75);padding:56px 0 32px;}
     </div>
   </div>
 </section>
+
+<a href="/quiz_test_memoria/" style="display:block;text-decoration:none;">
+<section class="banner">
+  <h1>Test di <em>Memoria</em></h1>
+</section>
+</a>
 
 <!-- COSA SONO -->
 <section class="section bg-off" id="cosa-sono">
