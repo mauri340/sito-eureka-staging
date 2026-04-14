@@ -2747,6 +2747,13 @@
     },
     getParams: function () {
       return userParams || {};
+    },
+    reset: function() {
+      localStorage.removeItem('ar_session_id');
+      localStorage.removeItem('ar_chat_history');
+      localStorage.removeItem('ar_previous_session_id');
+      localStorage.removeItem('ar_session_timestamp');
+      location.reload();
     }
   };
 
