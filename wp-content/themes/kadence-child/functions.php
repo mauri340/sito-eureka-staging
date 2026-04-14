@@ -260,6 +260,122 @@ function ar_whatsapp_widget() {
 }
 add_action('wp_footer', 'ar_whatsapp_widget');
 
+// HEADER CUSTOMIZATION — MATCH STATIC SITE DESIGN
+// Remove site title text from header (keep logo only)
+function ar_hide_site_title() {
+    ?>
+    <style>
+    /* Hide site title text but keep logo */
+    .site-branding .site-title,
+    .site-branding .site-title-wrap,
+    .site-branding .site-description {
+        display: none !important;
+    }
+    
+    /* Ensure only logo shows in branding */
+    .site-branding.branding-layout-standard {
+        display: flex !important;
+        align-items: center !important;
+    }
+    
+    .site-branding .brand {
+        display: flex !important;
+        align-items: center !important;
+    }
+    </style>
+    <?php
+}
+add_action('wp_head', 'ar_hide_site_title');
+
+// Register navigation menus
+function ar_register_menus() {
+    register_nav_menus(array(
+        'header_menu' => 'Header Menu',
+        'il_metodo_dropdown' => 'Il Metodo Dropdown Menu'
+    ));
+}
+add_action('init', 'ar_register_menus');
+
+// Create default menu structure if menus don't exist
+function ar_setup_default_menus() {
+    // Check if menus are already set up
+    $header_menu_exists = wp_get_nav_menu_object('Header Menu');
+    $dropdown_menu_exists = wp_get_nav_menu_object('Il Metodo Dropdown');
+    
+    if (!$header_menu_exists) {
+        // Create main header menu
+        $header_menu_id = wp_create_nav_menu('Header Menu');
+        
+        if (!is_wp_error($header_menu_id)) {
+            // Add "Il Metodo" parent menu item
+            wp_update_nav_menu_item($header_menu_id, 0, array(
+                'menu-item-title' => 'Il Metodo',
+                'menu-item-url' => '#',
+                'menu-item-status' => 'publish',
+                'menu-item-type' => 'custom'
+            ));
+            
+            // Add "Master Eureka" menu item
+            wp_update_nav_menu_item($header_menu_id, 0, array(
+                'menu-item-title' => 'Master Eureka',
+                'menu-item-url' => home_url('/master-eureka.html'),
+                'menu-item-status' => 'publish',
+                'menu-item-type' => 'custom'
+            ));
+            
+            // Add "Risorse Gratuite" menu item
+            wp_update_nav_menu_item($header_menu_id, 0, array(
+                'menu-item-title' => 'Risorse Gratuite',
+                'menu-item-url' => home_url('/risorse-gratuite.html'),
+                'menu-item-status' => 'publish',
+                'menu-item-type' => 'custom'
+            ));
+            
+            // Assign menu to theme location
+            $locations = get_theme_mod('nav_menu_locations');
+            $locations['primary'] = $header_menu_id;
+            set_theme_mod('nav_menu_locations', $locations);
+        }
+    }
+    
+    if (!$dropdown_menu_exists) {
+        // Create dropdown menu for "Il Metodo"
+        $dropdown_menu_id = wp_create_nav_menu('Il Metodo Dropdown');
+        
+        if (!is_wp_error($dropdown_menu_id)) {
+            // Add dropdown items
+            wp_update_nav_menu_item($dropdown_menu_id, 0, array(
+                'menu-item-title' => 'Il Metodo Eureka',
+                'menu-item-url' => home_url('/metodo-eureka.html'),
+                'menu-item-status' => 'publish',
+                'menu-item-type' => 'custom'
+            ));
+            
+            wp_update_nav_menu_item($dropdown_menu_id, 0, array(
+                'menu-item-title' => 'Tecniche di Memoria',
+                'menu-item-url' => home_url('/tecniche-memoria.html'),
+                'menu-item-status' => 'publish',
+                'menu-item-type' => 'custom'
+            ));
+            
+            wp_update_nav_menu_item($dropdown_menu_id, 0, array(
+                'menu-item-title' => 'Lettura Veloce',
+                'menu-item-url' => home_url('/lettura-veloce.html'),
+                'menu-item-status' => 'publish',
+                'menu-item-type' => 'custom'
+            ));
+            
+            wp_update_nav_menu_item($dropdown_menu_id, 0, array(
+                'menu-item-title' => 'Mappe Mentali',
+                'menu-item-url' => home_url('/mappe-mentali.html'),
+                'menu-item-status' => 'publish',
+                'menu-item-type' => 'custom'
+            ));
+        }
+    }
+}
+add_action('after_setup_theme', 'ar_setup_default_menus');
+
 // DISABLE COMMENTS COMPLETELY
 // Users should use the AI chat widget for interaction instead
 

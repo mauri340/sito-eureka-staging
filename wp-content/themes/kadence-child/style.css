@@ -557,7 +557,56 @@ a.more-link:hover { background: var(--ar-navy2) !important; }
     color: var(--ar-teal) !important;
 }
 
-/* ─── 13. HIDE COMMENTS COMPLETELY ─────────────────── */
+/* ─── 13. HIDE SITE TITLE — LOGO ONLY (match static site) ─── */
+/* Remove "APPRENDIMENTO RAPIDO" text, keep only logo */
+.site-branding .site-title,
+.site-branding .site-title-wrap,
+.site-branding .site-description,
+.custom-logo-link .site-title,
+.header-branding .site-title,
+body .site-branding .site-title,
+html body .site-branding .site-title,
+#masthead .site-branding .site-title,
+#wrapper #masthead .site-branding .site-title {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  height: 0 !important;
+  width: 0 !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  font-size: 0 !important;
+  line-height: 0 !important;
+}
+
+/* Make sure branding area only shows logo */
+.site-branding.branding-layout-standard,
+.site-branding.branding-layout-standard-reverse,
+#masthead .site-branding,
+body #masthead .site-branding,
+html body #masthead .site-branding {
+  display: flex !important;
+  align-items: center !important;
+}
+
+.site-branding .brand,
+.site-branding .custom-logo-link,
+#masthead .site-branding .brand,
+#masthead .site-branding .custom-logo-link,
+body #masthead .site-branding .brand {
+  display: flex !important;
+  align-items: center !important;
+  text-decoration: none !important;
+}
+
+/* Force logo-only layout */
+.site-branding.branding-layout-standard.site-brand-logo-only .brand,
+.site-branding.branding-layout-standard .brand {
+  gap: 0 !important;
+}
+
+/* ─── 14. HIDE COMMENTS COMPLETELY ─────────────────── */
 /* Users should interact via AI chat widget instead */
 #comments,
 .comments-area,
@@ -594,7 +643,7 @@ a.more-link:hover { background: var(--ar-navy2) !important; }
   padding: 0 !important;
 }
 
-/* ─── 14. RELATED/SUGGESTED ARTICLES STYLING ───────── */
+/* ─── 15. RELATED/SUGGESTED ARTICLES STYLING ───────── */
 /* Fix title sizes and visual consistency with dark site design */
 
 /* Related posts section container */
@@ -759,7 +808,7 @@ a.more-link:hover { background: var(--ar-navy2) !important; }
   transform: scale(1.05) !important;
 }
 
-/* ─── 15. RESPONSIVE ─────────────────────────────────── */
+/* ─── 16. RESPONSIVE ─────────────────────────────────── */
 @media (max-width: 768px) {
   .single .entry-header { padding: 52px 20px 36px !important; }
   .single .entry-content { padding: 28px 20px !important; margin: 24px 10px !important; }
