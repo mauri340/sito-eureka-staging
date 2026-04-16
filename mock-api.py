@@ -182,11 +182,31 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         greeting = PAGE_GREETINGS.get(key)
         proactive = greeting is not None
 
-        self._json_response({
-            'session_id': uuid.uuid4().hex[:12],
+        new_session_id = uuid.uuid4().hex[:12]
+
+        known = body.get('known_contact')
+        returning = body.get('returning_contact_id')
+        extra = body.get('session_extra') or {}
+
+        contact_id = returning or (uuid.uuid4().hex[:8] if known else None)
+
+        prev = extra.get('previous_session_id')
+        if prev:
+            print(f"[handoff] previous_session_id={prev}")
+        if returning:
+            print(f"[handoff] returning_contact_id={returning}")
+        if known:
+            print(f"[handoff] known_contact={known}")
+
+        resp = {
+            'session_id': new_session_id,
             'speech': greeting or DEFAULT_GREETING,
             'proactive': proactive,
-        })
+        }
+        if contact_id:
+            resp['contact_id'] = contact_id
+
+        self._json_response(resp)
 
     FORMS = {
         'webinar_registration': {

@@ -957,19 +957,10 @@
     return basicContext;
   }
 
-  // ── Session Start ───────────────────────────────────
-  function startSession() {
-    showTyping();
-    
-    var personalizedGreeting = 'Ciao! Sono Mentor Eureka. Come posso aiutarti?';
-    if (userSource && userSource.getPersonalizedGreeting) {
-      personalizedGreeting = userSource.getPersonalizedGreeting();
-    }
-
-    var contextData = getPageContext();
-    
-    var quizParams = window.ChatWidget 
-      ? window.ChatWidget.getParams() 
+  // ── Session Payload Helpers ─────────────────────────
+  function buildSessionPayload(personalizedGreeting) {
+    var quizParams = window.ChatWidget
+      ? window.ChatWidget.getParams()
       : {};
 
     var previousSessionId = null;
@@ -978,16 +969,24 @@
     var returningContactId = null;
     try { returningContactId = localStorage.getItem('chat_contact_id'); } catch (e) {}
 
-    var payload = {
-      page_context: contextData,
-      personalized_greeting: personalizedGreeting,
-      known_contact: quizParams.email ? {
-        nome: quizParams.nome,
-        cognome: quizParams.cognome,
+    var knownContact = null;
+    if (quizParams.email) {
+      knownContact = {
+        nome: quizParams.nome || null,
+        cognome: quizParams.cognome || null,
         email: quizParams.email,
-        telefono: quizParams.telefono
-      } : null,
-      session_extra: quizParams.quiz_status ? {
+        telefono: quizParams.telefono || null,
+        risultati_test: quizParams.quiz_status ? {
+          quiz_status: quizParams.quiz_status,
+          pam: quizParams.pam || null,
+          punteggio: quizParams.punteggio || null
+        } : null
+      };
+    }
+
+    var sessionExtra = null;
+    if (quizParams.quiz_status) {
+      sessionExtra = {
         test_results: {
           quiz_status: quizParams.quiz_status,
           pam: quizParams.pam || null,
@@ -1004,10 +1003,45 @@
           criticita_innovazione: quizParams.criticita_innovazione || null
         },
         previous_session_id: previousSessionId
-      } : null,
-      previous_session_id: previousSessionId,
-      returning_contact_id: returningContactId
+      };
+    }
+
+    var payload = {
+      page_context: getPageContext(),
+      personalized_greeting: personalizedGreeting || null,
+      known_contact: knownContact,
+      session_extra: sessionExtra,
+      returning_contact_id: (!quizParams.quiz_status && returningContactId) ? returningContactId : null
     };
+
+    return payload;
+  }
+
+  function saveSessionResponse(data) {
+    try {
+      if (data.session_id) {
+        localStorage.setItem('chat_session_id_current', data.session_id);
+        localStorage.setItem('ar_session_id', data.session_id);
+        localStorage.setItem('ar_session_timestamp', new Date().getTime().toString());
+        localStorage.setItem('ew_session_id', data.session_id);
+        localStorage.setItem('ew_session_ts', Date.now());
+      }
+      if (data.contact_id) {
+        localStorage.setItem('chat_contact_id', data.contact_id);
+      }
+    } catch (e) {}
+  }
+
+  // ── Session Start ───────────────────────────────────
+  function startSession() {
+    showTyping();
+    
+    var personalizedGreeting = 'Ciao! Sono Mentor Eureka. Come posso aiutarti?';
+    if (userSource && userSource.getPersonalizedGreeting) {
+      personalizedGreeting = userSource.getPersonalizedGreeting();
+    }
+
+    var payload = buildSessionPayload(personalizedGreeting);
     
     console.log('SESSION START BODY:', JSON.stringify(payload));
 
@@ -1020,19 +1054,7 @@
       .then(function (data) {
         hideTyping();
         sessionId = data.session_id;
-        
-        // Save session to localStorage with timestamp
-        try {
-          localStorage.setItem('ar_session_id', sessionId);
-          localStorage.setItem('ar_session_timestamp', new Date().getTime().toString());
-          localStorage.setItem('ew_session_id', sessionId);
-          localStorage.setItem('ew_session_ts', Date.now());
-          localStorage.setItem('chat_session_id_current', sessionId);
-
-          if (data.contact_id) {
-            localStorage.setItem('chat_contact_id', data.contact_id);
-          }
-        } catch (e) {}
+        saveSessionResponse(data);
         
         // Use personalized greeting if server doesn't provide one
         var message = data.speech || personalizedGreeting;
@@ -1089,37 +1111,8 @@
     var startPromise = sessionId
       ? Promise.resolve()
       : (function() {
-          const quizParams = window.ChatWidget 
-            ? window.ChatWidget.getParams() 
-            : {};
-
-          const payload = {
-            page_context: getPageContext(),
-            personalized_greeting: userSource ? userSource.getPersonalizedGreeting() : null,
-            known_contact: quizParams.email ? {
-              nome: quizParams.nome,
-              cognome: quizParams.cognome,
-              email: quizParams.email,
-              telefono: quizParams.telefono
-            } : null,
-            session_extra: quizParams.quiz_status ? {
-              test_results: {
-                quiz_status: quizParams.quiz_status,
-                pam: quizParams.pam || null,
-                punteggio: quizParams.punteggio || null,
-                punteggio1: quizParams.punteggio1 || null,
-                punteggio2: quizParams.punteggio2 || null,
-                miglioramento: quizParams.miglioramento || null,
-                fatturato_attuale: quizParams.fatturato_attuale || null,
-                fatturato_potenziale: quizParams.fatturato_potenziale || null,
-                crescita_potenziale: quizParams.crescita_potenziale || null,
-                criticita_opportunita: quizParams.criticita_opportunita || null,
-                criticita_inefficienza: quizParams.criticita_inefficienza || null,
-                criticita_competitivita: quizParams.criticita_competitivita || null,
-                criticita_innovazione: quizParams.criticita_innovazione || null
-              }
-            } : null
-          };
+          var greeting = userSource ? userSource.getPersonalizedGreeting() : null;
+          var payload = buildSessionPayload(greeting);
 
           return fetch(API_BASE + '/api/chat/session/start', {
             method: 'POST',
@@ -1128,7 +1121,7 @@
           });
         })()
           .then(function (r) { return r.json(); })
-          .then(function (d) { sessionId = d.session_id; });
+          .then(function (d) { sessionId = d.session_id; saveSessionResponse(d); });
 
     startPromise
       .then(function () {
@@ -2474,37 +2467,7 @@
   function startAutoOpen() {
     setTimeout(function () {
       if (chatOpened) return;
-      const quizParams = window.ChatWidget 
-        ? window.ChatWidget.getParams() 
-        : {};
-
-      const payload = {
-        page_context: getPageContext(),
-        personalized_greeting: null,
-        known_contact: quizParams.email ? {
-          nome: quizParams.nome,
-          cognome: quizParams.cognome,
-          email: quizParams.email,
-          telefono: quizParams.telefono
-        } : null,
-        session_extra: quizParams.quiz_status ? {
-          test_results: {
-            quiz_status: quizParams.quiz_status,
-            pam: quizParams.pam || null,
-            punteggio: quizParams.punteggio || null,
-            punteggio1: quizParams.punteggio1 || null,
-            punteggio2: quizParams.punteggio2 || null,
-            miglioramento: quizParams.miglioramento || null,
-            fatturato_attuale: quizParams.fatturato_attuale || null,
-            fatturato_potenziale: quizParams.fatturato_potenziale || null,
-            crescita_potenziale: quizParams.crescita_potenziale || null,
-            criticita_opportunita: quizParams.criticita_opportunita || null,
-            criticita_inefficienza: quizParams.criticita_inefficienza || null,
-            criticita_competitivita: quizParams.criticita_competitivita || null,
-            criticita_innovazione: quizParams.criticita_innovazione || null
-          }
-        } : null
-      };
+      var payload = buildSessionPayload(null);
 
       fetch(API_BASE + '/api/chat/session/start', {
         method: 'POST',
@@ -2515,12 +2478,12 @@
         .then(function (data) {
           if (chatOpened) return;
           sessionId = data.session_id;
+          saveSessionResponse(data);
           if (data.proactive) {
             openChat();
             if (data.speech) { 
               conversationHistory.push({role: 'assistant', content: data.speech, timestamp: new Date().toISOString()});
-          updateChatHistoryInStorage();
-        updateChatHistoryInStorage();
+              updateChatHistoryInStorage();
               typeBotMessage(data.speech); 
             }
           } else {
