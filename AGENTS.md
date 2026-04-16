@@ -1,3 +1,14 @@
+## Agent Operating Policy (Cost + Quality)
+
+- Use a lower-cost/faster model by default to contain usage costs.
+- Escalate to a more capable model only when needed:
+  - non-trivial bugs that do not converge after 1-2 focused attempts
+  - multi-file architectural changes or high-risk refactors
+  - ambiguous failures requiring deeper reasoning
+- Prioritize functional correctness over minimal diffs: implement complete, robust fixes (not "quick minimal patches").
+- Always run focused validation before handoff (automated and/or manual as appropriate) and report concrete test evidence.
+- Keep explanations concise and practical unless the user asks for deep detail.
+
 ## Cursor Cloud specific instructions
 
 This is a **static HTML website** with no build system, no package manager, and no dependencies to install. There are 8 HTML pages with inline CSS and vanilla JavaScript.
