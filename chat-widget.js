@@ -972,6 +972,12 @@
       ? window.ChatWidget.getParams() 
       : {};
 
+    var previousSessionId = null;
+    try { previousSessionId = localStorage.getItem('chat_session_id_current'); } catch (e) {}
+
+    var returningContactId = null;
+    try { returningContactId = localStorage.getItem('chat_contact_id'); } catch (e) {}
+
     var payload = {
       page_context: contextData,
       personalized_greeting: personalizedGreeting,
@@ -996,8 +1002,11 @@
           criticita_inefficienza: quizParams.criticita_inefficienza || null,
           criticita_competitivita: quizParams.criticita_competitivita || null,
           criticita_innovazione: quizParams.criticita_innovazione || null
-        }
-      } : null
+        },
+        previous_session_id: previousSessionId
+      } : null,
+      previous_session_id: previousSessionId,
+      returning_contact_id: returningContactId
     };
     
     console.log('SESSION START BODY:', JSON.stringify(payload));
@@ -1012,11 +1021,18 @@
         hideTyping();
         sessionId = data.session_id;
         
-        // Save session to localStorage with timestamp (both old and new format)
-        localStorage.setItem('ar_session_id', sessionId);
-        localStorage.setItem('ar_session_timestamp', new Date().getTime().toString());
-        localStorage.setItem('ew_session_id', sessionId);
-        localStorage.setItem('ew_session_ts', Date.now());
+        // Save session to localStorage with timestamp
+        try {
+          localStorage.setItem('ar_session_id', sessionId);
+          localStorage.setItem('ar_session_timestamp', new Date().getTime().toString());
+          localStorage.setItem('ew_session_id', sessionId);
+          localStorage.setItem('ew_session_ts', Date.now());
+          localStorage.setItem('chat_session_id_current', sessionId);
+
+          if (data.contact_id) {
+            localStorage.setItem('chat_contact_id', data.contact_id);
+          }
+        } catch (e) {}
         
         // Use personalized greeting if server doesn't provide one
         var message = data.speech || personalizedGreeting;
@@ -1165,6 +1181,10 @@
     console.log('handleBotResponse called with data:', data);
     var action = data.action || 'reply';
     console.log('Action detected:', action);
+
+    if (data.contact_id) {
+      try { localStorage.setItem('chat_contact_id', data.contact_id); } catch (e) {}
+    }
 
     switch (action) {
       case 'show_webinar':

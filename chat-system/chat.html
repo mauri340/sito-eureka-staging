@@ -377,6 +377,14 @@
               };
             }
 
+            // Recupera previous_session_id dalla sessione anonima precedente
+            try {
+              var prevSid = localStorage.getItem('chat_session_id_current');
+              if (prevSid) { chatParams.previous_session_id = prevSid; }
+              var contactId = localStorage.getItem('chat_contact_id');
+              if (contactId) { chatParams.returning_contact_id = contactId; }
+            } catch (e) {}
+
             // Usa il polling per aspettare che il widget sia disponibile
             waitForWidget(() => {
                 window.ChatWidget.init(chatParams);
