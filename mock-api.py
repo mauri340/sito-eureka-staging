@@ -119,6 +119,8 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             self._handle_message(body)
         elif self.path == '/api/chat/submit-form':
             self._handle_submit_form(body)
+        elif self.path == '/api/chat/book-appointment':
+            self._handle_book_appointment(body)
         elif self.path == '/api/chat/session/end':
             self._handle_end(body)
         else:
@@ -293,34 +295,25 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             return
 
         if any(w in msg for w in ['iscri', 'registr', 'prenot']) and any(w in msg for w in ['coaching', 'sessione', '1:1']):
-            # Aggiorna dinamicamente gli slot disponibili nel form
-            coaching_form = self.FORMS['coaching_booking'].copy()
-            coaching_form['fields'] = coaching_form['fields'].copy()
-            
-            # Popola le opzioni di orario con gli slot disponibili
             available_slots = get_available_slots()
-            time_options = []
-            for day in available_slots:
-                for slot in day['slots']:
-                    time_options.append({
-                        'value': f"{day['date']}|{slot}",
-                        'label': f"{day['weekday']} {day['date']} - {slot}"
-                    })
-            
-            # Trova il campo orario e aggiorna le opzioni
-            for field in coaching_form['fields']:
-                if field['name'] == 'preferred_time':
-                    field['options'] = time_options[:20]  # Limita a 20 opzioni
+            slots_for_widget = []
+            for day in available_slots[:2]:
+                for time_slot in day['slots'][:2]:
+                    dt_str = f"{day['date']}T{time_slot}:00"
+                    label = f"{day['weekday']} {day['date']} - {time_slot}"
+                    slots_for_widget.append({'datetime': dt_str, 'label': label})
+                    if len(slots_for_widget) >= 3:
+                        break
+                if len(slots_for_widget) >= 3:
                     break
-            
+
             self._json_response({
                 'session_id': session_id,
-                'action': 'show_form',
-                'speech': "Ottimo! Compila il modulo per prenotare la tua coaching gratuita. Seleziona uno slot disponibile.",
-                'display_text': "Ottimo! Compila il modulo per prenotare la tua coaching gratuita. Seleziona uno slot disponibile.",
-                'form': coaching_form,
-                'state': {'stage': 'data_collection', 'flow_target': 'coaching',
-                          'collected_fields': {}, 'awaiting_confirmation': False, 'action_executed': False},
+                'action': 'show_appointment_slots',
+                'speech': "Perfetto! Ecco gli orari disponibili per la coaching gratuita. Scegli quello che preferisci:",
+                'display_text': "Perfetto! Ecco gli orari disponibili per la coaching gratuita. Scegli quello che preferisci:",
+                'slots': slots_for_widget,
+                'state': {'stage': 'slot_selection'},
                 'business_result': None, 'audio_base64': None,
             })
             return
@@ -413,6 +406,28 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             'state': {'stage': 'completed', 'flow_target': form_id,
                       'collected_fields': data, 'awaiting_confirmation': False, 'action_executed': True},
             'business_result': {'success': True, 'action': form_id},
+            'audio_base64': None,
+        })
+
+    def _handle_book_appointment(self, body):
+        session_id = body.get('session_id', '')
+        dt = body.get('appointment_datetime', '')
+        name = body.get('user_name', '')
+        email = body.get('user_email', '')
+        phone = body.get('user_phone', '')
+
+        print(f"[booking] datetime={dt} name={name} email={email}")
+
+        if not dt or not name or not email:
+            self._json_response({'detail': 'Campi obbligatori mancanti.'}, 422)
+            return
+
+        self._json_response({
+            'session_id': session_id,
+            'action': 'action_completed',
+            'speech': f"Prenotazione confermata per {name} il {dt}. Riceverai una conferma a {email}.",
+            'display_text': f"Prenotazione confermata per {name} il {dt}.",
+            'business_result': {'success': True, 'action': 'appointment_booked'},
             'audio_base64': None,
         })
 

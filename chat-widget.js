@@ -1203,13 +1203,16 @@
         if (data.speech) { 
           conversationHistory.push({role: 'assistant', content: data.speech, timestamp: new Date().toISOString()});
           updateChatHistoryInStorage();
-        updateChatHistoryInStorage();
           typeBotMessage(data.speech); 
         }
         if (data.slot) { 
           console.log('Calling appendBookingForm with slot data:', data.slot);
           appendBookingForm(data.slot); 
         }
+        break;
+      case 'show_appointment_slots':
+        clearSlotPickers();
+        renderSlotButtons(data.slots, data.speech);
         break;
       case 'action_completed':
         if (data.speech) {
@@ -2208,6 +2211,90 @@
       });
   }
 
+  // ── Slot Picker ─────────────────────────────────────
+  function formatDateTime(datetimeIso) {
+    if (!datetimeIso) return null;
+    try {
+      var d = new Date(datetimeIso);
+      if (isNaN(d.getTime())) return String(datetimeIso);
+      return d.toLocaleDateString('it-IT', { weekday: 'long', day: 'numeric', month: 'long' }) +
+        ' ore ' + d.toLocaleTimeString('it-IT', { hour: '2-digit', minute: '2-digit' });
+    } catch (e) {
+      return String(datetimeIso);
+    }
+  }
+
+  function normalizeSlot(rawSlot) {
+    if (!rawSlot || typeof rawSlot !== 'object') return null;
+    var dt = rawSlot.datetime || rawSlot.start || null;
+    var label = rawSlot.label || formatDateTime(dt) || 'Orario disponibile';
+    return { label: label, datetime: dt };
+  }
+
+  function clearSlotPickers() {
+    var pickers = document.querySelectorAll('.slot-picker-wrap');
+    for (var i = 0; i < pickers.length; i++) {
+      pickers[i].remove();
+    }
+  }
+
+  function renderSlotButtons(slots, speechText) {
+    var msgs = $('ew-messages');
+    if (!msgs) return;
+
+    if (speechText) {
+      conversationHistory.push({ role: 'assistant', content: speechText, timestamp: new Date().toISOString() });
+      updateChatHistoryInStorage();
+      typeBotMessage(speechText);
+    }
+
+    clearSlotPickers();
+
+    var normalized = [];
+    var rawSlots = Array.isArray(slots) ? slots : [];
+    for (var i = 0; i < Math.min(rawSlots.length, 3); i++) {
+      var s = normalizeSlot(rawSlots[i]);
+      if (s && s.datetime) normalized.push(s);
+    }
+
+    if (normalized.length === 0) return;
+
+    var wrap = document.createElement('div');
+    wrap.className = 'ew-msg ew-msg-bot slot-picker-wrap';
+
+    var title = document.createElement('div');
+    title.className = 'slot-picker-title';
+    title.textContent = 'Scegli un orario:';
+    wrap.appendChild(title);
+
+    var btnContainer = document.createElement('div');
+    btnContainer.className = 'slot-buttons';
+
+    for (var j = 0; j < normalized.length; j++) {
+      (function (slot) {
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'slot-btn';
+        btn.textContent = slot.label;
+        btn.addEventListener('click', function () {
+          var allBtns = btnContainer.querySelectorAll('.slot-btn');
+          for (var k = 0; k < allBtns.length; k++) allBtns[k].classList.remove('selected');
+          btn.classList.add('selected');
+
+          var chosen = { label: slot.label, datetime: slot.datetime };
+          appendBot('Hai scelto: ' + slot.label);
+          appendBookingForm(chosen);
+          scrollDown();
+        });
+        btnContainer.appendChild(btn);
+      })(normalized[j]);
+    }
+
+    wrap.appendChild(btnContainer);
+    msgs.insertBefore(wrap, $('ew-typing'));
+    scrollDown();
+  }
+
   // ── Booking Form ────────────────────────────────────
   var bookingFormTimeout = null;
 
@@ -2389,7 +2476,7 @@
     };
 
     console.log('Making API call to /api/chat/book-appointment with data:', apiData);
-    fetch('https://ai-chat-service-nls9.onrender.com/api/chat/book-appointment', {
+    fetch(API_BASE + '/api/chat/book-appointment', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(apiData)
