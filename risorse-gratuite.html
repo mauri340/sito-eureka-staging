@@ -211,43 +211,49 @@ footer{background:var(--navy);color:rgba(255,255,255,.75);padding:56px 0 32px;}
 }
 .banner{
   width:100%;
-  min-height:140px;
   display:flex;
   align-items:center;
   justify-content:center;
   text-align:center;
-  padding:32px 24px;
-  border-radius:16px;
-  background:linear-gradient(160deg,#0D1B2A 0%,#1C2B3A 100%);
-  box-shadow:0 16px 48px rgba(13,27,42,.15);
-  border:1px solid rgba(255,255,255,.08);
-  margin:40px 0;
+  padding:18px 28px;
+  border-radius:12px;
+  background:linear-gradient(135deg,#00A988 0%,#007a63 100%);
+  box-shadow:0 4px 16px rgba(0,169,136,.25);
+  margin:32px 0;
   cursor:pointer;
-  transition:transform 0.2s ease, box-shadow 0.2s ease;
+  transition:transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
 .banner:hover{
-  transform:translateY(-3px);
-  box-shadow:0 20px 56px rgba(13,27,42,.22);
+  transform:translateY(-2px);
+  box-shadow:0 8px 24px rgba(0,169,136,.35);
+}
+.banner::after{
+  content:'→';
+  font-size:1.4rem;
+  color:#fff;
+  margin-left:16px;
+  transition:transform 0.2s ease;
+}
+.banner:hover::after{
+  transform:translateX(4px);
 }
 .banner h1{
-  font-family:'Playfair Display',serif;
-  font-size:clamp(1.8rem,4.5vw,3.2rem);
-  line-height:1.1;
-  font-weight:700;
+  font-family:'Inter','Montserrat',sans-serif;
+  font-size:clamp(1rem,2.5vw,1.35rem);
+  line-height:1.3;
+  font-weight:600;
   color:#fff;
-  letter-spacing:-0.02em;
+  letter-spacing:0;
   margin:0;
 }
 .banner h1 em{
-  color:#B8973E;
-  font-style:italic;
+  font-style:normal;
   font-weight:700;
 }
 @media(max-width:768px){
 .banner{
-  min-height:120px;
-  padding:24px 16px;
-  margin:32px 0;
+  padding:14px 20px;
+  margin:24px 0;
 }
 }
 @media(max-width:600px){
@@ -270,7 +276,7 @@ footer{background:var(--navy);color:rgba(255,255,255,.75);padding:56px 0 32px;}
     "width": 300,
     "height": 60
   },
-  "description": "Dal 2001 formiamo professionisti, studenti e imprenditori con il Metodo Eureka: tecniche di memoria, lettura veloce e mappe mentali. Oltre 20.000 persone formate, 98% di soddisfazione.",
+  "description": "Dal 2001 formiamo professionisti, studenti e imprenditori con il Metodo Eureka: tecniche di memoria, lettura veloce e mappe mentali. Oltre 40.000 persone formate, 98% di soddisfazione.",
   "foundingDate": "2001",
   "inLanguage": "it",
   "areaServed": [
@@ -439,7 +445,6 @@ footer{background:var(--navy);color:rgba(255,255,255,.75);padding:56px 0 32px;}
       </div>
       <div style="text-align:center;min-width:200px;">
         <a href="demo-zoom/index.html" class="btn btn-gold" style="display:block;text-align:center;margin-bottom:12px;">Prenota il posto</a>
-        <p style="font-size:12px;color:rgba(255,255,255,.5);">Posti limitati</p>
       </div>
     </div>
   </div>
