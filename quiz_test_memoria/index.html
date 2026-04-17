@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Test di Memoria</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <script type="text/javascript">
 var _iub = _iub || [];
 _iub.csConfiguration = {"applyGdprForCH":false,"askConsentAtCookiePolicyUpdate":true,"countryDetection":true,"enableFadp":true,"enableLgpd":true,"enableUspr":true,"gdprAppliesGlobally":false,"lgpdAppliesGlobally":false,"perPurposeConsent":true,"siteId":1598928,"whitelabel":false,"cookiePolicyId":89530968,"lang":"it","banner":{"acceptButtonCaptionColor":"#FFFFFF","acceptButtonColor":"#0A513C","acceptButtonDisplay":true,"backgroundColor":"#F5FEFB","closeButtonRejects":true,"customizeButtonCaptionColor":"#0A513C","customizeButtonColor":"#DDEDE8","customizeButtonDisplay":true,"explicitWithdrawal":true,"listPurposes":true,"ownerName":"www.apprendimentorapido.it","position":"bottom","rejectButtonCaptionColor":"#FFFFFF","rejectButtonColor":"#0A513C","rejectButtonDisplay":true,"showPurposesToggles":true,"showTotalNumberOfProviders":true,"theme":"mint-neutral","textColor":"#262626"}};
@@ -59,28 +60,28 @@ src="https://www.facebook.com/tr?id=1749584092436791&ev=PageView&noscript=1"
     <style>
         /* Stili Generali */
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: #f0f2f5;
-            color: #333;
+            font-family: 'Inter', sans-serif;
+            background-color: #F8F7F4;
+            color: #1a1a2e;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             margin: 0;
             padding: 20px;
             box-sizing: border-box;
-    padding-bottom: 70px; /* <-- RIGA DA AGGIUNGERE */
-
+            padding-bottom: 70px;
         }
 
         /* Contenitore principale del test */
         main {
             background-color: #ffffff;
             padding: 30px 40px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
             width: 100%;
-            max-width: 600px;
+            max-width: 700px;
             text-align: center;
         }
 
@@ -91,12 +92,12 @@ src="https://www.facebook.com/tr?id=1749584092436791&ev=PageView&noscript=1"
 
         /* Titoli e Testo */
         h1 {
-            color: #1a2a6c;
+            color: #0D1B2A;
             margin-bottom: 15px;
         }
 
         h2 {
-            color: #333;
+            color: #0D1B2A;
             margin-bottom: 20px;
         }
 
@@ -114,35 +115,38 @@ src="https://www.facebook.com/tr?id=1749584092436791&ev=PageView&noscript=1"
 
         /* Pulsanti */
         .btn {
-            background-image: linear-gradient(to right, #4e54c8, #8f94fb);
+            background: linear-gradient(135deg, #00A988 0%, #007a63 100%);
             color: #ffffff;
             border: none;
             padding: 15px 30px;
             font-size: 1.1em;
-            font-weight: bold;
-            border-radius: 8px;
+            font-weight: 600;
+            border-radius: 10px;
             cursor: pointer;
             transition: all 0.3s ease;
             display: inline-block;
             margin-top: 20px;
             text-decoration: none;
+            font-family: 'Inter', sans-serif;
+            box-shadow: 0 4px 15px rgba(0, 169, 136, 0.3);
         }
 
         .btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 6px 20px rgba(0, 169, 136, 0.4);
+            opacity: 0.95;
         }
 
         /* Timer */
         #timer {
             font-size: 2em;
             font-weight: bold;
-            color: #d9534f;
+            color: #0D1B2A;
             margin-bottom: 20px;
             padding: 10px;
-            background-color: #f9f9f9;
-            border-radius: 8px;
-            border: 1px solid #ddd;
+            background-color: #F8F7F4;
+            border-radius: 10px;
+            border: 1px solid #F0EDE8;
         }
         
         /* Lista di Parole e Campi di Input */
@@ -166,9 +170,17 @@ src="https://www.facebook.com/tr?id=1749584092436791&ev=PageView&noscript=1"
             width: 100%;
             padding: 12px;
             font-size: 1em;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            border: 1.5px solid #F0EDE8;
+            border-radius: 8px;
             box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            background: #F8F7F4;
+            color: #1a1a2e;
+            transition: border-color 0.2s;
+        }
+        .campo-input:focus {
+            border-color: #00A988;
+            outline: none;
         }
         
         .campo-input::placeholder {
@@ -185,17 +197,25 @@ src="https://www.facebook.com/tr?id=1749584092436791&ev=PageView&noscript=1"
             width: 100%;
             padding: 12px;
             font-size: 1em;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            border: 1.5px solid #F0EDE8;
+            border-radius: 8px;
             box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            background: #F8F7F4;
+            color: #1a1a2e;
+            transition: border-color 0.2s;
+        }
+        .form-contatto input:focus {
+            border-color: #00A988;
+            outline: none;
         }
         
         /* Contenuto post-form */
         #contenuto-post-form {
             padding: 20px;
-            background-color: #e9f7ef;
-            border: 1px solid #a3e9a4;
-            border-radius: 8px;
+            background-color: rgba(0, 169, 136, 0.08);
+            border: 1px solid rgba(0, 169, 136, 0.2);
+            border-radius: 10px;
             margin-top: 25px;
         }
         
@@ -315,7 +335,7 @@ src="https://www.facebook.com/tr?id=1749584092436791&ev=PageView&noscript=1"
 }
 
 .footer-bottom a:hover {
-    color: var(--teal);
+    color: #00A988;
 }
 
 @media (max-width: 900px) {
@@ -378,7 +398,7 @@ src="https://www.facebook.com/tr?id=1749584092436791&ev=PageView&noscript=1"
 <p id="risultato-1-testo" style="text-align: center; font-size: 1.3em; font-weight: bold;"></p>
 
 
-<h2 style="color: #4e54c8; margin-top: 25px;">La tua vera crescita inizia adesso.</h2>
+<h2 style="color: #00A988; margin-top: 25px;">La tua vera crescita inizia adesso.</h2>
 
 <p style="text-align: center; font-size: 1.1em;">
     Il tuo punteggio è solo un punto di partenza. Esiste una tecnica specifica che ti permette di ricordare tutte le parole, senza sforzo.
@@ -412,7 +432,7 @@ src="https://www.facebook.com/tr?id=1749584092436791&ev=PageView&noscript=1"
 
 <section id="schermata-video" class="nascosto">
     <h2>Ottima scelta!</h2>
-<h3 style="color: #4e54c8;">Stai per sbloccare il vero potenziale della tua memoria.</h3>
+<h3 style="color: #00A988;">Stai per sbloccare il vero potenziale della tua memoria.</h3>
 
 <p style="text-align: center; font-size: 1.1em;">
     Il video qui sotto non ti mostrerà un trucco, ma una vera e propria <strong>tecnica di memorizzazione</strong>.

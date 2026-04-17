@@ -12,14 +12,11 @@ html {
 
 body {
     font-family: 'Inter', sans-serif;
-    background-color: #f0f2f5;
-    color: #1a202c;
+    background-color: #F8F7F4;
+    color: #1a1a2e;
     line-height: 1.7;
     margin: 0;
-
-    /* QUESTA è l'unica regola che crea lo spazio in fondo.
-       Funzionerà perché abbiamo rimosso i conflitti di altezza. */
-    padding: 40px 20px 100px 20px; /* Prova con 200px e aumenta se necessario */
+    padding: 40px 20px 100px 20px;
 }
 
 .page-container {
@@ -58,13 +55,13 @@ main {
 }
 
 /* Stili per la Pagina di Scelta (Hub) */
-.hub-page h1 { font-size: 2.8rem; font-weight: 800; color: #007bff; margin-bottom: 15px; line-height: 1.2; text-align: center; }
+.hub-page h1 { font-size: 2.8rem; font-weight: 800; color: #0D1B2A; margin-bottom: 15px; line-height: 1.2; text-align: center; }
 .hub-page .hub-subtitle { font-size: 1.1rem; color: #4a5568; max-width: 650px; margin: 0 auto 40px auto; text-align: center; }
 .hub-container { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
 .quiz-card { background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 30px; text-decoration: none; color: #1a202c; transition: all 0.3s ease; text-align: left; }
-.quiz-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1); border-color: #3182ce; }
+.quiz-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1); border-color: #00A988; }
 .card-icon { font-size: 2.5rem; margin-bottom: 15px; }
-.quiz-card h2 { color: #2c5282; margin-top: 0; margin-bottom: 10px; font-size: 1.4em; font-weight: 700; text-transform: none; }
+.quiz-card h2 { color: #0D1B2A; margin-top: 0; margin-bottom: 10px; font-size: 1.4em; font-weight: 700; text-transform: none; }
 .quiz-card p { font-size: 1em; color: #4a5568; margin: 0; }
 
 /* Stili per il Contenitore del Quiz */
@@ -95,7 +92,7 @@ main {
     to { opacity: 1; transform: translateY(0); }
 }
 
-h1, h2 { text-align: left; color: #2c3e50; margin-bottom: 25px; }
+h1, h2 { text-align: left; color: #0D1B2A; margin-bottom: 25px; }
 p { text-align: left; color: #555; margin-bottom: 20px; }
 
 #reading-title {
@@ -110,13 +107,13 @@ p { text-align: left; color: #555; margin-bottom: 20px; }
 
 button {
     display: block; width: 100%; padding: 15px; font-size: 1.1em;
-    font-weight: 600; color: #fff; background: linear-gradient(90deg, #007bff, #0056b3);
-    border: none; border-radius: 8px; cursor: pointer; transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2); margin-top: 20px;
+    font-weight: 600; color: #fff; background: linear-gradient(135deg, #00A988 0%, #007a63 100%);
+    border: none; border-radius: 10px; cursor: pointer; transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 169, 136, 0.3); margin-top: 20px;
 }
 button:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 123, 255, 0.3);
+    box-shadow: 0 6px 20px rgba(0, 169, 136, 0.4);
 }
 
 #reading-text {
@@ -131,7 +128,7 @@ button:hover {
     margin-bottom: 25px; overflow: hidden;
 }
 #progress-bar {
-    width: 0%; height: 10px; background-color: #28a745;
+    width: 0%; height: 10px; background-color: #00A988;
     border-radius: 5px; transition: width 0.4s ease-in-out;
 }
 
@@ -141,7 +138,7 @@ button:hover {
     padding: 20px;
     background-color: #f9f9f9;
     border-radius: 8px;
-    border-left: 5px solid #007bff;
+    border-left: 5px solid #00A988;
 }
 .form-group p {
     text-align: left;
@@ -166,7 +163,7 @@ button:hover {
 /* Sezione originale question-block mantenuta, anche se non usata dal JS attuale */
 .question-block {
     margin-bottom: 20px; padding: 20px; background-color: #f9f9f9;
-    border-radius: 8px; border-left: 5px solid #007bff;
+    border-radius: 8px; border-left: 5px solid #00A988;
 }
 .question-block p { text-align: left; font-weight: 600; margin-top: 0; }
 .question-block label {
@@ -213,7 +210,7 @@ button:hover {
 .mentor-details h3 {
   margin-top: 0;
   margin-bottom: 10px;
-  color: #2c5282;
+  color: #0D1B2A;
   font-size: 1.4rem;
 }
 
@@ -232,10 +229,10 @@ button:hover {
 }
 
 .results-header h2 {
-    margin-bottom: 0; /* Rimuove il margine sotto il titolo per un migliore allineamento */
-    margin-left: 15px; /* Spazio tra il logo e il titolo */
-    font-size: 1.8rem; /* Rendi il titolo leggermente più grande e d'impatto */
-    color: #2c5282;
+    margin-bottom: 0;
+    margin-left: 15px;
+    font-size: 1.8rem;
+    color: #0D1B2A;
 }
 
 /* Stile specifico per il logo piccolo nella pagina risultati */
@@ -247,8 +244,8 @@ button:hover {
 }
 /* Stile per il box di introduzione a Mentor Eureka nella pagina risultati */
 .mentor-intro-box {
-  background-color: #e9f2ff; /* Un azzurro molto chiaro, colore di fiducia */
-  border-left: 5px solid #007bff; /* Un bordo di accento blu */
+  background-color: rgba(0, 169, 136, 0.06);
+  border-left: 5px solid #00A988;
   padding: 20px 25px;
   margin: 30px 0;
   border-radius: 8px;
@@ -256,7 +253,7 @@ button:hover {
 
 .mentor-intro-box p {
   margin: 0;
-  color: #2c5282; /* Un colore di testo più scuro e leggibile */
+  color: #1a1a2e;
   line-height: 1.6;
 }
 
@@ -298,15 +295,15 @@ button:hover {
 }
 /* Stile per il box delle istruzioni "Walkie-Talkie" */
 .chat-instructions-box {
-  background-color: #e9f2ff; /* Azzurro chiaro */
-  border: 1px solid #b3e0ff; /* Bordo azzurro */
+  background-color: rgba(0, 169, 136, 0.06);
+  border: 1px solid rgba(0, 169, 136, 0.2);
   border-radius: 16px;
   padding: 15px 20px;
   margin-bottom: 20px;
   width: 100%;
   max-width: 700px;
   box-sizing: border-box;
-  color: #2c5282; /* Colore testo scuro per buona leggibilità su azzurro */
+  color: #1a1a2e;
   font-size: 0.9rem;
   line-height: 1.6; /* Aggiunto per coerenza */
 }
@@ -335,20 +332,20 @@ button:hover {
 }
 /* Stile per il blocco di valore aggiunto sulla homepage */
 .value-add-section {
-  background-color: #f8f9fa; /* Un grigio chiarissimo che usi già */
-  border-left: 4px solid #007bff; /* Usa il tuo blu primario come accento */
-  padding: 25px;                 /* Spazio interno per dare respiro al testo */
-  margin: 40px 0;                /* Spazio verticale per separarlo bene */
-  border-radius: 8px;              /* Angoli arrotondati in linea con il tuo stile */
+  background-color: #F8F7F4;
+  border-left: 4px solid #00A988;
+  padding: 25px;
+  margin: 40px 0;
+  border-radius: 10px;
 }
 
 .value-add-section h3 {
-  margin-top: 0;                 /* Allinea meglio il titolo */
-  color: #2c5282;                /* Un colore scuro ma non nero, come nelle card */
+  margin-top: 0;
+  color: #0D1B2A;
 }
 
 .value-add-section p {
-  color: #4a5568; /* Colore del testo secondario, per coerenza */
+  color: #5a6a7a;
 }
 
 .value-add-section ul {
@@ -395,7 +392,7 @@ button:hover {
 #results-list li strong { color: #333; }
 
 .custom-section {
-    margin-top: 30px; background: #e9f7ff; border: 1px solid #b3e0ff;
+    margin-top: 30px; background: rgba(0, 169, 136, 0.06); border: 1px solid rgba(0, 169, 136, 0.2);
     padding: 25px; border-radius: 12px;
 }
 .custom-section p { text-align: center; } 
@@ -424,7 +421,7 @@ button:hover {
     min-height: 100vh; /* Usa min-height per flessibilità */
     padding: 20px;
     box-sizing: border-box;
-    background-color: #f0f2f5;
+    background-color: #F8F7F4;
 }
 #chat-container {
     width: 100%;
@@ -468,7 +465,7 @@ button:hover {
     line-height: 1.5;
 }
 .user {
-    background-color: #007bff; /* Blu per l'utente */
+    background: linear-gradient(135deg, #00A988 0%, #007a63 100%);
     color: white;
     align-self: flex-end;
     border-bottom-right-radius: 4px;
@@ -509,7 +506,7 @@ button:hover {
 }
 
 #chat-form button[type="submit"] {
-    background: #007bff;
+    background: linear-gradient(135deg, #00A988 0%, #007a63 100%);
     color: white;
 }
 
@@ -534,16 +531,16 @@ button:hover {
     border-radius: 50%; /* Cerchio perfetto */
 }
 #mic-btn:hover {
-    color: #007bff;
-    background: #e9f2ff;
+    color: #00A988;
+    background: rgba(0, 169, 136, 0.08);
     transform: none;
     box-shadow: none;
 }
 
 /* ✅ NUOVO STILE per quando la modalità conversazione è ATTIVA */
 #mic-btn.active {
-    color: #007bff;
-    border-color: #007bff;
+    color: #00A988;
+    border-color: #00A988;
 }
 
 /* Stile per quando sta ascoltando attivamente */
@@ -564,19 +561,19 @@ button:hover {
     100% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0); }
 }
 
-#chat-form button:hover { background-color: #0056b3; }
+#chat-form button:hover { background-color: #007a63; }
 .mic-button {
     padding: 12px 25px;
     font-size: 1rem;
     cursor: pointer;
     border: none;
     border-radius: 8px;
-    background-color: #007bff;
+    background-color: #00A988;
     color: #ffffff;
     transition: background-color 0.3s ease;
 }
 .mic-button:hover {
-    background-color: #0056b3;
+    background-color: #007a63;
 }
 .mic-button.recording {
     background-color: #ff4d4d; /* Rosso quando registra */
@@ -616,9 +613,40 @@ button:hover {
 }
 
 /* Footer */
-.site-footer { position: fixed; bottom: 0; left: 0; width: 100%; background-color: #ffffff; border-top: 1px solid #e2e8f0; padding: 15px 0; text-align: center; font-size: 0.85rem; color: #6c757d; z-index: 1000; box-shadow: 0 -5px 15px rgba(0,0,0,0.05); }
-.site-footer a { color: #4a5568; text-decoration: none; margin: 0 10px; transition: color 0.2s ease; }
-.site-footer a:hover { color: #007bff; text-decoration: underline; }
+.footer {
+    background: #0D1B2A;
+    color: rgba(255,255,255,.75);
+    padding: 56px 0 32px;
+    margin-top: 40px;
+    width: 100%;
+    font-family: 'Inter', sans-serif;
+}
+.footer .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 28px;
+}
+.footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 48px;
+    margin-bottom: 44px;
+}
+.footer-brand img { height: 44px; width: auto; display: block; margin-bottom: 14px; }
+.footer-brand p { font-size: 14px; color: rgba(255,255,255,.6); line-height: 1.8; }
+.footer-col h4 { font-size: 11px; font-weight: 700; color: rgba(255,255,255,.4); margin-bottom: 18px; text-transform: uppercase; letter-spacing: 1.5px; }
+.footer-col a { display: block; font-size: 13px; color: rgba(255,255,255,.65); text-decoration: none; margin-bottom: 10px; transition: color .2s; font-weight: 400; }
+.footer-col a:hover { color: #fff; }
+.footer-contact { font-size: 13px; color: rgba(255,255,255,.65); line-height: 1.8; }
+.footer-contact a { color: rgba(255,255,255,.65); text-decoration: none; margin-bottom: 5px; display: block; }
+.footer-contact a:hover { color: #fff; }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,.08); padding-top: 26px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; }
+.footer-bottom p { font-size: 11px; color: rgba(255,255,255,.2); letter-spacing: .2px; }
+.footer-bottom div { display: flex; gap: 20px; }
+.footer-bottom a { font-size: 11px; color: rgba(255,255,255,.3); text-decoration: none; margin-left: 20px; letter-spacing: .2px; }
+.footer-bottom a:hover { color: #00A988; }
+@media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr; gap: 32px; } }
+@media (max-width: 600px) { .footer-grid { grid-template-columns: 1fr 1fr; } .footer-bottom { text-align: center; justify-content: center; } .footer-bottom div { flex-direction: column; gap: 10px; } }
 /*
 
 
