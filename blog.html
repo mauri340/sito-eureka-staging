@@ -14,6 +14,7 @@
 <title>Blog | Apprendimento e Produttività</title>
 <meta name="description" content="Articoli pratici su memoria, lettura veloce e produttività professionale.">
 
+<link rel="stylesheet" href="/components/nav.css">
 <style>
 :root{
   --navy:#0D1B2A; --navy2:#1C2B3A; --navy3:#243447;
@@ -26,31 +27,6 @@
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
 body{font-family:'Inter',sans-serif;background:var(--off-white);color:var(--text);line-height:1.65;overflow-x:hidden;}
-
-/* ── NAV ── */
-.nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--nav-h);
-  background:rgba(255,255,255,.97);border-bottom:1px solid var(--light2);
-  backdrop-filter:blur(12px);display:flex;align-items:center;
-  padding:0 40px;justify-content:space-between;}
-.nav-logo{font-family:'Playfair Display',serif;font-size:19px;font-weight:700;
-  color:var(--navy);text-decoration:none;letter-spacing:.5px;}
-.nav-menu{display:flex;align-items:center;gap:2px;list-style:none;}
-.nav-menu a{display:block;padding:8px 14px;font-size:13px;font-weight:500;
-  color:var(--muted);text-decoration:none;border-radius:8px;
-  transition:color .2s,background .2s;white-space:nowrap;letter-spacing:.2px;}
-.nav-menu a:hover,.nav-menu a.active{color:var(--navy);background:var(--light);}
-.nav-menu a.btn-cta{background:var(--navy);color:#fff;padding:9px 20px;
-  border-radius:8px;margin-left:8px;font-weight:600;}
-.nav-menu a.btn-cta:hover{background:var(--navy2);transform:translateY(-1px);}
-.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;
-  padding:8px;background:none;border:none;}
-.hamburger span{display:block;width:24px;height:2px;background:var(--navy);border-radius:2px;}
-.mobile-menu{display:none;position:fixed;top:var(--nav-h);left:0;right:0;bottom:0;
-  background:#fff;padding:24px;overflow-y:auto;z-index:999;border-top:1px solid var(--light2);}
-.mobile-menu.open{display:block;}
-.mobile-menu a{display:block;padding:14px 16px;font-size:15px;font-weight:500;
-  color:var(--muted);text-decoration:none;border-bottom:1px solid var(--light2);}
-.mobile-menu a:hover{color:var(--navy);}
 
 /* ── LAYOUT ── */
 .container{max-width:1100px;margin:0 auto;padding:0 28px;}
@@ -201,9 +177,6 @@ footer{background:var(--navy);color:rgba(255,255,255,.75);padding:56px 0 32px;}
 
 /* ── RESPONSIVE ── */
 @media(max-width:900px){
-  .hamburger{display:flex;}
-  .nav-menu{display:none;}
-  .nav{padding:0 20px;}
   .hero-inner,.grid-2,.grid-3,.grid-4,.stats-grid,.footer-grid{grid-template-columns:1fr;}
   .hero{min-height:auto;padding:calc(var(--nav-h) + 40px) 0 60px;}
   .section{padding:64px 0;}
@@ -287,31 +260,7 @@ footer{background:var(--navy);color:rgba(255,255,255,.75);padding:56px 0 32px;}
 
 </head>
 <body>
-<nav class="nav">
-  <a href="index.html" class="nav-logo"><img src="images/logo.png" alt="Metodo Eureka" style="height:44px;width:auto;display:block;" onerror="this.style.display='none'"></a>
-  <ul class="nav-menu">
-    <li><a href="metodo-eureka.html">Il Metodo</a></li>
-    <li><a href="master-eureka.html">Master Eureka</a></li>
-    <li><a href="testimonianze.html">Testimonianze</a></li>
-    <li><a href="risorse-gratuite.html">Risorse Gratuite</a></li>
-    <li><a href="libro.html">Libro</a></li>
-    <li><a href="blog.html" class="active">Blog</a></li>
-    <li><a href="demo-zoom/index.html" class="btn-cta">Webinar Gratuito</a></li>
-  </ul>
-  <button class="hamburger" onclick="document.getElementById('mm').classList.toggle('open')">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
-<div class="mobile-menu" id="mm">
-  <a href="index.html">Home</a>
-  <a href="metodo-eureka.html">Il Metodo</a>
-  <a href="master-eureka.html">Master Eureka</a>
-  <a href="testimonianze.html">Testimonianze</a>
-  <a href="risorse-gratuite.html">Risorse Gratuite</a>
-  <a href="libro.html">Libro</a>
-  <a href="blog.html">Blog</a>
-  <a href="demo-zoom/index.html" style="color:var(--navy);font-weight:700;">Webinar Gratuito</a>
-</div>
+<div id="nav-placeholder"></div>
 
 <section class="page-hero" style="text-align:center;">
   <div class="container" style="max-width:680px;">
@@ -364,7 +313,6 @@ footer{background:var(--navy);color:rgba(255,255,255,.75);padding:56px 0 32px;}
 </style>
 
 <script>
-document.querySelectorAll('#mm a').forEach(a=>a.addEventListener('click',()=>document.getElementById('mm').classList.remove('open')));
 function animateCounters(){
   document.querySelectorAll('[data-count]').forEach(el=>{
     const target=parseInt(el.dataset.count);
@@ -592,6 +540,7 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 <script src="chat-widget.js"></script>
 <script src="whatsapp-widget.js"></script>
+<script src="/components/nav-loader.js"></script>
 <script src="/components/footer-loader.js"></script>
 </body>
 </html>
