@@ -321,7 +321,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         if any(w in msg for w in ['webinar', 'zoom', 'diretta']):
             speech = "Il prossimo webinar gratuito e' in programma! Due ore in diretta dove vedrai il metodo applicato dal vivo. Vuoi che ti iscrivo?"
         elif any(w in msg for w in ['coaching', 'sessione', '1:1']):
-            speech = "La coaching 1:1 gratuita dura 30 minuti via Zoom. Analizziamo la tua situazione e ti diamo un piano personalizzato. Vuoi prenotare?"
+            speech = "La coaching 1:1 gratuita dura 60 minuti via Zoom. Analizziamo la tua situazione e ti diamo un piano personalizzato. Vuoi prenotare?"
         elif any(w in msg for w in ['costo', 'prezzo', 'quanto costa', 'investimento']):
             speech = "Il percorso viene personalizzato in base alle tue esigenze. Ti consiglio di prenotare una coaching gratuita 1:1 dove analizziamo la tua situazione e ti diamo tutte le informazioni, senza impegno."
         elif any(w in msg for w in ['libro', 'book']):

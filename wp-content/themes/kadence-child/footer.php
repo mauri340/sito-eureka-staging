@@ -27,7 +27,7 @@ do_action( 'kadence_after_content' );
         <div class="footer-grid">
             <div class="footer-brand">
                 <img src="<?php echo esc_url(get_template_directory_uri()); ?>/../../../images/logo.png" alt="Metodo Eureka">
-                <p>Dal 2001 aiutiamo professionisti, imprenditori e studenti a imparare più velocemente e ricordare di più — con un metodo provato su oltre 20.000 persone.</p>
+                <p>Dal 2001 aiutiamo professionisti, imprenditori e studenti a imparare più velocemente e ricordare di più — con un metodo provato su oltre 40.000 persone.</p>
             </div>
 
             <div class="footer-col">
