@@ -16,6 +16,13 @@
   var fullscreenMode = false;
   var conversationHistory = [];
 
+  // ── Session lifecycle flags ────────────────────────
+  var userHasWritten = false;
+  var inactivityTimer = null;
+  var inactivityWarningTimer = null;
+  var INACTIVITY_TIMEOUT = 30 * 60 * 1000; // 30 minutes
+  var INACTIVITY_WARNING_BEFORE = 60 * 1000; // warning 1 min before cleanup
+
   // ── Advanced Systems ────────────────────────────────
   var wsClient = null;
   var audioSync = null;
@@ -862,6 +869,72 @@
     return false;
   }
 
+  // ── Session lifecycle helpers ───────────────────────
+  function resetChatUI() {
+    var msgs = $('ew-messages');
+    if (msgs) {
+      var typing = $('ew-typing');
+      msgs.innerHTML = '';
+      if (typing) msgs.appendChild(typing);
+    }
+    conversationHistory = [];
+    sessionId = null;
+    userHasWritten = false;
+    clearInactivityTimers();
+    try {
+      localStorage.removeItem('ar_session_id');
+      localStorage.removeItem('ar_chat_history');
+      localStorage.removeItem('ar_session_timestamp');
+      localStorage.removeItem('ew_session_id');
+      localStorage.removeItem('ew_session_ts');
+      localStorage.removeItem('ew_user_has_written');
+      localStorage.removeItem('ew_last_user_msg_ts');
+    } catch (e) {}
+  }
+
+  function isInactivityExpired() {
+    try {
+      var lastTs = localStorage.getItem('ew_last_user_msg_ts');
+      if (!lastTs) return false;
+      return (Date.now() - parseInt(lastTs)) > INACTIVITY_TIMEOUT;
+    } catch (e) { return false; }
+  }
+
+  function markUserWritten() {
+    userHasWritten = true;
+    try {
+      localStorage.setItem('ew_user_has_written', '1');
+      localStorage.setItem('ew_last_user_msg_ts', Date.now().toString());
+    } catch (e) {}
+    resetInactivityTimer();
+  }
+
+  function loadUserWrittenState() {
+    try {
+      userHasWritten = localStorage.getItem('ew_user_has_written') === '1';
+    } catch (e) { userHasWritten = false; }
+  }
+
+  function clearInactivityTimers() {
+    if (inactivityTimer) { clearTimeout(inactivityTimer); inactivityTimer = null; }
+    if (inactivityWarningTimer) { clearTimeout(inactivityWarningTimer); inactivityWarningTimer = null; }
+  }
+
+  function resetInactivityTimer() {
+    clearInactivityTimers();
+    inactivityWarningTimer = setTimeout(function () {
+      if (!userHasWritten) return;
+      appendBot("Non ti sento da un po'! Sto per chiudere la conversazione. Se vuoi continuare, scrivi un messaggio. Altrimenti ci rivediamo presto!");
+      scrollDown();
+      inactivityTimer = setTimeout(function () {
+        resetChatUI();
+        if (chatOpened) {
+          startSession();
+        }
+      }, INACTIVITY_WARNING_BEFORE);
+    }, INACTIVITY_TIMEOUT - INACTIVITY_WARNING_BEFORE);
+  }
+
   function openChat() {
     chatOpened = true;
     var chatBox = $('ew-chat-box');
@@ -888,26 +961,36 @@
       var userSourceData = userSource ? userSource.userSource : 'unknown';
       analytics.trackChatOpened(userSourceData);
     }
+
+    loadUserWrittenState();
+
+    // Check inactivity timeout (30min since last user message)
+    if (userHasWritten && isInactivityExpired()) {
+      resetChatUI();
+    }
     
     if (fullscreenMode) {
       sessionId = null;
       startSession();
     } else {
       // Check for existing session before starting new one
-      const savedId = localStorage.getItem('ew_session_id');
-      const savedTs = localStorage.getItem('ew_session_ts');
-      const isRecent = savedTs && (Date.now() - parseInt(savedTs)) < 3600000; // 1 hour
+      var savedId = localStorage.getItem('ew_session_id');
+      var savedTs = localStorage.getItem('ew_session_ts');
+      var isRecent = savedTs && (Date.now() - parseInt(savedTs)) < 3600000;
       
-      if (savedId && isRecent) {
+      if (savedId && isRecent && !isInactivityExpired()) {
         sessionId = savedId;
-        // Restore saved messages if available
         if (checkSessionExpiry() && restoreSession()) {
+          loadUserWrittenState();
+          if (userHasWritten) { resetInactivityTimer(); }
           focusInput();
         } else {
           focusInput();
         }
         return;
-      } else if (checkSessionExpiry() && restoreSession()) {
+      } else if (checkSessionExpiry() && restoreSession() && !isInactivityExpired()) {
+        loadUserWrittenState();
+        if (userHasWritten) { resetInactivityTimer(); }
         focusInput();
       } else if (!sessionId) {
         startSession();
@@ -932,6 +1015,11 @@
     
     // Restore body scroll on mobile
     document.body.classList.remove('ew-chat-open');
+
+    // Rule 2: if user never wrote, reset chat on close
+    if (!userHasWritten) {
+      resetChatUI();
+    }
   }
 
   function focusInput() {
@@ -1095,6 +1183,8 @@
     var inp = $('ew-input');
     var text = inp.value.trim();
     if (!text) return;
+
+    markUserWritten();
 
     // Track message sent
     if (analytics && userSource) {
@@ -2554,6 +2644,9 @@
   function startAutoOpen() {
     setTimeout(function () {
       if (chatOpened) return;
+      loadUserWrittenState();
+      if (userHasWritten && !isInactivityExpired()) return;
+
       var payload = buildSessionPayload(null);
 
       fetch(API_BASE + '/api/chat/session/start', {
