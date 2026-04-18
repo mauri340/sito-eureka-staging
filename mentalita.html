@@ -6,19 +6,15 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-2X3V7JZPBJ"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-2X3V7JZPBJ');</script>
-<!-- Facebook Pixel -->
 <script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','1113993426083027');fbq('track','PageView');</script>
-<!-- LinkedIn Insight Tag -->
 <script type="text/javascript">_linkedin_partner_id="6008396";window._linkedin_data_partner_ids=window._linkedin_data_partner_ids||[];window._linkedin_data_partner_ids.push(_linkedin_partner_id);(function(l){if(!l){window.lintrk=function(a,b){window.lintrk.q.push([a,b])};window.lintrk.q=[]}var s=document.getElementsByTagName("script")[0];var b=document.createElement("script");b.type="text/javascript";b.async=true;b.src="https://snap.licdn.com/li.lms-analytics/insight.min.js";s.parentNode.insertBefore(b,s)})(window.lintrk);</script>
-<!-- iubenda -->
 <script type="text/javascript">var _iub=_iub||[];_iub.csConfiguration={"askConsentAtCookiePolicyUpdate":true,"lang":"it","siteId":89530968,"cookiePolicyId":89530968,"banner":{"acceptButtonDisplay":true,"closeButtonDisplay":false,"customizeButtonDisplay":true,"explicitWithdrawal":true,"listPurposes":true,"position":"bottom","rejectButtonDisplay":true}};</script>
 <script type="text/javascript" src="https://cs.iubenda.com/autoblocking/89530968.js"></script>
 <script type="text/javascript" src="//cdn.iubenda.com/cs/iubenda_cs.js" charset="UTF-8" async></script>
-<title>Mentalità — Sviluppa la Giusta Mentalità per l'Apprendimento | Apprendimento Rapido</title>
-<meta name="description" content="Scopri come sviluppare la mentalità vincente per l'apprendimento. Supera i blocchi mentali e trasforma il tuo approccio allo studio con tecniche comprovate.">
+<title>Mentalità | Apprendimento Rapido — Metodo Eureka</title>
+<meta name="description" content="Scopri perché la mentalità conta quanto la tecnica. 15.000 interviste analizzate, 80.000 persone formate: la struttura mentale è la condizione che rende il metodo davvero utilizzabile nel tempo.">
 <link rel="stylesheet" href="/components/nav.css">
 <style>
 :root{
@@ -33,64 +29,90 @@
 html{scroll-behavior:smooth;}
 body{font-family:'Inter',sans-serif;background:var(--off-white);color:var(--text);line-height:1.65;overflow-x:hidden;}
 
-/* LAYOUT */
 .container{max-width:1100px;margin:0 auto;padding:0 28px;}
 .section{padding:96px 0;}
 .section-sm{padding:64px 0;}
-.section-label{font-size:11px;font-weight:700;text-transform:uppercase;
-  letter-spacing:2.5px;color:var(--teal);margin-bottom:14px;}
-.section-title{font-family:'Playfair Display',serif;
-  font-size:clamp(1.9rem,3.2vw,2.8rem);font-weight:700;
-  line-height:1.15;color:var(--navy);margin-bottom:18px;}
+.section-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2.5px;color:var(--teal);margin-bottom:14px;}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,3.2vw,2.8rem);font-weight:700;line-height:1.15;color:var(--navy);margin-bottom:18px;}
 .section-title em{font-style:italic;color:var(--gold);}
 .section-sub{font-size:1rem;color:var(--muted);line-height:1.8;max-width:600px;font-weight:400;}
 
-/* BUTTONS */
-.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;
-  border-radius:10px;font-size:14px;font-weight:600;font-family:'Inter',sans-serif;
-  text-decoration:none;cursor:pointer;border:none;
-  transition:transform .2s,box-shadow .2s,background .2s;letter-spacing:.2px;}
+.tag{display:inline-flex;align-items:center;padding:5px 14px;border-radius:50px;font-size:11px;font-weight:600;letter-spacing:.6px;text-transform:uppercase;}
+.tag-navy{background:rgba(13,27,42,.08);border:1px solid rgba(13,27,42,.2);color:var(--navy);}
+.tag-teal{background:var(--teal-lt);border:1px solid rgba(0,169,136,.25);color:var(--teal-dk);}
+.tag-gold{background:var(--gold-lt);border:1px solid var(--gold-brd);color:#8a6010;}
+
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:10px;font-size:14px;font-weight:600;font-family:'Inter',sans-serif;text-decoration:none;cursor:pointer;border:none;transition:transform .2s,box-shadow .2s,background .2s;letter-spacing:.2px;}
 .btn-primary{background:var(--navy);color:#fff;box-shadow:0 4px 20px rgba(13,27,42,.25);}
 .btn-primary:hover{background:var(--navy2);transform:translateY(-2px);box-shadow:0 8px 28px rgba(13,27,42,.3);}
 .btn-gold{background:var(--gold);color:#fff;box-shadow:0 4px 20px rgba(184,151,62,.3);}
 .btn-gold:hover{background:#a07c2a;transform:translateY(-2px);}
 .btn-outline{background:transparent;color:var(--navy);border:1.5px solid var(--navy);}
 .btn-outline:hover{background:var(--navy);color:#fff;}
+.btn-teal-outline{background:transparent;color:var(--teal-dk);border:1.5px solid var(--teal);}
+.btn-teal-outline:hover{background:var(--teal);color:#fff;}
 
-/* CARDS */
-.card{background:#fff;border:1px solid var(--light2);border-radius:16px;
-  padding:32px;transition:box-shadow .25s,transform .25s;}
+.card{background:#fff;border:1px solid var(--light2);border-radius:16px;padding:32px;transition:box-shadow .25s,transform .25s;}
 .card:hover{box-shadow:0 12px 40px rgba(0,0,0,.09);transform:translateY(-2px);}
 .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;}
 .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;}
 
-/* PAGE HERO */
-.page-hero{padding:calc(var(--nav-h) + 72px) 0 72px;
-  background:linear-gradient(160deg,var(--navy) 0%,#1a3050 100%);}
-.page-hero-title{font-family:'Playfair Display',serif;
-  font-size:clamp(2rem,4vw,3.2rem);font-weight:700;color:#fff;
-  line-height:1.15;margin-bottom:18px;}
+.page-hero{padding:calc(var(--nav-h) + 72px) 0 72px;background:linear-gradient(160deg,var(--navy) 0%,#1a3050 100%);}
+.page-hero-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:700;color:#fff;line-height:1.15;margin-bottom:18px;}
 .page-hero-title em{font-style:italic;color:var(--gold);}
-.page-hero-sub{font-size:1.05rem;color:rgba(255,255,255,.72);
-  line-height:1.8;max-width:620px;}
+.page-hero-sub{font-size:1.05rem;color:rgba(255,255,255,.72);line-height:1.8;max-width:620px;}
 .hero-inner{display:grid;grid-template-columns:1.1fr 0.9fr;gap:64px;align-items:center;padding:56px 0;}
 .hero-img-wrap{border-radius:20px;overflow:hidden;aspect-ratio:4/3;border:1px solid rgba(255,255,255,.1);}
 .hero-img-wrap img{width:100%;height:100%;object-fit:cover;opacity:.9;}
 
-/* FEATURE ITEM */
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center;}
+.stat-num{font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:700;color:var(--gold);line-height:1;}
+.stat-lbl{font-size:13px;color:var(--muted);margin-top:8px;font-weight:500;}
+
+.testi-card{background:#fff;border:1px solid var(--light2);border-radius:16px;padding:32px;position:relative;}
+.testi-card::before{content:'\201C';font-family:'Playfair Display',serif;font-size:5rem;color:var(--gold-lt);position:absolute;top:12px;left:20px;line-height:1;}
+.testi-quote{font-size:.98rem;color:var(--muted);line-height:1.8;font-style:italic;margin-bottom:20px;padding-top:20px;}
+.testi-name{font-weight:700;color:var(--navy);font-size:15px;}
+.testi-role{font-size:13px;color:var(--teal-dk);margin-top:2px;font-weight:500;}
+
+.gold-line{width:48px;height:2px;background:var(--gold);border-radius:2px;margin:16px 0;}
+
 .feature-item{border-left:2px solid var(--gold);padding-left:20px;margin-bottom:28px;}
 .feature-item h4{font-weight:600;color:var(--navy);margin-bottom:6px;font-size:15px;}
 .feature-item p{font-size:14px;color:var(--muted);line-height:1.75;}
 
-/* BG */
 .bg-white{background:#fff;}
 .bg-off{background:var(--off-white);}
 .bg-light{background:var(--light);}
+.bg-navy{background:var(--navy);}
 
-/* RESPONSIVE */
+.accordion-item{background:#fff;border:1px solid var(--light2);border-radius:12px;margin-bottom:12px;overflow:hidden;}
+.accordion-header{padding:18px 24px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-weight:600;font-size:15px;color:var(--navy);transition:background .2s;user-select:none;}
+.accordion-header:hover{background:var(--light);}
+.accordion-arrow{color:var(--gold);font-size:12px;transition:transform .3s;flex-shrink:0;margin-left:12px;}
+.accordion-body{display:none;padding:0 24px 20px;color:var(--muted);font-size:14px;line-height:1.8;}
+.accordion-body.open{display:block;}
+.accordion-arrow.open{transform:rotate(180deg);}
+
+.check-list{list-style:none;padding:0;}
+.check-list li{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--light2);font-size:14px;color:var(--muted);}
+.check-list li:last-child{border-bottom:none;}
+.check-list li .ico{flex-shrink:0;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;margin-top:1px;}
+.ico-yes{background:rgba(0,169,136,.12);color:var(--teal-dk);}
+.ico-no{background:rgba(220,38,38,.1);color:#dc2626;}
+
+.banner{width:100%;display:flex;align-items:center;justify-content:center;text-align:center;padding:18px 28px;border-radius:12px;background:linear-gradient(135deg,#00A988 0%,#007a63 100%);box-shadow:0 4px 16px rgba(0,169,136,.25);margin:32px 0;cursor:pointer;transition:transform 0.2s ease,box-shadow 0.2s ease;}
+.banner:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,169,136,.35);}
+.banner::after{content:'→';font-size:1.4rem;color:#fff;margin-left:16px;transition:transform 0.2s ease;}
+.banner:hover::after{transform:translateX(4px);}
+.banner h1{font-family:'Inter','Montserrat',sans-serif;font-size:clamp(1rem,2.5vw,1.35rem);line-height:1.3;font-weight:600;color:#fff;letter-spacing:0;margin:0;}
+.banner h1 em{font-style:normal;font-weight:700;}
+
 @media(max-width:900px){
-  .hero-inner,.grid-2,.grid-3{grid-template-columns:1fr;}
+  .hero-inner,.grid-2,.grid-3,.grid-4,.stats-grid{grid-template-columns:1fr;}
   .section{padding:64px 0;}
+  .banner{padding:14px 20px;margin:24px 0;}
 }
 @media(max-width:600px){
   .container{padding:0 16px;}
@@ -105,8 +127,12 @@ body{font-family:'Inter',sans-serif;background:var(--off-white);color:var(--text
   <div class="container">
     <div class="hero-inner">
       <div>
-        <h1 class="page-hero-title">La Giusta <em>Mentalità</em></h1>
-        <p class="page-hero-sub">Sviluppa l'approccio mentale vincente per trasformare il tuo apprendimento. Supera i blocchi, aumenta la fiducia e raggiungi risultati straordinari con la mentalità giusta.</p>
+        <div style="margin-bottom:18px;display:flex;gap:10px;flex-wrap:wrap;">
+          <span class="tag tag-gold">Dal 2001</span>
+          <span class="tag tag-teal">80.000+ formati</span>
+        </div>
+        <h1 class="page-hero-title"><em>Mentalità</em></h1>
+        <p class="page-hero-sub">Le tecniche sono fondamentali. Ma da sole non bastano sempre. La mentalità è la condizione che rende il metodo davvero utilizzabile nel tempo.</p>
         <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:32px;">
           <a href="demo-zoom/index.html" class="btn btn-gold">Scopri il Webinar Gratuito</a>
           <a href="master-eureka.html" class="btn btn-outline" style="color:#fff;border-color:rgba(255,255,255,.4);">Vedi il Corso</a>
@@ -114,9 +140,21 @@ body{font-family:'Inter',sans-serif;background:var(--off-white);color:var(--text
       </div>
       <div>
         <div class="hero-img-wrap">
-          <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&auto=format&fit=crop" alt="Mentalità vincente">
+          <img src="https://images.unsplash.com/photo-1499728603263-13726abce5fd?w=800&auto=format&fit=crop" alt="Mentalità e apprendimento">
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="bg-navy" style="padding:36px 0;">
+  <div class="container">
+    <div class="stats-grid stats-section">
+      <div><div class="stat-num" data-count="80" data-suffix="k+">0</div><div class="stat-lbl" style="color:rgba(255,255,255,.55);">Persone formate</div></div>
+      <div><div class="stat-num" data-count="25" data-suffix="+">0</div><div class="stat-lbl" style="color:rgba(255,255,255,.55);">Anni di attività</div></div>
+      <div><div class="stat-num" data-count="15" data-suffix="k+">0</div><div class="stat-lbl" style="color:rgba(255,255,255,.55);">Interviste analizzate</div></div>
+      <div><div class="stat-num" data-count="3">0</div><div class="stat-lbl" style="color:rgba(255,255,255,.55);">Aree di impatto</div></div>
     </div>
   </div>
 </section>
@@ -125,89 +163,251 @@ body{font-family:'Inter',sans-serif;background:var(--off-white);color:var(--text
 <section class="section bg-white">
   <div class="container">
     <div style="text-align:center;max-width:700px;margin:0 auto 60px;">
-      <div class="section-label">Il blocco mentale</div>
-      <h2 class="section-title">Dalla mentalità limitante alla mentalità <em>vincente</em></h2>
-      <p class="section-sub" style="margin:0 auto;">Il problema non è mai la mancanza di intelligenza o capacità. È la mentalità sbagliata che ci blocca e ci impedisce di esprimere il nostro vero potenziale.</p>
+      <div class="section-label">Il problema reale</div>
+      <h2 class="section-title">Perché molte persone non riescono a esprimere davvero il proprio <em>potenziale?</em></h2>
+      <p class="section-sub" style="margin:0 auto;">Nella maggior parte dei casi non è per mancanza di intelligenza. E spesso non è nemmeno per mancanza di strumenti. Il vero problema è che tante persone studiano e lavorano con una <strong style="color:#dc2626;">mentalità che lavora contro di loro.</strong></p>
     </div>
     <div class="grid-2">
       <div class="card" style="border-top:3px solid #dc2626;">
-        <h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:#dc2626;margin-bottom:16px;">✗ Mentalità limitante</h3>
-        <div class="feature-item">
-          <h4>"Non sono portato per lo studio"</h4>
-          <p>Credi che l'intelligenza sia fissa e che alcuni siano "naturalmente" più bravi.</p>
-        </div>
-        <div class="feature-item">
-          <h4>"È troppo difficile per me"</h4>
-          <p>Eviti le sfide perché hai paura di fallire e confermare le tue convinzioni negative.</p>
-        </div>
-        <div class="feature-item">
-          <h4>"Non ho tempo"</h4>
-          <p>Usi la mancanza di tempo come scusa per evitare di metterti alla prova.</p>
-        </div>
+        <h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:#dc2626;margin-bottom:16px;">✗ Senza una mentalità allenata</h3>
+        <ul class="check-list">
+          <li><span class="ico ico-no">✗</span>Ti blocchi più facilmente davanti alle difficoltà</li>
+          <li><span class="ico ico-no">✗</span>Rimandi e accumuli tensione</li>
+          <li><span class="ico ico-no">✗</span>Parti bene, ma fai fatica a mantenere costanza</li>
+          <li><span class="ico ico-no">✗</span>Vivi l'errore come una conferma di inadeguatezza</li>
+          <li><span class="ico ico-no">✗</span>Studi o lavori con pressione, non con lucidità</li>
+          <li><span class="ico ico-no">✗</span>Rischi di autosabotarti proprio nei momenti decisivi</li>
+        </ul>
       </div>
       <div class="card" style="border-top:3px solid var(--teal);">
-        <h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--teal-dk);margin-bottom:16px;">✓ Mentalità vincente</h3>
-        <div class="feature-item">
-          <h4>"Posso migliorare in tutto"</h4>
-          <p>Comprendi che l'intelligenza si sviluppa con l'allenamento e la pratica costante.</p>
-        </div>
-        <div class="feature-item">
-          <h4>"Ogni ostacolo è un'opportunità"</h4>
-          <p>Affronti le sfide perché sai che ogni difficoltà ti fa crescere e migliorare.</p>
-        </div>
-        <div class="feature-item">
-          <h4>"Creo il tempo per ciò che conta"</h4>
-          <p>Organizzi le priorità e trovi sempre tempo per investire su te stesso.</p>
-        </div>
+        <h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--teal-dk);margin-bottom:16px;">✓ Con una mentalità allenata</h3>
+        <ul class="check-list">
+          <li><span class="ico ico-yes">✓</span>Affronti lo sforzo con maggiore stabilità</li>
+          <li><span class="ico ico-yes">✓</span>Mantieni continuità anche quando la motivazione cala</li>
+          <li><span class="ico ico-yes">✓</span>Gestisci meglio pressione, fatica e imprevisti</li>
+          <li><span class="ico ico-yes">✓</span>Interpreti l'errore come correzione, non come condanna</li>
+          <li><span class="ico ico-yes">✓</span>Usi le tecniche con più coerenza e più fiducia</li>
+          <li><span class="ico ico-yes">✓</span>Costruisci risultati più solidi e duraturi</li>
+        </ul>
       </div>
     </div>
   </div>
 </section>
 
-<!-- COME SVILUPPARLA -->
-<section class="section bg-light">
+<a href="coaching.html" style="display:block;text-decoration:none;padding:0 28px;">
+  <div class="banner" style="max-width:1100px;margin:0 auto 32px;">
+    <h1>Prenota una <em>Coaching Gratuita</em> — parliamo della tua situazione</h1>
+  </div>
+</a>
+
+<!-- DEFINIZIONE -->
+<section class="section bg-off" id="definizione">
   <div class="container">
     <div style="text-align:center;max-width:700px;margin:0 auto 56px;">
-      <div class="section-label">Il percorso</div>
-      <h2 class="section-title">Come sviluppare la mentalità <em>vincente</em></h2>
-      <p class="section-sub" style="margin:0 auto;">Trasforma la tua mentalità attraverso tecniche concrete e scientificamente provate. Non è questione di motivazione, ma di metodo.</p>
+      <div class="section-label">La definizione</div>
+      <h2 class="section-title">Che cos'è davvero la <em>mentalità?</em></h2>
+      <p class="section-sub" style="margin:0 auto;">La mentalità è il filtro con cui interpreti ciò che ti accade. Non riguarda slogan motivazionali e non coincide con un generico "pensare positivo". Riguarda qualcosa di più concreto: la struttura interiore con cui affronti le situazioni che contano.</p>
     </div>
     <div class="grid-3">
-      <div class="card">
-        <div class="section-label">01</div>
-        <h3 style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--navy);margin-bottom:10px;">Cambia le convinzioni</h3>
-        <div style="width:48px;height:2px;background:var(--gold);border-radius:2px;margin:16px 0;"></div>
-        <p style="color:var(--muted);font-size:14px;line-height:1.8;">Identifica e trasforma le convinzioni limitanti che ti impediscono di progredire. Sostituisci "non sono capace" con "sto imparando".</p>
+      <div class="card" style="text-align:center;border-top:3px solid var(--gold);">
+        <div style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--gold);margin-bottom:12px;">Strutturale</div>
+        <h3 style="font-weight:600;color:var(--navy);margin-bottom:10px;">Lavora sotto la superficie</h3>
+        <p style="font-size:14px;color:var(--muted);">La mentalità non si vede subito, ma condiziona il modo in cui reagisci a pressioni, errori, ritardi, ostacoli e risultati.</p>
       </div>
-      <div class="card">
-        <div class="section-label">02</div>
-        <h3 style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--navy);margin-bottom:10px;">Abbraccia il processo</h3>
-        <div style="width:48px;height:2px;background:var(--gold);border-radius:2px;margin:16px 0;"></div>
-        <p style="color:var(--muted);font-size:14px;line-height:1.8;">Concentrati sul processo di apprendimento, non solo sui risultati. Celebra i progressi, per quanto piccoli.</p>
+      <div class="card" style="text-align:center;border-top:3px solid var(--teal);">
+        <div style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--teal-dk);margin-bottom:12px;">Pratica</div>
+        <h3 style="font-weight:600;color:var(--navy);margin-bottom:10px;">Incide sui comportamenti quotidiani</h3>
+        <p style="font-size:14px;color:var(--muted);">Costanza, concentrazione, fiducia, disciplina, gestione del tempo e capacità di ripartire dopo un errore dipendono anche dalla tua mentalità.</p>
       </div>
-      <div class="card">
-        <div class="section-label">03</div>
-        <h3 style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--navy);margin-bottom:10px;">Costruisci abitudini</h3>
-        <div style="width:48px;height:2px;background:var(--gold);border-radius:2px;margin:16px 0;"></div>
-        <p style="color:var(--muted);font-size:14px;line-height:1.8;">Crea routine quotidiane che rinforzino la tua nuova mentalità. Le piccole azioni costanti creano grandi cambiamenti.</p>
+      <div class="card" style="text-align:center;border-top:3px solid var(--navy);">
+        <div style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--navy);margin-bottom:12px;">Decisiva</div>
+        <h3 style="font-weight:600;color:var(--navy);margin-bottom:10px;">Determina quanto usi ciò che impari</h3>
+        <p style="font-size:14px;color:var(--muted);">Molte persone apprendono concetti validi, ma non li trasformano in comportamento stabile. La mentalità è ciò che collega il sapere al fare.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CTA -->
+<!-- DOVE INCIDE -->
+<section class="section bg-light">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:56px;">
+      <div class="section-label">Le tre aree</div>
+      <h2 class="section-title">Come la mentalità influenza studio, lavoro e <em>risultati</em></h2>
+      <p class="section-sub" style="margin:0 auto;">La mentalità non conta solo quando devi preparare un esame. Conta quando devi leggere con continuità, mantenere la concentrazione, applicare un metodo, organizzarti meglio o affrontare una fase di cambiamento.</p>
+    </div>
+    <div style="max-width:760px;margin:0 auto;">
+      <div class="accordion-item">
+        <div class="accordion-header">🎓 Nello studio <span class="accordion-arrow">▼</span></div>
+        <div class="accordion-body">
+          <p style="margin-bottom:14px;">Quando la mentalità è fragile, anche una difficoltà normale può trasformarsi in un blocco. Quando è solida, la difficoltà resta tale, ma non ti ferma allo stesso modo.</p>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+            <div>→ Ti aiuta a restare costante nel tempo</div>
+            <div>→ Riduce il peso mentale del "non ce la faccio"</div>
+            <div>→ Ti permette di applicare davvero le tecniche</div>
+            <div>→ Trasforma gli strumenti in abitudine</div>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <div class="accordion-header">💼 Nel lavoro <span class="accordion-arrow">▼</span></div>
+        <div class="accordion-body">
+          <p style="margin-bottom:14px;">La mentalità incide sulla qualità delle decisioni, sulla gestione della pressione e sulla capacità di mantenere un ritmo di lavoro elevato senza esaurirsi.</p>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+            <div>→ Migliora la gestione della pressione</div>
+            <div>→ Rafforza lucidità e priorità</div>
+            <div>→ Riduce procrastinazione e dispersione</div>
+            <div>→ Aumenta presenza, continuità e affidabilità</div>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <div class="accordion-header">🌱 Nella crescita personale <span class="accordion-arrow">▼</span></div>
+        <div class="accordion-body">
+          <p style="margin-bottom:14px;">La mentalità è anche la base su cui costruire obiettivi di lungo periodo, resistere ai momenti di calo e sviluppare una fiducia in sé stessi meno fragile e più concreta.</p>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+            <div>→ Ti rende più flessibile davanti al cambiamento</div>
+            <div>→ Riduce autosabotaggio e paura del giudizio</div>
+            <div>→ Ti aiuta a sostenere obiettivi nel lungo periodo</div>
+            <div>→ Costruisce una fiducia meno fragile e più concreta</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OSSERVAZIONE / FEATURE -->
+<section class="section bg-white">
+  <div class="container">
+    <div class="grid-2" style="gap:72px;align-items:center;">
+      <div>
+        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&auto=format&fit=crop" alt="Analisi dei risultati e mentalità" style="width:100%;border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,.1);">
+      </div>
+      <div>
+        <div class="section-label">Un'osservazione che ha cambiato il nostro punto di vista</div>
+        <h2 class="section-title">Cosa abbiamo capito osservando i risultati <em>migliori</em></h2>
+        <p style="color:var(--muted);margin-bottom:36px;line-height:1.8;">Dopo anni di insegnamento e oltre 15.000 interviste con ex studenti, è emerso un dato molto chiaro: i risultati migliori non dipendevano soltanto dalle strategie apprese, ma soprattutto da un desiderio più profondo di cambiamento personale.</p>
+        <div class="feature-item">
+          <h4>La tecnica accelera il processo</h4>
+          <p>Ma è la mentalità a rendere il cambiamento più stabile, più concreto e più duraturo nel tempo.</p>
+        </div>
+        <div class="feature-item">
+          <h4>Quando cambia il modo di guardarsi</h4>
+          <p>Quando cambia il modo in cui una persona guarda sé stessa, il tempo, la fatica e l'errore, cambiano anche la qualità dell'apprendimento e la tenuta dei risultati.</p>
+        </div>
+        <div class="feature-item">
+          <h4>Il collegamento tra sapere e fare</h4>
+          <p>Molte persone capiscono perfettamente cosa andrebbe fatto e hanno gli strumenti giusti. La mentalità è ciò che permette di farli diventare parte di sé.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IL COSTO INVISIBILE -->
+<section class="section bg-off">
+  <div class="container">
+    <div class="grid-2" style="gap:72px;align-items:center;">
+      <div>
+        <div class="section-label">Il costo invisibile</div>
+        <h2 class="section-title">Cosa succede quando non ci lavori <em>davvero</em></h2>
+        <p style="color:var(--muted);margin-bottom:32px;line-height:1.8;">La mentalità è uno di quegli aspetti che spesso non fanno rumore, ma incidono profondamente. Se non viene riconosciuta e allenata, può produrre effetti molto concreti.</p>
+        <ul class="check-list">
+          <li><span class="ico ico-no">✗</span>Buone intenzioni senza continuità</li>
+          <li><span class="ico ico-no">✗</span>Partenze forti e finali deboli</li>
+          <li><span class="ico ico-no">✗</span>Dipendenza dalla motivazione del momento</li>
+          <li><span class="ico ico-no">✗</span>Paura di esporsi davvero</li>
+          <li><span class="ico ico-no">✗</span>Tendenza a rimandare proprio ciò che conta</li>
+          <li><span class="ico ico-no">✗</span>Uso discontinuo di strumenti anche molto efficaci</li>
+          <li><span class="ico ico-no">✗</span>Spreco di tempo, energia e potenziale</li>
+        </ul>
+        <p style="color:var(--muted);margin-top:24px;font-size:14px;line-height:1.8;">In questi casi il problema non è che manchino capacità. Molto spesso manca la struttura mentale per sostenerle con costanza.</p>
+      </div>
+      <div>
+        <img src="https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=800&auto=format&fit=crop" alt="Il costo di una mentalità trascurata" style="width:100%;border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,.1);">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IL PUNTO CENTRALE -->
+<section class="section bg-light">
+  <div class="container">
+    <div style="text-align:center;max-width:760px;margin:0 auto 56px;">
+      <div class="section-label">Il punto centrale</div>
+      <h2 class="section-title">La tecnica ti insegna come fare. La mentalità ti permette di <em>farlo davvero.</em></h2>
+      <p class="section-sub" style="margin:0 auto 32px;">Le tecniche funzionano. Funzionano la memoria, la lettura veloce, le mappe mentali, la sintesi, i sistemi di organizzazione mentale. Ma la loro efficacia dipende anche dalla qualità della persona che le applica.</p>
+    </div>
+    <div class="grid-3">
+      <div class="card" style="text-align:center;">
+        <div style="font-size:2.2rem;margin-bottom:16px;">🎯</div>
+        <h3 style="font-family:'Playfair Display',serif;font-weight:700;color:var(--navy);margin-bottom:10px;">Continuità</h3>
+        <div class="gold-line" style="margin:10px auto 16px;"></div>
+        <p style="font-size:14px;color:var(--muted);">Quando la mentalità cambia, le tecniche diventano più efficaci e la disciplina pesa meno.</p>
+      </div>
+      <div class="card" style="text-align:center;">
+        <div style="font-size:2.2rem;margin-bottom:16px;">🧠</div>
+        <h3 style="font-family:'Playfair Display',serif;font-weight:700;color:var(--navy);margin-bottom:10px;">Concentrazione</h3>
+        <div class="gold-line" style="margin:10px auto 16px;"></div>
+        <p style="font-size:14px;color:var(--muted);">La concentrazione regge di più quando non è minata dall'ansia del risultato o dalla paura dell'errore.</p>
+      </div>
+      <div class="card" style="text-align:center;">
+        <div style="font-size:2.2rem;margin-bottom:16px;">📈</div>
+        <h3 style="font-family:'Playfair Display',serif;font-weight:700;color:var(--navy);margin-bottom:10px;">Risultati stabili</h3>
+        <div class="gold-line" style="margin:10px auto 16px;"></div>
+        <p style="font-size:14px;color:var(--muted);">I risultati smettono di dipendere solo dall'entusiasmo del momento e diventano più solidi nel tempo.</p>
+      </div>
+    </div>
+    <div style="max-width:700px;margin:56px auto 0;background:#fff;border-radius:20px;padding:40px;border-left:4px solid var(--gold);box-shadow:0 8px 32px rgba(0,0,0,.06);">
+      <p style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--navy);line-height:1.8;font-style:italic;margin-bottom:16px;">"La mentalità non sostituisce la tecnica. La rende più forte."</p>
+      <p style="font-size:14px;color:var(--muted);line-height:1.8;">Il metodo è essenziale. Le tecniche sono preziose. Gli strumenti fanno la differenza. Ma quando tutto questo è sostenuto da una mentalità più solida, il miglioramento cambia qualità. Diventa meno episodico, meno fragile, meno dipendente dalle circostanze. E soprattutto diventa più tuo.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINALE -->
 <section class="section" style="background:var(--navy);">
   <div class="container" style="text-align:center;">
-    <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.6rem);font-weight:700;color:#fff;margin-bottom:18px;">Pronto a trasformare la tua <em style="font-style:italic;color:var(--gold);">mentalità?</em></h2>
-    <p style="color:rgba(255,255,255,.7);margin:0 auto 36px;max-width:560px;line-height:1.8;">Scopri come sviluppare la mentalità vincente che ti permetterà di raggiungere qualsiasi obiettivo di apprendimento.</p>
+    <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.6rem);font-weight:700;color:#fff;margin-bottom:18px;">Vuoi approfondire <em style="font-style:italic;color:var(--gold);">Il Metodo?</em></h2>
+    <p style="color:rgba(255,255,255,.7);margin:0 auto 36px;max-width:560px;line-height:1.8;">Se ti interessa capire come tecnica, apprendimento e mentalità possano lavorare insieme in modo più efficace, puoi approfondire il nostro approccio.</p>
     <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
-      <a href="demo-zoom/index.html" class="btn btn-gold">Iscriviti al Webinar Gratuito</a>
-      <a href="coaching.html" class="btn btn-outline" style="color:#fff;border-color:rgba(255,255,255,.35);">Prenota una Coaching 1:1</a>
+      <a href="master-eureka.html" class="btn btn-gold">Scopri Il Metodo</a>
+      <a href="coaching.html" class="btn btn-outline" style="color:#fff;border-color:rgba(255,255,255,.35);">Approfondisci il percorso</a>
     </div>
   </div>
 </section>
 
 <div id="footer-placeholder"></div>
+
+<script>
+function animateCounters(){
+  document.querySelectorAll('[data-count]').forEach(el=>{
+    const target=parseInt(el.dataset.count);
+    const suffix=el.dataset.suffix||'';
+    let current=0;const step=target/60;
+    const timer=setInterval(()=>{
+      current+=step;if(current>=target){current=target;clearInterval(timer);}
+      el.textContent=Math.floor(current)+suffix;
+    },16);
+  });
+}
+const obs=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting&&e.target.classList.contains('stats-section')){animateCounters();obs.disconnect();}});
+},{threshold:0.2});
+const ss=document.querySelector('.stats-section');if(ss)obs.observe(ss);
+
+document.querySelectorAll('.accordion-header').forEach(h=>{
+  h.addEventListener('click',function(){
+    const body=this.nextElementSibling;
+    const arrow=this.querySelector('.accordion-arrow');
+    const isOpen=body.classList.contains('open');
+    document.querySelectorAll('.accordion-body').forEach(b=>b.classList.remove('open'));
+    document.querySelectorAll('.accordion-arrow').forEach(a=>a.classList.remove('open'));
+    if(!isOpen){body.classList.add('open');if(arrow)arrow.classList.add('open');}
+  });
+});
+</script>
 
 <script src="whatsapp-widget.js"></script>
 <script src="/components/nav-loader.js"></script>
