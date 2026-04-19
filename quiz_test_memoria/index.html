@@ -342,11 +342,13 @@ src="https://www.facebook.com/tr?id=1749584092436791&ev=PageView&noscript=1"
 
 @media (max-width: 600px) {
     body { padding: 12px; align-items: stretch; overflow-x: hidden; }
-    main { padding: 20px 16px; }
+    main { padding: 20px 16px; width: 100%; box-sizing: border-box; }
     h1 { font-size: 1.4em; }
     h2 { font-size: 1.2em; }
     input[type="text"], input[type="email"], input[type="tel"] { font-size: 1em; padding: 12px 14px; }
-    .btn { font-size: 1em; padding: 14px 20px; width: 100%; }
+    .btn { font-size: 1em; padding: 14px 20px; width: 100%; box-sizing: border-box; }
+    .lista-parole, .lista-input { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .footer { width: 100%; box-sizing: border-box; }
     .footer-grid { grid-template-columns: 1fr; }
     .footer-bottom { text-align: center; justify-content: center; }
     .footer-bottom div { flex-direction: column; gap: 10px; }
@@ -412,8 +414,8 @@ src="https://www.facebook.com/tr?id=1749584092436791&ev=PageView&noscript=1"
         <input type="hidden" name="tipo_quiz" value="Test Memoria">
 
         <div style="display: flex; align-items: flex-start; margin: 20px 0; font-size: 0.9em; text-align: left;">
-            <input type="checkbox" id="privacy-consent" name="privacy-consent" required style="margin-top: 5px; margin-right: 10px; flex-shrink: 0; min-width: 18px;">
-            <label for="privacy-consent">
+            <input type="checkbox" id="privacy-consent" name="privacy-consent" required style="margin-top: 5px; margin-right: 10px; flex-shrink: 0; min-width: 18px; width: 18px;">
+            <label for="privacy-consent" style="flex: 1; min-width: 0;">
                 <strong>Accettazione *</strong><br>
                 Cliccando sul pulsante "Invia e Scopri di più", dichiaro di aver preso visione dell'informativa privacy e acconsento al trattamento dei dati personali per finalità di marketing diretto di Apprendimento Rapido.
             </label>
