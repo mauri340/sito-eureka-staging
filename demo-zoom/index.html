@@ -667,111 +667,6 @@
     .msg.err { display:block; background:#fef2f2; color:#dc2626; border:1px solid rgba(220,38,38,.2); }
 
     /* ============================
-       FOOTER — unified
-       ============================ */
-    .footer {
-        background: var(--navy);
-        color: rgba(255,255,255,.75);
-        padding: 56px 0 32px;
-    }
-
-    .footer .container {
-        max-width: 1100px;
-        margin: 0 auto;
-        padding: 0 28px;
-    }
-
-    .footer-grid {
-        display: grid;
-        grid-template-columns: 2fr 1fr 1fr 1fr;
-        gap: 48px;
-        margin-bottom: 44px;
-    }
-
-    .footer-brand img {
-        height: 44px;
-        width: auto;
-        display: block;
-        margin-bottom: 14px;
-    }
-
-    .footer-brand p {
-        font-size: 14px;
-        color: rgba(255,255,255,.6);
-        line-height: 1.8;
-    }
-
-    .footer-col h4 {
-        font-size: 11px;
-        font-weight: 700;
-        color: rgba(255,255,255,.4);
-        margin-bottom: 18px;
-        text-transform: uppercase;
-        letter-spacing: 1.5px;
-    }
-
-    .footer-col a {
-        display: block;
-        font-size: 13px;
-        color: rgba(255,255,255,.65);
-        text-decoration: none;
-        margin-bottom: 10px;
-        transition: color .2s;
-        font-weight: 400;
-    }
-
-    .footer-col a:hover {
-        color: #fff;
-    }
-
-    .footer-contact {
-        font-size: 13px;
-        color: rgba(255,255,255,.65);
-        line-height: 1.8;
-    }
-
-    .footer-contact a {
-        color: rgba(255,255,255,.65);
-        text-decoration: none;
-        margin-bottom: 5px;
-        display: block;
-    }
-
-    .footer-contact a:hover {
-        color: #fff;
-    }
-
-    .footer-bottom {
-        border-top: 1px solid rgba(255,255,255,.08);
-        padding-top: 26px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 14px;
-    }
-
-    .footer-bottom p {
-        font-size: 12px;
-        color: rgba(255,255,255,.4);
-    }
-
-    .footer-bottom div {
-        display: flex;
-        gap: 20px;
-    }
-
-    .footer-bottom a {
-        font-size: 12px;
-        color: rgba(255,255,255,.4);
-        text-decoration: none;
-    }
-
-    .footer-bottom a:hover {
-        color: rgba(255,255,255,.8);
-    }
-
-    /* ============================
        RESPONSIVE
        ============================ */
     @media (max-width: 860px) {
@@ -792,26 +687,6 @@
         .micro { gap: 12px; }
     }
 
-    @media (max-width: 900px) {
-        .footer-grid {
-            grid-template-columns: 1fr;
-            gap: 32px;
-        }
-    }
-
-    @media (max-width: 600px) {
-        .footer-grid {
-            grid-template-columns: 1fr 1fr;
-        }
-        .footer-bottom {
-            text-align: center;
-            justify-content: center;
-        }
-        .footer-bottom div {
-            flex-direction: column;
-            gap: 10px;
-        }
-    }
     </style>
 
 <!-- JSON-LD Schema.org - EducationalOrganization (Blocco 1) -->
@@ -981,7 +856,7 @@
                 </div>
                 <div class="cred-mini-sep"></div>
                 <div class="cred-mini-item">
-                    <div class="cred-mini-num">22+</div>
+                    <div class="cred-mini-num">25+</div>
                     <div class="cred-mini-lbl">Anni di<br>attività</div>
                 </div>
                 <div class="cred-mini-sep"></div>
@@ -1095,57 +970,7 @@
     </div><!-- /inner -->
 </section>
 
-<!-- ============================
-     FOOTER minimal
-     ============================ -->
-<footer class="footer">
-    <div class="container">
-        <div class="footer-grid">
-            <div class="footer-brand">
-                <img src="../images/logo.png" alt="Metodo Eureka">
-                <p>Dal 2001 aiutiamo professionisti, imprenditori e studenti a imparare più velocemente e ricordare di più — con un metodo provato su oltre 20.000 persone.</p>
-            </div>
-
-            <div class="footer-col">
-                <h4>Il Metodo</h4>
-                <a href="../metodo-eureka.html">Il Metodo Eureka</a>
-                <a href="../master-eureka.html">Il Master Eureka</a>
-                <a href="../tecniche-memoria.html">Tecniche di Memoria</a>
-                <a href="../lettura-veloce.html">Lettura Veloce</a>
-                <a href="../mappe-mentali.html">Mappe Mentali</a>
-            </div>
-
-            <div class="footer-col">
-                <h4>Risorse</h4>
-                <a href="index.html">Webinar Gratuito</a>
-                <a href="../coaching.html">Coaching Gratuita</a>
-                <a href="../testimonianze.html">Testimonianze</a>
-                <a href="../libro.html">Il Nostro Libro</a>
-                <a href="https://academy.apprendimentorapido.it/users/sign_in" target="_blank">Login Allievi</a>
-            </div>
-
-            <div class="footer-col">
-                <h4>Contatti</h4>
-                <div class="footer-contact">
-                    Via Gardiscia 10<br>
-                    Rovio, (CH) 6821<br><br>
-                    <a href="mailto:info@apprendimentorapido.it">info@apprendimentorapido.it</a>
-                    <a href="tel:+390240702168">+390240702168</a><br>
-                    Lun–Ven 9:00–18:30
-                </div>
-            </div>
-        </div>
-
-        <div class="footer-bottom">
-            <p>© 2025 Apprendimento Rapido – Metodo Eureka. Tutti i diritti riservati.</p>
-            <div>
-                <a href="https://www.iubenda.com/privacy-policy/89530968" target="_blank">Privacy Policy</a>
-                <a href="https://www.iubenda.com/privacy-policy/89530968/cookie-policy" target="_blank">Cookie Policy</a>
-                <a href="https://www.iubenda.com/termini-e-condizioni/89530968" target="_blank">Termini e Condizioni</a>
-            </div>
-        </div>
-    </div>
-</footer>
+<div id="footer-placeholder"></div>
 
 <script type="text/javascript">(function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src="https://cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent){w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);</script>
 
@@ -1306,6 +1131,7 @@
 </script>
 
 <script src="../whatsapp-widget.js"></script>
+<script src="/components/footer-loader.js"></script>
 </body>
 </html>
   
