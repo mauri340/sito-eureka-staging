@@ -337,24 +337,19 @@ src="https://www.facebook.com/tr?id=1749584092436791&ev=PageView&noscript=1"
 }
 
 @media (max-width: 900px) {
-    .footer-grid {
-        grid-template-columns: 1fr 1fr 1fr;
-        gap: 32px;
-    }
+    .footer-grid { grid-template-columns: 1fr 1fr 1fr; gap: 32px; }
 }
 
 @media (max-width: 600px) {
-    .footer-grid {
-        grid-template-columns: 1fr;
-    }
-    .footer-bottom {
-        text-align: center;
-        justify-content: center;
-    }
-    .footer-bottom div {
-        flex-direction: column;
-        gap: 10px;
-    }
+    body { padding: 12px; align-items: stretch; overflow-x: hidden; }
+    main { padding: 20px 16px; }
+    h1 { font-size: 1.4em; }
+    h2 { font-size: 1.2em; }
+    input[type="text"], input[type="email"], input[type="tel"] { font-size: 1em; padding: 12px 14px; }
+    .btn { font-size: 1em; padding: 14px 20px; width: 100%; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .footer-bottom { text-align: center; justify-content: center; }
+    .footer-bottom div { flex-direction: column; gap: 10px; }
 }
     </style>
 </head>
@@ -417,7 +412,7 @@ src="https://www.facebook.com/tr?id=1749584092436791&ev=PageView&noscript=1"
         <input type="hidden" name="tipo_quiz" value="Test Memoria">
 
         <div style="display: flex; align-items: flex-start; margin: 20px 0; font-size: 0.9em; text-align: left;">
-            <input type="checkbox" id="privacy-consent" name="privacy-consent" required style="margin-top: 5px; margin-right: 10px;">
+            <input type="checkbox" id="privacy-consent" name="privacy-consent" required style="margin-top: 5px; margin-right: 10px; flex-shrink: 0; min-width: 18px;">
             <label for="privacy-consent">
                 <strong>Accettazione *</strong><br>
                 Cliccando sul pulsante "Invia e Scopri di più", dichiaro di aver preso visione dell'informativa privacy e acconsento al trattamento dei dati personali per finalità di marketing diretto di Apprendimento Rapido.
