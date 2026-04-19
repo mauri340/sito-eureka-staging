@@ -17,6 +17,7 @@ body {
     line-height: 1.7;
     margin: 0;
     padding: 40px 20px 100px 20px;
+    overflow-x: hidden;
 }
 
 .page-container {
@@ -403,13 +404,17 @@ button:hover {
 .call-to-action { margin-top: 20px; text-align: center; }
 
 @media (max-width: 600px) {
-    #test-container { padding: 20px; }
-    .question-block, .form-group { padding: 15px; } /* Applica lo stile anche a form-group */
-    h1, h2 { font-size: 1.5em; }
-    .hub-page h1 { font-size: 2.2em; } /* Adatta anche il titolo hub */
-    .hub-page .hub-subtitle { font-size: 1.1em; }
-    .hub-container { flex-direction: column; align-items: center; }
-    .quiz-card { width: 90%; }
+    body { padding: 20px 12px 80px 12px; }
+    #test-container { padding: 20px 16px; }
+    .question-block, .form-group { padding: 12px; }
+    h1, h2 { font-size: 1.4em; }
+    .hub-page h1 { font-size: 1.8em; }
+    .hub-page .hub-subtitle { font-size: 1em; }
+    .hub-container { grid-template-columns: 1fr; }
+    .quiz-card { width: 100%; }
+    #reading-text { padding: 14px; font-size: 0.95em; }
+    .mentor-profile-box { flex-direction: column; align-items: center; text-align: center; }
+    .mentor-avatar.mentor-logo { margin-right: 0; margin-bottom: 14px; width: 96px; height: 96px; }
 }
 
 /* Stili per la Chat */
