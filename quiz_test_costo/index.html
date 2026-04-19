@@ -204,22 +204,27 @@ src="https://www.facebook.com/tr?id=1749584092436791&ev=PageView&noscript=1"
     }
 }
 
+@media (max-width: 900px) {
+    .quiz-card { padding: 28px 24px; }
+    h1 { font-size: 1.5em; }
+}
+
 @media (max-width: 600px) {
-    .footer-grid {
-        grid-template-columns: 1fr;
-    }
-    .footer-bottom {
-        text-align: center;
-        justify-content: center;
-    }
-    .footer-bottom div {
-        flex-direction: column;
-        gap: 10px;
-    }
+    body { padding: 12px; align-items: stretch; overflow-x: hidden; }
+    .quiz-card { padding: 20px 16px; width: 100%; }
+    h1 { font-size: 1.3em; }
+    h2 { font-size: 1.2em; }
+    input[type="number"], input[type="text"], input[type="email"], input[type="tel"] { width: 100%; box-sizing: border-box; font-size: 1em; padding: 14px 16px; }
+    .btn { font-size: 1em; padding: 14px 20px; width: 100%; }
+    .privacy-checkbox-container { padding: 0; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .footer-bottom { text-align: center; justify-content: center; }
+    .footer-bottom div { flex-direction: column; gap: 10px; }
 }
 
 body {
     padding-bottom: 0;
+    overflow-x: hidden;
 }
     </style>
 <body>
