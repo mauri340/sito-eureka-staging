@@ -594,6 +594,17 @@ src="https://www.facebook.com/tr?id=1749584092436791&ev=PageView&noscript=1"
         try {
             // Save contact data for later use in final results
             datiContatto = { nome, cognome, email, telefono };
+
+            // Salva subito il contatto nella lista incompleti
+            fetch('https://ai-chat-service-nls9.onrender.com/api/quiz/submit', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    quiz_status: 'memoria_incompleto',
+                    nome, cognome, email, telefono
+                })
+            }).catch(() => {});
+
             submitButton.textContent = 'Invia e Scopri di più';
             submitButton.disabled = false;
             mostraSchermata('schermata-video');
