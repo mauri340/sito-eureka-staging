@@ -19,6 +19,7 @@ const userDataForm = document.getElementById('user-data-form');
 
 // Stato
 let startTime = null;
+let endTime = null;
 let answers = {};
 
 // Carica articolo
@@ -66,7 +67,6 @@ function showQuiz() {
 
 // Calcola risultati
 function calculateResults() {
-  const endTime = Date.now();
   const readingTimeInSeconds = (endTime - startTime) / 1000;
   const article = CONTENUTI[articleId];
   let score = 0;
@@ -108,6 +108,7 @@ function init() {
 
   loadArticle();
   finishReadingBtn.addEventListener('click', () => {
+    endTime = Date.now();
     showScreen('quiz-screen');
     showQuiz();
   });
