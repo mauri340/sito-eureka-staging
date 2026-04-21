@@ -1,0 +1,12 @@
+User-agent: *
+Disallow: /wp-admin/
+Allow: /wp-admin/admin-ajax.php
+Disallow: /quiz_test_memoria/
+Disallow: /quiz_test_costo/
+Disallow: /quiz_test_lettura/
+Disallow: /chat-system/
+Disallow: /disiscrizione/
+Disallow: /programmazione-date-master-eureka/
+Disallow: /riprogrammazione-date-master-eureka/
+
+Sitemap: https://apprendimentorapido.it/sitemap.xml
