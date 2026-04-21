@@ -3,6 +3,15 @@ RewriteCond %{HTTP_HOST} ^www\.apprendimentorapido\.it$ [NC]
 RewriteRule ^(.*)$ https://apprendimentorapido.it/$1 [R=301,L]
 
 # ══════════════════════════════════════════
+#  NOINDEX su staging — non indicizzare il sito di test
+# ══════════════════════════════════════════
+<IfModule mod_headers.c>
+  <If "%{HTTP_HOST} == 'staging.apprendimentorapido.it'">
+    Header set X-Robots-Tag "noindex, nofollow"
+  </If>
+</IfModule>
+
+# ══════════════════════════════════════════
 #  SITO STATICO — bypassa WordPress per tutte le pagine principali
 # ══════════════════════════════════════════
 
