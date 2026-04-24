@@ -10,6 +10,9 @@
 
   var sessionId = null;
   var chatOpened = false;
+  var chatOpenedAt = 0;
+  var messagesSentThisOpen = 0;
+  var firstMessageTrackedThisOpen = false;
   var inputDisabled = false;
   var widgetReady = false;
   var userParams = null;
@@ -935,8 +938,14 @@
     }, INACTIVITY_TIMEOUT - INACTIVITY_WARNING_BEFORE);
   }
 
-  function openChat() {
+  function openChat(trigger) {
     chatOpened = true;
+    chatOpenedAt = Date.now();
+    messagesSentThisOpen = 0;
+    firstMessageTrackedThisOpen = false;
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', 'chat_opened', { trigger: trigger || 'click' });
+    }
     var chatBox = $('ew-chat-box');
     var chatToggle = $('ew-chat-toggle');
     if (chatBox) chatBox.classList.add('ew-visible');
@@ -1001,6 +1010,13 @@
   }
 
   function closeChat() {
+    if (chatOpened && typeof window.gtag === 'function') {
+      var durationSec = chatOpenedAt ? Math.round((Date.now() - chatOpenedAt) / 1000) : 0;
+      window.gtag('event', 'chat_closed', {
+        duration_sec: durationSec,
+        messages_sent: messagesSentThisOpen
+      });
+    }
     chatOpened = false;
     var chatBox = $('ew-chat-box');
     var chatToggle = $('ew-chat-toggle');
@@ -1185,6 +1201,13 @@
     if (!text) return;
 
     markUserWritten();
+
+    // GA4 tracking: primo messaggio di questa sessione di apertura + contatore
+    messagesSentThisOpen++;
+    if (!firstMessageTrackedThisOpen && typeof window.gtag === 'function') {
+      firstMessageTrackedThisOpen = true;
+      window.gtag('event', 'chat_first_message');
+    }
 
     // Track message sent
     if (analytics && userSource) {
@@ -2660,8 +2683,8 @@
           sessionId = data.session_id;
           saveSessionResponse(data);
           if (data.proactive) {
-            openChat();
-            if (data.speech) { 
+            openChat('auto');
+            if (data.speech) {
               conversationHistory.push({role: 'assistant', content: data.speech, timestamp: new Date().toISOString()});
               updateChatHistoryInStorage();
               typeBotMessage(data.speech); 
@@ -2933,7 +2956,7 @@
         fullscreenMode = true;
         inject();
       }
-      openChat();
+      openChat('api');
     },
     close: function () {
       closeChat();
