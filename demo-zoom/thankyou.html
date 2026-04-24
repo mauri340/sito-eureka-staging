@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grazie! Iscrizione Confermata - Metodo Eureka</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2X3V7JZPBJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-2X3V7JZPBJ');
+    </script>
+
+    <!-- Facebook Pixel -->
+    <script>
+        !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+        n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+        document,'script','https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1113993426083027');
+        fbq('track', 'PageView');
+        fbq('track', 'Lead');
+    </script>
+    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1113993426083027&ev=Lead&noscript=1"/></noscript>
+
+    <!-- LinkedIn Insight Tag -->
+    <script type="text/javascript">
+        _linkedin_partner_id = "6008396";
+        window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || [];
+        window._linkedin_data_partner_ids.push(_linkedin_partner_id);
+    </script>
+    <script type="text/javascript">
+        (function(l) {
+        if (!l){window.lintrk = function(a,b){window.lintrk.q.push([a,b])};
+        window.lintrk.q=[]}
+        var s = document.getElementsByTagName("script")[0];
+        var b = document.createElement("script");
+        b.type = "text/javascript";b.async = true;
+        b.src = "https://snap.licdn.com/li.lms-analytics/insight.min.js";
+        s.parentNode.insertBefore(b, s);})(window.lintrk);
+    </script>
+
+    <!-- Iubenda -->
+    <script type="text/javascript">
+        var _iub = _iub || [];
+        _iub.csConfiguration = {"siteId":89530968,"cookiePolicyId":89530968,"lang":"it","storage":{"useSiteId":true}};
+    </script>
+    <script type="text/javascript" src="https://cs.iubenda.com/autoblocking/89530968.js"></script>
+    <script type="text/javascript" src="//cdn.iubenda.com/cs/gpp/stub.js"></script>
+    <script type="text/javascript" src="//cdn.iubenda.com/cs/iubenda_cs.js" charset="UTF-8" async></script>
+
+    <style>
+        /* ============================================
+           VARIABILI CSS — PALETTE #00A988
+           ============================================ */
+        :root {
+            --primary-color:  #00A988;   /* teal principale */
+            --secondary-color:#007a63;   /* teal scuro */
+            --accent-color:   #ff6b35;   /* arancione contrasto */
+            --dark-bg:        #081a17;   /* sfondo scuro teal-nero */
+            --darker-bg:      #040e0c;   /* sfondo ancora più scuro */
+            --card-bg:        #0d2b25;   /* card su sfondo scuro */
+            --light-bg:       #f4faf8;   /* sfondo chiaro con sfumatura teal */
+            --white:          #ffffff;
+            --text-dark:      #1a202c;
+            --text-light:     #ffffff;
+            --text-muted:     #9ecfc4;   /* muted su sfondo scuro */
+            --text-gray:      #64748b;
+        }
+
+        /* ============================================
+           RESET E BASE
+           ============================================ */
+        * { margin:0; padding:0; box-sizing:border-box; }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ============================================
+           URGENCY BAR — verde teal
+           ============================================ */
+        .urgency-bar {
+            background: linear-gradient(90deg, var(--secondary-color), var(--primary-color));
+            color: white;
+            text-align: center;
+            padding: 12px 20px;
+            font-weight: 700;
+            font-size: 14px;
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%,100%{ opacity:1; }
+            50%{ opacity:.85; }
+        }
+
+        /* ============================================
+           HEADER
+           ============================================ */
+        .header {
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #0d2b25 50%, var(--dark-bg) 100%);
+            padding: 80px 0 20px;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--primary-color);
+            letter-spacing: 1px;
+        }
+        .logo span { color: var(--white); }
+
+        /* ============================================
+           HERO — CONFERMA ISCRIZIONE
+           ============================================ */
+        .hero {
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #0d2b25 50%, var(--dark-bg) 100%);
+            padding: 40px 0 90px;
+            color: var(--text-light);
+            text-align: center;
+        }
+
+        .success-icon {
+            width: 100px;
+            height: 100px;
+            background: rgba(0,169,136,.2);
+            border: 3px solid var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            margin: 0 auto 30px;
+            animation: popIn .6s cubic-bezier(.175,.885,.32,1.275);
+        }
+
+        @keyframes popIn {
+            from { transform: scale(0); opacity:0; }
+            to   { transform: scale(1); opacity:1; }
+        }
+
+        .badge-success {
+            display: inline-block;
+            background: rgba(0,169,136,.2);
+            color: var(--primary-color);
+            padding: 8px 24px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            border: 1px solid rgba(0,169,136,.4);
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 20px;
+            color: var(--white);
+        }
+
+        .hero h1 .teal-text { color: var(--primary-color); }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 650px;
+            margin: 0 auto 40px;
+            line-height: 1.7;
+        }
+
+        /* 3 step cards */
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .step-card {
+            background: rgba(0,169,136,.08);
+            border: 1px solid rgba(0,169,136,.25);
+            border-radius: 16px;
+            padding: 28px 20px;
+            text-align: center;
+            transition: transform .3s, box-shadow .3s;
+        }
+
+        .step-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 35px rgba(0,169,136,.2);
+        }
+
+        .step-icon { font-size: 2.2rem; margin-bottom: 12px; }
+
+        .step-card h3 {
+            font-size: .95rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 6px;
+        }
+
+        .step-card p { font-size: .82rem; color: var(--text-muted); line-height:1.5; }
+
+        /* ============================================
+           COUNTDOWN
+           ============================================ */
+        .countdown-section {
+            background: rgba(0,0,0,.25);
+            border-top: 1px solid rgba(0,169,136,.15);
+            padding: 30px 20px 0;
+            max-width: 700px;
+            margin: 50px auto 0;
+            border-radius: 20px;
+        }
+
+        .countdown-title {
+            text-align: center;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .event-info-bar {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 12px;
+            background: rgba(0,169,136,.1);
+            border-radius: 10px;
+            border: 1px solid rgba(0,169,136,.2);
+        }
+
+        .event-info-bar span {
+            font-size: .95rem;
+            color: var(--white);
+            font-weight: 600;
+        }
+
+        .countdown-timer {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .countdown-item { text-align: center; }
+
+        .countdown-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            background: rgba(0,169,136,.12);
+            padding: 15px 20px;
+            border-radius: 12px;
+            min-width: 80px;
+            display: block;
+        }
+
+        .countdown-label {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ============================================
+           CALENDARIO (sfondo chiaro)
+           ============================================ */
+        .calendar-section {
+            padding: 90px 0;
+            background: var(--light-bg);
+            color: var(--text-dark);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.3rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .section-title-dark  { color: var(--text-dark); }
+        .section-title-light { color: var(--white); }
+
+        .section-subtitle {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 50px;
+            line-height: 1.7;
+        }
+
+        .section-subtitle-dark  { color: var(--text-gray); }
+        .section-subtitle-light { color: var(--text-muted); }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+            gap: 20px;
+            max-width: 900px;
+            margin: 0 auto 40px;
+        }
+
+        .cal-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 22px 14px;
+            border: none;
+            border-radius: 16px;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 14px;
+            color: white;
+            text-decoration: none;
+            transition: transform .3s, box-shadow .3s;
+        }
+
+        .cal-btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 35px rgba(0,0,0,.2);
+        }
+
+        .cal-btn .cal-icon { font-size: 2rem; }
+
+        .cal-google  { background: linear-gradient(135deg,#EA4335,#c5352a); }
+        .cal-apple   { background: linear-gradient(135deg,#333,#1a1a1a); }
+        .cal-outlook { background: linear-gradient(135deg,#0078D4,#005fa3); }
+        .cal-o365    { background: linear-gradient(135deg,#0052a3,#003a7a); }
+
+        .alert-card {
+            max-width: 700px;
+            margin: 0 auto 20px;
+            background: rgba(0,169,136,.1);
+            border: 2px solid var(--primary-color);
+            border-radius: 14px;
+            padding: 20px 28px;
+            text-align: center;
+            color: var(--secondary-color);
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+
+
+        /* ============================================
+           VIDEO RECENSIONI (sfondo scuro)
+           ============================================ */
+        .videos-section {
+            padding: 90px 0;
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #0d2b25 50%, var(--dark-bg) 100%);
+            color: var(--white);
+        }
+
+        .videos-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 35px;
+        }
+
+        .video-card {
+            background: rgba(0,169,136,.07);
+            border: 1px solid rgba(0,169,136,.2);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: transform .3s, box-shadow .3s;
+        }
+
+        .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 45px rgba(0,169,136,.2);
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 */
+            height: 0;
+            overflow: hidden;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            border: none;
+        }
+
+        .video-info { padding: 24px; }
+
+        .video-badge {
+            display: inline-block;
+            background: rgba(0,169,136,.15);
+            color: var(--primary-color);
+            padding: 5px 14px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            border: 1px solid rgba(0,169,136,.3);
+        }
+
+        .video-info h3 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 8px;
+        }
+
+        .video-info p {
+            font-size: .85rem;
+            color: var(--text-muted);
+            font-style: italic;
+            line-height: 1.6;
+        }
+
+        /* ============================================
+           TESTIMONIANZE TESTO (sfondo chiaro)
+           ============================================ */
+        .testimonials-section {
+            padding: 90px 0;
+            background: var(--white);
+            color: var(--text-dark);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap: 28px;
+        }
+
+        .testimonial-card {
+            background: var(--light-bg);
+            padding: 32px;
+            border-radius: 16px;
+            border-left: 4px solid var(--primary-color);
+            transition: transform .3s, box-shadow .3s;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 35px rgba(0,169,136,.12);
+        }
+
+        .testimonial-quote {
+            font-size: 2.8rem;
+            color: var(--primary-color);
+            opacity: .4;
+            line-height: 1;
+            margin-bottom: 12px;
+        }
+
+        .testimonial-text {
+            font-size: 14px;
+            color: var(--text-gray);
+            line-height: 1.7;
+            margin-bottom: 22px;
+            font-style: italic;
+        }
+
+        .testimonial-author { display:flex; align-items:center; gap:14px; }
+
+        .testimonial-avatar {
+            width: 46px;
+            height: 46px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .testimonial-info h4 {
+            font-size: .95rem;
+            margin-bottom: 2px;
+            color: var(--secondary-color);
+            font-weight: 700;
+        }
+
+        .testimonial-info p { font-size: 12px; color: var(--text-gray); }
+
+        /* ============================================
+           COSA ASPETTARTI (sfondo scuro)
+           ============================================ */
+        .expect-section {
+            padding: 90px 0;
+            background: linear-gradient(135deg,#0c2820 0%,#0d2b25 100%);
+            color: var(--white);
+        }
+
+        .expect-grid {
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+            gap: 28px;
+        }
+
+        .expect-card {
+            text-align: center;
+            padding: 30px 18px;
+        }
+
+        .expect-number {
+            width: 68px;
+            height: 68px;
+            background: rgba(0,169,136,.15);
+            border: 2px solid var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.7rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin: 0 auto 18px;
+        }
+
+        .expect-card h3 { font-size:1rem; margin-bottom:10px; color:var(--white); }
+        .expect-card p  { font-size:13px; color:var(--text-muted); line-height:1.6; }
+
+        /* ============================================
+
+        /* ============================================
+           NAV GRID — Esplora il sito
+           ============================================ */
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            max-width: 860px;
+            margin: 0 auto 48px;
+        }
+
+        .nav-card {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 20px 22px;
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.25);
+            border-radius: 14px;
+            text-decoration: none;
+            color: var(--white);
+            transition: all .25s;
+            text-align: left;
+        }
+
+        .nav-card:hover {
+            background: rgba(255,255,255,0.22);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0,0,0,.25);
+            border-color: rgba(255,255,255,0.5);
+        }
+
+        .nav-card-icon {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .nav-card-title {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .nav-card-desc {
+            font-size: 0.82rem;
+            color: rgba(255,255,255,0.78);
+            display: block;
+            line-height: 1.4;
+        }
+
+
+        /* Responsive nav-grid */
+        @media (max-width: 700px) {
+            .nav-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 460px) {
+            .nav-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ============================================
+           BOTTOM CTA (sfondo teal)
+           ============================================ */
+        .bottom-cta {
+            padding: 90px 0;
+            text-align: center;
+            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+            color: var(--white);
+        }
+
+        .bottom-cta h2 { font-size:2.3rem; margin-bottom:18px; }
+        .bottom-cta p  { color:rgba(255,255,255,.85); max-width:580px; margin:0 auto 40px; }
+
+        .cta-button-white {
+            display: inline-block;
+            padding: 18px 45px;
+            background: var(--white);
+            color: var(--secondary-color);
+            text-decoration: none;
+            border-radius: 14px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            transition: all .3s;
+            margin: 8px;
+        }
+
+        .cta-button-white:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(0,0,0,.2);
+        }
+
+        .cta-button-outline {
+            display: inline-block;
+            padding: 18px 45px;
+            background: transparent;
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 14px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border: 2px solid white;
+            transition: all .3s;
+            margin: 8px;
+        }
+
+        .cta-button-outline:hover {
+            background: rgba(255,255,255,.15);
+            transform: translateY(-3px);
+        }
+
+        /* ============================================
+           STATS
+           ============================================ */
+        .stats-section {
+            padding: 70px 0;
+            background: var(--white);
+        }
+
+        .stats-grid {
+            display: flex;
+            justify-content: center;
+            gap: 90px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item { text-align:center; }
+
+        .stat-number {
+            font-size: 3.8rem;
+            font-weight: 800;
+            color: var(--secondary-color);
+        }
+
+        .stat-label {
+            font-size: 13px;
+            color: var(--text-gray);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        .footer {
+            padding: 40px 0;
+            text-align: center;
+            background: var(--darker-bg);
+            border-top: 1px solid rgba(0,169,136,.15);
+        }
+
+        .footer p { color: var(--text-muted); font-size:13px; }
+        .footer a { color: var(--primary-color); text-decoration:none; }
+
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 1024px) {
+            .expect-grid    { grid-template-columns: repeat(2,1fr); }
+            .calendar-grid  { grid-template-columns: repeat(2,1fr); }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1        { font-size: 2.2rem; }
+            .steps-grid     { grid-template-columns: 1fr; }
+            .videos-grid    { grid-template-columns: 1fr; }
+            .testimonials-grid { grid-template-columns: 1fr; }
+            .expect-grid    { grid-template-columns: 1fr; }
+            .calendar-grid  { grid-template-columns: repeat(2,1fr); }
+            .countdown-timer { gap: 10px; }
+            .countdown-number { font-size:1.8rem; padding:12px 14px; min-width:60px; }
+            .stats-grid     { gap: 40px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================
+         CONFIGURAZIONE — stessa dell'originale
+         ============================================ -->
+    <script>
+        const LANDING_CONFIG = {
+            landingId: "55b4e482-4b5a-46aa-bfe9-55cd009c5722",
+            backendUrl: "https://api.apprendimentorapido.it"
+        };
+
+        let landingConfig = null;
+
+        /* ---- Utility: formato per Google Calendar  YYYYMMDDTHHMMSS ---- */
+        function toGcalDate(date) {
+            const pad = n => String(n).padStart(2,'0');
+            return `${date.getFullYear()}${pad(date.getMonth()+1)}${pad(date.getDate())}` +
+                   `T${pad(date.getHours())}${pad(date.getMinutes())}00`;
+        }
+
+        /* ---- Utility: formato per file .ics ---- */
+        function toIcsDate(date) {
+            return toGcalDate(date) + 'Z';
+        }
+
+        /* ---- Genera file .ics e lo scarica ---- */
+        function scaricaICS() {
+            if (!landingConfig) {
+                alert('Dati evento non ancora caricati. Riprova tra un secondo!');
+                return;
+            }
+
+            const start = new Date(landingConfig.countdown_date);
+            // durata evento: 2 ore
+            const end   = new Date(start.getTime() + 2 * 60 * 60 * 1000);
+
+            const icsContent = [
+                'BEGIN:VCALENDAR',
+                'VERSION:2.0',
+                'PRODID:-//Apprendimento Rapido//Metodo Eureka//IT',
+                'CALSCALE:GREGORIAN',
+                'METHOD:PUBLISH',
+                'BEGIN:VEVENT',
+                `DTSTART:${toIcsDate(start)}`,
+                `DTEND:${toIcsDate(end)}`,
+                `SUMMARY:Diretta Zoom Gratuita – Metodo Eureka`,
+                `DESCRIPTION:Webinar gratuito su Apprendimento Rapido e Metodo Eureka.\\nPorta carta e penna! Il link Zoom è nella tua email di conferma.`,
+                `LOCATION:Live su Zoom (link via email)`,
+                `STATUS:CONFIRMED`,
+                `SEQUENCE:0`,
+                'END:VEVENT',
+                'END:VCALENDAR'
+            ].join('\r\n');
+
+            const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+            const url  = URL.createObjectURL(blob);
+            const a    = document.createElement('a');
+            a.href     = url;
+            a.download = 'webinar-metodo-eureka.ics';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        /* ---- Apre Google Calendar con data dinamica ---- */
+        function apriGoogleCalendar() {
+            if (!landingConfig) {
+                alert('Dati evento non ancora caricati. Riprova tra un secondo!');
+                return;
+            }
+            const start = new Date(landingConfig.countdown_date);
+            const end   = new Date(start.getTime() + 2 * 60 * 60 * 1000);
+            const url = `https://calendar.google.com/calendar/render?action=TEMPLATE` +
+                `&text=${encodeURIComponent('Diretta Zoom Gratuita – Metodo Eureka')}` +
+                `&dates=${toGcalDate(start)}/${toGcalDate(end)}` +
+                `&details=${encodeURIComponent('Webinar gratuito di Apprendimento Rapido. Porta carta e penna! Il link Zoom è nella tua email di conferma.')}` +
+                `&location=${encodeURIComponent('Live su Zoom (controlla la tua email)')}`;
+            window.open(url, '_blank');
+        }
+
+        /* ---- Apre Outlook Live con data dinamica ---- */
+        function apriOutlook() {
+            if (!landingConfig) {
+                alert('Dati evento non ancora caricati. Riprova tra un secondo!');
+                return;
+            }
+            const start = new Date(landingConfig.countdown_date);
+            const end   = new Date(start.getTime() + 2 * 60 * 60 * 1000);
+            const url = `https://outlook.live.com/calendar/0/deeplink/compose?` +
+                `subject=${encodeURIComponent('Diretta Zoom Gratuita – Metodo Eureka')}` +
+                `&startdt=${start.toISOString()}` +
+                `&enddt=${end.toISOString()}` +
+                `&body=${encodeURIComponent('Webinar gratuito. Il link Zoom è nella tua email.')}` +
+                `&location=${encodeURIComponent('Live su Zoom')}`;
+            window.open(url, '_blank');
+        }
+
+        /* ---- Apre Outlook 365 con data dinamica ---- */
+        function apriO365() {
+            if (!landingConfig) {
+                alert('Dati evento non ancora caricati. Riprova tra un secondo!');
+                return;
+            }
+            const start = new Date(landingConfig.countdown_date);
+            const end   = new Date(start.getTime() + 2 * 60 * 60 * 1000);
+            const url = `https://outlook.office.com/calendar/0/deeplink/compose?` +
+                `subject=${encodeURIComponent('Diretta Zoom Gratuita – Metodo Eureka')}` +
+                `&startdt=${start.toISOString()}` +
+                `&enddt=${end.toISOString()}` +
+                `&body=${encodeURIComponent('Webinar gratuito. Il link Zoom è nella tua email.')}` +
+                `&location=${encodeURIComponent('Live su Zoom')}`;
+            window.open(url, '_blank');
+        }
+
+        /* ---- Carica config dal backend ---- */
+        async function loadConfig() {
+            try {
+                const res = await fetch(`${LANDING_CONFIG.backendUrl}/api/landing/config/${LANDING_CONFIG.landingId}`);
+                if (!res.ok) throw new Error('Config non trovata');
+                landingConfig = await res.json();
+                aggiornaUI();
+                avviaCountdown();
+            } catch(e) {
+                console.error('Errore config:', e);
+                // Fallback testo
+                document.getElementById('eventInfoBar').innerHTML =
+                    '<span>📅 Controlla la tua email per data e orario</span>';
+            }
+        }
+
+        function aggiornaUI() {
+            if (!landingConfig) return;
+            // Info bar
+            document.getElementById('eventInfoBar').innerHTML =
+                `<span>📅 ${landingConfig.data_display} &nbsp;|&nbsp; 🕘 ${landingConfig.evento_ora_inizio} – ${landingConfig.evento_ora_fine} &nbsp;|&nbsp; 💻 Live su Zoom</span>`;
+            // Urgency bar
+            document.getElementById('urgencyBar').textContent =
+                `🎉 SEI REGISTRATO! Ci vediamo il ${landingConfig.data_display_short} — Controlla la tua email per il link Zoom 🎉`;
+        }
+
+        function avviaCountdown() {
+            if (!landingConfig?.countdown_date) return;
+            const eventTime = new Date(landingConfig.countdown_date).getTime();
+
+            const tick = setInterval(() => {
+                const diff = eventTime - Date.now();
+                if (diff < 0) {
+                    clearInterval(tick);
+                    document.querySelector('.countdown-title').textContent = '🎉 La diretta è iniziata! Entra su Zoom!';
+                    return;
+                }
+                const d = Math.floor(diff / 86400000);
+                const h = Math.floor((diff % 86400000) / 3600000);
+                const m = Math.floor((diff % 3600000) / 60000);
+                const s = Math.floor((diff % 60000) / 1000);
+                document.getElementById('cdDays').textContent    = String(d).padStart(2,'0');
+                document.getElementById('cdHours').textContent   = String(h).padStart(2,'0');
+                document.getElementById('cdMinutes').textContent = String(m).padStart(2,'0');
+                document.getElementById('cdSeconds').textContent = String(s).padStart(2,'0');
+            }, 1000);
+        }
+
+        document.addEventListener('DOMContentLoaded', loadConfig);
+    </script>
+
+    <!-- ============================================
+         URGENCY BAR
+         ============================================ -->
+    <div class="urgency-bar" id="urgencyBar">
+        🎉 REGISTRAZIONE CONFERMATA! Controlla la tua email per il link Zoom 🎉
+    </div>
+
+    <!-- HEADER -->
+    <header class="header">
+        <div class="logo">Metodo Eureka &nbsp;|&nbsp; <span>Apprendimento Rapido</span></div>
+    </header>
+
+    <!-- ============================================
+         HERO — CONFERMA
+         ============================================ -->
+    <section class="hero">
+        <div class="container">
+            <div class="success-icon">✅</div>
+            <div class="badge-success">✓ POSTO RISERVATO</div>
+            <h1>Sei dentro! 🎉<br><span class="teal-text">REGISTRAZIONE CONFERMATA</span></h1>
+            <p class="hero-subtitle">
+                Ottimo lavoro! La tua iscrizione è confermata.<br>
+                Riceverai il link Zoom entro pochi minuti — controlla anche la cartella Spam.
+            </p>
+
+            <!-- 3 step -->
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-icon">📧</div>
+                    <h3>1. Controlla l'email</h3>
+                    <p>Riceverai il link Zoom entro pochi minuti. Controlla anche spam/promozioni.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-icon">📅</div>
+                    <h3>2. Aggiungi al calendario</h3>
+                    <p>Salva l'evento per non dimenticare la diretta. Trovi i bottoni qui sotto!</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-icon">🎬</div>
+                    <h3>3. Guarda i video</h3>
+                    <p>Guarda le testimonianze dei nostri allievi.</p>
+                </div>
+            </div>
+
+            <!-- Countdown -->
+            <div class="countdown-section">
+                <h3 class="countdown-title">⏰ La diretta inizia tra:</h3>
+                <div class="event-info-bar" id="eventInfoBar">
+                    <span>📅 Caricamento data evento...</span>
+                </div>
+                <div class="countdown-timer">
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="cdDays">00</span>
+                        <div class="countdown-label">Giorni</div>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="cdHours">00</span>
+                        <div class="countdown-label">Ore</div>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="cdMinutes">00</span>
+                        <div class="countdown-label">Minuti</div>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="cdSeconds">00</span>
+                        <div class="countdown-label">Secondi</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         AGGIUNGI AL CALENDARIO
+         ============================================ -->
+    <section class="calendar-section">
+        <div class="container">
+            <h2 class="section-title section-title-dark">📅 Aggiungi al Calendario</h2>
+            <p class="section-subtitle section-subtitle-dark">
+                Non perdere la diretta! Aggiungi subito l'evento al tuo calendario preferito —
+                la data viene letta <strong>automaticamente</strong> dall'evento programmato.
+            </p>
+
+            <div class="calendar-grid">
+                <!-- Google Calendar -->
+                <button class="cal-btn cal-google" onclick="apriGoogleCalendar()">
+                    <span class="cal-icon">📅</span>
+                    Google Calendar
+                </button>
+
+                <!-- Apple iCal -->
+                <button class="cal-btn cal-apple" onclick="scaricaICS()">
+                    <span class="cal-icon">🍎</span>
+                    Apple Calendar
+                </button>
+
+                <!-- Outlook -->
+                <button class="cal-btn cal-outlook" onclick="apriOutlook()">
+                    <span class="cal-icon">📧</span>
+                    Outlook
+                </button>
+
+                <!-- Office 365 -->
+                <button class="cal-btn cal-o365" onclick="apriO365()">
+                    <span class="cal-icon">💼</span>
+                    Outlook 365
+                </button>
+            </div>
+
+            <div class="alert-card">
+                ✏️ <strong>IMPORTANTE:</strong> Porta carta e penna alla diretta! Farai esercizi pratici dal vivo con i relatori.
+            </div>
+
+
+        </div>
+    </section>
+
+    <!-- ============================================
+         VIDEO RECENSIONI
+         ============================================ -->
+    <section class="videos-section">
+        <div class="container">
+            <h2 class="section-title section-title-light">🎬 Eccoti alcuni dei risultati</h2>
+            <p class="section-subtitle section-subtitle-light">
+                Guarda queste testimonianze!
+            </p>
+
+            <div class="videos-grid">
+                <!-- Video 1 -->
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe
+                            src="https://www.youtube.com/embed/jr5JuIH8Dqw?start=154&rel=0"
+                            title="Francesca Riboldi - Notaio | Testimonianza Master Eureka"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-badge">⚖️ Professionista</span>
+                        <h3>Francesca Riboldi — Notaio</h3>
+                        <p>"Ho studiato più di 14.000 pagine di atti creando 40 mappe mentali in soli 6 mesi e ho raggiunto il mio obiettivo: diventare notaio!"</p>
+                    </div>
+                </div>
+
+                <!-- Video 2 -->
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe
+                            src="https://www.youtube.com/embed/rWtxp1h5osk?rel=0"
+                            title="Susan - Insegnante madrelingua | Testimonianza Metodo Eureka"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-badge">🌍 Lingue Straniere</span>
+                        <h3>Susan — Insegnante d'inglese madrelingua</h3>
+                        <p>"Il Metodo Eureka dà potenza e flessibilità mentale. La scaletta poetica prepara il cervello e permette di imparare una lingua in modo straordinariamente più veloce!"</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         TESTIMONIANZE TESTO
+         ============================================ -->
+    <section class="testimonials-section">
+        <div class="container">
+            <h2 class="section-title section-title-dark">💬 Cosa Dicono i Nostri Allievi</h2>
+            <p class="section-subtitle section-subtitle-dark">
+                Professionisti, studenti, imprenditori: il Metodo Eureka funziona per tutti
+            </p>
+
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-quote">"</div>
+                    <p class="testimonial-text">Ho superato 5 esami in una sessione, uno preparato in sole 8 ore. Come avvocato penalista che ha deciso di prendere la seconda laurea in psicologia, il Master Eureka ha cambiato tutto.</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">E</div>
+                        <div class="testimonial-info">
+                            <h4>Eva Vigato</h4>
+                            <p>Avvocato Penalista</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-quote">"</div>
+                    <p class="testimonial-text">A soli 2 mesi dall'inizio del programma Master Eureka ho dato 4 esami universitari, recuperando completamente la sessione invernale!</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">M</div>
+                        <div class="testimonial-info">
+                            <h4>Michela</h4>
+                            <p>Studentessa Universitaria, 19 anni</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-quote">"</div>
+                    <p class="testimonial-text">Imprenditore e veterinario: il Metodo Eureka mi ha portato benefici economici concreti e misurabili nella mia attività professionale. Conviene investire? Assolutamente sì.</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">M</div>
+                        <div class="testimonial-info">
+                            <h4>Marco Cavazzoni</h4>
+                            <p>Imprenditore & Veterinario</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-quote">"</div>
+                    <p class="testimonial-text">Ho superato il concorso per la mia seconda specializzazione medica. Il Master Eureka mi ha dato le tecniche giuste per gestire una quantità enorme di materiale in poco tempo.</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">D</div>
+                        <div class="testimonial-info">
+                            <h4>Daniela</h4>
+                            <p>Medico Chirurgo</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-quote">"</div>
+                    <p class="testimonial-text">Lavoro nell'Aeronautica Militare e dovevo imparare l'inglese a livello accademico. Sono riuscito a memorizzare 1.500 vocaboli in soli 3 mesi. Incredibile!</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">C</div>
+                        <div class="testimonial-info">
+                            <h4>Ciro</h4>
+                            <p>Aeronautica Militare</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-quote">"</div>
+                    <p class="testimonial-text">Non avrei mai pensato di poter imparare così in fretta. Il corso ha cambiato il mio approccio allo studio e mi ha aiutata a fidarmi delle mie capacità.</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">G</div>
+                        <div class="testimonial-info">
+                            <h4>Gaia De Stradis</h4>
+                            <p>Studentessa</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         STATS
+         ============================================ -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">98%</div>
+                    <div class="stat-label">Soddisfatti</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">76%</div>
+                    <div class="stat-label">Applica il Metodo</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">50%</div>
+                    <div class="stat-label">Tempo Risparmiato</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         COSA ASPETTARTI
+         ============================================ -->
+    <section class="expect-section">
+        <div class="container">
+            <h2 class="section-title section-title-light">🚀 Cosa Aspettarti dalla Diretta</h2>
+            <p class="section-subtitle section-subtitle-light">
+                120 minuti di formazione pratica con esercizi dal vivo
+            </p>
+
+            <div class="expect-grid">
+                <div class="expect-card">
+                    <div class="expect-number">1</div>
+                    <h3>Il Metodo dei 4 Quadranti</h3>
+                    <p>Identifica gli sprechi di tempo e riprendi il controllo della tua produttività</p>
+                </div>
+                <div class="expect-card">
+                    <div class="expect-number">2</div>
+                    <h3>La Piramide del Successo</h3>
+                    <p>La struttura mentale dei professionisti che ottengono risultati straordinari</p>
+                </div>
+                <div class="expect-card">
+                    <div class="expect-number">3</div>
+                    <h3>Tecniche di Memoria dal Vivo</h3>
+                    <p>Esercizi pratici che dimostrano le vere capacità del tuo cervello in tempo reale</p>
+                </div>
+                <div class="expect-card">
+                    <div class="expect-number">4</div>
+                    <h3>Il Costo dell'Ignoranza</h3>
+                    <p>Scopri quanto stai perdendo ogni giorno in tempo, clienti e opportunità</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- ============================================
+         BOTTOM CTA — Esplora il sito + Social
+         ============================================ -->
+    <section class="bottom-cta">
+        <div class="container">
+            <h2>Ci Vediamo<br><strong>in Diretta! 🎯</strong></h2>
+            <p>
+                Mentre aspetti la diretta, esplora il sito di Apprendimento Rapido:<br>
+                trovi risorse gratuite, testimonianze, tecniche e molto altro ancora.
+            </p>
+
+            <!-- GRIGLIA NAVIGAZIONE SITO -->
+            <div class="nav-grid">
+
+                <a href="https://apprendimentorapido.it/metodo-eureka.html" target="_blank" class="nav-card">
+                    <span class="nav-card-icon">🧠</span>
+                    <span class="nav-card-title">Il Metodo Eureka</span>
+                    <span class="nav-card-desc">Scopri il sistema completo di apprendimento rapido</span>
+                </a>
+
+                <a href="https://apprendimentorapido.it/master-eureka.html" target="_blank" class="nav-card">
+                    <span class="nav-card-icon">🏆</span>
+                    <span class="nav-card-title">Master Eureka</span>
+                    <span class="nav-card-desc">Il corso completo che trasforma il tuo modo di studiare</span>
+                </a>
+
+                <a href="https://apprendimentorapido.it/testimonianze.html" target="_blank" class="nav-card">
+                    <span class="nav-card-icon">⭐</span>
+                    <span class="nav-card-title">Testimonianze</span>
+                    <span class="nav-card-desc">Storie reali di chi ha già cambiato la propria vita</span>
+                </a>
+
+                <a href="https://apprendimentorapido.it/risorse-gratuite.html" target="_blank" class="nav-card">
+                    <span class="nav-card-icon">🎁</span>
+                    <span class="nav-card-title">Risorse Gratuite</span>
+                    <span class="nav-card-desc">Test di memoria, lettura veloce e coaching gratuito</span>
+                </a>
+
+                <a href="https://apprendimentorapido.it/tecniche-memoria.html" target="_blank" class="nav-card">
+                    <span class="nav-card-icon">💡</span>
+                    <span class="nav-card-title">Tecniche di Memoria</span>
+                    <span class="nav-card-desc">Impara a memorizzare qualsiasi cosa in modo rapido</span>
+                </a>
+
+                <a href="https://apprendimentorapido.it/libro.html" target="_blank" class="nav-card">
+                    <span class="nav-card-icon">📖</span>
+                    <span class="nav-card-title">Il Nostro Libro</span>
+                    <span class="nav-card-desc">Il manuale pratico del Metodo Eureka</span>
+                </a>
+
+            </div>
+
+
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 Apprendimento Rapido - Metodo Eureka</p>
+            <p style="margin-top:10px;">
+                <a href="https://www.iubenda.com/privacy-policy/89530968" class="iubenda-nostyle iubenda-noiframe iubenda-embed" title="Privacy Policy">Privacy Policy</a> •
+                <a href="https://www.iubenda.com/privacy-policy/89530968/cookie-policy" class="iubenda-nostyle iubenda-noiframe iubenda-embed" title="Cookie Policy">Cookie Policy</a> •
+                <a href="https://www.iubenda.com/termini-e-condizioni/89530968" class="iubenda-nostyle iubenda-noiframe iubenda-embed" title="Termini e Condizioni">Termini e Condizioni</a>
+            </p>
+        </div>
+    </footer>
+
+    <script type="text/javascript">(function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src="https://cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent){w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);</script>
+
+</body>
+</html>
+
