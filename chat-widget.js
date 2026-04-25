@@ -2664,7 +2664,16 @@
   }
 
   // ── Auto-open after 40s ─────────────────────────────
+  // Disabilitata su /demo-zoom/ per A/B test: la pagina ha gia' un form
+  // di iscrizione webinar e l'auto-open sembra interferire con la conversion.
+  // Il toggle manuale (click sull'icona chat) resta attivo.
+  function isAutoOpenDisabledHere() {
+    var path = (window.location && window.location.pathname || '').toLowerCase();
+    return path.indexOf('/demo-zoom') === 0 || path.indexOf('/demo-zoom/') !== -1;
+  }
+
   function startAutoOpen() {
+    if (isAutoOpenDisabledHere()) return;
     setTimeout(function () {
       if (chatOpened) return;
       loadUserWrittenState();
