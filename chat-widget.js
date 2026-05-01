@@ -1118,6 +1118,16 @@
       returning_contact_id: (!quizParams.quiz_status && returningContactId) ? returningContactId : null
     };
 
+    // Paid ad context (added 2026-05-01 for SYSTEM_COLD_ADS)
+    // Propaga hook_id + UTM + Meta cookies al backend per attivare SYSTEM_COLD_ADS
+    if (quizParams.hook_id) {
+      payload.hook_id = quizParams.hook_id;
+      payload.source = quizParams.source || 'paid_ad';
+      if (quizParams.utm) payload.utm = quizParams.utm;
+      if (quizParams.fbc) payload.fbc = quizParams.fbc;
+      if (quizParams.fbp) payload.fbp = quizParams.fbp;
+    }
+
     return payload;
   }
 
