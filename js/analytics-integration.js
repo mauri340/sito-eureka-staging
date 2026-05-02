@@ -80,7 +80,7 @@ class AnalyticsIntegration {
       };
     }(window, document,'script', 'https://connect.facebook.net/en_US/fbevents.js');
 
-    fbq('init', '1113993426083027'); // Your Facebook Pixel ID
+    fbq('init', '957273196609597'); // Your Facebook Pixel ID
     fbq('track', 'PageView');
   }
 

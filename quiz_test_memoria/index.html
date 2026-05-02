@@ -44,11 +44,11 @@ n.queue=[];t=b.createElement(e);t.async=!0;
 t.src=v;s=b.getElementsByTagName(e)[0];
 s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1749584092436791');
+fbq('init', '957273196609597');
 fbq('track', 'PageView');
 </script>
 <noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1749584092436791&ev=PageView&noscript=1"
+src="https://www.facebook.com/tr?id=957273196609597&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
     <noscript>
@@ -565,6 +565,25 @@ src="https://www.facebook.com/tr?id=1749584092436791&ev=PageView&noscript=1"
         }
     }
 
+    // Paid ad attribution: leggi UTM da URL e cookies Meta (riusabile per entrambi i submit)
+    function getPaidAdAttribution() {
+      const p = new URLSearchParams(window.location.search);
+      function ck(name) {
+        const m = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
+        return m ? decodeURIComponent(m[1]) : null;
+      }
+      return {
+        hook_id: p.get('hook') || null,
+        utm_source: p.get('utm_source') || null,
+        utm_medium: p.get('utm_medium') || null,
+        utm_campaign: p.get('utm_campaign') || null,
+        utm_content: p.get('utm_content') || null,
+        utm_term: p.get('utm_term') || null,
+        fbc: ck('_fbc'),
+        fbp: ck('_fbp')
+      };
+    }
+
     async function handleSubmitContactForm(event) {
         event.preventDefault();
         const form = document.getElementById('form-contatto');
@@ -596,15 +615,21 @@ src="https://www.facebook.com/tr?id=1749584092436791&ev=PageView&noscript=1"
             // Save contact data for later use in final results
             datiContatto = { nome, cognome, email, telefono };
 
-            // Salva subito il contatto nella lista incompleti
+            // Salva subito il contatto nella lista incompleti (con attribution paid_ad)
             fetch('https://ai-chat-service-nls9.onrender.com/api/quiz/submit', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     quiz_status: 'memoria_incompleto',
-                    nome, cognome, email, telefono
+                    nome, cognome, email, telefono,
+                    ...getPaidAdAttribution()
                 })
             }).catch(() => {});
+
+            // Pixel Lead (rete sicurezza)
+            if (typeof fbq === 'function') {
+              try { fbq('track', 'Lead', { content_name: 'quiz_memoria', value: 0, currency: 'EUR' }); } catch(_){}
+            }
 
             submitButton.textContent = 'Invia e Scopri di più';
             submitButton.disabled = false;
@@ -651,7 +676,8 @@ src="https://www.facebook.com/tr?id=1749584092436791&ev=PageView&noscript=1"
           punteggio1: punteggio1,
           punteggio2: punteggio2,
           miglioramento: miglioramentoPercentualeCalcolato.toFixed(0),
-          totale_parole: numeroParole
+          totale_parole: numeroParole,
+          ...getPaidAdAttribution()
         };
 
         try {

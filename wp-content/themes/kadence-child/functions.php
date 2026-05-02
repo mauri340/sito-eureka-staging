@@ -8,7 +8,7 @@ function kadence_child_enqueue_styles() {
 
 // CONFIGURAZIONE CENTRALIZZATA — modifica solo qui
 define('AR_GA_ID',        'G-2X3V7JZPBJ');
-define('AR_FB_PIXEL',     '1113993426083027');
+define('AR_FB_PIXEL',     '957273196609597');
 define('AR_LI_PARTNER',   '6008396');
 define('AR_IUBENDA_SITE', '89530968');
 
