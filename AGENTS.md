@@ -92,5 +92,5 @@ Submit endpoint: `https://backend-quiz-ai.onrender.com/quiz/submit`
 
 Analytics tracking IDs (shared by all tests):
 - GA4: G-2X3V7JZPBJ
-- Facebook Pixel: 1113993426083027  
+- Facebook Pixel: 957273196609597 (consolidato 2026-05-02 — sostituiti 1113993426083027 e 1749584092436791)  
 - LinkedIn: 6008396

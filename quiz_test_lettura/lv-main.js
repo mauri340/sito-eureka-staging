@@ -132,6 +132,13 @@ function init() {
       telefono: document.getElementById('telefono').value
     };
 
+    // Paid ad attribution: leggi UTM da URL e cookies Meta
+    const adParams = new URLSearchParams(window.location.search);
+    function readCookie(name) {
+      const m = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
+      return m ? decodeURIComponent(m[1]) : null;
+    }
+
     const quizPayload = {
       quiz_status: "lettura",
       nome: formData.nome,
@@ -139,8 +146,21 @@ function init() {
       email: formData.email,
       telefono: formData.telefono,
       pam: Math.round(results.pam),
-      punteggio: results.score
+      punteggio: results.score,
+      hook_id: adParams.get('hook') || null,
+      utm_source: adParams.get('utm_source') || null,
+      utm_medium: adParams.get('utm_medium') || null,
+      utm_campaign: adParams.get('utm_campaign') || null,
+      utm_content: adParams.get('utm_content') || null,
+      utm_term: adParams.get('utm_term') || null,
+      fbc: readCookie('_fbc'),
+      fbp: readCookie('_fbp')
     };
+
+    // Pixel browser-side: evento Lead (rete di sicurezza, dato vero arriva via CAPI server)
+    if (typeof fbq === 'function') {
+      try { fbq('track', 'Lead', { content_name: 'quiz_lettura', value: 0, currency: 'EUR' }); } catch(_){}
+    }
 
     try {
       const response = await fetch(
