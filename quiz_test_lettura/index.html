@@ -104,12 +104,14 @@
  <div id="footer-placeholder"></div>
 
   <script>
-    // Gestione click card
+    // Gestione click card — preserva UTM/hook/fbclid passandoli a test-lettura.html
     document.querySelectorAll('.quiz-card').forEach(card => {
       card.addEventListener('click', (e) => {
         e.preventDefault();
         const articleId = card.getAttribute('data-article');
-        window.location.href = `test-lettura.html?article=${articleId}`;
+        const params = new URLSearchParams(window.location.search);
+        params.set('article', articleId);
+        window.location.href = `test-lettura.html?${params.toString()}`;
       });
     });
     </script>
