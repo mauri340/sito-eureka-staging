@@ -34,6 +34,7 @@ RewriteRule ^libro/?$             /libro.html             [L,R=302]
 RewriteRule ^risorse-gratuite/?$  /risorse-gratuite.html  [L,R=302]
 RewriteRule ^demo-zoom/?$         /demo-zoom/index.html   [L,R=302]
 RewriteRule ^blog/?$              /blog.html              [L,R=302]
+RewriteRule ^appuntamento/?$      /appuntamento/index.html [L]
 
 # ══════════════════════════════════════════
 # BEGIN WordPress (lascia invariato sotto)
