@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chat con Mentor Eureka</title>
+
+    <!-- Facebook Pixel: scrive _fbc/_fbp da fbclid per attribuzione paid_ad -->
+    <script>
+      !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', '957273196609597');
+      fbq('track', 'PageView');
+    </script>
+
     <style>
         /* Import del font */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap');
@@ -389,10 +397,18 @@
                 content: urlParams.get('utm_content') || null,
                 term: urlParams.get('utm_term') || null
               };
-              // Meta click ID dal cookie _fbc per attribution CAPI server-side
+              // Meta click ID per attribution CAPI server-side.
+              // Cookie _fbc viene scritto dal pixel da fbclid, ma e' async:
+              // se non e' ancora pronto, ricostruisco _fbc localmente dal
+              // parametro fbclid nell'URL (formato Meta: fb.1.{ts}.{fbclid}).
               try {
                 var fbcMatch = document.cookie.match(/_fbc=([^;]+)/);
-                if (fbcMatch) chatParams.fbc = fbcMatch[1];
+                if (fbcMatch) {
+                  chatParams.fbc = fbcMatch[1];
+                } else {
+                  var fbclid = urlParams.get('fbclid');
+                  if (fbclid) chatParams.fbc = 'fb.1.' + Date.now() + '.' + fbclid;
+                }
                 var fbpMatch = document.cookie.match(/_fbp=([^;]+)/);
                 if (fbpMatch) chatParams.fbp = fbpMatch[1];
               } catch (e) {}
