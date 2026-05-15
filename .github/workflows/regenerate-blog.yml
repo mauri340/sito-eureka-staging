@@ -1,0 +1,51 @@
+name: Regenerate Static Blog
+
+on:
+  # Cron settimanale: ogni domenica alle 02:00 UTC (04:00 IT estiva, 03:00 IT invernale)
+  schedule:
+    - cron: '0 2 * * 0'
+  # Trigger manuale: GitHub UI > Actions > Regenerate Static Blog > "Run workflow"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: regenerate-blog
+  cancel-in-progress: false
+
+jobs:
+  regenerate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Generate static blog HTML
+        run: python scripts/generate_static_blog.py
+
+      - name: Commit changes
+        run: |
+          git config user.name "blog-regen-bot"
+          git config user.email "blog-regen@apprendimentorapido.it"
+          git add blog/
+          if git diff --cached --quiet; then
+            echo "No blog changes to commit."
+          else
+            COUNT=$(git diff --cached --name-only | wc -l)
+            git commit -m "blog: rigenerazione HTML statici ($COUNT file modificati)
+
+Auto-generato da .github/workflows/regenerate-blog.yml
+Source: WordPress wp-json/wp/v2/posts"
+            git push
+          fi
