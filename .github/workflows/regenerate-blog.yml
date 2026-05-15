@@ -38,12 +38,12 @@ jobs:
         run: |
           git config user.name "blog-regen-bot"
           git config user.email "blog-regen@apprendimentorapido.it"
-          git add blog/
+          git add blog/ sitemap.xml
           if git diff --cached --quiet; then
-            echo "No blog changes to commit."
+            echo "No blog/sitemap changes to commit."
           else
             COUNT=$(git diff --cached --name-only | wc -l)
-            git commit -m "blog: rigenerazione HTML statici ($COUNT file modificati)
+            git commit -m "blog: rigenerazione HTML statici + sitemap ($COUNT file modificati)
 
 Auto-generato da .github/workflows/regenerate-blog.yml
 Source: WordPress wp-json/wp/v2/posts"

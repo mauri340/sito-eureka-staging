@@ -39,8 +39,23 @@ WP_API = "https://apprendimentorapido.it/wp-json/wp/v2/posts"
 SITE_BASE = "https://apprendimentorapido.it"
 REPO_ROOT = Path(__file__).resolve().parent.parent
 BLOG_DIR = REPO_ROOT / "blog"
+SITEMAP_PATH = REPO_ROOT / "sitemap.xml"
 DEFAULT_AUTHOR = "Maurizio Possenti"
 DEFAULT_AUTHOR_URL = "https://apprendimentorapido.it/chi-siamo"
+
+# Pagine fisse del sito (priorità + changefreq)
+STATIC_PAGES = [
+    ("/",                         "weekly",  "1.0"),
+    ("/master-eureka.html",       "monthly", "0.9"),
+    ("/tecniche-memoria.html",    "monthly", "0.8"),
+    ("/lettura-veloce.html",      "monthly", "0.8"),
+    ("/mappe-mentali.html",       "monthly", "0.8"),
+    ("/libro.html",               "monthly", "0.8"),
+    ("/testimonianze.html",       "monthly", "0.7"),
+    ("/coaching.html",            "monthly", "0.7"),
+    ("/demo-zoom/",               "weekly",  "0.7"),
+    ("/blog/",                    "weekly",  "0.6"),
+]
 
 
 def fetch_all_posts() -> list[dict[str, Any]]:
@@ -391,6 +406,35 @@ body{{font-family:'Inter',sans-serif;background:var(--off-white);color:var(--tex
 """
 
 
+def render_sitemap_xml(posts: list[dict[str, Any]]) -> str:
+    today = datetime.utcnow().strftime("%Y-%m-%d")
+    lines = ['<?xml version="1.0" encoding="UTF-8"?>',
+             '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
+    # Pagine fisse
+    for path, freq, prio in STATIC_PAGES:
+        lines.append("  <url>")
+        lines.append(f"    <loc>{SITE_BASE}{path}</loc>")
+        lines.append(f"    <lastmod>{today}</lastmod>")
+        lines.append(f"    <changefreq>{freq}</changefreq>")
+        lines.append(f"    <priority>{prio}</priority>")
+        lines.append("  </url>")
+    # Articoli blog (ordinati dal più recente)
+    posts_sorted = sorted(posts, key=lambda p: p.get("modified", p.get("date", "")), reverse=True)
+    for p in posts_sorted:
+        slug = p["slug"]
+        mod = p.get("modified") or p.get("date", today)
+        mod_date = mod.split("T")[0] if "T" in mod else mod[:10]
+        lines.append("  <url>")
+        lines.append(f"    <loc>{SITE_BASE}/blog/{slug}.html</loc>")
+        lines.append(f"    <lastmod>{mod_date}</lastmod>")
+        lines.append("    <changefreq>monthly</changefreq>")
+        lines.append("    <priority>0.6</priority>")
+        lines.append("  </url>")
+    lines.append("</urlset>")
+    lines.append("")
+    return "\n".join(lines)
+
+
 def main(dry_run: bool) -> int:
     print(f"[generate_static_blog] Fetching posts from {WP_API}")
     posts = fetch_all_posts()
@@ -444,8 +488,21 @@ def main(dry_run: bool) -> int:
                 print(f"  deleted blog/{existing.name}")
             deleted += 1
 
+    # Sitemap auto-aggiornata
+    sitemap_xml = render_sitemap_xml(posts)
+    sitemap_changed = False
+    if SITEMAP_PATH.exists() and SITEMAP_PATH.read_text(encoding="utf-8") == sitemap_xml:
+        pass
+    else:
+        sitemap_changed = True
+        if dry_run:
+            print(f"  [DRY] would write sitemap.xml ({len(sitemap_xml)} bytes, {len(STATIC_PAGES)} static + {len(posts)} posts)")
+        else:
+            SITEMAP_PATH.write_text(sitemap_xml, encoding="utf-8")
+            print(f"  wrote sitemap.xml ({len(STATIC_PAGES)} static + {len(posts)} posts)")
+
     print(
-        f"[generate_static_blog] Done. written={written} skipped={skipped} deleted={deleted}"
+        f"[generate_static_blog] Done. written={written} skipped={skipped} deleted={deleted} sitemap_changed={sitemap_changed}"
     )
     return 0
 
