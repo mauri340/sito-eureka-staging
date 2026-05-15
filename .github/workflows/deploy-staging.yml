@@ -11,6 +11,22 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
+      - name: Override robots.txt to block all crawlers on staging
+        run: |
+          cat > robots.txt <<'EOF'
+          # STAGING — non indicizzare. Vedere robots.txt di produzione su apprendimentorapido.it
+          User-agent: *
+          Disallow: /
+          EOF
+
+      - name: Override sitemap.xml to be empty on staging
+        run: |
+          cat > sitemap.xml <<'EOF'
+          <?xml version="1.0" encoding="UTF-8"?>
+          <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+          </urlset>
+          EOF
+
       - name: Deploy via SSH rsync
         uses: burnett01/rsync-deployments@7.0.1
         with:
