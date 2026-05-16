@@ -91,9 +91,10 @@ class AnalyticsIntegration {
       return;
     }
 
-    window._linkedin_partner_id = "6008396";
+    // pixel 2922380 = account ufficiale apprendimento rapido
+    window._linkedin_partner_id = "2922380";
     window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || [];
-    window._linkedin_data_partner_ids.push("6008396");
+    window._linkedin_data_partner_ids.push("2922380");
 
     const script = document.createElement('script');
     script.type = 'text/javascript';
@@ -161,7 +162,7 @@ class AnalyticsIntegration {
     // LinkedIn (for specific conversion events)
     if (window.lintrk && this.isLinkedInConversionEvent(eventType)) {
       try {
-        window.lintrk('track', { conversion_id: 6819532 });
+        window.lintrk('track', { conversion_id: 25089500 });
         console.log('LinkedIn conversion tracked:', eventType);
       } catch (error) {
         console.warn('LinkedIn tracking error:', error);
@@ -227,7 +228,7 @@ class AnalyticsIntegration {
     // LinkedIn conversion
     if (window.lintrk) {
       try {
-        window.lintrk('track', { conversion_id: 6819532 });
+        window.lintrk('track', { conversion_id: 25089500 });
         console.log('LinkedIn lead conversion tracked');
       } catch (error) {
         console.warn('LinkedIn lead tracking error:', error);
