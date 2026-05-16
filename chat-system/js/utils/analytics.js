@@ -50,11 +50,14 @@
 })();
 
 
-/* 3. LINKEDIN INSIGHT TAG */
+/* 3. LINKEDIN INSIGHT TAG (pixel 2922380 = account ufficiale) */
 (function loadLinkedinInsight() {
-    window._linkedin_partner_id = "6008396";
+    // Skip se gia' caricato (es. da footer-loader.js) per evitare doppio pixel
+    if (window._linkedin_partner_id_loaded) return;
+    window._linkedin_partner_id_loaded = true;
+    window._linkedin_partner_id = "2922380";
     window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || [];
-    window._linkedin_data_partner_ids.push("6008396");
+    window._linkedin_data_partner_ids.push("2922380");
     const script = document.createElement('script');
     script.type = 'text/javascript';
     script.async = true;
@@ -78,7 +81,7 @@ export function trackLead() {
     window.fbq('track', 'Lead');
   }
   if (typeof window.lintrk === 'function') {
-    window.lintrk('track', { conversion_id: 6819532 });
+    window.lintrk('track', { conversion_id: 25089500 });
   }
 }
 
