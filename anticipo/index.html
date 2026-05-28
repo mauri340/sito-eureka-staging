@@ -398,6 +398,106 @@
     font-style: normal;
   }
 
+  /* ===== SECTION: ROADMAP 3 FASI ===== */
+  .roadmap {
+    background: var(--paper);
+    padding: 80px 0;
+  }
+  .roadmap .container { max-width: 1000px; }
+  .roadmap h2 {
+    text-align: center;
+    margin-bottom: 12px;
+  }
+  .roadmap-lead {
+    text-align: center;
+    color: var(--muted);
+    margin-bottom: 56px;
+    font-size: 1.0625rem;
+  }
+  .roadmap-grid {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+    gap: 18px;
+    align-items: center;
+    margin-bottom: 48px;
+  }
+  @media (max-width: 720px) {
+    .roadmap-grid {
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+    .roadmap-arrow { display: none; }
+  }
+  .roadmap-step {
+    background: #ffffff;
+    border: 2px solid var(--ink-50);
+    border-radius: 12px;
+    padding: 28px 22px;
+    text-align: center;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .roadmap-step.is-now {
+    border-color: var(--teal);
+    background: linear-gradient(135deg, #ffffff 0%, var(--mint) 100%);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(14, 124, 115, 0.15);
+  }
+  .roadmap-step-tag {
+    display: inline-block;
+    font-family: 'Geist Mono', 'Menlo', monospace;
+    font-size: 0.75rem;
+    color: var(--teal);
+    background: rgba(14, 124, 115, 0.10);
+    padding: 4px 10px;
+    border-radius: 100px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    font-weight: 600;
+  }
+  .roadmap-step.is-now .roadmap-step-tag {
+    background: var(--teal);
+    color: #ffffff;
+  }
+  .roadmap-step-title {
+    font-family: 'Geist', sans-serif;
+    font-size: clamp(1.25rem, 2.2vw, 1.625rem);
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 6px;
+    line-height: 1.2;
+  }
+  .roadmap-step-time {
+    font-size: 0.9375rem;
+    color: var(--muted);
+  }
+  .roadmap-step.is-now .roadmap-step-time {
+    color: var(--teal-press);
+    font-weight: 500;
+  }
+  .roadmap-arrow {
+    font-family: 'Geist', sans-serif;
+    font-size: 1.5rem;
+    color: var(--teal);
+    text-align: center;
+    font-weight: 700;
+  }
+  .roadmap-tagline {
+    text-align: center;
+    font-family: 'Geist', sans-serif;
+    font-size: clamp(1.125rem, 2.2vw, 1.4rem);
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.5;
+    max-width: 740px;
+    margin: 0 auto;
+  }
+  .roadmap-tagline em {
+    color: var(--teal);
+    font-style: normal;
+    font-weight: 700;
+  }
+
   /* ===== SECTION: FOUNDER OFFER ===== */
   .founder {
     background: var(--ink);
@@ -1108,6 +1208,36 @@
     <p class="lead">
       Esami. Concorsi. Matematica. Lingue. Funzionano tutte, su materiali reali.
     </p>
+  </div>
+</section>
+
+<!-- ============== ROADMAP 3 FASI ============== -->
+<section class="roadmap">
+  <div class="container">
+    <h2>Come apriremo, in tre fasi.</h2>
+    <p class="roadmap-lead">Non scarsità marketing — sequenza tecnica reale.</p>
+
+    <div class="roadmap-grid">
+      <div class="roadmap-step is-now">
+        <span class="roadmap-step-tag">Fase 1 · qui sei tu</span>
+        <div class="roadmap-step-title">100 founder</div>
+        <div class="roadmap-step-time">Day-1 della beta</div>
+      </div>
+      <div class="roadmap-arrow">→</div>
+      <div class="roadmap-step">
+        <span class="roadmap-step-tag">Fase 2</span>
+        <div class="roadmap-step-title">+1.000 abbonati</div>
+        <div class="roadmap-step-time">~3 mesi dopo</div>
+      </div>
+      <div class="roadmap-arrow">→</div>
+      <div class="roadmap-step">
+        <span class="roadmap-step-tag">Fase 3</span>
+        <div class="roadmap-step-title">Pubblico generale</div>
+        <div class="roadmap-step-time">~6 mesi dopo</div>
+      </div>
+    </div>
+
+    <p class="roadmap-tagline">Chi è in Fase 1 ha <em>mesi di vantaggio</em> sullo strumento prima che lo abbia chiunque altro. Per chi ha un concorso a marzo, un esame a giugno, una promozione a settembre — la differenza è enorme.</p>
   </div>
 </section>
 
