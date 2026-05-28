@@ -645,6 +645,57 @@
   }
   .form-error.show { display: block; }
 
+  /* ===== NERD ASIDE ===== */
+  .nerd-aside {
+    background: var(--paper);
+    padding: 60px 0 40px;
+  }
+  .nerd-aside .container {
+    max-width: 720px;
+  }
+  .nerd-card {
+    background: linear-gradient(135deg, #ffffff 0%, var(--mint) 100%);
+    border: 1px solid rgba(14, 124, 115, 0.18);
+    border-radius: 14px;
+    padding: 32px 36px;
+    text-align: center;
+    position: relative;
+  }
+  @media (max-width: 540px) {
+    .nerd-card { padding: 28px 22px; }
+  }
+  .nerd-tag {
+    display: inline-block;
+    font-family: 'Geist Mono', 'Menlo', 'Monaco', monospace;
+    font-size: 0.75rem;
+    color: var(--teal);
+    background: rgba(14, 124, 115, 0.08);
+    padding: 4px 12px;
+    border-radius: 100px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    font-weight: 500;
+  }
+  .nerd-card p {
+    font-size: 1.0625rem;
+    color: var(--ink);
+    line-height: 1.7;
+    margin: 0;
+  }
+  .nerd-card p strong {
+    color: var(--teal-press);
+    font-weight: 600;
+  }
+  .nerd-card .nerd-question {
+    font-family: 'Geist', sans-serif;
+    font-weight: 600;
+    font-size: 1.125rem;
+    color: var(--ink);
+    display: block;
+    margin-bottom: 12px;
+  }
+
   /* ===== FAQ ===== */
   .faq { background: #ffffff; }
   .faq .container { max-width: 760px; }
@@ -728,7 +779,7 @@
 <header>
   <div class="container">
     <div class="brand-mini">
-      Apprendimento Rapido <span class="accent">·</span> il nuovo strumento di Maurizio Possenti
+      Apprendimento Rapido <span class="accent">·</span> il futuro dell'apprendimento è qui, nelle tue mani
     </div>
     <div class="header-meta">accesso anticipato</div>
   </div>
@@ -740,9 +791,9 @@
     <span class="eyebrow">100 posti founder · beta privata in arrivo</span>
     <h1>Cinquecento pagine. <span class="highlight">Un click.</span><br>Venti minuti.</h1>
     <p class="lead">
-      Il Metodo Eureka, dentro qualcosa che lavora al posto tuo.
-      Carichi un PDF. La fase organizzativa e la fase mnemonica sono fatte.
-      A te rimane solo capire.
+      Il Metodo Eureka prende vita propria e studia per te.
+      Carichi un PDF — il resto è fatto.
+      A te rimane solo <strong>ascoltare</strong>.
     </p>
     <a href="#form" class="btn btn-large">Voglio essere tra i primi 100</a>
     <p class="subnote">Niente da pagare ora. Niente da decidere ora. Solo il posto tenuto da parte.</p>
@@ -816,9 +867,9 @@
 <!-- ============== AREA SELECTOR + FORM ============== -->
 <section class="form-section" id="form">
   <div class="container">
-    <h2>Per quale area stai studiando?</h2>
+    <h2>Per chi sarà indispensabile?</h2>
     <p class="section-lead">
-      Scegli la tua area e scopri come lo strumento ti aiuta in concreto.
+      Per chi vuole risultati in poco tempo — per necessità o per ambizione. Questa è la scelta migliore.
     </p>
 
     <!-- 4 button selector -->
@@ -1059,6 +1110,19 @@
     </div>
 
     <a href="#form" class="btn btn-large">Voglio essere tra i primi 100</a>
+  </div>
+</section>
+
+<!-- ============== NERD ASIDE ============== -->
+<section class="nerd-aside">
+  <div class="container">
+    <div class="nerd-card">
+      <span class="nerd-tag">· per i curiosi ·</span>
+      <span class="nerd-question">Sei un piccolo nerd curioso di AI?</span>
+      <p>
+        Sappi che dietro abbiamo combinato <strong>diverse intelligenze</strong> che, con la giusta calibrazione, hanno dato risultati sorprendenti in velocità, performance e comprensione.
+      </p>
+    </div>
   </div>
 </section>
 
