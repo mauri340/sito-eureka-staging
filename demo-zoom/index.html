@@ -1110,6 +1110,52 @@
         setInterval(tick, 1000);
     }
 
+    /* ── Attribuzione: cattura UTM + li_fat_id (click id LinkedIn) ── */
+    function captureAttribution() {
+        try {
+            const p = new URLSearchParams(window.location.search);
+            // normalizza la source: corregge typo comuni (es. "likedin") -> "linkedin"
+            const normSource = (s) => {
+                if (!s) return '';
+                const v = String(s).trim().toLowerCase();
+                if (['likedin','linkdin','linked-in','linkedln','linkdein','linkedin'].includes(v)) return 'linkedin';
+                return v;
+            };
+            const readCookie = (name) => {
+                const m = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
+                return m ? decodeURIComponent(m[1]) : '';
+            };
+            const liFat = p.get('li_fat_id') || readCookie('li_fat_id') || readCookie('_li_fat') || '';
+            const attr = {
+                utm_source:   normSource(p.get('utm_source')),
+                utm_medium:   (p.get('utm_medium')   || '').trim(),
+                utm_campaign: (p.get('utm_campaign') || '').trim(),
+                utm_content:  (p.get('utm_content')  || '').trim(),
+                utm_id:       (p.get('utm_id')       || '').trim(),
+                utm_term:     (p.get('utm_term')     || '').trim(),
+                li_fat_id:    (liFat || '').trim(),
+                gclid:        (p.get('gclid')  || '').trim(),
+                fbclid:       (p.get('fbclid') || '').trim(),
+                landing_url:  window.location.href,
+                referrer:     document.referrer || ''
+            };
+            // persisti la prima cattura "con dati" così sopravvive a refresh/navigazione
+            const hasData = ['utm_source','utm_campaign','li_fat_id','gclid','fbclid'].some(k => attr[k]);
+            if (hasData) sessionStorage.setItem('ar_attribution', JSON.stringify(attr));
+            return attr;
+        } catch (e) {
+            return {};
+        }
+    }
+
+    function getAttribution() {
+        try {
+            const stored = sessionStorage.getItem('ar_attribution');
+            if (stored) return JSON.parse(stored);
+        } catch (e) {}
+        return captureAttribution();
+    }
+
     /* ── Invio form ── */
     async function handleSubmit() {
         const btn = document.getElementById('submitBtn');
@@ -1144,13 +1190,21 @@
         btn.disabled = true;
         btn.textContent = 'Invio in corso...';
 
+        // Attribuzione: allega solo i campi valorizzati (no chiavi vuote)
+        const attribution = getAttribution();
+        const customFields = {};
+        Object.keys(attribution).forEach(k => {
+            if (attribution[k]) customFields[k] = attribution[k];
+        });
+
         const payload = {
             nome:       nome,
             cognome:    cognome,
             email:      email,
             telefono:   tel || null,
             landing_id: LANDING_CONFIG.landingId,
-            source:     'squeeze_page_demo_zoom'
+            source:     'squeeze_page_demo_zoom',
+            custom_fields: customFields
         };
 
         try {
@@ -1168,7 +1222,7 @@
                 // Tracking conversione
                 if (typeof fbq    === 'function') fbq('track', 'Lead');
                 if (typeof gtag   === 'function') gtag('event', 'generate_lead', { event_category:'Form', event_label:'Webinar Demo Zoom' });
-                if (typeof lintrk === 'function') lintrk('track', { conversion_id: 6819532 });
+                if (typeof lintrk === 'function') lintrk('track', { conversion_id: 25089500 });
 
                 // Aggiorna posti e reset form
                 if (cfg) { cfg.posti_rimanenti--; updateUI(); }
@@ -1192,7 +1246,10 @@
     }
 
     /* ── Init ── */
-    document.addEventListener('DOMContentLoaded', loadConfig);
+    document.addEventListener('DOMContentLoaded', () => {
+        captureAttribution();   // cattura UTM + li_fat_id appena la pagina carica
+        loadConfig();
+    });
 </script>
 
 <script src="../chat-widget.js" defer></script>
