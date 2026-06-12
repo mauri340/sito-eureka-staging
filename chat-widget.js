@@ -1272,6 +1272,12 @@
           requestBody.user_context = userSource.getChatInitContext();
         }
 
+        // Contesto RAMPA (additivo): le risposte ai pulsanti della rampa
+        // pre-chat, cosi' l'AI sa gia' obiettivo + leva e non le richiede.
+        if (userParams && userParams.ramp_context) {
+          requestBody.ramp_context = userParams.ramp_context;
+        }
+
         return fetch(API_BASE + '/api/chat/message', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },

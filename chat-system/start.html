@@ -142,7 +142,7 @@
       // ── 4. Flusso rampa ────────────────────────────────────────────
       var ctx = { goal:'', goalLabel:'', answers:[] };
       function startRamp(){
-        rampBot("Ciao, sono <b>Piero</b> 👋<br>In mezzo minuto capisco la tua situazione e ti dico come il Metodo Eureka può aiutarti. <b>Qual è il tuo obiettivo?</b>");
+        rampBot("Ciao, sono <b>Piero</b> 👋 Partiamo dal tuo <b>obiettivo</b>:");
         rampOptions(OBJECTIVES, function(o){ ctx.goal=o.key; ctx.goalLabel=o.short; var p=P[o.key]; askQ(p,0); });
       }
       function askQ(p, i){
@@ -154,6 +154,12 @@
         });
       }
       function handoff(p){
+        // Aggiorna il widget col CONTESTO della rampa: verra' inviato col
+        // primo messaggio cosi' l'AI sa gia' obiettivo + risposte e non le richiede.
+        try {
+          var rampContext = { goal: ctx.goalLabel, answers: ctx.answers.slice() };
+          window.ChatWidget.init(Object.assign({}, chatParams, { skipGreeting: true, ramp_context: rampContext }));
+        } catch (e) {}
         rampType(function(){
           rampBot(p.openQ);
           // passa la parola all'utente: mostra l'input vero del widget
