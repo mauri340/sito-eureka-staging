@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat con Piero · Apprendimento Rapido</title>
+
+    <!-- Facebook Pixel: scrive _fbc/_fbp da fbclid per attribuzione paid_ad -->
+    <script>
+      !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', '957273196609597');
+      fbq('track', 'PageView');
+    </script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap');
+        html { box-sizing: border-box; }
+        *, *:before, *:after { box-sizing: inherit; }
+        body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #0D1B2A 0%, #1C2B3A 100%); color: #1a202c; margin: 0; padding: 0; height: 100vh; height: 100dvh; overflow: hidden; }
+        #chat-page-container { display: flex; justify-content: center; align-items: center; height: 100vh; height: 100dvh; padding: 16px; }
+        #chat-fullscreen { width: 100%; max-width: 700px; height: calc(100dvh - 32px); background:#fff; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,.1); display: flex; flex-direction: column; overflow: hidden; }
+
+        /* Override widget per fullscreen (come chat.html) */
+        #chat-fullscreen #ew-chat-widget,
+        #chat-fullscreen #ew-chat-widget #ew-chat-box,
+        #chat-fullscreen #ew-chat-widget #ew-chat-box.ew-visible {
+            position: relative !important; inset: auto !important; width: 100% !important; height: 100% !important;
+            max-width: none !important; max-height: none !important; border-radius: 16px !important; transform: none !important;
+            opacity: 1 !important; pointer-events: auto !important; box-shadow: none !important; border: none !important;
+            display: flex !important; flex-direction: column !important; overflow: hidden !important;
+        }
+        #chat-fullscreen #ew-chat-toggle { display: none !important; }
+        #chat-fullscreen .ew-header { flex-shrink: 0 !important; }
+        #chat-fullscreen .ew-messages, #chat-fullscreen #ew-messages { flex: 1 1 0 !important; min-height: 0 !important; overflow-y: auto !important; -webkit-overflow-scrolling: touch !important; }
+        #chat-fullscreen .ew-input-bar { flex-shrink: 0 !important; order: 99 !important; }
+        #chat-fullscreen .ew-powered { flex-shrink: 0 !important; order: 100 !important; }
+
+        /* === Rampa: pulsanti d'opzione dentro l'area messaggi del widget === */
+        .ramp-options { display: flex; flex-direction: column; gap: 8px; margin: 6px 0 4px; align-items: flex-start; width: 100%; animation: rampPop .25s ease; }
+        .ramp-opt { background:#fff; border: 2px solid #00A988; color:#007a63; padding: 12px 14px; border-radius: 13px; font-size: 15px; font-weight: 700; text-align: left; cursor: pointer; width: 100%; max-width: 92%; transition: all .15s; font-family: inherit; }
+        .ramp-opt:active { transform: scale(.98); background:#00A988; color:#fff; }
+        /* Nasconde la barra input finché la rampa non passa la parola */
+        #chat-fullscreen.ramp-running .ew-input-bar { display: none !important; }
+        @keyframes rampPop { from { opacity:0; transform: translateY(6px);} to { opacity:1; transform: translateY(0);} }
+        .footer { display: none !important; }
+        @media (max-width: 768px) {
+            #chat-page-container { padding: 0; height: 100dvh; }
+            #chat-fullscreen { height: 100dvh; max-width: 100%; border-radius: 0; box-shadow: none; }
+        }
+    </style>
+</head>
+<body>
+    <div id="chat-page-container">
+        <div id="chat-fullscreen"><!-- widget iniettato qui --></div>
+    </div>
+    <div id="footer-placeholder"></div>
+
+    <!-- Disabilita il widget galleggiante globale su questa pagina dedicata -->
+    <script>window.DISABLE_CHAT_WIDGET = true;</script>
+    <!-- Motore chat di produzione (stesso di chat.html) -->
+    <script src="../chat-widget.js"></script>
+
+    <script>
+    (function () {
+      var urlParams = new URLSearchParams(window.location.search);
+
+      // ── 1. Cattura attribuzione (identica a chat.html) ─────────────
+      var chatParams = {
+        nome: urlParams.get('nome'), cognome: urlParams.get('cognome'),
+        email: urlParams.get('email'), telefono: urlParams.get('telefono')
+      };
+      var hookId = urlParams.get('hook');
+      if (hookId) {
+        chatParams.hook_id = hookId;
+        chatParams.source = 'paid_ad';
+        chatParams.utm = {
+          source: urlParams.get('utm_source') || null, medium: urlParams.get('utm_medium') || null,
+          campaign: urlParams.get('utm_campaign') || null, content: urlParams.get('utm_content') || null,
+          term: urlParams.get('utm_term') || null
+        };
+        try {
+          var fbcMatch = document.cookie.match(/_fbc=([^;]+)/);
+          if (fbcMatch) { chatParams.fbc = fbcMatch[1]; }
+          else { var fbclid = urlParams.get('fbclid'); if (fbclid) chatParams.fbc = 'fb.1.' + Date.now() + '.' + fbclid; }
+          var fbpMatch = document.cookie.match(/_fbp=([^;]+)/);
+          if (fbpMatch) chatParams.fbp = fbpMatch[1];
+        } catch (e) {}
+        try { localStorage.setItem('paid_ad_hook_id', hookId); localStorage.setItem('paid_ad_utm', JSON.stringify(chatParams.utm)); } catch (e) {}
+      }
+
+      // ── 2. Contenuto rampa (v5, ramificato per persona) ────────────
+      var OBJECTIVES = [
+        {label:"📋 Superare un concorso pubblico", short:"Concorso pubblico", key:"concorso"},
+        {label:"📈 Aggiornarmi / restare al passo nella professione", short:"Aggiornamento professionale", key:"aggiorna"},
+        {label:"🎓 Una (seconda) laurea per carriera o cambio lavoro", short:"Laurea (lavoro+studio)", key:"laurea"},
+        {label:"🔄 Cambiare lavoro / salto di carriera", short:"Cambio lavoro", key:"cambio"},
+        {label:"🌍 Una lingua che mi serve per lavoro", short:"Lingua per lavoro", key:"lingua"},
+        {label:"🌱 Sono in pensione, voglio nuovi progetti", short:"Pensione / nuovi progetti", key:"pensione"}
+      ];
+      var P = {
+        concorso:{ack:"Un concorso è una gara: vince chi memorizza di più e regge la pressione. 👊",
+          q:[{q:"Hai già la data del concorso?",o:[{l:"⏱️ Sì, tra pochi mesi",s:"Data tra pochi mesi"},{l:"📅 Sì, ma più avanti",s:"Data più avanti"},{l:"❓ Non è ancora uscita",s:"Data non ancora uscita"}]},
+             {q:"E cosa ti preoccupa di più?",o:[{l:"📚 La quantità di programma",s:"Mole di programma"},{l:"🧠 Ricordarla il giorno dell'esame",s:"Ricordare all'esame"},{l:"🔁 Ho già provato e non passato",s:"Già provato senza passare"}]}],
+          openQ:"Sei nel posto giusto 😊 Parliamone con calma, ci pensiamo insieme: a che punto sei col programma e cosa hai provato finora? Raccontamelo come viene."},
+        aggiorna:{ack:"Stare al passo nella professione vuol dire assorbire tanto, in fretta, mentre lavori. 📈",
+          q:[{q:"Ti serve soprattutto per cosa?",o:[{l:"🚀 Un avanzamento / ruolo nuovo",s:"Avanzamento di carriera"},{l:"🤖 Non restare indietro (AI, colleghi più giovani)",s:"Non restare indietro"},{l:"📌 Il lavoro lo richiede ora",s:"Richiesto dal lavoro"}]},
+             {q:"E cosa ti pesa di più?",o:[{l:"🌊 La valanga di roba nuova",s:"Troppa roba nuova"},{l:"⏳ Il tempo che non ho",s:"Manca il tempo"},{l:"🧠 Studio ma non mi resta",s:"Non mi resta"}]}],
+          openQ:"Ci siamo, ti do una mano volentieri 😊 Raccontami con parole tue, senza fretta: cosa devi tenere aggiornato e come fai oggi a starci dietro?"},
+        laurea:{ack:"Studiare per una laurea mentre lavori è una maratona: la vera sfida è incastrarla nella vita. 🎓",
+          q:[{q:"Per cosa ti serve la laurea?",o:[{l:"💰 Un avanzamento / stipendio",s:"Avanzamento/stipendio"},{l:"🔄 Cambiare lavoro",s:"Per cambiare lavoro"},{l:"📌 Una necessità del mio ruolo",s:"Necessità del ruolo"}]},
+             {q:"E la difficoltà più grande?",o:[{l:"⏳ Incastrarla con lavoro e famiglia",s:"Tempo: lavoro+famiglia"},{l:"📚 Reggere la mole di esami",s:"Mole di esami"},{l:"😟 La paura di mollare come tanti",s:"Paura di mollare"}]}],
+          openQ:"Bene, sono qui apposta per questo 😊 Dimmi pure con calma: quanti esami ti mancano e quanto tempo riesci a ritagliarti? Vediamo insieme come renderlo sostenibile."},
+        cambio:{ack:"Cambiare lavoro a questa età è una delle scelte più coraggiose — e l'esperienza che hai è un vantaggio. 🔄",
+          q:[{q:"Cosa ti spinge a cambiare?",o:[{l:"😮‍💨 Sono stanco, non mi rispecchia più",s:"Stanco, non mi rispecchia"},{l:"📈 Un'occasione / ruolo migliore",s:"Occasione migliore"},{l:"💰 Voglio guadagnare di più",s:"Guadagnare di più"}]},
+             {q:"E cosa ti frena di più?",o:[{l:"😟 Il dubbio di farcela (alla mia età)",s:"Dubbio di farcela"},{l:"⏳ Il tempo per imparare il nuovo",s:"Tempo per imparare"},{l:"🧭 Non so da dove iniziare",s:"Da dove iniziare"}]}],
+          openQ:"Hai già fatto la cosa più difficile: decidere 😊 Raccontami senza fretta verso cosa vorresti spostarti e cosa senti che ti manca — lo guardiamo insieme."},
+        lingua:{ack:"Una lingua per lavoro deve diventare operativa davvero, non restare a metà come tante volte. 🌍",
+          q:[{q:"Ti serve per qualcosa di preciso?",o:[{l:"💼 Sì: lavoro / clienti / trasferta",s:"Per lavoro/clienti"},{l:"📌 È un requisito (concorso, ruolo)",s:"È un requisito"},{l:"🌍 In generale, mi servirebbe",s:"In generale"}]},
+             {q:"Hai già provato corsi o app?",o:[{l:"😕 Sì, ma mi sono arenato",s:"Provati, arenato"},{l:"🚪 Sì, ma ho mollato",s:"Provati, mollato"},{l:"🆕 No, è la prima volta",s:"Prima volta"}]}],
+          openQ:"Tranquillo, ci siamo passati in tanti 😊 Raccontami con calma dove ti serve usarla e dove ti eri arenato: troviamo il punto e lo sblocchiamo insieme."},
+        pensione:{ack:"Tenere la mente attiva e imparare cose nuove è il modo migliore di vivere questa fase. 🌱",
+          q:[{q:"È più per cosa?",o:[{l:"🎯 Un progetto / passione preciso",s:"Progetto/passione"},{l:"🧠 Tenere la mente lucida e sveglia",s:"Mente lucida"},{l:"👥 Conoscere persone, non solo imparare",s:"Socialità"}]},
+             {q:"Cosa ti piacerebbe?",o:[{l:"🌍 Una lingua / i viaggi",s:"Lingua/viaggi"},{l:"🎨 Una passione nuova",s:"Passione nuova"},{l:"👨‍👩‍👧 Stare dietro a figli/nipoti",s:"Aiutare figli/nipoti"}]}],
+          openQ:"Che bello 😊 Raccontami con tutta calma cosa ti piacerebbe imparare o riprendere in mano: partiamo da lì, un passo alla volta."}
+      };
+
+      // ── 3. Helper DOM (usano la struttura del widget) ──────────────
+      function $(id){ return document.getElementById(id); }
+      function msgsEl(){ return $('ew-messages'); }
+      function insertBeforeTyping(node){ var m=msgsEl(); var t=$('ew-typing'); if(t&&t.parentNode===m){ m.insertBefore(node,t);} else { m.appendChild(node);} scrollDown(); }
+      function scrollDown(){ var m=msgsEl(); if(m) m.scrollTop=m.scrollHeight; }
+      function rampBot(html){ var d=document.createElement('div'); d.className='ew-msg ew-msg-bot'; var b=document.createElement('div'); b.className='ew-bubble'; b.innerHTML=html; d.appendChild(b); insertBeforeTyping(d); }
+      function rampUser(text){ var d=document.createElement('div'); d.className='ew-msg ew-msg-user'; var b=document.createElement('div'); b.className='ew-bubble'; b.textContent=text; d.appendChild(b); insertBeforeTyping(d); }
+      function rampOptions(list, cb){ var w=document.createElement('div'); w.className='ramp-options';
+        list.forEach(function(o){ var btn=document.createElement('button'); btn.className='ramp-opt'; btn.innerHTML=o.l||o.label;
+          btn.onclick=function(){ rampUser(o.s||o.short); w.parentNode&&w.parentNode.removeChild(w); cb(o); };
+          var holder=document.createElement('div'); holder.className='ew-msg'; holder.style.width='100%'; holder.appendChild(btn); w.appendChild(btn); });
+        insertBeforeTyping(w); }
+      function rampType(then){ rampBot("<span style='opacity:.5'>Piero sta scrivendo…</span>"); var last=msgsEl().querySelector('.ew-msg-bot:last-of-type');
+        setTimeout(function(){ if(last&&last.parentNode){ last.parentNode.removeChild(last);} then(); }, 650); }
+
+      // ── 4. Flusso rampa ────────────────────────────────────────────
+      var ctx = { goal:'', goalLabel:'', answers:[] };
+      function startRamp(){
+        rampBot("Ciao, sono <b>Piero</b> 👋<br>In mezzo minuto capisco la tua situazione e ti dico come il Metodo Eureka può aiutarti. <b>Qual è il tuo obiettivo?</b>");
+        rampOptions(OBJECTIVES, function(o){ ctx.goal=o.key; ctx.goalLabel=o.short; var p=P[o.key]; askQ(p,0); });
+      }
+      function askQ(p, i){
+        if (i >= p.q.length){ handoff(p); return; }
+        rampType(function(){
+          var head = (i===0) ? (p.ack+' ') : '';
+          rampBot(head + p.q[i].q);
+          rampOptions(p.q[i].o, function(o){ ctx.answers.push(o.s); askQ(p, i+1); });
+        });
+      }
+      function handoff(p){
+        rampType(function(){
+          rampBot(p.openQ);
+          // passa la parola all'utente: mostra l'input vero del widget
+          document.getElementById('chat-fullscreen').classList.remove('ramp-running');
+          var inp = $('ew-input'); if (inp){ inp.disabled=false; try{ inp.focus(); }catch(e){} }
+          scrollDown();
+        });
+      }
+
+      // ── 5. Avvio: gate su 'hook' (solo traffico paid) ──────────────
+      function waitFor(cond, cb, tries){ tries=tries||50; if(cond()){cb();return;} if(tries<=0)return; setTimeout(function(){ waitFor(cond,cb,tries-1); },100); }
+      function boot(){
+        waitFor(function(){ return window.ChatWidget; }, function(){
+          if (hookId) {
+            // paid → rampa + chat seamless, saluto soppresso, contesto passato
+            chatParams.skipGreeting = true;
+            chatParams.ramp_pending = true;
+            window.ChatWidget.init(chatParams);
+            window.ChatWidget.open();
+            document.getElementById('chat-fullscreen').classList.add('ramp-running');
+            waitFor(function(){ return msgsEl(); }, function(){ startRamp(); });
+          } else {
+            // non-paid → chat normale identica a oggi (nessuna rampa)
+            window.ChatWidget.init(chatParams);
+            window.ChatWidget.open();
+          }
+        });
+      }
+      boot();
+    })();
+    </script>
+    <script src="/components/footer-loader.js"></script>
+</body>
+</html>
