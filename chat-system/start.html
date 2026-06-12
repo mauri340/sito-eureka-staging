@@ -142,19 +142,36 @@
 
       // ── 4. Flusso rampa ────────────────────────────────────────────
       var ctx = { goal:'', goalLabel:'', answers:[] };
+
+      // Beacon leggero: traccia fin dove arriva l'utente nei pulsanti (anche se
+      // non scrive) → backend salva extra.ramp_progress → mappa dell'imbuto.
+      var RAMP_API = 'https://ai-chat-service-nls9.onrender.com';
+      function rampEvent(step, reachedHandoff){
+        try {
+          var sid = localStorage.getItem('ew_session_id') || localStorage.getItem('chat_session_id_current');
+          if (!sid) return;
+          fetch(RAMP_API + '/api/chat/ramp-event', {
+            method:'POST', headers:{'Content-Type':'application/json'}, keepalive:true,
+            body: JSON.stringify({ session_id: sid, step: step, goal: ctx.goalLabel || null,
+                                   answers: ctx.answers || [], reached_handoff: !!reachedHandoff })
+          }).catch(function(){});
+        } catch(e){}
+      }
+
       function startRamp(){
         rampBot("Ciao, sono <b>Piero</b> 👋 Partiamo dal tuo <b>obiettivo</b>:");
-        rampOptions(OBJECTIVES, function(o){ ctx.goal=o.key; ctx.goalLabel=o.short; var p=P[o.key]; askQ(p,0); });
+        rampOptions(OBJECTIVES, function(o){ ctx.goal=o.key; ctx.goalLabel=o.short; rampEvent('objective'); var p=P[o.key]; askQ(p,0); });
       }
       function askQ(p, i){
         if (i >= p.q.length){ handoff(p); return; }
         rampType(function(){
           var head = (i===0) ? (p.ack+' ') : '';
           rampBot(head + p.q[i].q);
-          rampOptions(p.q[i].o, function(o){ ctx.answers.push(o.s); askQ(p, i+1); });
+          rampOptions(p.q[i].o, function(o){ ctx.answers.push(o.s); rampEvent('q'+(i+1)); askQ(p, i+1); });
         });
       }
       function handoff(p){
+        rampEvent('handoff', true);  // arrivato alla frase-ponte (anche se poi non scrive)
         // Aggiorna il widget col CONTESTO della rampa: verra' inviato col
         // primo messaggio cosi' l'AI sa gia' obiettivo + risposte e non le richiede.
         try {
