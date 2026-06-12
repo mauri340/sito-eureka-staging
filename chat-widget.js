@@ -1169,10 +1169,21 @@
         hideTyping();
         sessionId = data.session_id;
         saveSessionResponse(data);
-        
+
+        // ── MODALITA' RAMPA (additivo, retro-compatibile) ──────────────
+        // Se l'utente arriva dalla "rampa" (start.html), il saluto l'ha gia'
+        // fatto la rampa con la sua frase-ponte: sopprimiamo il saluto del
+        // backend per non creare un doppio saluto / stacco. Sessione +
+        // attribuzione restano identiche; ChatAvviata scatta comunque al
+        // primo messaggio scritto. Agisce SOLO se init riceve skipGreeting.
+        if (userParams && userParams.skipGreeting) {
+          focusInput();
+          return;
+        }
+
         // Use personalized greeting if server doesn't provide one
         var message = data.speech || personalizedGreeting;
-        
+
         // Add bot's initial message to conversation history
         conversationHistory.push({role: 'assistant', content: message, timestamp: new Date().toISOString()});
         
@@ -1196,6 +1207,7 @@
       })
       .catch(function () {
         hideTyping();
+        if (userParams && userParams.skipGreeting) { focusInput(); return; }
         conversationHistory.push({role: 'assistant', content: personalizedGreeting, timestamp: new Date().toISOString()});
         updateChatHistoryInStorage();
         typeBotMessage(personalizedGreeting);
