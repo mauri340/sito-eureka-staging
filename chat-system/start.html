@@ -57,8 +57,9 @@
 
     <!-- Disabilita il widget galleggiante globale su questa pagina dedicata -->
     <script>window.DISABLE_CHAT_WIDGET = true;</script>
-    <!-- Motore chat di produzione (stesso di chat.html) -->
-    <script src="../chat-widget.js"></script>
+    <!-- Motore chat di produzione (stesso di chat.html). ?v= = cache-bust per
+         garantire sempre la versione con skipGreeting/ramp_context. -->
+    <script src="../chat-widget.js?v=ramp1"></script>
 
     <script>
     (function () {
