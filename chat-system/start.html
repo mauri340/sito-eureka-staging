@@ -147,15 +147,19 @@
       // non scrive) → backend salva extra.ramp_progress → mappa dell'imbuto.
       var RAMP_API = 'https://ai-chat-service-nls9.onrender.com';
       function rampEvent(step, reachedHandoff){
-        try {
+        // Ritenta per ~5s se il session_id non e' ancora pronto (tap velocissimi).
+        var attempts = 0;
+        (function trySend(){
           var sid = localStorage.getItem('ew_session_id') || localStorage.getItem('chat_session_id_current');
-          if (!sid) return;
-          fetch(RAMP_API + '/api/chat/ramp-event', {
-            method:'POST', headers:{'Content-Type':'application/json'}, keepalive:true,
-            body: JSON.stringify({ session_id: sid, step: step, goal: ctx.goalLabel || null,
-                                   answers: ctx.answers || [], reached_handoff: !!reachedHandoff })
-          }).catch(function(){});
-        } catch(e){}
+          if (!sid) { if (attempts++ < 25) setTimeout(trySend, 200); return; }
+          try {
+            fetch(RAMP_API + '/api/chat/ramp-event', {
+              method:'POST', headers:{'Content-Type':'application/json'}, keepalive:true,
+              body: JSON.stringify({ session_id: sid, step: step, goal: ctx.goalLabel || null,
+                                     answers: ctx.answers || [], reached_handoff: !!reachedHandoff })
+            }).catch(function(){});
+          } catch(e){}
+        })();
       }
 
       function startRamp(){
@@ -198,7 +202,7 @@
             window.ChatWidget.init(chatParams);
             window.ChatWidget.open();
             document.getElementById('chat-fullscreen').classList.add('ramp-running');
-            waitFor(function(){ return msgsEl(); }, function(){ startRamp(); });
+            waitFor(function(){ return msgsEl(); }, function(){ rampEvent('landed'); startRamp(); });
           } else {
             // non-paid → chat normale identica a oggi (nessuna rampa)
             window.ChatWidget.init(chatParams);
