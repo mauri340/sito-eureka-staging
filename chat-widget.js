@@ -1128,6 +1128,10 @@
       if (quizParams.fbp) payload.fbp = quizParams.fbp;
     }
 
+    // Rampa pre-chat: dice al backend di NON generare il saluto cold
+    // (l'apertura l'ha gia' fatta la rampa). Additivo.
+    if (quizParams.skipGreeting) payload.skip_greeting = true;
+
     return payload;
   }
 
