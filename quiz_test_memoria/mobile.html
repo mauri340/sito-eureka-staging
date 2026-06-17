@@ -225,6 +225,13 @@ src="https://www.facebook.com/tr?id=957273196609597&ev=PageView&noscript=1"
     @keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}
 
     .muted-link{color:var(--muted);font-size:.8em;text-align:center;text-decoration:underline;}
+
+    /* loader puntini */
+    .loader-dots{display:flex;gap:9px;justify-content:center;}
+    .loader-dots span{width:11px;height:11px;border-radius:50%;background:var(--green);animation:bounce 1.2s ease infinite;}
+    .loader-dots span:nth-child(2){animation-delay:.18s;}
+    .loader-dots span:nth-child(3){animation-delay:.36s;}
+    @keyframes bounce{0%,80%,100%{transform:scale(.5);opacity:.4;}40%{transform:scale(1);opacity:1;}}
 </style>
 </head>
 <body>
@@ -353,21 +360,13 @@ src="https://www.facebook.com/tr?id=957273196609597&ev=PageView&noscript=1"
         </div>
     </section>
 
-    <!-- 7) RISULTATO FINALE -->
+    <!-- 7) TRANSIZIONE → CHAT (i risultati li comunica Piero in chat) -->
     <section class="screen" id="s-finale">
-        <div class="screen-inner">
-            <div class="pulse-ic">🚀</div>
-            <div>
-                <div class="score-big" id="final-delta">+0%</div>
-                <p class="score-sub" id="final-sub"></p>
-            </div>
-            <div class="card" style="text-align:center;">
-                <h2>Vuoi dimezzare i tuoi tempi di studio?</h2>
-                <p class="lead" style="margin-top:8px;">Scopri le tecniche avanzate per esami, concorsi e lingue straniere — con un coach, gratis.</p>
-            </div>
-            <div class="cta-bar">
-                <button class="btn" id="cta-finale" onclick="inviaRisultatoFinale()">Continua →</button>
-            </div>
+        <div class="screen-inner" style="justify-content:center;text-align:center;gap:18px;flex:1;">
+            <div class="pulse-ic">🧠</div>
+            <h2>Ci siamo!</h2>
+            <p class="lead">Sto preparando i tuoi risultati…<br>Tra un istante Piero ti spiega com'è andata e come migliorare ancora.</p>
+            <div class="loader-dots"><span></span><span></span><span></span></div>
         </div>
     </section>
 
@@ -488,7 +487,12 @@ src="https://www.facebook.com/tr?id=957273196609597&ev=PageView&noscript=1"
             showScreen('s-lead');
         } else {
             punteggio2=calcola(recall.answers);
-            mostraFinale();
+            // Calcola il miglioramento per il payload; i risultati li comunica Piero in chat
+            miglioramentoPercentualeCalcolato = (punteggio1 < punteggio2)
+                ? (punteggio1===0 ? 100 : ((punteggio2-punteggio1)/punteggio1)*100)
+                : 0;
+            showScreen('s-finale');   // breve transizione mentre parte il redirect
+            inviaRisultatoFinale();
         }
     }
 
@@ -538,27 +542,21 @@ src="https://www.facebook.com/tr?id=957273196609597&ev=PageView&noscript=1"
         showScreen('s-video');
     }
 
-    // --- RISULTATO FINALE ---
-    function mostraFinale(){
-        if(punteggio1 < punteggio2){
-            miglioramentoPercentualeCalcolato = punteggio1===0 ? 100 : ((punteggio2-punteggio1)/punteggio1)*100;
-        } else { miglioramentoPercentualeCalcolato = 0; }
-
-        const deltaEl=document.getElementById('final-delta');
-        const subEl=document.getElementById('final-sub');
-        if(punteggio1 < punteggio2){
-            deltaEl.textContent=`+${miglioramentoPercentualeCalcolato.toFixed(0)}%`;
-            subEl.innerHTML=`Sei passato da <b>${punteggio1}</b> a <b>${punteggio2}</b> parole corrette!`;
-        } else {
-            deltaEl.textContent=`${punteggio2}/${numeroParole}`;
-            subEl.textContent=`Il tuo secondo punteggio è ${punteggio2} su ${numeroParole}.`;
-        }
-        showScreen('s-finale');
-    }
-
+    // --- INVIO RISULTATO + REDIRECT IN CHAT (i risultati li comunica Piero) ---
     async function inviaRisultatoFinale(){
-        const btn=document.getElementById('cta-finale');
-        btn.textContent='Un attimo…'; btn.disabled=true;
+        const fallbackUrl = `/chat-system/chat.html?quiz_status=memoria`
+            +`&nome=${encodeURIComponent(datiContatto.nome||'')}`
+            +`&cognome=${encodeURIComponent(datiContatto.cognome||'')}`
+            +`&email=${encodeURIComponent(datiContatto.email||'')}`
+            +`&telefono=${encodeURIComponent(datiContatto.telefono||'')}`
+            +`&punteggio1=${encodeURIComponent(punteggio1)}`
+            +`&punteggio2=${encodeURIComponent(punteggio2)}`
+            +`&miglioramento=${encodeURIComponent(miglioramentoPercentualeCalcolato.toFixed(0))}`;
+
+        let done=false;
+        const go=url=>{ if(done) return; done=true; clearTimeout(safety); window.location.href=url; };
+        // rete di sicurezza: se la POST si impalla, vai comunque in chat
+        const safety=setTimeout(()=>go(fallbackUrl), 6000);
 
         const payload={
             quiz_status:'memoria',
@@ -574,17 +572,9 @@ src="https://www.facebook.com/tr?id=957273196609597&ev=PageView&noscript=1"
                 method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload)
             });
             const data=await r.json();
-            if(data.token){ window.location.href=`/chat-system/chat.html?token=${data.token}`; return; }
-            throw new Error('no token');
+            go(data && data.token ? `/chat-system/chat.html?token=${data.token}` : fallbackUrl);
         }catch(e){
-            window.location.href=`/chat-system/chat.html?quiz_status=memoria`
-                +`&nome=${encodeURIComponent(datiContatto.nome||'')}`
-                +`&cognome=${encodeURIComponent(datiContatto.cognome||'')}`
-                +`&email=${encodeURIComponent(datiContatto.email||'')}`
-                +`&telefono=${encodeURIComponent(datiContatto.telefono||'')}`
-                +`&punteggio1=${encodeURIComponent(punteggio1)}`
-                +`&punteggio2=${encodeURIComponent(punteggio2)}`
-                +`&miglioramento=${encodeURIComponent(miglioramentoPercentualeCalcolato.toFixed(0))}`;
+            go(fallbackUrl);
         }
     }
 
