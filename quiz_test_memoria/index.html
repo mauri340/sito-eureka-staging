@@ -7,15 +7,15 @@
     <title>Test di Memoria</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
-<!-- Device routing: da telefono -> versione mobile. Messo PRIMA dei pixel per non sdoppiare il PageView. ?desk=1 = forza versione desktop -->
+<!-- Device routing: telefono -> mobile.html, computer -> desktop.html. PRIMA dei pixel per non sdoppiare il PageView. ?legacy=1 = forza il vecchio test -->
 <script>
 (function(){
   try{
+    if(/[?&]legacy=1/.test(location.search)) return;
     var ua = navigator.userAgent || '';
     var isPhone = /Mobi|Android|iPhone|iPod|Windows Phone|BlackBerry|IEMobile/i.test(ua) || window.innerWidth <= 768;
-    if(isPhone && !/[?&]desk=1/.test(location.search)){
-      location.replace('/quiz_test_memoria/mobile.html' + location.search);
-    }
+    var dest = isPhone ? 'mobile.html' : 'desktop.html';
+    location.replace('/quiz_test_memoria/' + dest + location.search);
   }catch(e){}
 })();
 </script>
