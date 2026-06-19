@@ -77,14 +77,14 @@ src="https://www.facebook.com/tr?id=957273196609597&ev=PageView&noscript=1"
     .screen{
         position:absolute;inset:0;
         display:flex;flex-direction:column;
-        padding:48px 56px;
+        padding:38px 56px;
         opacity:0;visibility:hidden;
         transform:translateY(16px) scale(.99);
         transition:opacity .45s ease, transform .45s ease, visibility .45s;
         overflow-y:auto;
     }
     .screen.active{opacity:1;visibility:visible;transform:none;}
-    .screen-inner{width:100%;max-width:660px;margin:auto;display:flex;flex-direction:column;gap:22px;}
+    .screen-inner{width:100%;max-width:660px;margin:auto;display:flex;flex-direction:column;gap:18px;}
     .center{text-align:center;align-items:center;}
 
     /* ---- Header / progress ---- */
@@ -101,7 +101,7 @@ src="https://www.facebook.com/tr?id=957273196609597&ev=PageView&noscript=1"
 
     /* ---- Tipografia ---- */
     .eyebrow{font-size:13px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--green-d);}
-    h1{font-size:2.5em;line-height:1.12;margin:0;font-weight:800;letter-spacing:-1px;}
+    h1{font-size:2.2em;line-height:1.14;margin:0;font-weight:800;letter-spacing:-1px;}
     h2{font-size:1.6em;line-height:1.25;margin:0;font-weight:800;letter-spacing:-.4px;}
     .lead{font-size:1.12em;line-height:1.6;color:var(--muted);margin:0;}
 
@@ -119,11 +119,11 @@ src="https://www.facebook.com/tr?id=957273196609597&ev=PageView&noscript=1"
     .btn[disabled]{opacity:.6;pointer-events:none;}
     .btn-ghost{background:transparent;color:var(--muted);box-shadow:none;font-weight:600;font-size:1em;padding:10px;min-width:0;}
     .btn-ghost:hover{transform:none;color:var(--ink);box-shadow:none;}
-    .cta-bar{margin-top:auto;padding-top:20px;display:flex;flex-direction:column;align-items:center;gap:8px;}
+    .cta-bar{margin-top:auto;padding-top:14px;display:flex;flex-direction:column;align-items:center;gap:8px;}
 
     /* ---- Intro ---- */
     .hero-badge{
-        width:84px;height:84px;border-radius:24px;margin:0 auto;
+        width:72px;height:72px;border-radius:22px;margin:0 auto;
         background:linear-gradient(135deg,var(--green),var(--green-d));
         display:flex;align-items:center;justify-content:center;font-size:42px;
         box-shadow:0 16px 32px rgba(0,169,136,.35);
@@ -131,7 +131,7 @@ src="https://www.facebook.com/tr?id=957273196609597&ev=PageView&noscript=1"
     .rules{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;width:100%;}
     .rule{
         display:flex;flex-direction:column;gap:8px;align-items:center;text-align:center;
-        padding:20px 16px;background:#fff;border:1px solid var(--line);border-radius:16px;
+        padding:16px 14px;background:#fff;border:1px solid var(--line);border-radius:16px;
         transition:transform .2s, box-shadow .2s;
     }
     .rule:hover{transform:translateY(-3px);box-shadow:0 12px 26px rgba(13,27,42,.08);}
@@ -140,21 +140,21 @@ src="https://www.facebook.com/tr?id=957273196609597&ev=PageView&noscript=1"
     .rule span{font-size:.86em;color:var(--muted);line-height:1.45;}
 
     /* ---- Timer ring ---- */
-    .ring-wrap{position:relative;width:184px;height:184px;margin:0 auto;}
-    .ring-wrap svg{transform:rotate(-90deg);}
+    .ring-wrap{position:relative;width:148px;height:148px;margin:0 auto;}
+    .ring-wrap svg{transform:rotate(-90deg);width:100%;height:100%;display:block;}
     .ring-bg{fill:none;stroke:rgba(13,27,42,.08);stroke-width:12;}
     .ring-fg{fill:none;stroke:url(#ggrad);stroke-width:12;stroke-linecap:round;transition:stroke-dashoffset 1s linear;}
     .ring-time{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
-    .ring-time b{font-size:2.5em;font-weight:800;font-variant-numeric:tabular-nums;}
+    .ring-time b{font-size:2em;font-weight:800;font-variant-numeric:tabular-nums;}
     .ring-time small{font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);}
     .ring-wrap.low .ring-time b{color:#e23d3d;}
 
     /* ---- Parole da memorizzare ---- */
-    .words{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:100%;}
+    .words{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;width:100%;}
     .word{
-        display:flex;align-items:center;gap:11px;
-        background:#fff;border:1px solid var(--line);border-radius:13px;
-        padding:13px 15px;font-weight:600;font-size:1.05em;
+        display:flex;align-items:center;gap:10px;
+        background:#fff;border:1px solid var(--line);border-radius:12px;
+        padding:10px 14px;font-weight:600;font-size:1em;
         animation:pop .35s ease both;transition:transform .15s, box-shadow .15s;
     }
     .word:hover{transform:translateY(-2px);box-shadow:0 8px 18px rgba(13,27,42,.07);}
