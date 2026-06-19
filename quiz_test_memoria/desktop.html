@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, follow">
+    <title>Test di Memoria</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<!-- Iubenda -->
+<script type="text/javascript">
+var _iub = _iub || [];
+_iub.csConfiguration = {"applyGdprForCH":false,"askConsentAtCookiePolicyUpdate":true,"countryDetection":true,"enableFadp":true,"enableLgpd":true,"enableUspr":true,"gdprAppliesGlobally":false,"lgpdAppliesGlobally":false,"perPurposeConsent":true,"siteId":1598928,"whitelabel":false,"cookiePolicyId":89530968,"lang":"it","banner":{"acceptButtonCaptionColor":"#FFFFFF","acceptButtonColor":"#0A513C","acceptButtonDisplay":true,"backgroundColor":"#F5FEFB","closeButtonRejects":true,"customizeButtonCaptionColor":"#0A513C","customizeButtonColor":"#DDEDE8","customizeButtonDisplay":true,"explicitWithdrawal":true,"listPurposes":true,"ownerName":"www.apprendimentorapido.it","position":"bottom","rejectButtonCaptionColor":"#FFFFFF","rejectButtonColor":"#0A513C","rejectButtonDisplay":true,"showPurposesToggles":true,"showTotalNumberOfProviders":true,"theme":"mint-neutral","textColor":"#262626"}};
+</script>
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2X3V7JZPBJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-2X3V7JZPBJ');
+</script>
+
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '957273196609597');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=957273196609597&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+
+<style>
+    :root{
+        --green:#00A988;
+        --green-d:#007a63;
+        --ink:#0D1B2A;
+        --muted:#6b7a86;
+        --bg1:#F4FBF9;
+        --bg2:#E7F4EF;
+        --card:#ffffff;
+        --line:#E6EEEA;
+        --shadow:0 24px 70px rgba(13,27,42,.12);
+        --r:24px;
+    }
+    *{box-sizing:border-box;}
+    html,body{margin:0;padding:0;height:100%;}
+    body{
+        font-family:'Inter',system-ui,sans-serif;
+        color:var(--ink);
+        background:
+            radial-gradient(1100px 600px at 80% -10%, rgba(0,169,136,.10), transparent 60%),
+            radial-gradient(900px 600px at -10% 110%, rgba(0,122,99,.08), transparent 55%),
+            linear-gradient(160deg,var(--bg1) 0%,var(--bg2) 100%);
+        background-attachment:fixed;
+        overflow:hidden;
+    }
+
+    /* ---- App shell ---- */
+    .app{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:32px;}
+    .stage{
+        position:relative;width:100%;max-width:920px;
+        min-height:560px;max-height:calc(100vh - 64px);
+        background:var(--card);border-radius:var(--r);box-shadow:var(--shadow);
+        overflow:hidden;
+    }
+    .screen{
+        position:absolute;inset:0;
+        display:flex;flex-direction:column;
+        padding:48px 56px;
+        opacity:0;visibility:hidden;
+        transform:translateY(16px) scale(.99);
+        transition:opacity .45s ease, transform .45s ease, visibility .45s;
+        overflow-y:auto;
+    }
+    .screen.active{opacity:1;visibility:visible;transform:none;}
+    .screen-inner{width:100%;max-width:660px;margin:auto;display:flex;flex-direction:column;gap:22px;}
+    .center{text-align:center;align-items:center;}
+
+    /* ---- Header / progress ---- */
+    .topbar{display:flex;align-items:center;gap:16px;margin-bottom:6px;}
+    .back-btn{
+        border:none;background:rgba(13,27,42,.06);color:var(--ink);
+        width:42px;height:42px;border-radius:50%;font-size:22px;cursor:pointer;
+        display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .2s;
+    }
+    .back-btn:hover{background:rgba(13,27,42,.12);}
+    .progress-track{flex:1;height:9px;border-radius:99px;background:rgba(13,27,42,.08);overflow:hidden;}
+    .progress-fill{height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--green),var(--green-d));transition:width .35s ease;}
+    .step-count{font-size:14px;font-weight:700;color:var(--muted);min-width:56px;text-align:right;font-variant-numeric:tabular-nums;}
+
+    /* ---- Tipografia ---- */
+    .eyebrow{font-size:13px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--green-d);}
+    h1{font-size:2.5em;line-height:1.12;margin:0;font-weight:800;letter-spacing:-1px;}
+    h2{font-size:1.6em;line-height:1.25;margin:0;font-weight:800;letter-spacing:-.4px;}
+    .lead{font-size:1.12em;line-height:1.6;color:var(--muted);margin:0;}
+
+    /* ---- Bottoni ---- */
+    .btn{
+        appearance:none;border:none;cursor:pointer;
+        background:linear-gradient(135deg,var(--green) 0%,var(--green-d) 100%);
+        color:#fff;font-family:inherit;font-size:1.1em;font-weight:700;
+        padding:16px 44px;border-radius:14px;min-width:240px;
+        box-shadow:0 12px 28px rgba(0,169,136,.30);
+        transition:transform .15s ease, box-shadow .15s ease, opacity .15s;
+    }
+    .btn:hover{transform:translateY(-2px);box-shadow:0 16px 34px rgba(0,169,136,.4);}
+    .btn:active{transform:translateY(0) scale(.99);}
+    .btn[disabled]{opacity:.6;pointer-events:none;}
+    .btn-ghost{background:transparent;color:var(--muted);box-shadow:none;font-weight:600;font-size:1em;padding:10px;min-width:0;}
+    .btn-ghost:hover{transform:none;color:var(--ink);box-shadow:none;}
+    .cta-bar{margin-top:auto;padding-top:20px;display:flex;flex-direction:column;align-items:center;gap:8px;}
+
+    /* ---- Intro ---- */
+    .hero-badge{
+        width:84px;height:84px;border-radius:24px;margin:0 auto;
+        background:linear-gradient(135deg,var(--green),var(--green-d));
+        display:flex;align-items:center;justify-content:center;font-size:42px;
+        box-shadow:0 16px 32px rgba(0,169,136,.35);
+    }
+    .rules{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;width:100%;}
+    .rule{
+        display:flex;flex-direction:column;gap:8px;align-items:center;text-align:center;
+        padding:20px 16px;background:#fff;border:1px solid var(--line);border-radius:16px;
+        transition:transform .2s, box-shadow .2s;
+    }
+    .rule:hover{transform:translateY(-3px);box-shadow:0 12px 26px rgba(13,27,42,.08);}
+    .rule .ic{font-size:28px;}
+    .rule b{font-size:.98em;}
+    .rule span{font-size:.86em;color:var(--muted);line-height:1.45;}
+
+    /* ---- Timer ring ---- */
+    .ring-wrap{position:relative;width:184px;height:184px;margin:0 auto;}
+    .ring-wrap svg{transform:rotate(-90deg);}
+    .ring-bg{fill:none;stroke:rgba(13,27,42,.08);stroke-width:12;}
+    .ring-fg{fill:none;stroke:url(#ggrad);stroke-width:12;stroke-linecap:round;transition:stroke-dashoffset 1s linear;}
+    .ring-time{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+    .ring-time b{font-size:2.5em;font-weight:800;font-variant-numeric:tabular-nums;}
+    .ring-time small{font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);}
+    .ring-wrap.low .ring-time b{color:#e23d3d;}
+
+    /* ---- Parole da memorizzare ---- */
+    .words{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:100%;}
+    .word{
+        display:flex;align-items:center;gap:11px;
+        background:#fff;border:1px solid var(--line);border-radius:13px;
+        padding:13px 15px;font-weight:600;font-size:1.05em;
+        animation:pop .35s ease both;transition:transform .15s, box-shadow .15s;
+    }
+    .word:hover{transform:translateY(-2px);box-shadow:0 8px 18px rgba(13,27,42,.07);}
+    .word .n{
+        flex-shrink:0;width:26px;height:26px;border-radius:8px;
+        background:rgba(0,169,136,.12);color:var(--green-d);
+        font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center;
+    }
+    @keyframes pop{from{opacity:0;transform:translateY(10px) scale(.96);}to{opacity:1;transform:none;}}
+
+    /* ---- Recall: una parola alla volta ---- */
+    .recall-q{text-align:center;display:flex;flex-direction:column;gap:10px;margin-top:5vh;align-items:center;}
+    .recall-num{
+        width:66px;height:66px;border-radius:18px;
+        background:linear-gradient(135deg,var(--green),var(--green-d));color:#fff;
+        font-size:1.7em;font-weight:800;display:flex;align-items:center;justify-content:center;
+        box-shadow:0 12px 26px rgba(0,169,136,.3);
+    }
+    .recall-label{font-size:1.2em;color:var(--muted);font-weight:600;}
+    .recall-input{
+        width:100%;max-width:480px;text-align:center;
+        font-family:inherit;font-size:1.9em;font-weight:700;color:var(--ink);
+        padding:14px 16px;border:none;border-bottom:3px solid var(--line);
+        background:transparent;outline:none;transition:border-color .2s;letter-spacing:.4px;
+    }
+    .recall-input:focus{border-color:var(--green);}
+    .recall-input::placeholder{color:#c2cdc8;font-weight:600;}
+    .kbd-hint{font-size:.85em;color:var(--muted);}
+    .kbd-hint kbd{background:#fff;border:1px solid var(--line);border-bottom-width:2px;border-radius:6px;padding:2px 8px;font-family:inherit;font-size:.9em;font-weight:700;}
+
+    /* ---- Reveal punteggio ---- */
+    .score-big{text-align:center;font-weight:800;line-height:1;font-size:5.6em;color:var(--green-d);font-variant-numeric:tabular-nums;}
+    .score-sub{text-align:center;color:var(--muted);font-size:1.15em;margin-top:-4px;}
+    .pulse-ic{
+        width:76px;height:76px;border-radius:50%;margin:0 auto;
+        background:rgba(0,169,136,.12);display:flex;align-items:center;justify-content:center;
+        font-size:36px;animation:beat 1.6s ease infinite;
+    }
+    @keyframes beat{0%,100%{transform:scale(1);}50%{transform:scale(1.08);}}
+
+    /* ---- Form ---- */
+    .form{display:flex;flex-direction:column;gap:13px;width:100%;max-width:480px;margin:0 auto;}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:13px;}
+    .form input[type=text],.form input[type=email],.form input[type=tel]{
+        width:100%;padding:15px 16px;font-size:1em;font-family:inherit;
+        border:1.5px solid var(--line);border-radius:12px;background:#fff;color:var(--ink);transition:border-color .2s;
+    }
+    .form input:focus{border-color:var(--green);outline:none;}
+    .consent{display:flex;gap:11px;align-items:flex-start;font-size:.82em;color:var(--muted);line-height:1.45;text-align:left;}
+    .consent input{margin-top:3px;width:18px;height:18px;flex-shrink:0;accent-color:var(--green);}
+
+    /* ---- Video / audio ---- */
+    .video-box{position:relative;width:100%;aspect-ratio:16/9;border-radius:16px;overflow:hidden;background:#000;box-shadow:var(--shadow);}
+    .video-box iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
+    audio{width:100%;margin-top:6px;}
+
+    /* loader puntini */
+    .loader-dots{display:flex;gap:10px;justify-content:center;}
+    .loader-dots span{width:12px;height:12px;border-radius:50%;background:var(--green);animation:bounce 1.2s ease infinite;}
+    .loader-dots span:nth-child(2){animation-delay:.18s;}
+    .loader-dots span:nth-child(3){animation-delay:.36s;}
+    @keyframes bounce{0%,80%,100%{transform:scale(.5);opacity:.4;}40%{transform:scale(1);opacity:1;}}
+
+    /* schermi piccoli/laptop bassi */
+    @media (max-height:720px){ .screen{padding:32px 48px;} h1{font-size:2.1em;} .ring-wrap{width:150px;height:150px;} }
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="stage">
+
+    <!-- 1) INIZIALE -->
+    <section class="screen active" id="s-intro">
+        <div class="screen-inner center">
+            <div class="hero-badge">🧠</div>
+            <div style="display:flex;flex-direction:column;gap:10px;">
+                <div class="eyebrow">Test di Memoria</div>
+                <h1>Quanto è allenata<br>la tua memoria?</h1>
+                <p class="lead">Mettiti alla prova in pochi minuti. Poi ti svelo una tecnica per migliorare subito.</p>
+            </div>
+            <div class="rules">
+                <div class="rule"><span class="ic">⏱️</span><b>3 minuti a tempo</b><span>Memorizzi 18 parole numerate, poi le riscrivi a memoria.</span></div>
+                <div class="rule"><span class="ic">✍️</span><b>Niente appunti</b><span>Conta solo il ricordo: le riscrivi tu, nello stesso ordine.</span></div>
+                <div class="rule"><span class="ic">🎯</span><b>Come un gioco</b><span>Non c'è un voto: scopri come usi davvero la tua memoria.</span></div>
+            </div>
+            <div class="cta-bar">
+                <button class="btn" onclick="iniziaTest()">Inizia il test →</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2) MEMORIZZAZIONE -->
+    <section class="screen" id="s-memo">
+        <div class="screen-inner center">
+            <div style="display:flex;flex-direction:column;gap:6px;">
+                <div class="eyebrow">Memorizza</div>
+                <h2>Leggi e ripeti queste 18 parole</h2>
+            </div>
+            <div class="ring-wrap" id="ring-wrap">
+                <svg width="184" height="184" viewBox="0 0 184 184">
+                    <defs><linearGradient id="ggrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#00C79E"/><stop offset="100%" stop-color="#007a63"/></linearGradient></defs>
+                    <circle class="ring-bg" cx="92" cy="92" r="80"/>
+                    <circle class="ring-fg" id="ring-fg" cx="92" cy="92" r="80"/>
+                </svg>
+                <div class="ring-time"><b id="timer">03:00</b><small>tempo</small></div>
+            </div>
+            <div class="words" id="words"></div>
+            <p class="lead" style="font-size:.95em;">Quando il tempo finisce dovrai riscriverle <b>nello stesso ordine</b>.</p>
+            <div class="cta-bar">
+                <button class="btn" onclick="vaiAllaVerifica(1)">Sono pronto, riscrivile →</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3) e 6) RECALL -->
+    <section class="screen" id="s-recall">
+        <div class="screen-inner">
+            <div class="topbar">
+                <button class="back-btn" id="recall-back" onclick="recallBack()">‹</button>
+                <div class="progress-track"><div class="progress-fill" id="recall-progress"></div></div>
+                <div class="step-count" id="recall-count">1 / 18</div>
+            </div>
+            <div class="recall-q">
+                <div class="recall-num" id="recall-num">1</div>
+                <div class="recall-label" id="recall-label">Qual era la parola n° 1?</div>
+                <input class="recall-input" id="recall-input" type="text"
+                       autocomplete="off" autocorrect="off" spellcheck="false"
+                       autocapitalize="words" placeholder="scrivi qui…"
+                       onkeydown="if(event.key==='Enter'){event.preventDefault();recallNext();}">
+                <div class="kbd-hint">Premi <kbd>Invio</kbd> per continuare</div>
+            </div>
+            <div class="cta-bar">
+                <button class="btn" id="recall-next" onclick="recallNext()">Avanti</button>
+                <button class="btn-ghost" onclick="recallSkip()">Non la ricordo →</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4) PUNTEGGIO + LEAD GEN -->
+    <section class="screen" id="s-lead">
+        <div class="screen-inner center">
+            <div class="pulse-ic">🎉</div>
+            <div>
+                <div class="score-big"><span id="score-1">0</span><span style="font-size:.32em;color:var(--muted);font-weight:700;"> /18</span></div>
+                <p class="score-sub" id="score-1-sub">parole ricordate al primo tentativo</p>
+            </div>
+            <h2 style="color:var(--green-d);">La tua vera crescita inizia ora</h2>
+            <p class="lead">Il punteggio è solo il punto di partenza. Esiste una tecnica che ti fa ricordare <b>tutte</b> le parole, senza sforzo. Inserisci i tuoi dati per sbloccare subito il video.</p>
+            <form class="form" id="form-contatto" onsubmit="event.preventDefault();handleSubmitContactForm(event);">
+                <div class="form-row">
+                    <input type="text" name="nome" placeholder="Nome" required>
+                    <input type="text" name="cognome" placeholder="Cognome" required>
+                </div>
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="tel" name="telefono" placeholder="Numero di telefono" required>
+                <label class="consent">
+                    <input type="checkbox" id="privacy-consent" required>
+                    <span><b>Accettazione *</b> — Dichiaro di aver preso visione dell'informativa privacy e acconsento al trattamento dei dati per finalità di marketing diretto di Apprendimento Rapido.</span>
+                </label>
+                <button type="submit" class="btn">Sblocca il video →</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- 5) VIDEO + AUDIO -->
+    <section class="screen" id="s-video">
+        <div class="screen-inner center">
+            <div style="display:flex;flex-direction:column;gap:6px;">
+                <div class="eyebrow">Ottima scelta</div>
+                <h2>Sblocca il vero potenziale della tua memoria</h2>
+                <p class="lead">Non un trucco, ma una vera tecnica di memorizzazione. Guarda il video, poi riascolta le parole e riprova.</p>
+            </div>
+            <div class="video-box">
+                <iframe src="https://www.youtube.com/embed/uHQ14bntjAY" title="Tecnica di memorizzazione"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div style="width:100%;max-width:520px;">
+                <p style="margin:0 0 8px;font-weight:600;font-size:.95em;">🎧 Ora premi Play e riascolta le 18 parole</p>
+                <audio controls preload="none">
+                    <source src="/quiz_test_memoria/18 parole audio.mp3" type="audio/mpeg">
+                    Il tuo browser non supporta la riproduzione audio.
+                </audio>
+            </div>
+            <div class="cta-bar">
+                <button class="btn" onclick="vaiAllaVerifica(2)">Rifai il test ora →</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7) TRANSIZIONE → CHAT -->
+    <section class="screen" id="s-finale">
+        <div class="screen-inner center" style="justify-content:center;gap:22px;">
+            <div class="pulse-ic">🧠</div>
+            <h2>Ci siamo!</h2>
+            <p class="lead">Sto preparando i tuoi risultati…<br>Tra un istante <b>Piero, l'assistente AI di Apprendimento Rapido</b>, ti spiega com'è andata e come migliorare ancora.</p>
+            <div class="loader-dots"><span></span><span></span><span></span></div>
+        </div>
+    </section>
+
+  </div>
+</div>
+
+<script>
+    // --- CONFIGURAZIONE (regole invariate: 18 parole, ordine esatto) ---
+    const paroleCorrette = [
+        "Trottola","Pancia","Lama","Lava","Buca","Piumino","Muffa","Regina","Cero",
+        "Mamma","Fiamma","Nuca","Palazzo","Neve","Frutta","Pacco","Doccia","Bomba"
+    ];
+    const numeroParole = paroleCorrette.length;
+
+    let punteggio1 = 0, punteggio2 = 0;
+    let miglioramentoPercentualeCalcolato = 0;
+    let datiContatto = {};
+    let timerInterval;
+    const RING_LEN = 2 * Math.PI * 80;
+    let recall = { attempt:1, idx:0, answers:[] };
+
+    function showScreen(id){
+        document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+        const el=document.getElementById(id); el.classList.add('active'); el.scrollTop=0;
+    }
+
+    function iniziaTest(){
+        const cont=document.getElementById('words'); cont.innerHTML='';
+        paroleCorrette.forEach((p,i)=>{
+            const d=document.createElement('div'); d.className='word';
+            d.style.animationDelay=(i*0.02)+'s';
+            d.innerHTML=`<span class="n">${i+1}</span>${p}`;
+            cont.appendChild(d);
+        });
+        showScreen('s-memo'); avviaTimer(3*60);
+    }
+
+    function avviaTimer(durata){
+        const fg=document.getElementById('ring-fg'), disp=document.getElementById('timer'), wrap=document.getElementById('ring-wrap');
+        fg.style.strokeDasharray=RING_LEN; fg.style.strokeDashoffset=0;
+        let t=durata; clearInterval(timerInterval);
+        const render=()=>{
+            let m=Math.floor(t/60), s=t%60;
+            disp.textContent=(m<10?'0'+m:m)+':'+(s<10?'0'+s:s);
+            fg.style.strokeDashoffset=RING_LEN*(1-(t/durata));
+            wrap.classList.toggle('low', t<=15);
+        };
+        render();
+        timerInterval=setInterval(()=>{ t--; render(); if(t<0){ clearInterval(timerInterval); vaiAllaVerifica(1); } },1000);
+    }
+
+    function vaiAllaVerifica(attempt){
+        clearInterval(timerInterval);
+        recall={ attempt, idx:0, answers:new Array(numeroParole).fill('') };
+        showScreen('s-recall'); renderRecallStep();
+    }
+
+    function renderRecallStep(){
+        const i=recall.idx;
+        document.getElementById('recall-num').textContent=i+1;
+        document.getElementById('recall-label').textContent=`Qual era la parola n° ${i+1}?`;
+        document.getElementById('recall-count').textContent=`${i+1} / ${numeroParole}`;
+        document.getElementById('recall-progress').style.width=((i)/numeroParole*100)+'%';
+        document.getElementById('recall-back').style.visibility = i===0 ? 'hidden' : 'visible';
+        document.getElementById('recall-next').textContent = i===numeroParole-1 ? 'Vedi il risultato →' : 'Avanti';
+        const inp=document.getElementById('recall-input');
+        inp.value=recall.answers[i]||'';
+        setTimeout(()=>inp.focus(),120);
+    }
+
+    function saveCurrent(){ recall.answers[recall.idx]=document.getElementById('recall-input').value.trim(); }
+    function recallNext(){ saveCurrent(); if(recall.idx<numeroParole-1){ recall.idx++; renderRecallStep(); } else { finishRecall(); } }
+    function recallSkip(){ document.getElementById('recall-input').value=''; recallNext(); }
+    function recallBack(){ saveCurrent(); if(recall.idx>0){ recall.idx--; renderRecallStep(); } }
+
+    function calcola(answers){
+        let p=0;
+        for(let i=0;i<numeroParole;i++){ if((answers[i]||'').toLowerCase()===paroleCorrette[i].toLowerCase()) p++; }
+        return p;
+    }
+
+    function finishRecall(){
+        document.getElementById('recall-progress').style.width='100%';
+        if(recall.attempt===1){
+            punteggio1=calcola(recall.answers);
+            animaNumero('score-1', punteggio1);
+            document.getElementById('score-1-sub').textContent=`parole ricordate su ${numeroParole} al primo tentativo`;
+            showScreen('s-lead');
+        } else {
+            punteggio2=calcola(recall.answers);
+            miglioramentoPercentualeCalcolato = (punteggio1 < punteggio2)
+                ? (punteggio1===0 ? 100 : ((punteggio2-punteggio1)/punteggio1)*100) : 0;
+            showScreen('s-finale');
+            inviaRisultatoFinale();
+        }
+    }
+
+    function animaNumero(id,target){
+        const el=document.getElementById(id); let n=0; el.textContent='0';
+        const step=Math.max(1,Math.round(target/18));
+        const iv=setInterval(()=>{ n+=step; if(n>=target){ n=target; clearInterval(iv); } el.textContent=n; },45);
+    }
+
+    function getPaidAdAttribution(){
+        const p=new URLSearchParams(window.location.search);
+        const ck=name=>{const m=document.cookie.match(new RegExp('(?:^|; )'+name+'=([^;]*)'));return m?decodeURIComponent(m[1]):null;};
+        return {
+            hook_id:p.get('hook')||null,
+            utm_source:p.get('utm_source')||null, utm_medium:p.get('utm_medium')||null,
+            utm_campaign:p.get('utm_campaign')||null, utm_content:p.get('utm_content')||null,
+            utm_term:p.get('utm_term')||null, fbc:ck('_fbc'), fbp:ck('_fbp')
+        };
+    }
+
+    function handleSubmitContactForm(event){
+        const form=document.getElementById('form-contatto');
+        const btn=form.querySelector('button[type="submit"]');
+        if(!document.getElementById('privacy-consent').checked){ alert('Per procedere è necessario accettare la privacy.'); return; }
+        const nome=form.nome.value.trim(), cognome=form.cognome.value.trim(), email=form.email.value.trim(), telefono=form.telefono.value.trim();
+        if(!nome||!cognome||!email||!telefono){ alert('Compila tutti i campi.'); return; }
+        btn.textContent='Invio…'; btn.disabled=true;
+        datiContatto={ nome, cognome, email, telefono };
+        fetch('https://ai-chat-service-nls9.onrender.com/api/quiz/submit',{
+            method:'POST', headers:{'Content-Type':'application/json'},
+            body:JSON.stringify({ quiz_status:'memoria_incompleto', nome,cognome,email,telefono, ...getPaidAdAttribution() })
+        }).catch(()=>{});
+        if(typeof fbq==='function'){ try{ fbq('track','Lead',{content_name:'quiz_memoria',value:0,currency:'EUR'}); }catch(_){} }
+        btn.textContent='Sblocca il video →'; btn.disabled=false;
+        showScreen('s-video');
+    }
+
+    async function inviaRisultatoFinale(){
+        const fallbackUrl = `/chat-system/chat.html?quiz_status=memoria`
+            +`&nome=${encodeURIComponent(datiContatto.nome||'')}`
+            +`&cognome=${encodeURIComponent(datiContatto.cognome||'')}`
+            +`&email=${encodeURIComponent(datiContatto.email||'')}`
+            +`&telefono=${encodeURIComponent(datiContatto.telefono||'')}`
+            +`&punteggio1=${encodeURIComponent(punteggio1)}`
+            +`&punteggio2=${encodeURIComponent(punteggio2)}`
+            +`&miglioramento=${encodeURIComponent(miglioramentoPercentualeCalcolato.toFixed(0))}`;
+        let done=false;
+        const go=url=>{ if(done) return; done=true; clearTimeout(safety); window.location.href=url; };
+        const safety=setTimeout(()=>go(fallbackUrl), 6000);
+        const payload={
+            quiz_status:'memoria',
+            nome:datiContatto.nome, cognome:datiContatto.cognome, email:datiContatto.email, telefono:datiContatto.telefono,
+            punteggio1, punteggio2, miglioramento:miglioramentoPercentualeCalcolato.toFixed(0),
+            totale_parole:numeroParole, ...getPaidAdAttribution()
+        };
+        try{
+            const r=await fetch('https://ai-chat-service-nls9.onrender.com/api/quiz/submit',{
+                method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload)
+            });
+            const data=await r.json();
+            go(data && data.token ? `/chat-system/chat.html?token=${data.token}` : fallbackUrl);
+        }catch(e){ go(fallbackUrl); }
+    }
+
+    showScreen('s-intro');
+</script>
+</body>
+</html>
