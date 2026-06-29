@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <title>Master Eureka — Promozione 2.497€ | Metodo Eureka</title>
-<meta name="description" content="Master Eureka completo: da 4.997€ a 2.497€. 68 video-lezioni, 12 webinar, corso dal vivo 4 giorni. Promozione di lancio per chi conosce Apprendimento Rapido.">
+<meta name="description" content="Master Eureka Fase 1 e Fase 2 completo: da 4.997€ a 2.497€. 68 lezioni video, 12 webinar Zoom, 4 giorni dal vivo, 5 coaching, Life Emotion. Promozione di lancio.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Master Eureka — 50% di sconto (2.497€)">
 <meta property="og:description" content="Il percorso completo Metodo Eureka: memoria, lettura veloce, mappe mentali, organizzazione. Promozione di lancio.">
@@ -139,8 +139,32 @@ body{font-family:'Inter',sans-serif;background:var(--off-white);color:var(--text
 .form-note a{color:var(--teal-dk);}
 .hp-field{position:absolute;left:-9999px;opacity:0;height:0;overflow:hidden;}
 
+.topics-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px 32px;}
+.topic-block h4{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:8px;}
+.topic-block p,.topic-block li{font-size:13px;color:var(--muted);line-height:1.65;}
+.topic-block ul{padding-left:16px;margin:0;}
+.structure-flow{display:flex;flex-wrap:wrap;align-items:stretch;justify-content:center;gap:12px;margin-top:40px;}
+.flow-item{background:#fff;border:1px solid var(--light2);border-radius:14px;padding:24px 16px;flex:1 1 200px;max-width:240px;text-align:center;}
+.flow-item strong{display:block;font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--gold);margin-bottom:6px;}
+.flow-item span{font-size:13px;color:var(--muted);line-height:1.5;}
+.flow-plus{display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:var(--gold);font-weight:700;flex:0 0 24px;padding-top:24px;}
+.schedule-wrap{overflow-x:auto;margin-top:24px;}
+.schedule-table{width:100%;border-collapse:collapse;font-size:13px;}
+.schedule-table th,.schedule-table td{padding:12px 14px;border:1px solid var(--light2);text-align:left;}
+.schedule-table th{background:var(--light);color:var(--navy);font-weight:600;}
+.date-col h4{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--navy);margin-bottom:16px;}
+.date-list{list-style:none;padding:0;}
+.date-list li{padding:10px 0;border-bottom:1px solid var(--light2);font-size:14px;color:var(--muted);}
+.date-list li:last-child{border-bottom:none;}
+.fase-tag{display:inline-block;margin-bottom:12px;}
+.docente-card{display:flex;gap:24px;align-items:flex-start;}
+.docente-card h3{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--navy);margin-bottom:8px;}
+.docente-card p{font-size:14px;color:var(--muted);line-height:1.75;}
+
 @media(max-width:900px){
-  .hero-inner,.grid-2,.grid-3,.grid-4,.stats-grid,.form-row{grid-template-columns:1fr;}
+  .hero-inner,.grid-2,.grid-3,.grid-4,.stats-grid,.form-row,.topics-grid{grid-template-columns:1fr;}
+  .flow-plus{display:none;}
+  .docente-card{flex-direction:column;}
   .section{padding:72px 0;}
   .section-head{margin-bottom:40px;}
   .hero-inner{gap:40px;}
@@ -163,19 +187,19 @@ body{font-family:'Inter',sans-serif;background:var(--off-white);color:var(--text
     <div class="hero-inner">
       <div>
         <div style="margin-bottom:20px;display:flex;gap:10px;flex-wrap:wrap;">
-          <span class="tag tag-gold">Lancio promozionale</span>
+          <span class="tag tag-gold">Fase 1 + Fase 2</span>
           <span class="tag tag-teal">Master completo</span>
         </div>
         <h1 class="page-hero-title">Il <em>Master Eureka</em><br>Ora a metà prezzo</h1>
-        <p class="page-hero-sub">Memoria, lettura veloce, mappe mentali e organizzazione dello studio — online, in webinar e in aula. Il percorso strutturato per professionisti, studenti e concorsisti che vogliono imparare più in meno tempo.</p>
+        <p class="page-hero-sub">Il percorso più completo e collaudato per migliorare l'apprendimento a 360°: tecniche di memoria, lettura veloce, mappe mentali, sintesi e psicologia dell'apprendimento. Fase 1 per i risultati nello studio; Fase 2 per la crescita personale.</p>
         <div style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:36px;">
           <a href="#form" class="btn btn-gold btn-lg">Richiedi l'offerta a 2.497€</a>
-          <a href="#included" class="btn btn-outline btn-lg">Cosa include</a>
+          <a href="#included" class="btn btn-outline btn-lg">Struttura del percorso</a>
         </div>
-        <ul class="check-list" style="max-width:480px;">
-          <li><span class="ico ico-yes">✓</span>68 video-lezioni on demand + 12 webinar live</li>
-          <li><span class="ico ico-yes">✓</span>4 giorni di corso dal vivo (40 ore)</li>
-          <li><span class="ico ico-yes">✓</span>1 anno di accesso alla piattaforma</li>
+        <ul class="check-list" style="max-width:520px;">
+          <li><span class="ico ico-yes">✓</span>68 video-lezioni on demand (~20 min) + quiz e chat H24</li>
+          <li><span class="ico ico-yes">✓</span>12 webinar Zoom (lunedì 21:00–23:00) + 4 giorni dal vivo (40 h)</li>
+          <li><span class="ico ico-yes">✓</span>5 coaching telefoniche + Fase 2: Life Emotion, lingue, tempo, colloquio</li>
         </ul>
       </div>
       <div>
@@ -196,10 +220,10 @@ body{font-family:'Inter',sans-serif;background:var(--off-white);color:var(--text
 <section class="bg-navy" style="padding:40px 0;">
   <div class="container">
     <div class="stats-grid stats-section">
-      <div><div class="stat-num" data-count="98" data-suffix="%">0</div><div class="stat-lbl" style="color:rgba(255,255,255,.55);">Soddisfazione a fine percorso</div></div>
-      <div><div class="stat-num" data-count="40" data-suffix="k+">0</div><div class="stat-lbl" style="color:rgba(255,255,255,.55);">Persone formate</div></div>
-      <div><div class="stat-num" data-count="25" data-suffix="+">0</div><div class="stat-lbl" style="color:rgba(255,255,255,.55);">Anni di Metodo Eureka</div></div>
-      <div><div class="stat-num" data-count="68">0</div><div class="stat-lbl" style="color:rgba(255,255,255,.55);">Video-lezioni incluse</div></div>
+      <div><div class="stat-num" data-count="40" data-suffix="k+">0</div><div class="stat-lbl" style="color:rgba(255,255,255,.55);">Studenti e professionisti formati</div></div>
+      <div><div class="stat-num" data-count="24" data-suffix="+">0</div><div class="stat-lbl" style="color:rgba(255,255,255,.55);">Anni di attività dei docenti</div></div>
+      <div><div class="stat-num" data-count="3" data-suffix="×">0</div><div class="stat-lbl" style="color:rgba(255,255,255,.55);">Capacità di apprendimento</div></div>
+      <div><div class="stat-num" data-count="68">0</div><div class="stat-lbl" style="color:rgba(255,255,255,.55);">Video-lezioni Fase 1</div></div>
     </div>
   </div>
 </section>
@@ -207,27 +231,31 @@ body{font-family:'Inter',sans-serif;background:var(--off-white);color:var(--text
 <section class="section bg-white">
   <div class="container">
     <div class="section-head">
-      <div class="section-label">Perché adesso</div>
-      <h2 class="section-title">Non è una chat. È un <em>metodo</em> che ti segue.</h2>
-      <p class="section-sub">Da oltre venticinque anni formiamo persone reali su concorsi, università e aggiornamento professionale. Il Master Eureka trasforma tecniche di memoria e studio in un percorso strutturato — con risultati misurabili già durante il corso.</p>
+      <div class="section-label">Master Eureka Fase 1</div>
+      <h2 class="section-title">La tua mente al <em>100%</em></h2>
+      <p class="section-sub">Il Master Eureka ha l'obiettivo di fornirti nuove strategie per incrementare i tuoi risultati nell'apprendimento (Fase 1) e farti ottenere ancora più soddisfazione in ambito personale (Fase 2). Grazie all'esperienza dei docenti — maturata in oltre 24 anni — e ai risultati di oltre 40.000 studenti e professionisti, offre un metodo integrato che combina le tecniche più avanzate.</p>
     </div>
     <div class="grid-2" style="gap:72px;align-items:start;max-width:960px;margin:0 auto;">
       <div>
         <div class="feature-item">
-          <h4>Online + dal vivo + supporto</h4>
-          <p>Non solo video: webinar applicativi, weekend intensivo in aula e coaching per adattare il metodo al tuo materiale.</p>
+          <h4>Triplica la capacità di apprendimento</h4>
+          <p>Questo approccio consente di triplicare la capacità di apprendimento in pochi giorni, riducendo drasticamente i tempi di assimilazione delle informazioni.</p>
         </div>
         <div class="feature-item">
-          <h4>Psicologia robusta integrata</h4>
-          <p>Motivazione, abitudini, gestione dell'ansia — le tecniche restano solo se la mente collabora.</p>
+          <h4>Integrazione con ciò che già sai</h4>
+          <p>Tutte le tecniche possono essere integrate con le tue conoscenze precedenti, così da rendere il raggiungimento dei risultati più semplice e veloce.</p>
         </div>
         <div class="feature-item" style="margin-bottom:0;">
-          <h4>Promozione di lancio aperta</h4>
-          <p>Offerta comunicata al database Apprendimento Rapido: Master completo a 2.497€ invece di 4.997€.</p>
+          <h4>Supporto motivazionale del corpo docente</h4>
+          <p>Riceverai il supporto motivazionale adatto a rendere il percorso un'esperienza utile, piacevole e formativa.</p>
         </div>
       </div>
       <div>
-        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&auto=format&fit=crop" alt="Studio con Metodo Eureka" style="width:100%;border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,.1);">
+        <div class="banner-light" style="padding:32px;">
+          <p style="font-size:15px;color:var(--navy);font-weight:600;margin-bottom:12px;">Non solo studio: una rivoluzione personale e professionale</p>
+          <p style="font-size:14px;color:var(--muted);line-height:1.8;">Il Master Eureka Fase 1 non è solo un percorso per migliorare lo studio, ma una vera rivoluzione che permette di acquisire la preparazione, l'elasticità mentale e la disponibilità al cambiamento richieste nella vita personale e professionale.</p>
+          <p style="font-size:13px;color:var(--muted-lt);margin-top:16px;line-height:1.6;">Promozione di lancio: Master completo (Fase 1 + Fase 2) a <strong style="color:var(--navy);">2.497€</strong> invece di 4.997€.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -237,118 +265,320 @@ body{font-family:'Inter',sans-serif;background:var(--off-white);color:var(--text
   <div class="container">
     <div class="section-head">
       <div class="section-label">I 4 pilastri</div>
-      <h2 class="section-title">Tutto ciò che impari nel <em>Master Eureka</em></h2>
-      <p class="section-sub">Quattro aree che si rafforzano a vicenda — come nelle pagine dedicate a memoria, lettura veloce e organizzazione del Metodo Eureka.</p>
+      <h2 class="section-title">I 4 pilastri dell'<em>apprendimento rapido</em></h2>
+      <p class="section-sub">Il metodo integrato del Master Eureka Fase 1 combina memoria, lettura veloce, mappe mentali, tecniche di sintesi e psicologia dell'apprendimento.</p>
     </div>
     <div class="grid-4">
       <div class="card">
-        <div class="section-label">01 — Psicologia</div>
-        <h3>Psicologia robusta</h3>
+        <div class="section-label">01 — Memoria</div>
+        <h3>Tecniche di memoria</h3>
         <div class="gold-line"></div>
-        <p>Motivazione, ansia, trasformare i «devo» in «voglio», abitudini di studio che restano nel tempo.</p>
-        <div style="margin-top:20px;"><span class="tag tag-gold">Fondamenta</span></div>
+        <p>Fotografia mentale, numeri, parole astratte, nomi e visi, agenda mentale, tecniche dei Loci e delle Stanze, tecnica del corpo umano.</p>
+        <div style="margin-top:20px;"><span class="tag tag-teal">Memoria a lungo termine</span></div>
       </div>
       <div class="card">
-        <div class="section-label">02 — Memoria</div>
-        <h3>Memoria di ferro</h3>
+        <div class="section-label">02 — Lettura</div>
+        <h3>Lettura veloce</h3>
         <div class="gold-line"></div>
-        <p>Scientifico, giuridico, lingue, numeri, nomi e visi — tecniche PAV e visualizzazione sul tuo materiale.</p>
-        <div style="margin-top:20px;"><span class="tag tag-teal">Tecniche PAV</span></div>
+        <p>Test iniziale e finale, eliminazione abitudini disfunzionali, campo visivo, lettura globale, critica, a colonne e a blocchi.</p>
+        <div style="margin-top:20px;"><span class="tag tag-gold">Velocità e comprensione</span></div>
       </div>
       <div class="card">
         <div class="section-label">03 — Organizzazione</div>
-        <h3>Organizzazione</h3>
+        <h3>Mappe e sintesi</h3>
         <div class="gold-line"></div>
-        <p>Parole chiave, sintesi, mappe mentali, percorsi visivi — capire e ricordare senza ripetere a pappagallo.</p>
+        <p>Mappe mentali per appunti, studio, decisioni e public speaking. Metodologie di sintesi: parole chiave, percorsi visivi, verifica comprensione.</p>
         <div style="margin-top:20px;"><span class="tag tag-navy">Mappe mentali</span></div>
       </div>
       <div class="card">
-        <div class="section-label">04 — Lettura</div>
-        <h3>Lettura veloce</h3>
+        <div class="section-label">04 — Psicologia</div>
+        <h3>Psicologia dell'apprendimento</h3>
         <div class="gold-line"></div>
-        <p>Allenamento oculari e stili di lettura: più pagine in meno tempo, comprensione invariata.</p>
-        <div style="margin-top:20px;"><span class="tag tag-teal">3× velocità</span></div>
+        <p>Atteggiamento mentale, credenze dell'apprendimento, tecniche di rilassamento e concentrazione, creatività e comunicazione efficace.</p>
+        <div style="margin-top:20px;"><span class="tag tag-gold">Credenze e motivazione</span></div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section bg-light" id="included">
+<section class="section bg-light">
   <div class="container">
     <div class="section-head">
-      <div class="section-label">Pacchetto completo</div>
-      <h2 class="section-title">Cosa include l'offerta a <em>2.497€</em></h2>
-      <p class="section-sub">Wiki Apprendimento Online + corso dal vivo + supporto. Un unico percorso integrato, non moduli scelti a caso.</p>
+      <div class="section-label">Temi trattati</div>
+      <h2 class="section-title">Tutto ciò che affronti nel <em>Master Eureka</em></h2>
+      <p class="section-sub">Programma completo dalla brochure ufficiale: dalle credenze alla comunicazione efficace, con applicazioni pratiche su codice, formule, date e lingue.</p>
     </div>
-    <div class="grid-3">
-      <div class="card package-card">
-        <div class="package-num">68</div>
-        <h3>Video-lezioni on demand</h3>
-        <div class="gold-line"></div>
-        <p>Teoriche e pratiche (9–35 min). Mix aula e studio. Quiz per lezione. Accesso da 3 dispositivi.</p>
-      </div>
-      <div class="card package-card teal">
-        <div class="package-num">12</div>
-        <h3>Webinar tematici</h3>
-        <div class="gold-line"></div>
-        <p>2 ore ciascuno, live o registrati 1 anno: mappe, memoria, sintesi, matematica, diritto, lingue, lettura veloce.</p>
-      </div>
-      <div class="card package-card navy">
-        <div class="package-num">4 gg</div>
-        <h3>Corso dal vivo</h3>
-        <div class="gold-line"></div>
-        <p>40 ore, weekend intensivo Milano/Roma. Mappe, fotografia mentale, psicologia robusta, applicazione sul tuo materiale.</p>
-      </div>
-      <div class="card package-card teal">
-        <div class="package-num">+</div>
-        <h3>Moduli specialistici</h3>
-        <div class="gold-line"></div>
-        <p>Life Emotion (5 gg), Gestione del tempo, Tecniche del colloquio, Lingue straniere — inclusi nel pacchetto promozionale.</p>
-      </div>
-      <div class="card package-card">
-        <div class="package-num">5</div>
-        <h3>Sessioni di coaching</h3>
-        <div class="gold-line"></div>
-        <p>Personalizzazione del metodo sulle tue esigenze — studio guidato con i nostri docenti.</p>
-      </div>
-      <div class="card package-card navy">
-        <div class="package-num">1 anno</div>
-        <h3>Supporto e accesso</h3>
-        <div class="gold-line"></div>
-        <p>Chat di supporto, piattaforma wiki, rifrequenza gratuita al dal vivo, diploma di partecipazione.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section bg-white">
-  <div class="container">
-    <div class="section-head">
-      <div class="section-label">Percorso online</div>
-      <h2 class="section-title">68 lezioni + 12 webinar: <em>come funziona</em></h2>
-      <p class="section-sub">Le lezioni sono a compartimenti stagni: puoi partire dal modulo più utile per te e mettere subito in pratica.</p>
-    </div>
-    <div class="grid-2">
-      <div class="card" style="border-top:3px solid var(--teal);">
-        <h3>Wiki / corso on demand</h3>
-        <div class="gold-line"></div>
-        <ul class="check-list">
-          <li><span class="ico ico-yes">✓</span>Introduzione e atteggiamento (ACOR)</li>
-          <li><span class="ico ico-yes">✓</span>Organizzazione: mappe mentali, ascolto, libri, decisioni</li>
-          <li><span class="ico ico-yes">✓</span>Memoria: parole astratte, schedario, numeri, date, formule</li>
-          <li><span class="ico ico-yes">✓</span>Lettura veloce: test, esercizi oculari, lettura attiva</li>
-          <li><span class="ico ico-yes">✓</span>Metodo di studio: sintesi, parole chiave, percorsi visivi</li>
+    <div class="topics-grid">
+      <div class="topic-block card" style="padding:24px;">
+        <h4>Atteggiamento e credenze</h4>
+        <ul>
+          <li>Scopri le tue credenze — Azione e risultato: la ricetta del successo</li>
+          <li>Credenze dell'apprendimento</li>
+          <li>Tecniche di rilassamento e concentrazione</li>
         </ul>
+      </div>
+      <div class="topic-block card" style="padding:24px;">
+        <h4>Lettura veloce (percorso completo)</h4>
+        <ul>
+          <li>Principi base, punti di fissità, velocità di spostamento dell'occhio</li>
+          <li>Sviluppo del campo visivo e velocità di percezione</li>
+          <li>Lettura globale, critica, a colonne e a blocchi — test e esercizi</li>
+        </ul>
+      </div>
+      <div class="topic-block card" style="padding:24px;">
+        <h4>Mappe mentali e creatività</h4>
+        <ul>
+          <li>Struttura e vantaggi delle mappe — appunti, studio, decisioni</li>
+          <li>Mappe per insegnare e parlare in pubblico</li>
+          <li>Brainstorming, Problem Solving, Your Mind Travel</li>
+        </ul>
+      </div>
+      <div class="topic-block card" style="padding:24px;">
+        <h4>Memoria e ripasso</h4>
+        <ul>
+          <li>Fotografia mentale, numeri, parole astratte, nomi e visi</li>
+          <li>Agenda mentale, Loci, Stanze, tecnica del corpo umano</li>
+          <li>Cicli di ripasso e memorizzazione a lungo termine</li>
+        </ul>
+      </div>
+      <div class="topic-block card" style="padding:24px;">
+        <h4>Applicazioni pratiche</h4>
+        <ul>
+          <li>Articoli di codice, formule e materie scientifiche</li>
+          <li>Date di storia e lingue straniere</li>
+          <li>Organizzazione del tempo e dello studio</li>
+        </ul>
+      </div>
+      <div class="topic-block card" style="padding:24px;">
+        <h4>Comunicazione efficace</h4>
+        <p>Come preparare ed esporre esami, riunioni e conferenze — il miglioramento della comunicazione come primo passo per raggiungere i propri obiettivi.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section bg-white" id="included">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-label">Struttura del percorso</div>
+      <h2 class="section-title">Master Eureka Fase 1: <em>come è organizzato</em></h2>
+      <p class="section-sub">Un percorso a tappe che ti guida verso i tuoi obiettivi. All'iscrizione ricevi le credenziali della piattaforma online; parallelamente partecipi a webinar e al corso dal vivo con coaching personalizzato.</p>
+    </div>
+    <div class="structure-flow">
+      <div class="flow-item"><strong>68</strong><span>Lezioni video on demand (~20 min ciascuna)</span></div>
+      <div class="flow-plus">+</div>
+      <div class="flow-item"><strong>12</strong><span>Webinar tematici da 2 ore (Zoom)</span></div>
+      <div class="flow-plus">+</div>
+      <div class="flow-item"><strong>4 gg</strong><span>Corso dal vivo — 40 ore in aula</span></div>
+      <div class="flow-plus">+</div>
+      <div class="flow-item"><strong>5 h</strong><span>Coaching telefoniche personalizzate</span></div>
+    </div>
+    <div class="grid-3" style="margin-top:56px;">
+      <div class="card package-card">
+        <span class="fase-tag tag tag-gold">Corso on demand</span>
+        <div class="package-num">68</div>
+        <h3>Video-lezioni</h3>
+        <div class="gold-line"></div>
+        <p>Durata media ~20 min per lezione. Argomenti: tecniche di memoria, lettura veloce, mappe mentali, tecniche di sintesi.</p>
+        <ul class="check-list" style="margin-top:16px;">
+          <li><span class="ico ico-yes">✓</span>Accesso da 3 devices contemporaneamente</li>
+          <li><span class="ico ico-yes">✓</span>Quiz al termine di ogni lezione</li>
+          <li><span class="ico ico-yes">✓</span>Accesso illimitato per 1 anno</li>
+          <li><span class="ico ico-yes">✓</span>Chat assistenza H24</li>
+        </ul>
+      </div>
+      <div class="card package-card teal">
+        <span class="fase-tag tag tag-teal">12 webinar</span>
+        <div class="package-num">2 h</div>
+        <h3>Webinar Zoom live</h3>
+        <div class="gold-line"></div>
+        <p>Erogati in diretta streaming ogni <strong>lunedì dalle 21:00 alle 23:00</strong>. Interazione con i docenti su tematiche applicative, dubbi e monitoraggio progressi.</p>
+        <p style="margin-top:12px;font-size:13px;">Registrazione disponibile per chi non può partecipare in diretta.</p>
+      </div>
+      <div class="card package-card navy">
+        <span class="fase-tag tag tag-navy">Dal vivo</span>
+        <div class="package-num">40 h</div>
+        <h3>Weekend intensivo</h3>
+        <div class="gold-line"></div>
+        <p>4 giornate in aula — formula full immersion per ottenere il massimo dei risultati in soli 4 giorni. Didattica <strong>EEE</strong>: Education, Entertainment, Empowerment.</p>
+      </div>
+      <div class="card package-card">
+        <span class="fase-tag tag tag-gold">Coaching</span>
+        <div class="package-num">5×1 h</div>
+        <h3>Coaching telefoniche</h3>
+        <div class="gold-line"></div>
+        <p>5 appuntamenti telefonici o via Zoom con un docente: sessioni di studio guidato per personalizzare il metodo e migliorare il rendimento.</p>
+      </div>
+      <div class="card package-card teal">
+        <span class="fase-tag tag tag-teal">Fase 2</span>
+        <div class="package-num">4</div>
+        <h3>Moduli di crescita</h3>
+        <div class="gold-line"></div>
+        <p>Gestione del tempo, Lingue straniere, Tecniche del colloquio (6 h ciascuno su Zoom) e Life Emotion — 5 giorni di crescita personale.</p>
+      </div>
+      <div class="card package-card navy">
+        <span class="fase-tag tag tag-navy">Life Emotion</span>
+        <div class="package-num">5 gg</div>
+        <h3>Amore, Passione, Controllo</h3>
+        <div class="gold-line"></div>
+        <p>Il cuore della Fase 2: valori, credenze, triade (fisiologia, linguaggio, credenze), 6 bisogni umani, mission personale e Pirobazia.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section bg-off" id="webinars">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-label">12 webinar</div>
+      <h2 class="section-title">Argomenti trattati durante i <em>webinar</em></h2>
+      <p class="section-sub">Ogni webinar dura 2 ore, in diretta Zoom il lunedì sera (21:00–23:00). Ecco il programma completo dalla brochure.</p>
+    </div>
+    <div style="max-width:820px;margin:0 auto;">
+      <div class="accordion-item"><div class="accordion-header">1 — Mappa mentale (parte 1) <span class="accordion-arrow">▼</span></div><div class="accordion-body">Mente lineare · Mente simultanea · 1ª mappa · Mappa ascolto 1</div></div>
+      <div class="accordion-item"><div class="accordion-header">2 — Mappa mentale (parte 2) <span class="accordion-arrow">▼</span></div><div class="accordion-body">Mappa ascolto 2 · Mappa da testo · Mappa per decisioni · Mappe di uso comune</div></div>
+      <div class="accordion-item"><div class="accordion-header">3 — Credenze <span class="accordion-arrow">▼</span></div><div class="accordion-body">Cos'è una credenza · Domande di autovalutazione · Cambio credenze</div></div>
+      <div class="accordion-item"><div class="accordion-header">4 — Strategie di sintesi <span class="accordion-arrow">▼</span></div><div class="accordion-body">Approccio al testo · Parole chiave + esercizio · Percorsi visivi · Cicli di studio</div></div>
+      <div class="accordion-item"><div class="accordion-header">5 — Memoria (parte 1) <span class="accordion-arrow">▼</span></div><div class="accordion-body">Come funziona la memoria · Fotografia mentale · Parole astratte · Rilassamento · Creatività</div></div>
+      <div class="accordion-item"><div class="accordion-header">6 — Memoria (parte 2) <span class="accordion-arrow">▼</span></div><div class="accordion-body">Suoni fonetici · Schedario mentale · Nomi e visi · 30 parole</div></div>
+      <div class="accordion-item"><div class="accordion-header">7 — Obiettivi <span class="accordion-arrow">▼</span></div><div class="accordion-body">Stabilire obiettivo · Pianificazione risorse · Piano d'azione</div></div>
+      <div class="accordion-item"><div class="accordion-header">8 — Memoria matematica <span class="accordion-arrow">▼</span></div><div class="accordion-body">Ciclo dei numeri · Date storiche · Formule · Teoremi</div></div>
+      <div class="accordion-item"><div class="accordion-header">9 — Memoria diritto <span class="accordion-arrow">▼</span></div><div class="accordion-body">Articoli di codice · Definizioni</div></div>
+      <div class="accordion-item"><div class="accordion-header">10 — Memoria lingue <span class="accordion-arrow">▼</span></div><div class="accordion-body">Come si memorizzano · Approccio funzionale · Memorizzazione vocaboli · Memoria a lungo termine</div></div>
+      <div class="accordion-item"><div class="accordion-header">11 — Lettura veloce (parte 1) <span class="accordion-arrow">▼</span></div><div class="accordion-body">Perché leggere velocemente · Test di lettura 1 · Spiegazione esercizi · AIO</div></div>
+      <div class="accordion-item"><div class="accordion-header">12 — Lettura veloce (parte 2) <span class="accordion-arrow">▼</span></div><div class="accordion-body">Secondo test di lettura · Abitudini sane · Riepilogo finale</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section bg-white" id="dal-vivo">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-label">Corso dal vivo Fase 1</div>
+      <h2 class="section-title">40 ore in un solo <em>week-end</em></h2>
+      <p class="section-sub">La struttura full immersion facilita la concentrazione: l'apprendimento del metodo avviene con la pratica. In un solo week-end ottieni tutti i risultati promessi — più semplice che una serie di appuntamenti infrasettimanali.</p>
+    </div>
+    <div class="schedule-wrap">
+      <table class="schedule-table">
+        <thead>
+          <tr><th>Giorno</th><th>Mattina</th><th>Pomeriggio / Sera</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Giovedì</td><td>09:00 – 13:00</td><td>14:00 – 20:00</td></tr>
+          <tr><td>Venerdì</td><td>09:00 – 13:00</td><td>14:30 – 20:30</td></tr>
+          <tr><td>Sabato</td><td>09:00 – 13:00</td><td>14:30 – 19:30</td></tr>
+          <tr><td>Domenica</td><td>—</td><td>21:00 – 23:30</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="grid-2" style="margin-top:48px;gap:40px;">
+      <div class="card date-col">
+        <h4>Sede di Roma</h4>
+        <ul class="date-list">
+          <li>27–28 febbraio · 01–02 marzo</li>
+          <li>03–04–05–06 aprile</li>
+          <li>08–09–10–11 maggio</li>
+          <li>03–04–05–06 luglio</li>
+          <li>04–05–06–07 settembre</li>
+          <li>06–07–08–09 novembre</li>
+          <li>18–19–20–21 dicembre</li>
+        </ul>
+      </div>
+      <div class="card date-col">
+        <h4>Sede di Milano</h4>
+        <ul class="date-list">
+          <li>06–07–08–09 febbraio</li>
+          <li>24–25–26–27–28 aprile</li>
+          <li>12–13–14–15 giugno</li>
+          <li>24–25–26–27 luglio</li>
+          <li>02–03–04–05 ottobre</li>
+          <li>04–05–06–07 dicembre</li>
+        </ul>
+      </div>
+    </div>
+    <p style="text-align:center;font-size:13px;color:var(--muted-lt);margin-top:28px;max-width:640px;margin-left:auto;margin-right:auto;">Calendario dalla brochure ufficiale. All'iscrizione ti confermiamo le prossime date disponibili per Roma e Milano.</p>
+  </div>
+</section>
+
+<section class="section bg-light" id="fase-2">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-label">Master Eureka Fase 2</div>
+      <h2 class="section-title">Crescita personale: <em>Amore, Passione, Controllo</em></h2>
+      <p class="section-sub">Quattro appuntamenti distanziati nel tempo: i primi tre perfezionano Gestione del tempo, Lingue straniere e Tecniche del colloquio; il quarto — Life Emotion — è il cuore della crescita personale.</p>
+    </div>
+    <div class="grid-2" style="margin-bottom:48px;">
+      <div class="card">
+        <span class="tag tag-teal fase-tag">Zoom · 6 ore</span>
+        <h3>Lingue straniere</h3>
+        <div class="gold-line"></div>
+        <p>Sabato 10:00–13:00 / 14:00–17:00 · <strong>12 aprile 2025</strong></p>
+        <p style="margin-top:12px;">Pratica e verifica dell'applicazione in comunicazione. Elimini i blocchi emotivi legati alla paura di parlare.</p>
+      </div>
+      <div class="card">
+        <span class="tag tag-teal fase-tag">Zoom · 6 ore</span>
+        <h3>Gestione del tempo</h3>
+        <div class="gold-line"></div>
+        <p>Sabato 10:00–13:00 / 14:00–17:00 · <strong>28 giugno 2025</strong></p>
+        <p style="margin-top:12px;">Strategie per scegliere cosa fare e quando. Approccio proattivo, priorità e padronanza del proprio tempo.</p>
+      </div>
+      <div class="card">
+        <span class="tag tag-teal fase-tag">Zoom · 6 ore</span>
+        <h3>Tecniche del colloquio</h3>
+        <div class="gold-line"></div>
+        <p>Sabato 10:00–13:00 / 14:00–17:00 · <strong>27 settembre 2025</strong></p>
+        <p style="margin-top:12px;">I segreti della comunicazione efficace per ottenere ciò che desideri dal lavoro e dalla vita personale.</p>
       </div>
       <div class="card" style="border-top:3px solid var(--gold);">
-        <h3>12 webinar applicativi</h3>
+        <span class="tag tag-gold fase-tag">5 giorni · in presenza</span>
+        <h3>Life Emotion</h3>
         <div class="gold-line"></div>
+        <p><strong>Date 2025:</strong> 13–17 marzo · 29–31 maggio / 01–02 giugno · 23–27 ottobre</p>
+        <p style="margin-top:12px;">Orari: gio 15:00–23:00 · ven–dom 09:00–23:00 · lun 09:00–19:00</p>
+      </div>
+    </div>
+    <div class="banner-light" style="max-width:820px;margin:0 auto;">
+      <p style="font-size:15px;font-weight:600;color:var(--navy);margin-bottom:16px;">Durante i 5 giorni del Life Emotion</p>
+      <div class="grid-2" style="gap:20px;">
         <ul class="check-list">
-          <li><span class="ico ico-yes">✓</span>Mappa mentale 1 e 2 · Credenze · Strategie di sintesi</li>
-          <li><span class="ico ico-yes">✓</span>Memoria 1 e 2 · Obiettivi · Matematica · Diritto</li>
-          <li><span class="ico ico-yes">✓</span>Lingue · Lettura veloce 1 e 2</li>
+          <li><span class="ico ico-yes">✓</span>Gestire gli stati d'animo per raggiungere gli obiettivi</li>
+          <li><span class="ico ico-yes">✓</span>Triade: fisiologia, linguaggio, credenze</li>
+          <li><span class="ico ico-yes">✓</span>I 6 bisogni umani e le strategie per soddisfarli</li>
+          <li><span class="ico ico-yes">✓</span>Livelli di cambiamento di Robert Dilts</li>
         </ul>
-        <p style="margin-top:20px;font-size:14px;color:var(--muted);">Ogni webinar collega teoria e pratica sul materiale che stai studiando adesso.</p>
+        <ul class="check-list">
+          <li><span class="ico ico-yes">✓</span>Credenze e regole: estrarle e cambiarle</li>
+          <li><span class="ico ico-yes">✓</span>Rafforzare l'identità personale e la mission</li>
+          <li><span class="ico ico-yes">✓</span>Pirobazia (Firewalking) e ricerca dei valori</li>
+          <li><span class="ico ico-yes">✓</span>Sovraccarico sensoriale e check interiore</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section bg-white" id="docenti">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-label">I docenti</div>
+      <h2 class="section-title">Chi ti guida nel <em>Master Eureka</em></h2>
+    </div>
+    <div class="grid-2">
+      <div class="card docente-card">
+        <div>
+          <h3>Maurizio Possenti</h3>
+          <div class="gold-line"></div>
+          <p>Oltre 25 anni di esperienza sul campo, più di 30.000 partecipanti formati, migliaia di ore d'aula e centinaia di sessioni di Personal Coaching. Ha collaborato con Ferrari, Mercedes Daimler-Chrysler, Royal Insurance e Rugby Lazio.</p>
+          <p style="margin-top:12px;">Autore de «Tecniche di memoria e lettura veloce» (Giunti Editore, 2009) — oltre 80.000 copie vendute in tre edizioni. Docente in Comunicazione, Public Speaking, Apprendimento Rapido, Motivazione e Leadership.</p>
+        </div>
+      </div>
+      <div class="card docente-card">
+        <div>
+          <h3>Laura Di Felice</h3>
+          <div class="gold-line"></div>
+          <p>Docente di Metodologie di Apprendimento Rapido con oltre 600 ore di formazione frontale e 200 ore di didattica a distanza. Ha collaborato alla riedizione del libro «Tecniche di memoria e lettura veloce» (Giunti, 2021).</p>
+          <p style="margin-top:12px;">Competenze: mappe mentali, strategie di sintesi, tecniche di memoria, lettura veloce, rilassamento e concentrazione, psicologia dell'apprendimento e approcci motivazionali.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -428,20 +658,24 @@ body{font-family:'Inter',sans-serif;background:var(--off-white);color:var(--text
       <h2 class="section-title">Domande frequenti</h2>
     </div>
     <div class="accordion-item">
+      <div class="accordion-header">Cosa include l'offerta a 2.497€? <span class="accordion-arrow">▼</span></div>
+      <div class="accordion-body">Master Eureka completo Fase 1 + Fase 2: 68 video-lezioni on demand, 12 webinar Zoom (lunedì 21:00–23:00), 4 giorni dal vivo (40 ore) a Roma o Milano, 5 coaching telefoniche da 1 ora, moduli Fase 2 (Gestione del tempo, Lingue, Tecniche del colloquio, Life Emotion 5 giorni). Accesso piattaforma 1 anno, quiz, chat H24.</div>
+    </div>
+    <div class="accordion-item">
       <div class="accordion-header">Per chi è il Master Eureka? <span class="accordion-arrow">▼</span></div>
-      <div class="accordion-body">Professionisti, studenti universitari, concorsisti, manager — chi ha poco tempo e molto materiale da apprendere. Non serve conoscere già il metodo: il percorso ti guida passo passo.</div>
+      <div class="accordion-body">Professionisti, studenti universitari, concorsisti, manager — chi ha poco tempo e molto materiale da apprendere. Non serve conoscere già il metodo: il percorso ti guida passo passo, integrando le tue conoscenze precedenti.</div>
     </div>
     <div class="accordion-item">
       <div class="accordion-header">Devo pagare 2.497€ compilando il form? <span class="accordion-arrow">▼</span></div>
-      <div class="accordion-body">No. Il form serve per richiedere l'offerta e fissare il posto. Riceverai istruzioni per pagamento (carta o bonifico) e attivazione accessi.</div>
+      <div class="accordion-body">No. Il form serve per richiedere l'offerta e fissare il posto. Riceverai istruzioni per pagamento (carta o bonifico) e attivazione accessi alla piattaforma.</div>
     </div>
     <div class="accordion-item">
-      <div class="accordion-header">Cosa succede dopo l'invio? <span class="accordion-arrow">▼</span></div>
-      <div class="accordion-body">Entri nel CRM Apprendimento Rapido, ricevi conferma e il team pagamenti ti contatta per completare l'iscrizione e sbloccare piattaforma e date del dal vivo.</div>
+      <div class="accordion-header">Quando sono i webinar e il corso dal vivo? <span class="accordion-arrow">▼</span></div>
+      <div class="accordion-body">I 12 webinar sono ogni lunedì dalle 21:00 alle 23:00 su Zoom. Il corso dal vivo dura 4 giorni (40 ore) con edizioni a Roma e Milano — vedi calendario in pagina. All'iscrizione ti confermiamo la data più adatta a te.</div>
     </div>
     <div class="accordion-item">
       <div class="accordion-header">Quanto dura l'accesso online? <span class="accordion-arrow">▼</span></div>
-      <div class="accordion-body">1 anno dall'iscrizione alla piattaforma con 68 lezioni e materiali. I webinar registrati restano recuperabili per 1 anno.</div>
+      <div class="accordion-body">Accesso illimitato alla piattaforma con 68 lezioni e materiali per 1 anno dall'iscrizione, con chat assistenza H24 e quiz per ogni lezione.</div>
     </div>
   </div>
 </section>
