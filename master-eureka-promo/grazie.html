@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>Grazie — Master Eureka 2.497€</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="/components/nav.css">
+<style>
+:root{
+  --navy:#0D1B2A; --teal:#00A988; --teal-dk:#007a63; --teal-lt:rgba(0,169,136,.12);
+  --gold:#B8973E; --gold-lt:rgba(184,151,62,.12);
+  --off-white:#F8F7F4; --light2:#E8E7E2; --text:#1a1a2e; --muted:#5a6a7a;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Inter',sans-serif;background:var(--off-white);color:var(--text);line-height:1.65;}
+.container{max-width:720px;margin:0 auto;padding:48px 28px 88px;}
+.card{background:#fff;border:1px solid var(--light2);border-radius:20px;padding:40px;box-shadow:0 16px 48px rgba(13,27,42,.08);text-align:center;}
+.icon{width:64px;height:64px;border-radius:50%;background:var(--teal-lt);color:var(--teal-dk);display:flex;align-items:center;justify-content:center;margin:0 auto 24px;font-size:28px;font-weight:700;}
+h1{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.4rem);color:var(--navy);margin-bottom:12px;}
+.lead{color:var(--muted);font-size:1.05rem;margin-bottom:28px;}
+.summary{text-align:left;background:var(--off-white);border-radius:14px;padding:20px 24px;margin-bottom:28px;}
+.summary dt{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-top:12px;}
+.summary dt:first-child{margin-top:0;}
+.summary dd{font-size:15px;color:var(--navy);font-weight:600;margin-top:4px;}
+.steps{text-align:left;margin-bottom:28px;}
+.steps h2{font-family:'Playfair Display',serif;font-size:1.25rem;color:var(--navy);margin-bottom:14px;}
+.steps ol{padding-left:20px;color:var(--muted);font-size:.95rem;}
+.steps li{margin-bottom:10px;}
+.price-tag{display:inline-block;padding:8px 16px;border-radius:999px;background:var(--gold-lt);color:#8a6010;font-weight:700;font-size:14px;margin-bottom:20px;}
+.contact{font-size:14px;color:var(--muted);line-height:1.8;}
+.contact a{color:var(--teal-dk);font-weight:600;}
+.btn{display:inline-flex;margin-top:24px;padding:14px 28px;border-radius:10px;background:var(--navy);color:#fff;text-decoration:none;font-weight:600;font-size:14px;}
+.btn:hover{background:#1C2B3A;}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="card">
+    <div class="icon">✓</div>
+    <span class="price-tag">Master Eureka — 2.497€ (promo 50%)</span>
+    <h1>Richiesta ricevuta</h1>
+    <p class="lead">Grazie! I tuoi dati sono stati registrati. Il team Apprendimento Rapido ti ricontatterà per confermare il posto e completare l'iscrizione al Master Eureka completo.</p>
+
+    <dl class="summary" id="summary">
+      <dt>Nome</dt><dd id="s-nome">—</dd>
+      <dt>Email</dt><dd id="s-email">—</dd>
+      <dt>Telefono</dt><dd id="s-tel">—</dd>
+    </dl>
+
+    <div class="steps">
+      <h2>Prossimi passi</h2>
+      <ol>
+        <li>Riceverai una email di conferma (controlla anche spam).</li>
+        <li>Il team pagamenti ti invierà le istruzioni: carta o bonifico per i <strong>2.497€</strong> (listino 4.997€).</li>
+        <li>Dopo il pagamento: accesso alla piattaforma (68 lezioni + webinar) e scelta date corso dal vivo.</li>
+      </ol>
+    </div>
+
+    <p class="contact">
+      Domande urgenti:<br>
+      <a href="mailto:pagamenti@apprendimentorapido.it">pagamenti@apprendimentorapido.it</a><br>
+      <a href="tel:+390240702168">02 4070 2168</a> · Lun–Ven 9:00–18:00
+    </p>
+
+    <a href="/master-eureka-promo/" class="btn">Torna alla pagina promozionale</a>
+  </div>
+</div>
+<div id="footer-placeholder"></div>
+<script src="/components/nav-loader.js"></script>
+<script src="/components/footer-loader.js"></script>
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const nome = params.get('nome') || '';
+  const cognome = params.get('cognome') || '';
+  const email = params.get('email') || '';
+  const tel = params.get('telefono') || '';
+  if (nome || cognome) document.getElementById('s-nome').textContent = [nome, cognome].filter(Boolean).join(' ');
+  if (email) document.getElementById('s-email').textContent = email;
+  if (tel) document.getElementById('s-tel').textContent = tel;
+  if (typeof fbq === 'function') fbq('track', 'CompleteRegistration', { content_name: 'Master Eureka Promo 2497' });
+</script>
+</body>
+</html>
