@@ -6,6 +6,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2X3V7JZPBJ"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-2X3V7JZPBJ');</script>
+<script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','957273196609597');fbq('track','PageView');</script>
 <title>Master Eureka — Promozione 2.497€ | Metodo Eureka</title>
 <meta name="description" content="Master Eureka Fase 1 e Fase 2 completo: da 4.997€ a 2.497€. 68 lezioni video, 12 webinar Zoom, 4 giorni dal vivo, 5 coaching, Life Emotion. Promozione di lancio.">
 <meta property="og:type" content="website">
@@ -161,6 +164,29 @@ body{font-family:'Inter',sans-serif;background:var(--off-white);color:var(--text
 .docente-card h3{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--navy);margin-bottom:8px;}
 .docente-card p{font-size:14px;color:var(--muted);line-height:1.75;}
 
+.video-wrap{border-radius:16px;overflow:hidden;aspect-ratio:16/9;border:1px solid var(--light2);box-shadow:0 16px 48px rgba(13,27,42,.12);background:#000;}
+.video-wrap iframe{width:100%;height:100%;border:0;display:block;}
+
+.value-stack{max-width:640px;margin:40px auto 0;background:#fff;border:1px solid var(--light2);border-radius:16px;padding:28px 32px;}
+.value-row{display:flex;justify-content:space-between;gap:16px;padding:10px 0;border-bottom:1px solid var(--light2);font-size:14px;color:var(--muted);}
+.value-row:last-of-type{border-bottom:none;}
+.value-row span:last-child{font-weight:600;color:var(--navy);white-space:nowrap;}
+.value-total{display:flex;justify-content:space-between;padding-top:16px;margin-top:8px;border-top:2px solid var(--gold);font-weight:700;color:var(--navy);font-size:15px;}
+.value-promo{display:flex;justify-content:space-between;padding-top:8px;font-family:'Playfair Display',serif;font-size:1.35rem;color:var(--teal-dk);font-weight:700;}
+
+.sticky-cta{position:fixed;bottom:0;left:0;right:0;z-index:9998;background:var(--navy);color:#fff;padding:12px 20px;box-shadow:0 -8px 32px rgba(0,0,0,.25);transform:translateY(110%);transition:transform .35s ease;border-top:1px solid rgba(255,255,255,.08);}
+.sticky-cta.show{transform:translateY(0);}
+.sticky-cta-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+.sticky-cta-price{font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:700;}
+.sticky-cta-price small{font-size:13px;font-weight:400;color:rgba(255,255,255,.55);text-decoration:line-through;margin-right:8px;font-family:'Inter',sans-serif;}
+.sticky-cta-text{font-size:13px;color:rgba(255,255,255,.65);}
+
+.trust-bar{display:flex;flex-wrap:wrap;gap:16px 24px;justify-content:center;margin-top:24px;padding-top:24px;border-top:1px solid var(--light2);}
+.trust-bar a{font-size:13px;color:var(--teal-dk);font-weight:600;text-decoration:none;}
+.trust-bar a:hover{text-decoration:underline;}
+
+body.has-sticky-cta{padding-bottom:80px;}
+
 @media(max-width:900px){
   .hero-inner,.grid-2,.grid-3,.grid-4,.stats-grid,.form-row,.topics-grid{grid-template-columns:1fr;}
   .flow-plus{display:none;}
@@ -178,7 +204,7 @@ body{font-family:'Inter',sans-serif;background:var(--off-white);color:var(--text
 </head>
 <body>
 
-<div class="promo-bar">Promozione di lancio Master Eureka — <strong>4.997€ → 2.497€</strong> (50% di sconto) · per chi è già in contatto con Apprendimento Rapido</div>
+<div class="promo-bar">Promozione di lancio Master Eureka — <strong>4.997€ → 2.497€</strong> (50%) · valida fino al <strong id="promo-deadline">31 luglio 2026</strong> · per chi è già in contatto con Apprendimento Rapido</div>
 
 <div id="nav-placeholder"></div>
 
@@ -193,7 +219,7 @@ body{font-family:'Inter',sans-serif;background:var(--off-white);color:var(--text
         <h1 class="page-hero-title">Il <em>Master Eureka</em><br>Ora a metà prezzo</h1>
         <p class="page-hero-sub">Il percorso più completo e collaudato per migliorare l'apprendimento a 360°: tecniche di memoria, lettura veloce, mappe mentali, sintesi e psicologia dell'apprendimento. Fase 1 per i risultati nello studio; Fase 2 per la crescita personale.</p>
         <div style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:36px;">
-          <a href="#form" class="btn btn-gold btn-lg">Richiedi l'offerta a 2.497€</a>
+          <a href="#form" class="btn btn-gold btn-lg">Blocca il posto a 2.497€</a>
           <a href="#included" class="btn btn-outline btn-lg">Struttura del percorso</a>
         </div>
         <ul class="check-list" style="max-width:520px;">
@@ -220,10 +246,81 @@ body{font-family:'Inter',sans-serif;background:var(--off-white);color:var(--text
 <section class="bg-navy" style="padding:40px 0;">
   <div class="container">
     <div class="stats-grid stats-section">
+      <div><div class="stat-num" data-count="98" data-suffix="%">0</div><div class="stat-lbl" style="color:rgba(255,255,255,.55);">Soddisfazione a fine percorso</div></div>
       <div><div class="stat-num" data-count="40" data-suffix="k+">0</div><div class="stat-lbl" style="color:rgba(255,255,255,.55);">Studenti e professionisti formati</div></div>
-      <div><div class="stat-num" data-count="24" data-suffix="+">0</div><div class="stat-lbl" style="color:rgba(255,255,255,.55);">Anni di attività dei docenti</div></div>
-      <div><div class="stat-num" data-count="3" data-suffix="×">0</div><div class="stat-lbl" style="color:rgba(255,255,255,.55);">Capacità di apprendimento</div></div>
-      <div><div class="stat-num" data-count="68">0</div><div class="stat-lbl" style="color:rgba(255,255,255,.55);">Video-lezioni Fase 1</div></div>
+      <div><div class="stat-num" data-count="24" data-suffix="+">0</div><div class="stat-lbl" style="color:rgba(255,255,255,.55);">Anni di attività</div></div>
+      <div><div class="stat-num" data-count="68">0</div><div class="stat-lbl" style="color:rgba(255,255,255,.55);">Video-lezioni incluse</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section bg-off" style="padding-top:72px;padding-bottom:72px;">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-label">Il problema reale</div>
+      <h2 class="section-title">Studi tanto ma non <em>ricordi?</em></h2>
+      <p class="section-sub">Se passi ore sui libri ma dimentichi tutto il giorno dopo, il problema non è la tua intelligenza — è il metodo. E nessuno te l'ha mai insegnato a scuola.</p>
+    </div>
+    <div class="grid-2">
+      <div class="card" style="border-top:3px solid #dc2626;">
+        <h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;color:#dc2626;margin-bottom:16px;">Senza un metodo strutturato</h3>
+        <ul class="check-list">
+          <li><span class="ico" style="background:rgba(220,38,38,.1);color:#dc2626;">✗</span>Ripeti le stesse pagine senza trattenere nulla</li>
+          <li><span class="ico" style="background:rgba(220,38,38,.1);color:#dc2626;">✗</span>Perdi tempo prima di esami e concorsi</li>
+          <li><span class="ico" style="background:rgba(220,38,38,.1);color:#dc2626;">✗</span>Ansia e senso di essere «lento» rispetto agli obiettivi</li>
+        </ul>
+      </div>
+      <div class="card" style="border-top:3px solid var(--teal);">
+        <h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--teal-dk);margin-bottom:16px;">Con il Master Eureka</h3>
+        <ul class="check-list">
+          <li><span class="ico ico-yes">✓</span>Memoria, sintesi e lettura veloce sul tuo materiale</li>
+          <li><span class="ico ico-yes">✓</span>Weekend intensivo + webinar + piattaforma per 1 anno</li>
+          <li><span class="ico ico-yes">✓</span>Coaching e docenti che ti seguono fino all'applicazione</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section bg-white">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-label">Per chi è</div>
+      <h2 class="section-title">Il Master Eureka è per te se…</h2>
+    </div>
+    <div class="grid-2" style="gap:32px;max-width:960px;margin:0 auto;">
+      <div class="card" style="border-top:3px solid var(--teal);">
+        <h3 style="font-family:'Playfair Display',serif;color:var(--teal-dk);margin-bottom:20px;">✓ È adatto a chi</h3>
+        <ul class="check-list">
+          <li><span class="ico ico-yes">✓</span>Ha concorsi, università o aggiornamento professionale davanti</li>
+          <li><span class="ico ico-yes">✓</span>Vuole un percorso completo (online + dal vivo), non un corso singolo</li>
+          <li><span class="ico ico-yes">✓</span>Conosce già Apprendimento Rapido e vuole l'offerta integrata</li>
+          <li><span class="ico ico-yes">✓</span>È disposto a investire tempo per applicare il metodo sul proprio materiale</li>
+        </ul>
+      </div>
+      <div class="card" style="border-top:3px solid #dc2626;background:#fef2f2;">
+        <h3 style="font-family:'Playfair Display',serif;color:#dc2626;margin-bottom:20px;">✗ Non è adatto a chi</h3>
+        <ul class="check-list">
+          <li><span class="ico" style="background:rgba(220,38,38,.1);color:#dc2626;">✗</span>Cerca un «trucchetto» da 2 ore senza impegno</li>
+          <li><span class="ico" style="background:rgba(220,38,38,.1);color:#dc2626;">✗</span>Non può dedicare nemmeno 2–3 ore a settimana alla piattaforma</li>
+          <li><span class="ico" style="background:rgba(220,38,38,.1);color:#dc2626;">✗</span>Vuole solo video senza webinar, coaching o parte dal vivo</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section bg-light" style="padding-top:64px;padding-bottom:64px;">
+  <div class="container">
+    <div class="grid-2" style="gap:48px;align-items:center;">
+      <div>
+        <div class="section-label">Guarda prima di decidere</div>
+        <h2 class="section-title">2 minuti sul <em>Metodo Eureka</em></h2>
+        <p class="section-sub" style="margin-bottom:0;">Un assaggio di come lavoriamo in aula — memoria, coinvolgimento e applicazione pratica.</p>
+      </div>
+      <div class="video-wrap">
+        <iframe src="https://www.youtube.com/embed/jr5JuIH8Dqw?start=154&rel=0&modestbranding=1" title="Metodo Eureka — Apprendimento Rapido" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+      </div>
     </div>
   </div>
 </section>
@@ -424,6 +521,52 @@ body{font-family:'Inter',sans-serif;background:var(--off-white);color:var(--text
         <p>Il cuore della Fase 2: valori, credenze, triade (fisiologia, linguaggio, credenze), 6 bisogni umani, mission personale e Pirobazia.</p>
       </div>
     </div>
+
+    <div class="value-stack">
+      <p style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--teal);margin-bottom:16px;text-align:center;">Valore del pacchetto</p>
+      <div class="value-row"><span>68 video-lezioni on demand (1 anno)</span><span>1.497€</span></div>
+      <div class="value-row"><span>12 webinar Zoom live (2 h ciascuno)</span><span>597€</span></div>
+      <div class="value-row"><span>Corso dal vivo 40 ore (Roma o Milano)</span><span>1.997€</span></div>
+      <div class="value-row"><span>5 coaching telefoniche personalizzate</span><span>497€</span></div>
+      <div class="value-row"><span>Fase 2: Life Emotion + 3 moduli Zoom</span><span>409€</span></div>
+      <div class="value-total"><span>Valore di listino</span><span>4.997€</span></div>
+      <div class="value-promo"><span>Promo lancio DB</span><span>2.497€</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section bg-off" id="form-mid">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-label">Blocca il posto</div>
+      <h2 class="section-title">Master completo a <em>2.497€</em></h2>
+      <p class="section-sub">Compila ora: ti ricontattiamo entro 24 ore lavorative con conferma posto e istruzioni pagamento (carta o bonifico). Nessun addebito automatico.</p>
+    </div>
+    <div class="form-wrap">
+      <form class="promo-form" id="promo-form-mid" novalidate>
+        <div class="form-row">
+          <div class="form-group"><label for="nome-mid">Nome *</label><input type="text" id="nome-mid" name="nome" autocomplete="given-name" required></div>
+          <div class="form-group"><label for="cognome-mid">Cognome *</label><input type="text" id="cognome-mid" name="cognome" autocomplete="family-name" required></div>
+        </div>
+        <div class="form-group"><label for="email-mid">Email *</label><input type="email" id="email-mid" name="email" autocomplete="email" required></div>
+        <div class="form-group"><label for="telefono-mid">Telefono *</label><input type="tel" id="telefono-mid" name="telefono" autocomplete="tel" placeholder="+39 ..." required></div>
+        <div class="hp-field" aria-hidden="true"><input type="text" id="hp_promo_mid" tabindex="-1" autocomplete="off"></div>
+        <label class="form-checkbox">
+          <input type="checkbox" class="consent-check" required>
+          <span>Acconsento al trattamento dei dati per ricevere informazioni sull'offerta Master Eureka. Ho letto l'<a href="https://www.iubenda.com/privacy-policy/89530968" target="_blank" rel="noopener">informativa privacy</a>.</span>
+        </label>
+        <div style="margin-top:28px;">
+          <button type="submit" class="btn-submit">Blocca il posto a 2.497€</button>
+        </div>
+        <div class="form-error"></div>
+        <div class="trust-bar">
+          <a href="tel:+390240702168">📞 02 4070 2168</a>
+          <a href="mailto:pagamenti@apprendimentorapido.it">✉ pagamenti@apprendimentorapido.it</a>
+          <a href="https://wa.me/390240702168?text=Ciao%2C%20vorrei%20informazioni%20sul%20Master%20Eureka%20a%202.497%E2%82%AC" target="_blank" rel="noopener">WhatsApp</a>
+        </div>
+        <p class="form-note">Preferisci essere richiamato? Lascia il telefono: il team pagamenti ti contatta entro 24 ore.</p>
+      </form>
+    </div>
   </div>
 </section>
 
@@ -473,30 +616,24 @@ body{font-family:'Inter',sans-serif;background:var(--off-white);color:var(--text
     </div>
     <div class="grid-2" style="margin-top:48px;gap:40px;">
       <div class="card date-col">
-        <h4>Sede di Roma</h4>
+        <h4>Sede di Roma — edizioni 2026</h4>
         <ul class="date-list">
-          <li>27–28 febbraio · 01–02 marzo</li>
-          <li>03–04–05–06 aprile</li>
-          <li>08–09–10–11 maggio</li>
-          <li>03–04–05–06 luglio</li>
-          <li>04–05–06–07 settembre</li>
-          <li>06–07–08–09 novembre</li>
-          <li>18–19–20–21 dicembre</li>
+          <li>03–04–05–06 luglio 2026</li>
+          <li>04–05–06–07 settembre 2026</li>
+          <li>06–07–08–09 novembre 2026</li>
+          <li>18–19–20–21 dicembre 2026</li>
         </ul>
       </div>
       <div class="card date-col">
-        <h4>Sede di Milano</h4>
+        <h4>Sede di Milano — edizioni 2026</h4>
         <ul class="date-list">
-          <li>06–07–08–09 febbraio</li>
-          <li>24–25–26–27–28 aprile</li>
-          <li>12–13–14–15 giugno</li>
-          <li>24–25–26–27 luglio</li>
-          <li>02–03–04–05 ottobre</li>
-          <li>04–05–06–07 dicembre</li>
+          <li>24–25–26–27 luglio 2026</li>
+          <li>02–03–04–05 ottobre 2026</li>
+          <li>04–05–06–07 dicembre 2026</li>
         </ul>
       </div>
     </div>
-    <p style="text-align:center;font-size:13px;color:var(--muted-lt);margin-top:28px;max-width:640px;margin-left:auto;margin-right:auto;">Calendario dalla brochure ufficiale. All'iscrizione ti confermiamo le prossime date disponibili per Roma e Milano.</p>
+    <p style="text-align:center;font-size:13px;color:var(--muted-lt);margin-top:28px;max-width:640px;margin-left:auto;margin-right:auto;">All'iscrizione ti confermiamo la data più vicina disponibile. Se una edizione è al completo, proponiamo la successiva.</p>
   </div>
 </section>
 
@@ -512,28 +649,28 @@ body{font-family:'Inter',sans-serif;background:var(--off-white);color:var(--text
         <span class="tag tag-teal fase-tag">Zoom · 6 ore</span>
         <h3>Lingue straniere</h3>
         <div class="gold-line"></div>
-        <p>Sabato 10:00–13:00 / 14:00–17:00 · <strong>12 aprile 2025</strong></p>
+        <p>Sabato 10:00–13:00 / 14:00–17:00 · <strong>prossima edizione autunno 2026</strong></p>
         <p style="margin-top:12px;">Pratica e verifica dell'applicazione in comunicazione. Elimini i blocchi emotivi legati alla paura di parlare.</p>
       </div>
       <div class="card">
         <span class="tag tag-teal fase-tag">Zoom · 6 ore</span>
         <h3>Gestione del tempo</h3>
         <div class="gold-line"></div>
-        <p>Sabato 10:00–13:00 / 14:00–17:00 · <strong>28 giugno 2025</strong></p>
+        <p>Sabato 10:00–13:00 / 14:00–17:00 · <strong>prossima edizione autunno 2026</strong></p>
         <p style="margin-top:12px;">Strategie per scegliere cosa fare e quando. Approccio proattivo, priorità e padronanza del proprio tempo.</p>
       </div>
       <div class="card">
         <span class="tag tag-teal fase-tag">Zoom · 6 ore</span>
         <h3>Tecniche del colloquio</h3>
         <div class="gold-line"></div>
-        <p>Sabato 10:00–13:00 / 14:00–17:00 · <strong>27 settembre 2025</strong></p>
+        <p>Sabato 10:00–13:00 / 14:00–17:00 · <strong>prossima edizione autunno 2026</strong></p>
         <p style="margin-top:12px;">I segreti della comunicazione efficace per ottenere ciò che desideri dal lavoro e dalla vita personale.</p>
       </div>
       <div class="card" style="border-top:3px solid var(--gold);">
         <span class="tag tag-gold fase-tag">5 giorni · in presenza</span>
         <h3>Life Emotion</h3>
         <div class="gold-line"></div>
-        <p><strong>Date 2025:</strong> 13–17 marzo · 29–31 maggio / 01–02 giugno · 23–27 ottobre</p>
+        <p><strong>Edizioni 2026:</strong> ottobre (date comunicate all'iscrizione)</p>
         <p style="margin-top:12px;">Orari: gio 15:00–23:00 · ven–dom 09:00–23:00 · lun 09:00–19:00</p>
       </div>
     </div>
@@ -615,8 +752,8 @@ body{font-family:'Inter',sans-serif;background:var(--off-white);color:var(--text
     <div class="banner-navy">
       <div class="section-label" style="color:var(--teal);">Offerta di lancio</div>
       <h2 class="section-title" style="color:#fff;margin-bottom:12px;">Master Eureka completo<br><em style="color:var(--gold);">4.997€ → 2.497€</em></h2>
-      <p style="color:rgba(255,255,255,.65);max-width:520px;margin:0 auto 32px;line-height:1.75;">Compila il form: nessun addebito automatico. Ti ricontattiamo con conferma posto e modalità di pagamento.</p>
-      <a href="#form" class="btn btn-gold btn-lg">Richiedi l'offerta a 2.497€</a>
+      <p style="color:rgba(255,255,255,.65);max-width:520px;margin:0 auto 32px;line-height:1.75;">Compila il form: nessun addebito automatico. Ti ricontattiamo entro 24 ore con conferma posto e pagamento.</p>
+      <a href="#form" class="btn btn-gold btn-lg">Blocca il posto a 2.497€</a>
     </div>
   </div>
 </section>
@@ -625,11 +762,11 @@ body{font-family:'Inter',sans-serif;background:var(--off-white);color:var(--text
   <div class="container">
     <div class="section-head">
       <div class="section-label">Richiedi l'offerta</div>
-      <h2 class="section-title">Entra in lista per il Master a <em>2.497€</em></h2>
-      <p class="section-sub">Ti ricontattiamo con conferma posto, modalità di pagamento e accesso alla piattaforma.</p>
+      <h2 class="section-title">Ultimo passo: blocca il Master a <em>2.497€</em></h2>
+      <p class="section-sub">Ti ricontattiamo entro 24 ore lavorative con conferma posto, bonifico o carta, e accesso alla piattaforma.</p>
     </div>
     <div class="form-wrap">
-      <form id="promo-form" novalidate>
+      <form class="promo-form" id="promo-form" novalidate>
         <div class="form-row">
           <div class="form-group"><label for="nome">Nome *</label><input type="text" id="nome" name="nome" autocomplete="given-name" required></div>
           <div class="form-group"><label for="cognome">Cognome *</label><input type="text" id="cognome" name="cognome" autocomplete="family-name" required></div>
@@ -638,14 +775,19 @@ body{font-family:'Inter',sans-serif;background:var(--off-white);color:var(--text
         <div class="form-group"><label for="telefono">Telefono *</label><input type="tel" id="telefono" name="telefono" autocomplete="tel" placeholder="+39 ..." required></div>
         <div class="hp-field" aria-hidden="true"><label for="hp_promo">Non compilare</label><input type="text" id="hp_promo" name="hp_promo" tabindex="-1" autocomplete="off"></div>
         <label class="form-checkbox">
-          <input type="checkbox" id="consent" required>
+          <input type="checkbox" id="consent" class="consent-check" required>
           <span>Acconsento al trattamento dei dati per ricevere informazioni sull'offerta Master Eureka e per essere ricontattato/a. Ho letto l'<a href="https://www.iubenda.com/privacy-policy/89530968" target="_blank" rel="noopener">informativa privacy</a>.</span>
         </label>
         <div style="margin-top:28px;">
-          <button type="submit" class="btn-submit" id="submit-btn">Richiedi Master Eureka a 2.497€</button>
+          <button type="submit" class="btn-submit" id="submit-btn">Blocca il posto a 2.497€</button>
         </div>
         <div class="form-error" id="form-error"></div>
-        <p class="form-note">Offerta promozionale 2.497€ (listino 4.997€). Promozione di lancio al database Apprendimento Rapido.<br>Domande: <a href="mailto:pagamenti@apprendimentorapido.it">pagamenti@apprendimentorapido.it</a> · <a href="tel:+390240702168">02 4070 2168</a></p>
+        <div class="trust-bar">
+          <a href="tel:+390240702168">📞 02 4070 2168</a>
+          <a href="mailto:pagamenti@apprendimentorapido.it">✉ pagamenti@apprendimentorapido.it</a>
+          <a href="https://wa.me/390240702168?text=Ciao%2C%20vorrei%20informazioni%20sul%20Master%20Eureka%20a%202.497%E2%82%AC" target="_blank" rel="noopener">WhatsApp</a>
+        </div>
+        <p class="form-note">Offerta 2.497€ (listino 4.997€) valida fino al <span id="promo-deadline-2">31 luglio 2026</span>. Promozione di lancio al database Apprendimento Rapido.</p>
       </form>
     </div>
   </div>
@@ -674,13 +816,44 @@ body{font-family:'Inter',sans-serif;background:var(--off-white);color:var(--text
       <div class="accordion-body">I 12 webinar sono ogni lunedì dalle 21:00 alle 23:00 su Zoom. Il corso dal vivo dura 4 giorni (40 ore) con edizioni a Roma e Milano — vedi calendario in pagina. All'iscrizione ti confermiamo la data più adatta a te.</div>
     </div>
     <div class="accordion-item">
+      <div class="accordion-header">Quanto tempo devo dedicare ogni settimana? <span class="accordion-arrow">▼</span></div>
+      <div class="accordion-body">Consigliamo 2–3 ore a settimana per le lezioni on demand, più i webinar del lunedì sera (2 ore) e il weekend dal vivo quando lo fissi. Il percorso è flessibile: le lezioni restano accessibili per 1 anno.</div>
+    </div>
+    <div class="accordion-item">
+      <div class="accordion-header">Posso pagare a rate o con bonifico? <span class="accordion-arrow">▼</span></div>
+      <div class="accordion-body">Sì. Dopo il form il team pagamenti ti invia le opzioni: carta di credito o bonifico bancario. Per rate o soluzioni personalizzate, scrivi a pagamenti@apprendimentorapido.it indicando la tua situazione.</div>
+    </div>
+    <div class="accordion-item">
+      <div class="accordion-header">Ho già fatto un corso con voi: conviene il Master? <span class="accordion-arrow">▼</span></div>
+      <div class="accordion-body">Se conosci già singole tecniche, il Master Eureka integra tutto in un percorso strutturato con dal vivo, coaching e Fase 2 (Life Emotion, lingue, colloquio, tempo). L'offerta a 2.497€ è pensata proprio per chi è già nel mondo Apprendimento Rapido.</div>
+    </div>
+    <div class="accordion-item">
+      <div class="accordion-header">Cosa succede se non posso andare al dal vivo? <span class="accordion-arrow">▼</span></div>
+      <div class="accordion-body">Contattaci prima dell'edizione: valutiamo spostamento a una data successiva (Roma o Milano) secondo disponibilità. La piattaforma online e i webinar restano comunque attivi per 1 anno.</div>
+    </div>
+    <div class="accordion-item">
       <div class="accordion-header">Quanto dura l'accesso online? <span class="accordion-arrow">▼</span></div>
       <div class="accordion-body">Accesso illimitato alla piattaforma con 68 lezioni e materiali per 1 anno dall'iscrizione, con chat assistenza H24 e quiz per ogni lezione.</div>
+    </div>
+    <div class="accordion-item">
+      <div class="accordion-header">Esiste una garanzia o diritto di recesso? <span class="accordion-arrow">▼</span></div>
+      <div class="accordion-body">Per i dettagli contrattuali (recesso, condizioni di rimborso) il team pagamenti ti invia il regolamento completo prima della conferma d'iscrizione, in conformità alla normativa sui corsi a distanza.</div>
     </div>
   </div>
 </section>
 
+<div class="sticky-cta" id="sticky-cta" aria-hidden="true">
+  <div class="sticky-cta-inner">
+    <div>
+      <div class="sticky-cta-price"><small>4.997€</small>2.497€</div>
+      <div class="sticky-cta-text">Master Eureka completo · promo fino al <span id="promo-deadline-3">31 lug 2026</span></div>
+    </div>
+    <a href="#form" class="btn btn-gold">Blocca il posto</a>
+  </div>
+</div>
+
 <div id="footer-placeholder"></div>
+<script src="/whatsapp-widget.js"></script>
 <script src="/components/nav-loader.js"></script>
 <script src="/components/footer-loader.js"></script>
 <script>
@@ -717,26 +890,42 @@ const API_ENDPOINT='https://api.apprendimentorapido.it/api/webhook/contact';
 const LISTA_NAME='Master Eureka Promo 2497';
 const LANDING_ID='master-eureka-promo-2497';
 const REDIRECT_URL='/master-eureka-promo/grazie.html';
-const form=document.getElementById('promo-form');
-const errorBox=document.getElementById('form-error');
-const btn=document.getElementById('submit-btn');
 
-function showError(msg){errorBox.textContent=msg;errorBox.classList.add('show');errorBox.scrollIntoView({behavior:'smooth',block:'center'});}
-function clearError(){errorBox.classList.remove('show');errorBox.textContent='';}
+function getFormData(formEl){
+  const isMid=formEl.id==='promo-form-mid';
+  const suffix=isMid?'-mid':'';
+  return{
+    nome:formEl.querySelector('#nome'+suffix).value.trim(),
+    cognome:formEl.querySelector('#cognome'+suffix).value.trim(),
+    email:formEl.querySelector('#email'+suffix).value.trim(),
+    telefono:formEl.querySelector('#telefono'+suffix).value.trim(),
+    consent:formEl.querySelector('.consent-check').checked,
+    honeypot:formEl.querySelector(isMid?'#hp_promo_mid':'#hp_promo').value
+  };
+}
 
-form.addEventListener('submit',async function(e){
-  e.preventDefault();clearError();
-  const nome=document.getElementById('nome').value.trim();
-  const cognome=document.getElementById('cognome').value.trim();
-  const email=document.getElementById('email').value.trim();
-  const telefono=document.getElementById('telefono').value.trim();
-  const consent=document.getElementById('consent').checked;
-  const honeypot=document.getElementById('hp_promo').value;
-  if(!nome||!cognome||!email||!telefono){showError('Compila tutti i campi obbligatori.');return;}
-  if(!consent){showError('Accetta l\'informativa privacy per procedere.');return;}
+function showFormError(formEl,msg){
+  const box=formEl.querySelector('.form-error');
+  box.textContent=msg;box.classList.add('show');
+  box.scrollIntoView({behavior:'smooth',block:'center'});
+}
+function clearFormError(formEl){
+  const box=formEl.querySelector('.form-error');
+  box.classList.remove('show');box.textContent='';
+}
+
+async function submitPromoForm(e){
+  e.preventDefault();
+  const formEl=e.target;
+  clearFormError(formEl);
+  const btn=formEl.querySelector('.btn-submit');
+  const {nome,cognome,email,telefono,consent,honeypot}=getFormData(formEl);
+  if(!nome||!cognome||!email||!telefono){showFormError(formEl,'Compila tutti i campi obbligatori.');return;}
+  if(!consent){showFormError(formEl,'Accetta l\'informativa privacy per procedere.');return;}
   if(honeypot){window.location.href=REDIRECT_URL;return;}
   const original=btn.textContent;
   btn.textContent='Invio in corso...';btn.disabled=true;
+  document.querySelectorAll('.promo-form .btn-submit').forEach(b=>{b.disabled=true;});
   const payload={
     nome,cognome,email,telefono,
     lista:LISTA_NAME,landing_id:LANDING_ID,
@@ -746,7 +935,8 @@ form.addEventListener('submit',async function(e){
       offerta:'Master Eureka Completo',prezzo_listino:4997,prezzo_promo:2497,
       sconto_percentuale:50,consent_marketing:true,
       consent_marketing_at:new Date().toISOString(),
-      original_source:'landing-master-eureka-promo-2497'
+      original_source:'landing-master-eureka-promo-2497',
+      form_position:formEl.id==='promo-form-mid'?'mid':'bottom'
     }
   };
   try{
@@ -755,17 +945,43 @@ form.addEventListener('submit',async function(e){
     if(response.ok&&data.success!==false){
       if(typeof fbq==='function')fbq('track','Lead',{content_name:'Master Eureka Promo 2497'});
       if(typeof gtag==='function')gtag('event','generate_lead',{event_category:'Form',event_label:'Master Eureka Promo 2497'});
-      const params=new URLSearchParams({nome,cognome,email,telefono});
-      window.location.href=REDIRECT_URL+'?'+params.toString();
+      window.location.href=REDIRECT_URL+'?'+new URLSearchParams({nome,cognome,email,telefono}).toString();
     }else{
-      showError(data.detail||data.message||'Errore durante l\'invio. Scrivi a pagamenti@apprendimentorapido.it');
-      btn.textContent=original;btn.disabled=false;
+      showFormError(formEl,data.detail||data.message||'Errore durante l\'invio. Scrivi a pagamenti@apprendimentorapido.it');
+      btn.textContent=original;
+      document.querySelectorAll('.promo-form .btn-submit').forEach(b=>{b.disabled=false;});
     }
   }catch(err){
-    showError('Connessione non riuscita. Riprova o scrivi a pagamenti@apprendimentorapido.it');
-    btn.textContent=original;btn.disabled=false;
+    showFormError(formEl,'Connessione non riuscita. Riprova o scrivi a pagamenti@apprendimentorapido.it');
+    btn.textContent=original;
+    document.querySelectorAll('.promo-form .btn-submit').forEach(b=>{b.disabled=false;});
   }
-});
+}
+document.querySelectorAll('.promo-form').forEach(f=>f.addEventListener('submit',submitPromoForm));
+
+const stickyCta=document.getElementById('sticky-cta');
+const formSections=document.querySelectorAll('#form,#form-mid');
+if(stickyCta){
+  document.body.classList.add('has-sticky-cta');
+  let stickyVisible=false;
+  const formObserver=new IntersectionObserver((entries)=>{
+    const formInView=entries.some(e=>e.isIntersecting);
+    if(formInView&&stickyVisible){stickyCta.classList.remove('show');stickyVisible=false;}
+  },{threshold:0.15});
+  formSections.forEach(s=>formObserver.observe(s));
+  window.addEventListener('scroll',()=>{
+    if(window.scrollY>600&&!stickyVisible){
+      let anyFormVisible=false;
+      formSections.forEach(s=>{
+        const r=s.getBoundingClientRect();
+        if(r.top<window.innerHeight&&r.bottom>0)anyFormVisible=true;
+      });
+      if(!anyFormVisible){stickyCta.classList.add('show');stickyVisible=true;}
+    }else if(window.scrollY<=600&&stickyVisible){
+      stickyCta.classList.remove('show');stickyVisible=false;
+    }
+  },{passive:true});
+}
 </script>
 </body>
 </html>
