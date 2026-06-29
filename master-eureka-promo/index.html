@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <title>Master Eureka — Promozione 2.497€ | Metodo Eureka</title>
 <meta name="description" content="Master Eureka completo: da 4.997€ a 2.497€. 68 video-lezioni, 12 webinar, corso dal vivo 4 giorni. Promozione di lancio per chi conosce Apprendimento Rapido.">
 <meta property="og:type" content="website">
@@ -22,200 +22,382 @@
   --text:#1a1a2e; --muted:#5a6a7a; --muted-lt:#8a9aaa;
   --nav-h:72px;
 }
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
-body{font-family:'Inter',sans-serif;background:var(--off-white);color:var(--text);line-height:1.65;}
+body{font-family:'Inter',sans-serif;background:var(--off-white);color:var(--text);line-height:1.65;overflow-x:hidden;}
+
 .container{max-width:1100px;margin:0 auto;padding:0 28px;}
-.section{padding:88px 0;}
+.section{padding:96px 0;}
+.section-sm{padding:64px 0;}
+.section-head{text-align:center;max-width:720px;margin:0 auto 56px;}
 .section-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2.5px;color:var(--teal);margin-bottom:14px;}
 .section-title{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,3.2vw,2.8rem);font-weight:700;line-height:1.15;color:var(--navy);margin-bottom:18px;}
 .section-title em{font-style:italic;color:var(--gold);}
-.section-sub{font-size:1rem;color:var(--muted);line-height:1.8;max-width:640px;}
+.section-sub{font-size:1rem;color:var(--muted);line-height:1.8;max-width:600px;font-weight:400;}
+.section-head .section-sub{margin:0 auto;}
+
 .tag{display:inline-flex;align-items:center;padding:5px 14px;border-radius:50px;font-size:11px;font-weight:600;letter-spacing:.6px;text-transform:uppercase;}
-.tag-gold{background:var(--gold-lt);border:1px solid var(--gold-brd);color:#8a6010;}
+.tag-navy{background:rgba(13,27,42,.08);border:1px solid rgba(13,27,42,.2);color:var(--navy);}
 .tag-teal{background:var(--teal-lt);border:1px solid rgba(0,169,136,.25);color:var(--teal-dk);}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 28px;border-radius:10px;font-size:14px;font-weight:600;font-family:'Inter',sans-serif;text-decoration:none;cursor:pointer;border:none;transition:transform .2s,box-shadow .2s,background .2s;}
+.tag-gold{background:var(--gold-lt);border:1px solid var(--gold-brd);color:#8a6010;}
+
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:10px;font-size:14px;font-weight:600;font-family:'Inter',sans-serif;text-decoration:none;cursor:pointer;border:none;transition:transform .2s,box-shadow .2s,background .2s;letter-spacing:.2px;}
 .btn-gold{background:var(--gold);color:#fff;box-shadow:0 4px 20px rgba(184,151,62,.3);}
 .btn-gold:hover{background:#a07c2a;transform:translateY(-2px);}
 .btn-primary{background:var(--navy);color:#fff;box-shadow:0 4px 20px rgba(13,27,42,.25);}
 .btn-primary:hover{background:var(--navy2);transform:translateY(-2px);}
+.btn-outline{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.4);}
+.btn-outline:hover{background:rgba(255,255,255,.1);}
 .btn-lg{padding:18px 36px;font-size:16px;border-radius:12px;}
-.promo-bar{background:var(--navy);color:#fff;text-align:center;padding:10px 16px;font-size:13px;font-weight:600;letter-spacing:.3px;}
+
+.card{background:#fff;border:1px solid var(--light2);border-radius:16px;padding:32px;transition:box-shadow .25s,transform .25s;}
+.card:hover{box-shadow:0 12px 40px rgba(0,0,0,.09);transform:translateY(-2px);}
+.card h3{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;color:var(--navy);margin-bottom:10px;}
+.card p,.card li{font-size:14px;color:var(--muted);line-height:1.75;}
+.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:32px;}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;}
+
+.gold-line{width:48px;height:2px;background:var(--gold);border-radius:2px;margin:16px 0;}
+.feature-item{border-left:2px solid var(--gold);padding-left:20px;margin-bottom:28px;}
+.feature-item h4{font-weight:600;color:var(--navy);margin-bottom:6px;font-size:15px;}
+.feature-item p{font-size:14px;color:var(--muted);line-height:1.75;}
+
+.check-list{list-style:none;padding:0;}
+.check-list li{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--light2);font-size:14px;color:var(--muted);line-height:1.6;}
+.check-list li:last-child{border-bottom:none;}
+.check-list li .ico{flex-shrink:0;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;margin-top:1px;}
+.ico-yes{background:rgba(0,169,136,.12);color:var(--teal-dk);}
+
+.testi-card{background:#fff;border:1px solid var(--light2);border-radius:16px;padding:36px 32px;position:relative;transition:box-shadow .25s,transform .25s;}
+.testi-card:hover{box-shadow:0 12px 40px rgba(0,0,0,.09);transform:translateY(-2px);}
+.testi-card::before{content:'\201C';font-family:'Playfair Display',serif;font-size:5rem;color:var(--gold-lt);position:absolute;top:12px;left:20px;line-height:1;}
+.testi-quote{font-size:.98rem;color:var(--muted);line-height:1.8;font-style:italic;margin-bottom:20px;padding-top:20px;}
+.testi-name{font-weight:700;color:var(--navy);font-size:15px;}
+.testi-role{font-size:13px;color:var(--teal-dk);margin-top:2px;font-weight:500;}
+
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center;}
+.stat-num{font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:700;color:var(--gold);line-height:1;}
+.stat-lbl{font-size:13px;color:var(--muted);margin-top:8px;font-weight:500;}
+
+.accordion-item{background:#fff;border:1px solid var(--light2);border-radius:12px;margin-bottom:12px;overflow:hidden;}
+.accordion-header{padding:20px 24px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-weight:600;font-size:15px;color:var(--navy);transition:background .2s;user-select:none;}
+.accordion-header:hover{background:var(--light);}
+.accordion-arrow{color:var(--gold);font-size:12px;transition:transform .3s;flex-shrink:0;margin-left:12px;}
+.accordion-body{display:none;padding:0 24px 24px;color:var(--muted);font-size:14px;line-height:1.8;}
+.accordion-body.open{display:block;}
+.accordion-arrow.open{transform:rotate(180deg);}
+
+.banner-navy{background:var(--navy);border-radius:20px;padding:56px 48px;color:#fff;text-align:center;}
+.banner-light{background:var(--light);border-radius:20px;padding:48px;border:1px solid var(--light2);}
+
+.bg-white{background:#fff;}
+.bg-off{background:var(--off-white);}
+.bg-light{background:var(--light);}
+.bg-navy{background:var(--navy);}
+
+.promo-bar{background:var(--navy2);color:#fff;text-align:center;padding:12px 20px;font-size:13px;font-weight:600;letter-spacing:.3px;border-bottom:1px solid rgba(255,255,255,.06);}
 .promo-bar strong{color:#f5d78e;}
-.hero{padding-top:calc(var(--nav-h) + 24px);background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 100%);color:#fff;}
-.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;padding:56px 0 72px;}
-.hero-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3.2rem);line-height:1.08;margin-bottom:18px;}
-.hero-title em{font-style:italic;color:var(--gold);}
-.hero-lead{font-size:1.05rem;color:rgba(255,255,255,.78);line-height:1.75;margin-bottom:28px;max-width:540px;}
-.price-box{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:28px;text-align:center;backdrop-filter:blur(8px);}
-.price-old{font-size:1rem;color:rgba(255,255,255,.55);text-decoration:line-through;margin-bottom:6px;}
-.price-new{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,6vw,4rem);font-weight:700;color:#fff;line-height:1;}
+
+.page-hero{padding:calc(var(--nav-h) + 48px) 0 80px;background:linear-gradient(160deg,var(--navy) 0%,#1a3050 100%);}
+.page-hero-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:700;color:#fff;line-height:1.12;margin-bottom:20px;}
+.page-hero-title em{font-style:italic;color:var(--gold);}
+.page-hero-sub{font-size:1.05rem;color:rgba(255,255,255,.72);line-height:1.85;max-width:540px;margin-bottom:32px;}
+.hero-inner{display:grid;grid-template-columns:1.05fr .95fr;gap:72px;align-items:center;}
+.hero-img-wrap{border-radius:20px;overflow:hidden;aspect-ratio:4/3;border:1px solid rgba(255,255,255,.1);box-shadow:0 24px 64px rgba(0,0,0,.25);}
+.hero-img-wrap img{width:100%;height:100%;object-fit:cover;opacity:.92;}
+
+.price-card{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-radius:20px;padding:40px 36px;text-align:center;backdrop-filter:blur(10px);}
+.price-old{font-size:1.05rem;color:rgba(255,255,255,.5);text-decoration:line-through;margin-bottom:8px;}
+.price-new{font-family:'Playfair Display',serif;font-size:clamp(2.6rem,5vw,3.6rem);font-weight:700;color:#fff;line-height:1;}
 .price-new span{font-size:.45em;vertical-align:super;}
-.price-save{display:inline-block;margin-top:10px;padding:6px 14px;border-radius:999px;background:rgba(0,169,136,.2);color:#7dffd8;font-size:13px;font-weight:700;}
-.price-note{margin-top:14px;font-size:13px;color:rgba(255,255,255,.6);}
-.hero-bullets{display:grid;gap:10px;margin:24px 0 0;text-align:left;}
-.hero-bullets li{list-style:none;font-size:14px;color:rgba(255,255,255,.82);padding-left:22px;position:relative;}
-.hero-bullets li::before{content:'✓';position:absolute;left:0;color:var(--teal);}
-.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;}
-.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
-.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
-.card{background:#fff;border:1px solid var(--light2);border-radius:16px;padding:28px;}
-.card h3{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--navy);margin-bottom:10px;}
-.card p,.card li{font-size:.95rem;color:var(--muted);line-height:1.65;}
-.card ul{padding-left:18px;margin-top:8px;}
-.pillar-icon{width:44px;height:44px;border-radius:12px;background:var(--teal-lt);color:var(--teal-dk);display:flex;align-items:center;justify-content:center;font-weight:700;margin-bottom:14px;}
-.included{background:var(--navy);color:#fff;}
-.included .section-title,.included .section-sub{color:#fff;}
-.included .section-sub{color:rgba(255,255,255,.7);}
-.included-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:36px;}
-.included-item{display:flex;gap:14px;padding:18px;border-radius:14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);}
-.included-item strong{display:block;color:#fff;font-size:15px;margin-bottom:4px;}
-.included-item span{font-size:13px;color:rgba(255,255,255,.65);line-height:1.5;}
-.testimonial{border-left:4px solid var(--gold);padding-left:20px;}
-.testimonial q{display:block;font-size:1rem;color:var(--text);line-height:1.7;font-style:italic;margin-bottom:12px;}
-.testimonial cite{font-size:13px;font-weight:600;color:var(--navy);font-style:normal;}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;text-align:center;}
-.stat-num{font-family:'Playfair Display',serif;font-size:2.4rem;color:var(--teal-dk);font-weight:700;line-height:1;}
-.stat-label{font-size:13px;color:var(--muted);margin-top:6px;}
-.form-section{background:linear-gradient(180deg,var(--off-white) 0%,var(--light) 100%);}
-.form-wrap{max-width:720px;margin:0 auto;background:#fff;border:1px solid var(--light2);border-radius:20px;padding:40px;box-shadow:0 16px 48px rgba(13,27,42,.08);}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
-.form-group{margin-bottom:16px;}
-.form-group label{display:block;font-size:13px;font-weight:600;color:var(--navy);margin-bottom:6px;}
-.form-group input{width:100%;padding:12px 14px;border:1px solid var(--light2);border-radius:10px;font-size:15px;font-family:inherit;}
-.form-group input:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px var(--teal-lt);}
-.form-checkbox{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--muted);line-height:1.5;}
-.form-checkbox input{margin-top:3px;}
-.form-checkbox a{color:var(--teal-dk);}
-.form-error{display:none;margin-top:12px;padding:12px;border-radius:10px;background:#fef2f2;color:#991b1b;border:1px solid #fecaca;font-size:14px;}
+.price-save{display:inline-block;margin-top:16px;padding:8px 18px;border-radius:999px;background:rgba(0,169,136,.22);color:#8ef5dc;font-size:13px;font-weight:700;letter-spacing:.3px;}
+.price-note{margin-top:20px;font-size:13px;color:rgba(255,255,255,.55);line-height:1.65;}
+
+.package-card{border-top:3px solid var(--gold);height:100%;}
+.package-card.teal{border-top-color:var(--teal);}
+.package-card.navy{border-top-color:var(--navy);}
+.package-num{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:var(--gold);margin-bottom:8px;}
+.package-card.teal .package-num{color:var(--teal-dk);}
+.package-card.navy .package-num{color:var(--navy);}
+
+.form-wrap{max-width:640px;margin:0 auto;background:#fff;border:1px solid var(--light2);border-radius:20px;padding:48px;box-shadow:0 16px 48px rgba(13,27,42,.08);}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.form-group{margin-bottom:20px;}
+.form-group label{display:block;font-size:13px;font-weight:600;color:var(--navy);margin-bottom:7px;}
+.form-group input{width:100%;padding:13px 16px;border:1.5px solid var(--light2);border-radius:10px;font-size:14px;font-family:inherit;outline:none;transition:border-color .2s;}
+.form-group input:focus{border-color:var(--navy);}
+.form-checkbox{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--muted);line-height:1.55;}
+.form-checkbox input{width:auto;margin-top:3px;accent-color:var(--navy);}
+.form-checkbox a{color:var(--navy);font-weight:500;}
+.btn-submit{width:100%;padding:17px;font-size:16px;font-weight:700;background:var(--gold);color:#fff;border:none;border-radius:10px;cursor:pointer;font-family:'Inter',sans-serif;transition:background .2s,transform .2s,box-shadow .2s;}
+.btn-submit:hover{background:#a07c2a;transform:translateY(-2px);box-shadow:0 8px 24px rgba(184,151,62,.35);}
+.btn-submit:disabled{opacity:.7;cursor:not-allowed;transform:none;}
+.form-error{display:none;margin-top:16px;padding:14px;border-radius:10px;background:#fef2f2;color:#991b1b;border:1px solid #fecaca;font-size:14px;}
 .form-error.show{display:block;}
-.form-note{margin-top:14px;font-size:12px;color:var(--muted-lt);text-align:center;line-height:1.6;}
+.form-note{margin-top:20px;font-size:12px;color:var(--muted-lt);text-align:center;line-height:1.7;}
+.form-note a{color:var(--teal-dk);}
 .hp-field{position:absolute;left:-9999px;opacity:0;height:0;overflow:hidden;}
-.faq-item{padding:20px 0;border-bottom:1px solid var(--light2);}
-.faq-item h3{font-size:1rem;color:var(--navy);margin-bottom:8px;}
-.faq-item p{font-size:.95rem;color:var(--muted);}
+
 @media(max-width:900px){
-  .hero-grid,.grid-2,.grid-3,.grid-4,.included-grid,.form-row,.stats{grid-template-columns:1fr;}
-  .form-wrap{padding:28px 22px;}
+  .hero-inner,.grid-2,.grid-3,.grid-4,.stats-grid,.form-row{grid-template-columns:1fr;}
+  .section{padding:72px 0;}
+  .section-head{margin-bottom:40px;}
+  .hero-inner{gap:40px;}
+  .form-wrap{padding:32px 24px;}
+  .banner-navy{padding:40px 28px;}
+}
+@media(max-width:600px){
+  .container{padding:0 20px;}
 }
 </style>
 </head>
 <body>
 
-<div class="promo-bar">Promozione di lancio Master Eureka — <strong>4.997€ → 2.497€</strong> (50% di sconto) · riservata a chi è già in contatto con Apprendimento Rapido</div>
+<div class="promo-bar">Promozione di lancio Master Eureka — <strong>4.997€ → 2.497€</strong> (50% di sconto) · per chi è già in contatto con Apprendimento Rapido</div>
 
-<section class="hero">
-  <div class="container hero-grid">
-    <div>
-      <span class="tag tag-gold" style="margin-bottom:16px;">Lancio promozionale</span>
-      <h1 class="hero-title">Il <em>Master Eureka</em> completo.<br>Ora a metà prezzo.</h1>
-      <p class="hero-lead">Il percorso che unisce memoria, lettura veloce, mappe mentali e organizzazione dello studio — online, in webinar e in aula. Per professionisti, studenti e concorsisti che vogliono imparare più in meno tempo.</p>
-      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:8px;">
-        <a href="#form" class="btn btn-gold btn-lg">Richiedi l'offerta a 2.497€</a>
-        <a href="#included" class="btn btn-primary btn-lg" style="background:rgba(255,255,255,.1);box-shadow:none;border:1px solid rgba(255,255,255,.2);">Cosa include</a>
+<div id="nav-placeholder"></div>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div>
+        <div style="margin-bottom:20px;display:flex;gap:10px;flex-wrap:wrap;">
+          <span class="tag tag-gold">Lancio promozionale</span>
+          <span class="tag tag-teal">Master completo</span>
+        </div>
+        <h1 class="page-hero-title">Il <em>Master Eureka</em><br>Ora a metà prezzo</h1>
+        <p class="page-hero-sub">Memoria, lettura veloce, mappe mentali e organizzazione dello studio — online, in webinar e in aula. Il percorso strutturato per professionisti, studenti e concorsisti che vogliono imparare più in meno tempo.</p>
+        <div style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:36px;">
+          <a href="#form" class="btn btn-gold btn-lg">Richiedi l'offerta a 2.497€</a>
+          <a href="#included" class="btn btn-outline btn-lg">Cosa include</a>
+        </div>
+        <ul class="check-list" style="max-width:480px;">
+          <li><span class="ico ico-yes">✓</span>68 video-lezioni on demand + 12 webinar live</li>
+          <li><span class="ico ico-yes">✓</span>4 giorni di corso dal vivo (40 ore)</li>
+          <li><span class="ico ico-yes">✓</span>1 anno di accesso alla piattaforma</li>
+        </ul>
       </div>
-      <ul class="hero-bullets">
-        <li>68 video-lezioni on demand + 12 webinar live</li>
-        <li>4 giorni di corso dal vivo (40 ore)</li>
-        <li>1 anno di accesso alla piattaforma</li>
-      </ul>
-    </div>
-    <div class="price-box">
-      <div class="price-old">Prezzo di listino 4.997€</div>
-      <div class="price-new">2.497<span>€</span></div>
-      <div class="price-save">Risparmi 2.500€ · 50% di sconto</div>
-      <p class="price-note">Compila il form: ti ricontattiamo con i passi per confermare il posto e completare l'iscrizione.</p>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container">
-    <p class="section-label">Perché adesso</p>
-    <h2 class="section-title">Non è una chat. È un <em>metodo</em> che ti segue.</h2>
-    <p class="section-sub">Da oltre venticinque anni formiamo persone reali su concorsi, università e aggiornamento professionale. Il Master Eureka trasforma tecniche di memoria e studio in un percorso strutturato — con risultati misurabili già durante il corso.</p>
-    <div class="stats" style="margin-top:40px;">
-      <div><div class="stat-num">98%</div><div class="stat-label">soddisfazione a fine percorso</div></div>
-      <div><div class="stat-num">40k+</div><div class="stat-label">persone formate</div></div>
-      <div><div class="stat-num">25+</div><div class="stat-label">anni di Metodo Eureka</div></div>
+      <div>
+        <div class="price-card" style="margin-bottom:24px;">
+          <div class="price-old">Prezzo di listino 4.997€</div>
+          <div class="price-new">2.497<span>€</span></div>
+          <div class="price-save">Risparmi 2.500€ · 50% di sconto</div>
+          <p class="price-note">Compila il form in fondo alla pagina: ti ricontattiamo per confermare il posto e completare l'iscrizione.</p>
+        </div>
+        <div class="hero-img-wrap">
+          <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&auto=format&fit=crop" alt="Master Eureka — corso Apprendimento Rapido">
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="section" style="background:#fff;">
+<section class="bg-navy" style="padding:40px 0;">
   <div class="container">
-    <p class="section-label">I 4 pilastri</p>
-    <h2 class="section-title">Tutto ciò che impari nel <em>Master Eureka</em></h2>
-    <div class="grid-4" style="margin-top:36px;">
-      <div class="card"><div class="pillar-icon">P</div><h3>Psicologia robusta</h3><p>Motivazione, ansia, trasformare i «devo» in «voglio», abitudini di studio che restano.</p></div>
-      <div class="card"><div class="pillar-icon">M</div><h3>Memoria di ferro</h3><p>Scientifico, giuridico, lingue, numeri, nomi e visi — tecniche PAV e visualizzazione sul tuo materiale.</p></div>
-      <div class="card"><div class="pillar-icon">O</div><h3>Organizzazione</h3><p>Parole chiave, sintesi, mappe mentali, percorsi visivi — capire e ricordare senza ripetere a pappagallo.</p></div>
-      <div class="card"><div class="pillar-icon">L</div><h3>Lettura veloce</h3><p>Allenamento oculari e stili di lettura: più pagine in meno tempo, comprensione invariata.</p></div>
+    <div class="stats-grid stats-section">
+      <div><div class="stat-num" data-count="98" data-suffix="%">0</div><div class="stat-lbl" style="color:rgba(255,255,255,.55);">Soddisfazione a fine percorso</div></div>
+      <div><div class="stat-num" data-count="40" data-suffix="k+">0</div><div class="stat-lbl" style="color:rgba(255,255,255,.55);">Persone formate</div></div>
+      <div><div class="stat-num" data-count="25" data-suffix="+">0</div><div class="stat-lbl" style="color:rgba(255,255,255,.55);">Anni di Metodo Eureka</div></div>
+      <div><div class="stat-num" data-count="68">0</div><div class="stat-lbl" style="color:rgba(255,255,255,.55);">Video-lezioni incluse</div></div>
     </div>
   </div>
 </section>
 
-<section class="section included" id="included">
+<section class="section bg-white">
   <div class="container">
-    <p class="section-label">Pacchetto completo</p>
-    <h2 class="section-title">Cosa include l'offerta a <em>2.497€</em></h2>
-    <p class="section-sub">Wiki Apprendimento Online + corso dal vivo + supporto. Un unico percorso, non moduli scelti a caso.</p>
-    <div class="included-grid">
-      <div class="included-item"><div><strong>68 video-lezioni on demand</strong><span>Teoriche e pratiche (9–35 min). Mix aula e studio. Quiz per lezione. Accesso da 3 dispositivi.</span></div></div>
-      <div class="included-item"><div><strong>12 webinar tematici</strong><span>2 ore ciascuno, live o registrati 1 anno: mappe, memoria, sintesi, matematica, diritto, lingue, lettura veloce.</span></div></div>
-      <div class="included-item"><div><strong>Corso dal vivo — 4 giorni (40 h)</strong><span>Weekend intensivo Milano/Roma. Mappe, fotografia mentale, psicologia robusta, applicazione sul tuo materiale.</span></div></div>
-      <div class="included-item"><div><strong>Moduli specialistici</strong><span>Life Emotion (5 gg), Gestione del tempo, Tecniche del colloquio, Lingue straniere — incluse nel pacchetto promozionale.</span></div></div>
-      <div class="included-item"><div><strong>5 sessioni di coaching</strong><span>Personalizzazione del metodo sulle tue esigenze — studio guidato con i nostri docenti.</span></div></div>
-      <div class="included-item"><div><strong>Supporto e accesso 1 anno</strong><span>Chat di supporto, piattaforma wiki, rifrequenza gratuita al dal vivo per 1 anno, diploma di partecipazione.</span></div></div>
+    <div class="section-head">
+      <div class="section-label">Perché adesso</div>
+      <h2 class="section-title">Non è una chat. È un <em>metodo</em> che ti segue.</h2>
+      <p class="section-sub">Da oltre venticinque anni formiamo persone reali su concorsi, università e aggiornamento professionale. Il Master Eureka trasforma tecniche di memoria e studio in un percorso strutturato — con risultati misurabili già durante il corso.</p>
+    </div>
+    <div class="grid-2" style="gap:72px;align-items:start;max-width:960px;margin:0 auto;">
+      <div>
+        <div class="feature-item">
+          <h4>Online + dal vivo + supporto</h4>
+          <p>Non solo video: webinar applicativi, weekend intensivo in aula e coaching per adattare il metodo al tuo materiale.</p>
+        </div>
+        <div class="feature-item">
+          <h4>Psicologia robusta integrata</h4>
+          <p>Motivazione, abitudini, gestione dell'ansia — le tecniche restano solo se la mente collabora.</p>
+        </div>
+        <div class="feature-item" style="margin-bottom:0;">
+          <h4>Promozione di lancio aperta</h4>
+          <p>Offerta comunicata al database Apprendimento Rapido: Master completo a 2.497€ invece di 4.997€.</p>
+        </div>
+      </div>
+      <div>
+        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&auto=format&fit=crop" alt="Studio con Metodo Eureka" style="width:100%;border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,.1);">
+      </div>
     </div>
   </div>
 </section>
 
-<section class="section">
+<section class="section bg-off">
   <div class="container">
-    <p class="section-label">Percorso online</p>
-    <h2 class="section-title">68 lezioni + 12 webinar: <em>come funziona</em></h2>
-    <div class="grid-2" style="margin-top:32px;">
+    <div class="section-head">
+      <div class="section-label">I 4 pilastri</div>
+      <h2 class="section-title">Tutto ciò che impari nel <em>Master Eureka</em></h2>
+      <p class="section-sub">Quattro aree che si rafforzano a vicenda — come nelle pagine dedicate a memoria, lettura veloce e organizzazione del Metodo Eureka.</p>
+    </div>
+    <div class="grid-4">
       <div class="card">
+        <div class="section-label">01 — Psicologia</div>
+        <h3>Psicologia robusta</h3>
+        <div class="gold-line"></div>
+        <p>Motivazione, ansia, trasformare i «devo» in «voglio», abitudini di studio che restano nel tempo.</p>
+        <div style="margin-top:20px;"><span class="tag tag-gold">Fondamenta</span></div>
+      </div>
+      <div class="card">
+        <div class="section-label">02 — Memoria</div>
+        <h3>Memoria di ferro</h3>
+        <div class="gold-line"></div>
+        <p>Scientifico, giuridico, lingue, numeri, nomi e visi — tecniche PAV e visualizzazione sul tuo materiale.</p>
+        <div style="margin-top:20px;"><span class="tag tag-teal">Tecniche PAV</span></div>
+      </div>
+      <div class="card">
+        <div class="section-label">03 — Organizzazione</div>
+        <h3>Organizzazione</h3>
+        <div class="gold-line"></div>
+        <p>Parole chiave, sintesi, mappe mentali, percorsi visivi — capire e ricordare senza ripetere a pappagallo.</p>
+        <div style="margin-top:20px;"><span class="tag tag-navy">Mappe mentali</span></div>
+      </div>
+      <div class="card">
+        <div class="section-label">04 — Lettura</div>
+        <h3>Lettura veloce</h3>
+        <div class="gold-line"></div>
+        <p>Allenamento oculari e stili di lettura: più pagine in meno tempo, comprensione invariata.</p>
+        <div style="margin-top:20px;"><span class="tag tag-teal">3× velocità</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section bg-light" id="included">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-label">Pacchetto completo</div>
+      <h2 class="section-title">Cosa include l'offerta a <em>2.497€</em></h2>
+      <p class="section-sub">Wiki Apprendimento Online + corso dal vivo + supporto. Un unico percorso integrato, non moduli scelti a caso.</p>
+    </div>
+    <div class="grid-3">
+      <div class="card package-card">
+        <div class="package-num">68</div>
+        <h3>Video-lezioni on demand</h3>
+        <div class="gold-line"></div>
+        <p>Teoriche e pratiche (9–35 min). Mix aula e studio. Quiz per lezione. Accesso da 3 dispositivi.</p>
+      </div>
+      <div class="card package-card teal">
+        <div class="package-num">12</div>
+        <h3>Webinar tematici</h3>
+        <div class="gold-line"></div>
+        <p>2 ore ciascuno, live o registrati 1 anno: mappe, memoria, sintesi, matematica, diritto, lingue, lettura veloce.</p>
+      </div>
+      <div class="card package-card navy">
+        <div class="package-num">4 gg</div>
+        <h3>Corso dal vivo</h3>
+        <div class="gold-line"></div>
+        <p>40 ore, weekend intensivo Milano/Roma. Mappe, fotografia mentale, psicologia robusta, applicazione sul tuo materiale.</p>
+      </div>
+      <div class="card package-card teal">
+        <div class="package-num">+</div>
+        <h3>Moduli specialistici</h3>
+        <div class="gold-line"></div>
+        <p>Life Emotion (5 gg), Gestione del tempo, Tecniche del colloquio, Lingue straniere — inclusi nel pacchetto promozionale.</p>
+      </div>
+      <div class="card package-card">
+        <div class="package-num">5</div>
+        <h3>Sessioni di coaching</h3>
+        <div class="gold-line"></div>
+        <p>Personalizzazione del metodo sulle tue esigenze — studio guidato con i nostri docenti.</p>
+      </div>
+      <div class="card package-card navy">
+        <div class="package-num">1 anno</div>
+        <h3>Supporto e accesso</h3>
+        <div class="gold-line"></div>
+        <p>Chat di supporto, piattaforma wiki, rifrequenza gratuita al dal vivo, diploma di partecipazione.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section bg-white">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-label">Percorso online</div>
+      <h2 class="section-title">68 lezioni + 12 webinar: <em>come funziona</em></h2>
+      <p class="section-sub">Le lezioni sono a compartimenti stagni: puoi partire dal modulo più utile per te e mettere subito in pratica.</p>
+    </div>
+    <div class="grid-2">
+      <div class="card" style="border-top:3px solid var(--teal);">
         <h3>Wiki / corso on demand</h3>
-        <ul>
-          <li>Introduzione e atteggiamento (ACOR)</li>
-          <li>Organizzazione: mappe mentali, ascolto, libri, decisioni</li>
-          <li>Memoria: parole astratte, schedario, numeri, date, formule, vocaboli</li>
-          <li>Lettura veloce: test, esercizi oculari, lettura attiva</li>
-          <li>Metodo di studio: sintesi, parole chiave, percorsi visivi, articoli di codice</li>
+        <div class="gold-line"></div>
+        <ul class="check-list">
+          <li><span class="ico ico-yes">✓</span>Introduzione e atteggiamento (ACOR)</li>
+          <li><span class="ico ico-yes">✓</span>Organizzazione: mappe mentali, ascolto, libri, decisioni</li>
+          <li><span class="ico ico-yes">✓</span>Memoria: parole astratte, schedario, numeri, date, formule</li>
+          <li><span class="ico ico-yes">✓</span>Lettura veloce: test, esercizi oculari, lettura attiva</li>
+          <li><span class="ico ico-yes">✓</span>Metodo di studio: sintesi, parole chiave, percorsi visivi</li>
         </ul>
       </div>
-      <div class="card">
+      <div class="card" style="border-top:3px solid var(--gold);">
         <h3>12 webinar applicativi</h3>
-        <ul>
-          <li>Mappa mentale 1 e 2 · Credenze · Strategie di sintesi</li>
-          <li>Memoria 1 e 2 · Obiettivi · Matematica · Diritto</li>
-          <li>Lingue · Lettura veloce 1 e 2</li>
+        <div class="gold-line"></div>
+        <ul class="check-list">
+          <li><span class="ico ico-yes">✓</span>Mappa mentale 1 e 2 · Credenze · Strategie di sintesi</li>
+          <li><span class="ico ico-yes">✓</span>Memoria 1 e 2 · Obiettivi · Matematica · Diritto</li>
+          <li><span class="ico ico-yes">✓</span>Lingue · Lettura veloce 1 e 2</li>
         </ul>
-        <p style="margin-top:12px;">Le lezioni sono a compartimenti stagni: puoi partire dal modulo più utile per te e mettere subito in pratica.</p>
+        <p style="margin-top:20px;font-size:14px;color:var(--muted);">Ogni webinar collega teoria e pratica sul materiale che stai studiando adesso.</p>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section" style="background:#fff;">
+<section class="section bg-off">
   <div class="container">
-    <p class="section-label">Risultati reali</p>
-    <h2 class="section-title">Chi l'ha fatto, <em>cosa dice</em></h2>
-    <div class="grid-3" style="margin-top:32px;">
-      <div class="card testimonial"><q>Ho studiato più di 14.000 pagine con le tecniche, 80 mappe in sei mesi — e alla fine sono diventata notaio.</q><cite>Francesca R. · Notaio</cite></div>
-      <div class="card testimonial"><q>Dopo il Master ho superato 5 esami in una sessione, uno preparato in 8 ore. Emozione e metodo fanno la differenza.</q><cite>Eva V. · Avvocato</cite></div>
-      <div class="card testimonial"><q>Superato il concorso come 1ª classificata e contratto a tempo indeterminato. Il metodo ha rimesso ordine nello studio.</q><cite>Laura M. · Farmacista</cite></div>
+    <div class="section-head">
+      <div class="section-label">Testimonianze</div>
+      <h2 class="section-title">Chi l'ha fatto, <em>cosa dice</em></h2>
+    </div>
+    <div class="grid-3">
+      <div class="testi-card">
+        <p class="testi-quote">Ho studiato più di 14.000 pagine con le tecniche, 80 mappe in sei mesi — e alla fine sono diventata notaio.</p>
+        <div class="testi-name">Francesca R.</div>
+        <div class="testi-role">Notaio</div>
+      </div>
+      <div class="testi-card">
+        <p class="testi-quote">Dopo il Master ho superato 5 esami in una sessione, uno preparato in 8 ore. Emozione e metodo fanno la differenza.</p>
+        <div class="testi-name">Eva V.</div>
+        <div class="testi-role">Avvocato</div>
+      </div>
+      <div class="testi-card">
+        <p class="testi-quote">Superato il concorso come 1ª classificata e contratto a tempo indeterminato. Il metodo ha rimesso ordine nello studio.</p>
+        <div class="testi-name">Laura M.</div>
+        <div class="testi-role">Farmacista</div>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="section form-section" id="form">
+<section class="section bg-white" style="padding-top:72px;padding-bottom:72px;">
   <div class="container">
-    <p class="section-label" style="text-align:center;">Richiedi l'offerta</p>
-    <h2 class="section-title" style="text-align:center;max-width:720px;margin:0 auto 12px;">Entra in lista per il Master a <em>2.497€</em></h2>
-    <p class="section-sub" style="text-align:center;margin:0 auto 32px;">Compila il form. Ti ricontattiamo con conferma posto, modalità di pagamento e accesso alla piattaforma. Nessun addebito automatico da questo form.</p>
+    <div class="banner-navy">
+      <div class="section-label" style="color:var(--teal);">Offerta di lancio</div>
+      <h2 class="section-title" style="color:#fff;margin-bottom:12px;">Master Eureka completo<br><em style="color:var(--gold);">4.997€ → 2.497€</em></h2>
+      <p style="color:rgba(255,255,255,.65);max-width:520px;margin:0 auto 32px;line-height:1.75;">Compila il form: nessun addebito automatico. Ti ricontattiamo con conferma posto e modalità di pagamento.</p>
+      <a href="#form" class="btn btn-gold btn-lg">Richiedi l'offerta a 2.497€</a>
+    </div>
+  </div>
+</section>
+
+<section class="section bg-light" id="form">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-label">Richiedi l'offerta</div>
+      <h2 class="section-title">Entra in lista per il Master a <em>2.497€</em></h2>
+      <p class="section-sub">Ti ricontattiamo con conferma posto, modalità di pagamento e accesso alla piattaforma.</p>
+    </div>
     <div class="form-wrap">
       <form id="promo-form" novalidate>
         <div class="form-row">
@@ -229,24 +411,38 @@ body{font-family:'Inter',sans-serif;background:var(--off-white);color:var(--text
           <input type="checkbox" id="consent" required>
           <span>Acconsento al trattamento dei dati per ricevere informazioni sull'offerta Master Eureka e per essere ricontattato/a. Ho letto l'<a href="https://www.iubenda.com/privacy-policy/89530968" target="_blank" rel="noopener">informativa privacy</a>.</span>
         </label>
-        <div style="margin-top:24px;">
-          <button type="submit" class="btn btn-gold btn-lg" id="submit-btn" style="width:100%;">Richiedi Master Eureka a 2.497€</button>
+        <div style="margin-top:28px;">
+          <button type="submit" class="btn-submit" id="submit-btn">Richiedi Master Eureka a 2.497€</button>
         </div>
         <div class="form-error" id="form-error"></div>
-        <p class="form-note">Offerta promozionale 2.497€ (listino 4.997€). Promozione di lancio comunicata al database Apprendimento Rapido.<br>Domande: <a href="mailto:pagamenti@apprendimentorapido.it">pagamenti@apprendimentorapido.it</a> · <a href="tel:+390240702168">02 4070 2168</a></p>
+        <p class="form-note">Offerta promozionale 2.497€ (listino 4.997€). Promozione di lancio al database Apprendimento Rapido.<br>Domande: <a href="mailto:pagamenti@apprendimentorapido.it">pagamenti@apprendimentorapido.it</a> · <a href="tel:+390240702168">02 4070 2168</a></p>
       </form>
     </div>
   </div>
 </section>
 
-<section class="section">
+<section class="section bg-white">
   <div class="container" style="max-width:760px;">
-    <p class="section-label">FAQ</p>
-    <h2 class="section-title">Domande frequenti</h2>
-    <div class="faq-item"><h3>Per chi è il Master Eureka?</h3><p>Professionisti, studenti universitari, concorsisti, manager — chi ha poco tempo e molto materiale da apprendere. Non serve conoscere già il metodo: il percorso ti guida passo passo.</p></div>
-    <div class="faq-item"><h3>Devo pagare 2.497€ compilando il form?</h3><p>No. Il form serve per richiedere l'offerta e fissare il posto. Riceverai istruzioni per pagamento (carta o bonifico) e attivazione accessi.</p></div>
-    <div class="faq-item"><h3>Cosa succede dopo l'invio?</h3><p>Entri nel CRM Apprendimento Rapido, ricevi conferma e il team pagamenti ti contatta per completare l'iscrizione e sbloccare piattaforma e date del dal vivo.</p></div>
-    <div class="faq-item"><h3>Quanto dura l'accesso online?</h3><p>1 anno dall'iscrizione alla piattaforma con 68 lezioni e materiali. I webinar registrati restano recuperabili per 1 anno.</p></div>
+    <div class="section-head" style="margin-bottom:40px;">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title">Domande frequenti</h2>
+    </div>
+    <div class="accordion-item">
+      <div class="accordion-header">Per chi è il Master Eureka? <span class="accordion-arrow">▼</span></div>
+      <div class="accordion-body">Professionisti, studenti universitari, concorsisti, manager — chi ha poco tempo e molto materiale da apprendere. Non serve conoscere già il metodo: il percorso ti guida passo passo.</div>
+    </div>
+    <div class="accordion-item">
+      <div class="accordion-header">Devo pagare 2.497€ compilando il form? <span class="accordion-arrow">▼</span></div>
+      <div class="accordion-body">No. Il form serve per richiedere l'offerta e fissare il posto. Riceverai istruzioni per pagamento (carta o bonifico) e attivazione accessi.</div>
+    </div>
+    <div class="accordion-item">
+      <div class="accordion-header">Cosa succede dopo l'invio? <span class="accordion-arrow">▼</span></div>
+      <div class="accordion-body">Entri nel CRM Apprendimento Rapido, ricevi conferma e il team pagamenti ti contatta per completare l'iscrizione e sbloccare piattaforma e date del dal vivo.</div>
+    </div>
+    <div class="accordion-item">
+      <div class="accordion-header">Quanto dura l'accesso online? <span class="accordion-arrow">▼</span></div>
+      <div class="accordion-body">1 anno dall'iscrizione alla piattaforma con 68 lezioni e materiali. I webinar registrati restano recuperabili per 1 anno.</div>
+    </div>
   </div>
 </section>
 
@@ -254,90 +450,88 @@ body{font-family:'Inter',sans-serif;background:var(--off-white);color:var(--text
 <script src="/components/nav-loader.js"></script>
 <script src="/components/footer-loader.js"></script>
 <script>
-  const API_ENDPOINT = 'https://api.apprendimentorapido.it/api/webhook/contact';
-  const LISTA_NAME = 'Master Eureka Promo 2497';
-  const LANDING_ID = 'master-eureka-promo-2497';
-  const REDIRECT_URL = '/master-eureka-promo/grazie.html';
-
-  const form = document.getElementById('promo-form');
-  const errorBox = document.getElementById('form-error');
-  const btn = document.getElementById('submit-btn');
-
-  function showError(msg) {
-    errorBox.textContent = msg;
-    errorBox.classList.add('show');
-    errorBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  }
-  function clearError() { errorBox.classList.remove('show'); errorBox.textContent = ''; }
-
-  form.addEventListener('submit', async function(e) {
-    e.preventDefault();
-    clearError();
-
-    const nome = document.getElementById('nome').value.trim();
-    const cognome = document.getElementById('cognome').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const telefono = document.getElementById('telefono').value.trim();
-    const consent = document.getElementById('consent').checked;
-    const honeypot = document.getElementById('hp_promo').value;
-
-    if (!nome || !cognome || !email || !telefono) {
-      showError('Compila tutti i campi obbligatori.');
-      return;
-    }
-    if (!consent) {
-      showError('Accetta l\'informativa privacy per procedere.');
-      return;
-    }
-    if (honeypot) {
-      window.location.href = REDIRECT_URL;
-      return;
-    }
-
-    const original = btn.textContent;
-    btn.textContent = 'Invio in corso...';
-    btn.disabled = true;
-
-    const payload = {
-      nome, cognome, email, telefono,
-      lista: LISTA_NAME,
-      landing_id: LANDING_ID,
-      source: 'landing-master-eureka-promo-2497',
-      tags: ['master-eureka-promo', 'promo-2497', 'lancio-db-2026'],
-      custom_fields: {
-        offerta: 'Master Eureka Completo',
-        prezzo_listino: 4997,
-        prezzo_promo: 2497,
-        sconto_percentuale: 50,
-        consent_marketing: true,
-        consent_marketing_at: new Date().toISOString(),
-        original_source: 'landing-master-eureka-promo-2497'
-      }
-    };
-
-    try {
-      const response = await fetch(API_ENDPOINT, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-      const data = await response.json().catch(() => ({}));
-      if (response.ok && data.success !== false) {
-        if (typeof fbq === 'function') fbq('track', 'Lead', { content_name: 'Master Eureka Promo 2497' });
-        if (typeof gtag === 'function') gtag('event', 'generate_lead', { event_category: 'Form', event_label: 'Master Eureka Promo 2497' });
-        const params = new URLSearchParams({ nome, cognome, email, telefono });
-        window.location.href = REDIRECT_URL + '?' + params.toString();
-      } else {
-        showError(data.detail || data.message || 'Errore durante l\'invio. Scrivi a pagamenti@apprendimentorapido.it');
-        btn.textContent = original;
-        btn.disabled = false;
-      }
-    } catch (err) {
-      showError('Connessione non riuscita. Riprova o scrivi a pagamenti@apprendimentorapido.it');
-      btn.textContent = original;
-      btn.disabled = false;
-    }
+function animateCounters(){
+  document.querySelectorAll('[data-count]').forEach(el=>{
+    const target=parseInt(el.dataset.count);
+    const suffix=el.dataset.suffix||'';
+    let current=0;const step=target/60;
+    const timer=setInterval(()=>{
+      current+=step;
+      if(current>=target){current=target;clearInterval(timer);}
+      el.textContent=Math.floor(current)+suffix;
+    },16);
   });
+}
+const obs=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');
+    if(e.target.classList.contains('stats-section'))animateCounters();}});
+},{threshold:0.2});
+document.querySelectorAll('.stats-section').forEach(el=>obs.observe(el));
+
+document.querySelectorAll('.accordion-header').forEach(header=>{
+  header.addEventListener('click',()=>{
+    const body=header.nextElementSibling;
+    const arrow=header.querySelector('.accordion-arrow');
+    const open=body.classList.contains('open');
+    document.querySelectorAll('.accordion-body').forEach(b=>b.classList.remove('open'));
+    document.querySelectorAll('.accordion-arrow').forEach(a=>a.classList.remove('open'));
+    if(!open){body.classList.add('open');arrow.classList.add('open');}
+  });
+});
+
+const API_ENDPOINT='https://api.apprendimentorapido.it/api/webhook/contact';
+const LISTA_NAME='Master Eureka Promo 2497';
+const LANDING_ID='master-eureka-promo-2497';
+const REDIRECT_URL='/master-eureka-promo/grazie.html';
+const form=document.getElementById('promo-form');
+const errorBox=document.getElementById('form-error');
+const btn=document.getElementById('submit-btn');
+
+function showError(msg){errorBox.textContent=msg;errorBox.classList.add('show');errorBox.scrollIntoView({behavior:'smooth',block:'center'});}
+function clearError(){errorBox.classList.remove('show');errorBox.textContent='';}
+
+form.addEventListener('submit',async function(e){
+  e.preventDefault();clearError();
+  const nome=document.getElementById('nome').value.trim();
+  const cognome=document.getElementById('cognome').value.trim();
+  const email=document.getElementById('email').value.trim();
+  const telefono=document.getElementById('telefono').value.trim();
+  const consent=document.getElementById('consent').checked;
+  const honeypot=document.getElementById('hp_promo').value;
+  if(!nome||!cognome||!email||!telefono){showError('Compila tutti i campi obbligatori.');return;}
+  if(!consent){showError('Accetta l\'informativa privacy per procedere.');return;}
+  if(honeypot){window.location.href=REDIRECT_URL;return;}
+  const original=btn.textContent;
+  btn.textContent='Invio in corso...';btn.disabled=true;
+  const payload={
+    nome,cognome,email,telefono,
+    lista:LISTA_NAME,landing_id:LANDING_ID,
+    source:'landing-master-eureka-promo-2497',
+    tags:['master-eureka-promo','promo-2497','lancio-db-2026'],
+    custom_fields:{
+      offerta:'Master Eureka Completo',prezzo_listino:4997,prezzo_promo:2497,
+      sconto_percentuale:50,consent_marketing:true,
+      consent_marketing_at:new Date().toISOString(),
+      original_source:'landing-master-eureka-promo-2497'
+    }
+  };
+  try{
+    const response=await fetch(API_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+    const data=await response.json().catch(()=>({}));
+    if(response.ok&&data.success!==false){
+      if(typeof fbq==='function')fbq('track','Lead',{content_name:'Master Eureka Promo 2497'});
+      if(typeof gtag==='function')gtag('event','generate_lead',{event_category:'Form',event_label:'Master Eureka Promo 2497'});
+      const params=new URLSearchParams({nome,cognome,email,telefono});
+      window.location.href=REDIRECT_URL+'?'+params.toString();
+    }else{
+      showError(data.detail||data.message||'Errore durante l\'invio. Scrivi a pagamenti@apprendimentorapido.it');
+      btn.textContent=original;btn.disabled=false;
+    }
+  }catch(err){
+    showError('Connessione non riuscita. Riprova o scrivi a pagamenti@apprendimentorapido.it');
+    btn.textContent=original;btn.disabled=false;
+  }
+});
 </script>
 </body>
 </html>
