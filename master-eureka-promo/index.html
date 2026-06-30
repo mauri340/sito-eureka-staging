@@ -221,6 +221,37 @@ body{font-family:'Inter',sans-serif;background:var(--off-white);color:var(--text
 .utilita-item h4{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:4px;}
 .utilita-item p{font-size:13px;color:var(--muted);line-height:1.65;margin:0;}
 
+.quadrant-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
+.quadrant-card{padding:28px 24px;border-radius:16px;border:1px solid var(--light2);background:#fff;height:100%;}
+.quadrant-card h3{font-family:'Playfair Display',serif;font-size:1.05rem;margin-bottom:8px;color:var(--navy);}
+.quadrant-card .zone-tag{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:12px;display:block;}
+.quadrant-card p{font-size:13px;color:var(--muted);line-height:1.7;margin:0;}
+.quadrant-card ul{margin:12px 0 0;padding-left:16px;font-size:13px;color:var(--muted);line-height:1.65;}
+.quadrant-burnout{border-top:3px solid #dc2626;}.quadrant-burnout .zone-tag{color:#dc2626;}
+.quadrant-survive{border-top:3px solid #ea580c;}.quadrant-survive .zone-tag{color:#ea580c;}
+.quadrant-comfort{border-top:3px solid #64748b;}.quadrant-comfort .zone-tag{color:#64748b;}
+.quadrant-peak{border-top:3px solid var(--teal);}.quadrant-peak .zone-tag{color:var(--teal-dk);}
+
+.hours-banner{background:linear-gradient(135deg,var(--navy) 0%,#1a3050 100%);border-radius:20px;padding:36px 40px;color:#fff;text-align:center;margin-top:48px;}
+.hours-banner .hours-num{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,5vw,3.2rem);font-weight:700;color:var(--gold);line-height:1;}
+.hours-banner p{font-size:15px;color:rgba(255,255,255,.75);line-height:1.75;margin-top:12px;max-width:640px;margin-left:auto;margin-right:auto;}
+
+.cost-wrap{max-width:720px;margin:0 auto;}
+.cost-table{width:100%;border-collapse:collapse;font-size:14px;margin-bottom:24px;}
+.cost-table th,.cost-table td{padding:14px 16px;border:1px solid var(--light2);text-align:left;}
+.cost-table th{background:var(--light);color:var(--navy);font-weight:600;font-size:13px;}
+.cost-table td:last-child,.cost-table th:last-child{text-align:right;white-space:nowrap;}
+.cost-table tr.cost-total td{background:var(--gold-lt);font-weight:700;color:var(--navy);border-color:var(--gold-brd);font-size:15px;}
+.cost-compare{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:32px;}
+.cost-compare-box{border-radius:16px;padding:28px 24px;text-align:center;}
+.cost-compare-box.negative{background:#fef2f2;border:1px solid #fecaca;}
+.cost-compare-box.positive{background:var(--teal-lt);border:1px solid rgba(0,169,136,.25);}
+.cost-compare-box .compare-num{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3vw,2.2rem);font-weight:700;line-height:1.1;margin:8px 0;}
+.cost-compare-box.negative .compare-num{color:#991b1b;}
+.cost-compare-box.positive .compare-num{color:var(--teal-dk);}
+.cost-compare-box p{font-size:13px;color:var(--muted);line-height:1.65;margin:0;}
+.cost-note{font-size:12px;color:var(--muted-lt);text-align:center;margin-top:20px;line-height:1.65;}
+
 .included-phase{margin-bottom:48px;}
 .included-phase:last-child{margin-bottom:0;}
 .phase-title{font-family:'Playfair Display',serif;font-size:1.35rem;color:var(--navy);margin-bottom:8px;}
@@ -259,7 +290,7 @@ body{font-family:'Inter',sans-serif;background:var(--off-white);color:var(--text
 body.has-sticky-cta{padding-bottom:80px;}
 
 @media(max-width:900px){
-  .hero-inner,.grid-2,.grid-3,.grid-4,.stats-grid,.form-row,.topics-grid,.benefit-grid,.decision-grid,.compact-grid,.utilita-list{grid-template-columns:1fr;}
+  .hero-inner,.grid-2,.grid-3,.grid-4,.stats-grid,.form-row,.topics-grid,.benefit-grid,.decision-grid,.compact-grid,.utilita-list,.quadrant-grid,.cost-compare{grid-template-columns:1fr;}
   .flow-plus{display:none;}
   .docente-card{flex-direction:column;}
   .section{padding:72px 0;}
@@ -328,35 +359,74 @@ body.has-sticky-cta{padding-bottom:80px;}
   </div>
 </section>
 
-<section class="section bg-off" style="padding-top:72px;padding-bottom:72px;">
+<section class="section bg-off" style="padding-top:72px;padding-bottom:72px;" id="problema">
   <div class="container">
     <div class="section-head">
       <div class="section-label">Il problema reale</div>
-      <h2 class="section-title">Studi tanto ma non <em>ricordi?</em></h2>
-      <p class="section-sub">Se passi ore sui libri ma dimentichi tutto il giorno dopo, il problema non è la tua intelligenza — è il metodo. Ogni mese senza un sistema = stesse ore, stessi risultati, stessa ansia prima di esami e concorsi.</p>
+      <h2 class="section-title">Troppe informazioni, poco che <em>resta</em></h2>
+      <p class="section-sub">Esami, concorsi o lavoro: ti senti sopraffatto da cose da ricordare, decisioni da prendere e scadenze da rispettare. Se passi ore sui libri o sui PDF ma dimentichi tutto il giorno dopo, il problema non è la tua intelligenza — è il metodo.</p>
     </div>
     <div class="grid-2">
       <div class="card" style="border-top:3px solid #dc2626;">
-        <h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;color:#dc2626;margin-bottom:16px;">Senza un metodo strutturato</h3>
+        <h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;color:#dc2626;margin-bottom:16px;">Ti riconosci?</h3>
         <ul class="check-list">
+          <li><span class="ico" style="background:rgba(220,38,38,.1);color:#dc2626;">✗</span>Dimentichi un'informazione chiave in riunione o all'esame</li>
+          <li><span class="ico" style="background:rgba(220,38,38,.1);color:#dc2626;">✗</span>La giornata è troppo corta — troppe cose, zero concentrazione</li>
           <li><span class="ico" style="background:rgba(220,38,38,.1);color:#dc2626;">✗</span>Ripeti le stesse pagine senza trattenere nulla</li>
-          <li><span class="ico" style="background:rgba(220,38,38,.1);color:#dc2626;">✗</span>Perdi tempo prima di esami e concorsi</li>
-          <li><span class="ico" style="background:rgba(220,38,38,.1);color:#dc2626;">✗</span>Ansia e senso di essere «lento» rispetto agli obiettivi</li>
+          <li><span class="ico" style="background:rgba(220,38,38,.1);color:#dc2626;">✗</span>Perdi clienti, opportunità o tempo per inefficienza</li>
         </ul>
       </div>
       <div class="card" style="border-top:3px solid var(--teal);">
         <h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--teal-dk);margin-bottom:16px;">Con il Master Eureka</h3>
         <ul class="check-list">
-          <li><span class="ico ico-yes">✓</span>Mappe, parole chiave e memoria sul manuale o PDF del prof</li>
-          <li><span class="ico ico-yes">✓</span>Cicli di ripasso strutturati — anche con poco tempo e lavoro di mezzo</li>
-          <li><span class="ico ico-yes">✓</span>Weekend intensivo + webinar + piattaforma per 1 anno</li>
+          <li><span class="ico ico-yes">✓</span>Mappe, parole chiave e memoria sul manuale o PDF</li>
+          <li><span class="ico ico-yes">✓</span>Cicli di ripasso strutturati — anche con lavoro e famiglia</li>
+          <li><span class="ico ico-yes">✓</span>Fase 1: strategia · Fase 2: psicologia e motivazione</li>
+          <li><span class="ico ico-yes">✓</span>Weekend intensivo + webinar + piattaforma 1 anno</li>
         </ul>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section bg-white" id="utilita">
+<section class="section bg-white" id="benessere">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-label">Benessere sul lavoro</div>
+      <h2 class="section-title">Le competenze determinano come ti <em>senti</em> ogni giorno</h2>
+      <p class="section-sub">Non è solo questione di ore. Sul lavoro (e nello studio) contano competenze ed energia insieme. Dove ti posizioni oggi? Il mercato cambia — se non aggiorni il metodo, scendi di quadrante anche senza accorgertene.</p>
+    </div>
+    <div class="quadrant-grid">
+      <div class="quadrant-card quadrant-burnout">
+        <span class="zone-tag">Zona burnout</span>
+        <h3>Poca energia, poche competenze</h3>
+        <p>Scadenze accumulate, mente annebbiata, ogni compito pesa. Procrastini perché non hai strumenti.</p>
+        <ul><li>Rassegnazione, sfiducia</li><li>Sensazione di aver perso il controllo</li></ul>
+      </div>
+      <div class="quadrant-card quadrant-survive">
+        <span class="zone-tag">Zona sopravvivenza</span>
+        <h3>Tanta energia, poche competenze</h3>
+        <p>Butti energia ma senza metodo: come una mosca sul vetro — molto sforzo, pochi risultati concreti.</p>
+        <ul><li>Frustrazione, tensione</li><li>Lavori tanto, ricordi poco</li></ul>
+      </div>
+      <div class="quadrant-card quadrant-comfort">
+        <span class="zone-tag">Zona comfort</span>
+        <h3>Buone competenze, poca energia</h3>
+        <p>Sai fare il tuo, ma la routine ti appiattisce. Potenziale sottoutilizzato, niente sfida.</p>
+        <ul><li>Serenità che diventa stagnazione</li><li>Il mercato avanza, tu resti fermo</li></ul>
+      </div>
+      <div class="quadrant-card quadrant-peak">
+        <span class="zone-tag">Alta prestazione</span>
+        <h3>Competenze + energia alte</h3>
+        <p>Hai il metodo e la motivazione: impari in fretta, ricordi, gestisci stress e obiettivi.</p>
+        <ul><li>Determinazione, entusiasmo</li><li>Obiettivo del Master Eureka</li></ul>
+      </div>
+    </div>
+    <p style="text-align:center;margin-top:32px;font-size:15px;color:var(--muted);max-width:680px;margin-left:auto;margin-right:auto;line-height:1.75;">Per salire verso l'alta prestazione servono <strong style="color:var(--navy);">due leve</strong>: imparare più in fretta (Fase 1) e lavorare su emozioni e motivazione (Fase 2). È esattamente la struttura del Master Eureka.</p>
+  </div>
+</section>
+
+<section class="section bg-off" id="utilita">
   <div class="container">
     <div class="section-head">
       <div class="section-label">Utilità pratica</div>
@@ -466,6 +536,12 @@ body.has-sticky-cta{padding-bottom:80px;}
         <h3>Fase 2: Life Emotion</h3>
         <p>Emozioni, tempo, colloquio: la parte che sblocca ciò che ti frena oltre la tecnica di studio.</p>
       </div>
+    </div>
+    <div class="hours-banner">
+      <p style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:rgba(255,255,255,.5);margin-bottom:8px;">Piramide dei risultati</p>
+      <p style="font-size:15px;color:rgba(255,255,255,.85);margin-bottom:16px;">Apprendimento → Competenze → Guadagno. Chi si distingue oggi è chi impara più in fretta.</p>
+      <div class="hours-num">300+ ore</div>
+      <p>Se risparmi anche solo <strong style="color:#fff;">1 ora al giorno</strong> con un metodo efficace, in un anno recuperi oltre 300 ore. Tempo da dedicare a crescita, famiglia — o semplicemente a lavorare meglio, non di più.</p>
     </div>
   </div>
 </section>
@@ -846,12 +922,50 @@ body.has-sticky-cta{padding-bottom:80px;}
   </div>
 </section>
 
+<section class="section bg-off" id="costo-ignoranza">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-label">Investimento vs costo</div>
+      <h2 class="section-title">Quanto costa <em>non</em> avere un metodo?</h2>
+      <p class="section-sub">Un professionista che fattura circa 50.000€ l'anno, senza aggiornare competenze e efficienza, può perdere fino al 55% del fatturato in opportunità mancate e tempo sprecato. Modello di riflessione usato in aula con migliaia di professionisti.</p>
+    </div>
+    <div class="cost-wrap">
+      <table class="cost-table">
+        <thead>
+          <tr><th>Conseguenza</th><th>Impatto</th><th>Costo stimato</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Perdita di opportunità</td><td>Clienti, contratti, avanzamenti persi</td><td>10.000€</td></tr>
+          <tr><td>Tempo sprecato per inefficienza</td><td>Compiti che con un metodo richiederebbero meno ore</td><td>7.500€</td></tr>
+          <tr><td>Mancata competitività</td><td>Colleghi più preparati conquistano il mercato</td><td>5.000€</td></tr>
+          <tr><td>Mancanza di innovazione</td><td>Metodi e strumenti nuovi non adottati</td><td>5.000€</td></tr>
+          <tr class="cost-total"><td colspan="2">Costo totale dell'ignoranza (su 50.000€/anno)</td><td>27.500€/anno</td></tr>
+        </tbody>
+      </table>
+      <div class="cost-compare">
+        <div class="cost-compare-box negative">
+          <p style="font-weight:600;color:#991b1b;margin-bottom:4px;">Senza aggiornarti</p>
+          <div class="compare-num">27.500€</div>
+          <p>ogni anno — oltre <strong>270.000€</strong> in 10 anni che resti fermo</p>
+        </div>
+        <div class="cost-compare-box positive">
+          <p style="font-weight:600;color:var(--teal-dk);margin-bottom:4px;">Master Eureka (promo)</p>
+          <div class="compare-num">2.497€</div>
+          <p>investimento una tantum · metodo per tutta la carriera · Fase 1 + Fase 2</p>
+        </div>
+      </div>
+      <p class="cost-note">La formazione non è una spesa: è ciò che separa chi paga l'ignoranza ogni anno da chi investe una volta e accelera per sempre. Bill Gates, Buffett, Musk — non smettono mai di studiare.</p>
+      <p style="text-align:center;margin-top:28px;"><a href="#decision" class="btn btn-gold btn-lg">Blocca l'offerta a 2.497€</a></p>
+    </div>
+  </div>
+</section>
+
 <section class="decision-section bg-navy" id="decision">
   <div class="container">
     <div class="section-head">
       <div class="section-label" style="color:var(--teal);">Campagna Estate — il tuo investimento</div>
-      <h2 class="section-title" style="color:#fff;">Ecco cosa ottieni — e a che <em style="color:var(--gold);">prezzo</em></h2>
-      <p class="section-sub" style="color:rgba(255,255,255,.65);max-width:640px;margin:0 auto;">Prima il valore del percorso. Poi la promo riservata a chi ci segue da tempo. <strong style="color:#fff;">4 giorni per decidere</strong> — poi torna al listino 4.997€.</p>
+      <h2 class="section-title" style="color:#fff;">Investi 2.497€ — smetti di pagare <em style="color:var(--gold);">27.500€ l'anno</em></h2>
+      <p class="section-sub" style="color:rgba(255,255,255,.65);max-width:640px;margin:0 auto;">Il valore del percorso completo, poi la promo riservata. <strong style="color:#fff;">4 giorni per decidere</strong> — poi torna al listino 4.997€.</p>
     </div>
 
     <div class="value-stack" style="margin-bottom:40px;background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.12);">
