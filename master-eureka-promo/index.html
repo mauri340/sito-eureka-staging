@@ -1081,8 +1081,8 @@ document.querySelectorAll('.accordion-header').forEach(header=>{
 });
 
 const API_ENDPOINT='https://api.apprendimentorapido.it/api/webhook/contact';
-const LISTA_NAME='Master Eureka Promo 2497';
-const LANDING_ID='master-eureka-promo-2497';
+const LISTA_NAME='promozione master eureka estiva';
+const LANDING_ID='master-eureka-promo-estiva';
 const REDIRECT_URL='/master-eureka-promo/grazie.html';
 
 function getFormData(formEl){
@@ -1123,13 +1123,13 @@ async function submitPromoForm(e){
   const payload={
     nome,cognome,email,telefono,
     lista:LISTA_NAME,landing_id:LANDING_ID,
-    source:'landing-master-eureka-promo-2497',
-    tags:['master-eureka-promo','promo-2497','lancio-db-2026'],
+    source:'landing-master-eureka-promo-estiva',
+    tags:['master-eureka-promo','promo-estiva-2497','campagna-estate-2026'],
     custom_fields:{
       offerta:'Master Eureka Completo',prezzo_listino:4997,prezzo_promo:2497,
       sconto_percentuale:50,consent_marketing:true,
       consent_marketing_at:new Date().toISOString(),
-      original_source:'landing-master-eureka-promo-2497',
+      original_source:'landing-master-eureka-promo-estiva',
       form_position:formEl.id==='promo-form-mid'?'mid':'bottom'
     }
   };
