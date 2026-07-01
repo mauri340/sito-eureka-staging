@@ -264,6 +264,18 @@ body{font-family:'Inter',sans-serif;background:var(--off-white);color:var(--text
 .final-cta{text-align:center;padding:48px 0 80px;}
 .final-cta .btn-gold{font-size:16px;padding:18px 40px;}
 
+.storie-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.storia-card{background:#fff;border:1px solid var(--light2);border-radius:16px;padding:28px 24px;height:100%;border-top:3px solid var(--gold);}
+.storia-card.teal-top{border-top-color:var(--teal);}
+.storia-card.navy-top{border-top-color:var(--navy);}
+.storia-tag{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--teal-dk);margin-bottom:10px;display:block;}
+.storia-card p{font-size:14px;color:var(--muted);line-height:1.75;margin:0;}
+.storia-name{font-weight:700;color:var(--navy);font-size:14px;margin-top:16px;}
+.storia-role{font-size:12px;color:var(--muted-lt);margin-top:2px;}
+.storie-contrast{background:var(--navy);border-radius:20px;padding:32px 28px;color:#fff;text-align:center;margin-top:40px;}
+.storie-contrast p{font-size:15px;color:rgba(255,255,255,.78);line-height:1.75;max-width:720px;margin:0 auto;}
+.quote-strip{background:var(--gold-lt);border:1px solid var(--gold-brd);border-radius:14px;padding:20px 24px;margin-top:32px;font-size:14px;color:#6b5510;line-height:1.7;font-style:italic;text-align:center;}
+
 .included-phase{margin-bottom:48px;}
 .included-phase:last-child{margin-bottom:0;}
 .phase-title{font-family:'Playfair Display',serif;font-size:1.35rem;color:var(--navy);margin-bottom:8px;}
@@ -302,7 +314,7 @@ body{font-family:'Inter',sans-serif;background:var(--off-white);color:var(--text
 body.has-sticky-cta{padding-bottom:80px;}
 
 @media(max-width:900px){
-  .hero-inner,.grid-2,.grid-3,.grid-4,.stats-grid,.form-row,.topics-grid,.benefit-grid,.decision-grid,.compact-grid,.utilita-list,.quadrant-grid,.cost-compare{grid-template-columns:1fr;}
+  .hero-inner,.grid-2,.grid-3,.grid-4,.stats-grid,.form-row,.topics-grid,.benefit-grid,.decision-grid,.compact-grid,.utilita-list,.quadrant-grid,.cost-compare,.storie-grid{grid-template-columns:1fr;}
   .flow-plus{display:none;}
   .docente-card{flex-direction:column;}
   .section{padding:72px 0;}
@@ -376,7 +388,7 @@ body.has-sticky-cta{padding-bottom:80px;}
     <div class="section-head" style="margin-bottom:40px;">
       <div class="section-label">Testimonianze</div>
       <h2 class="section-title">Risultati <em>concreti</em></h2>
-      <p class="section-sub">Notai, avvocati, imprenditori, farmacisti — professionisti e studenti che hanno applicato il metodo sul loro materiale.</p>
+      <p class="section-sub">Concorsi superati, carriere cambiate, professioni rilanciate — indipendentemente da età e punto di partenza. Chi usa il cervello bene apre strade che altrimenti resterebbero chiuse.</p>
     </div>
     <div class="grid-2">
       <div class="testi-card">
@@ -471,11 +483,44 @@ body.has-sticky-cta{padding-bottom:80px;}
         <ul><li>Determinazione, entusiasmo</li><li>Obiettivo del Master Eureka</li></ul>
       </div>
     </div>
-    <p style="text-align:center;margin-top:32px;font-size:15px;color:var(--muted);max-width:680px;margin-left:auto;margin-right:auto;line-height:1.75;">Per salire verso l'alta prestazione servono <strong style="color:var(--navy);">due leve</strong>: imparare più in fretta (Fase 1) e lavorare su emozioni e motivazione (Fase 2). È esattamente la struttura del Master Eureka.</p>
+    <p style="text-align:center;margin-top:32px;font-size:15px;color:var(--muted);max-width:680px;margin-left:auto;margin-right:auto;line-height:1.75;">Per salire verso l'alta prestazione servono <strong style="color:var(--navy);">due leve</strong>: imparare più in fretta (Fase 1) e lavorare su emozioni e motivazione (Fase 2). Il professionista medio mette lo studio «dopo il lavoro» — e resta fermo. Chi investe nel metodo no.</p>
   </div>
 </section>
 
-<section class="section bg-off" id="utilita">
+<section class="section bg-off section-tight" id="storie-cambiamento">
+  <div class="container">
+    <div class="section-head" style="margin-bottom:40px;">
+      <div class="section-label">Storie dal webinar</div>
+      <h2 class="section-title">Quando impari <em>in fretta</em>, la vita cambia</h2>
+      <p class="section-sub">Non serve avere 25 anni o ore infinite. Serve un metodo per studiare bene nei tempi che hai — altrimenti nessuna opportunità cade dal cielo.</p>
+    </div>
+    <div class="storie-grid">
+      <div class="storia-card">
+        <span class="storia-tag">Nuova professione</span>
+        <p>Max era stato licenziato. Si è fatto prestare i soldi per un corso da chef, ha imparato una professione nuova con un metodo che gli permetteva di assorbire in fretta — oggi guadagna cifre che prima gli sembravano impossibili.</p>
+        <div class="storia-name">Max</div>
+        <div class="storia-role">Ex dipendente → chef · storia raccontata in aula</div>
+      </div>
+      <div class="storia-card teal-top">
+        <span class="storia-tag">Stesso lavoro, altro mercato</span>
+        <p>Giovanni faceva il suo mestiere in Italia con stipendi stagnanti. Ha studiato lingue e competenze, si è spostato in Germania nello stesso ruolo — con una retribuzione circa <strong>il doppio</strong>. Stesso lavoro, altra possibilità: la differenza l'ha fatta la formazione.</p>
+        <div class="storia-name">Giovanni</div>
+        <div class="storia-role">Professionista · trasferimento Germania</div>
+      </div>
+      <div class="storia-card navy-top">
+        <span class="storia-tag">Concorso e carriera</span>
+        <p>Francesca ha sintetizzato oltre 14.000 pagine con mappe e tecniche di memoria in sei mesi — e oggi è notaio. Non era questione di talento: era questione di metodo applicato sul materiale giusto.</p>
+        <div class="storia-name">Francesca Riboldi</div>
+        <div class="storia-role">Notaio</div>
+      </div>
+    </div>
+    <div class="storie-contrast">
+      <p>Il personaggio medio tiene lo studio al margine della giornata lavorativa — «non ho tempo», «formazione fino ai 35 anni», «costa troppo». Così la situazione resta stagnante. <strong style="color:#fff;">Aumentare le skill richiede studiare — e studiare bene, nei tempi che hai.</strong> Il Master Eureka serve proprio a questo.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section bg-white" id="utilita">
   <div class="container">
     <div class="section-head">
       <div class="section-label">Utilità pratica</div>
@@ -590,7 +635,10 @@ body.has-sticky-cta{padding-bottom:80px;}
       <p style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:rgba(255,255,255,.5);margin-bottom:8px;">Piramide dei risultati</p>
       <p style="font-size:15px;color:rgba(255,255,255,.85);margin-bottom:16px;">Apprendimento → Competenze → Guadagno. Chi si distingue oggi è chi impara più in fretta.</p>
       <div class="hours-num">300+ ore</div>
-      <p>Se risparmi anche solo <strong style="color:#fff;">1 ora al giorno</strong> con un metodo efficace, in un anno recuperi oltre 300 ore. Tempo da dedicare a crescita, famiglia — o semplicemente a lavorare meglio, non di più.</p>
+      <p>Se risparmi anche solo <strong style="color:#fff;">1 ora al giorno</strong> con un metodo efficace, in un anno recuperi oltre 300 ore. Tempo da dedicare a crescita, famiglia — o a imparare una competenza che apre una porta nuova, come Max o Giovanni.</p>
+      <div class="quote-strip" style="background:rgba(0,0,0,.2);border-color:rgba(255,255,255,.15);color:rgba(255,255,255,.75);font-style:normal;margin-top:24px;">
+        «Cambiare lavoro senza cambiare te stesso non basta: ritrovi le stesse difficoltà. Formarsi è l'unica leva che resta tua, a qualsiasi età.»
+      </div>
     </div>
   </div>
 </section>
@@ -729,6 +777,7 @@ body.has-sticky-cta{padding-bottom:80px;}
           <tr class="cost-total"><td colspan="2">Costo totale dell'ignoranza (su 50.000€/anno)</td><td>27.500€/anno</td></tr>
         </tbody>
       </table>
+      <p class="quote-strip">Opportunità che non cogli — Germania invece che Italia, una professione nuova invece del licenziamento, un concorso invece di un'altra rilettura — non cadono dal cielo. Arrivano quando studi con un metodo che funziona.</p>
       <div class="cost-compare">
         <div class="cost-compare-box negative">
           <p style="font-weight:600;color:#991b1b;margin-bottom:4px;">Senza aggiornarti</p>
@@ -809,11 +858,11 @@ body.has-sticky-cta{padding-bottom:80px;}
       </div>
       <div class="accordion-item">
         <div class="accordion-header">«Non ne vale la pena / ho già un titolo» <span class="accordion-arrow">▼</span></div>
-        <div class="accordion-body">Leggi e mercato cambiano ogni giorno. Fermarsi dopo il titolo equivale a perdere terreno. Applichi mappe e memoria sul tuo materiale fin da subito.</div>
+        <div class="accordion-body">Leggi e mercato cambiano ogni giorno. Un avvocato penalista ci ha detto: «La formazione si fa fino ai 35 anni.» Peccato che le leggi si aggiornano ogni giorno. Fermarsi dopo il titolo equivale a perdere terreno.</div>
       </div>
       <div class="accordion-item">
         <div class="accordion-header">«Costa troppo» <span class="accordion-arrow">▼</span></div>
-        <div class="accordion-body">2.497€ in promo vs 27.500€ l'anno senza metodo. Rate con Maurizio · acconto 500€ per bloccare il prezzo.</div>
+        <div class="accordion-body">2.497€ in promo vs 27.500€ l'anno senza metodo. <strong>Esempio reale:</strong> Max, licenziato, si fece prestare i soldi per formarsi come chef — oggi guadagna molto più di prima. Investimento, non spesa. Rate con Maurizio · acconto 500€.</div>
       </div>
       <div class="accordion-item">
         <div class="accordion-header">«Ho poco tempo per seguire un corso» <span class="accordion-arrow">▼</span></div>
