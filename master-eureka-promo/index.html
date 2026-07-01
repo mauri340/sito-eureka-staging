@@ -273,6 +273,13 @@ body{font-family:'Inter',sans-serif;background:var(--off-white);color:var(--text
 .storia-name{font-weight:700;color:var(--navy);font-size:14px;margin-top:16px;}
 .storia-role{font-size:12px;color:var(--muted-lt);margin-top:2px;}
 .storie-contrast{background:var(--navy);border-radius:20px;padding:32px 28px;color:#fff;text-align:center;margin-top:40px;}
+.verita-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:32px;}
+.verita-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:28px;}
+.verita-card h3{font-family:'Playfair Display',serif;font-size:1.05rem;color:#fff;margin-bottom:12px;}
+.verita-card p{font-size:14px;color:rgba(255,255,255,.72);line-height:1.8;margin:0;}
+.verita-punch{background:linear-gradient(135deg,rgba(184,151,62,.18),rgba(0,169,136,.12));border:1px solid rgba(184,151,62,.35);border-radius:16px;padding:28px 32px;text-align:center;}
+.verita-punch p{font-size:15px;color:rgba(255,255,255,.88);line-height:1.8;margin:0;}
+.verita-punch strong{color:var(--gold);}
 .storie-contrast p{font-size:15px;color:rgba(255,255,255,.78);line-height:1.75;max-width:720px;margin:0 auto;}
 .quote-strip{background:var(--gold-lt);border:1px solid var(--gold-brd);border-radius:14px;padding:20px 24px;margin-top:32px;font-size:14px;color:#6b5510;line-height:1.7;font-style:italic;text-align:center;}
 
@@ -314,7 +321,7 @@ body{font-family:'Inter',sans-serif;background:var(--off-white);color:var(--text
 body.has-sticky-cta{padding-bottom:80px;}
 
 @media(max-width:900px){
-  .hero-inner,.grid-2,.grid-3,.grid-4,.stats-grid,.form-row,.topics-grid,.benefit-grid,.decision-grid,.compact-grid,.utilita-list,.quadrant-grid,.cost-compare,.storie-grid{grid-template-columns:1fr;}
+  .hero-inner,.grid-2,.grid-3,.grid-4,.stats-grid,.form-row,.topics-grid,.benefit-grid,.decision-grid,.compact-grid,.utilita-list,.quadrant-grid,.cost-compare,.storie-grid,.verita-grid{grid-template-columns:1fr;}
   .flow-plus{display:none;}
   .docente-card{flex-direction:column;}
   .section{padding:72px 0;}
@@ -351,8 +358,8 @@ body.has-sticky-cta{padding-bottom:80px;}
           <span class="tag tag-teal">Master completo</span>
           <span class="tag tag-navy" style="background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.25);color:#fff;">Per chi ci conosce</span>
         </div>
-        <h1 class="page-hero-title">Studi sul tuo materiale.<br><em>Ricordi. Passi.</em></h1>
-        <p class="page-hero-sub">Memoria, mappe e sintesi su manuali e dispense — anatomia, diritto, economia, qualsiasi materia. Il Master Eureka completo: online, webinar e 40 ore in aula. Promo riservata a chi ci segue da tempo.</p>
+        <h1 class="page-hero-title">Competenze = opportunità.<br><em>Si costruiscono studiando.</em></h1>
+        <p class="page-hero-sub">Nel 2026 non chiederti «perché imparare in fretta» — chiediti quanto ti costa <strong style="color:#fff;">non</strong> farlo: soldi persi, mercati chiusi, anni buttati. Il Master Eureka ti dà il metodo per studiare bene sul tuo materiale — a 40, 50 anni o quando serve — e trasformare studio in risultati concreti.</p>
         <div style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:12px;">
           <a href="#form" class="btn btn-gold btn-lg">Richiedi offerta 2.497€</a>
           <a href="#programma" class="btn btn-outline btn-lg">Programma completo</a>
@@ -388,7 +395,7 @@ body.has-sticky-cta{padding-bottom:80px;}
     <div class="section-head" style="margin-bottom:40px;">
       <div class="section-label">Testimonianze</div>
       <h2 class="section-title">Risultati <em>concreti</em></h2>
-      <p class="section-sub">Concorsi superati, carriere cambiate, professioni rilanciate — indipendentemente da età e punto di partenza. Chi usa il cervello bene apre strade che altrimenti resterebbero chiuse.</p>
+      <p class="section-sub">Non teoria: concorsi superati, stipendi raddoppiati all'estero, professioni rilanciate. La competenza si paga — ma solo se la costruisci studiando, con un metodo che funziona sul serio.</p>
     </div>
     <div class="grid-2">
       <div class="testi-card">
@@ -420,12 +427,43 @@ body.has-sticky-cta{padding-bottom:80px;}
   </div>
 </section>
 
+<section class="section bg-navy section-tight" id="scelta-intelligente">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-label" style="color:var(--teal);">La scelta intelligente</div>
+      <h2 class="section-title" style="color:#fff;">La parola magica è <em style="color:var(--gold);">competenze</em>. Come le ottieni? Studiando.</h2>
+      <p class="section-sub" style="color:rgba(255,255,255,.65);">Se a 40 o 50 anni «studiare» ti suona da liceo e ti fa venire la nausea, non hai capito il mondo del 2026: tutto evolve — leggi, mercati, tecnologie — e chi si ferma crede di avere scelta quando in realtà l'ha già persa.</p>
+    </div>
+    <div class="verita-grid">
+      <div class="verita-card">
+        <h3>Non è «apprendimento rapido». Sono soldi e opportunità.</h3>
+        <p>Il cervello deve passare dal «perché dovrei?» al «cosa ottengo»: concorso superato, clientela nuova, stesso mestiere pagato meglio in un altro Paese, una professione rilanciata dopo un licenziamento. Senza competenze aggiornate restano slogan — non risultati.</p>
+      </div>
+      <div class="verita-card">
+        <h3>Se il tuo lavoro è reale, non hai scorciatoie.</h3>
+        <p>Medico, avvocato, imprenditore, libero professionista: la tua vita non si basa su trucchi virali o content vuoto. Si basa su competenza verificabile. E la competenza — ripetiamolo — si costruisce <strong style="color:#fff;">studiando</strong>. Meglio nei tempi che hai, con un metodo che non spreca ore.</p>
+      </div>
+      <div class="verita-card">
+        <h3>Lo studio al margine = stagnazione.</h3>
+        <p>Il professionista medio mette la formazione «dopo il lavoro», quando è stanco. Così resta nella zona comfort o nella sopravvivenza: tanta fatica, poche porte aperte. Non è questione di talento — è questione di priorità.</p>
+      </div>
+      <div class="verita-card">
+        <h3>Non è una scelta. È l'unica scelta intelligente.</h3>
+        <p>Puoi rimandare. Puoi dire «non ho tempo» o «ho già un titolo». Ma nel 2026 chi non studia perde terreno ogni mese — non quando ha 25 anni, adesso. Il Master non ti chiede di tornare studente: ti insegna a imparare in fretta da adulto.</p>
+      </div>
+    </div>
+    <div class="verita-punch">
+      <p><strong>La vera urgenza non è il countdown della promo.</strong> È ogni anno che aspetti: competenze non acquisite, opportunità non colte, migliaia di euro lasciati sul tavolo. Rimandare di 12 mesi non ti costa «un corso in meno» — ti costa un anno di vita professionale che non torna indietro.</p>
+    </div>
+  </div>
+</section>
+
 <section class="section bg-off section-tight" style="padding-top:72px;padding-bottom:72px;" id="problema">
   <div class="container">
     <div class="section-head">
       <div class="section-label">Il problema reale</div>
-      <h2 class="section-title">Troppe informazioni, poco che <em>resta</em></h2>
-      <p class="section-sub">Esami, concorsi o lavoro: ti senti sopraffatto da cose da ricordare, decisioni da prendere e scadenze da rispettare. Se passi ore sui libri o sui PDF ma dimentichi tutto il giorno dopo, il problema non è la tua intelligenza — è il metodo.</p>
+      <h2 class="section-title">Studi — o credi di studiare — ma <em>non accumuli competenze</em></h2>
+      <p class="section-sub">Ripassi le stesse pagine, dimentichi in riunione, rimandi l'aggiornamento. Non è pigrizia: è un metodo che non regge nel 2026. E finché non impari a studiare bene, ogni ora sul libro è tempo che non si trasforma in soldi, titoli o opportunità.</p>
     </div>
     <div class="grid-2">
       <div class="card" style="border-top:3px solid #dc2626;">
@@ -434,6 +472,7 @@ body.has-sticky-cta{padding-bottom:80px;}
           <li><span class="ico" style="background:rgba(220,38,38,.1);color:#dc2626;">✗</span>Dimentichi un'informazione chiave in riunione o all'esame</li>
           <li><span class="ico" style="background:rgba(220,38,38,.1);color:#dc2626;">✗</span>La giornata è troppo corta — troppe cose, zero concentrazione</li>
           <li><span class="ico" style="background:rgba(220,38,38,.1);color:#dc2626;">✗</span>Ripeti le stesse pagine senza trattenere nulla</li>
+          <li><span class="ico" style="background:rgba(220,38,38,.1);color:#dc2626;">✗</span>Vedi «studio» come cosa da studenti — e il mercato intanto ti supera</li>
           <li><span class="ico" style="background:rgba(220,38,38,.1);color:#dc2626;">✗</span>Perdi clienti, opportunità o tempo per inefficienza</li>
         </ul>
       </div>
@@ -492,7 +531,7 @@ body.has-sticky-cta{padding-bottom:80px;}
     <div class="section-head" style="margin-bottom:40px;">
       <div class="section-label">Storie dal webinar</div>
       <h2 class="section-title">Quando impari <em>in fretta</em>, la vita cambia</h2>
-      <p class="section-sub">Non serve avere 25 anni o ore infinite. Serve un metodo per studiare bene nei tempi che hai — altrimenti nessuna opportunità cade dal cielo.</p>
+      <p class="section-sub">Hanno studiato — sul serio, con metodo — e il mercato ha risposto con soldi e possibilità che in Italia non avevano. Non magia: competenze costruite quando gli altri avevano già mollato.</p>
     </div>
     <div class="storie-grid">
       <div class="storia-card">
@@ -515,7 +554,7 @@ body.has-sticky-cta{padding-bottom:80px;}
       </div>
     </div>
     <div class="storie-contrast">
-      <p>Il personaggio medio tiene lo studio al margine della giornata lavorativa — «non ho tempo», «formazione fino ai 35 anni», «costa troppo». Così la situazione resta stagnante. <strong style="color:#fff;">Aumentare le skill richiede studiare — e studiare bene, nei tempi che hai.</strong> Il Master Eureka serve proprio a questo.</p>
+      <p>Il professionista medio tratta lo studio come optional — «non ho tempo», «formazione fino ai 35 anni», «costa troppo». Poi si chiede perché le opportunità non arrivano. <strong style="color:#fff;">Competenze si ottengono studiando. Punto.</strong> La differenza è se lo fai a caso o con un metodo che ti restituisce ore e risultati.</p>
     </div>
   </div>
 </section>
@@ -635,9 +674,9 @@ body.has-sticky-cta{padding-bottom:80px;}
       <p style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:rgba(255,255,255,.5);margin-bottom:8px;">Piramide dei risultati</p>
       <p style="font-size:15px;color:rgba(255,255,255,.85);margin-bottom:16px;">Apprendimento → Competenze → Guadagno. Chi si distingue oggi è chi impara più in fretta.</p>
       <div class="hours-num">300+ ore</div>
-      <p>Se risparmi anche solo <strong style="color:#fff;">1 ora al giorno</strong> con un metodo efficace, in un anno recuperi oltre 300 ore. Tempo da dedicare a crescita, famiglia — o a imparare una competenza che apre una porta nuova, come Max o Giovanni.</p>
+      <p>Se risparmi anche solo <strong style="color:#fff;">1 ora al giorno</strong> con un metodo efficace, in un anno recuperi oltre 300 ore — ore da investire in competenze che si trasformano in soldi e opportunità, come Max o Giovanni.</p>
       <div class="quote-strip" style="background:rgba(0,0,0,.2);border-color:rgba(255,255,255,.15);color:rgba(255,255,255,.75);font-style:normal;margin-top:24px;">
-        «Cambiare lavoro senza cambiare te stesso non basta: ritrovi le stesse difficoltà. Formarsi è l'unica leva che resta tua, a qualsiasi età.»
+        «Rimandare lo studio non ti regala tempo libero: ti regala un anno in più da professionista medio. La vera urgenza è quella.»
       </div>
     </div>
   </div>
@@ -762,7 +801,7 @@ body.has-sticky-cta{padding-bottom:80px;}
     <div class="section-head">
       <div class="section-label">Investimento vs costo</div>
       <h2 class="section-title">Quanto costa <em>non</em> avere un metodo?</h2>
-      <p class="section-sub">Su 50.000€ di fatturato annuo, restare senza metodo può costarti fino a <strong>27.500€ l'anno</strong> tra opportunità perse e tempo sprecato.</p>
+      <p class="section-sub">Ogni anno senza metodo non è «un anno in cui non fai un corso». È fino a <strong>27.500€</strong> tra opportunità perse e tempo sprecato — su 50.000€ di fatturato. La promo ha un countdown. La tua carriera no: ogni mese conta.</p>
     </div>
     <div class="cost-wrap">
       <table class="cost-table">
@@ -777,7 +816,7 @@ body.has-sticky-cta{padding-bottom:80px;}
           <tr class="cost-total"><td colspan="2">Costo totale dell'ignoranza (su 50.000€/anno)</td><td>27.500€/anno</td></tr>
         </tbody>
       </table>
-      <p class="quote-strip">Opportunità che non cogli — Germania invece che Italia, una professione nuova invece del licenziamento, un concorso invece di un'altra rilettura — non cadono dal cielo. Arrivano quando studi con un metodo che funziona.</p>
+      <p class="quote-strip">Germania invece che Italia, concorso invece di un'altra rilettura, clienti nuovi invece dello stesso stipendio: non cadono dal cielo. Arrivano quando smetti di rimandare lo studio e impari a farlo bene — senza scuse da quarantenne stanco.</p>
       <div class="cost-compare">
         <div class="cost-compare-box negative">
           <p style="font-weight:600;color:#991b1b;margin-bottom:4px;">Senza aggiornarti</p>
@@ -798,8 +837,8 @@ body.has-sticky-cta{padding-bottom:80px;}
   <div class="container">
     <div class="section-head">
       <div class="section-label" style="color:var(--teal);">Campagna Estate — il tuo investimento</div>
-      <h2 class="section-title" style="color:#fff;">Investi 2.497€ — smetti di pagare <em style="color:var(--gold);">27.500€ l'anno</em></h2>
-      <p class="section-sub" style="color:rgba(255,255,255,.65);max-width:640px;margin:0 auto;"><strong style="color:#fff;">4 giorni per decidere</strong> — poi torna al listino 4.997€. Nessun pagamento compilando il form.</p>
+      <h2 class="section-title" style="color:#fff;">2.497€ una volta — o <em style="color:var(--gold);">27.500€ l'anno</em> per non studiare</h2>
+      <p class="section-sub" style="color:rgba(255,255,255,.65);max-width:680px;margin:0 auto;">La scelta intelligente non ha «forse». O investi sul metodo adesso, o paghi ogni anno in opportunità perse. <strong style="color:#fff;">Promo 4 giorni</strong> (poi 4.997€) · nessun pagamento compilando il form.</p>
     </div>
 
     <div class="value-stack" style="margin-bottom:40px;background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.12);">
