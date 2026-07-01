@@ -34,10 +34,20 @@
   const base = document.querySelector('meta[name="base-path"]')
     ?.getAttribute('content') || '';
 
-  fetch(base + '/components/footer.html')
+  const footerType = placeholder.getAttribute('data-footer') || 'default';
+  const formHref = placeholder.getAttribute('data-form-href');
+  const footerFile = footerType === 'promo'
+    ? '/components/footer-promo.html'
+    : '/components/footer.html';
+
+  fetch(base + footerFile)
     .then(r => r.text())
     .then(html => {
       placeholder.outerHTML = html;
+      if (formHref) {
+        const cta = document.querySelector('.footer-promo-cta');
+        if (cta) cta.href = formHref;
+      }
     })
     .catch(() => {
       console.warn('Footer component non caricato');
