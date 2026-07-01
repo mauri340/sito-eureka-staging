@@ -237,6 +237,34 @@ body{font-family:'Inter',sans-serif;background:var(--off-white);color:var(--text
 .quadrant-comfort{border-top:3px solid #64748b;}.quadrant-comfort .zone-tag{color:#64748b;}
 .quadrant-peak{border-top:3px solid var(--teal);}.quadrant-peak .zone-tag{color:var(--teal-dk);}
 
+.scala-impatto{max-width:680px;margin:0 auto;display:flex;flex-direction:column;gap:0;}
+.scala-level{position:relative;padding:24px 26px;border-radius:16px;border:1px solid var(--light2);background:#fff;transition:box-shadow .2s;}
+.scala-level-num{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;line-height:1;margin-bottom:8px;opacity:.35;}
+.scala-level-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:10px;flex-wrap:wrap;}
+.scala-level-head h3{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--navy);margin:0;line-height:1.25;}
+.scala-impact-badge{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;padding:6px 12px;border-radius:999px;white-space:nowrap;flex-shrink:0;}
+.scala-level p{font-size:13px;color:var(--muted);line-height:1.75;margin:0;}
+.scala-level ul{margin:10px 0 0;padding-left:16px;font-size:13px;color:var(--muted);line-height:1.65;}
+.scala-drop{display:flex;flex-direction:column;align-items:center;padding:10px 0 6px;gap:4px;}
+.scala-drop-line{width:2px;height:14px;background:linear-gradient(180deg,var(--muted-lt),#dc2626);border-radius:2px;}
+.scala-drop-text{font-size:11px;font-weight:600;color:#991b1b;text-align:center;letter-spacing:.2px;max-width:420px;line-height:1.5;}
+.level-peak{border:2px solid var(--teal);background:linear-gradient(135deg,rgba(0,169,136,.08),#fff);box-shadow:0 12px 40px rgba(0,169,136,.12);}
+.level-peak .scala-level-num{color:var(--teal);opacity:1;}
+.level-peak .scala-impact-badge{background:var(--teal-lt);color:var(--teal-dk);border:1px solid rgba(0,169,136,.25);}
+.level-comfort{border-left:4px solid #64748b;}
+.level-comfort .scala-level-num{color:#64748b;}
+.level-comfort .scala-impact-badge{background:#f1f5f9;color:#64748b;}
+.level-survive{border-left:4px solid #ea580c;background:#fffaf5;}
+.level-survive .scala-level-num{color:#ea580c;}
+.level-survive .scala-impact-badge{background:#ffedd5;color:#c2410c;}
+.level-burnout{border-left:4px solid #dc2626;background:#fef2f2;}
+.level-burnout .scala-level-num{color:#dc2626;opacity:.7;}
+.level-burnout .scala-impact-badge{background:#fee2e2;color:#991b1b;}
+.scala-legend{display:flex;flex-wrap:wrap;justify-content:center;gap:12px 24px;margin-bottom:36px;padding:16px 20px;background:var(--off-white);border:1px solid var(--light2);border-radius:12px;font-size:13px;color:var(--muted);}
+.scala-legend span{display:inline-flex;align-items:center;gap:8px;}
+.scala-legend .dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.scala-footnote{text-align:center;margin-top:36px;font-size:15px;color:var(--muted);max-width:640px;margin-left:auto;margin-right:auto;line-height:1.85;}
+
 .hours-banner{background:linear-gradient(135deg,var(--navy) 0%,#1a3050 100%);border-radius:20px;padding:36px 40px;color:#fff;text-align:center;margin-top:48px;}
 .hours-banner .hours-num{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,5vw,3.2rem);font-weight:700;color:var(--gold);line-height:1;}
 .hours-banner p{font-size:15px;color:rgba(255,255,255,.75);line-height:1.75;margin-top:12px;max-width:640px;margin-left:auto;margin-right:auto;}
@@ -526,36 +554,78 @@ body.has-sticky-cta{padding-bottom:80px;}
   <div class="container">
     <div class="section-head">
       <div class="section-label">Benessere sul lavoro</div>
-      <h2 class="section-title">Le competenze determinano come ti <em>senti</em> ogni giorno</h2>
-      <p class="section-sub">Contano competenze ed energia insieme. Dove ti trovi oggi? Se non aggiorni il metodo, scendi di quadrante piano piano — anche senza accorgertene.</p>
+      <h2 class="section-title">Competenze ed energia: <em>dove ti posiziona</em> ogni giorno</h2>
+      <p class="section-sub">Non è solo «stress» o «motivazione». Due leve contano insieme: <strong>quanto sai imparare</strong> (competenze) e <strong>quanta energia metti</strong>. Il Master Eureka muove entrambe — Fase 1 e Fase 2.</p>
     </div>
-    <div class="quadrant-grid">
-      <div class="quadrant-card quadrant-burnout">
-        <span class="zone-tag">Zona burnout</span>
-        <h3>Poca energia, poche competenze</h3>
-        <p>Scadenze accumulate, mente annebbiata, ogni compito pesa. Procrastini perché non hai strumenti.</p>
-        <ul><li>Rassegnazione, sfiducia</li><li>Sensazione di aver perso il controllo</li></ul>
-      </div>
-      <div class="quadrant-card quadrant-survive">
-        <span class="zone-tag">Zona sopravvivenza</span>
-        <h3>Tanta energia, poche competenze</h3>
-        <p>Butti energia ma senza metodo: come una mosca sul vetro — molto sforzo, pochi risultati concreti.</p>
-        <ul><li>Frustrazione, tensione</li><li>Lavori tanto, ricordi poco</li></ul>
-      </div>
-      <div class="quadrant-card quadrant-comfort">
-        <span class="zone-tag">Zona comfort</span>
-        <h3>Buone competenze, poca energia</h3>
-        <p>Sai fare il tuo, ma la routine ti appiattisce. Potenziale sottoutilizzato, niente sfida.</p>
-        <ul><li>Serenità che diventa stagnazione</li><li>Il mercato avanza, tu resti fermo</li></ul>
-      </div>
-      <div class="quadrant-card quadrant-peak">
-        <span class="zone-tag">Alta prestazione</span>
-        <h3>Competenze + energia alte</h3>
-        <p>Hai il metodo e la motivazione: impari in fretta, ricordi, gestisci stress e obiettivi.</p>
+
+    <div class="scala-legend">
+      <span><span class="dot" style="background:var(--teal);"></span> Impatto alto — obiettivo</span>
+      <span><span class="dot" style="background:#64748b;"></span> Impatto medio — stagnazione</span>
+      <span><span class="dot" style="background:#ea580c;"></span> Impatto basso — fatica senza risultati</span>
+      <span><span class="dot" style="background:#dc2626;"></span> Impatto critico — burnout</span>
+    </div>
+
+    <div class="scala-impatto">
+      <div class="scala-level level-peak">
+        <div class="scala-level-num">4</div>
+        <div class="scala-level-head">
+          <h3>Alta prestazione — competenze + energia alte</h3>
+          <span class="scala-impact-badge">Massimo impatto</span>
+        </div>
+        <p>Hai un metodo che regge e la motivazione per applicarlo: impari in fretta, ricordi, gestisci stress e obiettivi con chiarezza.</p>
         <ul><li>Determinazione, entusiasmo</li><li>Obiettivo del Master Eureka</li></ul>
       </div>
+
+      <div class="scala-drop" aria-hidden="true">
+        <div class="scala-drop-line"></div>
+        <p class="scala-drop-text">Se smetti di aggiornare competenze, scendi — anche con buona energia</p>
+        <div class="scala-drop-line"></div>
+      </div>
+
+      <div class="scala-level level-comfort">
+        <div class="scala-level-num">3</div>
+        <div class="scala-level-head">
+          <h3>Zona comfort — buone competenze, poca energia</h3>
+          <span class="scala-impact-badge">Impatto in calo</span>
+        </div>
+        <p>Sai fare il tuo, ma la routine ti appiattisce. Il mercato avanza, tu resti fermo — senza accorgertene.</p>
+        <ul><li>Serenità che diventa stagnazione</li><li>Potenziale sottoutilizzato</li></ul>
+      </div>
+
+      <div class="scala-drop" aria-hidden="true">
+        <div class="scala-drop-line"></div>
+        <p class="scala-drop-text">Studi senza metodo aggiornato: molta fatica, pochi risultati concreti</p>
+        <div class="scala-drop-line"></div>
+      </div>
+
+      <div class="scala-level level-survive">
+        <div class="scala-level-num">2</div>
+        <div class="scala-level-head">
+          <h3>Zona sopravvivenza — tanta energia, poche competenze</h3>
+          <span class="scala-impact-badge">Impatto basso</span>
+        </div>
+        <p>Butti ore sui libri ma senza strumenti: come una mosca sul vetro — sforzo alto, memoria che non resta.</p>
+        <ul><li>Frustrazione, tensione</li><li>Lavori tanto, ricordi poco</li></ul>
+      </div>
+
+      <div class="scala-drop" aria-hidden="true">
+        <div class="scala-drop-line"></div>
+        <p class="scala-drop-text">Energia e competenze entrambe in calo: il punto più basso</p>
+        <div class="scala-drop-line"></div>
+      </div>
+
+      <div class="scala-level level-burnout">
+        <div class="scala-level-num">1</div>
+        <div class="scala-level-head">
+          <h3>Zona burnout — poca energia, poche competenze</h3>
+          <span class="scala-impact-badge">Impatto critico</span>
+        </div>
+        <p>Scadenze accumulate, mente annebbiata, ogni compito pesa. Procrastini perché non hai strumenti — e il metodo vecchio non regge più.</p>
+        <ul><li>Rassegnazione, sfiducia</li><li>Sensazione di aver perso il controllo</li></ul>
+      </div>
     </div>
-    <p style="text-align:center;margin-top:32px;font-size:15px;color:var(--muted);max-width:680px;margin-left:auto;margin-right:auto;line-height:1.85;">Per salire serve muovere due leve: imparare più in fretta (Fase 1) e lavorare su emozioni e motivazione (Fase 2). Il professionista medio rimanda lo studio a «quando avrò tempo». Chi ha un metodo, no.</p>
+
+    <p class="scala-footnote"><strong>Se non agisci, non resti fermo — scendi di livello.</strong> Piano piano, spesso senza accorgertene. Per risalire servono due leve: imparare più in fretta sul tuo materiale (Fase 1) e lavorare su emozioni e motivazione (Fase 2). Chi rimanda lo studio al «quando avrò tempo» scivola verso il basso. Chi ha un metodo, sale.</p>
   </div>
 </section>
 
