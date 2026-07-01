@@ -405,6 +405,20 @@ body{font-family:'Inter',sans-serif;background:var(--off-white);color:var(--text
 .cost-dual{margin-top:24px;padding:20px 24px;background:var(--gold-lt);border:1px solid var(--gold-brd);border-radius:14px;font-size:14px;color:#6b5510;line-height:1.75;}
 .cost-dual strong{color:#6b4510;}
 
+.footer-promo{background:var(--navy);color:rgba(255,255,255,.65);padding:44px 0 52px;border-top:1px solid rgba(255,255,255,.08);}
+.footer-promo .footer-promo-inner{max-width:720px;margin:0 auto;padding:0 28px;text-align:center;}
+.footer-promo-lead{font-family:'Playfair Display',serif;font-size:1.15rem;color:#fff;margin-bottom:20px;line-height:1.35;}
+.footer-promo-contacts{display:flex;flex-wrap:wrap;justify-content:center;gap:12px 20px;margin-bottom:18px;}
+.footer-promo-contacts a{font-size:14px;font-weight:600;color:rgba(255,255,255,.85);text-decoration:none;transition:color .2s;}
+.footer-promo-contacts a:hover{color:#f5d78e;}
+.footer-promo-cta{display:inline-flex;align-items:center;padding:12px 22px;border-radius:10px;background:var(--gold);color:#fff!important;font-size:14px;font-weight:700;text-decoration:none!important;}
+.footer-promo-cta:hover{background:#a07c2a;color:#fff!important;}
+.footer-promo-hours{font-size:12px;color:rgba(255,255,255,.45);line-height:1.65;margin-bottom:24px;}
+.footer-promo-legal{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:8px 20px;padding-top:22px;border-top:1px solid rgba(255,255,255,.08);font-size:12px;color:rgba(255,255,255,.4);}
+.footer-promo-legal a{color:rgba(255,255,255,.55);text-decoration:none;font-weight:500;}
+.footer-promo-legal a:hover{color:#f5d78e;text-decoration:underline;}
+@media(max-width:600px){.footer-promo-contacts{flex-direction:column;align-items:center;}}
+
 body.has-sticky-cta{padding-bottom:80px;}
 
 @media(max-width:900px){
@@ -1470,7 +1484,22 @@ body.has-sticky-cta{padding-bottom:80px;}
   </div>
 </div>
 
-<div id="footer-placeholder" data-footer="promo"></div>
+<footer class="footer-promo" id="footer">
+  <div class="footer-promo-inner">
+    <p class="footer-promo-lead">Domande sulla promo Master Eureka?</p>
+    <div class="footer-promo-contacts">
+      <a href="tel:+390240702168">📞 02 4070 2168</a>
+      <a href="mailto:pagamenti@apprendimentorapido.it">✉ pagamenti@apprendimentorapido.it</a>
+      <a href="https://wa.me/390240702168?text=Ciao%2C%20vorrei%20informazioni%20sul%20Master%20Eureka%20a%202.497%E2%82%AC" target="_blank" rel="noopener">WhatsApp</a>
+      <a href="#form" class="footer-promo-cta">Richiedi il posto a 2.497€</a>
+    </div>
+    <p class="footer-promo-hours">Lun–Ven 9:00–18:30 · Via Gardiscia 10, Rovio (CH)</p>
+    <div class="footer-promo-legal">
+      <span>© 2026 Apprendimento Rapido – Metodo Eureka</span>
+      <a href="https://www.iubenda.com/privacy-policy/89530968" target="_blank" rel="noopener">Privacy Policy</a>
+    </div>
+  </div>
+</footer>
 <script src="/whatsapp-widget.js"></script>
 <script src="/components/footer-loader.js"></script>
 <script>
