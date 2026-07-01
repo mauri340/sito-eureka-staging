@@ -9,13 +9,12 @@
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-2X3V7JZPBJ"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-2X3V7JZPBJ');</script>
 <script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','957273196609597');fbq('track','PageView');</script>
-<title>Master Eureka 2.497€ — Campagna Estate | Apprendimento Rapido</title>
-<meta name="description" content="Campagna Estate: Master Eureka a 2.497€. Mappe, memoria e sintesi su manuali e PDF — anatomia, diritto, economia, qualsiasi materia. 40 h dal vivo + piattaforma 1 anno. Promo riservata.">
+<title>Master Eureka — Campagna Estate | Promo riservata</title>
+<meta name="description" content="Campagna Estate: Master Eureka completo (Fase 1 + Fase 2). Mappe, memoria e sintesi su manuali e PDF. 40 h dal vivo + piattaforma 1 anno. Promo riservata a chi ci segue.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Master Eureka — 50% di sconto (2.497€)">
+<meta property="og:title" content="Master Eureka — Promo Campagna Estate riservata">
 <meta property="og:description" content="Il percorso completo Metodo Eureka: memoria, lettura veloce, mappe mentali, organizzazione. Promozione di lancio.">
 <meta property="og:image" content="https://apprendimentorapido.it/images/og-image.png">
-<link rel="stylesheet" href="/components/nav.css">
 <style>
 :root{
   --navy:#0D1B2A; --navy2:#1C2B3A; --navy3:#243447;
@@ -23,7 +22,7 @@
   --gold:#B8973E; --gold-lt:rgba(184,151,62,.12); --gold-brd:rgba(184,151,62,.35);
   --white:#ffffff; --off-white:#F8F7F4; --light:#F0EFEB; --light2:#E8E7E2;
   --text:#1a1a2e; --muted:#5a6a7a; --muted-lt:#8a9aaa;
-  --nav-h:72px;
+  --promo-bar-h:56px;
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
@@ -102,7 +101,8 @@ body{font-family:'Inter',sans-serif;background:var(--off-white);color:var(--text
 .promo-bar{background:var(--navy2);color:#fff;text-align:center;padding:12px 20px 14px;font-size:13px;font-weight:600;letter-spacing:.3px;border-bottom:1px solid rgba(255,255,255,.06);}
 .promo-bar strong{color:#f5d78e;}
 
-.page-hero{padding:calc(var(--nav-h) + 48px) 0 80px;background:linear-gradient(160deg,var(--navy) 0%,#1a3050 100%);}
+.page-hero{padding:56px 0 80px;background:linear-gradient(160deg,var(--navy) 0%,#1a3050 100%);}
+.hero-curiosity{display:inline-block;margin-bottom:16px;padding:8px 16px;border-radius:999px;background:rgba(184,151,62,.15);border:1px solid rgba(184,151,62,.35);font-size:12px;font-weight:700;letter-spacing:.4px;color:#f5d78e;text-transform:uppercase;}
 .page-hero-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:700;color:#fff;line-height:1.12;margin-bottom:20px;}
 .page-hero-title em{font-style:italic;color:var(--gold);}
 .page-hero-sub{font-size:1.05rem;color:rgba(255,255,255,.72);line-height:1.85;max-width:540px;margin-bottom:32px;}
@@ -179,9 +179,14 @@ body{font-family:'Inter',sans-serif;background:var(--off-white);color:var(--text
 .sticky-cta{position:fixed;bottom:0;left:0;right:0;z-index:9998;background:var(--navy);color:#fff;padding:12px 20px;box-shadow:0 -8px 32px rgba(0,0,0,.25);transform:translateY(110%);transition:transform .35s ease;border-top:1px solid rgba(255,255,255,.08);}
 .sticky-cta.show{transform:translateY(0);}
 .sticky-cta-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+.sticky-cta-headline{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;color:#fff;}
 .sticky-cta-price{font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:700;}
 .sticky-cta-price small{font-size:13px;font-weight:400;color:rgba(255,255,255,.55);text-decoration:line-through;margin-right:8px;font-family:'Inter',sans-serif;}
 .sticky-cta-text{font-size:13px;color:rgba(255,255,255,.65);}
+.sticky-cta-price[hidden],.sticky-cta-headline[hidden]{display:none!important;}
+.offerta-reveal{text-align:center;margin-bottom:36px;padding-bottom:32px;border-bottom:1px solid rgba(255,255,255,.1);}
+.offerta-reveal-label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--teal);margin-bottom:8px;}
+.offerta-reveal-sub{font-size:15px;color:rgba(255,255,255,.65);line-height:1.65;max-width:520px;margin:0 auto;}
 
 .trust-bar{display:flex;flex-wrap:wrap;gap:16px 24px;justify-content:center;margin-top:24px;padding-top:24px;border-top:1px solid var(--light2);}
 .trust-bar a{font-size:13px;color:var(--teal-dk);font-weight:600;text-decoration:none;}
@@ -338,7 +343,7 @@ body.has-sticky-cta{padding-bottom:80px;}
 <body>
 
 <div class="promo-bar">
-  Campagna Estate — promo riservata a chi ci segue · <strong>4.997€ → 2.497€</strong> (50%) · <strong>4 giorni per decidere</strong> · termina il <strong id="promo-deadline">—</strong>
+  Campagna Estate — promo <strong>−50% riservata</strong> a chi ci segue · <strong>4 giorni per decidere</strong> · investimento promo in fondo pagina · termina il <strong id="promo-deadline">—</strong>
   <div class="promo-countdown" id="promo-countdown-bar" aria-live="polite">
     <div class="promo-countdown-unit"><span class="promo-countdown-num" id="cd-days-bar">—</span><span class="promo-countdown-lbl">Giorni</span></div>
     <div class="promo-countdown-unit"><span class="promo-countdown-num" id="cd-hours-bar">—</span><span class="promo-countdown-lbl">Ore</span></div>
@@ -347,24 +352,23 @@ body.has-sticky-cta{padding-bottom:80px;}
   </div>
 </div>
 
-<div id="nav-placeholder"></div>
-
 <section class="page-hero">
   <div class="container">
     <div class="hero-inner">
       <div>
+        <span class="hero-curiosity">Promo −50% · condizioni in fondo pagina</span>
         <div style="margin-bottom:20px;display:flex;gap:10px;flex-wrap:wrap;">
-          <span class="tag tag-gold">Fase 1 + Fase 2</span>
-          <span class="tag tag-teal">Master completo</span>
-          <span class="tag tag-navy" style="background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.25);color:#fff;">Per chi ci conosce</span>
+          <span class="tag tag-gold">Campagna Estate</span>
+          <span class="tag tag-teal">Master Eureka completo</span>
+          <span class="tag tag-navy" style="background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.25);color:#fff;">Fase 1 + Fase 2</span>
         </div>
-        <h1 class="page-hero-title">Competenze = opportunità.<br><em>Si costruiscono studiando.</em></h1>
-        <p class="page-hero-sub">Nel 2026 non chiederti «perché imparare in fretta» — chiediti quanto ti costa <strong style="color:#fff;">non</strong> farlo: soldi persi, mercati chiusi, anni buttati. Il Master Eureka ti dà il metodo per studiare bene sul tuo materiale — a 40, 50 anni o quando serve — e trasformare studio in risultati concreti.</p>
+        <h1 class="page-hero-title">Master Eureka — promo riservata<br><em>Studi sul tuo materiale. Ricordi. Passi.</em></h1>
+        <p class="page-hero-sub">Hai cliccato dall'email perché conosci Apprendimento Rapido. Mappe, memoria e sintesi su manuali e PDF — concorsi, esami o aggiornamento professionale. <strong style="color:#fff;">Prima capisci se fa per te</strong>; l'investimento promo lo vedi solo dopo, in fondo pagina.</p>
         <div style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:12px;">
-          <a href="#form" class="btn btn-gold btn-lg">Richiedi offerta 2.497€</a>
-          <a href="#programma" class="btn btn-outline btn-lg">Programma completo</a>
+          <a href="#cosa-include" class="btn btn-gold btn-lg">Scopri cosa include</a>
+          <a href="#testimonianze" class="btn btn-outline btn-lg">Vedi i risultati</a>
         </div>
-        <p class="cta-micro">Nessun pagamento ora · App con Maurizio o acconto 500€ · Promo <strong>4 giorni</strong></p>
+        <p class="cta-micro">Nessun pagamento ora · Promo <strong>4 giorni</strong> · Prezzo riservato in fondo pagina</p>
         <ul class="check-list" style="max-width:520px;margin-top:24px;">
           <li><span class="ico ico-yes">✓</span>68 video-lezioni on demand (~20 min) + quiz e chat H24</li>
           <li><span class="ico ico-yes">✓</span>12 webinar Zoom (lunedì 21:00–23:00) + 4 giorni dal vivo (40 h)</li>
@@ -423,7 +427,7 @@ body.has-sticky-cta{padding-bottom:80px;}
         <div class="testi-role">Farmacista</div>
       </div>
     </div>
-    <p style="text-align:center;margin-top:32px;"><a href="#form" class="btn btn-gold btn-lg">Richiedi offerta 2.497€</a></p>
+    <p style="text-align:center;margin-top:32px;"><a href="#cosa-include" class="btn btn-gold btn-lg">Continua — scopri il percorso</a></p>
   </div>
 </section>
 
@@ -792,7 +796,7 @@ body.has-sticky-cta{padding-bottom:80px;}
         </div>
       </div>
     </div>
-    <p style="text-align:center;margin-top:40px;"><a href="#form" class="btn btn-gold btn-lg">Richiedi offerta 2.497€</a></p>
+    <p style="text-align:center;margin-top:40px;"><a href="#offerta" class="btn btn-gold btn-lg">Scopri l'offerta promo</a></p>
   </div>
 </section>
 
@@ -833,8 +837,12 @@ body.has-sticky-cta{padding-bottom:80px;}
   </div>
 </section>
 
-<section class="decision-section bg-navy" id="decision">
+<section class="decision-section bg-navy" id="offerta">
   <div class="container">
+    <div class="offerta-reveal">
+      <p class="offerta-reveal-label">Ecco l'offerta riservata</p>
+      <p class="offerta-reveal-sub">Promo Campagna Estate — <strong style="color:#fff;">−50%</strong> sul Master Eureka completo. Hai letto cosa include e per chi è: adesso vedi l'investimento.</p>
+    </div>
     <div class="section-head">
       <div class="section-label" style="color:var(--teal);">Campagna Estate — il tuo investimento</div>
       <h2 class="section-title" style="color:#fff;">2.497€ una volta — o <em style="color:var(--gold);">27.500€ l'anno</em> per non studiare</h2>
@@ -1209,17 +1217,17 @@ body.has-sticky-cta{padding-bottom:80px;}
 <div class="sticky-cta" id="sticky-cta" aria-hidden="true">
   <div class="sticky-cta-inner">
     <div>
-      <div class="sticky-cta-price"><small>4.997€</small>2.497€</div>
+      <div class="sticky-cta-headline" id="sticky-headline">Promo −50% · scopri l'investimento</div>
+      <div class="sticky-cta-price" id="sticky-price" hidden><small>4.997€</small>2.497€</div>
       <div class="sticky-cta-text">Campagna Estate · 4 giorni · fino al <span id="promo-deadline-3">—</span></div>
       <div class="sticky-countdown">Termina tra <span id="cd-days-sticky">—</span>g <span id="cd-hours-sticky">—</span>h <span id="cd-min-sticky">—</span>m</div>
     </div>
-    <a href="#form" class="btn btn-gold">Blocca 2.497€</a>
+    <a href="#offerta" class="btn btn-gold" id="sticky-btn">Scopri l'offerta</a>
   </div>
 </div>
 
 <div id="footer-placeholder"></div>
 <script src="/whatsapp-widget.js"></script>
-<script src="/components/nav-loader.js"></script>
 <script src="/components/footer-loader.js"></script>
 <script>
 function animateCounters(){
@@ -1363,10 +1371,28 @@ updateCountdown();
 setInterval(updateCountdown,1000);
 
 const stickyCta=document.getElementById('sticky-cta');
-const formSections=document.querySelectorAll('#form,#form-mid,#decision');
+const stickyBtn=document.getElementById('sticky-btn');
+const stickyHeadline=document.getElementById('sticky-headline');
+const stickyPrice=document.getElementById('sticky-price');
+const offertaSection=document.getElementById('offerta');
+const formSections=document.querySelectorAll('#form,#form-mid,#offerta');
 if(stickyCta){
   document.body.classList.add('has-sticky-cta');
   let stickyVisible=false;
+  let priceRevealed=false;
+  const revealStickyPrice=()=>{
+    if(priceRevealed||!stickyHeadline||!stickyPrice||!stickyBtn)return;
+    priceRevealed=true;
+    stickyHeadline.hidden=true;
+    stickyPrice.hidden=false;
+    stickyBtn.textContent='Blocca 2.497€';
+    stickyBtn.setAttribute('href','#form');
+  };
+  if(offertaSection){
+    new IntersectionObserver((entries)=>{
+      if(entries.some(e=>e.isIntersecting))revealStickyPrice();
+    },{threshold:0.12}).observe(offertaSection);
+  }
   const formObserver=new IntersectionObserver((entries)=>{
     const formInView=entries.some(e=>e.isIntersecting);
     if(formInView&&stickyVisible){stickyCta.classList.remove('show');stickyVisible=false;}
