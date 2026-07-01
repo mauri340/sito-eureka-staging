@@ -252,6 +252,18 @@ body{font-family:'Inter',sans-serif;background:var(--off-white);color:var(--text
 .cost-compare-box p{font-size:13px;color:var(--muted);line-height:1.65;margin:0;}
 .cost-note{font-size:12px;color:var(--muted-lt);text-align:center;margin-top:20px;line-height:1.65;}
 
+.obiezioni-wrap{max-width:720px;margin:0 auto 40px;}
+.obiezioni-wrap .accordion-item{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12);}
+.obiezioni-wrap .accordion-header{color:#fff;}
+.obiezioni-wrap .accordion-header:hover{background:rgba(255,255,255,.06);}
+.obiezioni-wrap .accordion-body{color:rgba(255,255,255,.7);}
+.conv-strip{background:var(--navy);border-radius:20px;padding:36px 32px;text-align:center;color:#fff;margin-top:48px;}
+.conv-strip p{font-size:15px;color:rgba(255,255,255,.75);line-height:1.7;margin-bottom:20px;max-width:560px;margin-left:auto;margin-right:auto;}
+.section-tight{padding:64px 0;}
+.programma-note{font-size:13px;color:var(--muted);text-align:center;margin:-32px auto 40px;max-width:560px;line-height:1.65;}
+.final-cta{text-align:center;padding:48px 0 80px;}
+.final-cta .btn-gold{font-size:16px;padding:18px 40px;}
+
 .included-phase{margin-bottom:48px;}
 .included-phase:last-child{margin-bottom:0;}
 .phase-title{font-family:'Playfair Display',serif;font-size:1.35rem;color:var(--navy);margin-bottom:8px;}
@@ -330,10 +342,10 @@ body.has-sticky-cta{padding-bottom:80px;}
         <h1 class="page-hero-title">Studi sul tuo materiale.<br><em>Ricordi. Passi.</em></h1>
         <p class="page-hero-sub">Memoria, mappe e sintesi su manuali e dispense — anatomia, diritto, economia, qualsiasi materia. Il Master Eureka completo: online, webinar e 40 ore in aula. Promo riservata a chi ci segue da tempo.</p>
         <div style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:12px;">
-          <a href="#utilita" class="btn btn-gold btn-lg">Cosa puoi fare</a>
-          <a href="#programma" class="btn btn-outline btn-lg">Vedi il programma</a>
+          <a href="#form" class="btn btn-gold btn-lg">Richiedi offerta 2.497€</a>
+          <a href="#programma" class="btn btn-outline btn-lg">Programma completo</a>
         </div>
-        <p class="cta-micro">Campagna Estate · Promo <strong>4 giorni</strong> · Nessun pagamento compilando il form</p>
+        <p class="cta-micro">Nessun pagamento ora · App con Maurizio o acconto 500€ · Promo <strong>4 giorni</strong></p>
         <ul class="check-list" style="max-width:520px;margin-top:24px;">
           <li><span class="ico ico-yes">✓</span>68 video-lezioni on demand (~20 min) + quiz e chat H24</li>
           <li><span class="ico ico-yes">✓</span>12 webinar Zoom (lunedì 21:00–23:00) + 4 giorni dal vivo (40 h)</li>
@@ -359,7 +371,44 @@ body.has-sticky-cta{padding-bottom:80px;}
   </div>
 </section>
 
-<section class="section bg-off" style="padding-top:72px;padding-bottom:72px;" id="problema">
+<section class="section bg-white section-tight" id="testimonianze">
+  <div class="container">
+    <div class="section-head" style="margin-bottom:40px;">
+      <div class="section-label">Testimonianze</div>
+      <h2 class="section-title">Risultati <em>concreti</em></h2>
+      <p class="section-sub">Notai, avvocati, imprenditori, farmacisti — professionisti e studenti che hanno applicato il metodo sul loro materiale.</p>
+    </div>
+    <div class="grid-2">
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">Ho sintetizzato oltre 14.000 pagine con le tecniche, 80 mappe in sei mesi — e sono diventata notaio.</p>
+        <div class="testi-name">Francesca Riboldi</div>
+        <div class="testi-role">Notaio</div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">Dopo il Master ho superato 5 esami in una sessione, di cui uno preparato in sole 8 ore.</p>
+        <div class="testi-name">Eva Vigato</div>
+        <div class="testi-role">Avvocato penalista</div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">Il ritorno sull'investimento è stato rapidissimo: più efficienza, meno ore perse a rileggere senza ricordare.</p>
+        <div class="testi-name">Marco Cavazzoni</div>
+        <div class="testi-role">Imprenditore e veterinario</div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">Superato il concorso come 1ª classificata. Il metodo ha rimesso ordine nello studio.</p>
+        <div class="testi-name">Laura M.</div>
+        <div class="testi-role">Farmacista</div>
+      </div>
+    </div>
+    <p style="text-align:center;margin-top:32px;"><a href="#form" class="btn btn-gold btn-lg">Richiedi offerta 2.497€</a></p>
+  </div>
+</section>
+
+<section class="section bg-off section-tight" style="padding-top:72px;padding-bottom:72px;" id="problema">
   <div class="container">
     <div class="section-head">
       <div class="section-label">Il problema reale</div>
@@ -389,7 +438,7 @@ body.has-sticky-cta{padding-bottom:80px;}
   </div>
 </section>
 
-<section class="section bg-white" id="benessere">
+<section class="section bg-white section-tight" id="benessere">
   <div class="container">
     <div class="section-head">
       <div class="section-label">Benessere sul lavoro</div>
@@ -656,43 +705,155 @@ body.has-sticky-cta{padding-bottom:80px;}
         </div>
       </div>
     </div>
-    <p style="text-align:center;margin-top:40px;"><a href="#programma" class="btn btn-primary btn-lg">Vedi il programma completo</a></p>
+    <p style="text-align:center;margin-top:40px;"><a href="#form" class="btn btn-gold btn-lg">Richiedi offerta 2.497€</a></p>
   </div>
 </section>
 
-<section class="section bg-off">
+<section class="section bg-off" id="costo-ignoranza">
   <div class="container">
     <div class="section-head">
-      <div class="section-label">Testimonianze</div>
-      <h2 class="section-title">Storie di successo <em>reali</em></h2>
+      <div class="section-label">Investimento vs costo</div>
+      <h2 class="section-title">Quanto costa <em>non</em> avere un metodo?</h2>
+      <p class="section-sub">Su 50.000€ di fatturato annuo, restare senza metodo può costarti fino a <strong>27.500€ l'anno</strong> tra opportunità perse e tempo sprecato.</p>
     </div>
-    <div class="grid-2">
-      <div class="testi-card">
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-quote">Ho sintetizzato oltre 14.000 pagine con le tecniche, 80 mappe in sei mesi — e sono diventata notaio. Il Master ha trasformato il mio approccio allo studio.</p>
-        <div class="testi-name">Francesca Riboldi</div>
-        <div class="testi-role">Notaio</div>
-      </div>
-      <div class="testi-card">
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-quote">Dopo il Master ho superato 5 esami in una sessione, di cui uno preparato in sole 8 ore. Emozione e metodo fanno la differenza.</p>
-        <div class="testi-name">Eva Vigato</div>
-        <div class="testi-role">Avvocato penalista</div>
-      </div>
-      <div class="testi-card">
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-quote">Come professionista, il ritorno sull'investimento è stato rapidissimo: più efficienza, meno ore perse a rileggere senza ricordare.</p>
-        <div class="testi-name">Marco Cavazzoni</div>
-        <div class="testi-role">Imprenditore e veterinario</div>
-      </div>
-      <div class="testi-card">
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-quote">Superato il concorso come 1ª classificata e contratto a tempo indeterminato. Il metodo ha rimesso ordine nello studio.</p>
-        <div class="testi-name">Laura M.</div>
-        <div class="testi-role">Farmacista</div>
+    <div class="cost-wrap">
+      <table class="cost-table">
+        <thead>
+          <tr><th>Conseguenza</th><th>Impatto</th><th>Costo stimato</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Perdita di opportunità</td><td>Clienti, contratti, avanzamenti persi</td><td>10.000€</td></tr>
+          <tr><td>Tempo sprecato per inefficienza</td><td>Compiti che con un metodo richiederebbero meno ore</td><td>7.500€</td></tr>
+          <tr><td>Mancata competitività</td><td>Colleghi più preparati conquistano il mercato</td><td>5.000€</td></tr>
+          <tr><td>Mancanza di innovazione</td><td>Metodi e strumenti nuovi non adottati</td><td>5.000€</td></tr>
+          <tr class="cost-total"><td colspan="2">Costo totale dell'ignoranza (su 50.000€/anno)</td><td>27.500€/anno</td></tr>
+        </tbody>
+      </table>
+      <div class="cost-compare">
+        <div class="cost-compare-box negative">
+          <p style="font-weight:600;color:#991b1b;margin-bottom:4px;">Senza aggiornarti</p>
+          <div class="compare-num">27.500€</div>
+          <p>ogni anno — oltre <strong>270.000€</strong> in 10 anni</p>
+        </div>
+        <div class="cost-compare-box positive">
+          <p style="font-weight:600;color:var(--teal-dk);margin-bottom:4px;">Master Eureka (promo)</p>
+          <div class="compare-num">2.497€</div>
+          <p>una tantum · Fase 1 + Fase 2 · metodo per la carriera</p>
+        </div>
       </div>
     </div>
-    <p style="text-align:center;margin-top:32px;"><a href="#decision" class="btn btn-gold btn-lg">Scopri l'offerta Campagna Estate</a></p>
+  </div>
+</section>
+
+<section class="decision-section bg-navy" id="decision">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-label" style="color:var(--teal);">Campagna Estate — il tuo investimento</div>
+      <h2 class="section-title" style="color:#fff;">Investi 2.497€ — smetti di pagare <em style="color:var(--gold);">27.500€ l'anno</em></h2>
+      <p class="section-sub" style="color:rgba(255,255,255,.65);max-width:640px;margin:0 auto;"><strong style="color:#fff;">4 giorni per decidere</strong> — poi torna al listino 4.997€. Nessun pagamento compilando il form.</p>
+    </div>
+
+    <div class="value-stack" style="margin-bottom:40px;background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.12);">
+      <p style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--teal);margin-bottom:16px;text-align:center;">Servizi inclusi nel Master Eureka</p>
+      <div class="value-row" style="color:rgba(255,255,255,.65);border-color:rgba(255,255,255,.1);"><span>Piattaforma Wiki online (68 lezioni, 1 anno)</span><span style="color:#fff;">497€</span></div>
+      <div class="value-row" style="color:rgba(255,255,255,.65);border-color:rgba(255,255,255,.1);"><span>12 dirette Zoom (2 h ciascuna)</span><span style="color:#fff;">997€</span></div>
+      <div class="value-row" style="color:rgba(255,255,255,.65);border-color:rgba(255,255,255,.1);"><span>Corso dal vivo 4 giorni — 40 ore</span><span style="color:#fff;">1.497€</span></div>
+      <div class="value-row" style="color:rgba(255,255,255,.65);border-color:rgba(255,255,255,.1);"><span>Life Emotion — 5 giorni in presenza</span><span style="color:#fff;">2.497€</span></div>
+      <div class="value-row" style="color:rgba(255,255,255,.65);border-color:rgba(255,255,255,.1);"><span>Gestione del tempo — diretta Zoom (6 h)</span><span style="color:#fff;">500€</span></div>
+      <div class="value-row" style="color:rgba(255,255,255,.65);border-color:rgba(255,255,255,.1);"><span>Lingue straniere — diretta Zoom (6 h)</span><span style="color:#fff;">500€</span></div>
+      <div class="value-row" style="color:rgba(255,255,255,.65);border-color:rgba(255,255,255,.1);"><span>Tecniche del colloquio — diretta Zoom (6 h)</span><span style="color:#fff;">500€</span></div>
+      <div class="value-total" style="color:#fff;border-color:var(--gold);"><span>Valore complessivo del percorso</span><span>6.988€</span></div>
+      <div class="value-bundle" style="color:rgba(255,255,255,.65);"><span>Prezzo percorso Master</span><span style="color:#fff;">4.997€</span></div>
+      <div class="value-promo"><span>Promo riservata</span><span>2.497€</span></div>
+    </div>
+
+    <div class="decision-grid">
+      <div class="decision-checklist">
+        <h3>Tutto incluso nell'offerta</h3>
+        <div class="compact-grid">
+          <div class="compact-item"><span class="ck">✓</span>68 video-lezioni</div>
+          <div class="compact-item"><span class="ck">✓</span>12 webinar live</div>
+          <div class="compact-item"><span class="ck">✓</span>40 h dal vivo (4 gg)</div>
+          <div class="compact-item"><span class="ck">✓</span>Diploma</div>
+          <div class="compact-item"><span class="ck">✓</span>Life Emotion (5 gg)</div>
+          <div class="compact-item"><span class="ck">✓</span>3 moduli Fase 2</div>
+        </div>
+        <div class="compact-badges">
+          <span class="compact-badge">💬 Chat H24</span>
+          <span class="compact-badge">📅 1 anno accesso</span>
+          <span class="compact-badge">🎓 Diploma</span>
+        </div>
+      </div>
+      <div class="decision-price-box">
+        <div class="price-old">Listino 4.997€</div>
+        <div class="price-new">2.497<span style="font-size:.45em;vertical-align:super;">€</span></div>
+        <div class="price-save">Risparmi 2.500€ · −50%</div>
+        <p class="price-note" style="margin-top:12px;">≈ 208€/mese · 1 anno piattaforma + dal vivo + Fase 2</p>
+        <div class="decision-countdown">
+          <div class="hero-countdown-title">L'offerta scade tra</div>
+          <div class="promo-countdown" aria-live="polite">
+            <div class="promo-countdown-unit"><span class="promo-countdown-num" id="cd-days-dec">—</span><span class="promo-countdown-lbl">Giorni</span></div>
+            <div class="promo-countdown-unit"><span class="promo-countdown-num" id="cd-hours-dec">—</span><span class="promo-countdown-lbl">Ore</span></div>
+            <div class="promo-countdown-unit"><span class="promo-countdown-num" id="cd-min-dec">—</span><span class="promo-countdown-lbl">Min</span></div>
+            <div class="promo-countdown-unit"><span class="promo-countdown-num" id="cd-sec-dec">—</span><span class="promo-countdown-lbl">Sec</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="obiezioni-wrap" id="obiezioni">
+      <p style="text-align:center;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--teal);margin-bottom:20px;">Prima di decidere — le obiezioni più comuni</p>
+      <div class="accordion-item">
+        <div class="accordion-header">«Non ho tempo» <span class="accordion-arrow">▼</span></div>
+        <div class="accordion-body">Non è questione di tempo, ma di priorità. Piattaforma flessibile, webinar serali, dal vivo in un weekend. Con 1 ora al giorno risparmiata recuperi <strong>300+ ore l'anno</strong>.</div>
+      </div>
+      <div class="accordion-item">
+        <div class="accordion-header">«Non ne vale la pena / ho già un titolo» <span class="accordion-arrow">▼</span></div>
+        <div class="accordion-body">Leggi e mercato cambiano ogni giorno. Fermarsi dopo il titolo equivale a perdere terreno. Applichi mappe e memoria sul tuo materiale fin da subito.</div>
+      </div>
+      <div class="accordion-item">
+        <div class="accordion-header">«Costa troppo» <span class="accordion-arrow">▼</span></div>
+        <div class="accordion-body">2.497€ in promo vs 27.500€ l'anno senza metodo. Rate con Maurizio · acconto 500€ per bloccare il prezzo.</div>
+      </div>
+      <div class="accordion-item">
+        <div class="accordion-header">«Ho poco tempo per seguire un corso» <span class="accordion-arrow">▼</span></div>
+        <div class="accordion-body">30 minuti al giorno + webinar del lunedì + un weekend dal vivo. Parti subito online — non aspetti il dal vivo.</div>
+      </div>
+      <div class="accordion-item">
+        <div class="accordion-header">«Cosa succede dopo il form?» <span class="accordion-arrow">▼</span></div>
+        <div class="accordion-body">Nessun pagamento ora. App con Maurizio (domande e rate) oppure acconto 500€. Saldo 1.997€ concordato con il team pagamenti.</div>
+      </div>
+    </div>
+
+    <div class="form-wrap" id="form" style="max-width:720px;">
+      <div class="section-head" style="margin-bottom:32px;">
+        <h2 class="section-title" style="font-size:1.6rem;color:#fff;">Blocca il posto a 2.497€</h2>
+        <p class="section-sub" style="color:rgba(255,255,255,.65);">Compila in 30 secondi. Ti ricontattiamo — nessun addebito automatico.</p>
+      </div>
+      <form class="promo-form" id="promo-form" novalidate>
+        <div class="form-row">
+          <div class="form-group"><label for="nome">Nome *</label><input type="text" id="nome" name="nome" autocomplete="given-name" required></div>
+          <div class="form-group"><label for="cognome">Cognome *</label><input type="text" id="cognome" name="cognome" autocomplete="family-name" required></div>
+        </div>
+        <div class="form-group"><label for="email">Email *</label><input type="email" id="email" name="email" autocomplete="email" required></div>
+        <div class="form-group"><label for="telefono">Telefono *</label><input type="tel" id="telefono" name="telefono" autocomplete="tel" placeholder="+39 ..." required></div>
+        <div class="hp-field" aria-hidden="true"><label for="hp_promo">Non compilare</label><input type="text" id="hp_promo" name="hp_promo" tabindex="-1" autocomplete="off"></div>
+        <label class="form-checkbox">
+          <input type="checkbox" id="consent" class="consent-check" required>
+          <span>Acconsento al trattamento dei dati per ricevere informazioni sull'offerta Master Eureka e per essere ricontattato/a. Ho letto l'<a href="https://www.iubenda.com/privacy-policy/89530968" target="_blank" rel="noopener">informativa privacy</a>.</span>
+        </label>
+        <div style="margin-top:28px;">
+          <button type="submit" class="btn-submit" id="submit-btn">Blocca il posto a 2.497€</button>
+        </div>
+        <div class="form-error" id="form-error"></div>
+        <div class="trust-bar">
+          <a href="tel:+390240702168">📞 02 4070 2168</a>
+          <a href="mailto:pagamenti@apprendimentorapido.it">✉ pagamenti@apprendimentorapido.it</a>
+          <a href="https://wa.me/390240702168?text=Ciao%2C%20vorrei%20informazioni%20sul%20Master%20Eureka%20a%202.497%E2%82%AC" target="_blank" rel="noopener">WhatsApp</a>
+        </div>
+        <p class="cta-micro-form">Nessun pagamento ora · Promo <strong>4 giorni</strong> (fino al <span id="promo-deadline-2">—</span>) · Promo riservata a chi ci conosce</p>
+      </form>
+    </div>
   </div>
 </section>
 
@@ -703,6 +864,7 @@ body.has-sticky-cta{padding-bottom:80px;}
       <h2 class="section-title">Come è fatto il <em>Master Eureka</em></h2>
       <p class="section-sub">Tre modalità che lavorano insieme: piattaforma on demand, 12 webinar serali e un weekend intensivo in aula. Poi la Fase 2 per tempo, lingue, colloqui e Life Emotion.</p>
     </div>
+    <p class="programma-note">Dettaglio per chi vuole approfondire — se sei pronto, <a href="#form" style="color:var(--teal-dk);font-weight:600;">richiedi l'offerta qui</a>.</p>
 
     <div class="grid-2" style="gap:48px;align-items:center;margin-bottom:64px;">
       <div>
@@ -891,7 +1053,7 @@ body.has-sticky-cta{padding-bottom:80px;}
       </div>
     </div>
 
-    <p style="text-align:center;margin-top:48px;"><a href="#decision" class="btn btn-gold btn-lg">Vedi prezzo e offerta Campagna Estate</a></p>
+    <p style="text-align:center;margin-top:48px;"><a href="#form" class="btn btn-gold btn-lg">Torna all'offerta 2.497€</a></p>
   </div>
 </section>
 
@@ -919,172 +1081,39 @@ body.has-sticky-cta{padding-bottom:80px;}
         </div>
       </div>
     </div>
-  </div>
-</section>
-
-<section class="section bg-off" id="costo-ignoranza">
-  <div class="container">
-    <div class="section-head">
-      <div class="section-label">Investimento vs costo</div>
-      <h2 class="section-title">Quanto costa <em>non</em> avere un metodo?</h2>
-      <p class="section-sub">Un professionista che fattura circa 50.000€ l'anno, senza aggiornare competenze e efficienza, può perdere fino al 55% del fatturato in opportunità mancate e tempo sprecato. Modello di riflessione usato in aula con migliaia di professionisti.</p>
-    </div>
-    <div class="cost-wrap">
-      <table class="cost-table">
-        <thead>
-          <tr><th>Conseguenza</th><th>Impatto</th><th>Costo stimato</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Perdita di opportunità</td><td>Clienti, contratti, avanzamenti persi</td><td>10.000€</td></tr>
-          <tr><td>Tempo sprecato per inefficienza</td><td>Compiti che con un metodo richiederebbero meno ore</td><td>7.500€</td></tr>
-          <tr><td>Mancata competitività</td><td>Colleghi più preparati conquistano il mercato</td><td>5.000€</td></tr>
-          <tr><td>Mancanza di innovazione</td><td>Metodi e strumenti nuovi non adottati</td><td>5.000€</td></tr>
-          <tr class="cost-total"><td colspan="2">Costo totale dell'ignoranza (su 50.000€/anno)</td><td>27.500€/anno</td></tr>
-        </tbody>
-      </table>
-      <div class="cost-compare">
-        <div class="cost-compare-box negative">
-          <p style="font-weight:600;color:#991b1b;margin-bottom:4px;">Senza aggiornarti</p>
-          <div class="compare-num">27.500€</div>
-          <p>ogni anno — oltre <strong>270.000€</strong> in 10 anni che resti fermo</p>
-        </div>
-        <div class="cost-compare-box positive">
-          <p style="font-weight:600;color:var(--teal-dk);margin-bottom:4px;">Master Eureka (promo)</p>
-          <div class="compare-num">2.497€</div>
-          <p>investimento una tantum · metodo per tutta la carriera · Fase 1 + Fase 2</p>
-        </div>
-      </div>
-      <p class="cost-note">La formazione non è una spesa: è ciò che separa chi paga l'ignoranza ogni anno da chi investe una volta e accelera per sempre. Bill Gates, Buffett, Musk — non smettono mai di studiare.</p>
-      <p style="text-align:center;margin-top:28px;"><a href="#decision" class="btn btn-gold btn-lg">Blocca l'offerta a 2.497€</a></p>
+    <div class="conv-strip" style="margin-top:40px;">
+      <p>Promo <strong>4 giorni</strong> · 2.497€ invece di 4.997€ · Nessun pagamento ora</p>
+      <a href="#form" class="btn btn-gold btn-lg">Blocca il posto a 2.497€</a>
     </div>
   </div>
 </section>
 
-<section class="decision-section bg-navy" id="decision">
-  <div class="container">
-    <div class="section-head">
-      <div class="section-label" style="color:var(--teal);">Campagna Estate — il tuo investimento</div>
-      <h2 class="section-title" style="color:#fff;">Investi 2.497€ — smetti di pagare <em style="color:var(--gold);">27.500€ l'anno</em></h2>
-      <p class="section-sub" style="color:rgba(255,255,255,.65);max-width:640px;margin:0 auto;">Il valore del percorso completo, poi la promo riservata. <strong style="color:#fff;">4 giorni per decidere</strong> — poi torna al listino 4.997€.</p>
-    </div>
-
-    <div class="value-stack" style="margin-bottom:40px;background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.12);">
-      <p style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--teal);margin-bottom:16px;text-align:center;">Servizi inclusi nel Master Eureka</p>
-      <div class="value-row" style="color:rgba(255,255,255,.65);border-color:rgba(255,255,255,.1);"><span>Piattaforma Wiki online (68 lezioni, 1 anno)</span><span style="color:#fff;">497€</span></div>
-      <div class="value-row" style="color:rgba(255,255,255,.65);border-color:rgba(255,255,255,.1);"><span>12 dirette Zoom (2 h ciascuna)</span><span style="color:#fff;">997€</span></div>
-      <div class="value-row" style="color:rgba(255,255,255,.65);border-color:rgba(255,255,255,.1);"><span>Corso dal vivo 4 giorni — 40 ore</span><span style="color:#fff;">1.497€</span></div>
-      <div class="value-row" style="color:rgba(255,255,255,.65);border-color:rgba(255,255,255,.1);"><span>Life Emotion — 5 giorni in presenza</span><span style="color:#fff;">2.497€</span></div>
-      <div class="value-row" style="color:rgba(255,255,255,.65);border-color:rgba(255,255,255,.1);"><span>Gestione del tempo — diretta Zoom (6 h)</span><span style="color:#fff;">500€</span></div>
-      <div class="value-row" style="color:rgba(255,255,255,.65);border-color:rgba(255,255,255,.1);"><span>Lingue straniere — diretta Zoom (6 h)</span><span style="color:#fff;">500€</span></div>
-      <div class="value-row" style="color:rgba(255,255,255,.65);border-color:rgba(255,255,255,.1);"><span>Tecniche del colloquio — diretta Zoom (6 h)</span><span style="color:#fff;">500€</span></div>
-      <div class="value-total" style="color:#fff;border-color:var(--gold);"><span>Valore complessivo del percorso</span><span>6.988€</span></div>
-      <div class="value-bundle" style="color:rgba(255,255,255,.65);"><span>Prezzo percorso Master</span><span style="color:#fff;">4.997€</span></div>
-      <div class="value-promo"><span>Promo riservata</span><span>2.497€</span></div>
-    </div>
-
-    <div class="decision-grid">
-      <div class="decision-checklist">
-        <h3>Tutto incluso nell'offerta</h3>
-        <div class="compact-grid">
-          <div class="compact-item"><span class="ck">✓</span>68 video-lezioni</div>
-          <div class="compact-item"><span class="ck">✓</span>12 webinar live</div>
-          <div class="compact-item"><span class="ck">✓</span>40 h dal vivo (4 gg)</div>
-          <div class="compact-item"><span class="ck">✓</span>Diploma</div>
-          <div class="compact-item"><span class="ck">✓</span>Life Emotion (5 gg)</div>
-          <div class="compact-item"><span class="ck">✓</span>3 moduli Fase 2</div>
-        </div>
-        <div class="compact-badges">
-          <span class="compact-badge">💬 Chat H24</span>
-          <span class="compact-badge">📅 1 anno accesso</span>
-          <span class="compact-badge">🎓 Diploma</span>
-        </div>
-      </div>
-      <div class="decision-price-box">
-        <div class="price-old">Listino 4.997€</div>
-        <div class="price-new">2.497<span style="font-size:.45em;vertical-align:super;">€</span></div>
-        <div class="price-save">Risparmi 2.500€ · −50%</div>
-        <p class="price-note" style="margin-top:12px;">≈ 208€/mese · 1 anno piattaforma + dal vivo + Fase 2</p>
-        <div class="decision-countdown">
-          <div class="hero-countdown-title">L'offerta scade tra</div>
-          <div class="promo-countdown" aria-live="polite">
-            <div class="promo-countdown-unit"><span class="promo-countdown-num" id="cd-days-dec">—</span><span class="promo-countdown-lbl">Giorni</span></div>
-            <div class="promo-countdown-unit"><span class="promo-countdown-num" id="cd-hours-dec">—</span><span class="promo-countdown-lbl">Ore</span></div>
-            <div class="promo-countdown-unit"><span class="promo-countdown-num" id="cd-min-dec">—</span><span class="promo-countdown-lbl">Min</span></div>
-            <div class="promo-countdown-unit"><span class="promo-countdown-num" id="cd-sec-dec">—</span><span class="promo-countdown-lbl">Sec</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="form-wrap" id="form" style="max-width:720px;">
-      <div class="section-head" style="margin-bottom:32px;">
-        <h2 class="section-title" style="font-size:1.6rem;color:#fff;">Richiedi l'offerta a 2.497€</h2>
-        <p class="section-sub" style="color:rgba(255,255,255,.65);">Nessun pagamento ora. Dopo invio: <strong style="color:#fff;">app con Maurizio</strong> (rate e domande) oppure <strong style="color:#fff;">acconto 500€</strong> per bloccare il prezzo.</p>
-      </div>
-      <form class="promo-form" id="promo-form" novalidate>
-        <div class="form-row">
-          <div class="form-group"><label for="nome">Nome *</label><input type="text" id="nome" name="nome" autocomplete="given-name" required></div>
-          <div class="form-group"><label for="cognome">Cognome *</label><input type="text" id="cognome" name="cognome" autocomplete="family-name" required></div>
-        </div>
-        <div class="form-group"><label for="email">Email *</label><input type="email" id="email" name="email" autocomplete="email" required></div>
-        <div class="form-group"><label for="telefono">Telefono *</label><input type="tel" id="telefono" name="telefono" autocomplete="tel" placeholder="+39 ..." required></div>
-        <div class="hp-field" aria-hidden="true"><label for="hp_promo">Non compilare</label><input type="text" id="hp_promo" name="hp_promo" tabindex="-1" autocomplete="off"></div>
-        <label class="form-checkbox">
-          <input type="checkbox" id="consent" class="consent-check" required>
-          <span>Acconsento al trattamento dei dati per ricevere informazioni sull'offerta Master Eureka e per essere ricontattato/a. Ho letto l'<a href="https://www.iubenda.com/privacy-policy/89530968" target="_blank" rel="noopener">informativa privacy</a>.</span>
-        </label>
-        <div style="margin-top:28px;">
-          <button type="submit" class="btn-submit" id="submit-btn">Blocca il posto a 2.497€</button>
-        </div>
-        <div class="form-error" id="form-error"></div>
-        <div class="trust-bar">
-          <a href="tel:+390240702168">📞 02 4070 2168</a>
-          <a href="mailto:pagamenti@apprendimentorapido.it">✉ pagamenti@apprendimentorapido.it</a>
-          <a href="https://wa.me/390240702168?text=Ciao%2C%20vorrei%20informazioni%20sul%20Master%20Eureka%20a%202.497%E2%82%AC" target="_blank" rel="noopener">WhatsApp</a>
-        </div>
-        <p class="cta-micro-form">Nessun pagamento ora · Dopo invio: app o acconto 500€ · Promo <strong>4 giorni</strong> (fino al <span id="promo-deadline-2">—</span>) · Promo riservata a chi ci conosce già</p>
-      </form>
-    </div>
-  </div>
-</section>
-
-<section class="section bg-white" id="faq">
+<section class="section bg-white section-tight" id="faq">
   <div class="container" style="max-width:760px;">
     <div class="section-head" style="margin-bottom:40px;">
       <div class="section-label">FAQ</div>
-      <h2 class="section-title">Domande frequenti</h2>
+      <h2 class="section-title">Dettagli sul <em>percorso</em></h2>
+      <p class="section-sub">Per dubbi su tempo, costo e pagamento vedi la sezione <a href="#obiezioni" style="color:var(--teal-dk);font-weight:600;">obiezioni comuni</a> sopra il form.</p>
     </div>
     <div class="accordion-item">
-      <div class="accordion-header">Come si struttura il corso? È online o in presenza? <span class="accordion-arrow">▼</span></div>
-      <div class="accordion-body">Il Master Eureka offre una modalità ibrida: potrai accedere a lezioni registrate per lo studio autonomo, partecipare a sessioni interattive in diretta, e, per un'esperienza più immersiva, frequentare lezioni in presenza presso le nostre sedi. In questo modo, hai la flessibilità di scegliere la modalità che meglio si adatta alle tue esigenze.</div>
+      <div class="accordion-header">Come si struttura il corso? <span class="accordion-arrow">▼</span></div>
+      <div class="accordion-body">Modalità ibrida: 68 video-lezioni on demand (1 anno), 12 webinar Zoom serali, weekend dal vivo 40 ore (Roma/Milano) e Fase 2 con Life Emotion + 3 moduli Zoom. Parti subito online — concordi il dal vivo dopo l'iscrizione.</div>
     </div>
     <div class="accordion-item">
-      <div class="accordion-header">Posso iscrivermi e ottenere risultati anche se ho poco tempo a disposizione? <span class="accordion-arrow">▼</span></div>
-      <div class="accordion-body">Assolutamente! Il Master Eureka è progettato per adattarsi a chi ha poco tempo. La flessibilità del corso ti permette di organizzare lo studio secondo le tue esigenze, così da ottenere risultati senza stravolgere la tua routine.</div>
-    </div>
-    <div class="accordion-item">
-      <div class="accordion-header">Il Master Eureka è adatto anche agli studenti? <span class="accordion-arrow">▼</span></div>
-      <div class="accordion-body">Sì, il Master Eureka è ideale per studenti a partire dagli 8 anni. Le tecniche di apprendimento rapido sono perfette per chi deve prepararsi agli esami o affrontare volumi elevati di studio in tempi brevi. La Fase 2 del corso, focalizzata sulla crescita personale, è consigliata a partire dai 16 anni.</div>
-    </div>
-    <div class="accordion-item">
-      <div class="accordion-header">Quanto tempo dovrò dedicare al percorso? <span class="accordion-arrow">▼</span></div>
-      <div class="accordion-body">Il Master Eureka è flessibile e può essere seguito secondo i tuoi ritmi. Tuttavia, per ottenere risultati concreti, è consigliato un impegno costante. Suggeriamo di iniziare dedicando almeno 30 minuti al giorno per praticare le tecniche apprese, più i webinar del lunedì sera e il weekend dal vivo quando lo fissi.</div>
+      <div class="accordion-header">Per chi è il Master Eureka? <span class="accordion-arrow">▼</span></div>
+      <div class="accordion-body">Professionisti, universitari, concorsisti e chi studia da adulto con lavoro e famiglia. Ideale se devi memorizzare volumi elevati — esami, concorsi, aggiornamento professionale. Fase 2 (Life Emotion) consigliata dai 16 anni.</div>
     </div>
     <div class="accordion-item">
       <div class="accordion-header">Sarò seguito/a durante il percorso? <span class="accordion-arrow">▼</span></div>
-      <div class="accordion-body">Durante tutto il percorso avrai supporto dedicato: docenti in webinar e in aula, chat assistenza H24 sulla piattaforma e materiali extra per applicare correttamente le tecniche e superare eventuali ostacoli.</div>
+      <div class="accordion-body">Docenti in webinar e in aula, chat H24 sulla piattaforma, materiali per applicare le tecniche. Classi dal vivo sotto le 25 persone.</div>
     </div>
     <div class="accordion-item">
-      <div class="accordion-header">Posso applicare subito ciò che imparo nel Master Eureka? <span class="accordion-arrow">▼</span></div>
-      <div class="accordion-body">Sì, già dai primi moduli avrai a disposizione strumenti pratici che potrai immediatamente mettere in pratica nella tua vita quotidiana e professionale. Il corso è pensato per offrire risultati concreti fin da subito, grazie all'approccio altamente operativo.</div>
+      <div class="accordion-header">Quando e dove si terrà il dal vivo? <span class="accordion-arrow">▼</span></div>
+      <div class="accordion-body">Ogni mese a <strong>Roma</strong> o <strong>Milano</strong>. Dopo l'iscrizione: calendario + contatto entro 48 ore per la data più adatta. Intanto piattaforma e webinar attivi da subito.</div>
     </div>
-    <div class="accordion-item">
-      <div class="accordion-header">Cosa succede dopo aver compilato il form? <span class="accordion-arrow">▼</span></div>
-      <div class="accordion-body">Dopo il form accedi alla pagina di conferma. Scegli: <strong>app con Maurizio</strong> (domande, rate) oppure <strong>acconto 500€</strong> (carta o bonifico) per bloccare 2.497€. Il saldo di 1.997€ lo concordi con il team pagamenti. Riceverai via email le istruzioni per completare l'iscrizione e accedere al Master Eureka.</div>
-    </div>
-    <div class="accordion-item">
-      <div class="accordion-header">Quando e dove si terranno i corsi dal vivo? <span class="accordion-arrow">▼</span></div>
-      <div class="accordion-body"><strong>Sedi e frequenza:</strong> I nostri corsi dal vivo si tengono ogni mese in diverse città, principalmente a Roma o Milano.<br><br><strong>Accesso al calendario completo:</strong> Non appena avrai completato l'iscrizione, avrai accesso immediato al calendario completo con tutte le date disponibili nell'arco dell'anno 2026, permettendoti di pianificare con anticipo.<br><br><strong>Pianificazione personalizzata:</strong> Entro 48 ore dalla tua iscrizione, sarai contattato personalmente dal nostro team. Insieme, potrete scegliere e concordare la data e la sede del corso dal vivo più funzionale e comoda per le tue esigenze.<br><br><strong>Inizia subito online:</strong> Nel frattempo, e in attesa della data del corso dal vivo, potrai usufruire immediatamente di tutti i nostri contenuti e servizi online per iniziare subito il tuo percorso formativo e ottenere i primi risultati senza attese.</div>
+    <div class="final-cta">
+      <p style="color:var(--muted);margin-bottom:20px;font-size:15px;">Promo riservata · Scade tra pochi giorni</p>
+      <a href="#form" class="btn btn-gold btn-lg">Blocca il posto a 2.497€</a>
     </div>
   </div>
 </section>
@@ -1096,7 +1125,7 @@ body.has-sticky-cta{padding-bottom:80px;}
       <div class="sticky-cta-text">Campagna Estate · 4 giorni · fino al <span id="promo-deadline-3">—</span></div>
       <div class="sticky-countdown">Termina tra <span id="cd-days-sticky">—</span>g <span id="cd-hours-sticky">—</span>h <span id="cd-min-sticky">—</span>m</div>
     </div>
-    <a href="#decision" class="btn btn-gold">Blocca il posto</a>
+    <a href="#form" class="btn btn-gold">Blocca 2.497€</a>
   </div>
 </div>
 
