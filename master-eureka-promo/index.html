@@ -142,7 +142,7 @@ body{font-family:'Inter',sans-serif;background:var(--off-white);color:var(--text
 .form-offer-countdown .promo-countdown-unit{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);}
 .form-offer-countdown .promo-countdown-num{color:#f5d78e;}
 .form-offer-countdown .promo-countdown-lbl{color:rgba(255,255,255,.5);}
-.form-wrap .promo-steps{margin:28px 0 0;padding-top:24px;border-top:1px dashed var(--light2);background:var(--light);}
+.form-wrap .promo-steps{margin:0 0 28px;padding:22px 24px 20px;border-radius:16px;background:var(--light);border:1px solid var(--light2);}
 .form-wrap .form-ps{margin-top:24px;max-width:none;}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
 .form-group{margin-bottom:20px;}
@@ -1090,6 +1090,39 @@ body.has-sticky-cta{padding-bottom:80px;}
         </div>
       </div>
 
+      <div class="promo-steps" data-step="1" aria-label="Passaggi per accedere al Master Eureka in promo">
+        <p class="promo-steps-heading">Come accedere a queste condizioni</p>
+        <div class="promo-steps-track-wrap">
+          <div class="promo-steps-track" aria-hidden="true"><div class="promo-steps-progress"></div></div>
+          <ol class="promo-steps-list">
+          <li class="promo-steps-item is-active">
+            <div class="promo-steps-dot-wrap">
+              <span class="promo-steps-dot">1</span>
+              <span class="promo-steps-badge">Sei qui</span>
+            </div>
+            <strong class="promo-steps-title">Compila il form</strong>
+            <span class="promo-steps-desc">30 secondi · nessun addebito</span>
+          </li>
+          <li class="promo-steps-item is-upcoming">
+            <div class="promo-steps-dot-wrap">
+              <span class="promo-steps-dot">2</span>
+            </div>
+            <strong class="promo-steps-title">Completa la fase 2</strong>
+            <span class="promo-steps-desc">Verifica e conferma</span>
+          </li>
+          <li class="promo-steps-item is-upcoming">
+            <div class="promo-steps-dot-wrap">
+              <span class="promo-steps-dot">3</span>
+            </div>
+            <strong class="promo-steps-title">Fase 3 · Master</strong>
+            <span class="promo-steps-desc">Accedi a 2.497€</span>
+          </li>
+        </ol>
+        </div>
+        <p class="promo-steps-hint">Compila qui sotto — fase 1 di 3</p>
+        <p class="promo-steps-note">Compilare il form non addebita nulla. Pagamento e accesso alla fase 2 e 3.</p>
+      </div>
+
       <div id="bonus-today" style="margin:0 auto 28px;background:var(--gold-lt);border:1px solid var(--gold-brd);border-radius:14px;padding:18px 22px;">
         <span id="bonus-today-tag" style="display:inline-block;font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#8a6010;margin-bottom:6px;">Bonus di oggi</span>
         <div style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--navy);line-height:1.3;margin-bottom:6px;"><span id="bonus-today-emoji">🎁</span> <span id="bonus-today-title">—</span></div>
@@ -1121,39 +1154,6 @@ body.has-sticky-cta{padding-bottom:80px;}
         </div>
         <p class="cta-micro-form">Fase 1 di 3 · 30 secondi · Nessun addebito adesso · Promo fino al <span id="promo-deadline-2">—</span></p>
       </form>
-
-      <div class="promo-steps" data-step="1" aria-label="Passaggi per accedere al Master Eureka in promo">
-        <p class="promo-steps-heading">Come accedere a queste condizioni</p>
-        <div class="promo-steps-track-wrap">
-          <div class="promo-steps-track" aria-hidden="true"><div class="promo-steps-progress"></div></div>
-          <ol class="promo-steps-list">
-          <li class="promo-steps-item is-active">
-            <div class="promo-steps-dot-wrap">
-              <span class="promo-steps-dot">1</span>
-              <span class="promo-steps-badge">Sei qui</span>
-            </div>
-            <strong class="promo-steps-title">Compila il form</strong>
-            <span class="promo-steps-desc">30 secondi · nessun addebito</span>
-          </li>
-          <li class="promo-steps-item is-upcoming">
-            <div class="promo-steps-dot-wrap">
-              <span class="promo-steps-dot">2</span>
-            </div>
-            <strong class="promo-steps-title">Completa la fase 2</strong>
-            <span class="promo-steps-desc">Verifica e conferma</span>
-          </li>
-          <li class="promo-steps-item is-upcoming">
-            <div class="promo-steps-dot-wrap">
-              <span class="promo-steps-dot">3</span>
-            </div>
-            <strong class="promo-steps-title">Fase 3 · Master</strong>
-            <span class="promo-steps-desc">Accedi a 2.497€</span>
-          </li>
-        </ol>
-        </div>
-        <p class="promo-steps-hint">Dopo l'invio — fase 2 e 3</p>
-        <p class="promo-steps-note">Compilare il form non addebita nulla. Pagamento e accesso alla fase 2 e 3.</p>
-      </div>
 
       <div class="form-ps" style="margin-top:24px;">
         <p><strong>P.S.</strong> Il Master in promo costa 2.497€ — ed è giusto che lo sappia. Qui non paghi: completi la fase 1 e decidi in fase 2. Promo fino al <span class="promo-deadline-full">—</span>, poi torna a 4.997€. Francesca fece la stessa cosa con le stesse obiezioni che hai tu adesso. Oggi è notaio. E quanto l'ha pagato, non se lo ricorda già più.</p>
