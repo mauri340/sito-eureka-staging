@@ -125,7 +125,8 @@ body{font-family:'Inter',sans-serif;background:var(--off-white);color:var(--text
 .package-card.navy .package-num{color:var(--navy);}
 
 .form-wrap{max-width:820px;margin:0 auto;background:#fff;border:1px solid var(--light2);border-radius:20px;padding:48px;box-shadow:0 16px 48px rgba(13,27,42,.08);}
-.form-offer-panel{margin-bottom:28px;padding-bottom:28px;border-bottom:1px solid var(--light2);}
+.form-offer-panel{margin-bottom:28px;padding-bottom:0;border-bottom:none;}
+.form-offer-price-solo{max-width:420px;margin:0 auto;}
 .form-offer-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:stretch;}
 .form-offer-included{background:var(--light);border:1px solid var(--light2);border-radius:16px;padding:24px 22px;height:100%;}
 .form-offer-included h3{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--navy);margin-bottom:16px;}
@@ -1049,42 +1050,19 @@ body.has-sticky-cta{padding-bottom:80px;}
     </div>
 
     <div class="form-wrap" id="form">
-      <div class="section-head" style="margin-bottom:24px;">
-        <h2 class="section-title" style="font-size:1.6rem;color:var(--navy);">Richiedi accesso alla promo a 2.497€</h2>
-        <p class="section-sub" style="color:var(--muted);">Promo Campagna Estate — tutto incluso, bonus di oggi, nessun addebito in fase 1.</p>
-      </div>
-
       <div class="form-offer-panel">
-        <div class="form-offer-grid">
-          <div class="form-offer-included">
-            <h3>Tutto incluso nell'offerta</h3>
-            <div class="compact-grid">
-              <div class="compact-item"><span class="ck">✓</span>68 video-lezioni</div>
-              <div class="compact-item"><span class="ck">✓</span>12 webinar live</div>
-              <div class="compact-item"><span class="ck">✓</span>35 h dal vivo (4 gg)</div>
-              <div class="compact-item"><span class="ck">✓</span>Life Emotion (5 gg)</div>
-              <div class="compact-item"><span class="ck">✓</span>3 moduli Fase 2</div>
-            </div>
-            <div class="compact-badges">
-              <span class="compact-badge">💬 Chat H24</span>
-              <span class="compact-badge">📅 1 anno accesso</span>
-              <span class="compact-badge">🛡️ Tutor personale incluso</span>
-              <span class="compact-badge">🎓 Diploma</span>
-            </div>
-          </div>
-          <div class="form-offer-price">
-            <div class="price-old">Listino 4.997€</div>
-            <div class="price-new">2.497<span style="font-size:.45em;vertical-align:super;">€</span></div>
-            <div class="price-save">Risparmi 2.500€ · −50%</div>
-            <p class="price-note" style="margin-top:12px;">1 anno piattaforma + dal vivo + Fase 2 · una tantum</p>
-            <div class="form-offer-countdown">
-              <div class="hero-countdown-title">L'offerta scade tra</div>
-              <div class="promo-countdown" aria-live="polite">
-                <div class="promo-countdown-unit"><span class="promo-countdown-num" id="cd-days-dec">—</span><span class="promo-countdown-lbl">Giorni</span></div>
-                <div class="promo-countdown-unit"><span class="promo-countdown-num" id="cd-hours-dec">—</span><span class="promo-countdown-lbl">Ore</span></div>
-                <div class="promo-countdown-unit"><span class="promo-countdown-num" id="cd-min-dec">—</span><span class="promo-countdown-lbl">Min</span></div>
-                <div class="promo-countdown-unit"><span class="promo-countdown-num" id="cd-sec-dec">—</span><span class="promo-countdown-lbl">Sec</span></div>
-              </div>
+        <div class="form-offer-price form-offer-price-solo">
+          <div class="price-old">Listino 4.997€</div>
+          <div class="price-new">2.497<span style="font-size:.45em;vertical-align:super;">€</span></div>
+          <div class="price-save">Risparmi 2.500€ · −50%</div>
+          <p class="price-note" style="margin-top:12px;">1 anno piattaforma + dal vivo + Fase 2 · una tantum</p>
+          <div class="form-offer-countdown">
+            <div class="hero-countdown-title">L'offerta scade tra</div>
+            <div class="promo-countdown" aria-live="polite">
+              <div class="promo-countdown-unit"><span class="promo-countdown-num" id="cd-days-dec">—</span><span class="promo-countdown-lbl">Giorni</span></div>
+              <div class="promo-countdown-unit"><span class="promo-countdown-num" id="cd-hours-dec">—</span><span class="promo-countdown-lbl">Ore</span></div>
+              <div class="promo-countdown-unit"><span class="promo-countdown-num" id="cd-min-dec">—</span><span class="promo-countdown-lbl">Min</span></div>
+              <div class="promo-countdown-unit"><span class="promo-countdown-num" id="cd-sec-dec">—</span><span class="promo-countdown-lbl">Sec</span></div>
             </div>
           </div>
         </div>
