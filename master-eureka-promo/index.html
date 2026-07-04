@@ -385,6 +385,30 @@ body{font-family:'Inter',sans-serif;background:var(--off-white);color:var(--text
 .peak-quote-text{font-family:'Playfair Display',serif;font-size:1.15rem;font-style:italic;color:#fff;line-height:1.55;margin:0 0 12px;}
 .peak-quote-name{font-size:13px;color:var(--gold);font-weight:600;margin:0;}
 
+.promo-steps{max-width:640px;margin:0 auto 28px;padding:22px 24px 20px;background:var(--light);border:1px solid var(--light2);border-radius:16px;}
+.promo-steps-heading{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.6px;color:var(--teal-dk);text-align:center;margin-bottom:20px;}
+.promo-steps-track-wrap{position:relative;padding:0 4px 6px;margin-bottom:4px;}
+.promo-steps-track{position:absolute;top:17px;left:calc(16.666% + 4px);right:calc(16.666% + 4px);height:4px;background:var(--light2);border-radius:999px;overflow:hidden;z-index:0;}
+.promo-steps-progress{position:absolute;left:0;top:0;height:100%;background:linear-gradient(90deg,var(--teal),var(--gold));border-radius:999px;transition:width .45s ease;}
+.promo-steps[data-step="1"] .promo-steps-progress{width:0;}
+.promo-steps[data-step="2"] .promo-steps-progress{width:50%;}
+.promo-steps[data-step="3"] .promo-steps-progress{width:100%;}
+.promo-steps-list{list-style:none;display:flex;justify-content:space-between;gap:8px;padding:0;margin:0;position:relative;z-index:1;}
+.promo-steps-item{flex:1;text-align:center;position:relative;padding-top:0;}
+.promo-steps-dot-wrap{position:relative;display:flex;flex-direction:column;align-items:center;margin-bottom:10px;}
+.promo-steps-dot{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;font-family:'Playfair Display',serif;background:#fff;border:2px solid var(--light2);color:var(--muted-lt);position:relative;z-index:2;transition:border-color .25s,background .25s,color .25s,box-shadow .25s;}
+.promo-steps-item.is-done .promo-steps-dot{background:var(--teal);border-color:var(--teal);color:#fff;font-size:13px;}
+.promo-steps-item.is-active .promo-steps-dot{background:var(--navy);border-color:var(--navy);color:#fff;box-shadow:0 0 0 4px rgba(13,27,42,.12);animation:promo-step-pulse 2s ease-in-out infinite;}
+@keyframes promo-step-pulse{0%,100%{box-shadow:0 0 0 4px rgba(13,27,42,.12);}50%{box-shadow:0 0 0 7px rgba(13,27,42,.08);}}
+.promo-steps-badge{display:inline-block;margin-top:8px;padding:3px 10px;border-radius:999px;background:var(--gold);color:#fff;font-size:10px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;}
+.promo-steps-item:not(.is-active) .promo-steps-badge{display:none;}
+.promo-steps-title{display:block;font-size:13px;font-weight:700;color:var(--navy);line-height:1.35;margin-bottom:3px;}
+.promo-steps-item.is-upcoming .promo-steps-title{color:var(--muted);}
+.promo-steps-desc{display:block;font-size:11.5px;color:var(--muted);line-height:1.45;max-width:140px;margin:0 auto;}
+.promo-steps-hint{text-align:center;margin-top:16px;padding-top:14px;border-top:1px dashed rgba(13,27,42,.12);font-size:12px;font-weight:600;color:var(--teal-dk);letter-spacing:.2px;}
+.promo-steps-hint::before{content:'↓ ';opacity:.75;}
+.promo-steps-note{text-align:center;margin-top:10px;font-size:11.5px;color:var(--muted-lt);line-height:1.55;}
+
 .form-ps{max-width:640px;margin:32px auto 0;padding:24px 28px;border-radius:14px;background:var(--gold-lt);border:1px solid var(--gold-brd);}
 .form-ps p{font-size:14px;color:var(--muted);line-height:1.85;margin:0;}
 .form-ps strong{color:#8a6010;}
@@ -434,6 +458,12 @@ body.has-sticky-cta{padding-bottom:80px;}
 }
 @media(max-width:600px){
   .container{padding:0 20px;}
+  .promo-steps{padding:18px 14px 16px;}
+  .promo-steps-track{left:calc(16.666% + 2px);right:calc(16.666% + 2px);top:15px;}
+  .promo-steps-dot{width:32px;height:32px;font-size:13px;}
+  .promo-steps-title{font-size:12px;}
+  .promo-steps-desc{font-size:10.5px;max-width:96px;}
+  .promo-steps-badge{font-size:9px;padding:2px 8px;}
 }
 </style>
 </head>
@@ -1051,9 +1081,9 @@ body.has-sticky-cta{padding-bottom:80px;}
       <div class="accordion-item">
         <div class="accordion-header">«Cosa succede dopo il form? Devo pagare subito?» <span class="accordion-arrow">▼</span></div>
         <div class="accordion-body">
-          <p><strong>No.</strong> Compilare il form non addebita nulla. Non è un checkout: è il tuo posto messo da parte al prezzo promo.</p>
-          <p>Compili nome, email e telefono — 30 secondi. Subito dopo <strong>scegli tu come procedere</strong>: blocchi il prezzo con un <strong>acconto da 500€</strong> (saldo di 1.997€ con bonifico entro 24 ore) se sei già deciso, oppure prenoti la <strong>sessione live riservata con Maurizio</strong> per fare tutte le domande e conoscerlo dal vivo prima di scegliere.</p>
-          <p>Dopo l'iscrizione partono piattaforma e webinar; il weekend a Roma o Milano lo scegli tu tra le date disponibili. Se ti bloccava solo la paura del pagamento automatico: qui nessuno ti addebita niente finché non sei tu a decidere.</p>
+          <p><strong>No.</strong> Compilare il form non addebita nulla: è la <strong>fase 1</strong>, non un checkout.</p>
+          <p>Compili nome, email e telefono — 30 secondi. Nella pagina successiva entri in <strong>fase 2</strong> e scegli come completarla: acconto da <strong>500€</strong> (saldo di 1.997€ con bonifico entro 24 ore) se sei già deciso, oppure sessione live riservata con Maurizio per fare tutte le domande prima di confermare.</p>
+          <p>Dopo la fase 3 partono piattaforma e webinar; il weekend a Roma o Milano lo scegli tu tra le date disponibili. Nessuno ti addebita niente finché non sei tu a decidere in fase 2.</p>
         </div>
       </div>
     </div>
@@ -1073,14 +1103,47 @@ body.has-sticky-cta{padding-bottom:80px;}
       <span style="display:inline-block;background:rgba(255,255,255,.1);color:#fff;font-size:12px;font-weight:700;padding:7px 14px;border-radius:999px;letter-spacing:.3px;">🎥 Mercoledì 8 luglio ore 21:00 · gruppo ristretto · niente replay</span>
       <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.4rem,3vw,1.9rem);margin:16px 0 8px;color:#fff;line-height:1.25;">Ancora dei dubbi? C'è la sessione live riservata</h2>
       <p style="font-size:15px;color:rgba(255,255,255,.82);max-width:640px;margin:0 auto;line-height:1.75;">
-        Dopo aver preso il tuo posto, mercoledì sera puoi entrare nella <strong style="color:#fff;">sessione live riservata con Maurizio</strong>: lo spazio per sciogliere ogni dubbio prima di decidere. Fai tutte le tue domande e ricevi le risposte <strong style="color:#fff;">in diretta</strong>, parli del <strong style="color:#fff;">tuo caso e delle tue necessità</strong>, vedi <strong style="color:#fff;">dimostrazioni pratiche</strong> del metodo in azione. E lo fai con Maurizio e con i <strong style="color:#fff;">docenti che ti seguiranno nel programma</strong>. Esci con la tua scelta sviscerata fino in fondo.
+        Se richiedi accesso alla promo, mercoledì 8 luglio alle 21:00 puoi entrare nella <strong style="color:#fff;">sessione live riservata con Maurizio</strong>: lo spazio per sciogliere ogni dubbio prima di decidere. Fai tutte le tue domande e ricevi le risposte <strong style="color:#fff;">in diretta</strong>, parli del <strong style="color:#fff;">tuo caso e delle tue necessità</strong>, vedi <strong style="color:#fff;">dimostrazioni pratiche</strong> del metodo in azione. E lo fai con Maurizio e con i <strong style="color:#fff;">docenti che ti seguiranno nel programma</strong>. Esci con la tua scelta sviscerata fino in fondo.
       </p>
     </div>
 
     <div class="form-wrap" id="form" style="max-width:720px;">
-      <div class="section-head" style="margin-bottom:24px;">
-        <h2 class="section-title" style="font-size:1.6rem;color:var(--navy);">Sì, voglio iscrivermi al Master Eureka Completo</h2>
-        <p class="section-sub" style="color:var(--muted);">Promo Estiva — 2.497€ invece di 4.997€, con il bonus di oggi incluso. Compili qui sotto: al passo successivo blocchi il tuo posto e confermi l'iscrizione.</p>
+      <div class="section-head" style="margin-bottom:20px;">
+        <h2 class="section-title" style="font-size:1.6rem;color:var(--navy);">Richiedi accesso alla promo a 2.497€</h2>
+        <p class="section-sub" style="color:var(--muted);">Promo Campagna Estate — 2.497€ invece di 4.997€, con il bonus di oggi incluso.</p>
+      </div>
+
+      <div class="promo-steps" data-step="1" aria-label="Passaggi per accedere al Master Eureka in promo">
+        <p class="promo-steps-heading">Come accedere a queste condizioni</p>
+        <div class="promo-steps-track-wrap">
+          <div class="promo-steps-track" aria-hidden="true"><div class="promo-steps-progress"></div></div>
+          <ol class="promo-steps-list">
+          <li class="promo-steps-item is-active">
+            <div class="promo-steps-dot-wrap">
+              <span class="promo-steps-dot">1</span>
+              <span class="promo-steps-badge">Sei qui</span>
+            </div>
+            <strong class="promo-steps-title">Compila il form</strong>
+            <span class="promo-steps-desc">30 secondi · nessun addebito</span>
+          </li>
+          <li class="promo-steps-item is-upcoming">
+            <div class="promo-steps-dot-wrap">
+              <span class="promo-steps-dot">2</span>
+            </div>
+            <strong class="promo-steps-title">Completa la fase 2</strong>
+            <span class="promo-steps-desc">Verifica e conferma</span>
+          </li>
+          <li class="promo-steps-item is-upcoming">
+            <div class="promo-steps-dot-wrap">
+              <span class="promo-steps-dot">3</span>
+            </div>
+            <strong class="promo-steps-title">Fase 3 · Master</strong>
+            <span class="promo-steps-desc">Accedi a 2.497€</span>
+          </li>
+        </ol>
+        </div>
+        <p class="promo-steps-hint">Compila qui sotto — fase 1 di 3</p>
+        <p class="promo-steps-note">Compilare il form non addebita nulla. Pagamento e accesso alla fase 2 e 3.</p>
       </div>
 
       <!-- BONUS DI OGGI (ruota per data via JS) -->
@@ -1088,7 +1151,7 @@ body.has-sticky-cta{padding-bottom:80px;}
         <span id="bonus-today-tag" style="display:inline-block;font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#8a6010;margin-bottom:6px;">Bonus di oggi</span>
         <div style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--navy);line-height:1.3;margin-bottom:6px;"><span id="bonus-today-emoji">🎁</span> <span id="bonus-today-title">—</span></div>
         <div id="bonus-today-desc" style="font-size:13.5px;color:var(--muted);line-height:1.6;">—</div>
-        <div style="font-size:12px;color:var(--muted);margin-top:10px;">Lo agganci prendendo il posto qui sotto — lo <strong>tieni</strong> solo confermando (il bonus si prende bloccando il prezzo).</div>
+        <div style="font-size:12px;color:var(--muted);margin-top:10px;">Lo agganci in fase 1. Lo <strong>confermi</strong> quando completi la fase 2.</div>
       </div>
       <form class="promo-form" id="promo-form" novalidate>
         <div class="form-row">
@@ -1104,7 +1167,7 @@ body.has-sticky-cta{padding-bottom:80px;}
           <span>Acconsento al trattamento dei dati per ricevere informazioni sull'offerta Master Eureka e per essere ricontattato/a. Ho letto l'<a href="https://www.iubenda.com/privacy-policy/89530968" target="_blank" rel="noopener">informativa privacy</a>.</span>
         </label>
         <div style="margin-top:28px;">
-          <button type="submit" class="btn-submit" id="submit-btn">Voglio iscrivermi al Master Eureka →</button>
+          <button type="submit" class="btn-submit" id="submit-btn">Richiedi accesso alla promo →</button>
         </div>
         <div class="form-error" id="form-error"></div>
         <div class="trust-bar">
@@ -1112,10 +1175,10 @@ body.has-sticky-cta{padding-bottom:80px;}
           <a href="mailto:pagamenti@apprendimentorapido.it">✉ pagamenti@apprendimentorapido.it</a>
           <a href="https://wa.me/390240702168?text=Ciao%2C%20vorrei%20informazioni%20sul%20Master%20Eureka%20a%202.497%E2%82%AC" target="_blank" rel="noopener">WhatsApp</a>
         </div>
-        <p class="cta-micro-form">Compili in 30 secondi · Bonus di oggi agganciato · 1 anno di accesso · Promo fino al <span id="promo-deadline-2">—</span></p>
+        <p class="cta-micro-form">Fase 1 di 3 · 30 secondi · Nessun addebito adesso · Promo fino al <span id="promo-deadline-2">—</span></p>
       </form>
       <div class="form-ps">
-        <p><strong>P.S.</strong> Prendere il posto non è un gesto qualunque: è la tua decisione di bloccare i 2.497€ e agganciare il bonus di oggi, prima che il prezzo torni pieno (promo fino al <span class="promo-deadline-full">—</span>). Non paghi niente adesso — prendi il posto e basta. C'è una sola cosa che non puoi fermare: l'altro orologio. Le 300 ore di quest'anno se ne stanno già andando — con o senza la tua decisione. Francesca prese il suo posto con le stesse obiezioni che hai tu adesso. Oggi è notaio. E come ti dicevamo: quanto l'ha pagato, non se lo ricorda già più.</p>
+        <p><strong>P.S.</strong> Il Master in promo costa 2.497€ — ed è giusto che lo sappia. Qui non paghi: completi la fase 1 e decidi in fase 2. Promo fino al <span class="promo-deadline-full">—</span>, poi torna a 4.997€. Francesca fece la stessa cosa con le stesse obiezioni che hai tu adesso. Oggi è notaio. E quanto l'ha pagato, non se lo ricorda già più.</p>
       </div>
     </div>
   </div>
@@ -1401,7 +1464,7 @@ body.has-sticky-cta{padding-bottom:80px;}
       <a href="tel:+390240702168">📞 02 4070 2168</a>
       <a href="mailto:pagamenti@apprendimentorapido.it">✉ pagamenti@apprendimentorapido.it</a>
       <a href="https://wa.me/390240702168?text=Ciao%2C%20vorrei%20informazioni%20sul%20Master%20Eureka%20a%202.497%E2%82%AC" target="_blank" rel="noopener">WhatsApp</a>
-      <a href="#form" class="footer-promo-cta">Richiedi il posto a 2.497€</a>
+      <a href="#form" class="footer-promo-cta">Richiedi accesso alla promo a 2.497€</a>
     </div>
     <p class="footer-promo-hours">Lun–Ven 9:00–18:30 · Via Gardiscia 10, Rovio (CH)</p>
     <div class="footer-promo-legal">
@@ -1594,7 +1657,7 @@ if(stickyCta){
     priceRevealed=true;
     stickyHeadline.hidden=true;
     stickyPrice.hidden=false;
-    stickyBtn.textContent='Blocca 2.497€';
+    stickyBtn.textContent='Richiedi accesso a 2.497€';
     stickyBtn.setAttribute('href','#form');
   };
   if(offertaSection){
