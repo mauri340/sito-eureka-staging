@@ -1,0 +1,1466 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apprendimento Rapido — Accesso anticipato</title>
+<meta name="description" content="Il nuovo strumento di Maurizio Possenti. Cinquecento pagine. Un click. Venti minuti. Apertura beta privata: 100 posti founder.">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Accesso anticipato — il nuovo strumento di Maurizio Possenti">
+<meta property="og:description" content="500 pagine. Un click. 20 minuti. Il metodo Eureka dentro qualcosa che lavora al posto tuo.">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  /* ===== RESET ===== */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: #1B1F24;
+    background: #FBFAF7;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ===== VARIABLES ===== */
+  :root {
+    --teal: #0E7C73;
+    --teal-press: #0A6660;
+    --mint: #D4ECEA;
+    --ink: #1B1F24;
+    --ink-50: #F4F5F6;
+    --paper: #FBFAF7;
+    --coral: #D9533D;
+    --muted: #6B7280;
+  }
+
+  /* ===== TYPOGRAPHY ===== */
+  h1, h2, h3, h4 {
+    font-family: 'Geist', 'Inter', sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    color: var(--ink);
+  }
+  h1 { font-size: clamp(2rem, 5vw, 3.5rem); }
+  h2 { font-size: clamp(1.5rem, 3.5vw, 2.5rem); }
+  h3 { font-size: clamp(1.15rem, 2.2vw, 1.5rem); }
+
+  p { font-size: 1.0625rem; }
+  .lead { font-size: 1.1875rem; color: var(--muted); }
+
+  /* ===== LAYOUT ===== */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  section { padding: 80px 0; }
+
+  /* ===== HEADER ===== */
+  header {
+    border-bottom: 1px solid var(--ink-50);
+    background: var(--paper);
+    padding: 18px 0;
+  }
+  header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .brand-mini {
+    font-family: 'Geist', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--ink);
+    letter-spacing: 0.02em;
+  }
+  .brand-mini .accent {
+    color: var(--teal);
+  }
+  .header-meta {
+    font-size: 0.8125rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    padding: 100px 0 80px 0;
+    text-align: center;
+  }
+  .hero .eyebrow {
+    display: inline-block;
+    font-family: 'Geist', sans-serif;
+    font-size: 0.875rem;
+    color: var(--teal);
+    background: var(--mint);
+    padding: 6px 14px;
+    border-radius: 100px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    margin-bottom: 24px;
+  }
+  .hero h1 {
+    max-width: 800px;
+    margin: 0 auto 24px;
+  }
+  .hero h1 .highlight {
+    color: var(--teal);
+  }
+  .hero .lead {
+    max-width: 640px;
+    margin: 0 auto 40px;
+  }
+
+  /* ===== CTA BUTTONS ===== */
+  .btn {
+    display: inline-block;
+    background: var(--teal);
+    color: #ffffff;
+    font-family: 'Geist', sans-serif;
+    font-size: 1.0625rem;
+    font-weight: 600;
+    padding: 16px 32px;
+    border-radius: 8px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.15s;
+    letter-spacing: 0.01em;
+  }
+  .btn:hover { background: var(--teal-press); transform: translateY(-1px); }
+  .btn:active { transform: translateY(0); }
+  .btn-large { font-size: 1.125rem; padding: 18px 40px; }
+
+  .hero .subnote {
+    margin-top: 16px;
+    font-size: 0.875rem;
+    color: var(--muted);
+  }
+  .hero .easy-claim {
+    display: inline-block;
+    margin-top: 20px;
+    margin-bottom: 8px;
+    font-family: 'Geist', sans-serif;
+    font-size: 1rem;
+    color: var(--teal);
+    background: var(--mint);
+    padding: 8px 18px;
+    border-radius: 100px;
+    font-weight: 500;
+  }
+
+  /* ===== SECTION: VIDEO ===== */
+  .video-section {
+    background: var(--paper);
+    padding: 20px 0 80px;
+  }
+  .video-section .container {
+    max-width: 920px;
+  }
+  .video-wrapper {
+    position: relative;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 10px 50px rgba(27, 31, 36, 0.18);
+    background: var(--ink);
+    aspect-ratio: 16 / 9;
+  }
+  .video-wrapper video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .video-caption {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.9375rem;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  /* ===== SECTION: DIMMI UNA COSA ===== */
+  .dimmi {
+    background: var(--ink);
+    color: #ffffff;
+    padding: 100px 0;
+  }
+  .dimmi h2 {
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 56px;
+  }
+  .dimmi .narrative {
+    max-width: 720px;
+    margin: 0 auto;
+    font-size: 1.1875rem;
+    line-height: 1.8;
+  }
+  .dimmi .narrative p {
+    margin-bottom: 24px;
+    font-size: 1.1875rem;
+    color: #E5E7EB;
+  }
+  .dimmi .narrative strong {
+    color: #ffffff;
+    font-weight: 600;
+  }
+  .dimmi .narrative .number {
+    color: var(--mint);
+    font-weight: 700;
+  }
+
+  /* ===== SECTION: THREE OUTPUTS ===== */
+  .outputs h2 {
+    text-align: center;
+    margin-bottom: 16px;
+  }
+  .outputs .section-lead {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 64px;
+  }
+  .output-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 32px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .output-card {
+    background: #ffffff;
+    border: 1px solid var(--ink-50);
+    border-radius: 12px;
+    padding: 36px 32px;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .output-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--teal);
+  }
+  .output-card .icon {
+    width: 48px;
+    height: 48px;
+    background: var(--mint);
+    color: var(--teal);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Geist', sans-serif;
+    font-weight: 700;
+    font-size: 1.25rem;
+    margin-bottom: 20px;
+  }
+  .output-card h3 {
+    margin-bottom: 12px;
+  }
+  .output-card p {
+    color: var(--muted);
+    font-size: 1rem;
+  }
+
+  /* ===== SECTION: REFRAME ===== */
+  .reframe {
+    background: var(--mint);
+    text-align: center;
+  }
+  .reframe .container {
+    max-width: 800px;
+  }
+  .reframe h2 {
+    margin-bottom: 32px;
+  }
+  .reframe .reframe-line {
+    font-family: 'Geist', sans-serif;
+    font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+    font-weight: 500;
+    line-height: 1.5;
+    color: var(--ink);
+    margin-bottom: 12px;
+  }
+  .reframe .reframe-line strong {
+    color: var(--teal);
+    font-weight: 700;
+  }
+  .reframe .reframe-final {
+    margin-top: 32px;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .reframe .reframe-final em {
+    color: var(--teal);
+    font-style: normal;
+  }
+  .reframe-tagline {
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(14, 124, 115, 0.25);
+    font-family: 'Geist', sans-serif;
+    font-size: clamp(1.375rem, 3vw, 1.875rem);
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+  .reframe-tagline em {
+    color: var(--teal);
+    font-style: normal;
+    font-weight: 700;
+  }
+
+  /* ===== SECTION: AUTHORITY ===== */
+  .authority {
+    background: var(--paper);
+    text-align: center;
+  }
+  .authority .container { max-width: 800px; }
+  .authority h2 { margin-bottom: 32px; }
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 32px;
+    margin: 48px 0;
+  }
+  .stat .number {
+    font-family: 'Geist', sans-serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+    color: var(--teal);
+    display: block;
+    margin-bottom: 4px;
+  }
+  .stat .label {
+    font-size: 0.9375rem;
+    color: var(--muted);
+  }
+
+  /* ===== SECTION: TUTTI ===== */
+  .tutti {
+    background: var(--paper);
+    text-align: center;
+  }
+  .tutti .container { max-width: 900px; }
+  .tutti h2 { margin-bottom: 14px; }
+  .tutti .answer-lead {
+    font-size: clamp(1.125rem, 2.2vw, 1.375rem);
+    color: var(--teal);
+    font-family: 'Geist', sans-serif;
+    font-weight: 600;
+    margin-bottom: 48px;
+    line-height: 1.4;
+  }
+  .tutti-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    text-align: left;
+    margin-bottom: 40px;
+  }
+  @media (max-width: 720px) {
+    .tutti-grid { grid-template-columns: 1fr; }
+  }
+  .tutti-card {
+    background: #ffffff;
+    border: 2px solid var(--ink-50);
+    border-radius: 12px;
+    padding: 32px 28px;
+    transition: border-color 0.2s;
+  }
+  .tutti-card:hover { border-color: var(--teal); }
+  .tutti-card h3 {
+    color: var(--teal);
+    margin-bottom: 14px;
+    font-size: 1.125rem;
+  }
+  .tutti-card p {
+    color: var(--ink);
+    font-size: 1rem;
+    margin: 0;
+  }
+  .tutti-footer {
+    font-family: 'Geist', sans-serif;
+    font-size: clamp(1.25rem, 2.5vw, 1.625rem);
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .tutti-footer em {
+    color: var(--teal);
+    font-style: normal;
+  }
+
+  /* ===== SECTION: ROADMAP 3 FASI ===== */
+  .roadmap {
+    background: var(--paper);
+    padding: 80px 0;
+  }
+  .roadmap .container { max-width: 1000px; }
+  .roadmap h2 {
+    text-align: center;
+    margin-bottom: 12px;
+  }
+  .roadmap-lead {
+    text-align: center;
+    color: var(--muted);
+    margin-bottom: 56px;
+    font-size: 1.0625rem;
+  }
+  .roadmap-grid {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+    gap: 18px;
+    align-items: center;
+    margin-bottom: 48px;
+  }
+  @media (max-width: 720px) {
+    .roadmap-grid {
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+    .roadmap-arrow { display: none; }
+  }
+  .roadmap-step {
+    background: #ffffff;
+    border: 2px solid var(--ink-50);
+    border-radius: 12px;
+    padding: 28px 22px;
+    text-align: center;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .roadmap-step.is-now {
+    border-color: var(--teal);
+    background: linear-gradient(135deg, #ffffff 0%, var(--mint) 100%);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(14, 124, 115, 0.15);
+  }
+  .roadmap-step-tag {
+    display: inline-block;
+    font-family: 'Geist Mono', 'Menlo', monospace;
+    font-size: 0.75rem;
+    color: var(--teal);
+    background: rgba(14, 124, 115, 0.10);
+    padding: 4px 10px;
+    border-radius: 100px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    font-weight: 600;
+  }
+  .roadmap-step.is-now .roadmap-step-tag {
+    background: var(--teal);
+    color: #ffffff;
+  }
+  .roadmap-step-title {
+    font-family: 'Geist', sans-serif;
+    font-size: clamp(1.25rem, 2.2vw, 1.625rem);
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 6px;
+    line-height: 1.2;
+  }
+  .roadmap-step-time {
+    font-size: 0.9375rem;
+    color: var(--muted);
+  }
+  .roadmap-step.is-now .roadmap-step-time {
+    color: var(--teal-press);
+    font-weight: 500;
+  }
+  .roadmap-arrow {
+    font-family: 'Geist', sans-serif;
+    font-size: 1.5rem;
+    color: var(--teal);
+    text-align: center;
+    font-weight: 700;
+  }
+  .roadmap-tagline {
+    text-align: center;
+    font-family: 'Geist', sans-serif;
+    font-size: clamp(1.125rem, 2.2vw, 1.4rem);
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.5;
+    max-width: 740px;
+    margin: 0 auto;
+  }
+  .roadmap-tagline em {
+    color: var(--teal);
+    font-style: normal;
+    font-weight: 700;
+  }
+
+  /* ===== SECTION: FOUNDER OFFER ===== */
+  .founder {
+    background: var(--ink);
+    color: #ffffff;
+    padding: 100px 0;
+  }
+  .founder .container { max-width: 800px; text-align: center; }
+  .founder h2 {
+    color: #ffffff;
+    margin-bottom: 24px;
+  }
+  .founder .lead {
+    color: #E5E7EB;
+    margin-bottom: 48px;
+    font-size: 1.1875rem;
+  }
+  .founder-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 24px;
+    margin-bottom: 48px;
+    text-align: left;
+  }
+  .founder-features .item {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px;
+    padding: 20px;
+  }
+  .founder-features .item-title {
+    font-family: 'Geist', sans-serif;
+    font-weight: 600;
+    color: var(--mint);
+    font-size: 0.9375rem;
+    margin-bottom: 6px;
+    letter-spacing: 0.01em;
+  }
+  .founder-features .item-text {
+    color: #D1D5DB;
+    font-size: 0.9375rem;
+  }
+
+  /* ===== AREA SELECTOR + FORM ===== */
+  .form-section {
+    background: var(--paper);
+    padding: 80px 0;
+  }
+  .form-section .container { max-width: 800px; text-align: center; }
+  .form-section h2 { margin-bottom: 16px; }
+  .form-section .section-lead {
+    margin-bottom: 40px;
+  }
+
+  .area-buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+  @media (max-width: 720px) {
+    .area-buttons { grid-template-columns: repeat(2, 1fr); }
+  }
+  .area-btn {
+    background: #ffffff;
+    border: 2px solid var(--ink-50);
+    color: var(--ink);
+    font-family: 'Geist', sans-serif;
+    font-weight: 600;
+    font-size: 0.9375rem;
+    padding: 18px 12px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    text-align: center;
+    line-height: 1.3;
+  }
+  .area-btn:hover {
+    border-color: var(--teal);
+    transform: translateY(-2px);
+  }
+  .area-btn.active {
+    background: var(--teal);
+    border-color: var(--teal);
+    color: #ffffff;
+    box-shadow: 0 4px 14px rgba(14,124,115,0.25);
+  }
+
+  .area-descriptions {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 36px 40px;
+    margin-bottom: 40px;
+    border: 1px solid var(--ink-50);
+    text-align: left;
+    min-height: 240px;
+  }
+  @media (max-width: 540px) {
+    .area-descriptions { padding: 28px 24px; }
+  }
+  .area-description { display: none; }
+  .area-description.active { display: block; }
+  .area-description h3 {
+    color: var(--teal);
+    margin-bottom: 16px;
+    font-size: 1.375rem;
+  }
+  .area-description p {
+    margin-bottom: 14px;
+    font-size: 1rem;
+    color: var(--ink);
+  }
+  .area-description p:last-child { margin-bottom: 0; }
+  .area-description .for-who {
+    font-size: 0.875rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 600;
+    margin-bottom: 12px;
+    display: block;
+  }
+  .area-description strong { color: var(--teal); }
+  .area-description .empty-state {
+    text-align: center;
+    color: var(--muted);
+    font-style: italic;
+    padding: 40px 0;
+  }
+  .area-description ul {
+    list-style: none;
+    margin-top: 12px;
+  }
+  .area-description ul li {
+    padding-left: 22px;
+    position: relative;
+    margin-bottom: 8px;
+    color: var(--ink);
+    font-size: 0.9375rem;
+  }
+  .area-description ul li::before {
+    content: '→';
+    color: var(--teal);
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    text-align: left;
+  }
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  @media (max-width: 540px) {
+    .form-row { grid-template-columns: 1fr; }
+  }
+  .form-field label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+  .form-field input,
+  .form-field select {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid #D1D5DB;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    background: #ffffff;
+    color: var(--ink);
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .form-field input:focus,
+  .form-field select:focus {
+    outline: none;
+    border-color: var(--teal);
+    box-shadow: 0 0 0 3px rgba(14,124,115,0.15);
+  }
+  .form-submit { margin-top: 8px; }
+  .form-submit button {
+    width: 100%;
+  }
+  .form-note {
+    font-size: 0.8125rem;
+    color: var(--muted);
+    margin-top: 16px;
+    text-align: center;
+  }
+  .form-success {
+    background: var(--mint);
+    border: 1px solid var(--teal);
+    color: var(--ink);
+    padding: 24px;
+    border-radius: 10px;
+    text-align: center;
+    display: none;
+  }
+  .form-success.show { display: block; }
+  .form-success h3 {
+    color: var(--teal);
+    margin-bottom: 8px;
+  }
+
+  /* Consent + privacy ===== */
+  .privacy-notice {
+    background: var(--ink-50);
+    border-left: 3px solid var(--teal);
+    border-radius: 6px;
+    padding: 14px 18px;
+    font-size: 0.8125rem;
+    color: var(--muted);
+    line-height: 1.55;
+    margin-top: 8px;
+    text-align: left;
+  }
+  .privacy-notice a {
+    color: var(--teal);
+    text-decoration: underline;
+  }
+  .consent-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 12px;
+    text-align: left;
+    font-size: 0.875rem;
+    color: var(--ink);
+    line-height: 1.5;
+  }
+  .consent-row input[type="checkbox"] {
+    margin-top: 3px;
+    width: 18px;
+    height: 18px;
+    accent-color: var(--teal);
+    flex-shrink: 0;
+    cursor: pointer;
+  }
+  .consent-row label {
+    cursor: pointer;
+  }
+  .consent-row a {
+    color: var(--teal);
+    text-decoration: underline;
+  }
+  /* Honeypot - invisibile, bot lo riempiono */
+  .hp-field {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .form-error {
+    background: #FEE2E2;
+    border: 1px solid #FCA5A5;
+    color: #991B1B;
+    padding: 14px 18px;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 0.9375rem;
+    margin-top: 16px;
+    display: none;
+  }
+  .form-error.show { display: block; }
+
+  /* ===== NERD ASIDE ===== */
+  .nerd-aside {
+    background: var(--paper);
+    padding: 60px 0 40px;
+  }
+  .nerd-aside .container {
+    max-width: 720px;
+  }
+  .nerd-card {
+    background: linear-gradient(135deg, #ffffff 0%, var(--mint) 100%);
+    border: 1px solid rgba(14, 124, 115, 0.18);
+    border-radius: 14px;
+    padding: 32px 36px;
+    text-align: center;
+    position: relative;
+  }
+  @media (max-width: 540px) {
+    .nerd-card { padding: 28px 22px; }
+  }
+  .nerd-tag {
+    display: inline-block;
+    font-family: 'Geist Mono', 'Menlo', 'Monaco', monospace;
+    font-size: 0.75rem;
+    color: var(--teal);
+    background: rgba(14, 124, 115, 0.08);
+    padding: 4px 12px;
+    border-radius: 100px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    font-weight: 500;
+  }
+  .nerd-card p {
+    font-size: 1.0625rem;
+    color: var(--ink);
+    line-height: 1.7;
+    margin: 0;
+  }
+  .nerd-card p strong {
+    color: var(--teal-press);
+    font-weight: 600;
+  }
+  .nerd-card .nerd-question {
+    font-family: 'Geist', sans-serif;
+    font-weight: 600;
+    font-size: 1.125rem;
+    color: var(--ink);
+    display: block;
+    margin-bottom: 12px;
+  }
+
+  /* ===== FAQ ===== */
+  .faq { background: #ffffff; }
+  .faq .container { max-width: 760px; }
+  .faq h2 { text-align: center; margin-bottom: 48px; }
+  .faq-item {
+    border-bottom: 1px solid var(--ink-50);
+    padding: 24px 0;
+  }
+  .faq-item h3 {
+    margin-bottom: 12px;
+    font-size: 1.125rem;
+  }
+  .faq-item p {
+    color: var(--muted);
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: var(--ink);
+    color: #9CA3AF;
+    padding: 56px 0 32px;
+    text-align: center;
+    font-size: 0.875rem;
+  }
+  footer .footer-brand {
+    font-family: 'Geist', sans-serif;
+    font-weight: 600;
+    color: #ffffff;
+    font-size: 0.9375rem;
+    margin-bottom: 6px;
+    letter-spacing: 0.01em;
+  }
+  footer .footer-tagline {
+    font-size: 0.8125rem;
+    color: #9CA3AF;
+    margin-bottom: 24px;
+    max-width: 520px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+  }
+  footer .footer-contact {
+    font-size: 0.8125rem;
+    color: #9CA3AF;
+    margin-bottom: 24px;
+    line-height: 1.7;
+  }
+  footer .footer-contact a {
+    color: var(--mint);
+    text-decoration: none;
+  }
+  footer .footer-contact a:hover { text-decoration: underline; }
+  footer .footer-legal {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    font-size: 0.8125rem;
+  }
+  footer .footer-legal a {
+    color: #9CA3AF;
+    text-decoration: none;
+  }
+  footer .footer-legal a:hover { color: var(--mint); }
+  footer .copyright {
+    font-size: 0.75rem;
+    color: #6B7280;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 20px;
+    margin-top: 4px;
+  }
+
+  /* ===== UTILITIES ===== */
+  .center { text-align: center; }
+</style>
+</head>
+<body>
+
+<!-- ============== HEADER ============== -->
+<header>
+  <div class="container">
+    <div class="brand-mini">
+      Apprendimento Rapido <span class="accent">·</span> il futuro dell'apprendimento è qui, nelle tue mani
+    </div>
+    <div class="header-meta">accesso anticipato</div>
+  </div>
+</header>
+
+<!-- ============== HERO ============== -->
+<section class="hero">
+  <div class="container">
+    <span class="eyebrow">100 posti founder · beta privata in arrivo</span>
+    <h1>Cinquecento pagine. <span class="highlight">Un click.</span><br>Venti minuti.</h1>
+    <p class="lead">
+      Il Metodo Eureka prende vita propria e studia per te.
+      Carichi un PDF — <strong>il resto è fatto</strong>.
+    </p>
+    <span class="easy-claim">Sistema intelligente, semplice da usare anche per un bambino</span>
+    <br>
+    <a href="#form" class="btn btn-large" style="margin-top: 24px;">Voglio essere tra i primi 100</a>
+    <p class="subnote">Niente da pagare ora. Niente da decidere ora. Solo il posto tenuto da parte.</p>
+  </div>
+</section>
+
+<!-- ============== VIDEO ============== -->
+<section class="video-section">
+  <div class="container">
+    <div class="video-wrapper">
+      <video controls autoplay muted loop playsinline poster="">
+        <source src="presentation.mp4" type="video/mp4">
+        Il tuo browser non supporta i video HTML5.
+        <a href="presentation.mp4" style="color: var(--mint);">Scarica il video</a>.
+      </video>
+    </div>
+    <p class="video-caption">62 secondi · audio attivo cliccando sul player</p>
+  </div>
+</section>
+
+<!-- ============== TUTTI ============== -->
+<section class="tutti">
+  <div class="container">
+    <h2>Devo conoscere il Metodo Eureka per usarlo?</h2>
+    <p class="answer-lead">No. L'app applica il metodo per te. Tu vedi solo i benefici.</p>
+
+    <div class="tutti-grid">
+      <div class="tutti-card">
+        <h3>Conosci già il Metodo Eureka?</h3>
+        <p>Sei già indipendente — sai fare il lavoro a mano. Con l'app non lo fai più tu: vai direttamente al risultato. <strong>Acceleri ancora di più</strong> di quanto già sai fare.</p>
+      </div>
+      <div class="tutti-card">
+        <h3>Non ne hai mai sentito parlare?</h3>
+        <p>Non importa. <strong>L'app fa tutto il lavoro al posto tuo.</strong> Tu carichi il materiale, lei applica il metodo, tu vedi solo i risultati: parole chiave, mappe, audio, quiz.</p>
+      </div>
+    </div>
+
+    <p class="tutti-footer">Funziona per <em>tutti</em>.</p>
+  </div>
+</section>
+
+<!-- ============== DIMMI UNA COSA ============== -->
+<section class="dimmi">
+  <div class="container">
+    <h2>Dimmi una cosa.</h2>
+    <div class="narrative">
+      <p>
+        Immagina di avere davanti un libro che devi studiare. Un manuale di concorso.
+        Un testo universitario. Una dispensa di aggiornamento.
+      </p>
+      <p>
+        <strong class="number">Cinquecento pagine. Da zero. Non hai ancora iniziato.</strong>
+      </p>
+      <p>
+        Adesso immagina di avere un sistema dove, <strong>con un solo click del mouse</strong>,
+        in <strong class="number">venti minuti</strong> ti trovi tutte le parole chiave del libro estratte e organizzate,
+        una mappa mentale per ogni capitolo, e un podcast costruito apposta per te
+        da ascoltare in macchina, in palestra, mentre cucini.
+      </p>
+      <p>
+        Tutta la <strong>fase organizzativa</strong> dello studio: fatta.<br>
+        Tutta la <strong>fase mnemonica</strong>, quella che ti fa rimandare il libro per mesi: fatta.
+      </p>
+      <p style="margin-top: 32px; font-weight: 500;">
+        Il lavoro pesante non lo fai più tu.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============== AREA SELECTOR + FORM ============== -->
+<section class="form-section" id="form">
+  <div class="container">
+    <h2>Per chi sarà indispensabile?</h2>
+    <p class="section-lead">
+      Per chi vuole risultati in poco tempo — per necessità o per ambizione. Questa è la scelta migliore.
+    </p>
+
+    <!-- 4 button selector -->
+    <div class="area-buttons" role="tablist">
+      <button class="area-btn" data-area="concorsi" type="button">Concorsi pubblici</button>
+      <button class="area-btn" data-area="esami" type="button">Esami universitari</button>
+      <button class="area-btn" data-area="lingue" type="button">Lingue straniere</button>
+      <button class="area-btn" data-area="aggiornamento" type="button">Aggiornamento professionale</button>
+    </div>
+
+    <!-- Description per area -->
+    <div class="area-descriptions">
+
+      <!-- DEFAULT (nessuna selezione) -->
+      <div class="area-description active" id="desc-default">
+        <p class="empty-state">↑ Clicca un'area qui sopra per vedere come funziona per te.</p>
+      </div>
+
+      <!-- CONCORSI -->
+      <div class="area-description" id="desc-concorsi">
+        <span class="for-who">Per: candidati a concorsi pubblici di ogni tipo</span>
+        <h3>Il tuo manuale di concorso, lavorato in pochi istanti.</h3>
+        <p>Prendi il tuo materiale di studio — libri, dispense, manuali del concorso — in formato PDF. Lo carichi nello strumento.</p>
+        <p>In pochi istanti ti torna tutto il materiale <strong>già organizzato per essere imparato</strong>: parole chiave estratte, mappe mentali di facile lettura, audio per ricordare il contenuto, quiz per testare la tua preparazione.</p>
+        <p>E tutti i manuali che processi <strong>ti restano ordinati nella tua console nel tempo</strong> — sempre pronti per il ripasso, fino al giorno del concorso.</p>
+        <ul>
+          <li>Parole chiave estratte dal tuo manuale</li>
+          <li>Mappe mentali di facile lettura</li>
+          <li>Audio per ricordare, anche in macchina o in palestra</li>
+          <li>Quiz per verificare la tua preparazione</li>
+          <li>Tutti i manuali restano ordinati nella tua console nel tempo</li>
+        </ul>
+      </div>
+
+      <!-- ESAMI UNIVERSITARI -->
+      <div class="area-description" id="desc-esami">
+        <span class="for-who">Per: medicina · ingegneria · giurisprudenza · scienze · economia · qualsiasi facoltà</span>
+        <h3>Seicento pagine di manuale denso, dentro la tua giornata normale.</h3>
+        <p>Anatomia, fisiologia, biochimica, diritto, economia — qualsiasi materia. Carichi il PDF del manuale o delle dispense del prof. In venti minuti ti torna la mappa visiva del capitolo, le parole chiave organizzate per logica, l'audio guidato da ascoltare mentre vai al campus.</p>
+        <p>È pensato per chi <strong>studia da adulto</strong>, con poco tempo, lavoro o famiglia di mezzo. Il ripasso a uno, sette, trenta giorni scatta in automatico — non sei tu a doverlo gestire.</p>
+        <p>E tutti i capitoli che studi <strong>ti restano ordinati nella tua console nel tempo</strong> — sempre disponibili per il ripasso prima della sessione d'esame.</p>
+        <ul>
+          <li>Mappa mentale di ogni capitolo che vedi tutta in un colpo d'occhio</li>
+          <li>Immagini mnemoniche per concetti astratti o difficili</li>
+          <li>Audio per ascoltare durante spostamenti, palestra, pause</li>
+          <li>Test di verifica sui punti dove stai dimenticando</li>
+          <li>Tutti i capitoli restano ordinati nella tua console nel tempo</li>
+        </ul>
+      </div>
+
+      <!-- LINGUE STRANIERE -->
+      <div class="area-description" id="desc-lingue">
+        <span class="for-who">Per: chi vuole sbloccare o riprendere una lingua straniera</span>
+        <h3>30 vocaboli in 8 minuti. Ascolta, visualizza, divertiti, impara.</h3>
+        <p>Ricorda una cosa: <strong>il bambino impara prima i vocaboli</strong>. Solo quando sarà grande, scoprirà le regole della grammatica. Torna bambino. Imparerai prima i vocaboli, e il resto verrà da solo.</p>
+        <p>Questa è <strong>l'unica app</strong> costruita per concentrarsi sul ricordare i vocaboli — la fonte essenziale di ogni lingua. Sessioni da 30 vocaboli in 8 minuti. Apri, ascolti, visualizzi, ricordi.</p>
+        <p>Sei lingue pronte (inglese, tedesco, francese, spagnolo, russo, cinese), tutti i livelli — dal principiante (A1) all'avanzato (C2). Il metodo lo usano da anni migliaia di persone, ma fanno tutto a mano. <strong>Con questa app, tu dovrai solo ascoltare.</strong></p>
+        <p>E tutte le sessioni che fai <strong>ti restano ordinate nella tua console nel tempo</strong> — sempre lì per un ripasso quando vuoi.</p>
+        <ul>
+          <li>30 vocaboli ricordati in 8 minuti per sessione</li>
+          <li>6 lingue: inglese, tedesco, francese, spagnolo, russo, cinese</li>
+          <li>Tutti i livelli, da A1 (principiante) a C2 (avanzato)</li>
+          <li>Ascolta, visualizza, divertiti, impara</li>
+          <li>Tutte le sessioni restano ordinate nella tua console nel tempo</li>
+        </ul>
+      </div>
+
+      <!-- AGGIORNAMENTO PROFESSIONALE -->
+      <div class="area-description" id="desc-aggiornamento">
+        <span class="for-who">Per: professionisti che devono restare aggiornati senza fermare il lavoro</span>
+        <h3>Procedure, contratti, progetti — dentro in pochi minuti.</h3>
+        <p>C'è una nuova <strong>procedura</strong> da conoscere. Un <strong>contratto</strong> da memorizzare prima della riunione. Un <strong>progetto</strong> di cui devi sapere ogni dettaglio. Cose che devi ricordare in modo rapido, senza perdere tempo.</p>
+        <p>Le carichi nello strumento in formato PDF. In pochi istanti lui <strong>estrae le parole chiave</strong>, ti costruisce le mappe, e ti manda gli audio pronti per ricordare.</p>
+        <p>Ascolti l'audio. Consulti la mappa quando serve. <strong>Tempo pochi minuti</strong> — e ricordi tutto in modo rapido. Così continui a fare il tuo lavoro e resti aggiornato.</p>
+        <p>E tutto il materiale che processi <strong>ti resta ordinato nella tua console nel tempo</strong> — sempre lì quando ti serve riconsultarlo, anche mesi dopo.</p>
+        <ul>
+          <li>Carichi procedure, contratti, progetti, normative — qualsiasi PDF</li>
+          <li>Parole chiave, mappe e audio pronti in pochi istanti</li>
+          <li>Ascolti l'audio mentre lavori, consulti la mappa quando ti serve</li>
+          <li>Tutto il materiale resta ordinato nella tua console nel tempo</li>
+          <li>Continui a lavorare e resti aggiornato</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <form id="waitlist-form" novalidate>
+      <div class="form-row">
+        <div class="form-field">
+          <label for="nome">Nome</label>
+          <input type="text" id="nome" name="nome" placeholder="Es. Mario" autocomplete="given-name" required>
+        </div>
+        <div class="form-field">
+          <label for="cognome">Cognome</label>
+          <input type="text" id="cognome" name="cognome" placeholder="Es. Rossi" autocomplete="family-name" required>
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="tu@email.it" autocomplete="email" required>
+      </div>
+
+      <!-- Hidden field popolato dal click sui bottoni area -->
+      <input type="hidden" id="area" name="area" value="">
+
+      <!-- Honeypot anti-spam: invisibile a umani, riempito dai bot -->
+      <div class="hp-field" aria-hidden="true">
+        <label for="hp_az9q7x">Non compilare questo campo</label>
+        <input type="text" id="hp_az9q7x" name="hp_az9q7x" tabindex="-1" autocomplete="off">
+      </div>
+
+      <div class="consent-row">
+        <input type="checkbox" id="consent" name="consent" required>
+        <label for="consent">
+          Acconsento al trattamento dei miei dati per ricevere comunicazioni relative al nuovo strumento e per essere contattato/a quando aprirà la beta. Ho letto l'<a href="https://www.iubenda.com/privacy-policy/89530968" target="_blank" rel="noopener">informativa privacy</a>. Posso cancellarmi in ogni momento.
+        </label>
+      </div>
+
+      <div class="form-submit">
+        <button type="submit" class="btn btn-large" id="submit-btn">Voglio essere tra i primi 100</button>
+      </div>
+
+      <p class="form-note">
+        Founder vuol dire tre cose: <strong>aggiornamenti sui progressi</strong>, <strong>accesso prima di tutti</strong> quando apre la beta, e <strong>un'offerta dedicata ai 100</strong> al lancio. Niente email inutili in mezzo.
+      </p>
+
+      <div class="form-error" id="form-error"></div>
+    </form>
+
+    <div class="form-success" id="form-success">
+      <h3>Sei dentro.</h3>
+      <p>Riceverai un'email di conferma in pochi minuti. Da qui in poi ti scriverò io con gli update.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============== THREE OUTPUTS ============== -->
+<section class="outputs">
+  <div class="container">
+    <h2 class="center">Cosa trovi al click.</h2>
+    <p class="section-lead">Tre artefatti generati dal tuo PDF, pronti in venti minuti.</p>
+    <div class="output-grid">
+
+      <div class="output-card">
+        <div class="icon">P</div>
+        <h3>Parole chiave</h3>
+        <p>
+          Estratte automaticamente da tutto il manuale. Organizzate in modo intelligente.
+          Solo quelle che servono davvero a ricostruire la logica del libro.
+        </p>
+      </div>
+
+      <div class="output-card">
+        <div class="icon">M</div>
+        <h3>Mappa mentale</h3>
+        <p>
+          Una mappa visiva per ogni capitolo. Vedi tutta la struttura del materiale in un colpo d'occhio.
+          Stile radiale classico, gerarchia leggibile.
+        </p>
+      </div>
+
+      <div class="output-card">
+        <div class="icon">A</div>
+        <h3>Podcast personalizzato</h3>
+        <p>
+          Un audio guidato di circa dodici minuti per capitolo, costruito sul tuo materiale.
+          Ascolti in macchina, in palestra, mentre cucini. Il libro entra mentre vivi.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============== REFRAME ============== -->
+<section class="reframe">
+  <div class="container">
+    <h2>Il lavoro pesante non lo fai più tu.</h2>
+    <p class="reframe-line">Tutta la <strong>fase organizzativa</strong>: fatta.</p>
+    <p class="reframe-line">Tutta la <strong>fase mnemonica</strong>: fatta.</p>
+    <p class="reframe-tagline" style="margin-top: 48px;">A noi la fatica. <em>A te il piacere.</em></p>
+  </div>
+</section>
+
+<!-- ============== AUTHORITY ============== -->
+<section class="authority">
+  <div class="container">
+    <h2>Trent'anni di metodo, dentro una macchina.</h2>
+    <p class="lead">
+      Lo strumento applica il Metodo Eureka che Maurizio Possenti ha sviluppato e insegnato
+      a oltre quarantamila persone in trent'anni.
+    </p>
+    <div class="stats">
+      <div class="stat">
+        <span class="number">30</span>
+        <span class="label">anni di metodo</span>
+      </div>
+      <div class="stat">
+        <span class="number">40.000+</span>
+        <span class="label">persone formate</span>
+      </div>
+      <div class="stat">
+        <span class="number">4</span>
+        <span class="label">sezioni pronte al lancio</span>
+      </div>
+    </div>
+    <p class="lead">
+      Esami. Concorsi. Matematica. Lingue. Funzionano tutte, su materiali reali.
+    </p>
+  </div>
+</section>
+
+<!-- ============== ROADMAP 3 FASI ============== -->
+<section class="roadmap">
+  <div class="container">
+    <h2>Come apriremo, in tre fasi.</h2>
+    <p class="roadmap-lead">Non scarsità marketing — sequenza tecnica reale.</p>
+
+    <div class="roadmap-grid">
+      <div class="roadmap-step is-now">
+        <span class="roadmap-step-tag">Fase 1 · qui sei tu</span>
+        <div class="roadmap-step-title">100 founder</div>
+        <div class="roadmap-step-time">Day-1 della beta</div>
+      </div>
+      <div class="roadmap-arrow">→</div>
+      <div class="roadmap-step">
+        <span class="roadmap-step-tag">Fase 2</span>
+        <div class="roadmap-step-title">+1.000 abbonati</div>
+        <div class="roadmap-step-time">~3 mesi dopo</div>
+      </div>
+      <div class="roadmap-arrow">→</div>
+      <div class="roadmap-step">
+        <span class="roadmap-step-tag">Fase 3</span>
+        <div class="roadmap-step-title">Pubblico generale</div>
+        <div class="roadmap-step-time">~6 mesi dopo</div>
+      </div>
+    </div>
+
+    <p class="roadmap-tagline">Chi è in Fase 1 ha <em>mesi di vantaggio</em> sullo strumento prima che lo abbia chiunque altro. Per chi ha un concorso a marzo, un esame a giugno, una promozione a settembre — la differenza è enorme.</p>
+  </div>
+</section>
+
+<!-- ============== FOUNDER OFFER ============== -->
+<section class="founder">
+  <div class="container">
+    <h2>I 100 founder hanno una posizione, non uno sconto.</h2>
+    <p class="lead">Riservato a chi si iscrive prima dell'apertura della beta privata.</p>
+
+    <div class="founder-features">
+      <div class="item">
+        <div class="item-title">PRIMA ONDATA AL LANCIO</div>
+        <div class="item-text">Le iscrizioni iniziali saranno contingentate per scelta tecnica. Chi è in waitlist entra nella prima ondata. Gli altri aspettano la seconda.</div>
+      </div>
+      <div class="item">
+        <div class="item-title">STATUS FOUNDER (primi 100)</div>
+        <div class="item-text">I primi 100 iscritti avranno status founder con condizioni dedicate al lancio.</div>
+      </div>
+      <div class="item">
+        <div class="item-title">NESSUN IMPEGNO ORA</div>
+        <div class="item-text">Niente da pagare ora, niente da decidere ora. Solo il posto tenuto da parte.</div>
+      </div>
+      <div class="item">
+        <div class="item-title">PRIMI A SAPERE</div>
+        <div class="item-text">Aggiornamenti sui progressi + data di apertura beta vanno solo agli iscritti. Da fuori, nessuna comunicazione.</div>
+      </div>
+    </div>
+
+    <a href="#form" class="btn btn-large">Voglio essere tra i primi 100</a>
+  </div>
+</section>
+
+<!-- ============== NERD ASIDE ============== -->
+<section class="nerd-aside">
+  <div class="container">
+    <div class="nerd-card">
+      <span class="nerd-tag">· per i curiosi ·</span>
+      <span class="nerd-question">Sei un piccolo nerd curioso di AI?</span>
+      <p>
+        Sappi che dietro abbiamo combinato <strong>diverse intelligenze</strong> che, con la giusta calibrazione, hanno dato risultati sorprendenti in velocità, performance e comprensione.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============== FAQ ============== -->
+<section class="faq">
+  <div class="container">
+    <h2>Quattro domande veloci.</h2>
+
+    <div class="faq-item">
+      <h3>Quando apre la beta?</h3>
+      <p>Quando è pronta davvero. Non sto fissando una data al pubblico — voglio aprire solo quando lo strumento funziona come deve. I founder lo sapranno per primi.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Costa qualcosa adesso?</h3>
+      <p>No. Iscriverti è gratis. Quando apre la beta privata sarà comunque gratis per i founder per il periodo della prova. Le condizioni di abbonamento successive verranno comunicate solo a quel punto.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Su che materiali funziona?</h3>
+      <p>PDF di qualsiasi tipo: manuali di concorso, testi universitari, dispense, libri tecnici, normativa, manuali di lingua. Quattro sezioni specializzate sono pronte al lancio: esami, concorsi, matematica, lingue.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Posso cambiare idea?</h3>
+      <p>Sì. Ogni email ha un link "esci dalla lista" in fondo. Senza domande, senza fastidi.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============== FOOTER ============== -->
+<footer>
+  <div class="container">
+    <div class="footer-brand">Apprendimento Rapido — Metodo Eureka</div>
+    <p class="footer-tagline">
+      Dal 2001 aiutiamo professionisti, imprenditori e studenti a imparare più velocemente e ricordare di più — con un metodo provato su oltre 40.000 persone.
+    </p>
+
+    <div class="footer-contact">
+      Via Gardiscia 10 · Rovio (CH) 6821<br>
+      <a href="mailto:info@apprendimentorapido.it">info@apprendimentorapido.it</a> · <a href="tel:+390240702168">+39 02 4070 2168</a><br>
+      Lun–Ven 9:00–18:30
+    </div>
+
+    <div class="footer-legal">
+      <a href="https://www.iubenda.com/privacy-policy/89530968" target="_blank" rel="noopener">Privacy Policy</a>
+      <a href="https://www.iubenda.com/privacy-policy/89530968/cookie-policy" target="_blank" rel="noopener">Cookie Policy</a>
+      <a href="https://www.iubenda.com/termini-e-condizioni/89530968" target="_blank" rel="noopener">Termini e Condizioni</a>
+      <a href="https://apprendimentorapido.it">apprendimentorapido.it</a>
+    </div>
+
+    <p class="copyright">© 2026 Apprendimento Rapido — Metodo Eureka. Tutti i diritti riservati.</p>
+  </div>
+</footer>
+
+<script>
+  // ===== Area selector =====
+  document.querySelectorAll('.area-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const area = btn.dataset.area;
+
+      // Toggle button active state
+      document.querySelectorAll('.area-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      // Switch description panel
+      document.querySelectorAll('.area-description').forEach(d => d.classList.remove('active'));
+      const targetDesc = document.getElementById('desc-' + area);
+      if (targetDesc) targetDesc.classList.add('active');
+
+      // Pre-populate hidden form field
+      const areaInput = document.getElementById('area');
+      if (areaInput) areaInput.value = area;
+    });
+  });
+
+  // ===== Form handling =====
+  // Endpoint reale ai-call-system (in produzione su api.apprendimentorapido.it)
+  // Pattern già usato da coaching.html, demo-zoom, ecc.
+  const API_ENDPOINT = 'https://api.apprendimentorapido.it/api/webhook/contact';
+  const LANDING_ID = 'elefantra-anticipo';         // identificativo landing per il sistema admin
+  const LISTA_NAME = 'Elefantra Waitlist';         // nome lista MongoDB (case-insensitive lookup)
+  const REDIRECT_URL = '/anticipo/grazie/';         // thank-you page dopo signup OK
+
+  const form = document.getElementById('waitlist-form');
+  const success = document.getElementById('form-success');
+  const errorBox = document.getElementById('form-error');
+  const btn = document.getElementById('submit-btn');
+
+  function showError(msg) {
+    errorBox.textContent = msg;
+    errorBox.classList.add('show');
+    errorBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+  function clearError() {
+    errorBox.classList.remove('show');
+    errorBox.textContent = '';
+  }
+
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    clearError();
+
+    // Validazione cliente
+    const nome = document.getElementById('nome').value.trim();
+    const cognome = document.getElementById('cognome').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const area = document.getElementById('area').value || '';
+    const consent = document.getElementById('consent').checked;
+    const honeypot = document.getElementById('hp_az9q7x').value;
+
+    if (!nome || !cognome || !email) {
+      showError('Per favore compila nome, cognome ed email.');
+      return;
+    }
+    if (!consent) {
+      showError('Per iscriverti devi accettare l\'informativa privacy.');
+      return;
+    }
+    if (honeypot) {
+      // Bot rilevato: simulazione successo silente, niente POST
+      form.style.display = 'none';
+      success.classList.add('show');
+      return;
+    }
+
+    const originalText = btn.textContent;
+    btn.textContent = 'Invio in corso...';
+    btn.disabled = true;
+
+    const payload = {
+      nome: nome,
+      cognome: cognome,
+      email: email,
+      lista: LISTA_NAME,
+      landing_id: LANDING_ID,
+      source: 'landing-anticipo',
+      tags: ['elefantra-founder', 'waitlist-fase1'],
+      custom_fields: {
+        area_studio: area,
+        consent_marketing: true,
+        consent_marketing_at: new Date().toISOString(),
+        original_source: 'landing-anticipo'
+      }
+    };
+
+    try {
+      const response = await fetch(API_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const data = await response.json().catch(() => ({}));
+
+      if (response.ok && data.success !== false) {
+        // Tracking eventuale (se pixel caricati a livello sito)
+        if (typeof fbq === 'function') {
+          fbq('track', 'Lead', { content_name: 'Elefantra Waitlist' });
+        }
+        if (typeof gtag === 'function') {
+          gtag('event', 'generate_lead', {
+            event_category: 'Form',
+            event_label: 'Elefantra Waitlist'
+          });
+        }
+
+        // Redirect a thank-you page
+        window.location.href = REDIRECT_URL;
+      } else {
+        btn.textContent = originalText;
+        btn.disabled = false;
+        const errMsg = (data && data.detail) || 'Si è verificato un problema. Riprova tra qualche istante.';
+        showError(errMsg);
+      }
+    } catch (err) {
+      btn.textContent = originalText;
+      btn.disabled = false;
+      showError('Connessione non riuscita. Controlla la rete e riprova.');
+    }
+  });
+</script>
+
+</body>
+</html>
