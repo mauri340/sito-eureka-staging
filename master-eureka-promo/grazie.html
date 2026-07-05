@@ -376,15 +376,12 @@ h1{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3.6vw,2.15rem);co
 <script src="promo-config.js"></script>
 <script>
 (function(){
-  // Default TEST (staging / locale). Live solo se promo-config dice isProduction.
-  var stripeAccontoUrl='https://buy.stripe.com/test_6oUbJ1eqo4GG51QbwLbwk02';
-  if(window.MASTER_EUREKA_PROMO&&window.MASTER_EUREKA_PROMO.isProduction&&window.MASTER_EUREKA_PROMO.stripe){
-    stripeAccontoUrl=window.MASTER_EUREKA_PROMO.stripe.accontoUrl;
-  }
+  var CFG=window.MASTER_EUREKA_PROMO||{};
+  var stripeAccontoUrl=(CFG.stripe&&CFG.stripe.accontoUrl)||'https://buy.stripe.com/test_6oUbJ1eqo4GG51QbwLbwk02';
+  var caparraUrl=(CFG.stripe&&CFG.stripe.caparraUrl)||'https://buy.stripe.com/test_8x2aEXbec4GG79Y44jbwk03';
   var CONFIG={
     stripeAccontoUrl:stripeAccontoUrl,
-    // TODO Maurizio: link Stripe caparra 50€ → stesso pattern acconto
-    caparraUrl:'',
+    caparraUrl:caparraUrl,
     caparraImporto:50,
     // Acuity call privata (solo pagamenti diversi)
     acuityOwnerId:'24847459',
