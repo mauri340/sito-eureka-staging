@@ -115,7 +115,7 @@
         clockEl.textContent = 'Finestra scaduta';
         var lbl = document.querySelector('.count-label');
         if (lbl) lbl.textContent = 'Bonus riservati non più garantiti';
-        if (subEl) subEl.textContent = 'I bonus riservati non sono più garantiti, ma il prezzo promo a 2.497 euro resta fino a giovedì alle 19. Puoi comunque iscriverti con l\'acconto o la caparra.';
+        if (subEl) subEl.textContent = 'I bonus riservati non sono più garantiti, ma il prezzo promo a 2.497 euro resta fino a giovedì alle 19. Puoi comunque iscriverti con l\'acconto o il deposito LIVE.';
         if (bonusBox) bonusBox.classList.add('dim');
         return;
       }

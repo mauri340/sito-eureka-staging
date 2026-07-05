@@ -42,6 +42,8 @@ h2{font-family:'Playfair Display',serif;font-size:1.45rem;color:var(--navy);text
 .after-box li strong{color:var(--text);}
 .contact{text-align:center;font-size:14px;color:var(--muted);line-height:1.85;}
 .contact a{color:var(--teal-dk);font-weight:600;}
+.page-help{margin-top:18px;text-align:center;font-size:14px;color:var(--muted);line-height:1.65;}
+.page-help a{color:var(--teal-dk);font-weight:700;text-decoration:underline;text-underline-offset:3px;}
 .footer-promo{background:var(--navy);color:rgba(255,255,255,.65);padding:40px 0 48px;margin-top:36px;}
 .footer-promo-inner{max-width:720px;margin:0 auto;padding:0 28px;text-align:center;}
 .footer-promo-legal{font-size:12px;color:rgba(255,255,255,.4);padding-top:20px;border-top:1px solid rgba(255,255,255,.08);}
@@ -53,9 +55,9 @@ h2{font-family:'Playfair Display',serif;font-size:1.45rem;color:var(--navy);text
 
   <div class="card hero-card">
     <div class="icon">🎥</div>
-    <span class="price-tag">Caparra 50€ confermata · LIVE riservata</span>
+    <span class="price-tag">Deposito 50€ confermato · LIVE riservata</span>
     <h1>Perfetto<span id="lead-name"></span> — il tuo posto in LIVE è riservato</h1>
-    <p class="hero-lead">Hai bloccato la <strong style="color:#fff;">LIVE su Zoom</strong> con Maurizio e i docenti. Il <strong style="color:#fff;">bonus di oggi</strong> resta congelato fino a mercoledì. Se ti iscrivi dopo, i 50€ si scalano dal prezzo.</p>
+    <p class="hero-lead">Hai riservato la <strong style="color:#fff;">LIVE su Zoom</strong> con Maurizio e i docenti. Il <strong style="color:#fff;">bonus di oggi</strong> resta congelato fino a mercoledì.</p>
   </div>
 
   <div class="card">
@@ -76,16 +78,17 @@ h2{font-family:'Playfair Display',serif;font-size:1.45rem;color:var(--navy);text
     <div class="after-box">
       <h3>Cosa succede adesso</h3>
       <ol>
-        <li><strong>Subito:</strong> ricevi via email la conferma caparra e — appena disponibile — il <strong>link Zoom</strong>.</li>
+        <li><strong>Subito:</strong> ricevi via email la conferma del deposito e — appena disponibile — il <strong>link Zoom</strong>.</li>
         <li><strong>Fino a mercoledì:</strong> il bonus di oggi resta riservato a te.</li>
         <li><strong>In LIVE:</strong> se decidi di iscriverti, confermi il prezzo promo 2.497€ (acconto 500€ + saldo).</li>
-        <li>Se partecipi e non ti iscrivi, ti <strong>rimborsiamo</strong> la caparra — come indicato in pagina.</li>
+        <li><strong>Dopo la LIVE:</strong> se partecipi, il giorno dopo ti <strong>rimborsiamo</strong> il deposito — a prescindere dalla tua decisione. Lo perdi solo se <strong>non ti presenti</strong>.</li>
       </ol>
     </div>
   </div>
 
   <div class="card">
-    <p class="contact">
+    <p class="page-help">Non ti è chiaro qualcosa? Vuoi un aiuto? <a href="https://wa.me/390240702168?text=Ciao%2C%20ho%20compilato%20il%20form%20Master%20Eureka%20e%20vorrei%20un%20aiuto" target="_blank" rel="noopener">Scrivici su WhatsApp</a></p>
+    <p class="contact" style="margin-top:16px;">
       <strong>Domande?</strong><br>
       <a href="mailto:pagamenti@apprendimentorapido.it">pagamenti@apprendimentorapido.it</a> ·
       <a href="tel:+390240702168">02 4070 2168</a> (Lun–Ven 9–18)
@@ -135,8 +138,8 @@ h2{font-family:'Playfair Display',serif;font-size:1.45rem;color:var(--navy);text
     zoomCta.innerHTML='<p class="zoom-pending" style="margin:16px 0 0;">Il link Zoom ti arriva via email entro poche ore. Salva questa pagina e controlla la posta (anche spam).</p>';
   }
 
-  if(typeof fbq==='function')fbq('track','Purchase',{value:50,currency:'EUR',content_name:'Caparra LIVE Master Eureka'});
-  if(typeof gtag==='function')gtag('event','purchase',{value:50,currency:'EUR',event_label:'Caparra LIVE Master Eureka'});
+  if(typeof fbq==='function')fbq('track','Purchase',{value:50,currency:'EUR',content_name:'Deposito LIVE Master Eureka'});
+  if(typeof gtag==='function')gtag('event','purchase',{value:50,currency:'EUR',event_label:'Deposito LIVE Master Eureka'});
 
   async function markCaparraPaidOnce(){
     if(!email)return;
