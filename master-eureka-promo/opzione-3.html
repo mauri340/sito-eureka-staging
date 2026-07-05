@@ -42,7 +42,7 @@ body{font-family:'Inter',sans-serif;background:var(--off-white);color:var(--text
 
   <div class="card">
     <span class="btn-route-label" style="display:block;margin-bottom:8px;color:#8a6010;">Opzione 3</span>
-    <h1 class="page-title">Condizioni di pagamento su misura<span id="lead-name"></span></h1>
+    <h1 class="page-title">Condizioni di pagamento su misura</h1>
     <p class="path-question">«Sei convinto e vorresti aderire, ma cerchi condizioni più consone alla tua situazione.»</p>
 
     <p class="page-lead">Sei convinto sul Master Eureka e vuoi restare in promo a <strong>2.497 euro</strong>, ma ti serve un <strong>piano di pagamento</strong> più adatto a te — non un sconto, un calendario su misura.</p>
@@ -78,7 +78,6 @@ body{font-family:'Inter',sans-serif;background:var(--off-white);color:var(--text
 <script>
 (function(){
   var data=PROMO_THANKYOU.loadBookingData();
-  if(data.nome){var ln=document.getElementById('lead-name');if(ln)ln.textContent=', '+data.nome;}
   var q=new URLSearchParams();
   q.set('owner','24847459');
   q.set('appointmentType','95370223');
