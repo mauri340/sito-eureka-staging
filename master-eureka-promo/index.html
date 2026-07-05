@@ -78,9 +78,6 @@ body{font-family:'Inter',sans-serif;background:var(--off-white);color:var(--text
 .testi-name{font-weight:700;color:var(--navy);font-size:15px;}
 .testi-role{font-size:13px;color:var(--teal-dk);margin-top:2px;font-weight:500;}
 
-.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center;}
-.stat-num{font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:700;color:var(--gold);line-height:1;}
-.stat-lbl{font-size:13px;color:var(--muted);margin-top:8px;font-weight:500;}
 
 .accordion-item{background:#fff;border:1px solid var(--light2);border-radius:12px;margin-bottom:12px;overflow:hidden;}
 .accordion-header{padding:20px 24px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-weight:600;font-size:15px;color:var(--navy);transition:background .2s;user-select:none;}
@@ -482,7 +479,7 @@ body{font-family:'Inter',sans-serif;background:var(--off-white);color:var(--text
 body.has-sticky-cta{padding-bottom:80px;}
 
 @media(max-width:900px){
-  .hero-inner,.grid-2,.grid-3,.grid-4,.stats-grid,.form-row,.topics-grid,.benefit-grid,.decision-grid,.compact-grid,.utilita-list,.quadrant-grid,.cost-compare,.storie-grid,.verita-grid,.authority-grid,.path-contrast{grid-template-columns:1fr;}
+  .hero-inner,.grid-2,.grid-3,.grid-4,.form-row,.topics-grid,.benefit-grid,.decision-grid,.compact-grid,.utilita-list,.quadrant-grid,.cost-compare,.storie-grid,.verita-grid,.authority-grid,.path-contrast{grid-template-columns:1fr;}
   .flow-plus{display:none;}
   .docente-card{flex-direction:column;}
   .section{padding:72px 0;}
@@ -617,17 +614,6 @@ body.has-sticky-cta{padding-bottom:80px;}
     })();
     </script>
     <p style="text-align:center;margin-top:32px;"><a href="#cosa-include" class="btn btn-gold btn-lg">Continua — scopri il percorso</a></p>
-  </div>
-</section>
-
-<section class="bg-navy" style="padding:40px 0;">
-  <div class="container">
-    <div class="stats-grid stats-section">
-      <div><div class="stat-num" data-count="98" data-suffix="%">0</div><div class="stat-lbl" style="color:rgba(255,255,255,.55);">Soddisfazione a fine percorso</div></div>
-      <div><div class="stat-num" data-count="40" data-suffix="k+">0</div><div class="stat-lbl" style="color:rgba(255,255,255,.55);">Studenti e professionisti formati</div></div>
-      <div><div class="stat-num" data-count="25" data-suffix="+">0</div><div class="stat-lbl" style="color:rgba(255,255,255,.55);">Anni di attività</div></div>
-      <div><div class="stat-num" data-count="80" data-suffix="k+">0</div><div class="stat-lbl" style="color:rgba(255,255,255,.55);">Copie libro Giunti</div></div>
-    </div>
   </div>
 </section>
 
@@ -1501,24 +1487,6 @@ body.has-sticky-cta{padding-bottom:80px;}
 <script src="/whatsapp-widget.js"></script>
 <script src="/components/footer-loader.js"></script>
 <script>
-function animateCounters(){
-  document.querySelectorAll('[data-count]').forEach(el=>{
-    const target=parseInt(el.dataset.count);
-    const suffix=el.dataset.suffix||'';
-    let current=0;const step=target/60;
-    const timer=setInterval(()=>{
-      current+=step;
-      if(current>=target){current=target;clearInterval(timer);}
-      el.textContent=Math.floor(current)+suffix;
-    },16);
-  });
-}
-const obs=new IntersectionObserver((entries)=>{
-  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');
-    if(e.target.classList.contains('stats-section'))animateCounters();}});
-},{threshold:0.2});
-document.querySelectorAll('.stats-section').forEach(el=>obs.observe(el));
-
 document.querySelectorAll('.accordion-header').forEach(header=>{
   header.addEventListener('click',()=>{
     const body=header.nextElementSibling;
