@@ -10,7 +10,8 @@
   #whatsapp-widget {
     position: fixed;
     bottom: 24px;
-    left: 24px;
+    right: 24px;
+    left: auto;
     z-index: 10001;
     width: 60px;
     height: 60px;
@@ -105,7 +106,8 @@
   @media (max-width: 860px) {
     #whatsapp-widget {
       bottom: 16px;
-      left: 16px;
+      right: 16px;
+      left: auto;
       width: 54px;
       height: 54px;
     }
@@ -125,7 +127,8 @@
   @media (max-width: 480px) {
     #whatsapp-widget {
       bottom: 96px; /* Move up when chat widget is full screen */
-      left: 16px;
+      right: 16px;
+      left: auto;
     }
   }
   `;
