@@ -175,6 +175,7 @@ input[readonly]{background:var(--off-white);color:var(--muted);}
   var cognome=(stored&&stored.cognome)||param('cognome')||'';
   var telefono=(stored&&stored.telefono)||param('telefono')||'';
   var emailStored=(stored&&stored.email)||param('email')||'';
+  var promoDay=(stored&&stored.promo_day)||param('promo_day')||'';
 
   if(nome){var ln=document.getElementById('lead-name'); if(ln)ln.textContent=', '+nome;}
   if(emailStored){document.getElementById('email').value=emailStored;}
@@ -244,7 +245,8 @@ input[readonly]{background:var(--off-white);color:var(--muted);}
         stato:stato,
         acconto_pagato:true,
         dati_contratto_completati:true,
-        dati_contratto_completati_at:new Date().toISOString()
+        dati_contratto_completati_at:new Date().toISOString(),
+        promo_day:promoDay?parseInt(promoDay,10):undefined
       }
     };
     try{

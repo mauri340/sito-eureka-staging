@@ -1582,6 +1582,11 @@ async function submitPromoForm(e){
     custom_fields:{
       offerta:'Master Eureka Completo',prezzo_listino:4997,prezzo_promo:2497,
       materia:materia,
+      promo_day:(function(){
+        var d=new URLSearchParams(window.location.search).get('day');
+        var idx=(d!==null)?parseInt(d,10):new Date().getDay();
+        return (idx>=1&&idx<=4)?idx:1;
+      })(),
       sconto_percentuale:50,consent_marketing:true,
       consent_marketing_at:new Date().toISOString(),
       original_source:'landing-master-eureka-promo-estiva',
@@ -1594,7 +1599,7 @@ async function submitPromoForm(e){
     if(response.ok&&data.success!==false){
       if(typeof fbq==='function')fbq('track','Lead',{content_name:'Master Eureka Promo 2497'});
       if(typeof gtag==='function')gtag('event','generate_lead',{event_category:'Form',event_label:'Master Eureka Promo 2497'});
-      localStorage.setItem(BOOKING_KEY,JSON.stringify({nome,cognome,email,telefono,materia,timestamp:new Date().toISOString()}));
+      localStorage.setItem(BOOKING_KEY,JSON.stringify({nome,cognome,email,telefono,materia,promo_day:payload.custom_fields.promo_day,timestamp:new Date().toISOString()}));
       localStorage.setItem(SPOT_KEY,String(Date.now()));
       window.location.href=REDIRECT_URL+'?'+new URLSearchParams({nome,cognome,email,telefono,materia}).toString();
     }else{
