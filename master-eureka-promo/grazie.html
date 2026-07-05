@@ -373,12 +373,17 @@ h1{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3.6vw,2.15rem);co
 </footer>
 <script src="/whatsapp-widget.js"></script>
 <script src="/components/footer-loader.js"></script>
+<script src="promo-config.js"></script>
 <script>
 (function(){
+  // Default TEST (staging / locale). Live solo se promo-config dice isProduction.
+  var stripeAccontoUrl='https://buy.stripe.com/test_6oUbJ1eqo4GG51QbwLbwk02';
+  if(window.MASTER_EUREKA_PROMO&&window.MASTER_EUREKA_PROMO.isProduction&&window.MASTER_EUREKA_PROMO.stripe){
+    stripeAccontoUrl=window.MASTER_EUREKA_PROMO.stripe.accontoUrl;
+  }
   var CONFIG={
-    // Link Stripe reale per l'acconto da 500€
-    stripeAccontoUrl:'https://buy.stripe.com/14AfZh964ehg51Q1Wbbwk05',
-    // TODO Maurizio: link Stripe per la CAPARRA da 50€ (secondo link). Se vuoto → fallback WhatsApp.
+    stripeAccontoUrl:stripeAccontoUrl,
+    // TODO Maurizio: link Stripe caparra 50€ → stesso pattern acconto
     caparraUrl:'',
     caparraImporto:50,
     // Acuity call privata (solo pagamenti diversi)
@@ -410,7 +415,7 @@ h1{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3.6vw,2.15rem);co
   function loadBookingData(){
     var params=new URLSearchParams(window.location.search);
     var stored=null;
-    try{stored=JSON.parse(localStorage.getItem('masterEurekaPromoBooking')||'null');}catch(e){}
+    try{stored=JSON.parse(localStorage.getItem((window.MASTER_EUREKA_PROMO&&window.MASTER_EUREKA_PROMO.storageKeys&&window.MASTER_EUREKA_PROMO.storageKeys.booking)||'masterEurekaPromoBooking')||'null');}catch(e){}
     var g=function(k){return params.get(k)||(stored&&stored[k])||'';};
     var nome=g('nome'),cognome=g('cognome'),email=g('email'),telefono=g('telefono'),materia=g('materia');
     return {nome,cognome,email,telefono,materia,fullName:(nome+' '+cognome).trim()};
@@ -450,7 +455,7 @@ h1{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3.6vw,2.15rem);co
   }
 
   // ---- Countdown personale (1h da quando ha "preso il posto") ----
-  var KEY='masterEurekaSpotTaken';
+  var KEY=(window.MASTER_EUREKA_PROMO&&window.MASTER_EUREKA_PROMO.storageKeys&&window.MASTER_EUREKA_PROMO.storageKeys.spotTaken)||'masterEurekaSpotTaken';
   var taken;
   try{taken=parseInt(localStorage.getItem(KEY),10);}catch(e){}
   if(param('reset')!==null||!taken||isNaN(taken)){taken=Date.now();try{localStorage.setItem(KEY,String(taken));}catch(e){}}

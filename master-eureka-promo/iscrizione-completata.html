@@ -158,25 +158,55 @@ input[readonly]{background:var(--off-white);color:var(--muted);}
 
 <script src="/whatsapp-widget.js"></script>
 <script src="/components/footer-loader.js"></script>
+<script src="promo-config.js"></script>
 <script>
 (function(){
-  var API_ENDPOINT='https://api.apprendimentorapido.it/api/webhook/contact';
-  var LISTA_NAME='promozione master eureka estiva';
+  var CFG=window.MASTER_EUREKA_PROMO||{};
+  var API_ENDPOINT=CFG.apiEndpoint||'https://api.apprendimentorapido.it/api/webhook/contact';
+  var LISTA_NAME=CFG.listaName||'promozione master eureka estiva';
+  var LANDING_ID=CFG.landingId||'master-eureka-promo-estiva';
+  var SK=CFG.storageKeys||{booking:'masterEurekaPromoBooking',accontoBeacon:'masterEurekaAccontoBeaconSent'};
 
-  // Dati dal localStorage (chi ha pagato, arriva dal form iniziale)
+  function param(k){return new URLSearchParams(window.location.search).get(k);}
+
   var stored=null;
-  try{stored=JSON.parse(localStorage.getItem('masterEurekaPromoBooking')||'null');}catch(e){}
-  var nome=(stored&&stored.nome)||'';
-  var cognome=(stored&&stored.cognome)||'';
-  var telefono=(stored&&stored.telefono)||'';
-  var emailStored=(stored&&stored.email)||'';
+  try{stored=JSON.parse(localStorage.getItem(SK.booking)||'null');}catch(e){}
+  var nome=(stored&&stored.nome)||param('nome')||'';
+  var cognome=(stored&&stored.cognome)||param('cognome')||'';
+  var telefono=(stored&&stored.telefono)||param('telefono')||'';
+  var emailStored=(stored&&stored.email)||param('email')||'';
 
   if(nome){var ln=document.getElementById('lead-name'); if(ln)ln.textContent=', '+nome;}
   if(emailStored){document.getElementById('email').value=emailStored;}
 
-  // Tracking: qui è avvenuto il pagamento dell'acconto
   if(typeof fbq==='function')fbq('track','Purchase',{value:500,currency:'EUR',content_name:'Acconto Master Eureka 2497'});
   if(typeof gtag==='function')gtag('event','purchase',{value:500,currency:'EUR',event_label:'Acconto Master Eureka'});
+
+  // Arrivo da Stripe: segna acconto pagato in CRM (anche se non compila subito i dati fiscali)
+  async function markAccontoPaidOnce(){
+    if(!emailStored)return;
+    try{
+      if(sessionStorage.getItem(SK.accontoBeacon))return;
+    }catch(e){}
+    var payload={
+      nome:nome||'—',cognome:cognome||'—',email:emailStored,telefono:telefono||undefined,
+      lista:LISTA_NAME,landing_id:LANDING_ID,
+      source:'stripe-success-acconto',
+      tags:['master-eureka-promo','acconto-pagato'],
+      custom_fields:{
+        acconto_pagato:true,
+        acconto_pagato_at:new Date().toISOString(),
+        stripe_session_id:param('session_id')||undefined
+      }
+    };
+    try{
+      var resp=await fetch(API_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+      if(resp.ok){
+        try{sessionStorage.setItem(SK.accontoBeacon,'1');}catch(e){}
+      }
+    }catch(err){/* non bloccare la pagina */}
+  }
+  markAccontoPaidOnce();
 
   var form=document.getElementById('dati-form');
   var errBox=document.getElementById('form-error');
@@ -201,8 +231,9 @@ input[readonly]{background:var(--off-white);color:var(--muted);}
     btn.disabled=true;btn.textContent='Invio in corso...';
 
     var payload={
-      nome:nome,cognome:cognome,email:email,telefono:telefono,
-      lista:LISTA_NAME,
+      nome:nome||'—',cognome:cognome||'—',email:email,telefono:telefono||undefined,
+      lista:LISTA_NAME,landing_id:LANDING_ID,
+      indirizzo:via,citta:citta,cap:cap,nazione:stato,
       source:'iscrizione-completata-acconto',
       tags:['master-eureka-promo','acconto-pagato','dati-contratto-completati'],
       custom_fields:{
@@ -212,7 +243,8 @@ input[readonly]{background:var(--off-white);color:var(--muted);}
         codice_fiscale:cf,
         stato:stato,
         acconto_pagato:true,
-        dati_contratto_completati:true
+        dati_contratto_completati:true,
+        dati_contratto_completati_at:new Date().toISOString()
       }
     };
     try{
