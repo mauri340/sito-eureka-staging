@@ -31,6 +31,8 @@
     isProduction: isProduction,
     redirects: {
       grazie: '/master-eureka-promo/grazie.html',
+      opzione2: '/master-eureka-promo/opzione-2.html',
+      opzione3: '/master-eureka-promo/opzione-3.html',
       iscrizioneCompletata: '/master-eureka-promo/iscrizione-completata.html',
       caparraCompletata: '/master-eureka-promo/caparra-completata.html',
     },

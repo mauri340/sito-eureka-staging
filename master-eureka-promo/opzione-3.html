@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2X3V7JZPBJ"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-2X3V7JZPBJ');</script>
+<title>Opzione 3 — Pagamento su misura · Master Eureka</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="promo-thankyou.css">
+<style>
+:root{--navy:#0D1B2A;--teal-dk:#007a63;--gold:#B8973E;--light2:#E8E7E2;--off-white:#F8F7F4;--text:#1a1a2e;--muted:#4e5c6b}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--off-white);color:var(--text);line-height:1.65}
+.container{max-width:820px;margin:0 auto;padding:40px 24px 100px}
+.card{background:#fff;border:1px solid var(--light2);border-radius:20px;padding:36px;box-shadow:0 16px 48px rgba(13,27,42,.08);margin-bottom:22px}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:16px 24px;border-radius:10px;font-size:15px;font-weight:700;font-family:inherit;text-decoration:none;border:none;cursor:pointer;width:100%}
+.btn-outline{background:#fff;color:var(--navy);border:2px solid var(--navy)}
+.page-back{display:inline-flex;font-size:14px;font-weight:600;color:var(--teal-dk);text-decoration:none;margin-bottom:20px}
+.page-title{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,3vw,1.85rem);color:var(--navy);margin-bottom:12px}
+.page-lead{font-size:15px;color:var(--muted);margin-bottom:24px;line-height:1.75}
+.path-list{text-align:left;font-size:14px;color:var(--muted);margin:0 0 20px;padding-left:18px;line-height:1.7}
+.path-list li strong{color:var(--navy)}
+.path-question{font-style:italic;color:var(--muted);font-size:15px;margin-bottom:16px}
+.btn-route-label{font-size:11px;font-weight:800;text-transform:uppercase;color:#8a6010}
+.contact{text-align:center;font-size:14px;color:var(--muted)}
+.contact a{color:var(--teal-dk);font-weight:600}
+.footer-promo{background:var(--navy);color:rgba(255,255,255,.82);padding:44px 0 52px;margin-top:40px;text-align:center}
+.footer-promo-hours{font-size:12px;color:rgba(255,255,255,.45)}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <a href="grazie.html" class="page-back">← Torna alla conferma iscrizione</a>
+
+  <div class="card">
+    <span class="btn-route-label" style="display:block;margin-bottom:8px;color:#8a6010;">Opzione 3</span>
+    <h1 class="page-title">Condizioni di pagamento su misura<span id="lead-name"></span></h1>
+    <p class="path-question">«Sei convinto e vorresti aderire, ma cerchi condizioni più consone alla tua situazione.»</p>
+
+    <p class="page-lead">Sei convinto sul Master Eureka e vuoi restare in promo a <strong>2.497 euro</strong>, ma ti serve un <strong>piano di pagamento</strong> più adatto a te — non un sconto, un calendario su misura.</p>
+
+    <p class="page-lead" style="margin-bottom:28px;">Prenota un <strong>appuntamento telefonico</strong> con Maurizio: ne parlate insieme e trovate la soluzione giusta, sempre entro le condizioni della Campagna Estate.</p>
+
+    <ul class="path-list">
+      <li>Promo <strong>2.497€</strong> confermata in call (non torni al prezzo pieno).</li>
+      <li>Rate e tempistiche concordate con te — niente sorprese.</li>
+      <li>Stessi contenuti del Master Eureka completo.</li>
+    </ul>
+
+    <a href="#" class="btn btn-outline" id="private-call-link" target="_blank" rel="noopener">Prenota un appuntamento telefonico con Maurizio →</a>
+  </div>
+
+  <div class="card">
+    <p class="contact">Pronto a pagare l'acconto ora? <a href="grazie.html">Torna indietro — acconto 500€</a></p>
+  </div>
+</div>
+
+<footer class="footer-promo">
+  <div class="footer-promo-inner">
+    <p class="footer-promo-hours">Pagamenti: pagamenti@apprendimentorapido.it · 02 4070 2168</p>
+    <div class="footer-promo-legal"><span>© 2026 Apprendimento Rapido</span></div>
+  </div>
+</footer>
+
+<script src="promo-config.js"></script>
+<script src="promo-grazie-common.js"></script>
+<script>
+(function(){
+  var data=PROMO_THANKYOU.loadBookingData();
+  if(data.nome){var ln=document.getElementById('lead-name');if(ln)ln.textContent=', '+data.nome;}
+  var q=new URLSearchParams();
+  if(data.nome)q.set('firstName',data.nome);
+  if(data.cognome)q.set('lastName',data.cognome);
+  if(data.email)q.set('email',data.email);
+  if(data.telefono)q.set('phone',data.telefono);
+  document.getElementById('private-call-link').href='https://app.acuityscheduling.com/schedule.php?owner=24847459&'+q.toString();
+})();
+</script>
+</body>
+</html>
