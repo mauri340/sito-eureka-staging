@@ -159,8 +159,8 @@ body{font-family:'Inter',sans-serif;background:var(--off-white);color:var(--text
 .form-group input{width:100%;padding:13px 16px;border:1.5px solid var(--light2);border-radius:10px;font-size:14px;font-family:inherit;color:var(--text);background:#fff;outline:none;transition:border-color .2s;}
 .form-group input::placeholder{color:var(--muted-lt);}
 .form-group input:focus{border-color:var(--navy);}
-.form-checkbox{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--muted);line-height:1.55;}
-.form-checkbox input{width:auto;margin-top:3px;accent-color:var(--navy);}
+.form-checkbox{display:flex;gap:12px;align-items:flex-start;font-size:13.5px;color:var(--muted);line-height:1.6;cursor:pointer;}
+.form-checkbox input{width:24px;height:24px;min-width:24px;flex-shrink:0;margin-top:1px;accent-color:var(--teal);cursor:pointer;}
 .form-checkbox a{color:var(--navy);font-weight:500;}
 .btn-submit{width:100%;padding:17px;font-size:16px;font-weight:700;background:var(--gold);color:#fff;border:none;border-radius:10px;cursor:pointer;font-family:'Inter',sans-serif;transition:background .2s,transform .2s,box-shadow .2s;}
 .btn-submit:hover{background:#a07c2a;transform:translateY(-2px);box-shadow:0 8px 24px rgba(184,151,62,.35);}
@@ -1139,7 +1139,7 @@ body.has-sticky-cta{padding-bottom:80px;}
         <div class="hp-field" aria-hidden="true"><label for="hp_promo">Non compilare</label><input type="text" id="hp_promo" name="hp_promo" tabindex="-1" autocomplete="off"></div>
         <label class="form-checkbox">
           <input type="checkbox" id="consent" class="consent-check" required>
-          <span>Acconsento al trattamento dei dati per ricevere informazioni sull'offerta Master Eureka e per essere ricontattato/a. Ho letto l'<a href="https://www.iubenda.com/privacy-policy/89530968" target="_blank" rel="noopener">informativa privacy</a>.</span>
+          <span><strong style="color:var(--navy);display:block;margin-bottom:4px;">Accettazione *</strong>Cliccando sul pulsante "Vai al passo numero due", Lei dichiara di aver preso visione dell'<a href="https://www.iubenda.com/privacy-policy/89530968" target="_blank" rel="noopener">informativa privacy</a> – ai sensi degli art. 6 e 19 LPD (CH) │ 12 e 13 GDPR (EU) e acconsente al trattamento dei dati personali per finalità di marketing diretto di Apprendimento Rapido.</span>
         </label>
         <div style="margin-top:28px;">
           <button type="submit" class="btn-submit" id="submit-btn">Vai al passo numero due →</button>
