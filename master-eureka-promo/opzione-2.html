@@ -48,7 +48,7 @@ body{font-family:'Inter',sans-serif;background:var(--off-white);color:var(--text
 
   <div class="card">
     <span class="btn-route-label" style="display:block;margin-bottom:8px;">Opzione 2</span>
-    <h1 class="page-title">Hai ancora dei dubbi<span id="lead-name"></span></h1>
+    <h1 class="page-title">Hai ancora dei dubbi</h1>
     <p class="path-question">«Vorresti approfondire meglio prima di decidere.»</p>
 
     <span class="live-badge">🎥 LIVE su Zoom · Mercoledì 8 luglio ore 21:00 · gruppo ristretto · niente replay</span>
@@ -97,7 +97,6 @@ body{font-family:'Inter',sans-serif;background:var(--off-white);color:var(--text
 <script>
 (function(){
   var data=PROMO_THANKYOU.loadBookingData();
-  if(data.nome){var ln=document.getElementById('lead-name');if(ln)ln.textContent=', '+data.nome;}
   var caparraUrl=(window.MASTER_EUREKA_PROMO&&window.MASTER_EUREKA_PROMO.stripe&&window.MASTER_EUREKA_PROMO.stripe.caparraUrl)||'https://buy.stripe.com/test_8x2aEXbec4GG79Y44jbwk03';
   if(data.email)caparraUrl+=(caparraUrl.indexOf('?')>-1?'&':'?')+'prefilled_email='+encodeURIComponent(data.email);
   var btn=document.getElementById('caparra-btn');
