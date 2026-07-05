@@ -1559,18 +1559,18 @@ body.has-sticky-cta{padding-bottom:80px;}
 <script src="/whatsapp-widget.js"></script>
 <script src="/components/footer-loader.js"></script>
 <script>
-document.querySelectorAll('.accordion-header').forEach(header=>{
-  header.addEventListener('click',()=>{
-    const body=header.nextElementSibling;
-    const arrow=header.querySelector('.accordion-arrow');
-    const open=body.classList.contains('open');
-    document.querySelectorAll('.accordion-body').forEach(b=>b.classList.remove('open'));
-    document.querySelectorAll('.accordion-arrow').forEach(a=>a.classList.remove('open'));
-    if(!open){body.classList.add('open');arrow.classList.add('open');}
-  });
+document.addEventListener('click',function(e){
+  var header=e.target.closest('.accordion-header');
+  if(!header)return;
+  var body=header.nextElementSibling;
+  if(!body||!body.classList.contains('accordion-body'))return;
+  var arrow=header.querySelector('.accordion-arrow');
+  var open=body.classList.contains('open');
+  document.querySelectorAll('.accordion-body').forEach(function(b){b.classList.remove('open');});
+  document.querySelectorAll('.accordion-arrow').forEach(function(a){a.classList.remove('open');});
+  if(!open){body.classList.add('open');if(arrow)arrow.classList.add('open');}
 });
-
-<script src="/components/footer-loader.js"></script>
+</script>
 <script src="promo-config.js"></script>
 <script>
 const API_ENDPOINT=(window.MASTER_EUREKA_PROMO&&window.MASTER_EUREKA_PROMO.apiEndpoint)||'https://api.apprendimentorapido.it/api/webhook/contact';
