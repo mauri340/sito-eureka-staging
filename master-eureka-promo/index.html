@@ -170,6 +170,29 @@ body{font-family:'Inter',sans-serif;background:var(--off-white);color:var(--text
 .form-wrap .promo-steps-desc{max-width:200px;}
 .form-wrap .promo-steps-desc strong{color:var(--navy);font-weight:700;}
 .form-wrap .form-ps{margin-top:24px;max-width:none;}
+.form-intro{margin:0 0 24px;}
+.form-intro p{font-size:15px;color:var(--muted);line-height:1.75;margin:0 0 12px;}
+.form-intro p:last-child{margin-bottom:0;}
+.form-section-title{font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--navy);margin:0 0 16px;}
+.form-included{display:flex;flex-direction:column;gap:16px;margin:0 0 24px;}
+.form-included-item > p:first-child{font-size:14.5px;font-weight:700;color:var(--navy);margin:0 0 8px;line-height:1.4;}
+.form-included-item ul{margin:0;padding-left:22px;color:var(--muted);font-size:14px;line-height:1.75;}
+.form-included-item ul li{margin-bottom:6px;}
+.form-included-item ul li:last-child{margin-bottom:0;}
+.form-included-item > p:last-child:not(:first-child){font-size:14px;color:var(--muted);line-height:1.75;margin:0;}
+.form-included-item > p:only-child{font-size:14px;color:var(--muted);line-height:1.75;margin:0;}
+.form-divider{border:none;border-top:1px solid var(--light2);margin:0 0 24px;}
+.form-price-block{display:flex;flex-direction:column;gap:10px;margin-bottom:20px;}
+.form-price-block:last-of-type{margin-bottom:28px;}
+.form-price-block h3{font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--navy);margin:0;}
+.form-price-block p{font-size:15px;color:var(--muted);line-height:1.75;margin:0;}
+.valore-copy{max-width:720px;margin:0 auto;font-size:16px;line-height:1.75;color:var(--text);}
+.valore-copy p{margin:0 0 14px;}
+.valore-copy p:last-child{margin-bottom:0;}
+.valore-copy ul{margin:0 0 14px;padding-left:22px;color:var(--muted);}
+.valore-copy ul li{margin-bottom:6px;}
+.valore-copy ul li:last-child{margin-bottom:0;}
+.valore-copy .valore-quote{font-family:'Playfair Display',serif;font-size:1.12rem;line-height:1.65;color:var(--navy);}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
 .form-group{margin-bottom:20px;}
 .form-group label{display:block;font-size:13px;font-weight:600;color:var(--navy);margin-bottom:7px;}
@@ -1061,43 +1084,44 @@ body.has-sticky-cta{padding-bottom:80px;}
 <section class="section bg-white section-tight" id="valore-tempo">
   <div class="container">
     <div class="section-head">
+      <div class="section-label">Il valore del Master Eureka</div>
       <h2 class="section-title">Quanto potrebbe valere <em>tutto questo per te?</em></h2>
     </div>
-    <div style="max-width:720px;margin:0 auto;font-size:16.5px;line-height:1.9;color:var(--text);">
-      <p style="margin:0 0 18px;">Prima di mostrarti le <strong>condizioni riservate</strong> per entrare nel Master Eureka, voglio invitarti a fare una riflessione.</p>
-      <p style="margin:0 0 18px;">Immagina di avere un metodo che, da oggi in poi, ti accompagni <strong>ogni volta che dovrai imparare qualcosa di nuovo</strong>.</p>
-      <p style="margin:0 0 18px;">Un metodo che ti permetta di <strong>leggere più velocemente</strong>, <strong>comprendere meglio</strong>, <strong>organizzare le informazioni con facilità</strong> e <strong>ricordarle quando ne hai davvero bisogno</strong>.</p>
-      <p style="margin:0 0 18px;">Non solo per il prossimo esame.</p>
-      <p style="margin:0 0 18px;">Non solo per il prossimo concorso.</p>
-      <p style="margin:0 0 18px;">Ma per <strong>ogni libro, ogni corso, ogni certificazione, ogni aggiornamento professionale e ogni nuova competenza</strong> che deciderai di acquisire negli anni.</p>
-      <p style="margin:0 0 18px;">Se oggi impieghi <strong>un'ora</strong> per raggiungere un risultato, immagina di riuscire a ottenere lo stesso obiettivo in <strong>circa venti minuti</strong>.</p>
-      <p style="margin:0 0 18px;">Non significa semplicemente <strong>risparmiare tempo</strong>.</p>
-      <p style="margin:0 0 18px;">Significa <strong>moltiplicare il valore del tuo tempo</strong>.</p>
-      <p style="margin:0 0 18px;">Anche recuperando <strong>una sola ora al giorno</strong>, nell'arco di un anno avresti circa <strong>300 ore in più</strong> da dedicare alla tua crescita personale e professionale.</p>
-      <p style="margin:0 0 18px;">E se quelle stesse ore diventassero <strong>tre volte più efficaci</strong> grazie al Metodo Eureka, significherebbe avere l'equivalente di circa <strong>900 ore di valore aggiunto ogni anno</strong>.</p>
-      <p style="margin:0 0 18px;"><strong>La parte più interessante, però, è un'altra.</strong></p>
-      <p style="margin:0 0 18px;">Quelle <strong>900 ore non appartengono a un solo anno</strong>.</p>
-      <p style="margin:0 0 18px;">Apparterranno a <strong>ogni anno della tua vita</strong>, perché il metodo che avrai imparato continuerà ad accompagnarti ogni volta che dovrai acquisire una nuova competenza.</p>
-      <p style="margin:0 0 18px;">Adesso fermati un momento e chiediti:</p>
-      <p style="margin:0 0 18px;font-family:'Playfair Display',serif;font-size:1.12rem;line-height:1.65;color:var(--navy);"><strong>Che cosa potresti costruire non con 900 ore... ma con migliaia di ore recuperate nell'arco della tua vita?</strong></p>
-      <ul style="margin:0 0 18px;padding-left:22px;color:var(--muted);">
-        <li style="margin-bottom:8px;">Una nuova lingua.</li>
-        <li style="margin-bottom:8px;">Una certificazione.</li>
-        <li style="margin-bottom:8px;">Una promozione.</li>
-        <li style="margin-bottom:8px;">Nuovi clienti.</li>
-        <li style="margin-bottom:8px;">Una laurea.</li>
-        <li style="margin-bottom:8px;">Un concorso.</li>
-        <li style="margin-bottom:0;">Oppure, semplicemente, <strong style="color:var(--navy);">più tempo da dedicare alle persone che ami</strong>.</li>
+    <div class="valore-copy">
+      <p>Prima di mostrarti le <strong>condizioni riservate</strong> per entrare nel Master Eureka, voglio invitarti a fare una riflessione.</p>
+      <p>Immagina di avere un metodo che, da oggi in poi, ti accompagni <strong>ogni volta che dovrai imparare qualcosa di nuovo</strong>.</p>
+      <p>Un metodo che ti permetta di <strong>leggere più velocemente</strong>, <strong>comprendere meglio</strong>, <strong>organizzare le informazioni con facilità</strong> e <strong>ricordarle quando ne hai davvero bisogno</strong>.</p>
+      <p>Non solo per il prossimo esame.</p>
+      <p>Non solo per il prossimo concorso.</p>
+      <p>Ma per <strong>ogni libro, ogni corso, ogni certificazione, ogni aggiornamento professionale e ogni nuova competenza</strong> che deciderai di acquisire negli anni.</p>
+      <p>Se oggi impieghi <strong>un'ora</strong> per raggiungere un risultato, immagina di riuscire a ottenere lo stesso obiettivo in <strong>circa venti minuti</strong>.</p>
+      <p>Non significa semplicemente <strong>risparmiare tempo</strong>.</p>
+      <p>Significa <strong>moltiplicare il valore del tuo tempo</strong>.</p>
+      <p>Anche recuperando <strong>una sola ora al giorno</strong>, nell'arco di un anno avresti circa <strong>300 ore in più</strong> da dedicare alla tua crescita personale e professionale.</p>
+      <p>E se quelle stesse ore diventassero <strong>tre volte più efficaci</strong> grazie al Metodo Eureka, significherebbe avere l'equivalente di circa <strong>900 ore di valore aggiunto ogni anno</strong>.</p>
+      <p><strong>La parte più interessante, però, è un'altra.</strong></p>
+      <p>Quelle <strong>900 ore non appartengono a un solo anno</strong>.</p>
+      <p>Apparterranno a <strong>ogni anno della tua vita</strong>, perché il metodo che avrai imparato continuerà ad accompagnarti ogni volta che dovrai acquisire una nuova competenza.</p>
+      <p>Adesso fermati un momento e chiediti:</p>
+      <p class="valore-quote"><strong>Che cosa potresti costruire non con 900 ore... ma con migliaia di ore recuperate nell'arco della tua vita?</strong></p>
+      <ul>
+        <li>Una nuova lingua.</li>
+        <li>Una certificazione.</li>
+        <li>Una promozione.</li>
+        <li>Nuovi clienti.</li>
+        <li>Una laurea.</li>
+        <li>Un concorso.</li>
+        <li>Oppure, semplicemente, <strong style="color:var(--navy);">più tempo da dedicare alle persone che ami</strong>.</li>
       </ul>
-      <p style="margin:0 0 18px;">È proprio qui che si nasconde il <strong>vero valore del Master Eureka</strong>.</p>
-      <p style="margin:0 0 18px;">Non si misura nelle giornate di formazione.</p>
-      <p style="margin:0 0 18px;">Non si misura nelle ore di lezione.</p>
-      <p style="margin:0 0 18px;">Si misura in <strong>tutte le competenze che acquisirai negli anni grazie a un metodo che continuerà a lavorare per te</strong>.</p>
-      <p style="margin:0 0 18px;">Perché un libro si conclude.</p>
-      <p style="margin:0 0 18px;">Un esame si supera.</p>
-      <p style="margin:0 0 18px;">Una certificazione si ottiene.</p>
-      <p style="margin:0 0 18px;"><strong>Un metodo di apprendimento, invece, resta con te per tutta la vita.</strong></p>
-      <p style="margin:0;">Ed è con questa prospettiva che voglio mostrarti le <strong>condizioni riservate</strong> per entrare nel Master Eureka.</p>
+      <p>È proprio qui che si nasconde il <strong>vero valore del Master Eureka</strong>.</p>
+      <p>Non si misura nelle giornate di formazione.</p>
+      <p>Non si misura nelle ore di lezione.</p>
+      <p>Si misura in <strong>tutte le competenze che acquisirai negli anni grazie a un metodo che continuerà a lavorare per te</strong>.</p>
+      <p>Perché un libro si conclude.</p>
+      <p>Un esame si supera.</p>
+      <p>Una certificazione si ottiene.</p>
+      <p><strong>Un metodo di apprendimento, invece, resta con te per tutta la vita.</strong></p>
+      <p>Ed è con questa prospettiva che voglio mostrarti le <strong>condizioni riservate</strong> per entrare nel Master Eureka.</p>
     </div>
   </div>
 </section>
@@ -1118,52 +1142,60 @@ body.has-sticky-cta{padding-bottom:80px;}
         </div>
       </div>
 
-      <p style="font-size:15px;color:var(--muted);line-height:1.85;margin:0 0 14px;">Il <strong style="color:var(--navy);">Master Eureka</strong> rappresenta il percorso più completo che abbiamo mai realizzato.</p>
-      <p style="font-size:15px;color:var(--muted);line-height:1.85;margin:0 0 28px;">Un anno di formazione, affiancamento e supporto continuo per aiutarti a trasformare il tuo modo di apprendere e mettere questo metodo al servizio della tua crescita personale e professionale.</p>
-
-      <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--navy);margin:0 0 18px;">Il Master Eureka comprende:</h3>
-
-      <div style="margin-bottom:18px;">
-        <p style="font-size:14.5px;font-weight:700;color:var(--navy);margin:0 0 8px;">✅ 12 giornate di formazione dal vivo</p>
-        <ul style="margin:0;padding-left:22px;color:var(--muted);font-size:14px;line-height:1.75;">
-          <li>4 giornate in aula a Roma o Milano.</li>
-          <li>5 giornate del percorso Life Emotion.</li>
-          <li>3 giornate di formazione live su Zoom.</li>
-        </ul>
+      <div class="form-intro">
+        <p>Il <strong style="color:var(--navy);">Master Eureka</strong> rappresenta il percorso più completo che abbiamo mai realizzato.</p>
+        <p>Un anno di formazione, affiancamento e supporto continuo per aiutarti a trasformare il tuo modo di apprendere e mettere questo metodo al servizio della tua crescita personale e professionale.</p>
       </div>
 
-      <div style="margin-bottom:18px;">
-        <p style="font-size:14.5px;font-weight:700;color:var(--navy);margin:0 0 8px;">✅ 12 mesi di accesso alla piattaforma didattica</p>
-        <ul style="margin:0;padding-left:22px;color:var(--muted);font-size:14px;line-height:1.75;">
-          <li>68 video-lezioni on demand.</li>
-          <li>Materiale didattico sempre disponibile.</li>
-          <li>Aggiornamenti inclusi.</li>
-        </ul>
+      <h3 class="form-section-title">Il Master Eureka comprende:</h3>
+
+      <div class="form-included">
+        <div class="form-included-item">
+          <p>✅ 12 giornate di formazione dal vivo</p>
+          <ul>
+            <li>4 giornate in aula a Roma o Milano.</li>
+            <li>5 giornate del percorso Life Emotion.</li>
+            <li>3 giornate di formazione live su Zoom.</li>
+          </ul>
+        </div>
+
+        <div class="form-included-item">
+          <p>✅ 12 mesi di accesso alla piattaforma didattica</p>
+          <ul>
+            <li>68 video-lezioni on demand.</li>
+            <li>Materiale didattico sempre disponibile.</li>
+            <li>Aggiornamenti inclusi.</li>
+          </ul>
+        </div>
+
+        <div class="form-included-item">
+          <p>✅ 12 incontri live del lunedì sera</p>
+          <p>Due ore di formazione e confronto diretto con i docenti per consolidare il metodo e applicarlo sul tuo materiale di studio.</p>
+        </div>
+
+        <div class="form-included-item">
+          <p>✅ Un anno di accesso ai servizi</p>
+          <p>Per dodici mesi resti connesso a piattaforma, webinar e risorse del percorso — quando ti servono, per tutto l'anno.</p>
+        </div>
+
+        <div class="form-included-item">
+          <p>✅ Chat di supporto</p>
+          <p>Assistenza diretta per dubbi pratici e applicazione del metodo sul tuo materiale, così non resti mai bloccato da solo.</p>
+        </div>
       </div>
 
-      <div style="margin-bottom:18px;">
-        <p style="font-size:14.5px;font-weight:700;color:var(--navy);margin:0 0 8px;">✅ 12 incontri live del lunedì sera</p>
-        <p style="font-size:14px;color:var(--muted);line-height:1.75;margin:0;">Due ore di formazione e confronto diretto con i docenti per consolidare il metodo e applicarlo sul tuo materiale di studio.</p>
+      <hr class="form-divider">
+
+      <div class="form-price-block">
+        <h3>Valore del Master Eureka</h3>
+        <p><strong style="color:var(--navy);">Valore completo del percorso:</strong> <strong style="color:var(--navy);font-size:1.1rem;">4.997 €</strong></p>
       </div>
 
-      <div style="margin-bottom:18px;">
-        <p style="font-size:14.5px;font-weight:700;color:var(--navy);margin:0 0 8px;">✅ Un anno di accesso ai servizi</p>
-        <p style="font-size:14px;color:var(--muted);line-height:1.75;margin:0;">Per dodici mesi resti connesso a piattaforma, webinar e risorse del percorso — quando ti servono, per tutto l'anno.</p>
+      <div class="form-price-block">
+        <h3>Promo Estate riservata</h3>
+        <p>Oggi puoi entrare nel Master Eureka a <strong style="color:var(--navy);font-size:1.05rem;">2.497 €</strong>.</p>
+        <p><strong style="color:var(--navy);">Un risparmio immediato di 2.500 €</strong>, riservato esclusivamente ai partecipanti della Promo Estate.</p>
       </div>
-
-      <div style="margin-bottom:28px;">
-        <p style="font-size:14.5px;font-weight:700;color:var(--navy);margin:0 0 8px;">✅ Chat di supporto</p>
-        <p style="font-size:14px;color:var(--muted);line-height:1.75;margin:0;">Assistenza diretta per dubbi pratici e applicazione del metodo sul tuo materiale, così non resti mai bloccato da solo.</p>
-      </div>
-
-      <hr style="border:none;border-top:1px solid var(--light2);margin:0 0 28px;">
-
-      <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--navy);margin:0 0 12px;">Valore del Master Eureka</h3>
-      <p style="font-size:15px;color:var(--muted);line-height:1.75;margin:0 0 28px;"><strong style="color:var(--navy);">Valore completo del percorso:</strong> <strong style="color:var(--navy);font-size:1.1rem;">4.997 €</strong></p>
-
-      <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--navy);margin:0 0 12px;">Promo Estate riservata</h3>
-      <p style="font-size:15px;color:var(--muted);line-height:1.85;margin:0 0 14px;">Oggi puoi entrare nel Master Eureka a <strong style="color:var(--navy);font-size:1.05rem;">2.497 €</strong>.</p>
-      <p style="font-size:15px;color:var(--muted);line-height:1.85;margin:0 0 32px;"><strong style="color:var(--navy);">Un risparmio immediato di 2.500 €</strong>, riservato esclusivamente ai partecipanti della Promo Estate.</p>
 
       <div class="promo-steps" data-step="1" aria-label="Passaggi per accedere al Master Eureka in promo">
         <p class="promo-steps-heading">Come accedere a queste condizioni in tre semplici passi</p>
