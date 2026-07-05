@@ -8,14 +8,14 @@
  *
  * Stripe caparra 50€ (LIVE Zoom):
  *   TEST: https://buy.stripe.com/test_8x2aEXbec4GG79Y44jbwk03
- *   LIVE: (da impostare quando pronto)
+ *   LIVE: https://buy.stripe.com/3cIdR9aa87SSdym9oDbwk06
  *   Success URL: …/caparra-completata.html
  */
 (function (w) {
   var STRIPE_ACCONTO_TEST = 'https://buy.stripe.com/test_6oUbJ1eqo4GG51QbwLbwk02';
   var STRIPE_ACCONTO_LIVE = 'https://buy.stripe.com/14AfZh964ehg51Q1Wbbwk05';
   var STRIPE_CAPARRA_TEST = 'https://buy.stripe.com/test_8x2aEXbec4GG79Y44jbwk03';
-  var STRIPE_CAPARRA_LIVE = '';
+  var STRIPE_CAPARRA_LIVE = 'https://buy.stripe.com/3cIdR9aa87SSdym9oDbwk06';
 
   var host = (w.location && w.location.hostname) || '';
   var isProduction =
