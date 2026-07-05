@@ -597,15 +597,19 @@ body.has-sticky-cta{padding-bottom:80px;}
       var modal=document.getElementById('storia-modal');
       var title=document.getElementById('storia-title');
       var holder=document.getElementById('storia-video');
-      document.querySelectorAll('.testi-play').forEach(function(b){
-        b.addEventListener('click',function(){
-          var id=b.getAttribute('data-video-id');
-          var start=b.getAttribute('data-start');
-          title.textContent='La storia di '+b.getAttribute('data-name')+' · '+b.getAttribute('data-role');
-          var url='https://www.youtube.com/embed/'+id+'?autoplay=1&rel=0&modestbranding=1'+(start?('&start='+start):'');
-          holder.innerHTML='<iframe src="'+url+'" style="width:100%;height:100%;border:0;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
-          modal.style.display='flex';
-        });
+      function openStory(b){
+        var id=b.getAttribute('data-video-id');
+        var start=b.getAttribute('data-start');
+        title.textContent='La storia di '+b.getAttribute('data-name')+' · '+b.getAttribute('data-role');
+        var url='https://www.youtube.com/embed/'+id+'?autoplay=1&rel=0&modestbranding=1'+(start?('&start='+start):'');
+        holder.innerHTML='<iframe src="'+url+'" style="width:100%;height:100%;border:0;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+        modal.style.display='flex';
+      }
+      document.addEventListener('click',function(e){
+        var b=e.target.closest('.testi-play');
+        if(!b)return;
+        e.preventDefault();
+        openStory(b);
       });
       function closeM(){modal.style.display='none';holder.innerHTML='';}
       document.getElementById('storia-close').addEventListener('click',closeM);
