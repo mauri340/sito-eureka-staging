@@ -1,0 +1,67 @@
+{
+  "campaign": "recupero-carrello-master-eureka-estiva-2026",
+  "trigger": {
+    "event": "form_passo1_completato",
+    "lista": "promozione master eureka estiva",
+    "exit_if_tags": ["acconto-pagato", "caparra-pagata", "dati-contratto-completati"],
+    "exit_if_custom": ["appuntamento_prenotato"]
+  },
+  "merge_fields": ["nome", "cognome", "email", "telefono", "materia"],
+  "urls": {
+    "passo2": "https://apprendimentorapido.it/master-eureka-promo/grazie.html?nome={{nome}}&cognome={{cognome}}&email={{email}}&telefono={{telefono}}&materia={{materia}}",
+    "stripe_acconto_500": "https://buy.stripe.com/14AfZh964ehg51Q1Wbbwk05?prefilled_email={{email}}",
+    "stripe_caparra_50": "https://buy.stripe.com/3cIdR9aa87SSdym9oDbwk06?prefilled_email={{email}}",
+    "opzione2": "https://apprendimentorapido.it/master-eureka-promo/opzione-2.html?nome={{nome}}&cognome={{cognome}}&email={{email}}&telefono={{telefono}}&materia={{materia}}",
+    "opzione3": "https://apprendimentorapido.it/master-eureka-promo/opzione-3.html?nome={{nome}}&cognome={{cognome}}&email={{email}}&telefono={{telefono}}&materia={{materia}}"
+  },
+  "emails": [
+    {
+      "id": "rc01",
+      "file": "01-reminder-passo2.html",
+      "delay": "+3h",
+      "angle": "recupero",
+      "subject": "{{nome}}, il passo 2 ti aspetta ancora",
+      "preheader": "Hai lasciato il form a metà — bonus e prezzo promo ancora disponibili per te."
+    },
+    {
+      "id": "rc02",
+      "file": "02-costa-troppo.html",
+      "delay": "+24h",
+      "angle": "costa_troppo",
+      "subject": "Non è una spesa — è quanto costa restare fermo",
+      "preheader": "2.497€ per un anno intero. Tabella servizi completa + confronto con l'immobilismo."
+    },
+    {
+      "id": "rc03",
+      "file": "03-risultati-garanzia.html",
+      "delay": "+48h",
+      "angle": "risultati",
+      "subject": "«Ma funziona davvero con la MIA materia?»",
+      "preheader": "Garanzia applicazione + tutor personale. Il rischio lo prendiamo noi."
+    },
+    {
+      "id": "rc04",
+      "file": "04-ci-devo-pensare.html",
+      "delay": "+72h",
+      "angle": "indecisione",
+      "subject": "Pensare ancora ti costa 2.500€ (letteralmente)",
+      "preheader": "Giovedì 9 luglio ore 19:00 il prezzo torna a 4.997€. Decidi con i dati in mano."
+    },
+    {
+      "id": "rc05",
+      "file": "05-live-deposito.html",
+      "send_at": "2026-07-08T09:30:00+02:00",
+      "angle": "live_caparra",
+      "subject": "Stasera alle 21:00 — oppure congela tutto con 50€",
+      "preheader": "LIVE riservata con Maurizio. Deposito che blocca bonus e prezzo promo."
+    },
+    {
+      "id": "rc06",
+      "file": "06-ultimo-giorno.html",
+      "send_at": "2026-07-09T09:30:00+02:00",
+      "angle": "deadline",
+      "subject": "Ultimo giorno, {{nome}} — poi chiudiamo a 4.997€",
+      "preheader": "Stasera ore 19:00 fine promo. Due link: passo 2 o acconto diretto."
+    }
+  ]
+}
