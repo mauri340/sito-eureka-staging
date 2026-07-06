@@ -32,48 +32,48 @@
       "file": "01-reminder-passo2.html",
       "delay": "+3h",
       "angle": "recupero",
-      "subject": "{{nome}}, il passo 2 ti aspetta ancora",
-      "preheader": "Hai già fatto il primo passo: prezzo promo a 2.497€ e bonus sono ancora disponibili."
+      "subject": "{{nome}}, manca solo il passo 2",
+      "preheader": "Hai già fatto il primo passo: il prezzo promo a 2.497€ e i bonus sono ancora disponibili."
     },
     {
       "id": "rc02",
       "file": "02-costa-troppo.html",
       "delay": "+24h",
       "angle": "costa_troppo",
-      "subject": "Costa troppo? Guarda quanto costa restare fermo",
-      "preheader": "2.497€ per un anno intero: tutto incluso, oppure deposito da 50€ per il LIVE di mercoledì."
+      "subject": "Costa troppo? Guarda quanto costa rimandare",
+      "preheader": "Master a 2.497€ per un anno intero, tutto incluso. Se vuoi decidere in diretta, deposito di 50€ per mercoledì."
     },
     {
       "id": "rc03",
       "file": "03-risultati-garanzia.html",
       "delay": "+48h",
       "angle": "risultati",
-      "subject": "Funziona davvero con {{materia}}?",
-      "preheader": "Garanzia di applicazione e tutor personale. Il rischio lo prendiamo noi."
+      "subject": "Con {{materia}} funzionerà davvero?",
+      "preheader": "Hai 1 anno di accesso e una garanzia concreta: se serve, tutor personale fino al risultato."
     },
     {
       "id": "rc04",
       "file": "04-ci-devo-pensare.html",
       "delay": "+72h",
       "angle": "indecisione",
-      "subject": "Pensarci ancora può costarti 2.500€",
-      "preheader": "Giovedì 9 luglio alle 19:00 il prezzo torna a 4.997€. Ora puoi bloccare la promo in due modi."
+      "subject": "Pensarci va bene. Rimandare costa 2.500€",
+      "preheader": "Giovedì 9 luglio alle 19:00 il prezzo torna a 4.997€. Chiudi a 2.497€ o blocchi condizioni e bonus con 50€ per la LIVE di mercoledì."
     },
     {
       "id": "rc05",
       "file": "05-live-deposito.html",
       "send_at": "2026-07-08T09:30:00+02:00",
       "angle": "live_caparra",
-      "subject": "Stasera alle 21:00, oppure blocca prezzo e bonus con 50€",
-      "preheader": "LIVE riservata con Maurizio: deposito da 50€ per bloccare bonus e prezzo promo."
+      "subject": "Stasera alle 21:00 ci vediamo in diretta, oppure chiudi ora a 2.497€",
+      "preheader": "Hai già fatto il primo passo: ora puoi versare l'acconto da 500€ oppure bloccare prezzo e bonus con il deposito da 50€."
     },
     {
       "id": "rc06",
       "file": "06-ultimo-giorno.html",
       "send_at": "2026-07-09T09:30:00+02:00",
       "angle": "deadline",
-      "subject": "Ultimo giorno, {{nome}}: promo fino alle 19:00, poi 4.997€",
-      "preheader": "Stasera alle 19:00 termina la promo: acconto 500€ o deposito 50€ per l'ultima LIVE."
+      "subject": "Ultimo giorno, {{nome}}: promo a 2.497€ fino alle 19:00",
+      "preheader": "Alle 19:00 si chiude: acconto 500€ o deposito 50€ per recuperare la LIVE di ieri. Poi il Master torna a 4.997€."
     }
   ]
 }
