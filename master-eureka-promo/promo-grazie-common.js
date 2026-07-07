@@ -8,7 +8,7 @@
 
   var BONUS_BY_DAY = {
     1: { emoji: '🎟️', tag: 'Bonus di oggi', title: 'Un posto al corso dal vivo, in regalo per chi vuoi tu', desc: 'Blocchi oggi e porti con te una persona al corso dal vivo di 4 giorni.', val: 1497 },
-    2: { emoji: '🏨', tag: 'Bonus di oggi · solo i primi 7 iscritti', title: 'Vieni al Life senza pensare a hotel e viaggio', desc: 'Vitto e alloggio Life Emotion coperti da noi. Riservato ai primi 7 iscritti con acconto.', val: 400 },
+    2: { emoji: '🏨', tag: 'Bonus di oggi · solo i primi 7 iscritti', title: 'Vieni al Life senza pensare a hotel e viaggio', desc: 'Vitto e alloggio Life Emotion coperti da noi. Riservato anche ai primi 7 iscritti di oggi con acconto.', val: 400 },
     3: { emoji: '🎓', tag: 'Bonus di oggi', title: '5 ore di coaching sulla TUA materia', desc: 'Il metodo applicato al tuo materiale — concorso, esame o manuale.', val: 500 },
     4: { emoji: '⏳', tag: 'Ultimo giorno', title: 'Oggi alle 19:00 il prezzo torna a 4.997€', desc: 'Ultimo giorno promo: blocchi oggi a 2.497€.', val: 0 },
   };
@@ -16,7 +16,7 @@
   var REWARDS = [
     { emoji: '🎟️', label: 'Un posto al corso dal vivo (4 giorni), in regalo per chi vuoi', val: 1497, exclusive: 'Solo se versi l\'acconto adesso' },
     { emoji: '🎓', label: '5 ore di coaching sulla tua materia', val: 500, exclusive: 'Solo se versi l\'acconto adesso' },
-    { emoji: '🏨', label: 'Vitto e alloggio al Life Emotion', val: 400, exclusive: 'Solo primi 7 · acconto adesso' },
+    { emoji: '🏨', label: 'Vitto e alloggio al Life Emotion', val: 400, exclusive: 'Solo primi 7 di oggi · acconto adesso' },
   ];
 
   function param(k) { return new URLSearchParams(w.location.search).get(k); }
