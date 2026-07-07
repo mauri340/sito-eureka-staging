@@ -1,0 +1,74 @@
+{
+  "campaign": "visita-no-iscrizione-master-eureka-estiva-2026",
+  "trigger": {
+    "event": "pagina_promo_visitata",
+    "page": "https://apprendimentorapido.it/master-eureka-promo/index.html",
+    "min_time_on_page_seconds": 30,
+    "exit_if_tags": [
+      "form-promo-compilato",
+      "promozione-master-eureka-estiva",
+      "acconto-pagato",
+      "caparra-pagata"
+    ],
+    "exit_if_event": "form_passo1_completato"
+  },
+  "merge_fields": [
+    "nome",
+    "email"
+  ],
+  "urls": {
+    "landing_form": "https://apprendimentorapido.it/master-eureka-promo/index.html#form",
+    "landing": "https://apprendimentorapido.it/master-eureka-promo/index.html",
+    "whatsapp": "https://wa.me/390240702168?text=Ciao%2C%20ho%20visitato%20la%20pagina%20Master%20Eureka%20e%20vorrei%20fare%20due%20domande"
+  },
+  "emails": [
+    {
+      "id": "vn01",
+      "file": "01-quanto-tempo.html",
+      "delay": "+24h",
+      "angle": "tempo_impegno",
+      "subject": "{{nome}}, quanto tempo serve davvero?",
+      "preheader": "Circa 20 minuti al giorno per 30 giorni, sul materiale che studi già. Poi diventa abitudine."
+    },
+    {
+      "id": "vn02",
+      "file": "02-investi-su-te-stesso.html",
+      "delay": "+48h",
+      "angle": "investimento_pagamento",
+      "subject": "«Non ho tutta la cifra disponibile»",
+      "preheader": "Hai già visto l'offerta a 2.497€. Se il dubbio è solo il pagamento, parliamone prima che scada la promo."
+    },
+    {
+      "id": "vn03",
+      "file": "03-storia-manuela.html",
+      "delay": "+72h",
+      "angle": "costo_rimandare",
+      "subject": "Aspettò un mese. Pagò 2.500€ in più.",
+      "preheader": "Conosci già i prezzi: 2.497€ fino a giovedì 9 luglio ore 19:00, poi 4.997€."
+    },
+    {
+      "id": "vn04",
+      "file": "04-tre-situazioni.html",
+      "delay": "+96h",
+      "angle": "decisione_consapevole",
+      "subject": "{{nome}}, in quale di queste 3 situazioni sei?",
+      "preheader": "Hai visitato la pagina ma non ti sei iscritto. Meglio decidere tu che lasciare decidere al tempo."
+    },
+    {
+      "id": "vn05",
+      "file": "05-bilancia-decisione.html",
+      "delay": "+120h",
+      "angle": "costo_non_decidere",
+      "subject": "Cosa succede se NON fai il Master Eureka?",
+      "preheader": "Anche non decidere è una decisione. Promo a 2.497€ fino a giovedì alle 19:00."
+    },
+    {
+      "id": "vn06",
+      "file": "06-pregiudizi-ultimo-giorno.html",
+      "send_at": "2026-07-09T09:00:00+02:00",
+      "angle": "pregiudizi_deadline",
+      "subject": "«A me non serve» (disse lo studente di Ingegneria)",
+      "preheader": "Ultimo giorno promo: 2.497€ fino alle 19:00. Valuta con la mente aperta, poi scegli."
+    }
+  ]
+}
