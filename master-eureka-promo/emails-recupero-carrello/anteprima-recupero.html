@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anteprima — 6 mail recupero carrello Master Eureka</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: system-ui, sans-serif; background: #0D1B2A; color: #eee; margin: 0; padding: 24px; }
+    h1 { text-align: center; font-size: 1.45rem; margin-bottom: 8px; color: #f5d78e; }
+    .sub { text-align: center; color: #aaa; font-size: 14px; margin-bottom: 12px; max-width: 720px; margin-left: auto; margin-right: auto; line-height: 1.6; }
+    .info { max-width: 720px; margin: 0 auto 28px; padding: 16px 20px; background: rgba(0,169,136,.12); border: 1px solid rgba(0,169,136,.35); border-radius: 8px; font-size: 13px; line-height: 1.65; color: #cdeee6; }
+    .info code { background: rgba(0,0,0,.25); padding: 2px 6px; border-radius: 4px; font-size: 12px; }
+    nav { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 32px; }
+    nav a { background: #1a2d42; color: #f5d78e; padding: 8px 14px; border-radius: 6px; text-decoration: none; font-size: 13px; border: 1px solid rgba(184,151,62,.25); }
+    nav a:hover { background: #243a52; }
+    .mail-block { max-width: 680px; margin: 0 auto 48px; background: #fff; color: #222; border-radius: 8px; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,.35); }
+    .mail-meta { background: #f0f0f0; padding: 16px 20px; border-bottom: 1px solid #ddd; font-size: 13px; line-height: 1.55; }
+    .mail-meta strong { display: block; color: #0D1B2A; font-size: 15px; margin-bottom: 8px; }
+    .mail-meta .tag { display: inline-block; background: #B8973E; color: #fff; font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 999px; text-transform: uppercase; letter-spacing: .5px; margin-right: 6px; }
+    .mail-meta span { color: #666; display: block; margin-top: 4px; }
+    .mail-frame { border: none; width: 100%; min-height: 580px; display: block; }
+    .links-box { max-width: 720px; margin: 0 auto 40px; padding: 20px; background: #1a2d42; border-radius: 8px; font-size: 13px; line-height: 1.7; }
+    .links-box h2 { font-size: 14px; color: #f5d78e; margin: 0 0 12px; }
+    .links-box p { margin: 0 0 10px; color: #ccc; }
+    .links-box code { display: block; background: #0D1B2A; padding: 10px 12px; border-radius: 6px; font-size: 11px; word-break: break-all; color: #8ef5dc; margin: 8px 0 16px; }
+  </style>
+</head>
+<body>
+  <h1>Recupero carrello — 6 mail</h1>
+  <p class="sub">Trigger: ha compilato il form (passo 1) · NON ha pagato acconto · NON ha pagato caparra LIVE · NON ha prenotato appuntamento<br>Stile Kennedy · doppia CTA in ogni mail: <strong>pagamento diretto 2.497€</strong> (primaria) + <strong>LIVE mercoledì 21:00</strong> deposito 50€ (secondaria)</p>
+
+  <div class="info">
+    <strong>Priorità CTA (v2)</strong><br>
+    1️⃣ <strong>Oro — acconto 500€</strong> = Master bloccato a 2.497€ (Stripe diretto)<br>
+    2️⃣ <strong>Navy — deposito LIVE 50€</strong> = mercoledì 8/7 ore 21:00, iscrizione in diretta con Maurizio<br>
+    3️⃣ Testo — passo 2 / grazie.html solo se serve ripilogo<br><br>
+    <strong>Merge fields da mappare nel CRM</strong><br>
+    <code>{{nome}}</code> <code>{{cognome}}</code> <code>{{email}}</code> <code>{{telefono}}</code> <code>{{materia}}</code><br><br>
+    <strong>CTA principale (passo 2 personalizzato):</strong><br>
+    <code>https://apprendimentorapido.it/master-eureka-promo/grazie.html?nome={{nome}}&amp;cognome={{cognome}}&amp;email={{email}}&amp;telefono={{telefono}}&amp;materia={{materia}}</code><br><br>
+    <strong>CTA pagamento diretto acconto 500€:</strong><br>
+    <code>https://buy.stripe.com/14AfZh964ehg51Q1Wbbwk05?prefilled_email={{email}}</code><br><br>
+    <strong>CTA caparra LIVE 50€:</strong><br>
+    <code>https://buy.stripe.com/3cIdR9aa87SSdym9oDbwk06?prefilled_email={{email}}</code>
+  </div>
+
+  <div class="links-box">
+    <h2>Timing suggerito automazione</h2>
+    <p><strong>Mail 1</strong> — +3 ore dal form · reminder passo 2</p>
+    <p><strong>Mail 2</strong> — +24 ore · angolo «costa troppo» + tabella servizi</p>
+    <p><strong>Mail 3</strong> — +48 ore · angolo risultati + garanzia applicazione</p>
+    <p><strong>Mail 4</strong> — +72 ore · «ci devo pensare» + deadline 9/7 ore 19</p>
+    <p><strong>Mail 5</strong> — mercoledì 8/7 mattina · LIVE ore 21 + deposito 50€</p>
+    <p><strong>Mail 6</strong> — giovedì 9/7 mattina · ultimo giorno ore 19</p>
+    <p style="margin-top:14px;color:#888;font-size:12px;">Condizione uscita: tag <code>acconto-pagato</code> o <code>caparra-pagata</code> o prenotazione appuntamento.</p>
+  </div>
+
+  <nav>
+    <a href="#m1">1 · Reminder</a>
+    <a href="#m2">2 · Costa troppo</a>
+    <a href="#m3">3 · Risultati</a>
+    <a href="#m4">4 · Ci devo pensare</a>
+    <a href="#m5">5 · LIVE 50€</a>
+    <a href="#m6">6 · Ultimo giorno</a>
+  </nav>
+
+  <div class="mail-block" id="m1">
+    <div class="mail-meta">
+      <strong>1/6 — +3 ore dal form · Reminder passo 2</strong>
+      <span><span class="tag">Recupero</span></span>
+      <span><strong>Oggetto:</strong> {{nome}}, manca solo il passo 2</span>
+      <span><strong>Preheader:</strong> Hai già fatto il primo passo: il prezzo promo a 2.497€ e i bonus sono ancora disponibili.</span>
+    </div>
+    <iframe class="mail-frame" src="01-reminder-passo2.html" title="Mail 1"></iframe>
+  </div>
+
+  <div class="mail-block" id="m2">
+    <div class="mail-meta">
+      <strong>2/6 — +24 ore · Obiezione «costa troppo»</strong>
+      <span><span class="tag">Prezzo</span></span>
+      <span><strong>Oggetto:</strong> Costa troppo? Guarda quanto costa rimandare</span>
+      <span><strong>Preheader:</strong> Master a 2.497€ per un anno intero, tutto incluso. Se vuoi decidere in diretta, deposito di 50€ per mercoledì.</span>
+    </div>
+    <iframe class="mail-frame" src="02-costa-troppo.html" title="Mail 2"></iframe>
+  </div>
+
+  <div class="mail-block" id="m3">
+    <div class="mail-meta">
+      <strong>3/6 — +48 ore · Obiezione «otterrò risultati?»</strong>
+      <span><span class="tag">Fiducia</span></span>
+      <span><strong>Oggetto:</strong> Con {{materia}} funzionerà davvero?</span>
+      <span><strong>Preheader:</strong> Hai 1 anno di accesso e una garanzia concreta: se serve, tutor personale fino al risultato.</span>
+    </div>
+    <iframe class="mail-frame" src="03-risultati-garanzia.html" title="Mail 3"></iframe>
+  </div>
+
+  <div class="mail-block" id="m4">
+    <div class="mail-meta">
+      <strong>4/6 — +72 ore · Obiezione «ci devo pensare»</strong>
+      <span><span class="tag">Urgenza</span></span>
+      <span><strong>Oggetto:</strong> Pensarci va bene. Rimandare costa 2.500€</span>
+      <span><strong>Preheader:</strong> Giovedì 9 luglio alle 19:00 il prezzo torna a 4.997€. Chiudi a 2.497€ o blocchi condizioni e bonus con 50€ per la LIVE di mercoledì.</span>
+    </div>
+    <iframe class="mail-frame" src="04-ci-devo-pensare.html" title="Mail 4"></iframe>
+  </div>
+
+  <div class="mail-block" id="m5">
+    <div class="mail-meta">
+      <strong>5/6 — Mercoledì 8 lug mattina · LIVE + deposito</strong>
+      <span><span class="tag">Alternativa soft</span></span>
+      <span><strong>Oggetto:</strong> Stasera alle 21:00 ci vediamo in diretta, oppure chiudi ora a 2.497€</span>
+      <span><strong>Preheader:</strong> Hai già fatto il primo passo: ora puoi versare l'acconto da 500€ oppure bloccare prezzo e bonus con il deposito da 50€.</span>
+    </div>
+    <iframe class="mail-frame" src="05-live-deposito.html" title="Mail 5"></iframe>
+  </div>
+
+  <div class="mail-block" id="m6">
+    <div class="mail-meta">
+      <strong>6/6 — Giovedì 9 lug mattina · Ultimo giorno</strong>
+      <span><span class="tag">Chiusura</span></span>
+      <span><strong>Oggetto:</strong> Ultimo giorno, {{nome}}: promo a 2.497€ fino alle 19:00</span>
+      <span><strong>Preheader:</strong> Alle 19:00 si chiude: acconto 500€ o deposito 50€ per recuperare la LIVE di ieri. Poi il Master torna a 4.997€.</span>
+    </div>
+    <iframe class="mail-frame" src="06-ultimo-giorno.html" title="Mail 6"></iframe>
+  </div>
+</body>
+</html>
