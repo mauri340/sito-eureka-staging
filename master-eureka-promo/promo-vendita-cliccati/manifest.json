@@ -1,5 +1,5 @@
 {
-  "campaign": "visita-no-iscrizione-master-eureka-estiva-2026",
+  "campaign": "promo-vendita-cliccati-master-eureka-estiva-2026",
   "trigger": {
     "event": "pagina_promo_visitata",
     "page": "https://apprendimentorapido.it/master-eureka-promo/index.html",
