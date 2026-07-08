@@ -28,12 +28,12 @@
 </head>
 <body>
   <h1>Recupero carrello — 6 mail</h1>
-  <p class="sub">Trigger: ha compilato il form (passo 1) · NON ha pagato acconto · NON ha pagato caparra LIVE · NON ha prenotato appuntamento<br>Stile Kennedy · doppia CTA in ogni mail: <strong>pagamento diretto 2.497€</strong> (primaria) + <strong>LIVE mercoledì 21:00</strong> deposito 50€ (secondaria)</p>
+  <p class="sub">Trigger: ha compilato il form (passo 1) · NON ha pagato acconto · NON è registrato alla LIVE · NON ha prenotato appuntamento<br>Stile Kennedy · doppia CTA in ogni mail: <strong>pagamento diretto 2.497€</strong> (primaria) + <strong>LIVE mercoledì 21:00 gratuita</strong> (secondaria, un click)</p>
 
   <div class="info">
     <strong>Priorità CTA (v2)</strong><br>
     1️⃣ <strong>Oro — acconto 500€</strong> = Master bloccato a 2.497€ (Stripe diretto)<br>
-    2️⃣ <strong>Navy — deposito LIVE 50€</strong> = mercoledì 8/7 ore 21:00, iscrizione in diretta con Maurizio<br>
+    2️⃣ <strong>Navy — LIVE gratuita</strong> = mercoledì 8/7 ore 21:00, iscrizione 1 click con {{link_live_stasera}}<br>
     3️⃣ Testo — passo 2 / grazie.html solo se serve ripilogo<br><br>
     <strong>Merge fields da mappare nel CRM</strong><br>
     <code>{{nome}}</code> <code>{{cognome}}</code> <code>{{email}}</code> <code>{{telefono}}</code> <code>{{materia}}</code><br><br>
@@ -41,8 +41,8 @@
     <code>https://apprendimentorapido.it/master-eureka-promo/grazie.html?nome={{nome}}&amp;cognome={{cognome}}&amp;email={{email}}&amp;telefono={{telefono}}&amp;materia={{materia}}</code><br><br>
     <strong>CTA pagamento diretto acconto 500€:</strong><br>
     <code>https://buy.stripe.com/14AfZh964ehg51Q1Wbbwk05?prefilled_email={{email}}</code><br><br>
-    <strong>CTA caparra LIVE 50€:</strong><br>
-    <code>https://buy.stripe.com/3cIdR9aa87SSdym9oDbwk06?prefilled_email={{email}}</code>
+    <strong>CTA LIVE gratuita (1 click):</strong><br>
+    <code>{{link_live_stasera}}</code>
   </div>
 
   <div class="links-box">
@@ -53,7 +53,7 @@
     <p><strong>Mail 4</strong> — +72 ore · «ci devo pensare» + deadline 9/7 ore 19</p>
     <p><strong>Mail 5</strong> — mercoledì 8/7 mattina · LIVE ore 21 + deposito 50€</p>
     <p><strong>Mail 6</strong> — giovedì 9/7 mattina · ultimo giorno ore 19</p>
-    <p style="margin-top:14px;color:#888;font-size:12px;">Condizione uscita: tag <code>acconto-pagato</code> o <code>caparra-pagata</code> o prenotazione appuntamento.</p>
+    <p style="margin-top:14px;color:#888;font-size:12px;">Condizione uscita: tag <code>acconto-pagato</code>, <code>live-riservata</code>, <code>conferma-live-invito-inviata</code>, <code>caparra-pagata</code> o prenotazione appuntamento.</p>
   </div>
 
   <nav>
