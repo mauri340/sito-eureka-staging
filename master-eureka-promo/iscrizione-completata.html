@@ -197,7 +197,8 @@ input[readonly]{background:var(--off-white);color:var(--muted);}
       custom_fields:{
         acconto_pagato:true,
         acconto_pagato_at:new Date().toISOString(),
-        stripe_session_id:param('session_id')||undefined
+        stripe_session_id:param('session_id')||undefined,
+        promo_day:promoDay?parseInt(promoDay,10):undefined
       }
     };
     try{

@@ -27,12 +27,35 @@
     try { stored = JSON.parse(localStorage.getItem(BOOKING_KEY) || 'null'); } catch (e) {}
     var g = function (k) { return params.get(k) || (stored && stored[k]) || ''; };
     var nome = g('nome'), cognome = g('cognome');
-    return { nome: nome, cognome: cognome, email: g('email'), telefono: g('telefono'), materia: g('materia'), fullName: (nome + ' ' + cognome).trim() };
+    var promoDayRaw = g('promo_day');
+    var promoDay = promoDayRaw !== '' ? parseInt(promoDayRaw, 10) : null;
+    if (promoDay !== null && (isNaN(promoDay) || promoDay < 1 || promoDay > 4)) promoDay = null;
+    return {
+      nome: nome,
+      cognome: cognome,
+      email: g('email'),
+      telefono: g('telefono'),
+      materia: g('materia'),
+      promo_day: promoDay,
+      fullName: (nome + ' ' + cognome).trim(),
+    };
   }
 
   function promoDayIndex() {
     var d = param('day');
-    var idx = d !== null ? parseInt(d, 10) : new Date().getDay();
+    if (d !== null) {
+      var fromDay = parseInt(d, 10);
+      if (fromDay >= 1 && fromDay <= 4) return fromDay;
+    }
+    var stored = null;
+    try { stored = JSON.parse(localStorage.getItem(BOOKING_KEY) || 'null'); } catch (e) {}
+    if (stored && stored.promo_day >= 1 && stored.promo_day <= 4) return stored.promo_day;
+    var fromUrl = param('promo_day');
+    if (fromUrl !== null) {
+      var fromPromo = parseInt(fromUrl, 10);
+      if (fromPromo >= 1 && fromPromo <= 4) return fromPromo;
+    }
+    var idx = new Date().getDay();
     return BONUS_BY_DAY[idx] ? idx : 1;
   }
 
