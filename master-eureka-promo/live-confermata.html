@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LIVE confermata — Master Eureka</title>
+<meta name="robots" content="noindex, nofollow">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:Inter,sans-serif;background:#F8F7F4;color:#1a1a2e;line-height:1.65}
+.wrap{max-width:640px;margin:0 auto;padding:48px 24px 80px}
+.card{background:#fff;border-radius:16px;padding:36px;box-shadow:0 12px 40px rgba(13,27,42,.08);text-align:center}
+.icon{width:64px;height:64px;border-radius:50%;background:#00A988;color:#fff;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:28px;font-weight:700}
+h1{font-family:'Playfair Display',serif;font-size:1.75rem;margin:0 0 12px}
+.lead{color:#4e5c6b;font-size:16px;margin:0 0 24px}
+.box{background:#0D1B2A;color:#fff;border-radius:12px;padding:22px;margin:0 0 24px}
+.box strong{color:#f5d78e}
+.note{font-size:14px;color:#4e5c6b}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <div class="icon">✓</div>
+    <h1>Sei registrato<span id="lead-name"></span></h1>
+    <p class="lead" id="lead-msg">Controlla l'email: ti abbiamo mandato il <strong>link Zoom personale</strong> per stasera alle 21:00.</p>
+    <div class="box">
+      <strong>Mercoledì 8 luglio · ore 21:00</strong><br>
+      LIVE Master Eureka su Zoom
+    </div>
+    <p class="note">Non trovi la mail? Controlla lo spam o scrivi a <a href="mailto:pagamenti@apprendimentorapido.it">pagamenti@apprendimentorapido.it</a></p>
+  </div>
+</div>
+<script>
+(function(){
+  var p=new URLSearchParams(location.search);
+  var nome=p.get('nome');
+  if(nome){document.getElementById('lead-name').textContent=', '+nome;}
+  if(p.get('gia')==='1'){
+    document.getElementById('lead-msg').innerHTML='Eri già registrato alla LIVE. Controlla l\'email con il <strong>link Zoom</strong> (anche quella di ieri).';
+  }
+})();
+</script>
+</body>
+</html>
