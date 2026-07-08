@@ -30,10 +30,23 @@
     return { nome: nome, cognome: cognome, email: g('email'), telefono: g('telefono'), materia: g('materia'), fullName: (nome + ' ' + cognome).trim() };
   }
 
-  function currentBonus() {
+  function promoDayIndex() {
     var d = param('day');
     var idx = d !== null ? parseInt(d, 10) : new Date().getDay();
-    return BONUS_BY_DAY[idx] || BONUS_BY_DAY[1];
+    return BONUS_BY_DAY[idx] ? idx : 1;
+  }
+
+  function currentBonus() {
+    return BONUS_BY_DAY[promoDayIndex()];
+  }
+
+  /** Lun: tutti e 3 · Mar: 2 (senza biglietto) · Mer: 1 (solo coaching) · Gio: 0 */
+  function rewardsForDay() {
+    var idx = promoDayIndex();
+    if (idx >= 4) return [];
+    if (idx === 3) return [REWARDS[1]];
+    if (idx === 2) return REWARDS.slice(1);
+    return REWARDS.slice();
   }
 
   function fmt(n) { return n.toLocaleString('it-IT'); }
@@ -50,8 +63,23 @@
     opts = opts || {};
     var rl = document.getElementById(containerId);
     if (!rl) return;
+    var idx = promoDayIndex();
+    var items = rewardsForDay();
+    var section = document.getElementById('reward-section');
+    var btn = document.getElementById('stripe-btn');
+
+    if (idx >= 4) {
+      if (section) section.style.display = 'none';
+      if (btn) btn.textContent = 'Conferma l\'iscrizione a 2.497€ — acconto 500€ →';
+      rl.innerHTML = '';
+      return;
+    }
+
+    if (section) section.style.display = '';
+    if (btn) btn.textContent = 'Blocca i bonus e versa l\'acconto da 500€ →';
+
     var h = '', tot = 0;
-    REWARDS.forEach(function (it) {
+    items.forEach(function (it) {
       tot += it.val;
       h += '<li class="reward-item">' +
         '<div class="reward-item-main"><strong>' + it.emoji + ' ' + it.label + '</strong>' +
@@ -66,11 +94,23 @@
     rl.innerHTML = h;
     var totEl = document.getElementById('reward-total-num');
     if (totEl) totEl.textContent = fmt(tot);
+
+    var lead = document.getElementById('reward-lead');
+    if (lead) {
+      if (items.length === 3) {
+        lead.innerHTML = 'Hai visto le condizioni, il pulsante è qui sotto. Chi conferma <strong>oggi</strong> ottiene extra per un valore fino a <strong><span id="reward-total-num">' + fmt(tot) + '</span>€</strong> che restano riservati a te.';
+      } else if (items.length === 2) {
+        lead.innerHTML = 'Il bonus biglietto di lunedì non c\'è più. Se versi l\'acconto <strong>oggi</strong> restano <strong><span id="reward-total-num">' + fmt(tot) + '</span>€</strong> di extra.';
+      } else {
+        lead.innerHTML = 'Oggi resta un solo bonus extra (<strong><span id="reward-total-num">' + fmt(tot) + '</span>€</strong>): le 5 ore di coaching sulla tua materia — solo con l\'acconto adesso.';
+      }
+    }
   }
 
   function renderRewardPersonal(data) {
     var el = document.getElementById('reward-title');
     if (!el) return;
+    if (promoDayIndex() >= 4) return;
     var base = 'solo se versi l\'acconto adesso — plus che chi aspetta non ha';
     var nome = (data && data.nome) ? data.nome.trim() : '';
     if (nome) {
@@ -128,6 +168,8 @@
 
   w.PROMO_THANKYOU = {
     loadBookingData: loadBookingData,
+    promoDayIndex: promoDayIndex,
+    rewardsForDay: rewardsForDay,
     renderBonusDay: renderBonusDay,
     renderRewardList: renderRewardList,
     renderRewardPersonal: renderRewardPersonal,
