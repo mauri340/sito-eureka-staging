@@ -40,6 +40,8 @@
       label: 'Mercoledì 8 luglio 2026 · ore 21:00',
       zoomMeetingId: '81357612138',
       zoomUrl: '',
+      registerFromThankYou:
+        'https://api.apprendimentorapido.it/api/promo/master-eureka/live/register-from-thankyou',
     },
     stripe: {
       accontoUrl: isProduction ? STRIPE_ACCONTO_LIVE : STRIPE_ACCONTO_TEST,
