@@ -31,14 +31,24 @@ jobs:
       - name: Prepare deploy bundle
         run: rm -rf .git .cursor
 
-      - name: Deploy via SCP (SSH, no rsync)
-        uses: appleboy/scp-action@v1.0.0
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: 22
-          source: "."
-          target: /home/apprendimedoit/staging.apprendimentorapido.it/
-          overwrite: true
-          debug: true
+      - name: Setup SSH key
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts 2>/dev/null || true
+
+      - name: Deploy via tar + scp + ssh
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+          REMOTE_DIR: staging.apprendimentorapido.it
+        run: |
+          set -euxo pipefail
+          tar czf deploy.tar.gz .
+          ls -lh deploy.tar.gz
+          scp -i ~/.ssh/deploy_key -o BatchMode=yes -o ConnectTimeout=30 \
+            deploy.tar.gz "${SSH_USER}@${SSH_HOST}:${REMOTE_DIR}/deploy.tar.gz"
+          ssh -i ~/.ssh/deploy_key -o BatchMode=yes -o ConnectTimeout=30 \
+            "${SSH_USER}@${SSH_HOST}" \
+            "set -e; cd ${REMOTE_DIR} && tar xzf deploy.tar.gz && rm -f deploy.tar.gz && echo DEPLOY_OK"
