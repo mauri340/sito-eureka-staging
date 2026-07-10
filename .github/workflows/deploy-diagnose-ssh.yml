@@ -9,11 +9,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Setup SSH key
+        env:
+          SSH_KEY_PASSPHRASE: ${{ secrets.SSH_KEY_PASSPHRASE }}
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
           ssh-keyscan -H "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts 2>/dev/null || true
+          eval "$(ssh-agent -s)"
+          if [ -n "${SSH_KEY_PASSPHRASE:-}" ]; then
+            ASKPASS_SCRIPT="$(mktemp)"
+            printf '#!/bin/sh\necho "%s"\n' "$SSH_KEY_PASSPHRASE" > "$ASKPASS_SCRIPT"
+            chmod +x "$ASKPASS_SCRIPT"
+            DISPLAY=:0 SSH_ASKPASS="$ASKPASS_SCRIPT" SSH_ASKPASS_REQUIRE=force ssh-add ~/.ssh/deploy_key
+            rm -f "$ASKPASS_SCRIPT"
+          else
+            ssh-add ~/.ssh/deploy_key
+          fi
+          ssh-add -l
 
       - name: SFTP list home and paths
         env:
@@ -21,7 +34,7 @@ jobs:
           SSH_USER: ${{ secrets.SSH_USER }}
         run: |
           set -x
-          sftp -i ~/.ssh/deploy_key -o BatchMode=yes -o ConnectTimeout=30 -b - \
+          sftp -o BatchMode=yes -o ConnectTimeout=30 -b - \
             "${SSH_USER}@${SSH_HOST}" <<'EOF' || true
           pwd
           ls -la
@@ -37,7 +50,7 @@ jobs:
         run: |
           set -euxo pipefail
           echo "deploy-test-$(date -u +%Y%m%dT%H%M%SZ)" > /tmp/deploy-test.txt
-          sftp -i ~/.ssh/deploy_key -o BatchMode=yes -o ConnectTimeout=30 -b - \
+          sftp -o BatchMode=yes -o ConnectTimeout=30 -b - \
             "${SSH_USER}@${SSH_HOST}" <<'EOF'
           put /tmp/deploy-test.txt deploy-test.txt
           ls -la deploy-test.txt

@@ -8,6 +8,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -15,23 +16,35 @@ jobs:
       - name: Prepare deploy bundle
         run: rm -rf .git .cursor
 
-      - name: Setup SSH key and lftp
+      - name: Setup SSH key
+        env:
+          SSH_KEY_PASSPHRASE: ${{ secrets.SSH_KEY_PASSPHRASE }}
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
           ssh-keyscan -H "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts 2>/dev/null || true
-          sudo apt-get update -qq
-          sudo apt-get install -y -qq lftp
+          eval "$(ssh-agent -s)"
+          if [ -n "${SSH_KEY_PASSPHRASE:-}" ]; then
+            ASKPASS_SCRIPT="$(mktemp)"
+            printf '#!/bin/sh\necho "%s"\n' "$SSH_KEY_PASSPHRASE" > "$ASKPASS_SCRIPT"
+            chmod +x "$ASKPASS_SCRIPT"
+            DISPLAY=:0 SSH_ASKPASS="$ASKPASS_SCRIPT" SSH_ASKPASS_REQUIRE=force ssh-add ~/.ssh/deploy_key
+            rm -f "$ASKPASS_SCRIPT"
+          else
+            ssh-add ~/.ssh/deploy_key
+          fi
 
-      - name: Deploy via SFTP mirror (no remote shell)
+      - name: Deploy via SFTP recursive upload
         env:
           SSH_HOST: ${{ secrets.SSH_HOST }}
           SSH_USER: ${{ secrets.SSH_USER }}
-          REMOTE_DIR: public_html
         run: |
           set -euxo pipefail
-          lftp -u "${SSH_USER},x" "sftp://${SSH_HOST}" -e "
-            set sftp:connect-program \"ssh -a -x -i ~/.ssh/deploy_key -o BatchMode=yes -o StrictHostKeyChecking=no\";
-            mirror -R --parallel=4 --verbose ./ ${REMOTE_DIR};
-            quit"
+          sftp -o BatchMode=yes -o ConnectTimeout=30 -b - \
+            "${SSH_USER}@${SSH_HOST}" <<'EOF'
+          cd public_html
+          put -r .
+          quit
+          EOF
+          echo "DEPLOY_OK"
