@@ -41,7 +41,7 @@ jobs:
           SSH_USER: ${{ secrets.SSH_USER }}
         run: |
           set -euxo pipefail
-          sftp -o BatchMode=yes -o ConnectTimeout=30 -b - \
+          sftp -i ~/.ssh/deploy_key -o IdentitiesOnly=yes -o BatchMode=yes -o ConnectTimeout=30 -b - \
             "${SSH_USER}@${SSH_HOST}" <<'EOF'
           cd public_html
           put -r *

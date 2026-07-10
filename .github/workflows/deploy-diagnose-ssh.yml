@@ -34,7 +34,7 @@ jobs:
           SSH_USER: ${{ secrets.SSH_USER }}
         run: |
           set -x
-          sftp -o BatchMode=yes -o ConnectTimeout=30 -b - \
+          sftp -i ~/.ssh/deploy_key -o IdentitiesOnly=yes -o BatchMode=yes -o ConnectTimeout=30 -b - \
             "${SSH_USER}@${SSH_HOST}" <<'EOF' || true
           pwd
           ls -la
@@ -50,7 +50,7 @@ jobs:
         run: |
           set -euxo pipefail
           echo "deploy-test-$(date -u +%Y%m%dT%H%M%SZ)" > /tmp/deploy-test.txt
-          sftp -o BatchMode=yes -o ConnectTimeout=30 -b - \
+          sftp -i ~/.ssh/deploy_key -o IdentitiesOnly=yes -o BatchMode=yes -o ConnectTimeout=30 -b - \
             "${SSH_USER}@${SSH_HOST}" <<'EOF'
           put /tmp/deploy-test.txt deploy-test.txt
           ls -la deploy-test.txt
