@@ -8,43 +8,31 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Prepare deploy bundle
-        run: rm -rf .git .cursor
-
-      - name: Setup SSH key
+      - name: Setup chiave SSH + lftp
         env:
-          SSH_KEY_PASSPHRASE: ${{ secrets.SSH_KEY_PASSPHRASE }}
+          DEPLOY_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key
+          printf '%s\n' "$DEPLOY_KEY" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
-          ssh-keyscan -H "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts 2>/dev/null || true
-          eval "$(ssh-agent -s)"
-          if [ -n "${SSH_KEY_PASSPHRASE:-}" ]; then
-            ASKPASS_SCRIPT="$(mktemp)"
-            printf '#!/bin/sh\necho "%s"\n' "$SSH_KEY_PASSPHRASE" > "$ASKPASS_SCRIPT"
-            chmod +x "$ASKPASS_SCRIPT"
-            DISPLAY=:0 SSH_ASKPASS="$ASKPASS_SCRIPT" SSH_ASKPASS_REQUIRE=force ssh-add ~/.ssh/deploy_key
-            rm -f "$ASKPASS_SCRIPT"
-          else
-            ssh-add ~/.ssh/deploy_key
-          fi
+          sudo apt-get update -qq && sudo apt-get install -y -qq lftp
 
-      - name: Deploy via SFTP recursive upload
+      - name: Deploy via SFTP mirror (nessun comando remoto — hosting senza shell)
         env:
-          SSH_HOST: ${{ secrets.SSH_HOST }}
           SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          REMOTE_DIR: public_html
         run: |
-          set -euxo pipefail
-          sftp -o BatchMode=yes -o ConnectTimeout=30 -b - \
-            "${SSH_USER}@${SSH_HOST}" <<'EOF'
-          cd public_html
-          put -r *
-          quit
-          EOF
-          echo "DEPLOY_OK"
+          lftp -u "${SSH_USER},x" "sftp://${SSH_HOST}" <<LFTP
+          set sftp:connect-program "ssh -a -x -i $HOME/.ssh/deploy_key -o BatchMode=yes -o StrictHostKeyChecking=no"
+          set net:timeout 20
+          set net:max-retries 2
+          set mirror:parallel-transfer-count 4
+          mirror -R --verbose --no-perms --exclude .git/ --exclude .github/ --exclude .cursor/ ./ ${REMOTE_DIR}
+          bye
+          LFTP
