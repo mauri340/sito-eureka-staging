@@ -44,7 +44,7 @@ jobs:
           sftp -o BatchMode=yes -o ConnectTimeout=30 -b - \
             "${SSH_USER}@${SSH_HOST}" <<'EOF'
           cd public_html
-          put -r .
+          put -r *
           quit
           EOF
           echo "DEPLOY_OK"
