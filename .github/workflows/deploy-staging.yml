@@ -37,6 +37,20 @@ jobs:
           chmod 600 ~/.ssh/deploy_key
           sudo apt-get update -qq && sudo apt-get install -y -qq lftp
 
+      - name: DIAG sftp verboso (temporaneo)
+        env:
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+        run: |
+          echo "=== test sftp -v ==="
+          timeout 30 sftp -v -i "$HOME/.ssh/deploy_key" -o BatchMode=yes -o StrictHostKeyChecking=no -P 22 "${SSH_USER}@${SSH_HOST}" <<'EOF' 2>&1 | grep -aiE "Authenticat|Permission|denied|Connection|refused|subsystem|Could not|Offering|Server accepts|debug1: Next|Remote working|sftp>|/home|drwx" | tail -40 || true
+          pwd
+          ls -la
+          ls -la staging.apprendimentorapido.it
+          bye
+          EOF
+          echo "=== fine diag ==="
+
       - name: Deploy via SFTP mirror (nessun comando remoto — hosting senza shell)
         env:
           SSH_USER: ${{ secrets.SSH_USER }}
