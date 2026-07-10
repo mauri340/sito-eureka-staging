@@ -31,13 +31,23 @@ jobs:
       - name: Prepare deploy bundle
         run: rm -rf .git .cursor
 
-      - name: Deploy via SFTP (no remote shell)
-        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
-        with:
-          username: ${{ secrets.SSH_USER }}
-          server: ${{ secrets.SSH_HOST }}
-          port: 22
-          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
-          local_path: ./
-          remote_path: /staging.apprendimentorapido.it/
-          sftpArgs: -o ConnectTimeout=30 -o StrictHostKeyChecking=no
+      - name: Setup SSH key and lftp
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts 2>/dev/null || true
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq lftp
+
+      - name: Deploy via SFTP mirror (no remote shell)
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+          REMOTE_DIR: staging.apprendimentorapido.it
+        run: |
+          set -euxo pipefail
+          lftp -u "${SSH_USER},x" "sftp://${SSH_HOST}" -e "
+            set sftp:connect-program \"ssh -a -x -i ~/.ssh/deploy_key -o BatchMode=yes -o StrictHostKeyChecking=no\";
+            mirror -R --parallel=4 --verbose ./ ${REMOTE_DIR};
+            quit"
