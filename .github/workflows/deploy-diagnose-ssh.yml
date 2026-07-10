@@ -1,0 +1,33 @@
+# Diagnostica SSH/rsync — lancia manualmente da GitHub Actions → Run workflow
+name: Diagnose deploy SSH
+
+on:
+  workflow_dispatch:
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    steps:
+      - name: SSH checks on server
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            echo "=== whoami / shell ==="
+            whoami
+            echo $SHELL
+            echo "=== rsync ==="
+            which rsync || echo "rsync NOT FOUND"
+            rsync --version 2>/dev/null | head -1 || true
+            ls -la /usr/bin/rsync 2>/dev/null || true
+            ls -la /usr/local/bin/rsync 2>/dev/null || true
+            echo "=== disk ==="
+            df -h ~ | tail -1
+            echo "=== deploy paths ==="
+            ls -ld /home/apprendimedoit/public_html/ 2>/dev/null || echo "public_html MISSING"
+            ls -ld /home/apprendimedoit/staging.apprendimentorapido.it/ 2>/dev/null || echo "staging path MISSING"
+            echo "=== write test staging ==="
+            touch /home/apprendimedoit/staging.apprendimentorapido.it/.deploy-write-test 2>&1 && echo "staging WRITABLE" || echo "staging NOT writable"
+            rm -f /home/apprendimedoit/staging.apprendimentorapido.it/.deploy-write-test 2>/dev/null || true
