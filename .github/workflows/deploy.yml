@@ -12,13 +12,17 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Deploy via SSH rsync
-        uses: burnett01/rsync-deployments@7.0.1
+      - name: Prepare deploy bundle
+        run: rm -rf .git .cursor
+
+      - name: Deploy via SCP (SSH, no rsync)
+        uses: appleboy/scp-action@v1.0.0
         with:
-          switches: -avzr --timeout=120 --rsync-path=/usr/bin/rsync --exclude=.git --exclude=.cursor --exclude=.github
-          path: ./
-          remote_path: /home/apprendimedoit/public_html/
-          remote_host: ${{ secrets.SSH_HOST }}
-          remote_user: ${{ secrets.SSH_USER }}
-          remote_key: ${{ secrets.SSH_PRIVATE_KEY }}
-          rsh: -o StrictHostKeyChecking=no -o ServerAliveInterval=30 -o ServerAliveCountMax=6
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          source: "."
+          target: /home/apprendimedoit/public_html/
+          overwrite: true
+          debug: true
