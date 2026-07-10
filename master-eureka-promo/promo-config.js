@@ -25,9 +25,14 @@
   var base = isProduction ? prodBase : stagingBase;
 
   w.MASTER_EUREKA_PROMO = {
+    /** true = post-promo: solo lead, niente prezzi/countdown/pagamenti online */
+    leadOnlyMode: true,
     apiEndpoint: 'https://api.apprendimentorapido.it/api/webhook/contact',
     listaName: 'promozione master eureka estiva',
     landingId: 'master-eureka-promo-estiva',
+    leadLandingId: 'master-eureka-promo-ritardatari',
+    leadSource: 'landing-master-eureka-post-promo-ritardatari',
+    leadTags: ['master-eureka-interesse', 'post-promo-ritardatario', 'campagna-estate-2026'],
     isProduction: isProduction,
     redirects: {
       grazie: '/master-eureka-promo/grazie.html',

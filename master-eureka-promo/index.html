@@ -9,11 +9,14 @@
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-2X3V7JZPBJ"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-2X3V7JZPBJ');</script>
 <script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','957273196609597');fbq('track','PageView');</script>
-<title>Master Eureka — Campagna Estate | Promo riservata</title>
-<meta name="description" content="Campagna Estate: Master Eureka completo (Fase 1 + Fase 2). Mappe, memoria e sintesi su libri e manuali. 12 giornate di formazione + piattaforma 1 anno. Promo riservata fino al 9 luglio 2026.">
+<script src="promo-config.js"></script>
+<script>if(window.MASTER_EUREKA_PROMO&&window.MASTER_EUREKA_PROMO.leadOnlyMode)document.documentElement.classList.add('lead-only-mode');</script>
+<link rel="stylesheet" href="promo-lead-mode.css">
+<title>Master Eureka — Richiedi informazioni</title>
+<meta name="description" content="Master Eureka: percorso completo Metodo Eureka. Lascia i tuoi dati per essere ricontattato — valutiamo insieme il percorso e le condizioni.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Master Eureka — Promo Campagna Estate riservata">
-<meta property="og:description" content="Il percorso completo Metodo Eureka: memoria, lettura veloce, mappe mentali, organizzazione. Promozione di lancio.">
+<meta property="og:title" content="Master Eureka — Richiedi informazioni">
+<meta property="og:description" content="Interessato al Master Eureka? Compila il form: ti ricontattiamo per parlare del percorso.">
 <meta property="og:image" content="https://apprendimentorapido.it/images/og-image.png">
 <style>
 :root{
@@ -1355,8 +1358,8 @@ body.has-sticky-cta{padding-bottom:80px;}
       <p class="peak-quote-text">«Un metodo di studio non te lo toglie più nessuno. Una volta tuo, resta per sempre.»</p>
     </div>
 
-    <!-- Blocco sessione live riservata -->
-    <div style="max-width:760px;margin:0 auto 44px;background:linear-gradient(160deg,#0D1B2A,#12283e);color:#fff;border-radius:20px;padding:40px 36px;text-align:center;">
+    <!-- Blocco sessione live riservata (nascosto in modalità lead) -->
+    <div id="live-riservata-block" data-lead-hide style="max-width:760px;margin:0 auto 44px;background:linear-gradient(160deg,#0D1B2A,#12283e);color:#fff;border-radius:20px;padding:40px 36px;text-align:center;">
       <span style="display:inline-block;background:rgba(255,255,255,.1);color:#fff;font-size:12px;font-weight:700;padding:7px 14px;border-radius:999px;letter-spacing:.3px;">🎥 Mercoledì 8 luglio ore 21:00 · gruppo ristretto · niente replay</span>
       <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.4rem,3vw,1.9rem);margin:16px 0 8px;color:#fff;line-height:1.25;">Ancora dei dubbi? C'è la sessione live riservata</h2>
       <p style="font-size:15px;color:rgba(255,255,255,.82);max-width:640px;margin:0 auto;line-height:1.75;">
@@ -1678,13 +1681,16 @@ document.addEventListener('click',function(e){
 });
 </script>
 <script src="promo-config.js"></script>
+<script src="promo-lead-mode.js"></script>
 <script>
-const API_ENDPOINT=(window.MASTER_EUREKA_PROMO&&window.MASTER_EUREKA_PROMO.apiEndpoint)||'https://api.apprendimentorapido.it/api/webhook/contact';
-const LISTA_NAME=(window.MASTER_EUREKA_PROMO&&window.MASTER_EUREKA_PROMO.listaName)||'promozione master eureka estiva';
-const LANDING_ID=(window.MASTER_EUREKA_PROMO&&window.MASTER_EUREKA_PROMO.landingId)||'master-eureka-promo-estiva';
-const REDIRECT_URL=(window.MASTER_EUREKA_PROMO&&window.MASTER_EUREKA_PROMO.redirects&&window.MASTER_EUREKA_PROMO.redirects.grazie)||'/master-eureka-promo/grazie.html';
-const BOOKING_KEY=(window.MASTER_EUREKA_PROMO&&window.MASTER_EUREKA_PROMO.storageKeys&&window.MASTER_EUREKA_PROMO.storageKeys.booking)||'masterEurekaPromoBooking';
-const SPOT_KEY=(window.MASTER_EUREKA_PROMO&&window.MASTER_EUREKA_PROMO.storageKeys&&window.MASTER_EUREKA_PROMO.storageKeys.spotTaken)||'masterEurekaSpotTaken';
+const CFG=window.MASTER_EUREKA_PROMO||{};
+const LEAD_ONLY=!!CFG.leadOnlyMode;
+const API_ENDPOINT=CFG.apiEndpoint||'https://api.apprendimentorapido.it/api/webhook/contact';
+const LISTA_NAME=CFG.listaName||'promozione master eureka estiva';
+const LANDING_ID=LEAD_ONLY?(CFG.leadLandingId||'master-eureka-promo-ritardatari'):(CFG.landingId||'master-eureka-promo-estiva');
+const REDIRECT_URL=(CFG.redirects&&CFG.redirects.grazie)||'/master-eureka-promo/grazie.html';
+const BOOKING_KEY=(CFG.storageKeys&&CFG.storageKeys.booking)||'masterEurekaPromoBooking';
+const SPOT_KEY=(CFG.storageKeys&&CFG.storageKeys.spotTaken)||'masterEurekaSpotTaken';
 
 function getFormData(formEl){
   return{
@@ -1723,9 +1729,18 @@ async function submitPromoForm(e){
   const payload={
     nome,cognome,email,telefono,
     lista:LISTA_NAME,landing_id:LANDING_ID,
-    source:'landing-master-eureka-promo-estiva',
-    tags:['master-eureka-promo','promo-estiva-2497','campagna-estate-2026'],
-    custom_fields:{
+    source:LEAD_ONLY?(CFG.leadSource||'landing-master-eureka-post-promo-ritardatari'):'landing-master-eureka-promo-estiva',
+    tags:LEAD_ONLY?(CFG.leadTags||['master-eureka-interesse','post-promo-ritardatario']):['master-eureka-promo','promo-estiva-2497','campagna-estate-2026'],
+    custom_fields:LEAD_ONLY?{
+      offerta:'Master Eureka Completo',
+      materia:materia,
+      fase_funnel:'post-promo-lead',
+      post_promo_ritardatario:true,
+      consent_marketing:true,
+      consent_marketing_at:new Date().toISOString(),
+      original_source:CFG.leadSource||'landing-master-eureka-post-promo-ritardatari',
+      form_position:'offer-close-post-promo'
+    }:{
       offerta:'Master Eureka Completo',prezzo_listino:4997,prezzo_promo:2497,
       materia:materia,
       promo_day:(function(){
@@ -1743,11 +1758,11 @@ async function submitPromoForm(e){
     const response=await fetch(API_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
     const data=await response.json().catch(()=>({}));
     if(response.ok&&data.success!==false){
-      if(typeof fbq==='function')fbq('track','Lead',{content_name:'Master Eureka Promo 2497'});
-      if(typeof gtag==='function')gtag('event','generate_lead',{event_category:'Form',event_label:'Master Eureka Promo 2497'});
+      if(typeof fbq==='function')fbq('track','Lead',{content_name:LEAD_ONLY?'Master Eureka Post-Promo Lead':'Master Eureka Promo 2497'});
+      if(typeof gtag==='function')gtag('event','generate_lead',{event_category:'Form',event_label:LEAD_ONLY?'Master Eureka Post-Promo':'Master Eureka Promo 2497'});
       localStorage.setItem(BOOKING_KEY,JSON.stringify({nome,cognome,email,telefono,materia,promo_day:payload.custom_fields.promo_day,timestamp:new Date().toISOString()}));
       localStorage.setItem(SPOT_KEY,String(Date.now()));
-      window.location.href=REDIRECT_URL+'?'+new URLSearchParams({nome,cognome,email,telefono,materia,promo_day:String(payload.custom_fields.promo_day)}).toString();
+      window.location.href=REDIRECT_URL+'?'+new URLSearchParams({nome,cognome,email,telefono,materia}).toString();
     }else{
       showFormError(formEl,data.detail||data.message||'Errore durante l\'invio. Scrivi a pagamenti@apprendimentorapido.it');
       btn.textContent=original;
@@ -1761,8 +1776,9 @@ async function submitPromoForm(e){
 }
 document.querySelectorAll('.promo-form').forEach(f=>f.addEventListener('submit',submitPromoForm));
 
-// ---- Bonus di oggi sulla landing (ruota per data lun-gio; ?day=1..4 per anteprima) ----
+// ---- Bonus di oggi (disattivato in modalità lead) ----
 (function(){
+  if(LEAD_ONLY)return;
   var BONUS_BY_DAY={
     1:{emoji:'🎟️',tag:'Bonus di oggi',title:'Un posto al corso dal vivo, in regalo per chi vuoi tu',val:1497,desc:'Ti porti al corso dal vivo di 4 giorni una persona che scegli tu — un collega, tuo figlio, il partner. Un secondo posto in aula, in regalo.'},
     2:{emoji:'🏨',tag:'Bonus di oggi · solo i primi 7 iscritti',title:'Vieni al Life senza pensare a hotel e viaggio',val:400,desc:'Vitto e alloggio al Life Emotion in presenza, coperti da noi. Riservato anche ai primi 7 iscritti di oggi.'},
@@ -1779,6 +1795,7 @@ document.querySelectorAll('.promo-form').forEach(f=>f.addEventListener('submit',
 
 const PROMO_END=new Date('2026-07-09T19:00:00+02:00');
 function formatPromoDate(date,short){
+  if(LEAD_ONLY)return '';
   const s=new Intl.DateTimeFormat('it-IT',{day:'numeric',month:'short',year:'numeric',timeZone:'Europe/Rome'}).format(date);
   return s.replace(/\./g,'').replace(/,/g,'');
 }
@@ -1788,6 +1805,7 @@ function formatPromoDateLong(date){
   return day+' alle ore '+time;
 }
 function initPromoDates(){
+  if(LEAD_ONLY)return;
   const full=formatPromoDateLong(PROMO_END);
   const mid=formatPromoDate(PROMO_END,false);
   const ids={
@@ -1804,6 +1822,7 @@ function initPromoDates(){
 initPromoDates();
 function pad(n){return String(n).padStart(2,'0');}
 function updateCountdown(){
+  if(LEAD_ONLY)return;
   const diff=PROMO_END-Date.now();
   const ended=diff<=0;
   const d=ended?0:Math.floor(diff/86400000);
@@ -1834,6 +1853,7 @@ if(stickyCta){
   let stickyVisible=false;
   let priceRevealed=false;
   const revealStickyPrice=()=>{
+    if(LEAD_ONLY)return;
     if(priceRevealed||!stickyHeadline||!stickyPrice||!stickyBtn)return;
     priceRevealed=true;
     stickyHeadline.hidden=true;
@@ -1841,7 +1861,7 @@ if(stickyCta){
     stickyBtn.textContent='Blocca il prezzo a 2.497 €';
     stickyBtn.setAttribute('href','#form');
   };
-  if(offertaSection){
+  if(!LEAD_ONLY&&offertaSection){
     new IntersectionObserver((entries)=>{
       if(entries.some(e=>e.isIntersecting))revealStickyPrice();
     },{threshold:0.12}).observe(offertaSection);
