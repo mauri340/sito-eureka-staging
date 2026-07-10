@@ -9,6 +9,12 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
+      - name: IP pubblico del runner (da comunicare all'hosting)
+        run: |
+          echo "=== IP pubblico di uscita di questo runner GitHub Actions ==="
+          echo "IPv4: $(curl -s --max-time 10 https://api.ipify.org || echo n/d)"
+          echo "IPv6: $(curl -s --max-time 10 https://api64.ipify.org || echo n/d)"
+
       - name: SSH shell test
         uses: appleboy/ssh-action@v1.2.0
         with:
