@@ -7,53 +7,36 @@ on:
 jobs:
   diagnose:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
-      - name: Setup SSH key
-        env:
-          SSH_KEY_PASSPHRASE: ${{ secrets.SSH_KEY_PASSPHRASE }}
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key
-          chmod 600 ~/.ssh/deploy_key
-          ssh-keyscan -H "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts 2>/dev/null || true
-          eval "$(ssh-agent -s)"
-          if [ -n "${SSH_KEY_PASSPHRASE:-}" ]; then
-            ASKPASS_SCRIPT="$(mktemp)"
-            printf '#!/bin/sh\necho "%s"\n' "$SSH_KEY_PASSPHRASE" > "$ASKPASS_SCRIPT"
-            chmod +x "$ASKPASS_SCRIPT"
-            DISPLAY=:0 SSH_ASKPASS="$ASKPASS_SCRIPT" SSH_ASKPASS_REQUIRE=force ssh-add ~/.ssh/deploy_key
-            rm -f "$ASKPASS_SCRIPT"
-          else
-            ssh-add ~/.ssh/deploy_key
-          fi
-          ssh-add -l
+      - name: SSH shell test
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          passphrase: ${{ secrets.SSH_KEY_PASSPHRASE }}
+          port: 22
+          command_timeout: 2m
+          script: |
+            echo "=== whoami / pwd ==="
+            whoami
+            pwd
+            echo "=== paths ==="
+            ls -ld public_html staging.apprendimentorapido.it
+            echo "=== write test ==="
+            touch staging.apprendimentorapido.it/.deploy-write-test && echo STAGING_WRITABLE
+            rm -f staging.apprendimentorapido.it/.deploy-write-test
+            echo DONE
 
-      - name: SFTP list home and paths
-        env:
-          SSH_HOST: ${{ secrets.SSH_HOST }}
-          SSH_USER: ${{ secrets.SSH_USER }}
-        run: |
-          set -x
-          sftp -i ~/.ssh/deploy_key -o IdentitiesOnly=yes -o BatchMode=yes -o ConnectTimeout=30 -b - \
-            "${SSH_USER}@${SSH_HOST}" <<'EOF' || true
-          pwd
-          ls -la
-          ls -la staging.apprendimentorapido.it
-          ls -la public_html
-          quit
-          EOF
-
-      - name: SFTP upload tiny test file
-        env:
-          SSH_HOST: ${{ secrets.SSH_HOST }}
-          SSH_USER: ${{ secrets.SSH_USER }}
-        run: |
-          set -euxo pipefail
-          echo "deploy-test-$(date -u +%Y%m%dT%H%M%SZ)" > /tmp/deploy-test.txt
-          sftp -i ~/.ssh/deploy_key -o IdentitiesOnly=yes -o BatchMode=yes -o ConnectTimeout=30 -b - \
-            "${SSH_USER}@${SSH_HOST}" <<'EOF'
-          put /tmp/deploy-test.txt deploy-test.txt
-          ls -la deploy-test.txt
-          rm deploy-test.txt
-          quit
-          EOF
+      - name: SFTP upload test
+        uses: appleboy/scp-action@v1.0.0
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          passphrase: ${{ secrets.SSH_KEY_PASSPHRASE }}
+          port: 22
+          source: deploy-diagnose-ssh.yml
+          target: staging.apprendimentorapido.it/
+          overwrite: true
