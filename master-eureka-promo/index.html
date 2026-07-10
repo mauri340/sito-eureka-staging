@@ -1762,7 +1762,7 @@ async function submitPromoForm(e){
       if(typeof gtag==='function')gtag('event','generate_lead',{event_category:'Form',event_label:LEAD_ONLY?'Master Eureka Post-Promo':'Master Eureka Promo 2497'});
       localStorage.setItem(BOOKING_KEY,JSON.stringify({nome,cognome,email,telefono,materia,promo_day:payload.custom_fields.promo_day,timestamp:new Date().toISOString()}));
       localStorage.setItem(SPOT_KEY,String(Date.now()));
-      window.location.href=REDIRECT_URL+'?'+new URLSearchParams({nome,cognome,email,telefono,materia,promo_day:String(payload.custom_fields.promo_day)}).toString();
+      window.location.href=REDIRECT_URL+'?'+new URLSearchParams({nome,cognome,email,telefono,materia}).toString();
     }else{
       showFormError(formEl,data.detail||data.message||'Errore durante l\'invio. Scrivi a pagamenti@apprendimentorapido.it');
       btn.textContent=original;
