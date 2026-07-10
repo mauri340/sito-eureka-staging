@@ -1,4 +1,4 @@
-# Diagnostica SSH/rsync — lancia manualmente da GitHub Actions → Run workflow
+# Diagnostica SSH — lancia manualmente da GitHub Actions → Run workflow
 name: Diagnose deploy SSH
 
 on:
@@ -8,26 +8,20 @@ jobs:
   diagnose:
     runs-on: ubuntu-latest
     steps:
+      - name: Setup SSH key
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts 2>/dev/null || true
+
       - name: SSH checks on server
-        uses: appleboy/ssh-action@v1.2.0
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: |
-            echo "=== whoami / shell ==="
-            whoami
-            echo $SHELL
-            echo "=== rsync ==="
-            which rsync || echo "rsync NOT FOUND"
-            rsync --version 2>/dev/null | head -1 || true
-            ls -la /usr/bin/rsync 2>/dev/null || true
-            ls -la /usr/local/bin/rsync 2>/dev/null || true
-            echo "=== disk ==="
-            df -h ~ | tail -1
-            echo "=== deploy paths ==="
-            ls -ld /home/apprendimedoit/public_html/ 2>/dev/null || echo "public_html MISSING"
-            ls -ld /home/apprendimedoit/staging.apprendimentorapido.it/ 2>/dev/null || echo "staging path MISSING"
-            echo "=== write test staging ==="
-            touch /home/apprendimedoit/staging.apprendimentorapido.it/.deploy-write-test 2>&1 && echo "staging WRITABLE" || echo "staging NOT writable"
-            rm -f /home/apprendimedoit/staging.apprendimentorapido.it/.deploy-write-test 2>/dev/null || true
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+        run: |
+          set -x
+          ssh -i ~/.ssh/deploy_key -o BatchMode=yes -o ConnectTimeout=30 \
+            -o RequestTTY=no \
+            "${SSH_USER}@${SSH_HOST}" \
+            'echo "=== whoami / pwd ==="; whoami; pwd; echo "SHELL=$SHELL"; echo "=== tools ==="; which tar scp rsync 2>/dev/null || true; tar --version 2>/dev/null | head -1 || echo "tar missing"; echo "=== disk ==="; df -h . 2>/dev/null | tail -1 || df -h ~ | tail -1; echo "=== paths ==="; ls -ld public_html staging.apprendimentorapido.it 2>&1; echo "=== write test ==="; touch staging.apprendimentorapido.it/.deploy-write-test && echo STAGING_WRITABLE && rm -f staging.apprendimentorapido.it/.deploy-write-test || echo STAGING_NOT_WRITABLE; echo DONE'
