@@ -29,10 +29,10 @@ jobs:
           REMOTE_DIR: public_html
         run: |
           set -euxo pipefail
-          tar czf deploy.tar.gz .
-          ls -lh deploy.tar.gz
+          tar czf /tmp/deploy.tar.gz --exclude='deploy.tar.gz' .
+          ls -lh /tmp/deploy.tar.gz
           scp -i ~/.ssh/deploy_key -o BatchMode=yes -o ConnectTimeout=30 \
-            deploy.tar.gz "${SSH_USER}@${SSH_HOST}:${REMOTE_DIR}/deploy.tar.gz"
+            /tmp/deploy.tar.gz "${SSH_USER}@${SSH_HOST}:${REMOTE_DIR}/deploy.tar.gz"
           ssh -i ~/.ssh/deploy_key -o BatchMode=yes -o ConnectTimeout=30 \
             "${SSH_USER}@${SSH_HOST}" \
-            "set -e; cd ${REMOTE_DIR} && tar xzf deploy.tar.gz && rm -f deploy.tar.gz && echo DEPLOY_OK"
+            "cd ${REMOTE_DIR} && tar xzf deploy.tar.gz && rm -f deploy.tar.gz && echo DEPLOY_OK"

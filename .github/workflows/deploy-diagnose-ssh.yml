@@ -21,7 +21,11 @@ jobs:
           SSH_USER: ${{ secrets.SSH_USER }}
         run: |
           set -x
+          ssh -i ~/.ssh/deploy_key -o BatchMode=yes -o ConnectTimeout=30 -vvv \
+            "${SSH_USER}@${SSH_HOST}" echo HELLO 2>&1 | tail -30
           ssh -i ~/.ssh/deploy_key -o BatchMode=yes -o ConnectTimeout=30 \
-            -o RequestTTY=no \
-            "${SSH_USER}@${SSH_HOST}" \
-            'echo "=== whoami / pwd ==="; whoami; pwd; echo "SHELL=$SHELL"; echo "=== tools ==="; which tar scp rsync 2>/dev/null || true; tar --version 2>/dev/null | head -1 || echo "tar missing"; echo "=== disk ==="; df -h . 2>/dev/null | tail -1 || df -h ~ | tail -1; echo "=== paths ==="; ls -ld public_html staging.apprendimentorapido.it 2>&1; echo "=== write test ==="; touch staging.apprendimentorapido.it/.deploy-write-test && echo STAGING_WRITABLE && rm -f staging.apprendimentorapido.it/.deploy-write-test || echo STAGING_NOT_WRITABLE; echo DONE'
+            "${SSH_USER}@${SSH_HOST}" whoami
+          ssh -i ~/.ssh/deploy_key -o BatchMode=yes -o ConnectTimeout=30 \
+            "${SSH_USER}@${SSH_HOST}" pwd
+          ssh -i ~/.ssh/deploy_key -o BatchMode=yes -o ConnectTimeout=30 \
+            "${SSH_USER}@${SSH_HOST}" "ls -ld public_html staging.apprendimentorapido.it"
