@@ -1,4 +1,4 @@
-# Diagnostica SSH — lancia manualmente da GitHub Actions → Run workflow
+# Diagnostica SSH/SFTP — lancia manualmente da GitHub Actions → Run workflow
 name: Diagnose deploy SSH
 
 on:
@@ -15,17 +15,25 @@ jobs:
           chmod 600 ~/.ssh/deploy_key
           ssh-keyscan -H "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts 2>/dev/null || true
 
-      - name: SSH checks on server
+      - name: Test SFTP list (shell-free)
         env:
           SSH_HOST: ${{ secrets.SSH_HOST }}
           SSH_USER: ${{ secrets.SSH_USER }}
         run: |
           set -x
-          ssh -i ~/.ssh/deploy_key -o BatchMode=yes -o ConnectTimeout=30 -vvv \
-            "${SSH_USER}@${SSH_HOST}" echo HELLO 2>&1 | tail -30
+          sftp -i ~/.ssh/deploy_key -o BatchMode=yes -o ConnectTimeout=30 -b - \
+            "${SSH_USER}@${SSH_HOST}" <<'EOF'
+          ls -la
+          ls -la staging.apprendimentorapido.it
+          ls -la public_html
+          quit
+          EOF
+
+      - name: Test remote shell (optional)
+        continue-on-error: true
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+        run: |
           ssh -i ~/.ssh/deploy_key -o BatchMode=yes -o ConnectTimeout=30 \
-            "${SSH_USER}@${SSH_HOST}" whoami
-          ssh -i ~/.ssh/deploy_key -o BatchMode=yes -o ConnectTimeout=30 \
-            "${SSH_USER}@${SSH_HOST}" pwd
-          ssh -i ~/.ssh/deploy_key -o BatchMode=yes -o ConnectTimeout=30 \
-            "${SSH_USER}@${SSH_HOST}" "ls -ld public_html staging.apprendimentorapido.it"
+            "${SSH_USER}@${SSH_HOST}" echo HELLO || echo "Remote shell not available (SFTP-only account)"

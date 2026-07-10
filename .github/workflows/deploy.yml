@@ -15,24 +15,13 @@ jobs:
       - name: Prepare deploy bundle
         run: rm -rf .git .cursor
 
-      - name: Setup SSH key
-        run: |
-          mkdir -p ~/.ssh
-          printf '%s\n' "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key
-          chmod 600 ~/.ssh/deploy_key
-          ssh-keyscan -H "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts 2>/dev/null || true
-
-      - name: Deploy via tar + scp + ssh
-        env:
-          SSH_HOST: ${{ secrets.SSH_HOST }}
-          SSH_USER: ${{ secrets.SSH_USER }}
-          REMOTE_DIR: public_html
-        run: |
-          set -euxo pipefail
-          tar czf /tmp/deploy.tar.gz --exclude='deploy.tar.gz' .
-          ls -lh /tmp/deploy.tar.gz
-          scp -i ~/.ssh/deploy_key -o BatchMode=yes -o ConnectTimeout=30 \
-            /tmp/deploy.tar.gz "${SSH_USER}@${SSH_HOST}:${REMOTE_DIR}/deploy.tar.gz"
-          ssh -i ~/.ssh/deploy_key -o BatchMode=yes -o ConnectTimeout=30 \
-            "${SSH_USER}@${SSH_HOST}" \
-            "cd ${REMOTE_DIR} && tar xzf deploy.tar.gz && rm -f deploy.tar.gz && echo DEPLOY_OK"
+      - name: Deploy via SFTP (no remote shell)
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+        with:
+          username: ${{ secrets.SSH_USER }}
+          server: ${{ secrets.SSH_HOST }}
+          port: 22
+          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+          local_path: ./
+          remote_path: /public_html/
+          sftpArgs: -o ConnectTimeout=30 -o StrictHostKeyChecking=no
