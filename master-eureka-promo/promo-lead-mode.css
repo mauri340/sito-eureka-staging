@@ -1,0 +1,51 @@
+/**
+ * Master Eureka — modalità post-promo (solo lead, niente prezzi).
+ * Attiva con MASTER_EUREKA_PROMO.leadOnlyMode = true
+ */
+.lead-only-mode .promo-bar,
+.lead-only-mode .promo-card-countdown,
+.lead-only-mode .form-price-block,
+.lead-only-mode #bonus-today,
+.lead-only-mode .live-cta-box,
+.lead-only-mode .lead-hide,
+.lead-only-mode .sticky-countdown,
+.lead-only-mode .conv-strip,
+.lead-only-mode .sticky-cta-price,
+.lead-only-mode [data-lead-hide] {
+  display: none !important;
+}
+
+.lead-only-mode .promo-card-head {
+  font-size: 13px;
+  letter-spacing: 1.2px;
+}
+
+.lead-only-mode .lead-info-bar {
+  background: var(--navy2, #1a2d42);
+  color: #fff;
+  text-align: center;
+  padding: 14px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.5;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.lead-only-mode .lead-info-bar strong {
+  color: #f5d78e;
+}
+
+.lead-only-mode .promo-steps-item.is-upcoming .promo-steps-desc {
+  color: var(--muted);
+}
+
+.lead-only-mode .form-ps.lead-ps {
+  margin-top: 24px;
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+.lead-only-mode .form-ps.lead-ps strong {
+  color: var(--navy);
+}
