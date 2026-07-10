@@ -8,6 +8,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -15,13 +16,35 @@ jobs:
       - name: Prepare deploy bundle
         run: rm -rf .git .cursor
 
-      - name: Deploy via SFTP (no remote shell)
-        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
-        with:
-          username: ${{ secrets.SSH_USER }}
-          server: ${{ secrets.SSH_HOST }}
-          port: 22
-          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
-          local_path: ./
-          remote_path: /public_html/
-          sftpArgs: -o ConnectTimeout=30 -o StrictHostKeyChecking=no
+      - name: Setup SSH key
+        env:
+          SSH_KEY_PASSPHRASE: ${{ secrets.SSH_KEY_PASSPHRASE }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts 2>/dev/null || true
+          eval "$(ssh-agent -s)"
+          if [ -n "${SSH_KEY_PASSPHRASE:-}" ]; then
+            ASKPASS_SCRIPT="$(mktemp)"
+            printf '#!/bin/sh\necho "%s"\n' "$SSH_KEY_PASSPHRASE" > "$ASKPASS_SCRIPT"
+            chmod +x "$ASKPASS_SCRIPT"
+            DISPLAY=:0 SSH_ASKPASS="$ASKPASS_SCRIPT" SSH_ASKPASS_REQUIRE=force ssh-add ~/.ssh/deploy_key
+            rm -f "$ASKPASS_SCRIPT"
+          else
+            ssh-add ~/.ssh/deploy_key
+          fi
+
+      - name: Deploy via SFTP recursive upload
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+        run: |
+          set -euxo pipefail
+          sftp -o BatchMode=yes -o ConnectTimeout=30 -b - \
+            "${SSH_USER}@${SSH_HOST}" <<'EOF'
+          cd public_html
+          put -r *
+          quit
+          EOF
+          echo "DEPLOY_OK"
