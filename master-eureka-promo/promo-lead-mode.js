@@ -1,5 +1,6 @@
 /**
  * UI post-promo: lead capture senza prezzi né countdown.
+ * Disattiva con MASTER_EUREKA_PROMO.leadOnlyMode = false
  */
 (function (w, d) {
   var CFG = w.MASTER_EUREKA_PROMO || {};
@@ -58,10 +59,6 @@
       if (t2) t2.textContent = 'Ti ricontattiamo';
       if (d2) d2.innerHTML = 'Parliamo del percorso e delle <strong>condizioni</strong> adatte a te';
     }
-    if (items.length >= 3) {
-      var t3 = items[2].querySelector('.promo-steps-desc');
-      if (t3) t3.textContent = '';
-    }
     var hint = steps.querySelector('.promo-steps-hint');
     if (hint) hint.textContent = 'Compila qui sotto — richiesta informazioni';
     var note = steps.querySelector('.promo-steps-note');
@@ -89,8 +86,7 @@
     });
     var consent = d.querySelector('.form-checkbox span');
     if (consent) {
-      consent.innerHTML =
-        consent.innerHTML.replace('Vai al passo numero due', 'Invia la richiesta');
+      consent.innerHTML = consent.innerHTML.replace('Vai al passo numero due', 'Invia la richiesta');
     }
     var wa = d.querySelector('.form-whatsapp-help a');
     if (wa) {
@@ -100,16 +96,25 @@
     }
   }
 
-  function updateStickyAndFooter() {
+  function lockStickyLead() {
     var headline = d.getElementById('sticky-headline');
-    if (headline) headline.textContent = 'Interessato al Master Eureka?';
+    var stickyPrice = d.getElementById('sticky-price');
     var stickyText = d.querySelector('.sticky-cta-text');
-    if (stickyText) stickyText.textContent = 'Lascia i dati — ti ricontattiamo noi';
     var stickyBtn = d.getElementById('sticky-btn');
+    if (headline) {
+      headline.hidden = false;
+      headline.textContent = 'Interessato al Master Eureka?';
+    }
+    if (stickyPrice) stickyPrice.hidden = true;
+    if (stickyText) stickyText.textContent = 'Lascia i dati — ti ricontattiamo noi';
     if (stickyBtn) {
       stickyBtn.textContent = 'Richiedi informazioni';
       stickyBtn.setAttribute('href', '#form');
     }
+  }
+
+  function updateStickyAndFooter() {
+    lockStickyLead();
     var footerLead = d.querySelector('.footer-promo-lead');
     if (footerLead) footerLead.textContent = 'Domande sul Master Eureka?';
     var footerCta = d.querySelector('.footer-promo-cta');
@@ -124,36 +129,60 @@
     });
   }
 
-  function patchFaqPrices() {
-    d.querySelectorAll('.accordion-body').forEach(function (body) {
-      body.innerHTML = body.innerHTML
-        .replace(/2\.497\s*€/g, 'il percorso')
-        .replace(/4\.997\s*€/g, 'il listino')
-        .replace(/Vale 2\.497 €\?/g, 'Vale l\'investimento?');
+  function replaceObiezioniForLead() {
+    var wrap = d.getElementById('obiezioni');
+    if (!wrap) return;
+    wrap.innerHTML =
+      '<h3 style="font-family:\'Playfair Display\',serif;font-size:clamp(1.35rem,2.5vw,1.65rem);color:#fff;text-align:center;margin:0 0 14px;">Prima di inviare la richiesta</h3>' +
+      '<p style="text-align:center;font-size:15px;color:rgba(255,255,255,.7);margin-bottom:24px;line-height:1.7;">' +
+      'Niente prezzi in pagina: lascia i dati e <strong style="color:#fff;">ti ricontattiamo noi</strong>. ' +
+      'Ecco cosa succede dopo e le domande più frequenti in questo momento.</p>' +
+      '<div class="accordion-item">' +
+      '  <div class="accordion-header">Cosa succede dopo il form? <span class="accordion-arrow">▼</span></div>' +
+      '  <div class="accordion-body">' +
+      '    <p><strong>Nessun addebito.</strong> Compili nome, email e telefono — 30 secondi.</p>' +
+      '    <p>Vedi una pagina di conferma con un riepilogo del percorso. Poi <strong>ti richiamiamo noi</strong> ' +
+      'per capire se il Master fa per te e, se ha senso, illustrarti le <strong>condizioni di accesso</strong>.</p>' +
+      '    <p><strong>Nessun obbligo di acquisto.</strong> Se non è il momento giusto, ti fermi lì.</p>' +
+      '  </div>' +
+      '</div>' +
+      '<div class="accordion-item">' +
+      '  <div class="accordion-header">Perché non vedo il prezzo? <span class="accordion-arrow">▼</span></div>' +
+      '  <div class="accordion-body">' +
+      '    <p>La <strong>Campagna Estate è conclusa</strong>: online non mostriamo più prezzi automatici.</p>' +
+      '    <p>Prima valutiamo insieme se il percorso è adatto a te; solo dopo parliamo di investimento e modalità, ' +
+      'in base alla tua situazione.</p>' +
+      '  </div>' +
+      '</div>' +
+      '<div class="accordion-item">' +
+      '  <div class="accordion-header">«Non ho tempo» — e se fosse proprio il motivo per cui mi serve? <span class="accordion-arrow">▼</span></div>' +
+      '  <div class="accordion-body">' +
+      '    <p>La maggior parte dei nostri allievi lavora, ha famiglia e mille impegni. Il Master non serve a studiare di più, ' +
+      'ma a ottenere di più nel tempo che hai già.</p>' +
+      '    <p>Le ore che dedichi oggi al metodo possono restituirti centinaia di ore negli anni a venire — ' +
+      'in lettura, memoria e organizzazione dello studio.</p>' +
+      '  </div>' +
+      '</div>';
+  }
+
+  function updateFaqSectionLead() {
+    var sub = d.querySelector('#faq .section-sub');
+    if (sub) {
+      sub.innerHTML =
+        'Dettagli sul percorso. Per <strong>tempi, costi e pagamento</strong> ne parliamo ' +
+        'quando ti ricontattiamo — non in questa pagina.';
+    }
+    d.querySelectorAll('a[href="#obiezioni"]').forEach(function (a) {
+      a.textContent = 'domande frequenti';
     });
-    var obiezioniIntro = d.querySelector('#obiezioni + p, #obiezioni ~ p');
-    var obWrap = d.getElementById('obiezioni');
-    if (obWrap && obWrap.previousElementSibling) {
-      /* intro is inside obiezioni-wrap */
-    }
-    var obIntro = d.querySelector('.obiezioni-wrap > p');
-    if (obIntro) {
-      obIntro.textContent =
-        'Hai visto il programma e il form sopra — è normale avere ancora qualche domanda. ' +
-        'Le tre più frequenti, con la risposta netta.';
-    }
-    var faqAfterForm = d.querySelector('.accordion-header');
-    /* FAQ "Cosa succede dopo il form" */
-    d.querySelectorAll('.accordion-item').forEach(function (item) {
-      var h = item.querySelector('.accordion-header');
-      if (!h || h.textContent.indexOf('Cosa succede dopo il form') === -1) return;
-      var body = item.querySelector('.accordion-body');
-      if (body) {
-        body.innerHTML =
-          '<p><strong>No.</strong> Compilare il form non addebita nulla.</p>' +
-          '<p>Inserisci nome, email e telefono — 30 secondi. Nella pagina di conferma trovi un riepilogo del percorso. ' +
-          'Poi <strong>ti ricontattiamo noi</strong> per capire se il Master fa per te e illustrarti le condizioni di accesso. ' +
-          '<strong>Nessun obbligo di acquisto.</strong></p>';
+  }
+
+  function updatePromoCtas() {
+    d.querySelectorAll('a.btn-gold, a.btn.btn-gold').forEach(function (a) {
+      var t = (a.textContent || '').toLowerCase();
+      if (t.indexOf('promo') !== -1 || t.indexOf('2.497') !== -1 || t.indexOf('offerta') !== -1) {
+        a.textContent = 'Richiedi informazioni →';
+        a.setAttribute('href', '#form');
       }
     });
   }
@@ -186,8 +215,13 @@
     replaceFormPs();
     updateFormUi();
     updateStickyAndFooter();
-    patchFaqPrices();
+    replaceObiezioniForLead();
+    updateFaqSectionLead();
+    updatePromoCtas();
     updateMeta();
+    /* Ripristina sticky lead se lo script promo la sovrascrive */
+    setTimeout(lockStickyLead, 0);
+    setTimeout(lockStickyLead, 500);
   }
 
   if (d.readyState === 'loading') {

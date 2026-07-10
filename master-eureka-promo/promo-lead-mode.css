@@ -15,6 +15,10 @@
   display: none !important;
 }
 
+.lead-only-mode #sticky-price {
+  display: none !important;
+}
+
 .lead-only-mode .promo-card-head {
   font-size: 13px;
   letter-spacing: 1.2px;

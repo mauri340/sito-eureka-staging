@@ -1853,6 +1853,7 @@ if(stickyCta){
   let stickyVisible=false;
   let priceRevealed=false;
   const revealStickyPrice=()=>{
+    if(LEAD_ONLY)return;
     if(priceRevealed||!stickyHeadline||!stickyPrice||!stickyBtn)return;
     priceRevealed=true;
     stickyHeadline.hidden=true;
@@ -1860,7 +1861,7 @@ if(stickyCta){
     stickyBtn.textContent='Blocca il prezzo a 2.497 €';
     stickyBtn.setAttribute('href','#form');
   };
-  if(offertaSection){
+  if(!LEAD_ONLY&&offertaSection){
     new IntersectionObserver((entries)=>{
       if(entries.some(e=>e.isIntersecting))revealStickyPrice();
     },{threshold:0.12}).observe(offertaSection);
