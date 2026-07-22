@@ -17,6 +17,8 @@ jobs:
         run: |
           rm -rf _stage && mkdir -p _stage
           cp -r master-eureka-promo _stage/
+          cp -r anticipo _stage/
+          cp -r founder _stage/
           cat > _stage/robots.txt <<'EOF'
           # STAGING — non indicizzare. Vedere robots.txt di produzione su apprendimentorapido.it
           User-agent: *
