@@ -239,11 +239,11 @@
   }
   .area-buttons {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 10px;
     margin-bottom: 24px;
   }
-  @media (max-width: 640px) { .area-buttons { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 640px) { .area-buttons { grid-template-columns: 1fr; } }
   .area-btn {
     background: var(--paper);
     border: 2px solid var(--ink-50);
@@ -268,6 +268,66 @@
     color: var(--muted);
     margin-bottom: 24px;
     min-height: 1.4em;
+  }
+  .area-descriptions {
+    background: #fff;
+    border-radius: 12px;
+    padding: 32px 36px;
+    margin-bottom: 32px;
+    border: 1px solid var(--ink-50);
+    text-align: left;
+    min-height: 220px;
+  }
+  @media (max-width: 540px) {
+    .area-descriptions { padding: 24px 20px; }
+  }
+  .area-description { display: none; }
+  .area-description.active { display: block; }
+  .area-description h3 {
+    color: var(--teal);
+    margin-bottom: 14px;
+    font-size: 1.3rem;
+  }
+  .area-description p {
+    margin-bottom: 12px;
+    font-size: 1rem;
+    color: var(--ink);
+  }
+  .area-description .for-who {
+    font-size: 0.8125rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 600;
+    margin-bottom: 10px;
+    display: block;
+  }
+  .area-description strong { color: var(--teal); }
+  .area-description .empty-state {
+    text-align: center;
+    color: var(--muted);
+    font-style: italic;
+    padding: 36px 0;
+    margin: 0;
+  }
+  .area-description ul {
+    list-style: none;
+    margin-top: 10px;
+    padding: 0;
+  }
+  .area-description ul li {
+    padding-left: 22px;
+    position: relative;
+    margin-bottom: 8px;
+    color: var(--ink);
+    font-size: 0.9375rem;
+  }
+  .area-description ul li::before {
+    content: '→';
+    color: var(--teal);
+    position: absolute;
+    left: 0;
+    font-weight: bold;
   }
   form { display: flex; flex-direction: column; gap: 14px; max-width: 520px; margin: 0 auto; }
   .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
@@ -368,7 +428,7 @@
   <div class="container">
     <div class="brand-wrap">
       <div class="brand"><b>e</b>Elefantra</div>
-      <span class="brand-tagline">Lo strumento per studiare più veloce dal tuo PDF</span>
+      <span class="brand-tagline">Un click · tutto il materiale di studio pronto</span>
     </div>
     <div class="header-note">Lista d'attesa · gratis</div>
   </div>
@@ -455,19 +515,65 @@
 
 <section class="form-section" id="form">
   <div class="container">
-    <h2>Iscriviti alla lista Elefantra</h2>
+    <h2>Per chi sarà indispensabile?</h2>
     <p class="section-lead">
-      Ideale se prepari un concorso, un esame universitario, un aggiornamento professionale
-      o studi lingue con materiali voluminosi.
+      Concorsi, esami universitari, aggiornamento professionale — se hai PDF voluminosi e poco tempo, clicca la tua situazione e scopri cosa fa Elefantra per te.
     </p>
 
     <div class="area-buttons" role="tablist">
-      <button class="area-btn" data-area="concorsi" type="button">Concorsi</button>
-      <button class="area-btn" data-area="esami" type="button">Esami uni</button>
-      <button class="area-btn" data-area="lingue" type="button">Lingue</button>
-      <button class="area-btn" data-area="aggiornamento" type="button">Professionale</button>
+      <button class="area-btn" data-area="concorsi" type="button">Concorsi pubblici</button>
+      <button class="area-btn" data-area="esami" type="button">Esami universitari</button>
+      <button class="area-btn" data-area="aggiornamento" type="button">Aggiornamento professionale</button>
     </div>
-    <p class="area-hint" id="area-hint">Opzionale: indica il tuo ambito — ci aiuta a capire chi c'è in lista.</p>
+
+    <div class="area-descriptions">
+      <div class="area-description active" id="desc-default">
+        <p class="empty-state">↑ Clicca la tua situazione qui sopra per vedere i vantaggi concreti.</p>
+      </div>
+
+      <div class="area-description" id="desc-concorsi">
+        <span class="for-who">Per: candidati a concorsi pubblici di ogni tipo</span>
+        <h3>Il tuo manuale di concorso, lavorato in pochi istanti.</h3>
+        <p>Prendi il tuo materiale di studio — libri, dispense, manuali del concorso — in formato PDF. Lo carichi in Elefantra.</p>
+        <p>In pochi istanti ti torna tutto il materiale <strong>già organizzato per essere imparato</strong>: parole chiave estratte, mappe mentali di facile lettura, audio per ricordare il contenuto, quiz per testare la tua preparazione.</p>
+        <p>E tutti i manuali che processi <strong>ti restano ordinati nella tua console nel tempo</strong> — sempre pronti per il ripasso, fino al giorno del concorso.</p>
+        <ul>
+          <li>Parole chiave estratte dal tuo manuale</li>
+          <li>Mappe mentali di facile lettura</li>
+          <li>Audio per ricordare, anche in macchina o in palestra</li>
+          <li>Quiz per verificare la tua preparazione</li>
+          <li>Tutti i manuali restano ordinati nella tua console nel tempo</li>
+        </ul>
+      </div>
+
+      <div class="area-description" id="desc-esami">
+        <span class="for-who">Per: medicina · ingegneria · giurisprudenza · scienze · economia · qualsiasi facoltà</span>
+        <h3>Seicento pagine di manuale denso, dentro la tua giornata normale.</h3>
+        <p>Anatomia, fisiologia, biochimica, diritto, economia — qualsiasi materia. Carichi il PDF del manuale o delle dispense del prof. In venti minuti ti torna la mappa visiva del capitolo, le parole chiave organizzate per logica, l'audio guidato da ascoltare mentre vai al campus.</p>
+        <p>È pensato per chi <strong>studia da adulto</strong>, con poco tempo, lavoro o famiglia di mezzo.</p>
+        <p>E tutti i capitoli che studi <strong>ti restano ordinati nella tua console nel tempo</strong> — sempre disponibili per il ripasso prima della sessione d'esame.</p>
+        <ul>
+          <li>Mappa mentale di ogni capitolo che vedi tutta in un colpo d'occhio</li>
+          <li>Audio per ascoltare durante spostamenti, palestra, pause</li>
+          <li>Quiz sui punti dove stai dimenticando</li>
+          <li>Tutti i capitoli restano ordinati nella tua console nel tempo</li>
+        </ul>
+      </div>
+
+      <div class="area-description" id="desc-aggiornamento">
+        <span class="for-who">Per: professionisti che devono restare aggiornati senza fermare il lavoro</span>
+        <h3>Procedure, contratti, progetti — dentro in pochi minuti.</h3>
+        <p>C'è una nuova <strong>procedura</strong> da conoscere. Un <strong>contratto</strong> da memorizzare prima della riunione. Un <strong>progetto</strong> di cui devi sapere ogni dettaglio.</p>
+        <p>Le carichi in Elefantra in formato PDF. In pochi istanti <strong>estrae le parole chiave</strong>, ti costruisce le mappe e prepara gli audio per ricordare.</p>
+        <p>Ascolti l'audio. Consulti la mappa quando serve. <strong>Pochi minuti</strong> — e ricordi in modo rapido. Così continui a lavorare e resti aggiornato.</p>
+        <ul>
+          <li>Carichi procedure, contratti, progetti, normative — qualsiasi PDF</li>
+          <li>Parole chiave, mappe e audio pronti in pochi istanti</li>
+          <li>Ascolti l'audio mentre lavori, consulti la mappa quando ti serve</li>
+          <li>Tutto il materiale resta ordinato nella tua console nel tempo</li>
+        </ul>
+      </div>
+    </div>
 
     <form id="waitlist-form" novalidate>
       <div class="form-row">
@@ -546,20 +652,15 @@
 </footer>
 
 <script>
-  const areaLabels = {
-    concorsi: 'Concorsi pubblici — perfetto, ti terremo aggiornato su Elefantra per i manuali di concorso.',
-    esami: 'Esami universitari — registrato. Manuali e dispense: è esattamente il caso d\'uso.',
-    lingue: 'Lingue — ottimo. Elefantra lavora anche su vocabolario e materiali linguistici.',
-    aggiornamento: 'Aggiornamento professionale — registrato. Normative, procedure, PDF tecnici.'
-  };
-
   document.querySelectorAll('.area-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const area = btn.dataset.area;
       document.querySelectorAll('.area-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       document.getElementById('area').value = area;
-      document.getElementById('area-hint').textContent = areaLabels[area] || '';
+      document.querySelectorAll('.area-description').forEach(d => d.classList.remove('active'));
+      const targetDesc = document.getElementById('desc-' + area);
+      if (targetDesc) targetDesc.classList.add('active');
     });
   });
 
