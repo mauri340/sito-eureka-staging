@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
-<title>Sei dentro — Apprendimento Rapido</title>
-<meta name="description" content="Iscrizione alla waitlist confermata. Sei tra i 100 founder che riceveranno l'accesso anticipato.">
+<title>Sei in lista — Elefantra</title>
+<meta name="description" content="Iscrizione alla lista d'attesa Elefantra confermata.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,242 +15,143 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
     --teal: #0E7C73;
-    --teal-press: #0A6660;
     --mint: #D4ECEA;
     --ink: #1B1F24;
     --ink-50: #F4F5F6;
     --paper: #FBFAF7;
     --muted: #6B7280;
   }
-  html, body { height: 100%; }
+  html, body { min-height: 100%; }
   body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: 'Inter', sans-serif;
     background: var(--paper);
     color: var(--ink);
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
+    line-height: 1.65;
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
-  }
-  h1, h2, h3 {
-    font-family: 'Geist', 'Inter', sans-serif;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    line-height: 1.15;
-    color: var(--ink);
   }
   header {
-    background: var(--paper);
-    padding: 18px 24px;
+    padding: 16px 24px;
     border-bottom: 1px solid var(--ink-50);
-  }
-  header .container {
-    max-width: 1100px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .brand-mini {
     font-family: 'Geist', sans-serif;
-    font-weight: 600;
-    font-size: 0.9rem;
-    color: var(--ink);
+    font-weight: 700;
   }
-  .brand-mini .accent { color: var(--teal); }
-  .header-meta {
-    font-size: 0.8125rem;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
+  header b {
+    display: inline-grid;
+    place-items: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--teal);
+    color: #fff;
+    font-size: 0.85rem;
+    margin-right: 6px;
+    vertical-align: middle;
   }
-
   main {
     flex: 1;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 80px 24px;
+    padding: 64px 24px;
   }
-  .grazie-card {
-    max-width: 640px;
-    text-align: center;
-  }
-  .check-icon {
-    width: 80px;
-    height: 80px;
+  .card { max-width: 560px; text-align: center; }
+  .check {
+    width: 72px;
+    height: 72px;
+    margin: 0 auto 24px;
     background: var(--mint);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 32px;
     color: var(--teal);
-    font-size: 2.5rem;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-size: 2rem;
     font-weight: 700;
     font-family: 'Geist', sans-serif;
   }
   .eyebrow {
     display: inline-block;
-    font-family: 'Geist', sans-serif;
-    font-size: 0.875rem;
+    font-size: 0.8rem;
     color: var(--teal);
     background: var(--mint);
     padding: 6px 14px;
-    border-radius: 100px;
-    font-weight: 500;
-    letter-spacing: 0.02em;
-    margin-bottom: 20px;
+    border-radius: 999px;
+    font-weight: 600;
+    margin-bottom: 16px;
   }
   h1 {
-    font-size: clamp(2rem, 5vw, 3rem);
-    margin-bottom: 24px;
+    font-family: 'Geist', sans-serif;
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    margin-bottom: 16px;
   }
-  h1 em {
-    color: var(--teal);
-    font-style: normal;
-  }
-  .lead {
-    font-size: 1.1875rem;
-    color: var(--muted);
-    margin-bottom: 40px;
-    line-height: 1.7;
-  }
-  .next-steps {
-    background: #ffffff;
+  h1 em { color: var(--teal); font-style: normal; }
+  .lead { color: var(--muted); font-size: 1.1rem; margin-bottom: 32px; }
+  .steps {
+    text-align: left;
+    background: #fff;
     border: 1px solid var(--ink-50);
     border-radius: 12px;
-    padding: 32px 36px;
-    text-align: left;
-    margin-bottom: 40px;
+    padding: 24px 28px;
+    margin-bottom: 28px;
   }
-  .next-steps h3 {
+  .steps h3 {
+    font-family: 'Geist', sans-serif;
     color: var(--teal);
-    font-size: 1.125rem;
-    margin-bottom: 18px;
-  }
-  .next-steps ol {
-    padding-left: 0;
-    list-style: none;
-  }
-  .next-steps ol li {
-    counter-increment: step;
-    position: relative;
-    padding-left: 42px;
-    margin-bottom: 16px;
     font-size: 1rem;
-    line-height: 1.6;
-    color: var(--ink);
+    margin-bottom: 14px;
   }
-  .next-steps ol {
-    counter-reset: step;
-  }
-  .next-steps ol li::before {
-    content: counter(step);
-    position: absolute;
-    left: 0;
-    top: 0;
-    background: var(--teal);
-    color: #ffffff;
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Geist', sans-serif;
-    font-weight: 700;
-    font-size: 0.875rem;
-  }
-  .signature {
-    font-size: 1.0625rem;
-    color: var(--ink);
-    margin-bottom: 8px;
-  }
-  .signature-name {
-    font-family: 'Geist', sans-serif;
-    font-weight: 600;
-    color: var(--ink);
-    font-size: 1rem;
-  }
-  .home-link {
+  .steps ol { padding-left: 1.2rem; }
+  .steps li { margin-bottom: 10px; font-size: 0.98rem; }
+  .sig { font-weight: 600; font-family: 'Geist', sans-serif; }
+  .home {
     display: inline-block;
-    margin-top: 32px;
+    margin-top: 20px;
     color: var(--muted);
     text-decoration: none;
-    font-size: 0.9375rem;
-    border-bottom: 1px solid transparent;
-    transition: color 0.15s, border-color 0.15s;
+    font-size: 0.9rem;
   }
-  .home-link:hover {
-    color: var(--teal);
-    border-color: var(--teal);
-  }
-
+  .home:hover { color: var(--teal); }
   footer {
     background: var(--ink);
     color: #9CA3AF;
-    padding: 32px 24px;
     text-align: center;
+    padding: 24px;
     font-size: 0.8125rem;
   }
-  footer .container {
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-  footer p { margin-bottom: 6px; }
   footer a { color: var(--mint); text-decoration: none; }
 </style>
 </head>
 <body>
 
-<header>
-  <div class="container">
-    <div class="brand-mini">
-      Apprendimento Rapido <span class="accent">·</span> il nuovo strumento di Maurizio Possenti
-    </div>
-    <div class="header-meta">accesso anticipato</div>
-  </div>
-</header>
+<header><b>e</b>Elefantra</header>
 
 <main>
-  <div class="grazie-card">
-    <div class="check-icon">✓</div>
-    <span class="eyebrow">Iscrizione confermata</span>
-    <h1>Sei dentro i <em>100</em>.</h1>
+  <div class="card">
+    <div class="check">✓</div>
+    <span class="eyebrow">Lista d'attesa</span>
+    <h1>Sei in <em>lista</em>.</h1>
     <p class="lead">
-      Da qui in poi ti tratto da founder, non da contatto. Niente spam, niente nurturing a tappeto. Solo quello che conta davvero.
+      Da qui in poi riceverai solo comunicazioni su Elefantra — progressi, novità e invito quando apriremo.
+      Niente spam generico dal resto del sito.
     </p>
 
-    <div class="next-steps">
-      <h3>Cosa succede ora</h3>
+    <div class="steps">
+      <h3>Cosa succede adesso</h3>
       <ol>
-        <li>Riceverai un'email di conferma in pochi minuti. Se non arriva, controlla nello spam.</li>
-        <li>Ogni tanto ti scriverò qualche update onesto: cosa sto vedendo nei test, cosa sto rifinendo, qualche sneak peek.</li>
-        <li>Quando aprirà la beta, sarai tra i primi a saperlo. Niente da pagare ora, niente da decidere ora — solo il posto tenuto da parte.</li>
+        <li>Controlla la posta (anche Promozioni/Spam) per l'email di conferma.</li>
+        <li>Salva questo indirizzo tra i contatti così non perdi gli aggiornamenti.</li>
+        <li>Quando saremo pronti ad aprire, riceverai l'invito per primo — prima del pubblico.</li>
       </ol>
     </div>
 
-    <p class="signature">A presto.</p>
-    <p class="signature-name">— Maurizio</p>
-
-    <a href="https://apprendimentorapido.it" class="home-link">Torna al sito principale</a>
+    <p class="sig">A presto,</p>
+    <p class="sig">Maurizio</p>
+    <a href="https://apprendimentorapido.it" class="home">Torna ad Apprendimento Rapido</a>
   </div>
 </main>
 
 <footer>
-  <div class="container">
-    <p>Apprendimento Rapido — Metodo Eureka · Via Gardiscia 10, Rovio (CH) 6821</p>
-    <p>
-      <a href="https://www.iubenda.com/privacy-policy/89530968" target="_blank" rel="noopener">Privacy Policy</a> ·
-      <a href="https://www.iubenda.com/privacy-policy/89530968/cookie-policy" target="_blank" rel="noopener">Cookie Policy</a> ·
-      <a href="mailto:info@apprendimentorapido.it">info@apprendimentorapido.it</a>
-    </p>
-    <p style="font-size: 0.75rem; color: #6B7280; margin-top: 12px;">
-      © 2026 Apprendimento Rapido — Metodo Eureka. Tutti i diritti riservati.
-    </p>
-  </div>
+  <p>Elefantra · Apprendimento Rapido · <a href="https://www.iubenda.com/privacy-policy/89530968" target="_blank" rel="noopener">Privacy</a></p>
 </footer>
 
 </body>
