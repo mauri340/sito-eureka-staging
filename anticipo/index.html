@@ -456,7 +456,7 @@
 <section style="padding-top: 0;">
   <div class="container">
     <div class="video-wrap">
-      <video controls muted playsinline preload="metadata" poster="">
+      <video id="elefantra-demo-video" controls muted playsinline preload="metadata" poster="">
         <source src="elefantra-demo-16x9.mp4" type="video/mp4">
       </video>
     </div>
@@ -656,6 +656,43 @@
 </footer>
 
 <script>
+  (function() {
+    var video = document.getElementById('elefantra-demo-video');
+    if (!video) return;
+    var started = false;
+    var milestones = { 25: false, 50: false, 75: false };
+    var videoMeta = { event_category: 'Video', event_label: 'Elefantra Demo', video: 'elefantra-demo-16x9', source: 'landing-anticipo' };
+
+    function track(name, extra) {
+      var payload = Object.assign({}, videoMeta, extra || {});
+      if (typeof gtag === 'function') gtag('event', name, payload);
+      if (name === 'video_start' && typeof fbq === 'function') {
+        fbq('trackCustom', 'VideoPlay', { content_name: 'Elefantra Demo' });
+      }
+    }
+
+    video.addEventListener('play', function() {
+      if (started) return;
+      started = true;
+      track('video_start');
+    });
+
+    video.addEventListener('timeupdate', function() {
+      if (!video.duration || !isFinite(video.duration)) return;
+      var pct = (video.currentTime / video.duration) * 100;
+      [25, 50, 75].forEach(function(m) {
+        if (pct >= m && !milestones[m]) {
+          milestones[m] = true;
+          track('video_progress', { progress_pct: m });
+        }
+      });
+    });
+
+    video.addEventListener('ended', function() {
+      track('video_complete');
+    });
+  })();
+
   document.querySelectorAll('.area-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const area = btn.dataset.area;
