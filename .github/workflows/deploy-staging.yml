@@ -19,6 +19,7 @@ jobs:
           cp -r master-eureka-promo _stage/
           cp -r anticipo _stage/
           cp -r pass-anticipo _stage/
+          cp -r pass-metodo _stage/
           cp -r founder _stage/
           cat > _stage/robots.txt <<'EOF'
           # STAGING — non indicizzare. Vedere robots.txt di produzione su apprendimentorapido.it
