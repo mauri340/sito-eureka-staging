@@ -17,8 +17,8 @@
 </style>
 </head>
 <body>
-<div class="wrap" id="page" data-seats-total="100" data-seats-taken="0" data-close-date="2026-08-05" data-checkout-url="https://buy.stripe.com/eVqcN5820ddceCq58nbwk07">
-  <div class="promo">Metodo Eureka online — <b class="js-remaining">100</b> posti · prima apertura Elefantra · chiude il <b class="js-deadline">5 agosto 2026</b> · <em>€497</em></div>
+<div class="wrap" id="page" data-seats-total="100" data-seats-taken="0" data-close-date="2026-08-07" data-checkout-url="https://buy.stripe.com/eVqcN5820ddceCq58nbwk07">
+  <div class="promo">Metodo Eureka online — <b class="js-remaining">100</b> posti · prima apertura Elefantra · chiude il <b class="js-deadline">7 agosto 2026</b> · <em>€497</em></div>
   <div class="countdown-strip" aria-live="polite">
     <div class="countdown-inner container" style="width:min(1120px,calc(100% - 40px));justify-content:center;">
       <div class="countdown-grid countdown-compact js-countdown" data-countdown-variant="strip">
@@ -46,7 +46,7 @@
             <p class="lead">Per la <strong>prima volta</strong> il nostro materiale <strong>solo in digitale</strong> — come molti ci avete chiesto: <strong>68 videolezioni</strong>, <strong>12 dirette su Zoom</strong> e l'uso di <strong>Elefantra</strong>, la nuova app che stiamo per lanciare. Il <strong>Metodo Eureka</strong> per apprendere più in fretta, organizzato e immediato. <strong>€497 una tantum</strong> · solo <strong>100 posti</strong>.</p>
             <div class="countdown-hero js-countdown" data-countdown-variant="hero" aria-live="polite">
               <div class="countdown-head">
-                <div><b>L'offerta chiude tra</b><span>Data limite: <strong class="js-deadline">5 agosto 2026</strong></span></div>
+                <div><b>L'offerta chiude tra</b><span>Data limite: <strong class="js-deadline">7 agosto 2026</strong></span></div>
               </div>
               <div class="countdown-grid">
                 <div class="countdown-unit"><b class="js-cd-days">--</b><span>Giorni</span></div>
@@ -211,7 +211,7 @@
           <div class="scarcity-box js-scarcity-box" aria-live="polite">
             <div class="scarcity-dual">
               <span>🔥 <span class="js-seats-label">100 posti disponibili</span></span>
-              <span>📅 Chiude il <strong class="js-deadline">5 agosto 2026</strong></span>
+              <span>📅 Chiude il <strong class="js-deadline">7 agosto 2026</strong></span>
             </div>
             <div class="meter"><div class="fill js-fill"></div></div>
             <p class="scarcity-note">Si chiude alla <strong>prima</strong> condizione: 100 posti esauriti <em>oppure</em> data di chiusura.</p>
@@ -253,7 +253,7 @@
 
   <div class="sticky" id="sticky">
     <div class="sticky-inner">
-      <p><strong class="js-remaining">100</strong> posti <span>· chiude <strong class="js-deadline-short">5 ago</strong></span></p>
+      <p><strong class="js-remaining">100</strong> posti <span>· chiude <strong class="js-deadline-short">7 ago</strong></span></p>
       <div class="countdown-grid countdown-compact js-countdown" data-countdown-variant="sticky" aria-hidden="true">
         <div class="countdown-unit"><b class="js-cd-days">--</b><span>G</span></div>
         <div class="countdown-unit"><b class="js-cd-hours">--</b><span>O</span></div>
@@ -269,7 +269,7 @@
   var total=Math.max(1,parseInt(root.dataset.seatsTotal,10)||100);
   var taken=Math.min(total,Math.max(0,parseInt(root.dataset.seatsTaken,10)||0));
   var remaining=total-taken;
-  var closeDate=new Date((root.dataset.closeDate||'2026-08-05')+'T23:59:59');
+  var closeDate=new Date((root.dataset.closeDate||'2026-08-07')+'T23:59:59');
   var longDate=closeDate.toLocaleDateString('it-IT',{day:'numeric',month:'long',year:'numeric'});
   var shortDate=closeDate.toLocaleDateString('it-IT',{day:'numeric',month:'short'}).replace('.','');
   document.querySelectorAll('.js-remaining').forEach(function(el){el.textContent=remaining});
@@ -299,9 +299,7 @@
     document.querySelectorAll('.js-cd-seconds').forEach(function(el){el.textContent=expired?'00':pad(s)});
     if(expired){
       document.querySelectorAll('.js-countdown').forEach(function(el){el.classList.add('expired')});
-      document.querySelectorAll('.js-countdown-label').forEach(function(el){el.textContent='Offerta chiusa — condizioni da listino'});
     }else if(d===0){
-      document.querySelectorAll('.js-countdown-label').forEach(function(el){el.textContent='Ultimo giorno — entra prima della mezzanotte'});
       document.querySelectorAll('.js-countdown[data-countdown-variant="hero"], .js-countdown[data-countdown-variant="offer"]').forEach(function(el){el.classList.add('low')});
     }
   }
