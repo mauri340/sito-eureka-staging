@@ -7,7 +7,8 @@
 <meta name="description" content="Metodo Eureka solo online: 68 videolezioni subito, live da 7 settembre, Elefantra entro fine ottobre. 100 posti. €497.">
 <meta name="robots" content="noindex, nofollow">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-2X3V7JZPBJ"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-2X3V7JZPBJ');</script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-2X3V7JZPBJ',{page_path:location.pathname});</script>
+<script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','957273196609597');fbq('track','PageView');</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -329,6 +330,23 @@
     if(qp){checkout=qp}
   }catch(e){}
   if(checkout&&!root.dataset.closedShown){document.querySelectorAll('.js-checkout').forEach(function(el){el.href=checkout})}
+
+  function trackCheckoutClick(){
+    if(typeof gtag==='function'){
+      gtag('event','begin_checkout',{
+        currency:'EUR',
+        value:497,
+        items:[{item_name:'Metodo Eureka Online Pass',price:497,quantity:1}]
+      });
+    }
+    if(typeof fbq==='function'){
+      fbq('track','InitiateCheckout',{value:497,currency:'EUR',content_name:'Metodo Eureka Online Pass'});
+    }
+  }
+  document.querySelectorAll('.js-checkout').forEach(function(el){
+    el.addEventListener('click',function(){ if(!root.dataset.closedShown) trackCheckoutClick(); });
+  });
+
   if(/staging\.apprendimentorapido\.it/i.test(location.hostname)||location.search.indexOf('staging=1')>-1){
     var bar=document.createElement('div');
     bar.textContent='STAGING — Pass Metodo (SMS / non lista). Anteprima — non condividere.';
