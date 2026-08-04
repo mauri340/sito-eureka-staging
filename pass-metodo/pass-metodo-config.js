@@ -10,6 +10,7 @@
 
   global.PASS_METODO = {
     apiEndpoint: "https://api.apprendimentorapido.it/api/webhook/contact",
+    condizioniPath: "/pass-metodo/condizioni-vendita.html",
     listaName: "Corso Metodo Online — €497",
     /** Impostato da seed_pass_metodo_list.py — fallback: nome lista */
     listaId: "c1730b6c-b1ce-40dc-b320-7f4584508fd1",
