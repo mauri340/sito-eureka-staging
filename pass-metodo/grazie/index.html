@@ -119,6 +119,7 @@
 
   var sessionId = param('session_id') || param('checkout_session_id') || '';
   var emailParam = param('email') || param('prefilled_email') || param('customer_email') || '';
+  var sessionActivationKey = sessionId ? ('passMetodoActivatedSession:' + sessionId) : '';
 
   var nomeEl = document.getElementById('nome');
   var cognomeEl = document.getElementById('cognome');
@@ -243,6 +244,9 @@
       }
 
       try { sessionStorage.setItem(SK.activationDone || 'passMetodoActivationSubmitted', '1'); } catch(e) {}
+      if (sessionActivationKey) {
+        try { localStorage.setItem(sessionActivationKey, '1'); } catch(e) {}
+      }
       formWrap.style.display = 'none';
       successBox.classList.add('show');
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -253,10 +257,16 @@
     }
   });
 
+  function showActivationSuccess() {
+    formWrap.style.display = 'none';
+    successBox.classList.add('show');
+  }
+
   try {
-    if (sessionStorage.getItem(SK.activationDone || 'passMetodoActivationSubmitted') === '1') {
-      formWrap.style.display = 'none';
-      successBox.classList.add('show');
+    var alreadyDone = sessionStorage.getItem(SK.activationDone || 'passMetodoActivationSubmitted') === '1';
+    var sessionDone = sessionActivationKey && localStorage.getItem(sessionActivationKey) === '1';
+    if (alreadyDone || sessionDone) {
+      showActivationSuccess();
     }
   } catch(e) {}
 
