@@ -35,6 +35,7 @@ RewriteRule ^risorse-gratuite/?$  /risorse-gratuite.html  [L,R=302]
 RewriteRule ^demo-zoom/?$         /demo-zoom/index.html   [L,R=302]
 RewriteRule ^blog/?$              /blog.html              [L,R=302]
 RewriteRule ^appuntamento/?$      /appuntamento/index.html [L]
+RewriteRule ^pm/?$               /pass-metodo/?utm_source=sms&utm_medium=test&utm_campaign=pass_metodo_2026&utm_content=round1-test [L,R=302]
 
 # ══════════════════════════════════════════
 # BEGIN WordPress (lascia invariato sotto)
